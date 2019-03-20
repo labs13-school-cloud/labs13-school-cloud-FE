@@ -8,6 +8,7 @@ class TeamMembersView extends React.Component {
   };
 
   componentDidMount() {
+    console.log(this.props);
     axios
       .get("https://labs11-trainingbot.herokuapp.com/api/users")
       .then(res => {
@@ -22,12 +23,12 @@ class TeamMembersView extends React.Component {
     return (
       <>
         <p>Team Members View</p>
-        {this.state.users.map(user => (
+        {/* {this.state.users.map(user => (
           <div key={user.userID}>
             <p>User ID: {user.userID}</p>
             <p>Account Type ID: {user.accountTypeID}</p>
           </div>
-        ))}
+        ))} */}
       </>
     );
   }
