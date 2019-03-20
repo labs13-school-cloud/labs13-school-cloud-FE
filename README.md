@@ -1,1 +1,1 @@
-# labs11-trainingBot-FE
+# Training Bot
