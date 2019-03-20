@@ -1,0 +1,1 @@
+// main page for displaying list of all training series

@@ -1,0 +1,1 @@
+// HOC for client-side authorization, protecting routes that require authentication
