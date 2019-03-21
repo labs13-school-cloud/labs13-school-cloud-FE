@@ -4,6 +4,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import { LandingPageView } from "./components/LandingPage";
 import { TeamMembersView } from "./components/TeamMembers";
 import { Dashboard } from "./components/Dashboard";
+import Button from "@material-ui/core/Button";
 //Authentication
 import Auth from "./Auth/Auth";
 //What renders while waiting for data from Auth0
@@ -12,29 +13,63 @@ import Callback from "./Callback/callback";
 const auth = new Auth();
 
 class App extends Component {
-  handleAuthentication = ({ location }) => {
-    if (/access_token|id_token|error/.test(location.hash)) {
-      auth.handleAuthentication();
+  goTo(route) {
+    this.props.history.replace(`/${route}`);
+  }
+
+  login() {
+    this.props.auth.login();
+  }
+
+  logout() {
+    this.props.auth.logout();
+  }
+
+  renewToken() {
+    const { renewSession } = this.props.auth;
+    renewSession();
+  }
+
+  componentDidMount() {
+    const { renewSession } = this.props.auth;
+
+    if (localStorage.getItem("isLoggedIn") === "true") {
+      renewSession();
     }
-  };
+  }
 
   render() {
+    console.log(this.props.auth);
+    const { isAuthenticated } = this.props.auth;
+
     return (
       <>
         <CssBaseline />
-        <Route
-          exact
-          path='/'
-          render={props => <LandingPageView {...props} auth={auth} />}
-        />
-        {/* Note from Leigh-Ann: This component will need to be restructured with proper routes, displaying training-series is a placeholder */}
-        <Route
-          path='/home'
-          render={props => {
-            this.handleAuthentication(props);
-            return <Dashboard {...props} />;
-          }}
-        />
+        <Button
+          onClick={() => this.props.auth.login()}
+          color='primary'
+          variant='contained'
+        >
+          Register
+        </Button>
+        {!isAuthenticated() && (
+          <Button
+            bsStyle='primary'
+            className='btn-margin'
+            onClick={this.login.bind(this)}
+          >
+            Log In
+          </Button>
+        )}
+        {isAuthenticated() && (
+          <Button
+            bsStyle='primary'
+            className='btn-margin'
+            onClick={this.logout.bind(this)}
+          >
+            Log Out
+          </Button>
+        )}
       </>
     );
   }

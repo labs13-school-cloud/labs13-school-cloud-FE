@@ -5,20 +5,6 @@ import { Link } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 
 class LandingPageView extends React.Component {
-  componentDidMount() {
-    const { renewSession } = this.props.auth;
-
-    if (localStorage.getItem("isLoggedIn") === "true") {
-      renewSession();
-    }
-  }
-  goTo(route) {
-    this.props.history.replace(`/${route}`);
-  }
-
-  login() {
-    this.props.auth.login();
-  }
   render() {
     console.log(this.props.auth);
     const { isAuthenticated } = this.props.auth;
@@ -35,7 +21,7 @@ class LandingPageView extends React.Component {
           <Button
             bsStyle='primary'
             className='btn-margin'
-            onClick={this.login.bind(this)}
+            onClick={this.props.login.bind(this)}
           >
             Log In
           </Button>
@@ -44,7 +30,7 @@ class LandingPageView extends React.Component {
           <Button
             bsStyle='primary'
             className='btn-margin'
-            onClick={this.logout.bind(this)}
+            onClick={this.props.logout.bind(this)}
           >
             Log Out
           </Button>
