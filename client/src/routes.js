@@ -2,7 +2,7 @@ import React from "react";
 import { Redirect, Route, Router } from "react-router-dom";
 import App from "./App";
 import Home from "./components/Dashboard/Dashboard";
-// import Profile from "./Profile/Profile";
+
 import Callback from "./Callback/callback";
 import Auth from "./Auth/Auth";
 import history from "./history";

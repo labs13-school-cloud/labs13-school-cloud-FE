@@ -5,12 +5,6 @@ import { LandingPageView } from "./components/LandingPage";
 import { TeamMembersView } from "./components/TeamMembers";
 import { Dashboard } from "./components/Dashboard";
 import Button from "@material-ui/core/Button";
-//Authentication
-import Auth from "./Auth/Auth";
-//What renders while waiting for data from Auth0
-import Callback from "./Callback/callback";
-//Assign a variable to the class Auth
-const auth = new Auth();
 
 class App extends Component {
   goTo(route) {

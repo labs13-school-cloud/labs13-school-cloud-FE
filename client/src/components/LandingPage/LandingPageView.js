@@ -21,7 +21,7 @@ class LandingPageView extends React.Component {
           <Button
             bsStyle='primary'
             className='btn-margin'
-            onClick={this.props.login.bind(this)}
+            onClick={this.login.bind(this)}
           >
             Log In
           </Button>
@@ -30,7 +30,7 @@ class LandingPageView extends React.Component {
           <Button
             bsStyle='primary'
             className='btn-margin'
-            onClick={this.props.logout.bind(this)}
+            onClick={this.logout.bind(this)}
           >
             Log Out
           </Button>
