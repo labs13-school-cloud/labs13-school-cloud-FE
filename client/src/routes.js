@@ -2,7 +2,7 @@ import React from "react";
 import { Redirect, Route, Router } from "react-router-dom";
 import App from "./App";
 import Home from "./components/Dashboard/Dashboard";
-
+import Profile from "./Profile/profile";
 import Callback from "./Callback/callback";
 import Auth from "./Auth/Auth";
 import history from "./history";
@@ -21,7 +21,7 @@ export const makeMainRoutes = () => {
       <div>
         <Route path='/' render={props => <App auth={auth} {...props} />} />
         <Route path='/home' render={props => <Home auth={auth} {...props} />} />
-        {/* <Route
+        <Route
           path='/profile'
           render={props =>
             !auth.isAuthenticated() ? (
@@ -30,7 +30,7 @@ export const makeMainRoutes = () => {
               <Profile auth={auth} {...props} />
             )
           }
-        /> */}
+        />
         <Route
           path='/callback'
           render={props => {
