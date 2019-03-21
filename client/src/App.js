@@ -3,9 +3,12 @@ import { Route } from "react-router-dom";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { LandingPageView } from "./components/LandingPage";
 import { TeamMembersView } from "./components/TeamMembers";
-import { Dashboard } from './components/Dashboard';
+import { Dashboard } from "./components/Dashboard";
+//Authentication
 import Auth from "./Auth/Auth";
-
+//What renders while waiting for data from Auth0
+import Callback from "./Callback/callback";
+//Assign a variable to the class Auth
 const auth = new Auth();
 
 class App extends Component {

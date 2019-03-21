@@ -8,20 +8,6 @@ class TeamMembersView extends React.Component {
     profile: []
   };
 
-  componentWillMount() {
-    this.setState({ profile: {} });
-    const { userProfile, getProfile } = this.props.auth;
-    console.log(userProfile, getProfile);
-    if (!userProfile) {
-      getProfile((err, profile) => {
-        console.log(profile);
-        this.setState({ profile });
-      });
-    } else {
-      this.setState({ profile: userProfile });
-    }
-  }
-
   componentDidMount() {
     console.log(this.props);
     axios
