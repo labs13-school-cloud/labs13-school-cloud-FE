@@ -14,12 +14,16 @@ const handleAuthentication = ({ location }) => {
     auth.handleAuthentication();
   }
 };
-
+//Use this for rendering all of our components
 export const makeMainRoutes = () => {
   return (
     <Router history={history}>
       <div>
-        <Route path='/' render={props => <App auth={auth} {...props} />} />
+        <Route
+          exact
+          path='/'
+          render={props => <App auth={auth} {...props} />}
+        />
         <Route path='/home' render={props => <Home auth={auth} {...props} />} />
         <Route
           path='/profile'
