@@ -3,6 +3,7 @@ import { Route } from "react-router-dom";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { LandingPageView } from "./components/LandingPage";
 import { TeamMembersView } from "./components/TeamMembers";
+import { Dashboard } from './components/Dashboard';
 import Auth from "./Auth/Auth";
 
 const auth = new Auth();
@@ -25,10 +26,10 @@ class App extends Component {
         />
         {/* Note from Leigh-Ann: This component will need to be restructured with proper routes, displaying training-series is a placeholder */}
         <Route
-          path='/training-series'
+          path='/home'
           render={props => {
             this.handleAuthentication(props);
-            return <TeamMembersView {...props} />;
+            return <Dashboard {...props} />;
           }}
         />
       </>
