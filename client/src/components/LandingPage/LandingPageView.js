@@ -5,20 +5,6 @@ import { Link } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 
 class LandingPageView extends React.Component {
-  componentDidMount() {
-    const { renewSession } = this.props.auth;
-
-    if (localStorage.getItem("isLoggedIn") === "true") {
-      renewSession();
-    }
-  }
-  goTo(route) {
-    this.props.history.replace(`/${route}`);
-  }
-
-  login() {
-    this.props.auth.login();
-  }
   render() {
     console.log(this.props.auth);
     const { isAuthenticated } = this.props.auth;

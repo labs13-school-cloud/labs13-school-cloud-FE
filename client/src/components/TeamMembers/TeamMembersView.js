@@ -4,7 +4,8 @@ import axios from "axios";
 
 class TeamMembersView extends React.Component {
   state = {
-    users: []
+    users: [],
+    profile: []
   };
 
   componentDidMount() {
