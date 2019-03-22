@@ -1,9 +1,9 @@
 // parent component for app once logged in
-import React, { Children } from 'react';
-import { NavigationView } from '../Navigation';
-import { Link } from 'react-router-dom';
-import TeamMembersView from '../TeamMembers/TeamMembersView';
-import TrainingSeriesView from '../TrainingSeries/TrainingSeriesView';
+import React, { Children } from "react";
+import { NavigationView } from "../Navigation";
+import { Link } from "react-router-dom";
+import TeamMembersView from "../TeamMembers/TeamMembersView";
+import TrainingSeriesView from "../TrainingSeries/TrainingSeriesView";
 
 class Dashboard extends React.Component {
   login() {
@@ -19,20 +19,21 @@ class Dashboard extends React.Component {
         {isAuthenticated() && (
           <>
             <h4>
-              You are logged in! You can now view your{' '}
+              You are logged in! You can now view your{" "}
               <Link to="profile">profile area</Link>.
             </h4>
             <div>
               <TrainingSeriesView />
+              <TeamMembersView />
             </div>
           </>
         )}
         {!isAuthenticated() && (
           <h4>
-            You are not logged in! Please{' '}
-            <a style={{ cursor: 'pointer' }} onClick={this.login.bind(this)}>
+            You are not logged in! Please{" "}
+            <a style={{ cursor: "pointer" }} onClick={this.login.bind(this)}>
               Log In
-            </a>{' '}
+            </a>{" "}
             to continue.
           </h4>
         )}
