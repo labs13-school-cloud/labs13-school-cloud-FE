@@ -4,4 +4,5 @@ export const AUTH_CONFIG = {
 	callbackUrl: process.env.REACT_APP_LOCAL || process.env.REACT_APP_PROD,
 	// callbackUrl: 'http://localhost:3000/callback',
 	// callbackUrl: 'https://trainingbot-dev.netlify.com/callback',
+	//
 };
