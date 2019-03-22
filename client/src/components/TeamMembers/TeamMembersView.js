@@ -5,17 +5,18 @@ import axios from "axios";
 class TeamMembersView extends React.Component {
   state = {
     users: [],
-    profile: []
+    profile: [],
+    teamMembers: []
   };
 
   componentDidMount() {
     console.log(this.props);
     axios
-      .get("https://labs11-trainingbot.herokuapp.com/api/users")
+      .get("https://labs11-trainingbot-dev.herokuapp.com/api/team-members")
       .then(res => {
-        console.log(res.data.users);
+        console.log(res.data.teamMembers);
         this.setState({
-          users: res.data.users
+          teamMembers: res.data.teamMembers
         });
       })
       .catch(err => console.log(err));
@@ -24,12 +25,15 @@ class TeamMembersView extends React.Component {
     return (
       <>
         <p>Team Members View</p>
-        {/* {this.state.users.map(user => (
-          <div key={user.userID}>
-            <p>User ID: {user.userID}</p>
-            <p>Account Type ID: {user.accountTypeID}</p>
+        {this.state.teamMembers.map(member => (
+          <div key={member.teamMemberID}>
+            <p>First Name: {member.firstName}</p>
+            <p>Last Name: {member.lastName}</p>
+            <p>Job: {member.jobDescription}</p>
+            <p>Email: {member.email}</p>
+            <p>Phone: {member.phoneNumber}</p>
           </div>
-        ))} */}
+        ))}
       </>
     );
   }
