@@ -3,14 +3,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
-// import Typography from '@material-ui/core/Typography';
-// import Tabs from '@material-ui/core/Tabs';
-// import Tab from '@material-ui/core/Tab';
 import Button from '@material-ui/core/Button';
 
 import AppBar from '@material-ui/core/AppBar';
 import logo from '../../img/training-bot.png';
 import { flex } from '@material-ui/system/flexbox';
+const faker = require('faker');
 
 const styles = {
 	avatar: {
@@ -53,7 +51,7 @@ const appBar = props => {
 					<Button>About</Button>
 					<Button>Contact</Button>
 				</div>
-				<Avatar alt="Avatar" src="/static/images/avatar/1.jpg" className={classes.avatar} />
+				<Avatar alt="Avatar" src={faker.image.avatar()} className={classes.avatar} />
 			</AppBar>
 		</>
 	);
