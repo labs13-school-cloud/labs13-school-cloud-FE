@@ -4,6 +4,7 @@ import { NavigationView } from "../Navigation";
 import { Link } from "react-router-dom";
 import TeamMembersView from "../TeamMembers/TeamMembersView";
 import TrainingSeriesView from "../TrainingSeries/TrainingSeriesView";
+import AppBar from "../AppBar/AppBar";
 
 class Dashboard extends React.Component {
   state = {
