@@ -37,8 +37,6 @@ class Dashboard extends React.Component {
               <Link to="profile">profile area</Link>.
             </h4>
             <div>
-              // Displays training series or team members based on which tab is
-              selected
               {this.state.tabValue === 0 && <TrainingSeriesView />}
               {this.setState.tabValue === 1 && <TeamMembersView />}
             </div>
