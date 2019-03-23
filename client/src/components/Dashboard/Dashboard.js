@@ -6,6 +6,17 @@ import TeamMembersView from "../TeamMembers/TeamMembersView";
 import TrainingSeriesView from "../TrainingSeries/TrainingSeriesView";
 
 class Dashboard extends React.Component {
+  state = {
+    tabValue: 0
+  };
+
+  // tracking the tab value in navigation.js
+  changeTabValue = value => {
+    this.setState({
+      tabValue: value
+    });
+  };
+
   login() {
     this.props.auth.login();
   }
@@ -15,7 +26,10 @@ class Dashboard extends React.Component {
 
     return (
       <>
-        <NavigationView />
+        <NavigationView
+          tabValue={this.state.tabValue}
+          changeTabValue={this.changeTabValue}
+        />
         {isAuthenticated() && (
           <>
             <h4>
@@ -23,8 +37,10 @@ class Dashboard extends React.Component {
               <Link to="profile">profile area</Link>.
             </h4>
             <div>
-              <TrainingSeriesView />
-              <TeamMembersView />
+              // Displays training series or team members based on which tab is
+              selected
+              {this.state.tabValue === 0 && <TrainingSeriesView />}
+              {this.setState.tabValue === 1 && <TeamMembersView />}
             </div>
           </>
         )}

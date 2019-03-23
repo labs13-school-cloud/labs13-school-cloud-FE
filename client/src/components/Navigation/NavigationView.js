@@ -1,13 +1,15 @@
 // component to contain all the components related to navigation
-import React from 'react';
-import { Navigation } from './index';
+import React from "react";
+import { Navigation } from "./index";
 
 const NavigationView = props => {
-    return (
-        <>
-            <Navigation />
-        </>
-    )
-}
+  //   console.log(props);
+
+  return (
+    <>
+      <Navigation {...props} />
+    </>
+  );
+};
 
 export default NavigationView;
