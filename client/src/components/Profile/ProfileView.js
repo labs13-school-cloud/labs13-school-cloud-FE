@@ -4,6 +4,8 @@ import AppBar from '../AppBar/AppBar';
 import styled from 'styled-components';
 import { Button } from '@material-ui/core';
 
+import { logout } from '../../Auth/Auth';
+
 const Container = styled.div`
 	margin-top: 80px;
 `;
@@ -13,7 +15,7 @@ const ProfileView = props => {
 
 	const handleLogout = e => {
 		e.preventDefault();
-		localStorage.removeItem('isLoggedIn');
+		logout();
 		props.history.push('/');
 	};
 
