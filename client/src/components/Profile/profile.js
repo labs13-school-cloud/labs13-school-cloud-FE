@@ -86,6 +86,7 @@ function Profile(props) {
 	// render() {
 	return (
 		<div className="container">
+			<AppBar />
 			{isLoggedIn() ? (
 				<>
 					<AppBar />
