@@ -54,7 +54,7 @@ function Profile(props) {
 	};
 
 	useEffect(() => {
-		const { userProfile, getProfile } = props.auth;
+		// const { userProfile, getProfile } = props.auth;
 
 		if (!userProfile) {
 			getProfile((err, profile) => {
