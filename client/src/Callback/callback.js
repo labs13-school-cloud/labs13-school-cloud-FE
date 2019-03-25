@@ -12,6 +12,7 @@ class Callback extends Component {
     getUserProfile();
     window.location.href = "/home";
   }
+
   render() {
     //Customized styling
     const style = {

@@ -13,18 +13,41 @@ import TeamMembersView from "../TeamMembers/TeamMembersView";
 import TrainingSeriesView from "../TrainingSeries/TrainingSeriesView";
 import { NavigationView } from "../Navigation";
 
+//Authentication
 import { isLoggedIn, login } from "../../Auth/Auth";
+
+//Axios
+import axios from "axios";
 
 class Dashboard extends React.Component {
   state = {
     tabValue: 0
   };
 
+  componentDidMount() {
+    this.sendUserDataToDatabase();
+  }
+
   // tracking the tab value in navigation.js
   changeTabValue = value => {
     this.setState({
       tabValue: value
     });
+  };
+
+  sendUserDataToDatabase = () => {
+    const userData = JSON.parse(localStorage.getItem("Profile"));
+    const { email, name } = userData;
+    console.log(email, name);
+    axios
+      .post("https://labs11-trainingbot-dev.herokuapp.com/api/auth", {
+        email,
+        name
+      })
+      .then(res => {
+        console.log(res.data);
+      })
+      .catch(err => console.log(err));
   };
 
   render() {
