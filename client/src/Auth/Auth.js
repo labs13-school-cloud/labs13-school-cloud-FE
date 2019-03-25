@@ -30,6 +30,7 @@ export const login = () => {
 export const logout = () => {
   clearIdToken();
   clearAccessToken();
+  clearUserProfile();
   history.push("/");
 };
 
@@ -77,6 +78,8 @@ export const getUserProfile = cb => {
     cb(err, profile);
   });
 };
+
+const clearUserProfile = () => localStorage.removeItem("Profile");
 
 //----HELPER FUNCTIONS----
 
