@@ -21,7 +21,7 @@ function Profile(props) {
 		} else {
 			setUProfile(userProfile);
 		}
-	}, []);
+	});
 	return (
 		<div className="container">
 			<Button variant="contained" color="secondary" onClick={e => handleLogout(e)}>
