@@ -1,14 +1,16 @@
 // component to contain all the components related to team members
 import React from 'react';
+
+//API Dependency
 import axios from 'axios';
 import TeamMembersList from './TeamMembersList'
 
 class TeamMembersView extends React.Component {
-	state = {
-		users: [],
-		profile: [],
-		teamMembers: [],
-	};
+  state = {
+    users: [],
+    profile: [],
+    teamMembers: [],
+  };
 
 	componentDidMount() {
 		axios

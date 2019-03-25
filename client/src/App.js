@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
+// Routing
 import { Route } from 'react-router-dom';
+
+//Styling
 import CssBaseline from '@material-ui/core/CssBaseline';
+import Button from '@material-ui/core/Button';
+
+//Components
 import { LandingPageView } from './components/LandingPage';
 import { TeamMembersView } from './components/TeamMembers';
 import { Dashboard } from './components/Dashboard';
-import Button from '@material-ui/core/Button';
+
 
 class App extends Component {
   goTo(route) {

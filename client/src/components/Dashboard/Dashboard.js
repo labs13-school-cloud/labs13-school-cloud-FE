@@ -1,29 +1,36 @@
 // parent component for app once logged in
-import React, { Children } from "react";
-import { NavigationView } from "../Navigation";
-import { Link } from "react-router-dom";
-import TeamMembersView from "../TeamMembers/TeamMembersView";
-import TrainingSeriesView from "../TrainingSeries/TrainingSeriesView";
-import AppBar from "../AppBar/AppBar";
-import styled from "styled-components";
+import React, {Children} from 'react';
+
+//Routing
+import {Link} from 'react-router-dom';
+
+//Styling
+import styled from 'styled-components';
+
+//Components
+import AppBar from '../AppBar/AppBar';
+import TeamMembersView from '../TeamMembers/TeamMembersView';
+import TrainingSeriesView from '../TrainingSeries/TrainingSeriesView';
+import {NavigationView} from '../Navigation';
+
 class Dashboard extends React.Component {
   state = {
-    tabValue: 0
+    tabValue: 0,
   };
 
   // tracking the tab value in navigation.js
   changeTabValue = value => {
     this.setState({
-      tabValue: value
+      tabValue: value,
     });
   };
-
+  //Logs user in
   login() {
     this.props.auth.login();
   }
   render() {
     const { isAuthenticated } = this.props.auth;
-
+    
     return (
       <>
         <AppBar />
@@ -35,7 +42,7 @@ class Dashboard extends React.Component {
           {isAuthenticated() && (
             <>
               <h4>
-                You are logged in! You can now view your{" "}
+                You are logged in! You can now view your{' '}
                 <Link to="profile">profile area</Link>.
               </h4>
               <div>
@@ -46,10 +53,10 @@ class Dashboard extends React.Component {
           )}
           {!isAuthenticated() && (
             <h4>
-              You are not logged in! Please{" "}
-              <a style={{ cursor: "pointer" }} onClick={this.login.bind(this)}>
+              You are not logged in! Please{' '}
+              <a style={{cursor: 'pointer'}} onClick={this.login.bind(this)}>
                 Log In
-              </a>{" "}
+              </a>{' '}
               to continue.
             </h4>
           )}
@@ -58,9 +65,9 @@ class Dashboard extends React.Component {
     );
   }
 }
+export default Dashboard;
 
+//Styled Components
 const DashboardContainer = styled.div`
   margin: 100px 0;
 `;
-
-export default Dashboard;

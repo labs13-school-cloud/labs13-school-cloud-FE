@@ -1,28 +1,32 @@
 // displays individual training series' posts
-
 import React from 'react';
+
+//PropTypes
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
+
+//Styling
+import {withStyles} from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import { spacing } from '@material-ui/system';
+import {spacing} from '@material-ui/system';
 
+//Customized Styling
 const styles = {
   card: {
     minWidth: 275,
     maxWidth: 325,
-    marginBottom: 20
+    marginBottom: 20,
   },
   title: {
-    fontSize: 16
-  }
+    fontSize: 16,
+  },
 };
 
 function SeriesCard(props) {
-  const { classes } = props;
+  const {classes} = props;
 
   return (
     <Card className={classes.card}>
@@ -45,7 +49,7 @@ function SeriesCard(props) {
 }
 
 SeriesCard.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
 };
 
 export default withStyles(styles)(SeriesCard);
