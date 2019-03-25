@@ -6,7 +6,6 @@ import Tab from "@material-ui/core/Tab";
 
 const Navigation = props => {
   const [value, setValue] = React.useState(0);
-  console.log(props);
 
   function handleChange(event, newValue) {
     setValue(newValue);
