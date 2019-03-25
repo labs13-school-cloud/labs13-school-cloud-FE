@@ -49,24 +49,26 @@ function Profile(props) {
 
 	const handleLogout = e => {
 		e.preventDefault();
-		localStorage.removeItem('isLoggedIn');
+		// localStorage.removeItem('isLoggedIn');
+		logout();
 		props.history.push('/');
 	};
 
 	useEffect(() => {
 		// const { userProfile, getProfile } = props.auth;
 
-		if (!userProfile) {
-			getProfile((err, profile) => {
-				setProfile(profile);
-			});
-		} else {
-			setProfile(userProfile);
-		}
+		// if (!userProfile) {
+		// 	getProfile((err, profile) => {
+		// 		setProfile(profile);
+		// 	});
+		// } else {
+		// 	setProfile(userProfile);
+		// }
 
 		if (isLoggedIn()) {
 			const user = JSON.parse(localStorage.getItem('Profile'));
-			this.setState({ userProfile: user });
+			setProfile(user);
+			// this.setState({ userProfile: user });
 		}
 	});
 
