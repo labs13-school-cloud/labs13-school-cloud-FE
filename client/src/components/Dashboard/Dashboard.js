@@ -29,9 +29,8 @@ class Dashboard extends React.Component {
     this.props.auth.login();
   }
   render() {
-    const {isAuthenticated} = this.props.auth;
-    console.log(this.props);
-
+    const { isAuthenticated } = this.props.auth;
+    
     return (
       <>
         <AppBar />
@@ -48,7 +47,7 @@ class Dashboard extends React.Component {
               </h4>
               <div>
                 {this.state.tabValue === 0 && <TrainingSeriesView />}
-                {this.setState.tabValue === 1 && <TeamMembersView />}
+                {this.state.tabValue === 1 && <TeamMembersView />}
               </div>
             </>
           )}
