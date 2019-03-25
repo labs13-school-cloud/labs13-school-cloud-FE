@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 //Styling
 import Button from "@material-ui/core/Button";
 //Authentication
-import { getUserProfile, logout } from "../../Auth/Auth";
+import { logout } from "../../Auth/Auth";
 
 class Profile extends React.Component {
   state = {
