@@ -77,6 +77,7 @@ export const getUserProfile = cb => {
     cb(err, profile);
   });
 };
+
 //----HELPER FUNCTIONS----
 
 //Help function that extracts the id token and access token
