@@ -67,12 +67,12 @@ export const isLoggedIn = () => {
   return !!idToken && !isTokenExpired(idToken);
 };
 
-//Gets the user profile
+//gets the users profile
 export const getUserProfile = cb => {
   auth.client.userInfo(getAccessToken(), (err, profile) => {
     if (profile) {
-      console.log(profile);
-      return profile;
+      let setProfileToString = JSON.stringify(profile);
+      localStorage.setItem("Profile", setProfileToString);
     }
     cb(err, profile);
   });

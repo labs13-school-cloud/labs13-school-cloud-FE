@@ -3,12 +3,13 @@ import React, { Component } from "react";
 //Loading SVG that gets displayed
 import loading from "./loading.svg";
 
-import { setIdToken, setAccessToken } from "../Auth/Auth";
+import { setIdToken, setAccessToken, getUserProfile } from "../Auth/Auth";
 
 class Callback extends Component {
   componentDidMount() {
     setAccessToken();
     setIdToken();
+    getUserProfile();
     window.location.href = "/home";
   }
   render() {

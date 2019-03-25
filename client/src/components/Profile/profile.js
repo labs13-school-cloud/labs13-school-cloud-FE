@@ -6,6 +6,9 @@ import Button from "@material-ui/core/Button";
 import { getUserProfile, logout } from "../../Auth/Auth";
 
 class Profile extends React.Component {
+  state = {
+    userProfile: []
+  };
   // const [uProfile, setUProfile] = useState({});
 
   // const handleLogout = e => {
@@ -27,24 +30,30 @@ class Profile extends React.Component {
   // });
 
   componentDidMount() {
-    getUserProfile();
+    this.setProfileToState();
   }
+
+  setProfileToState = () => {
+    const user = JSON.parse(localStorage.getItem("Profile"));
+    this.setState({ userProfile: user });
+    console.log(this.state);
+  };
   render() {
     return (
       <div className='container'>
         <Button variant='contained' color='secondary' onClick={() => logout()}>
           Log Out
         </Button>
-        {/* <div className="profile-area">
-          <h1>{uProfile.name}</h1>
+        <div className='profile-area'>
+          <h1>{this.state.userProfile.email}</h1>
           <div>
-            <img src={uProfile.picture} alt="profile" />
+            <img src={this.state.userProfile.picture} alt='profile' />
             <div>
-              <h3>{uProfile.nickname}</h3>
+              <h3>{this.state.userProfile.nickname}</h3>
             </div>
-            <pre>{JSON.stringify(uProfile, null, 2)}</pre>
+            <pre>{JSON.stringify(this.state.userProfile, null, 2)}</pre>
           </div>
-        </div> */}
+        </div>
       </div>
     );
   }
