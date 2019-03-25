@@ -67,6 +67,16 @@ export const isLoggedIn = () => {
   return !!idToken && !isTokenExpired(idToken);
 };
 
+//Gets the user profile
+export const getUserProfile = cb => {
+  auth.client.userInfo(getAccessToken(), (err, profile) => {
+    if (profile) {
+      console.log(profile);
+      return profile;
+    }
+    cb(err, profile);
+  });
+};
 //----HELPER FUNCTIONS----
 
 //Help function that extracts the id token and access token
