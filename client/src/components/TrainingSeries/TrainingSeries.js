@@ -37,7 +37,7 @@ function SeriesCard(props) {
           component='h3'
           gutterBottom
         >
-          {props.title}
+          {props.data.title}
         </Typography>
         <Typography>test data</Typography>
       </CardContent>
