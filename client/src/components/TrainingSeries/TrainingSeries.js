@@ -26,7 +26,6 @@ const styles = {
 
 function SeriesCard(props) {
   const { classes } = props;
-  console.log(props);
   return (
     <Card className={classes.card}>
       <CardContent>
@@ -36,7 +35,7 @@ function SeriesCard(props) {
           component='h3'
           gutterBottom
         >
-          {props.title}
+          {props.data.title}
         </Typography>
         <Typography>test data</Typography>
       </CardContent>

@@ -24,7 +24,8 @@ class Dashboard extends React.Component {
   state = {
     tabValue: 0,
     user: {},
-    doneLoading: false
+    doneLoading: false,
+    refreshCount: 0
   };
 
   componentDidMount() {
@@ -32,7 +33,6 @@ class Dashboard extends React.Component {
   }
 
   render() {
-    console.log(this.state);
     return (
       <>
         {this.state.doneLoading && (
