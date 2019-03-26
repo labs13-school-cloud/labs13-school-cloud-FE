@@ -15,9 +15,6 @@ import { flex } from '@material-ui/system/flexbox';
 //Images
 import logo from '../../img/training-bot.png';
 
-//Fake data
-const faker = require('faker');
-
 //Customized Styling
 const styles = {
 	avatar: {
@@ -61,7 +58,7 @@ const appBar = props => {
 					<Button>Contact</Button>
 				</div>
 				<Link to="/profile">
-					<Avatar alt="Avatar" src={faker.image.avatar()} className={classes.avatar} />
+					<Avatar alt="Avatar" src={logo} className={classes.avatar} />
 				</Link>
 			</AppBar>
 		</>
