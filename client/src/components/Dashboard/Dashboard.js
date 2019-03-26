@@ -1,5 +1,5 @@
 // parent component for app once logged in
-import React from 'react';
+import React, { Children } from 'react';
 import { Elements } from 'react-stripe-elements';
 
 //Routing
@@ -13,12 +13,21 @@ import AppBar from '../AppBar/AppBar';
 import TeamMembersView from '../TeamMembers/TeamMembersView';
 import TrainingSeriesView from '../TrainingSeries/TrainingSeriesView';
 import { NavigationView } from '../Navigation';
-import CheckoutForm from '../Stripe/CheckoutForm';
+
+//Authentication
+import { isLoggedIn, login } from '../../Auth/Auth';
+
+//Axios
+import axios from 'axios';
 
 class Dashboard extends React.Component {
 	state = {
 		tabValue: 0,
 	};
+
+	componentDidMount() {
+		this.sendUserDataToDatabase();
+	}
 
 	// tracking the tab value in navigation.js
 	changeTabValue = value => {
@@ -26,26 +35,32 @@ class Dashboard extends React.Component {
 			tabValue: value,
 		});
 	};
-	//Logs user in
-	login() {
-		this.props.auth.login();
-	}
-	render() {
-		const { isAuthenticated } = this.props.auth;
 
+	sendUserDataToDatabase = () => {
+		const userData = JSON.parse(localStorage.getItem('Profile'));
+		const { email, name } = userData;
+		console.log(email, name);
+		axios
+			.post('https://labs11-trainingbot-dev.herokuapp.com/api/auth', {
+				email,
+				name,
+			})
+			.then(res => {
+				console.log(res.data);
+			})
+			.catch(err => console.log(err));
+	};
+
+	render() {
 		return (
 			<>
 				<AppBar />
-				<Elements>
-					<CheckoutForm />
-				</Elements>
-
 				<DashboardContainer>
 					<NavigationView
 						tabValue={this.state.tabValue}
 						changeTabValue={this.changeTabValue}
 					/>
-					{isAuthenticated() && (
+					{isLoggedIn() && (
 						<>
 							<h4>
 								You are logged in! You can now view your{' '}
@@ -57,10 +72,10 @@ class Dashboard extends React.Component {
 							</div>
 						</>
 					)}
-					{!isAuthenticated() && (
+					{!isLoggedIn() && (
 						<h4>
 							You are not logged in! Please{' '}
-							<a style={{ cursor: 'pointer' }} onClick={this.login.bind(this)}>
+							<a style={{ cursor: 'pointer' }} onClick={() => login()}>
 								Log In
 							</a>{' '}
 							to continue.
