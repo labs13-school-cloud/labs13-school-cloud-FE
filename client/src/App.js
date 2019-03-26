@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Button from '@material-ui/core/Button';
 
-import { login, logout, isLoggedIn } from './Auth/Auth';
+import { login } from './Auth/Auth';
 
 class App extends Component {
 	render() {
