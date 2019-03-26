@@ -15,78 +15,44 @@ import TrainingSeriesView from '../TrainingSeries/TrainingSeriesView';
 import { NavigationView } from '../Navigation';
 
 //Authentication
-import { isLoggedIn, login } from '../../Auth/Auth';
-
-//Axios
-import axios from 'axios';
-
+import { isLoggedIn, login } from "../../Auth/Auth";
+import Authenticate from "../authenticate/authenticate";
 class Dashboard extends React.Component {
 	state = {
 		tabValue: 0,
 	};
 
-	componentDidMount() {
-		this.sendUserDataToDatabase();
-	}
+  // tracking the tab value in navigation.js
+  changeTabValue = value => {
+    this.setState({
+      tabValue: value
+    });
+  };
 
-	// tracking the tab value in navigation.js
-	changeTabValue = value => {
-		this.setState({
-			tabValue: value,
-		});
-	};
+  render() {
+    return (
+      <>
+        <AppBar />
+        <DashboardContainer>
+          <NavigationView
+            tabValue={this.state.tabValue}
+            changeTabValue={this.changeTabValue}
+          />
 
-	sendUserDataToDatabase = () => {
-		const userData = JSON.parse(localStorage.getItem('Profile'));
-		const { email, name } = userData;
-		console.log(email, name);
-		axios
-			.post('https://labs11-trainingbot-dev.herokuapp.com/api/auth', {
-				email,
-				name,
-			})
-			.then(res => {
-				console.log(res.data);
-			})
-			.catch(err => console.log(err));
-	};
-
-	render() {
-		return (
-			<>
-				<AppBar />
-				<DashboardContainer>
-					<NavigationView
-						tabValue={this.state.tabValue}
-						changeTabValue={this.changeTabValue}
-					/>
-					{isLoggedIn() && (
-						<>
-							<h4>
-								You are logged in! You can now view your{' '}
-								<Link to="profile">profile area</Link>.
-							</h4>
-							<div>
-								{this.state.tabValue === 0 && <TrainingSeriesView />}
-								{this.state.tabValue === 1 && <TeamMembersView />}
-							</div>
-						</>
-					)}
-					{!isLoggedIn() && (
-						<h4>
-							You are not logged in! Please{' '}
-							<a style={{ cursor: 'pointer' }} onClick={() => login()}>
-								Log In
-							</a>{' '}
-							to continue.
-						</h4>
-					)}
-				</DashboardContainer>
-			</>
-		);
-	}
+          <h4>
+            You are logged in! You can now view your{" "}
+            <Link to='profile'>profile area</Link>.
+          </h4>
+          <div>
+            {this.state.tabValue === 0 && <TrainingSeriesView />}
+            {this.state.tabValue === 1 && <TeamMembersView />}
+          </div>
+        </DashboardContainer>
+      </>
+    );
+  }
 }
-export default Dashboard;
+export default Authenticate(Dashboard);
 
 //Styled Components
 const DashboardContainer = styled.div`
