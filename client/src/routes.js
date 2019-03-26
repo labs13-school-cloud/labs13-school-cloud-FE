@@ -9,13 +9,10 @@ import Dashboard from "./components/Dashboard/Dashboard";
 import ProfileView from "./components/Profile/ProfileView";
 
 //Callback
-import Callback from "./Callback/callback";
+import Callback from "./components/Callback/callback";
 
 //History
 import history from "./history";
-
-//Authentication
-import { requiresAuth } from "./Auth/Auth";
 
 //Use this for rendering all of our components
 export const makeMainRoutes = () => {

@@ -17,41 +17,47 @@ import { NavigationView } from "../Navigation";
 import axios from "axios";
 
 //Auth
-import {
-  setIdToken,
-  setAccessToken,
-  getUserProfile,
-  isLoggedIn,
-  login
-} from "../../Auth/Auth";
-
+import { getUserProfile } from "../../Auth/Auth";
 import Authenticate from "../authenticate/authenticate";
+
 class Dashboard extends React.Component {
   state = {
     tabValue: 0,
-    user: {}
+    user: {},
+    doneLoading: false
   };
 
   componentDidMount() {
-    setAccessToken();
-    setIdToken();
-    getUserProfile(() => {
-      const userData = JSON.parse(localStorage.getItem("Profile"));
-      const { email, name } = userData;
-      console.log(email, name);
-      axios
-        .post("https://labs11-trainingbot-dev.herokuapp.com/api/auth", {
-          email,
-          name
-        })
-        .then(res => {
-          this.setState({ user: res.data });
-        })
-        .catch(err => {
-          console.log(err);
-          //Put 404 error JSX here or 500 error jsx
-        });
-    });
+    this.getProfile();
+  }
+
+  render() {
+    return (
+      <>
+        {this.state.doneLoading && (
+          <>
+            <AppBar />
+            <DashboardContainer>
+              <NavigationView
+                tabValue={this.state.tabValue}
+                changeTabValue={this.changeTabValue}
+              />
+
+              <h4>
+                You are logged in! You can now view your{" "}
+                <Link to='profile'>profile area</Link>.
+              </h4>
+              <div>
+                {this.state.tabValue === 0 && (
+                  <TrainingSeriesView userData={this.state.user} />
+                )}
+                {this.state.tabValue === 1 && <TeamMembersView />}
+              </div>
+            </DashboardContainer>
+          </>
+        )}
+      </>
+    );
   }
 
   // tracking the tab value in navigation.js
@@ -60,40 +66,26 @@ class Dashboard extends React.Component {
       tabValue: value
     });
   };
-
-  setLocalStorageToState = () => {
-    //Gets local storage data & sets state
-    const user = JSON.parse(localStorage.getItem("userData"));
-    this.setState({
-      user: { ...user }
+  //Gets the users Profile
+  getProfile = () => {
+    getUserProfile(() => {
+      const userData = JSON.parse(localStorage.getItem("Profile"));
+      const { email, name } = userData;
+      axios
+        .post("https://labs11-trainingbot-dev.herokuapp.com/api/auth", {
+          email,
+          name
+        })
+        .then(res => {
+          console.log(res.data);
+          let userData = res.data;
+          this.setState({ user: { ...userData }, doneLoading: true });
+        })
+        .catch(err => {
+          console.log(err);
+        });
     });
   };
-
-  render() {
-    console.log(this.state.user);
-    return (
-      <>
-        <AppBar />
-        <DashboardContainer>
-          <NavigationView
-            tabValue={this.state.tabValue}
-            changeTabValue={this.changeTabValue}
-          />
-
-          <h4>
-            You are logged in! You can now view your{" "}
-            <Link to='profile'>profile area</Link>.
-          </h4>
-          <div>
-            {this.state.tabValue === 0 && (
-              <TrainingSeriesView userId={this.state.user} />
-            )}
-            {this.state.tabValue === 1 && <TeamMembersView />}
-          </div>
-        </DashboardContainer>
-      </>
-    );
-  }
 }
 
 export default Authenticate(Dashboard);

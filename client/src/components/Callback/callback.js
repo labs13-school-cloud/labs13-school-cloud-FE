@@ -1,9 +1,18 @@
 import React, { Component } from "react";
-
 //Loading SVG that gets displayed
 import loading from "./loading.svg";
 
+//Auth
+import { setAccessToken, setIdToken } from "../../Auth/Auth";
+import history from "../../history";
+
 class Callback extends Component {
+  componentDidMount() {
+    setAccessToken();
+    setIdToken();
+
+    history.push("/home");
+  }
   render() {
     //Customized styling
     const style = {
