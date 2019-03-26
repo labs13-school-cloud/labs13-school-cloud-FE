@@ -27,14 +27,14 @@ const styles = {
 
 function SeriesCard(props) {
   const { classes } = props;
-  console.log(props);
+  // console.log(props);
   return (
     <Card className={classes.card}>
       <CardContent>
         <Typography
           className={classes.title}
-          variant='h5'
-          component='h3'
+          variant="h5"
+          component="h3"
           gutterBottom
         >
           {props.data.title}
@@ -42,7 +42,7 @@ function SeriesCard(props) {
         <Typography>test data</Typography>
       </CardContent>
       <CardActions>
-        <Button size='small'>Edit</Button>
+        <Button size="small">Edit</Button>
       </CardActions>
     </Card>
   );
