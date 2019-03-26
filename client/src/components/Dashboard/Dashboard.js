@@ -1,6 +1,5 @@
 // parent component for app once logged in
 import React, { Children } from 'react';
-import { Elements } from 'react-stripe-elements';
 
 //Routing
 import { Link } from 'react-router-dom';
