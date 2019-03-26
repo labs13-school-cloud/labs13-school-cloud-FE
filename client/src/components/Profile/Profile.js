@@ -1,104 +1,102 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
+//Prop Types
 import PropTypes from 'prop-types';
-import AppBar from '../AppBar/AppBar';
-import styled from 'styled-components';
 
 //Styling
 import {
-	Button,
-	Card,
-	CardActions,
-	CardContent,
-	CardMedia,
-	Typography,
-	withStyles,
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  CardMedia,
+  Typography,
+  withStyles,
 } from '@material-ui/core';
+import styled from 'styled-components';
+
+//Components
+import AppBar from '../AppBar/AppBar';
 
 //Authentication
-import { isLoggedIn, login } from '../../Auth/Auth';
+import {logout, isLoggedIn, login} from '../../Auth/Auth';
+import Authentication from '../authenticate/authenticate';
 
 const styles = {
-	card: {
-		maxWidth: 800,
-		margin: '0 auto',
-	},
-	cardContent: {
-		backgroundColor: '#E8E9EB',
-	},
-	media: {
-		height: 200,
-		width: 200,
-	},
+  card: {
+    maxWidth: 800,
+    margin: '0 auto',
+  },
+  cardContent: {
+    backgroundColor: '#E8E9EB',
+  },
+  media: {
+    height: 200,
+    width: 200,
+  },
 };
 
 const Container = styled.div`
-	margin-top: 80px;
+  margin-top: 80px;
 `;
 
-function Profile(props) {
-	const { classes } = props;
+class Profile extends React.Component {
+  state = {
+    userProfile: [],
+  };
 
-	const [Profile, setProfile] = useState({});
+  componentDidMount() {
+    //Gets the user profile and assigns it to state
+    const user = JSON.parse(localStorage.getItem('Profile'));
+    this.setState({userProfile: user});
+  }
 
-	useEffect(() => {
-		if (isLoggedIn()) {
-			const user = JSON.parse(localStorage.getItem('Profile'));
-			setProfile(user);
-		}
-	});
+  render() {
+    const {classes} = this.props;
+    const {userProfile} = this.state;
+    return (
+      <div className="container">
+        <AppBar />
+        <Container>
+          <div className="profile-area">
+            <Card className={classes.card}>
+              <Typography gutterBottom variant="h5" component="h1">
+                {userProfile.name}
+              </Typography>
 
-	return (
-		<div className="container">
-			<AppBar />
-			{isLoggedIn() ? (
-				<>
-					<AppBar />
-					<Container>
-						<div className="profile-area">
-							<Card className={classes.card}>
-								<Typography gutterBottom variant="h5" component="h1">
-									{Profile.name}
-								</Typography>
-
-								{/* <CardActionArea> */}
-								<CardMedia
-									className={classes.media}
-									image={Profile.picture}
-									title="Contemplative Reptile"
-								/>
-								<CardContent className={classes.cardContent}>
-									<Typography gutterBottom variant="h5" component="h2">
-										{Profile.nickname}
-									</Typography>
-									<Typography component="p">
-										<pre>{JSON.stringify(Profile, null, 2)}</pre>
-									</Typography>
-								</CardContent>
-								{/* </CardActionArea> */}
-								<CardActions>
-									<Button size="small" color="primary">
-										Edit
-									</Button>
-									<Button size="small" color="secondary">
-										Delete Account
-									</Button>
-								</CardActions>
-							</Card>
-						</div>
-					</Container>
-				</>
-			) : (
-				<h1>
-					You are not logged in! <button onClick={() => login()}>Login Here!</button>
-				</h1>
-			)}
-		</div>
-	);
+              {/* <CardActionArea> */}
+              <CardMedia
+                className={classes.media}
+                image={userProfile.picture}
+                title="Contemplative Reptile"
+              />
+              <CardContent className={classes.cardContent}>
+                <Typography gutterBottom variant="h5" component="h2">
+                  {userProfile.nickname}
+                </Typography>
+                <Typography component="p">
+                  <pre>{JSON.stringify(userProfile, null, 2)}</pre>
+                </Typography>
+              </CardContent>
+              {/* </CardActionArea> */}
+              <CardActions>
+                <Button size="small" color="primary">
+                  Edit
+                </Button>
+                <Button size="small" color="secondary">
+                  Delete Account
+                </Button>
+              </CardActions>
+            </Card>
+          </div>
+        </Container>
+      </div>
+    );
+  }
 }
 
 Profile.propTypes = {
-	classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(Profile);
+export default withStyles(styles)(Authentication(Profile));
