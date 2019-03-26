@@ -18,14 +18,29 @@ import { isLoggedIn, login } from "../../Auth/Auth";
 import Authenticate from "../authenticate/authenticate";
 class Dashboard extends React.Component {
   state = {
-    tabValue: 0
+    tabValue: 0,
+    user: {}
   };
+
+  componentDidMount() {
+    this.setLocalStorageToState();
+  }
 
   // tracking the tab value in navigation.js
   changeTabValue = value => {
     this.setState({
       tabValue: value
     });
+  };
+
+  setLocalStorageToState = () => {
+    //Gets local storage data & sets state
+    const user = JSON.parse(localStorage.getItem("userData"));
+    this.setState({
+      user: { ...user }
+    });
+    //Removes local storage data
+    localStorage.removeItem("userData");
   };
 
   render() {
@@ -51,6 +66,7 @@ class Dashboard extends React.Component {
     );
   }
 }
+
 export default Authenticate(Dashboard);
 
 //Styled Components
