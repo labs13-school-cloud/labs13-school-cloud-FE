@@ -46,13 +46,15 @@ class Dashboard extends React.Component {
 
               <h4>
                 You are logged in! You can now view your{" "}
-                <Link to='profile'>profile area</Link>.
+                <Link to="profile">profile area</Link>.
               </h4>
               <div>
                 {this.state.tabValue === 0 && (
                   <TrainingSeriesView userData={this.state.user} />
                 )}
-                {this.state.tabValue === 1 && <TeamMembersView />}
+                {this.state.tabValue === 1 && (
+                  <TeamMembersView userId={this.state.user.user.userID} />
+                )}
               </div>
             </DashboardContainer>
           </>
