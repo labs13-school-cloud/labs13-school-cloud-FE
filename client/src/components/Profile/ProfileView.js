@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import Profile from './Profile';
 import AppBar from '../AppBar/AppBar';
 import styled from 'styled-components';
 import { Button } from '@material-ui/core';
 
 import { logout } from '../../Auth/Auth';
+import Profile from './Profile';
 
 const Container = styled.div`
 	margin-top: 80px;
@@ -26,7 +26,7 @@ const ProfileView = props => {
 				Log Out
 			</Button>
 
-			<Profile auth={props.auth} />
+			<Profile />
 		</Container>
 	);
 };
