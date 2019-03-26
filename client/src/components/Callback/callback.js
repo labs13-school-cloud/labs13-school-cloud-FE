@@ -10,7 +10,6 @@ class Callback extends Component {
   componentDidMount() {
     setAccessToken();
     setIdToken();
-
     history.push("/home");
   }
   render() {

@@ -32,6 +32,7 @@ class Dashboard extends React.Component {
   }
 
   render() {
+    console.log(this.state);
     return (
       <>
         {this.state.doneLoading && (
@@ -77,7 +78,6 @@ class Dashboard extends React.Component {
           name
         })
         .then(res => {
-          console.log(res.data);
           let userData = res.data;
           this.setState({ user: { ...userData }, doneLoading: true });
         })

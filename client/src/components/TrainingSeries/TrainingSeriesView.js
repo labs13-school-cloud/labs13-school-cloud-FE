@@ -6,7 +6,6 @@ import TrainingSeriesList from "./TrainingSeriesList";
 
 class TrainingSeriesView extends Component {
   render() {
-    console.log(this.props);
     return (
       <div>
         <TrainingSeriesList userData={this.props.userData} />

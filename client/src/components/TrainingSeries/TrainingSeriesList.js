@@ -10,11 +10,9 @@ import TrainingSeries from "./TrainingSeries";
 const TrainingSeriesList = props => {
   return (
     <ListStyles>
-      <TrainingSeries />
-      <TrainingSeries />
-      <TrainingSeries />
-      <TrainingSeries />
-      <TrainingSeries />
+      {props.userData.trainingSeries.map(series => {
+        return <TrainingSeries key={series.trainingSeriesID} data={series} />;
+      })}
     </ListStyles>
   );
 };
