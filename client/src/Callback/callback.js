@@ -3,32 +3,7 @@ import React, { Component } from "react";
 //Loading SVG that gets displayed
 import loading from "./loading.svg";
 
-//Axios
-import axios from "axios";
-
-//Auth
-import { setIdToken, setAccessToken, getUserProfile } from "../Auth/Auth";
 class Callback extends Component {
-  componentDidMount() {
-    setAccessToken();
-    setIdToken();
-    getUserProfile(() => {
-      const userData = JSON.parse(localStorage.getItem("Profile"));
-      const { email, name } = userData;
-      console.log(email, name);
-      axios
-        .post("https://labs11-trainingbot-dev.herokuapp.com/api/auth", {
-          email,
-          name
-        })
-        .then(res => {
-          localStorage.setItem("userData", JSON.stringify(res.data));
-          window.location.href = "/home";
-        })
-        .catch(err => console.log(err));
-    });
-  }
-
   render() {
     //Customized styling
     const style = {

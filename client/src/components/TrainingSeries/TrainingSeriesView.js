@@ -1,10 +1,11 @@
 // component to contain all the components related to training series
-import React from 'react';
+import React from "react";
 
 //Components
-import TrainingSeriesList from './TrainingSeriesList';
+import TrainingSeriesList from "./TrainingSeriesList";
 
-const TrainingSeriesView = () => {
+const TrainingSeriesView = props => {
+  console.log(props);
   return (
     <div>
       <TrainingSeriesList />

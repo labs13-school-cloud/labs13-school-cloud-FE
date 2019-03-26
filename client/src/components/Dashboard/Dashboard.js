@@ -13,8 +13,18 @@ import TeamMembersView from "../TeamMembers/TeamMembersView";
 import TrainingSeriesView from "../TrainingSeries/TrainingSeriesView";
 import { NavigationView } from "../Navigation";
 
-//Authentication
-import { isLoggedIn, login } from "../../Auth/Auth";
+//Axios
+import axios from "axios";
+
+//Auth
+import {
+  setIdToken,
+  setAccessToken,
+  getUserProfile,
+  isLoggedIn,
+  login
+} from "../../Auth/Auth";
+
 import Authenticate from "../authenticate/authenticate";
 class Dashboard extends React.Component {
   state = {
@@ -23,7 +33,25 @@ class Dashboard extends React.Component {
   };
 
   componentDidMount() {
-    this.setLocalStorageToState();
+    setAccessToken();
+    setIdToken();
+    getUserProfile(() => {
+      const userData = JSON.parse(localStorage.getItem("Profile"));
+      const { email, name } = userData;
+      console.log(email, name);
+      axios
+        .post("https://labs11-trainingbot-dev.herokuapp.com/api/auth", {
+          email,
+          name
+        })
+        .then(res => {
+          this.setState({ user: res.data });
+        })
+        .catch(err => {
+          console.log(err);
+          //Put 404 error JSX here or 500 error jsx
+        });
+    });
   }
 
   // tracking the tab value in navigation.js
@@ -39,11 +67,10 @@ class Dashboard extends React.Component {
     this.setState({
       user: { ...user }
     });
-    //Removes local storage data
-    localStorage.removeItem("userData");
   };
 
   render() {
+    console.log(this.state.user);
     return (
       <>
         <AppBar />
@@ -58,7 +85,9 @@ class Dashboard extends React.Component {
             <Link to='profile'>profile area</Link>.
           </h4>
           <div>
-            {this.state.tabValue === 0 && <TrainingSeriesView />}
+            {this.state.tabValue === 0 && (
+              <TrainingSeriesView userId={this.state.user} />
+            )}
             {this.state.tabValue === 1 && <TeamMembersView />}
           </div>
         </DashboardContainer>
