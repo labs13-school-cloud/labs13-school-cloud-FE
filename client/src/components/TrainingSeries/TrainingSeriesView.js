@@ -1,15 +1,17 @@
 // component to contain all the components related to training series
-import React from 'react';
+import React, { Component } from "react";
 
 //Components
-import TrainingSeriesList from './TrainingSeriesList';
+import TrainingSeriesList from "./TrainingSeriesList";
 
-const TrainingSeriesView = () => {
-  return (
-    <div>
-      <TrainingSeriesList />
-    </div>
-  );
-};
+class TrainingSeriesView extends Component {
+  render() {
+    return (
+      <div>
+        <TrainingSeriesList userData={this.props.userData} />
+      </div>
+    );
+  }
+}
 
 export default TrainingSeriesView;

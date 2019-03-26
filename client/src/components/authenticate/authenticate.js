@@ -1,6 +1,6 @@
 // HOC for client-side authorization, protecting routes that require authentication
 
-import React, { Component } from "react";
+import React from "react";
 
 //Styling
 import styled from "styled-components";
