@@ -50,6 +50,7 @@ export const addTrainingSeries = trainingSeriesData => dispatch => {
     .catch(err => dispatch({ type: ADD_TRIANING_SERIES_FAIL, error: err }));
 };
 
+
 // export const editTrainingSeries = trainingSeriesData => dispatch => {
 
 // }
@@ -63,3 +64,4 @@ export const deleteTrainingSeries = id => dispatch => {
     )
     .catch(err => dispatch({ type: DELETE_TRIANING_SERIES_FAIL, error: err }));
 };
+
