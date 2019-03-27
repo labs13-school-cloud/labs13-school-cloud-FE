@@ -44,24 +44,25 @@ class Dashboard extends React.Component {
 								changeTabValue={this.changeTabValue}
 							/>
 
-							<h4>
-								You are logged in! You can now view your{' '}
-								<Link to="profile">profile area</Link>.
-							</h4>
-							<div>
-								{this.state.tabValue === 0 && (
-									<TrainingSeriesView userData={this.state.user} />
-								)}
-								{this.state.tabValue === 1 && (
-									<TeamMembersView userId={this.state.user.user.userID} />
-								)}
-							</div>
-						</DashboardContainer>
-					</>
-				)}
-			</>
-		);
-	}
+              <h4>
+                You are logged in! You can now view your{" "}
+                <Link to='profile'>profile area</Link>.
+              </h4>
+              <div>
+                {this.state.tabValue === 0 && (
+                  <TrainingSeriesView userId={this.state.user.user.userID} />
+                )}
+                {this.state.tabValue === 1 && (
+                  <TeamMembersView userId={this.state.user.user.userID} />
+                )}
+              </div>
+            </DashboardContainer>
+          </>
+        )}
+      </>
+    );
+  }
+
 
 	// tracking the tab value in navigation.js
 	changeTabValue = value => {
