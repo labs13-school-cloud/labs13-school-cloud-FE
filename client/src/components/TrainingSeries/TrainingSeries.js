@@ -11,7 +11,6 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import { spacing } from "@material-ui/system";
 
 //Customized Styling
 const styles = {
@@ -27,14 +26,13 @@ const styles = {
 
 function SeriesCard(props) {
   const { classes } = props;
-  console.log(props);
   return (
     <Card className={classes.card}>
       <CardContent>
         <Typography
           className={classes.title}
-          variant='h5'
-          component='h3'
+          variant="h5"
+          component="h3"
           gutterBottom
         >
           {props.data.title}
@@ -42,7 +40,7 @@ function SeriesCard(props) {
         <Typography>test data</Typography>
       </CardContent>
       <CardActions>
-        <Button size='small'>Edit</Button>
+        <Button size="small">Edit</Button>
       </CardActions>
     </Card>
   );
