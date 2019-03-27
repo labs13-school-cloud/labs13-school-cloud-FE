@@ -1,4 +1,4 @@
-// import axios from "axios";
+import axios from "axios";
 
 export const FETCH_TEAM_START = "FETCH_TEAM_START";
 export const FETCH_TEAM_SUCCESS = "FETCH_TEAM_SUCCESS";
