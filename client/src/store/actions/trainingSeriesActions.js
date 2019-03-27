@@ -42,7 +42,10 @@ export const addTrainingSeries = trainingSeriesData => dispatch => {
       trainingSeriesData
     )
     .then(res =>
-      dispatch({ type: ADD_TRIANING_SERIES_SUCCESS, payload: res.data })
+      dispatch({
+        type: ADD_TRIANING_SERIES_SUCCESS,
+        payload: res.data.newTrainingSeries
+      })
     )
     .catch(err => dispatch({ type: ADD_TRIANING_SERIES_FAIL, error: err }));
 };

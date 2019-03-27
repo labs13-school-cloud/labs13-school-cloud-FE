@@ -15,9 +15,9 @@ class TrainingSeriesView extends Component {
   }
 
   componentDidUpdate() {
-    if (this.props.isDoneAdding) {
-      this.getTrainingSeries();
-    }
+    // if (this.props.isDoneAdding) {
+    //   this.getTrainingSeries();
+    // }
   }
 
   getTrainingSeries = () => {
