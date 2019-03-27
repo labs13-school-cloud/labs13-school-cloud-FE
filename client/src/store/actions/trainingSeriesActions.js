@@ -9,7 +9,13 @@ export const ADD_TRIANING_SERIES_START = "ADD_TRIANING_SERIES_START";
 export const ADD_TRIANING_SERIES_SUCCESS = "ADD_TRIANING_SERIES_SUCCESS";
 export const ADD_TRIANING_SERIES_FAIL = "ADD_TRIANING_SERIES_FAIL";
 //EDIT TRAINING SERIES
+export const EDIT_TRIANING_SERIES_START = "EDIT_TRIANING_SERIES_START";
+export const EDIT_TRIANING_SERIES_SUCCESS = "EDIT_TRIANING_SERIES_SUCCESS";
+export const EDIT_TRIANING_SERIES_FAIL = "EDIT_TRIANING_SERIES_FAIL";
 //DELETE TRAINING SERIES
+export const DELETE_TRIANING_SERIES_START = "DELETE_TRIANING_SERIES_START";
+export const DELETE_TRIANING_SERIES_SUCCESS = "DELETE_TRIANING_SERIES_SUCCESS";
+export const DELETE_TRIANING_SERIES_FAIL = "DELETE_TRIANING_SERIES_FAIL";
 
 export const getTrainingSeries = id => dispatch => {
   dispatch({
@@ -36,8 +42,26 @@ export const addTrainingSeries = trainingSeriesData => dispatch => {
       trainingSeriesData
     )
     .then(res =>
-      dispatch({ type: ADD_TRIANING_SERIES_SUCCESS, payload: res.data })
+      dispatch({
+        type: ADD_TRIANING_SERIES_SUCCESS,
+        payload: res.data.newTrainingSeries
+      })
     )
     .catch(err => dispatch({ type: ADD_TRIANING_SERIES_FAIL, error: err }));
+};
+
+
+// export const editTrainingSeries = trainingSeriesData => dispatch => {
+
+// }
+
+export const deleteTrainingSeries = id => dispatch => {
+  dispatch({ type: DELETE_TRIANING_SERIES_START });
+  axios
+    .delete(`${process.env.REACT_APP_API}/api/training-series/${id}`)
+    .then(res =>
+      dispatch({ type: DELETE_TRIANING_SERIES_SUCCESS, payload: id })
+    )
+    .catch(err => dispatch({ type: DELETE_TRIANING_SERIES_FAIL, error: err }));
 };
 
