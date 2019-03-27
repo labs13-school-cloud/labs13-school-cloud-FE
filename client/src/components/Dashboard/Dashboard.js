@@ -1,5 +1,5 @@
 // parent component for app once logged in
-import React, { Children } from "react";
+import React from "react";
 
 //Routing
 import { Link } from "react-router-dom";
@@ -49,12 +49,6 @@ class Dashboard extends React.Component {
                 <Link to="profile">profile area</Link>.
               </h4>
               <div>
-                {/* {this.state.tabValue === 0 && (
-                  <TrainingSeriesView userData={this.state.user} />
-                )}
-                {this.state.tabValue === 1 && (
-                  <TeamMembersView userId={this.state.user.user.userID} />
-                )} */}
                 <div style={this.state.tabValue === 0 ? active : hidden}>
                   <TrainingSeriesView userData={this.state.user} />
                 </div>

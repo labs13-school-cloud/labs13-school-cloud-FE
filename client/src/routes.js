@@ -1,18 +1,18 @@
-import React from "react";
+import React from 'react';
 
 //Routing
-import { Route, Router } from "react-router-dom";
+import { Route, Router } from 'react-router-dom';
 
 //Components
-import App from "./App";
-import Dashboard from "./components/Dashboard/Dashboard";
-import ProfileView from "./components/Profile/ProfileView";
+import App from './App';
+import Dashboard from './components/Dashboard/Dashboard';
+import ProfileView from './components/Profile/ProfileView';
 
 //Callback
-import Callback from "./components/Callback/callback";
+import Callback from './components/Callback/callback';
 
 //History
-import history from "./history";
+import history from './history';
 
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware, compose } from "redux";
