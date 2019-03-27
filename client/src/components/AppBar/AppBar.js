@@ -10,13 +10,10 @@ import { withStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import AppBar from '@material-ui/core/AppBar';
-import { flex } from '@material-ui/system/flexbox';
+// import { flex } from '@material-ui/system/flexbox';
 
 //Images
 import logo from '../../img/training-bot.png';
-
-//Fake data
-const faker = require('faker');
 
 //Customized Styling
 const styles = {
@@ -46,11 +43,11 @@ const styles = {
 
 const appBar = props => {
 	const { classes } = props;
-	const [value, setValue] = React.useState(2);
+	// const [value, setValue] = React.useState(2);
 
-	function handleChange(event, newValue) {
-		setValue(newValue);
-	}
+	// function handleChange(event, newValue) {
+	// 	setValue(newValue);
+	// }
 
 	return (
 		<>
@@ -61,7 +58,7 @@ const appBar = props => {
 					<Button>Contact</Button>
 				</div>
 				<Link to="/profile">
-					<Avatar alt="Avatar" src={faker.image.avatar()} className={classes.avatar} />
+					<Avatar alt="Avatar" src={logo} className={classes.avatar} />
 				</Link>
 			</AppBar>
 		</>

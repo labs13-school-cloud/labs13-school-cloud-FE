@@ -1,4 +1,4 @@
-import axios from "axios";
+// import axios from "axios";
 
 //GET TRAINING SERIES
 export const GET_TRAINING_SERIES_START = "GET_TRAINING_SERIES_START";
@@ -40,3 +40,4 @@ export const addTrainingSeries = trainingSeriesData => dispatch => {
     )
     .catch(err => dispatch({ type: ADD_TRIANING_SERIES_FAIL, error: err }));
 };
+
