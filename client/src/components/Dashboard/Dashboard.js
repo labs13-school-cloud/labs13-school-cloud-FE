@@ -75,7 +75,7 @@ class Dashboard extends React.Component {
       const userData = JSON.parse(localStorage.getItem("Profile"));
       const { email, name } = userData;
       axios
-        .post("https://labs11-trainingbot-dev.herokuapp.com/api/auth", {
+        .post(`${process.env.REACT_APP_API}/api/auth`, {
           email,
           name
         })

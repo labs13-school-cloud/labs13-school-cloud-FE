@@ -3,7 +3,7 @@ import React, { Component } from "react";
 
 //REDUX
 import { connect } from "react-redux";
-import { getTrainingSeries } from "../../store/actions/";
+import { getTrainingSeries, deleteTrainingSeries } from "../../store/actions/";
 
 //Components
 import TrainingSeriesList from "./TrainingSeriesList";
@@ -24,7 +24,12 @@ class TrainingSeriesView extends Component {
     this.props.getTrainingSeries(this.props.userId);
   };
 
+  deleteTrainingSeries = id => {
+    this.props.deleteTrainingSeries(id);
+  };
+
   render() {
+    console.log(this.props.trainingSeries);
     return (
       <div>
         <>
@@ -32,7 +37,10 @@ class TrainingSeriesView extends Component {
             getTrainingSeries={this.props.getTrainingSeries}
             userID={this.props.userId}
           />
-          <TrainingSeriesList trainingSeries={this.props.trainingSeries} />
+          <TrainingSeriesList
+            deleteTrainingSeries={this.deleteTrainingSeries}
+            trainingSeries={this.props.trainingSeries}
+          />
         </>
       </div>
     );
@@ -50,6 +58,7 @@ const mapStateToProps = state => {
 export default connect(
   mapStateToProps,
   {
-    getTrainingSeries
+    getTrainingSeries,
+    deleteTrainingSeries
   }
 )(TrainingSeriesView);

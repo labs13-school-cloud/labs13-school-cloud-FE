@@ -14,7 +14,13 @@ const TrainingSeriesList = props => {
     <>
       <ListStyles>
         {props.trainingSeries.map(series => {
-          return <TrainingSeries key={series.trainingSeriesID} data={series} />;
+          return (
+            <TrainingSeries
+              key={series.trainingSeriesID}
+              deleteTrainingSeries={props.deleteTrainingSeries}
+              data={series}
+            />
+          );
         })}
       </ListStyles>
     </>
