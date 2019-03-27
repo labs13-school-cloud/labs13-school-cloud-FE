@@ -1,6 +1,5 @@
 // import axios from "axios";
 
-<<<<<<< HEAD
 export const FETCH_TEAM_START = "FETCH_TEAM_START";
 export const FETCH_TEAM_SUCCESS = "FETCH_TEAM_SUCCESS";
 export const FETCH_TEAM_FAIL = "FETCH_TEAM_FAIL";
@@ -35,6 +34,3 @@ export const addTeamMember = teamMember => dispatch => {
 export const editTeamMember = changes => dispatch => {};
 
 export const deleteTeamMember = changes => dispatch => {};
-=======
-// const baseUrl = `${process.env.REACT_APP_API}/api/`;
->>>>>>> development
