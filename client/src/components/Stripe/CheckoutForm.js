@@ -15,14 +15,28 @@ class CheckoutForm extends Component {
 		this.submit = this.submit.bind(this);
 	}
 
-	async submit(ev) {
-		let { token } = await this.props.stripe.createToken({ name: 'Name' });
+	async createUser(ev) {
+		let { token } = await this.props.stripe.createToken();
 		token = token.id;
-		let id = this.props.user.id;
-		let response = await Axios(`${process.env.REACT_APP_API_LOCAL}/api/stripe`, {
-			method: 'POST',
-			headers: { 'Content-Type': 'text/plain' },
-			body: { token: token, id: id },
+		let name = this.props.user.name;
+		let email = this.props.user.email;
+		let userID = this.props.user.userID;
+		console.log(token);
+		let response = await Axios.post(`${process.env.REACT_APP_API_LOCAL}/api/stripe`, {
+			token,
+			name,
+			email,
+			userID,
+		});
+	}
+	async submit(ev) {
+		let { token } = await this.props.stripe.createToken();
+		token = token.id;
+		let stripe_id = this.props.user.stripe;
+		console.log(token);
+		let response = await Axios.post(`${process.env.REACT_APP_API_LOCAL}/api/stripe/subscribe`, {
+			token,
+			stripe_id,
 		});
 
 		if (response.ok) this.setState({ complete: true });
