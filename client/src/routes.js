@@ -30,18 +30,6 @@ const store = createStore(
 
 //Use this for rendering all of our components
 export const makeMainRoutes = () => {
-<<<<<<< HEAD
-	return (
-		<Router history={history}>
-			<div>
-				<Route exact path="/" component={App} />
-				<Route path="/home" component={Dashboard} />
-				<Route path="/profile" component={ProfileView} />
-				<Route path="/callback" component={Callback} />
-			</div>
-		</Router>
-	);
-=======
   return (
     <Provider store={store}>
       <Router history={history}>
@@ -54,5 +42,4 @@ export const makeMainRoutes = () => {
       </Router>
     </Provider>
   );
->>>>>>> b3fb7c0a61ffe196a47f5d8a93e999d45fd88d7a
 };

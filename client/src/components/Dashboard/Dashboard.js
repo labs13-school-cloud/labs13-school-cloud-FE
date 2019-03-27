@@ -21,56 +21,17 @@ import { getUserProfile } from '../../Auth/Auth';
 import Authenticate from '../authenticate/authenticate';
 
 class Dashboard extends React.Component {
-<<<<<<< HEAD
-	state = {
-		tabValue: 0,
-		user: {},
-		doneLoading: false,
-	};
-=======
   state = {
     tabValue: 0,
     user: {},
     doneLoading: false,
     refreshCount: 0
   };
->>>>>>> b3fb7c0a61ffe196a47f5d8a93e999d45fd88d7a
 
 	componentDidMount() {
 		this.getProfile();
 	}
 
-<<<<<<< HEAD
-	render() {
-		console.log(this.state);
-		return (
-			<>
-				{this.state.doneLoading && (
-					<>
-						<AppBar />
-						<DashboardContainer>
-							<NavigationView
-								tabValue={this.state.tabValue}
-								changeTabValue={this.changeTabValue}
-							/>
-
-							<h4>
-								You are logged in! You can now view your{' '}
-								<Link to="profile">profile area</Link>.
-							</h4>
-							<div>
-								{this.state.tabValue === 0 && (
-									<TrainingSeriesView userData={this.state.user} />
-								)}
-								{this.state.tabValue === 1 && <TeamMembersView />}
-							</div>
-						</DashboardContainer>
-					</>
-				)}
-			</>
-		);
-	}
-=======
   render() {
     return (
       <>
@@ -101,7 +62,6 @@ class Dashboard extends React.Component {
       </>
     );
   }
->>>>>>> b3fb7c0a61ffe196a47f5d8a93e999d45fd88d7a
 
 	// tracking the tab value in navigation.js
 	changeTabValue = value => {
