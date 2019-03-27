@@ -50,7 +50,7 @@ class Dashboard extends React.Component {
               </h4>
               <div>
                 <div style={this.state.tabValue === 0 ? active : hidden}>
-                  <TrainingSeriesView userData={this.state.user} />
+                  <TrainingSeriesView userId={this.state.user.user.userID} />
                 </div>
                 <div style={this.state.tabValue === 1 ? active : hidden}>
                   <TeamMembersView userId={this.state.user.user.userID} />
