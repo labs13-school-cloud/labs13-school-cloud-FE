@@ -1,20 +1,18 @@
 // main page for displaying list of all training series
-import React from 'react';
+import React from "react";
 
 //Styling
-import styled from 'styled-components';
+import styled from "styled-components";
 
 //Components
-import TrainingSeries from './TrainingSeries';
+import TrainingSeries from "./TrainingSeries";
 
-const TrainingSeriesList = () => {
+const TrainingSeriesList = props => {
   return (
     <ListStyles>
-      <TrainingSeries />
-      <TrainingSeries />
-      <TrainingSeries />
-      <TrainingSeries />
-      <TrainingSeries />
+      {props.trainingSeriesData.trainingSeries.map(series => {
+        return <TrainingSeries key={series.trainingSeriesID} data={series} />;
+      })}
     </ListStyles>
   );
 };
