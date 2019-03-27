@@ -1,4 +1,4 @@
-// displays individual training series' posts
+// displays training series card
 import React from "react";
 
 //PropTypes
