@@ -9,8 +9,9 @@ import Modal from "@material-ui/core/Modal";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 
-//Axios
-import axios from "axios";
+//REDUX
+import { connect } from "react-redux";
+import { addTrainingSeries } from "../../store/actions/";
 
 function getModalStyle() {
   const top = 50;
@@ -52,7 +53,7 @@ const styles = theme => ({
   }
 });
 
-class SimpleModal extends React.Component {
+class TrainingSeriesModal extends React.Component {
   state = {
     open: false,
     title: ""
@@ -68,6 +69,17 @@ class SimpleModal extends React.Component {
 
   handleChange = name => event => {
     this.setState({ [name]: event.target.value });
+  };
+  clearForm = () => {
+    this.setState({ title: "" });
+  };
+
+  addTrainingSeries = e => {
+    e.preventDefault();
+    const data = { title: this.state.title, userID: this.props.userID };
+    this.props.addTrainingSeries(data);
+    this.handleClose();
+    this.clearForm();
   };
 
   render() {
@@ -113,27 +125,24 @@ class SimpleModal extends React.Component {
       </div>
     );
   }
-  addTrainingSeries = e => {
-    e.preventDefault();
-    axios
-      .post(`${process.env.REACT_APP_API}/api/training-series`, {
-        title: this.state.title,
-        userID: this.props.userID
-      })
-      .then(res => {
-        console.log("POST", res.data);
-        this.props.getAllTrainingSeries();
-      })
-      .then(() => this.handleClose())
-      .catch(err => console.log(err));
-  };
 }
 
-SimpleModal.propTypes = {
+TrainingSeriesModal.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-// We need an intermediary variable for handling the recursive nesting.
-const SimpleModalWrapped = withStyles(styles)(SimpleModal);
+const mapStateToProps = state => {
+  return {
+    trainingSeries: state.trainingSeriesReducer.trainingSeries,
+    isLoading: state.trainingSeriesReducer.isLoading
+  };
+};
 
-export default SimpleModalWrapped;
+const TrainingSeriesModalWrapped = withStyles(styles)(TrainingSeriesModal);
+
+export default connect(
+  mapStateToProps,
+  {
+    addTrainingSeries
+  }
+)(TrainingSeriesModalWrapped);
