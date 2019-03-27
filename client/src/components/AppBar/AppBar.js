@@ -10,7 +10,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import AppBar from '@material-ui/core/AppBar';
-import { flex } from '@material-ui/system/flexbox';
+// import { flex } from '@material-ui/system/flexbox';
 
 //Images
 import logo from '../../img/training-bot.png';
@@ -43,11 +43,11 @@ const styles = {
 
 const appBar = props => {
 	const { classes } = props;
-	const [value, setValue] = React.useState(2);
+	// const [value, setValue] = React.useState(2);
 
-	function handleChange(event, newValue) {
-		setValue(newValue);
-	}
+	// function handleChange(event, newValue) {
+	// 	setValue(newValue);
+	// }
 
 	return (
 		<>

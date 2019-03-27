@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Elements, StripeProvider } from 'react-stripe-elements';
 import Authentication from '../authenticate/authenticate';
 import { getUserProfile } from '../../Auth/Auth';
@@ -15,7 +15,7 @@ import {
 	Button,
 	Card,
 	CardActions,
-	CardContent,
+	// CardContent,
 	CardMedia,
 	Typography,
 	withStyles,
@@ -120,7 +120,7 @@ class ProfileView extends React.Component {
 						</Card>
 					</div>
 					<Elements>
-						<CheckoutForm user={this.state.user}/>
+						<CheckoutForm user={this.state.user} />
 					</Elements>
 				</Container>
 			</StripeProvider>

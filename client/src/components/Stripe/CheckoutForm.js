@@ -15,39 +15,35 @@ class CheckoutForm extends Component {
 		this.submit = this.submit.bind(this);
 	}
 
-	async createUser(ev) {
-		let { token } = await this.props.stripe.createToken();
+	componentDidMount = () => {
+		// check to see if user has active subscription
+	};
+
+	async submit(ev) {
+		const { name, email, userID, stripe } = this.props.user;
+		let { token } = await this.props.stripe.createToken({ userID: userID });
 		token = token.id;
-		let name = this.props.user.name;
-		let email = this.props.user.email;
-		let userID = this.props.user.userID;
-		console.log(token);
 		let response = await Axios.post(`${process.env.REACT_APP_API_LOCAL}/api/stripe`, {
 			token,
 			name,
 			email,
 			userID,
+			stripe,
 		});
-	}
-	async submit(ev) {
-		let { token } = await this.props.stripe.createToken();
-		token = token.id;
-		let stripe_id = this.props.user.stripe;
-		console.log(token);
-		let response = await Axios.post(`${process.env.REACT_APP_API_LOCAL}/api/stripe/subscribe`, {
-			token,
-			stripe_id,
-		});
-
+		console.log('response', response);
 		if (response.ok) this.setState({ complete: true });
 	}
 
 	render() {
 		if (this.state.complete) return <h1>Purchase Complete</h1>;
 		return (
+			// Hide payment form if subscription is active via accountTypeID
+			// Button for cancelling subscription if subscription is active
 			<div className="checkout">
-				<p>Would you like to complete the purchase?</p>
-				<CardElement />
+				<label>
+					Card details
+					<CardElement style={{ base: { fontSize: '18px' } }} />
+				</label>
 				<button onClick={this.submit}>Send</button>
 			</div>
 		);

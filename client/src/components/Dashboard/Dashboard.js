@@ -1,5 +1,5 @@
 // parent component for app once logged in
-import React, { Children } from 'react';
+import React from 'react';
 
 //Routing
 import { Link } from 'react-router-dom';
@@ -21,47 +21,47 @@ import { getUserProfile } from '../../Auth/Auth';
 import Authenticate from '../authenticate/authenticate';
 
 class Dashboard extends React.Component {
-  state = {
-    tabValue: 0,
-    user: {},
-    doneLoading: false,
-    refreshCount: 0
-  };
+	state = {
+		tabValue: 0,
+		user: {},
+		doneLoading: false,
+		refreshCount: 0,
+	};
 
 	componentDidMount() {
 		this.getProfile();
 	}
 
-  render() {
-    return (
-      <>
-        {this.state.doneLoading && (
-          <>
-            <AppBar />
-            <DashboardContainer>
-              <NavigationView
-                tabValue={this.state.tabValue}
-                changeTabValue={this.changeTabValue}
-              />
+	render() {
+		return (
+			<>
+				{this.state.doneLoading && (
+					<>
+						<AppBar />
+						<DashboardContainer>
+							<NavigationView
+								tabValue={this.state.tabValue}
+								changeTabValue={this.changeTabValue}
+							/>
 
-              <h4>
-                You are logged in! You can now view your{" "}
-                <Link to="profile">profile area</Link>.
-              </h4>
-              <div>
-                {this.state.tabValue === 0 && (
-                  <TrainingSeriesView userData={this.state.user} />
-                )}
-                {this.state.tabValue === 1 && (
-                  <TeamMembersView userId={this.state.user.user.userID} />
-                )}
-              </div>
-            </DashboardContainer>
-          </>
-        )}
-      </>
-    );
-  }
+							<h4>
+								You are logged in! You can now view your{' '}
+								<Link to="profile">profile area</Link>.
+							</h4>
+							<div>
+								{this.state.tabValue === 0 && (
+									<TrainingSeriesView userData={this.state.user} />
+								)}
+								{this.state.tabValue === 1 && (
+									<TeamMembersView userId={this.state.user.user.userID} />
+								)}
+							</div>
+						</DashboardContainer>
+					</>
+				)}
+			</>
+		);
+	}
 
 	// tracking the tab value in navigation.js
 	changeTabValue = value => {
