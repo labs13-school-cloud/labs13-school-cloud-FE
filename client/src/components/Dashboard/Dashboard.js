@@ -49,12 +49,18 @@ class Dashboard extends React.Component {
                 <Link to="profile">profile area</Link>.
               </h4>
               <div>
-                {this.state.tabValue === 0 && (
+                {/* {this.state.tabValue === 0 && (
                   <TrainingSeriesView userData={this.state.user} />
                 )}
                 {this.state.tabValue === 1 && (
                   <TeamMembersView userId={this.state.user.user.userID} />
-                )}
+                )} */}
+                <div style={this.state.tabValue === 0 ? active : hidden}>
+                  <TrainingSeriesView userData={this.state.user} />
+                </div>
+                <div style={this.state.tabValue === 1 ? active : hidden}>
+                  <TeamMembersView userId={this.state.user.user.userID} />
+                </div>
               </div>
             </DashboardContainer>
           </>
@@ -96,3 +102,28 @@ export default Authenticate(Dashboard);
 const DashboardContainer = styled.div`
   margin: 100px 0;
 `;
+
+const hidden = {
+  display: "none"
+};
+
+const active = {
+  display: "block"
+};
+
+// const toggleTrainingSeries = tabValue => {
+
+//   return tabValue === 0 ? active : hidden;
+// };
+
+// const toggleTeamMembers = tabValue => {
+//   const hidden = {
+//     display: "none"
+//   };
+
+//   const active = {
+//     display: "block"
+//   };
+
+//   return tabValue === 1 ? active : hidden;
+// };

@@ -77,32 +77,32 @@ class SimpleModal extends React.Component {
       <div>
         <Button onClick={this.handleOpen}>Add new training series</Button>
         <Modal
-          aria-labelledby='simple-modal-title'
-          aria-describedby='simple-modal-description'
+          aria-labelledby="simple-modal-title"
+          aria-describedby="simple-modal-description"
           open={this.state.open}
           onClose={this.handleClose}
         >
           <div style={getModalStyle()} className={classes.paper}>
-            <Typography variant='h6' id='modal-title'>
+            <Typography variant="h6" id="modal-title">
               Create a new Training series
             </Typography>
             <form
               onSubmit={e => this.addTrainingSeries(e)}
               className={classes.container}
               noValidate
-              autoComplete='off'
+              autoComplete="off"
             >
               <TextField
-                id='standard-name'
-                label='Title'
+                id="standard-name"
+                label="Title"
                 className={classes.textField}
                 value={this.state.title}
                 onChange={this.handleChange("title")}
-                margin='normal'
+                margin="normal"
               />
               <Button
-                type='submit'
-                variant='contained'
+                type="submit"
+                variant="contained"
                 className={classes.button}
               >
                 Submit
