@@ -1,10 +1,10 @@
-import teamMemberReducer from "./teamMembersReducer";
+import teamMembersReducer from "./teamMembersReducer";
 import trainingSeriesReducer from "./trainingSeriesReducer";
 
 import { combineReducers } from "redux";
 
 const rootReducer = combineReducers({
-  teamMemberReducer,
+  teamMembersReducer,
   trainingSeriesReducer
 });
 

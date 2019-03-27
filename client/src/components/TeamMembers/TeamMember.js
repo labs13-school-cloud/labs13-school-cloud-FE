@@ -23,7 +23,7 @@ const styles = {
 function TeamMember(props) {
   const { classes } = props;
   const { firstName, lastName, jobDescription } = props.teamMember;
-  console.log("TEAM", props.teamMember);
+
   return (
     <Card className={classes.card}>
       <CardContent>
