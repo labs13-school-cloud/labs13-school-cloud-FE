@@ -14,16 +14,32 @@ import Callback from "./components/Callback/callback";
 //History
 import history from "./history";
 
+import { Provider } from "react-redux";
+import { createStore, applyMiddleware, compose } from "redux";
+import thunk from "redux-thunk";
+import logger from "redux-logger";
+
+import rootReducer from "./store/reducers";
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+const store = createStore(
+  rootReducer,
+  composeEnhancers(applyMiddleware(thunk, logger))
+);
+
 //Use this for rendering all of our components
 export const makeMainRoutes = () => {
   return (
-    <Router history={history}>
-      <div>
-        <Route exact path='/' component={App} />
-        <Route path='/home' component={Dashboard} />
-        <Route path='/profile' component={ProfileView} />
-        <Route path='/callback' component={Callback} />
-      </div>
-    </Router>
+    <Provider store={store}>
+      <Router history={history}>
+        <div>
+          <Route exact path="/" component={App} />
+          <Route path="/home" component={Dashboard} />
+          <Route path="/profile" component={ProfileView} />
+          <Route path="/callback" component={Callback} />
+        </div>
+      </Router>
+    </Provider>
   );
 };
