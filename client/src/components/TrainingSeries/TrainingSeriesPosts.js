@@ -6,7 +6,7 @@ import PostModal from "../Modals/PostModal";
 
 // Redux
 import { connect } from "react-redux";
-import { getTrainingSeriesPosts, createAPost } from "../../store/actions";
+import { getTrainingSeriesPosts, createAPost, editPost } from "../../store/actions";
 
 //PropTypes
 import PropTypes from "prop-types";
@@ -15,15 +15,16 @@ import PropTypes from "prop-types";
 import Button from "@material-ui/core/Button";
 
 class TrainingSeriesPosts extends React.Component {
-    state = {
-        open: false,
-        post: {
-          postName: "",
-          postDetails: "",
-          link: "",
-          daysFromStart: 1, 
-        }
-      };
+//   state = {
+//     open: false,
+//     isUpdating: false,
+//     post: {
+//       postName: "",
+//       postDetails: "",
+//       link: "",
+//       daysFromStart: 1
+//     }
+//   };
 
   componentDidMount() {
     this.getTrainingSeriesWithPosts(this.props.match.params.id);
@@ -33,73 +34,83 @@ class TrainingSeriesPosts extends React.Component {
     this.props.getTrainingSeriesPosts(id);
   };
 
-  handleOpen = () => {
-    this.setState({ 
-      open: true,
-      post: {
-        ...this.state.post,
-        trainingSeriesID: this.props.singleTrainingSeries.trainingSeriesID
-      }
-     });
-  };
+//   handleOpen = () => {
+//     this.setState({
+//       open: true,
+//       post: {
+//         ...this.state.post,
+//         trainingSeriesID: this.props.singleTrainingSeries.trainingSeriesID
+//       }
+//     });
+//   };
 
-  handleClose = () => {
-    this.setState({ open: false });
-  };
+//   handleClose = () => {
+//     this.setState({ open: false });
+//   };
 
-  handleChange = e => {
-    e.preventDefault();
-    this.setState({
-      ...this.state,
-      post: {
-        ...this.state.post,
-        [e.target.name]: e.target.value
-      }
-    })
-  }
+//   handleChange = e => {
+//     e.preventDefault();
+//     this.setState({
+//       ...this.state,
+//       post: {
+//         ...this.state.post,
+//         [e.target.name]: e.target.value
+//       }
+//     });
+//   };
 
-  addAPost = e => {
-    e.preventDefault();
-    console.log("post", this.state.post)
-    this.props.createAPost(this.state.post);
-    this.setState({
-      ...this.state,
-      open: false,
-      post: {
-        ...this.state.post,
-        postName: "",
-        postDetails: "",
-        link: "",
-        daysFromStart: 1,
-      }
-    })
-  };
+//   addAPost = e => {
+//     e.preventDefault();
+//     console.log("post", this.state.post);
+//     this.props.createAPost(this.state.post);
+//     this.setState({
+//       ...this.state,
+//       open: false,
+//       post: {
+//         ...this.state.post,
+//         postName: "",
+//         postDetails: "",
+//         link: "",
+//         daysFromStart: 1
+//       }
+//     });
+//   };
+
+//   updateModal = e => {
+//     e.preventDefault();
+//     this.setState({
+//       open: true,
+//       isUpdating: true,
+//       post: {
+//         postName: "",
+//         postDetails: "",
+//         link: "",
+//         daysFromStart: 1,
+//         trainingSeriesID: this.props.singleTrainingSeries.trainingSeriesID
+//       }
+//     });
+//   };
+
 
   render() {
-    // const series = this.props.trainingSeries.find(
-    //   series => `${series.trainingSeriesID}` === this.props.match.params.id
-    // );
-
     return (
       <>
         <PostModal
           trainingSeries={this.props.singleTrainingSeries}
           createAPost={this.props.createAPost}
-          addAPost={this.addAPost}
-          handleChange={this.handleChange}
-          handleOpen={this.handleOpen}
-          handleClose={this.handleClose}
-          open={this.state.open}
-          post={this.state.post}
+          editPost={this.props.editPost}
         />
         {this.props.isLoading && <p>Please wait...</p>}
         {!this.props.isLoading && (
           <>
-            <p>{this.props.singleTrainingSeries.title}</p>
+            <h1>{this.props.singleTrainingSeries.title}</h1>
             <div>
               {this.props.posts.map(post => (
-                <div key={post.postID}>
-                  <p>{post.postName}</p>
+                <div onClick={this.updateModal} key={post.postID}>
+                  <h1>{post.postName}</h1>
+                  <p>{post.postDetails}</p>
+                  <p>{post.daysFromStart} days</p>
+                  <PostModal post={post} modalType="edit" trainingSeriesID={this.props.singleTrainingSeries.trainingSeriesID} />
                 </div>
               ))}
             </div>
@@ -120,5 +131,5 @@ TrainingSeriesPosts.propTypes = {};
 
 export default connect(
   mapStateToProps,
-  { getTrainingSeriesPosts, createAPost }
+  { getTrainingSeriesPosts, createAPost, editPost }
 )(TrainingSeriesPosts);
