@@ -11,7 +11,7 @@ import TextField from "@material-ui/core/TextField";
 
 //REDUX
 import { connect } from "react-redux";
-import { addTrainingSeries } from "../../store/actions/";
+import { addTrainingSeries, editTrainingSeries } from "../../store/actions/";
 
 function getModalStyle() {
   const top = 50;
@@ -59,6 +59,16 @@ class TrainingSeriesModal extends React.Component {
     title: ""
   };
 
+  componentDidMount() {
+    this.props.modalType === "edit" &&
+      this.setState({ title: this.props.title });
+  }
+  componentDidUpdate(prevProps) {
+    if (prevProps.isEditing) {
+      this.setState({ title: this.props.title });
+    }
+  }
+
   handleOpen = () => {
     this.setState({ open: true });
   };
@@ -74,12 +84,17 @@ class TrainingSeriesModal extends React.Component {
     this.setState({ title: "" });
   };
 
-  addTrainingSeries = e => {
+  handleTrainingSeriesSubmit = e => {
     e.preventDefault();
     const data = { title: this.state.title, userID: this.props.userID };
-    this.props.addTrainingSeries(data);
+    if (this.props.modalType === "edit") {
+      this.setState({ title: this.props.title });
+      this.props.editTrainingSeries(this.props.trainingSeriesID, data);
+    } else {
+      this.props.addTrainingSeries(data);
+      this.clearForm();
+    }
     this.handleClose();
-    this.clearForm();
   };
 
   render() {
@@ -87,34 +102,38 @@ class TrainingSeriesModal extends React.Component {
 
     return (
       <div>
-        <Button onClick={this.handleOpen}>Add new training series</Button>
+        <Button onClick={this.handleOpen}>
+          {this.props.modalType === "edit" ? "Edit " : "Add new "}
+          training series
+        </Button>
         <Modal
-          aria-labelledby="simple-modal-title"
-          aria-describedby="simple-modal-description"
+          aria-labelledby='simple-modal-title'
+          aria-describedby='simple-modal-description'
           open={this.state.open}
           onClose={this.handleClose}
         >
           <div style={getModalStyle()} className={classes.paper}>
-            <Typography variant="h6" id="modal-title">
-              Create a new Training series
+            <Typography variant='h6' id='modal-title'>
+              {this.props.modalType === "edit" ? "Edit " : "Create a new "}
+              Training series
             </Typography>
             <form
-              onSubmit={e => this.addTrainingSeries(e)}
+              onSubmit={e => this.handleTrainingSeriesSubmit(e)}
               className={classes.container}
               noValidate
-              autoComplete="off"
+              autoComplete='off'
             >
               <TextField
-                id="standard-name"
-                label="Title"
+                id='standard-name'
+                label='Title'
                 className={classes.textField}
                 value={this.state.title}
                 onChange={this.handleChange("title")}
-                margin="normal"
+                margin='normal'
               />
               <Button
-                type="submit"
-                variant="contained"
+                type='submit'
+                variant='contained'
                 className={classes.button}
               >
                 Submit
@@ -134,7 +153,8 @@ TrainingSeriesModal.propTypes = {
 const mapStateToProps = state => {
   return {
     trainingSeries: state.trainingSeriesReducer.trainingSeries,
-    isLoading: state.trainingSeriesReducer.isLoading
+    isLoading: state.trainingSeriesReducer.isLoading,
+    isEditing: state.trainingSeriesReducer.isEditing
   };
 };
 
@@ -143,6 +163,7 @@ const TrainingSeriesModalWrapped = withStyles(styles)(TrainingSeriesModal);
 export default connect(
   mapStateToProps,
   {
-    addTrainingSeries
+    addTrainingSeries,
+    editTrainingSeries
   }
 )(TrainingSeriesModalWrapped);

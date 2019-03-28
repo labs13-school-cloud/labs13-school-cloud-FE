@@ -1,6 +1,6 @@
 // displays training series card
 import React from "react";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 //PropTypes
 import PropTypes from "prop-types";
@@ -13,6 +13,7 @@ import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 
+import TrainingSeriesModal from "../Modals/TrainingSeriesModal";
 //Customized Styling
 const styles = {
   card: {
@@ -26,6 +27,7 @@ const styles = {
 };
 
 function SeriesCard(props) {
+  console.log(props);
   const { classes } = props;
   return (
     <Card className={classes.card}>
@@ -41,8 +43,21 @@ function SeriesCard(props) {
         <Typography>test data</Typography>
       </CardContent>
       <CardActions>
-        <Link to={`${props.match.url}/training-series/${props.data.trainingSeriesID}`}><Button size='small'>View Posts</Button></Link>
-        <Button size="small">Edit</Button>
+        <Link
+          to={`${props.match.url}/training-series/${
+            props.data.trainingSeriesID
+          }`}
+        >
+          <Button size='small'>View Posts</Button>
+        </Link>
+        <TrainingSeriesModal
+          trainingSeriesID={props.data.trainingSeriesID}
+          title={props.data.title}
+          modalType='edit'
+        />
+        {/* <Button onClick={() => props.openModal()} size='small'>
+          Edit
+        </Button> */}
         <Button
           onClick={() =>
             props.deleteTrainingSeries(props.data.trainingSeriesID)
