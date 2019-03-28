@@ -7,7 +7,13 @@ import {
     GET_SINGLE_POST_FAIL,
     ADD_POST_START,
     ADD_POST_SUCCESS,
-    ADD_POST_FAIL
+    ADD_POST_FAIL,
+    EDIT_POST_START,
+    EDIT_POST_SUCCESS,
+    EDIT_POST_FAIL,
+    DELETE_POST_START,
+    DELETE_POST_SUCCESS,
+    DELETE_POST_FAIL,
 } from '../actions';
 
 const initialState = {
@@ -15,8 +21,13 @@ const initialState = {
     singleTrainingSeries: {},
     singlePost: [],
     isLoading: false,
+    isAdding: false,
+    isEditing: false,
+    isDeleting: false,
     error: "",
-    addedSuccessfully: false
+    addedSuccessfully: false,
+    editedSuccessfully: false,
+    deletedSuccessfully: false
 }
 
 const postsReducer = (state = initialState, action) => {
@@ -26,13 +37,13 @@ const postsReducer = (state = initialState, action) => {
         return {
             ...state,
             isLoading: true,
+            isAdding: false,
             error: ""
         };
         case GET_POSTS_SUCCESS:
         return {
             ...state,
             isLoading: false,
-            isAdding: false,
             posts: action.payload.posts,
             singleTrainingSeries: action.payload.trainingSeries
 
@@ -41,7 +52,7 @@ const postsReducer = (state = initialState, action) => {
         return {
             ...state,
             isLoading: false,
-            error: action.payload
+            error: action.error
         };
         case GET_SINGLE_POST_START:
         return {
@@ -59,7 +70,7 @@ const postsReducer = (state = initialState, action) => {
         return {
             ...state,
             isLoading: false,
-            error: action.payload
+            error: action.error
         };
         // ---POST ACTIVITIES---
         case ADD_POST_START:
@@ -67,7 +78,6 @@ const postsReducer = (state = initialState, action) => {
             ...state,
             isAdding: true,
             error: "",
-            addedSuccessfully: false
         }
         case ADD_POST_SUCCESS:
         return {
@@ -80,7 +90,45 @@ const postsReducer = (state = initialState, action) => {
         return {
             ...state,
             isAdding: false,
-            error: action.payload
+            error: action.error
+        };
+        // ---EDIT ACTIVITIES---
+        case EDIT_POST_START:
+        return {
+            ...state,
+            isEditing: true,
+            error: ""
+        };
+        case EDIT_POST_SUCCESS:
+        return {
+            ...state,
+            isEditing: false,
+            editedSuccessfully: true,
+            singlePost: action.payload
+        };
+        case EDIT_POST_FAIL:
+        return {
+            ...state,
+            isEditing: false,
+            error: action.error
+        };
+        case DELETE_POST_START:
+        return {
+            ...state,
+            isDeleting: true,
+            error: ""
+        };
+        case DELETE_POST_SUCCESS:
+        return {
+            ...state,
+            isDeleting: false,
+            deletedSuccessfully: true
+        };
+        case DELETE_POST_FAIL:
+        return {
+            ...state,
+            isDeleting: false,
+            error: action.error
         };
         default: return state;
     }
