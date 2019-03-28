@@ -45,12 +45,10 @@ const styles = {
 };
 
 const appBar = props => {
+
   const { classes } = props;
   // const [value, setValue] = React.useState(2);
 
-  // function handleChange(event, newValue) {
-  // 	setValue(newValue);
-  // }
   const toDashboard = e => {
     e.preventDefault();
     props.history.push("/home");
