@@ -16,7 +16,8 @@ import {
 const initialState = {
   trainingSeries: [],
   error: "",
-  isLoading: false
+  isLoading: false,
+  isEditing: false
 };
 
 const trainingSeriesReducer = (state = initialState, action) => {
@@ -58,7 +59,8 @@ const trainingSeriesReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: true,
-        error: ""
+        error: "",
+        isEditing: true
       };
     case EDIT_TRIANING_SERIES_SUCCESS:
       const updatedItem = state.trainingSeries.map(series => {
@@ -71,6 +73,7 @@ const trainingSeriesReducer = (state = initialState, action) => {
       });
       return {
         ...state,
+        isEditing: false,
         isLoading: false,
         error: "",
         trainingSeries: updatedItem
@@ -79,6 +82,7 @@ const trainingSeriesReducer = (state = initialState, action) => {
     case EDIT_TRIANING_SERIES_FAIL:
       return {
         ...state,
+        isEditing: false,
         isLoading: false,
         error: action.payload
       };

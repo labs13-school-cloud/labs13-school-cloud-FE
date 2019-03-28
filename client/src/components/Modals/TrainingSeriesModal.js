@@ -63,6 +63,12 @@ class TrainingSeriesModal extends React.Component {
     this.props.modalType === "edit" &&
       this.setState({ title: this.props.title });
   }
+  componentDidUpdate(prevProps) {
+    if (prevProps.isEditing) {
+      this.setState({ title: this.props.title });
+    }
+  }
+
   handleOpen = () => {
     this.setState({ open: true });
   };
@@ -86,9 +92,9 @@ class TrainingSeriesModal extends React.Component {
       this.props.editTrainingSeries(this.props.trainingSeriesID, data);
     } else {
       this.props.addTrainingSeries(data);
+      this.clearForm();
     }
     this.handleClose();
-    this.clearForm();
   };
 
   render() {
@@ -147,7 +153,8 @@ TrainingSeriesModal.propTypes = {
 const mapStateToProps = state => {
   return {
     trainingSeries: state.trainingSeriesReducer.trainingSeries,
-    isLoading: state.trainingSeriesReducer.isLoading
+    isLoading: state.trainingSeriesReducer.isLoading,
+    isEditing: state.trainingSeriesReducer.isEditing
   };
 };
 
