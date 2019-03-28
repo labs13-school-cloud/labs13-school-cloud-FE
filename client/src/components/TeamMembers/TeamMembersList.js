@@ -9,7 +9,13 @@ const TeamMembersList = props => {
 
   // map through member list on props
   const membersList = teamMembers.map(member => {
-    return <TeamMember key={member.teamMemberID} teamMember={member} />;
+    return (
+      <TeamMember
+        key={member.teamMemberID}
+        teamMember={member}
+        deleteTeamMember={props.deleteTeamMember}
+      />
+    );
   });
 
   return <ListStyles>{membersList}</ListStyles>;
