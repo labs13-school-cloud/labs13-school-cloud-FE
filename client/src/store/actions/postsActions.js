@@ -55,6 +55,7 @@ export const getPostById = id => dispatch => {
 // POST a new post
 export const createAPost = post => dispatch => {
   dispatch({ type: ADD_POST_START });
+  console.log("post in createAPost", post);
   axios
     .post(`${process.env.REACT_APP_API}/api/posts`, post)
     .then(res =>

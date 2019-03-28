@@ -16,9 +16,7 @@ import Button from "@material-ui/core/Button";
 
 class TrainingSeriesPosts extends React.Component {
   state = {
-    series: this.props.trainingSeries.find(
-      series => `${series.trainingSeriesID}` === this.props.match.params.id
-    )
+    
   };
 
   componentDidMount() {
@@ -35,10 +33,23 @@ class TrainingSeriesPosts extends React.Component {
 
     return (
       <>
-        <PostModal trainingSeries={this.props.singleTrainingSeries} createAPost={this.props.createAPost} />
+        <PostModal
+          trainingSeries={this.props.singleTrainingSeries}
+          createAPost={this.props.createAPost}
+        />
         {this.props.isLoading && <p>Please wait...</p>}
-        {!this.props.isLoading && 
-        <p>{this.props.singleTrainingSeries.title}</p>}
+        {!this.props.isLoading && (
+          <>
+            <p>{this.props.singleTrainingSeries.title}</p>
+            <div>
+              {this.props.posts.map(post => (
+                <div>
+                  <p>{post.postName}</p>
+                </div>
+              ))}
+            </div>
+          </>
+        )}
       </>
     );
   }

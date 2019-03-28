@@ -56,8 +56,7 @@ class PostModal extends React.Component {
       postName: "",
       postDetails: "",
       link: "",
-      daysFromStart: 0,
-      trainingSeries: this.props.trainingSeries.trainingSeriesID
+      daysFromStart: 1, 
     }
   };
 
@@ -66,7 +65,13 @@ class PostModal extends React.Component {
   }
 
   handleOpen = () => {
-    this.setState({ open: true });
+    this.setState({ 
+      open: true,
+      post: {
+        ...this.state.post,
+        trainingSeriesID: this.props.trainingSeries.trainingSeriesID
+      }
+     });
   };
 
   handleClose = () => {
@@ -86,7 +91,19 @@ class PostModal extends React.Component {
 
   createAPost = e => {
     e.preventDefault();
-    // logic here
+    console.log("post", this.state.post)
+    this.props.createAPost(this.state.post);
+    this.setState({
+      ...this.state,
+      open: false,
+      post: {
+        ...this.state.post,
+        postName: "",
+        postDetails: "",
+        link: "",
+        daysFromStart: 1,
+      }
+    })
   };
 
   render() {
@@ -102,12 +119,14 @@ class PostModal extends React.Component {
         >
           <div style={getModalStyle()} className={classes.paper}>
             <p>Post Modal!</p>
-            <form>
+            <form onSubmit={e => this.createAPost(e)}>
               <input type="text" name="postName" onChange={this.handleChange} value={this.state.post.postName} />
               <input type="textarea" name="postDetails" onChange={this.handleChange} value={this.state.post.postDetails} />
               <input type="text" name="link" onChange={this.handleChange} value={this.state.post.link} />
+              <input type="number" name="daysFromStart" onChange={this.handleChange} value={this.state.post.daysFromStart} step="1" min="1" />
+              <Button type="submit">Add Post</Button>
             </form>
-            <Button onClick={this.handleClose}>Cancel</Button>
+            <Button type="button" onClick={this.handleClose}>Cancel</Button>
           </div>
         </Modal>
       </>
