@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { CardElement, injectStripe, Elements } from 'react-stripe-elements';
-import StripeCard from './StripeCard'
+import { CardElement, injectStripe } from 'react-stripe-elements';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 
 // const stripe = require('stripe')('sk_test_I3A5cCkzbD6C7HqqHSt7uRHH00ht9noOJw');
@@ -8,17 +8,15 @@ import axios from 'axios';
 // stripe.charges.retrieve('ch_1EI51gChlDwQi04Izf2PqAxC', {
 // 	api_key: 'sk_test_I3A5cCkzbD6C7HqqHSt7uRHH00ht9noOJw',
 // });
-import PropTypes from 'prop-types';
-import { withStyles, MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
-// import FormHelperText from '@material-ui/core/FormHelperText';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormControl from '@material-ui/core/FormControl';
-import FormLabel from '@material-ui/core/FormLabel';
-// import MenuItem from '@material-ui/core/MenuItem';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
+import {
+	withStyles,
+	MuiThemeProvider,
+	createMuiTheme,
+	FormControl,
+	FormLabel,
+	TextField,
+	Button,
+} from '@material-ui/core/';
 import green from '@material-ui/core/colors/green';
 
 const styles = theme => ({
@@ -75,11 +73,9 @@ class CheckoutForm extends Component {
 			plan: '',
 			paymentToggle: false,
 		};
-		// this.submit = this.submit.bind(this);
 	}
 	componentDidMount = () => {
 		this.getPlans();
-		// check to see if user has active subscription
 	};
 	async getPlans() {
 		try {
@@ -100,12 +96,16 @@ class CheckoutForm extends Component {
 			[e.currentTarget.name]: e.currentTarget.value,
 		});
 	};
+	createToken = async userID => {
+		let { token } = await this.props.stripe.createToken({ userID: userID });
+		return token.id;
+	};
 
 	submit = async () => {
 		const { name, email, userID, stripe } = this.props.user;
 		const { plan } = this.state;
-		let { token } = await this.props.stripe.createToken({ userID: userID });
-		token = token.id;
+
+		let { token } = this.createToken(userID);
 		let response = await axios.post(`${process.env.REACT_APP_API_LOCAL}/api/stripe`, {
 			token,
 			name,
@@ -119,14 +119,10 @@ class CheckoutForm extends Component {
 	};
 	unsubscribe = async () => {
 		const { userID, stripe } = this.props.user;
-		let { token } = await this.props.stripe.createToken({ userID: userID });
-		console.log('token', token);
-		token = token.id;
 		this.setState({ paymentToggle: false });
 		let response = await axios.post(
 			`${process.env.REACT_APP_API_LOCAL}/api/stripe/unsubscribe`,
 			{
-				token,
 				userID,
 				stripe,
 			}
@@ -137,8 +133,6 @@ class CheckoutForm extends Component {
 
 	render() {
 		const { classes } = this.props;
-
-		//conditionally render unsubscribe button
 		let unsubscribe;
 		if (this.props.user.accountTypeID > 1) {
 			unsubscribe = (
@@ -168,14 +162,12 @@ class CheckoutForm extends Component {
 			return <div>Loading</div>;
 		} else {
 			return (
-				// Button for cancelling subscription if subscription is active
 				<div className={classes.root}>
 					<div>
 						<FormControl component="fieldset" className={classes.formControl}>
 							<FormLabel component="legend">Subscriptions</FormLabel>
 							<MuiThemeProvider theme={theme}>
 								{unsubscribe}
-
 								<Button
 									variant="contained"
 									color="primary"
@@ -220,11 +212,8 @@ class CheckoutForm extends Component {
 									margin="normal"
 									placeholder="jenny@email.com"
 									required
-								/>				
-								{/* <Elements> */}
-									<CardElement style={{ base: { fontSize: '18px' } }} />				
-								{/* </Elements> */}
-								<StripeCard/>
+								/>
+								<CardElement style={{ base: { fontSize: '18px' } }} />
 							</FormControl>
 						) : (
 							<span />
@@ -247,4 +236,4 @@ CheckoutForm.propTypes = {
 	classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(CheckoutForm);
+export default injectStripe(withStyles(styles)(CheckoutForm));
