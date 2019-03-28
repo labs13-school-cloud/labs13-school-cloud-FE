@@ -1,6 +1,11 @@
 import React from "react";
+
+import { connect } from "react-redux";
+
 //Prop Types
 import PropTypes from "prop-types";
+
+import { editTeamMember } from "../../store/actions";
 
 //Styles
 import { withStyles } from "@material-ui/core/styles";
@@ -51,7 +56,7 @@ const styles = theme => ({
   }
 });
 
-class SimpleModal extends React.Component {
+class TeamMemberModal extends React.Component {
   state = {
     open: false,
     teamMember: {
@@ -63,6 +68,19 @@ class SimpleModal extends React.Component {
       user_ID: ""
     }
   };
+
+  componentDidMount() {
+    this.props.modalType === "edit" &&
+      this.setState({ teamMember: this.props.teamMember });
+  }
+
+  componentDidUpdate(prevProps) {
+    // populates form with selected users information
+    if (prevProps.isEditing) {
+      this.props.teamMember &&
+        this.setState({ teamMember: this.props.teamMember, open: false });
+    }
+  }
 
   handleOpen = () => {
     this.setState({ open: true });
@@ -93,23 +111,30 @@ class SimpleModal extends React.Component {
   handleSubmit = e => {
     e.preventDefault();
 
-    const newMember = {
-      ...this.state.teamMember,
-      user_ID: this.props.userId
-    };
+    if (this.props.modalType === "edit") {
+      console.log("Edit Fired");
+      this.props.editTeamMember(this.props.teamMemberId, this.state.teamMember);
+    } else {
+      const newMember = {
+        ...this.state.teamMember,
+        user_ID: this.props.userId
+      };
 
-    this.props.addTeamMember(newMember);
+      this.props.addTeamMember(newMember);
 
-    this.handleClose();
+      this.handleClose();
+    }
   };
 
   render() {
     const { classes } = this.props;
 
-    // console.log(this.props);
+    console.log("MODAL PROPS", this.props);
     return (
       <div>
-        <Button onClick={this.handleOpen}>Add new team member</Button>
+        <Button onClick={this.handleOpen}>
+          {this.props.modalType === "edit" ? "Edit" : "Add new team member"}
+        </Button>
         <Modal
           aria-labelledby="simple-modal-title"
           aria-describedby="simple-modal-description"
@@ -118,7 +143,9 @@ class SimpleModal extends React.Component {
         >
           <div style={getModalStyle()} className={classes.paper}>
             <Typography variant="h6" id="modal-title" align="center">
-              Add a new team member
+              {this.props.modalType === "edit"
+                ? "Edit Team Member Info"
+                : "Add a new team member"}
             </Typography>
             <form
               onSubmit={e => this.handleSubmit(e)}
@@ -171,7 +198,7 @@ class SimpleModal extends React.Component {
                 variant="contained"
                 className={classes.button}
               >
-                Save
+                {this.props.modalType === "edit" ? "Save Update" : "Save"}
               </Button>
             </form>
           </div>
@@ -181,11 +208,21 @@ class SimpleModal extends React.Component {
   }
 }
 
-SimpleModal.propTypes = {
+TeamMemberModal.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-// We need an intermediary variable for handling the recursive nesting.
-const SimpleModalWrapped = withStyles(styles)(SimpleModal);
+const mapStateToProps = state => {
+  return {
+    isEditing: state.teamMembersReducer.status.isEditing,
+    editSuccess: state.teamMembersReducer.status.editSuccess
+  };
+};
 
-export default SimpleModalWrapped;
+// We need an intermediary variable for handling the recursive nesting.
+const TeamMemberModalWrapped = withStyles(styles)(TeamMemberModal);
+
+export default connect(
+  mapStateToProps,
+  { editTeamMember }
+)(TeamMemberModalWrapped);

@@ -8,6 +8,7 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
+import TeamMemberModal from "../Modals/TeamMemberModal";
 
 const styles = {
   card: {
@@ -46,7 +47,11 @@ function TeamMember(props) {
         <Typography>Start Date: March 8</Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">Edit</Button>
+        <TeamMemberModal
+          modalType="edit"
+          teamMember={props.teamMember}
+          teamMemberId={props.teamMember.teamMemberID}
+        />
         <Button
           size="small"
           onClick={e => props.deleteTeamMember(e, teamMemberID)}

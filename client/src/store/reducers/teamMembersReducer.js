@@ -7,12 +7,16 @@ import {
   ADD_MEMBER_FAIL,
   DELETE_MEMBER_START,
   DELETE_MEMBER_FAIL,
-  DELETE_MEMBER_SUCCESS
+  DELETE_MEMBER_SUCCESS,
+  EDIT_MEMBER_START,
+  EDIT_MEMBER_SUCCESS,
+  EDIT_MEMBER_FAIL
 } from "../actions";
 import { CardActions } from "@material-ui/core";
 
 const initialState = {
   teamMembers: [],
+  teamMember: {},
   error: null,
   status: {
     isLoading: false,
@@ -21,6 +25,9 @@ const initialState = {
     addSuccess: false,
     addFailed: false,
     loadFailed: false,
+    isEditing: false,
+    editSuccess: false,
+    editFailed: false,
     isDeleting: false,
     deleteSuccess: false,
     deleteFailed: false
@@ -89,6 +96,49 @@ const teamMembersReducer = (state = initialState, action) => {
         },
         error: action.payload
       };
+
+    case EDIT_MEMBER_START:
+      return {
+        ...state,
+        status: {
+          ...state.status,
+          isEditing: true,
+          editSuccess: false,
+          editFailed: false
+        }
+      };
+    case EDIT_MEMBER_SUCCESS:
+      const updatedMember = state.teamMembers.map(member => {
+        if (member.teamMemberID === action.payload.teamMemberID) {
+          return {
+            ...member,
+            ...action.payload
+          };
+        } else {
+          return member;
+        }
+      });
+      return {
+        ...state,
+        teamMembers: updatedMember,
+        status: {
+          ...state.status,
+          isEditing: false,
+          editSuccess: true
+        }
+      };
+
+    case EDIT_MEMBER_FAIL:
+      return {
+        ...state,
+        status: {
+          ...state.status,
+          editFailed: true,
+          editSuccess: false
+        },
+        error: action.payload
+      };
+
     case DELETE_MEMBER_START:
       return {
         ...state,
