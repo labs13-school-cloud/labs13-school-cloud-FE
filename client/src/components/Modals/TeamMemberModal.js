@@ -9,9 +9,6 @@ import Modal from "@material-ui/core/Modal";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 
-//Axios
-import axios from "axios";
-
 function getModalStyle() {
   const top = 50;
   const left = 50;
@@ -174,7 +171,7 @@ class SimpleModal extends React.Component {
                 variant="contained"
                 className={classes.button}
               >
-                Submit
+                Save
               </Button>
             </form>
           </div>
