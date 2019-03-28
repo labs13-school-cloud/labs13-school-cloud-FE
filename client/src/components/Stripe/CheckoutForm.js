@@ -79,7 +79,7 @@ class CheckoutForm extends Component {
 	};
 	async getPlans() {
 		try {
-			let response = await axios.get(`${process.env.REACT_APP_API_LOCAL}/api/stripe/plans`);
+			let response = await axios.get(`${process.env.REACT_APP_API}/api/stripe/plans`);
 			this.setState({ plans: response.data });
 		} catch (error) {
 			console.log(error);
@@ -106,7 +106,7 @@ class CheckoutForm extends Component {
 		const { plan } = this.state;
 
 		let { token } = this.createToken(userID);
-		let response = await axios.post(`${process.env.REACT_APP_API_LOCAL}/api/stripe`, {
+		let response = await axios.post(`${process.env.REACT_APP_API}/api/stripe`, {
 			token,
 			name,
 			email,
@@ -120,13 +120,10 @@ class CheckoutForm extends Component {
 	unsubscribe = async () => {
 		const { userID, stripe } = this.props.user;
 		this.setState({ paymentToggle: false });
-		let response = await axios.post(
-			`${process.env.REACT_APP_API_LOCAL}/api/stripe/unsubscribe`,
-			{
-				userID,
-				stripe,
-			}
-		);
+		let response = await axios.post(`${process.env.REACT_APP_API}/api/stripe/unsubscribe`, {
+			userID,
+			stripe,
+		});
 
 		if (response.status === 200) this.setState({ complete: true });
 	};
