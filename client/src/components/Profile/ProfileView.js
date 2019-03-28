@@ -82,6 +82,16 @@ class ProfileView extends React.Component {
 
 	render() {
 		const { classes } = this.props;
+		let accountType;
+		let type = this.state.user.accountTypeID;
+
+		if (type === 3) {
+			accountType = <span>Pro</span>;
+		} else if (type === 2) {
+			accountType = <span>Premium</span>;
+		} else if (type === 1) {
+			accountType = <span>Free</span>;
+		}
 
 		return (
 			<Container>
@@ -103,6 +113,9 @@ class ProfileView extends React.Component {
 						/>
 						<Typography gutterBottom variant="h5" component="h5">
 							{this.state.user.email}
+						</Typography>
+						<Typography gutterBottom variant="h5" component="h5">
+							<div>Account Type: {accountType}</div>
 						</Typography>
 						<CardActions>
 							<Button size="small" color="primary">

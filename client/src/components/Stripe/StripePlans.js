@@ -1,13 +1,12 @@
 import React from 'react';
 import axios from 'axios';
-import { Elements } from 'react-stripe-elements';
+// import { Elements } from 'react-stripe-elements';
 import CheckoutForm from './CheckoutForm';
 
 class StripePlans extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-		
 			subscriptions: [],
 		};
 	}
@@ -17,18 +16,15 @@ class StripePlans extends React.Component {
 		);
 		this.setState({ subscriptions: response.data });
 	};
-	componentDidMount = () => {
-
-	};
+	componentDidMount = () => {};
 
 	render() {
 		return (
-				<div>
-					<Elements>
-
+			<div>
+				{/* <Elements> */}
 					<CheckoutForm plans={this.state.plans} user={this.props.user} />
-					</Elements>
-				</div>
+				{/* </Elements> */}
+			</div>
 		);
 	}
 }
