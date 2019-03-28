@@ -19,7 +19,6 @@ import {
 const initialState = {
     posts: [],
     singleTrainingSeries: {},
-    singlePost: [],
     isLoading: false,
     isAdding: false,
     isEditing: false,
@@ -84,7 +83,7 @@ const postsReducer = (state = initialState, action) => {
             ...state,
             isAdding: false,
             addedSuccessfully: true,
-            singlePost: action.payload
+            posts: [...state.posts, action.payload]
         };
         case ADD_POST_FAIL:
         return {
@@ -100,11 +99,22 @@ const postsReducer = (state = initialState, action) => {
             error: ""
         };
         case EDIT_POST_SUCCESS:
+        const updatedPosts = state.posts.map(post => {
+            if (post.postID === action.payload.postID) {
+              return {
+                ...post,
+                postName: action.payload.postName,
+                postDetails: action.payload.postDetails,
+                link: action.payload.link,
+                daysFromStart: action.payload.daysFromStart
+              };
+            } else return post;
+          });
         return {
             ...state,
             isEditing: false,
             editedSuccessfully: true,
-            singlePost: action.payload
+            posts: updatedPosts
         };
         case EDIT_POST_FAIL:
         return {

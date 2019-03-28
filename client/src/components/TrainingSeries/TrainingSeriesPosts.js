@@ -72,7 +72,7 @@ class TrainingSeriesPosts extends React.Component {
         link: "",
         daysFromStart: 1,
       }
-    }, this.getTrainingSeriesWithPosts(this.props.match.params.id))
+    })
   };
 
   render() {
