@@ -1,5 +1,6 @@
 // displays training series card
 import React from "react";
+import { Link } from 'react-router-dom';
 
 //PropTypes
 import PropTypes from "prop-types";
@@ -40,7 +41,8 @@ function SeriesCard(props) {
         <Typography>test data</Typography>
       </CardContent>
       <CardActions>
-        <Button size='small'>Edit</Button>
+        <Link to={`${props.match.url}/training-series/${props.data.trainingSeriesID}`}><Button size='small'>View Posts</Button></Link>
+        <Button size="small">Edit</Button>
         <Button
           onClick={() =>
             props.deleteTrainingSeries(props.data.trainingSeriesID)

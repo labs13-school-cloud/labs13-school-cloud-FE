@@ -11,9 +11,14 @@ import PropTypes from "prop-types";
 import Button from "@material-ui/core/Button";
 
 function TrainingSeriesPosts(props) {
+    console.log("props in TSP", props);
+    const series = props.trainingSeries.find(series => `${series.trainingSeriesID}` === props.match.params.id);
+    console.log("series", series);
     return (
         <>
         <PostModal />
+        {series.trainingSeriesID}
+        {series.title}
         </>
     )
 }
