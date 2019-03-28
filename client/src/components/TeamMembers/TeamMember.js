@@ -22,8 +22,14 @@ const styles = {
 
 function TeamMember(props) {
   const { classes } = props;
-  const { firstName, lastName, jobDescription } = props.teamMember;
-  console.log("TEAM", props.teamMember);
+  const {
+    firstName,
+    lastName,
+    jobDescription,
+    teamMemberID
+  } = props.teamMember;
+
+  console.log("PROPS", props);
   return (
     <Card className={classes.card}>
       <CardContent>
@@ -41,6 +47,12 @@ function TeamMember(props) {
       </CardContent>
       <CardActions>
         <Button size="small">Edit</Button>
+        <Button
+          size="small"
+          onClick={e => props.deleteTeamMember(e, teamMemberID)}
+        >
+          Delete
+        </Button>
       </CardActions>
     </Card>
   );

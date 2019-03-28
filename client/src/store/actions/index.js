@@ -1,3 +1,5 @@
-export {} from "./teamMembersActions";
+export * from "./teamMembersActions";
 
-export {} from "./trainingSeriesActions";
+export * from "./trainingSeriesActions";
+
+export * from './postsActions';

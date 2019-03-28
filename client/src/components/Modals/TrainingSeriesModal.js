@@ -9,8 +9,9 @@ import Modal from "@material-ui/core/Modal";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 
-//Axios
-import axios from "axios";
+//REDUX
+import { connect } from "react-redux";
+import { addTrainingSeries, editTrainingSeries } from "../../store/actions/";
 
 function getModalStyle() {
   const top = 50;
@@ -52,11 +53,21 @@ const styles = theme => ({
   }
 });
 
-class SimpleModal extends React.Component {
+class TrainingSeriesModal extends React.Component {
   state = {
     open: false,
     title: ""
   };
+
+  componentDidMount() {
+    this.props.modalType === "edit" &&
+      this.setState({ title: this.props.title });
+  }
+  componentDidUpdate(prevProps) {
+    if (prevProps.isEditing) {
+      this.setState({ title: this.props.title });
+    }
+  }
 
   handleOpen = () => {
     this.setState({ open: true });
@@ -69,13 +80,32 @@ class SimpleModal extends React.Component {
   handleChange = name => event => {
     this.setState({ [name]: event.target.value });
   };
+  clearForm = () => {
+    this.setState({ title: "" });
+  };
+
+  handleTrainingSeriesSubmit = e => {
+    e.preventDefault();
+    const data = { title: this.state.title, userID: this.props.userID };
+    if (this.props.modalType === "edit") {
+      this.setState({ title: this.props.title });
+      this.props.editTrainingSeries(this.props.trainingSeriesID, data);
+    } else {
+      this.props.addTrainingSeries(data);
+      this.clearForm();
+    }
+    this.handleClose();
+  };
 
   render() {
     const { classes } = this.props;
 
     return (
       <div>
-        <Button onClick={this.handleOpen}>Add new training series</Button>
+        <Button onClick={this.handleOpen}>
+          {this.props.modalType === "edit" ? "Edit " : "Add new "}
+          training series
+        </Button>
         <Modal
           aria-labelledby='simple-modal-title'
           aria-describedby='simple-modal-description'
@@ -84,10 +114,11 @@ class SimpleModal extends React.Component {
         >
           <div style={getModalStyle()} className={classes.paper}>
             <Typography variant='h6' id='modal-title'>
-              Create a new Training series
+              {this.props.modalType === "edit" ? "Edit " : "Create a new "}
+              Training series
             </Typography>
             <form
-              onSubmit={e => this.addTrainingSeries(e)}
+              onSubmit={e => this.handleTrainingSeriesSubmit(e)}
               className={classes.container}
               noValidate
               autoComplete='off'
@@ -113,27 +144,26 @@ class SimpleModal extends React.Component {
       </div>
     );
   }
-  addTrainingSeries = e => {
-    e.preventDefault();
-    axios
-      .post(`${process.env.REACT_APP_API}/api/training-series`, {
-        title: this.state.title,
-        userID: this.props.userID
-      })
-      .then(res => {
-        console.log("POST", res.data);
-        this.props.getAllTrainingSeries();
-      })
-      .then(() => this.handleClose())
-      .catch(err => console.log(err));
-  };
 }
 
-SimpleModal.propTypes = {
+TrainingSeriesModal.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-// We need an intermediary variable for handling the recursive nesting.
-const SimpleModalWrapped = withStyles(styles)(SimpleModal);
+const mapStateToProps = state => {
+  return {
+    trainingSeries: state.trainingSeriesReducer.trainingSeries,
+    isLoading: state.trainingSeriesReducer.isLoading,
+    isEditing: state.trainingSeriesReducer.isEditing
+  };
+};
 
-export default SimpleModalWrapped;
+const TrainingSeriesModalWrapped = withStyles(styles)(TrainingSeriesModal);
+
+export default connect(
+  mapStateToProps,
+  {
+    addTrainingSeries,
+    editTrainingSeries
+  }
+)(TrainingSeriesModalWrapped);

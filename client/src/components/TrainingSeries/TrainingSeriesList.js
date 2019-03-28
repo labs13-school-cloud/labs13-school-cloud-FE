@@ -7,18 +7,28 @@ import styled from "styled-components";
 //Components
 import TrainingSeries from "./TrainingSeries";
 
+import { withStyles } from "@material-ui/core";
+
 const TrainingSeriesList = props => {
   return (
-    <ListStyles>
-      {props.trainingSeriesData.trainingSeries.map(series => {
-        return <TrainingSeries key={series.trainingSeriesID} data={series} />;
-      })}
-    </ListStyles>
+    <>
+      <ListStyles>
+        {props.trainingSeries.map(series => {
+          return (
+            <TrainingSeries
+              key={series.trainingSeriesID}
+              deleteTrainingSeries={props.deleteTrainingSeries}
+              data={series}
+              match={props.match}
+            />
+          );
+        })}
+      </ListStyles>
+    </>
   );
 };
 
 export default TrainingSeriesList;
-
 //Styled Components
 const ListStyles = styled.div`
   display: flex;
