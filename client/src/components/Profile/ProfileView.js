@@ -1,12 +1,10 @@
 import React from 'react';
-import { Elements, StripeProvider } from 'react-stripe-elements';
 import Authentication from '../authenticate/authenticate';
 import { getUserProfile } from '../../Auth/Auth';
 
 import AppBar from '../AppBar/AppBar';
 
 import { logout } from '../../Auth/Auth';
-import CheckoutForm from '../Stripe/CheckoutForm';
 //Axios
 import axios from 'axios';
 
@@ -21,6 +19,7 @@ import {
 	withStyles,
 } from '@material-ui/core';
 import styled from 'styled-components';
+import StripeView from '../Stripe/StripeView';
 
 const styles = {
 	card: {
@@ -85,45 +84,38 @@ class ProfileView extends React.Component {
 		const { classes } = this.props;
 
 		return (
-			<StripeProvider apiKey="pk_test_L76yOnUDjq2cNP8heEH9MkpA00Ktyd3MYn">
-				<Container>
-					<AppBar />
-					<Button
-						variant="contained"
-						color="secondary"
-						onClick={e => this.handleLogout(e)}>
-						Log Out
-					</Button>
+			<Container>
+				<AppBar />
+				<Button variant="contained" color="secondary" onClick={e => this.handleLogout(e)}>
+					Log Out
+				</Button>
 
-					<div className="profile-area">
-						<Card className={classes.card}>
-							<Typography gutterBottom variant="h5" component="h1">
-								{this.state.userProfile.name}
-							</Typography>
+				<div className="profile-area">
+					<Card className={classes.card}>
+						<Typography gutterBottom variant="h5" component="h1">
+							{this.state.userProfile.name}
+						</Typography>
 
-							<CardMedia
-								className={classes.media}
-								image={this.state.userProfile.picture}
-								title="Contemplative Reptile"
-							/>
-							<Typography gutterBottom variant="h5" component="h5">
-								{this.state.user.email}
-							</Typography>
-							<CardActions>
-								<Button size="small" color="primary">
-									Edit
-								</Button>
-								<Button size="small" color="secondary">
-									Delete Account
-								</Button>
-							</CardActions>
-						</Card>
-					</div>
-					<Elements>
-						<CheckoutForm user={this.state.user} />
-					</Elements>
-				</Container>
-			</StripeProvider>
+						<CardMedia
+							className={classes.media}
+							image={this.state.userProfile.picture}
+							title="Contemplative Reptile"
+						/>
+						<Typography gutterBottom variant="h5" component="h5">
+							{this.state.user.email}
+						</Typography>
+						<CardActions>
+							<Button size="small" color="primary">
+								Edit
+							</Button>
+							<Button size="small" color="secondary">
+								Delete Account
+							</Button>
+						</CardActions>
+					</Card>
+				</div>
+				<StripeView user={this.state.user} />
+			</Container>
 		);
 	}
 }
