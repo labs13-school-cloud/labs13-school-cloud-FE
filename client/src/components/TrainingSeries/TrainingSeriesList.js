@@ -19,6 +19,7 @@ const TrainingSeriesList = props => {
               key={series.trainingSeriesID}
               deleteTrainingSeries={props.deleteTrainingSeries}
               data={series}
+              match={props.match}
             />
           );
         })}

@@ -50,7 +50,7 @@ class Dashboard extends React.Component {
               </h4>
               <div>
                 <div style={this.state.tabValue === 0 ? active : hidden}>
-                  <TrainingSeriesView userId={this.state.user.user.userID} />
+                  <TrainingSeriesView userId={this.state.user.user.userID} match={this.props.match} />
                 </div>
                 <div style={this.state.tabValue === 1 ? active : hidden}>
                   <TeamMembersView userId={this.state.user.user.userID} />

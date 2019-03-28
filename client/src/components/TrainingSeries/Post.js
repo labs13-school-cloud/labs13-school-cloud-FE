@@ -1,1 +1,0 @@
-// displays individual post modal
