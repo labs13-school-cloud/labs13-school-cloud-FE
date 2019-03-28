@@ -22,7 +22,7 @@ class StripePlans extends React.Component {
 		return (
 			<div>
 				{/* <Elements> */}
-					<CheckoutForm plans={this.state.plans} user={this.props.user} />
+				<CheckoutForm plans={this.state.plans} user={this.props.user} />
 				{/* </Elements> */}
 			</div>
 		);
