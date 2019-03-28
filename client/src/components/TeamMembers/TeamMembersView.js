@@ -7,7 +7,12 @@ import axios from "axios";
 import TeamMembersList from "./TeamMembersList";
 
 import { connect } from "react-redux";
-import { getTeamMembers, addTeamMember } from "../../store/actions";
+import {
+  getTeamMembers,
+  addTeamMember,
+  deleteTeamMember
+} from "../../store/actions";
+
 import TeamMemberModal from "../Modals/TeamMemberModal";
 
 class TeamMembersView extends React.Component {
@@ -24,6 +29,11 @@ class TeamMembersView extends React.Component {
     });
   }
 
+  deleteMember = (e, id) => {
+    e.preventDefault();
+    this.props.deleteTeamMember(id);
+  };
+
   render() {
     console.log("RENDER", this.state.teamMembers);
     return (
@@ -32,7 +42,11 @@ class TeamMembersView extends React.Component {
           userId={this.props.userId}
           addTeamMember={this.props.addTeamMember}
         />
-        <TeamMembersList teamMembers={this.props.teamMembers} />;
+        <TeamMembersList
+          teamMembers={this.props.teamMembers}
+          deleteTeamMember={this.deleteMember}
+        />
+        ;
       </>
     );
   }
@@ -51,5 +65,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { getTeamMembers, addTeamMember }
+  { getTeamMembers, addTeamMember, deleteTeamMember }
 )(TeamMembersView);
