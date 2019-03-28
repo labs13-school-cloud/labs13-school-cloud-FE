@@ -12,6 +12,7 @@ import {
 
 const initialState = {
     posts: [],
+    singleTrainingSeries: {},
     singlePost: [],
     isLoading: false,
     error: "",
@@ -31,7 +32,8 @@ const postsReducer = (state = initialState, action) => {
         return {
             ...state,
             isLoading: false,
-            posts: action.payload
+            posts: action.payload.posts,
+            singleTrainingSeries: action.payload.trainingSeries
 
         };
         case GET_POSTS_FAIL:
