@@ -61,21 +61,24 @@ const trainingSeriesReducer = (state = initialState, action) => {
         error: ""
       };
     case EDIT_TRIANING_SERIES_SUCCESS:
+      const updatedItem = state.trainingSeries.map(series => {
+        if (series.trainingSeriesID === action.payload.trainingSeriesID) {
+          return {
+            ...series,
+            title: action.payload.title
+          };
+        } else return series;
+      });
       return {
         ...state,
         isLoading: false,
-        error: ""
+        error: "",
+        trainingSeries: updatedItem
       };
+
     case EDIT_TRIANING_SERIES_FAIL:
       return {
         ...state,
-        trainingSeries: [
-          ...state.trainingSeries,
-          ...state.trainingSeries.filter(
-            series =>
-              series.trainingSeriesID === action.payload.trainingSeriesID
-          )
-        ],
         isLoading: false,
         error: action.payload
       };
