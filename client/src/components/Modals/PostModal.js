@@ -9,10 +9,6 @@ import { withStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import Button from "@material-ui/core/Button";
 
-// Redux
-import { connect } from "react-redux";
-import { createAPost } from "../../store/actions";
-
 function getModalStyle() {
   const top = 50;
   const left = 50;
@@ -27,7 +23,7 @@ function getModalStyle() {
 const styles = theme => ({
   paper: {
     position: "absolute",
-    width: theme.spacing.unit * 25,
+    width: theme.spacing.unit * 175,
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
     padding: theme.spacing.unit * 4,
@@ -54,37 +50,83 @@ const styles = theme => ({
 });
 
 class PostModal extends React.Component {
-  state = {
-    open: false
-  };
+  // state = {
+  //   open: false,
+  //   post: {
+  //     postName: "",
+  //     postDetails: "",
+  //     link: "",
+  //     daysFromStart: 1, 
+  //   }
+  // };
 
-  handleOpen = () => {
-    this.setState({ open: true });
-  };
+  componentDidMount() {
 
-  handleClose = () => {
-    this.setState({ open: false });
-  };
+  }
 
-  createAPost = e => {
-    e.preventDefault();
-    // logic here
-  };
+  // handleOpen = () => {
+  //   this.setState({ 
+  //     open: true,
+  //     post: {
+  //       ...this.state.post,
+  //       trainingSeriesID: this.props.trainingSeries.trainingSeriesID
+  //     }
+  //    });
+  // };
+
+  // handleClose = () => {
+  //   this.setState({ open: false });
+  // };
+
+  // handleChange = e => {
+  //   e.preventDefault();
+  //   this.setState({
+  //     ...this.state,
+  //     post: {
+  //       ...this.state.post,
+  //       [e.target.name]: e.target.value
+  //     }
+  //   })
+  // }
+
+  // createAPost = e => {
+  //   e.preventDefault();
+  //   console.log("post", this.state.post)
+  //   this.props.createAPost(this.state.post);
+  //   this.setState({
+  //     ...this.state,
+  //     open: false,
+  //     post: {
+  //       ...this.state.post,
+  //       postName: "",
+  //       postDetails: "",
+  //       link: "",
+  //       daysFromStart: 1,
+  //     }
+  //   })
+  // };
 
   render() {
     const { classes } = this.props;
     return (
       <>
-        <Button onClick={this.handleOpen}>Create a new post</Button>
+        <Button onClick={this.props.handleOpen}>Create a new post</Button>
         <Modal
           aria-labelledby="simple-modal-title"
           aria-describedby="simple-modal-description"
-          open={this.state.open}
-          onClose={this.handleClose}
+          open={this.props.open}
+          onClose={this.props.handleClose}
         >
           <div style={getModalStyle()} className={classes.paper}>
             <p>Post Modal!</p>
-            <Button onClick={this.handleCloser}>Cancel</Button>
+            <form onSubmit={e => this.props.addAPost(e)}>
+              <input type="text" name="postName" onChange={this.props.handleChange} value={this.props.post.postName} />
+              <input type="textarea" name="postDetails" onChange={this.props.handleChange} value={this.props.post.postDetails} />
+              <input type="text" name="link" onChange={this.props.handleChange} value={this.props.post.link} />
+              <input type="number" name="daysFromStart" onChange={this.props.handleChange} value={this.props.post.daysFromStart} step="1" min="1" />
+              <Button type="submit">Add Post</Button>
+            </form>
+            <Button type="button" onClick={this.props.handleClose}>Cancel</Button>
           </div>
         </Modal>
       </>
@@ -94,11 +136,6 @@ class PostModal extends React.Component {
 
 PostModal.propTypes = {};
 
-const mapStateToProps = state => ({});
-
 const PostModalWrapped = withStyles(styles)(PostModal);
 
-export default connect(
-  null,
-  {}
-)(PostModalWrapped);
+export default PostModalWrapped;

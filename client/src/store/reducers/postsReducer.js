@@ -12,6 +12,7 @@ import {
 
 const initialState = {
     posts: [],
+    singleTrainingSeries: {},
     singlePost: [],
     isLoading: false,
     error: "",
@@ -31,7 +32,9 @@ const postsReducer = (state = initialState, action) => {
         return {
             ...state,
             isLoading: false,
-            posts: action.payload
+            isAdding: false,
+            posts: action.payload.posts,
+            singleTrainingSeries: action.payload.trainingSeries
 
         };
         case GET_POSTS_FAIL:
@@ -62,20 +65,21 @@ const postsReducer = (state = initialState, action) => {
         case ADD_POST_START:
         return {
             ...state,
-            isLoading: true,
+            isAdding: true,
             error: "",
             addedSuccessfully: false
         }
         case ADD_POST_SUCCESS:
         return {
             ...state,
-            isLoading: false,
-            addedSuccessfully: true
+            isAdding: false,
+            addedSuccessfully: true,
+            singlePost: action.payload
         };
         case ADD_POST_FAIL:
         return {
             ...state,
-            isLoading: false,
+            isAdding: false,
             error: action.payload
         };
         default: return state;

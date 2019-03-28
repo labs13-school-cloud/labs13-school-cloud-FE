@@ -35,7 +35,7 @@ export const getTrainingSeriesPosts = id => dispatch => {
     .then(res =>
       dispatch({
         type: GET_POSTS_SUCCESS,
-        payload: res.data.posts
+        payload: res.data
       })
     )
     .catch(err => dispatch({ type: GET_POSTS_FAIL, error: err }));
@@ -55,6 +55,7 @@ export const getPostById = id => dispatch => {
 // POST a new post
 export const createAPost = post => dispatch => {
   dispatch({ type: ADD_POST_START });
+  console.log("post in createAPost", post);
   axios
     .post(`${process.env.REACT_APP_API}/api/posts`, post)
     .then(res =>
