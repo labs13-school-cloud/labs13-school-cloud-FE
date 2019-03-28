@@ -44,7 +44,6 @@ const trainingSeriesReducer = (state = initialState, action) => {
       return {
         ...state,
         trainingSeries: [...state.trainingSeries, action.payload],
-
         isLoading: false,
         error: ""
       };
@@ -57,7 +56,28 @@ const trainingSeriesReducer = (state = initialState, action) => {
     // ---EDIT TRIANING SERIES---
     case EDIT_TRIANING_SERIES_START:
       return {
-        ...state
+        ...state,
+        isLoading: true,
+        error: ""
+      };
+    case EDIT_TRIANING_SERIES_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        error: ""
+      };
+    case EDIT_TRIANING_SERIES_FAIL:
+      return {
+        ...state,
+        trainingSeries: [
+          ...state.trainingSeries,
+          ...state.trainingSeries.filter(
+            series =>
+              series.trainingSeriesID === action.payload.trainingSeriesID
+          )
+        ],
+        isLoading: false,
+        error: action.payload
       };
     // ---DELETE TRAINING SERIES---
     case DELETE_TRIANING_SERIES_START:
