@@ -35,7 +35,7 @@ class TrainingSeriesPosts extends React.Component {
 
     return (
       <>
-        <PostModal />
+        <PostModal trainingSeries={this.props.singleTrainingSeries} createAPost={this.props.createAPost} />
         {this.props.isLoading && <p>Please wait...</p>}
         {!this.props.isLoading && 
         <p>{this.props.singleTrainingSeries.title}</p>}

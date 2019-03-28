@@ -23,7 +23,7 @@ function getModalStyle() {
 const styles = theme => ({
   paper: {
     position: "absolute",
-    width: theme.spacing.unit * 25,
+    width: theme.spacing.unit * 175,
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
     padding: theme.spacing.unit * 4,
@@ -51,7 +51,14 @@ const styles = theme => ({
 
 class PostModal extends React.Component {
   state = {
-    open: false
+    open: false,
+    post: {
+      postName: "",
+      postDetails: "",
+      link: "",
+      daysFromStart: 0,
+      trainingSeries: this.props.trainingSeries.trainingSeriesID
+    }
   };
 
   componentDidMount() {
@@ -65,6 +72,17 @@ class PostModal extends React.Component {
   handleClose = () => {
     this.setState({ open: false });
   };
+
+  handleChange = e => {
+    e.preventDefault();
+    this.setState({
+      ...this.state,
+      post: {
+        ...this.state.post,
+        [e.target.name]: e.target.value
+      }
+    })
+  }
 
   createAPost = e => {
     e.preventDefault();
@@ -84,6 +102,11 @@ class PostModal extends React.Component {
         >
           <div style={getModalStyle()} className={classes.paper}>
             <p>Post Modal!</p>
+            <form>
+              <input type="text" name="postName" onChange={this.handleChange} value={this.state.post.postName} />
+              <input type="textarea" name="postDetails" onChange={this.handleChange} value={this.state.post.postDetails} />
+              <input type="text" name="link" onChange={this.handleChange} value={this.state.post.link} />
+            </form>
             <Button onClick={this.handleClose}>Cancel</Button>
           </div>
         </Modal>
