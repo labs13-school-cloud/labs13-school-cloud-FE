@@ -50,10 +50,18 @@ export const addTrainingSeries = trainingSeriesData => dispatch => {
     .catch(err => dispatch({ type: ADD_TRIANING_SERIES_FAIL, error: err }));
 };
 
-
-// export const editTrainingSeries = trainingSeriesData => dispatch => {
-
-// }
+export const editTrainingSeries = (id, trainingSeriesData) => dispatch => {
+  dispatch({ type: EDIT_TRIANING_SERIES_START });
+  axios
+    .put(
+      `${process.env.REACT_APP_API}/api/training-series/${id}`,
+      trainingSeriesData
+    )
+    .then(res =>
+      dispatch({ type: EDIT_TRIANING_SERIES_SUCCESS, payload: res.data })
+    )
+    .catch(err => dispatch({ type: EDIT_TRIANING_SERIES_FAIL, error: err }));
+};
 
 export const deleteTrainingSeries = id => dispatch => {
   dispatch({ type: DELETE_TRIANING_SERIES_START });
@@ -64,4 +72,3 @@ export const deleteTrainingSeries = id => dispatch => {
     )
     .catch(err => dispatch({ type: DELETE_TRIANING_SERIES_FAIL, error: err }));
 };
-

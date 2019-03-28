@@ -16,17 +16,14 @@ import {
 const initialState = {
   trainingSeries: [],
   error: "",
-  isLoading: false,
-  isDoneAdding: false,
-  isDoneEditing: false,
-  isDoneDeleting: false
+  isLoading: false
 };
 
 const trainingSeriesReducer = (state = initialState, action) => {
   switch (action.type) {
     // ---GET TRAINING SERIES---
     case GET_TRAINING_SERIES_START:
-      return { ...state, isDoneAdding: false, isLoading: true, error: "" };
+      return { ...state, isLoading: true, error: "" };
     case GET_TRAINING_SERIES_SUCCESS:
       return {
         ...state,
@@ -47,16 +44,20 @@ const trainingSeriesReducer = (state = initialState, action) => {
       return {
         ...state,
         trainingSeries: [...state.trainingSeries, action.payload],
-        isDoneAdding: true,
+
         isLoading: false,
         error: ""
       };
     case ADD_TRIANING_SERIES_FAIL:
       return {
         ...state,
-        isDoneAdding: false,
         isLoading: false,
         error: action.payload
+      };
+    // ---EDIT TRIANING SERIES---
+    case EDIT_TRIANING_SERIES_START:
+      return {
+        ...state
       };
     // ---DELETE TRAINING SERIES---
     case DELETE_TRIANING_SERIES_START:
