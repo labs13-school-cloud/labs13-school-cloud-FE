@@ -53,7 +53,9 @@ const appBar = props => {
 		<>
 			<AppBar className={classes.appBar}>
 				<div className={classes.menuItems}>
-					<img src={logo} alt="logo" className={classes.logo} />
+					<Link to="/home">
+						<img src={logo} alt="logo" className={classes.logo} />
+					</Link>
 					<Button>About</Button>
 					<Button>Contact</Button>
 				</div>
