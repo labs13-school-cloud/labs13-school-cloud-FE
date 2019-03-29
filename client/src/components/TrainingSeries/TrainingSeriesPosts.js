@@ -19,16 +19,6 @@ import PropTypes from "prop-types";
 import Button from "@material-ui/core/Button";
 
 class TrainingSeriesPosts extends React.Component {
-  //   state = {
-  //     open: false,
-  //     isUpdating: false,
-  //     post: {
-  //       postName: "",
-  //       postDetails: "",
-  //       link: "",
-  //       daysFromStart: 1
-  //     }
-  //   };
 
   componentDidMount() {
     this.getTrainingSeriesWithPosts(this.props.match.params.id);
@@ -38,63 +28,6 @@ class TrainingSeriesPosts extends React.Component {
     this.props.getTrainingSeriesPosts(id);
   };
 
-  //   handleOpen = () => {
-  //     this.setState({
-  //       open: true,
-  //       post: {
-  //         ...this.state.post,
-  //         trainingSeriesID: this.props.singleTrainingSeries.trainingSeriesID
-  //       }
-  //     });
-  //   };
-
-  //   handleClose = () => {
-  //     this.setState({ open: false });
-  //   };
-
-  //   handleChange = e => {
-  //     e.preventDefault();
-  //     this.setState({
-  //       ...this.state,
-  //       post: {
-  //         ...this.state.post,
-  //         [e.target.name]: e.target.value
-  //       }
-  //     });
-  //   };
-
-  //   addAPost = e => {
-  //     e.preventDefault();
-  //     console.log("post", this.state.post);
-  //     this.props.createAPost(this.state.post);
-  //     this.setState({
-  //       ...this.state,
-  //       open: false,
-  //       post: {
-  //         ...this.state.post,
-  //         postName: "",
-  //         postDetails: "",
-  //         link: "",
-  //         daysFromStart: 1
-  //       }
-  //     });
-  //   };
-
-  //   updateModal = e => {
-  //     e.preventDefault();
-  //     this.setState({
-  //       open: true,
-  //       isUpdating: true,
-  //       post: {
-  //         postName: "",
-  //         postDetails: "",
-  //         link: "",
-  //         daysFromStart: 1,
-  //         trainingSeriesID: this.props.singleTrainingSeries.trainingSeriesID
-  //       }
-  //     });
-  //   };
-
   render() {
     return (
       <>
@@ -103,6 +36,7 @@ class TrainingSeriesPosts extends React.Component {
           createAPost={this.props.createAPost}
           editPost={this.props.editPost}
         />
+        {/* Gives app time to fetch data */}
         {this.props.isLoading && <p>Please wait...</p>}
         {!this.props.isLoading && (
           <>
