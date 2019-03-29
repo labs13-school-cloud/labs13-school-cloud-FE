@@ -19,6 +19,8 @@ import {
 const initialState = {
 	plans: [],
 	plan: '',
+	subscription: '',
+	unsubscribe: '',
 	isLoading: false,
 	subscribeLoading: false,
 	error: '',
@@ -73,6 +75,7 @@ const stripeReducer = (state = initialState, action) => {
 		case POST_UNSUBSCRIBE_SUCCESS:
 			return {
 				...state,
+				unsubscribe: action.payload,
 				isLoading: false,
 			};
 		case POST_UNSUBSCRIBE_FAIL:
@@ -90,6 +93,7 @@ const stripeReducer = (state = initialState, action) => {
 		case POST_SUBSCRIBE_SUCCESS:
 			return {
 				...state,
+				subscription: action.payload,
 				subscribeLoading: false,
 			};
 		case POST_SUBSCRIBE_FAIL:

@@ -77,8 +77,7 @@ class CheckoutForm extends Component {
 	}
 	componentDidMount = () => {
 		this.props.getPlans();
-		const { stripe } = this.props.user;
-		console.log('stripe', this.props.user);
+		const { stripe } = this.props.userProfile;
 		this.props.getCustomersPlan(stripe); // doesn't work, not getting user stripe id
 	};
 	handleChange = e => {
@@ -97,24 +96,26 @@ class CheckoutForm extends Component {
 		return token.id;
 	};
 	submit = () => {
-		const { name, email, userID, stripe } = this.props.user;
+		const { name, email, userID, stripe } = this.props.userProfile;
 		const { plan } = this.state;
 		let { token } = this.createToken(userID);
 		this.props.submit(token, name, email, userID, stripe, plan);
 	};
 
 	render() {
-		console.log('props userp', this.props.user);
 		const { classes } = this.props;
 		let unsubscribe;
-		if (this.props.user.accountTypeID > 1) {
+		if (this.props.userProfile.accountTypeID > 1) {
 			unsubscribe = (
 				<Button
 					variant="contained"
 					color="primary"
 					className={classes.button}
 					onClick={() =>
-						this.props.unsubscribe(this.props.user.userID, this.props.user.stripe)
+						this.props.unsubscribe(
+							this.props.userProfile.userID,
+							this.props.userProfile.stripe
+						)
 					}>
 					Unsubscribe
 				</Button>
@@ -210,6 +211,7 @@ const mapStateToProps = state => {
 		plans: state.stripeReducer.plans,
 		plan: state.stripeReducer.plan,
 		isLoading: state.stripeReducer.isLoading,
+		userProfile: state.userReducer.userProfile.user,
 	};
 };
 

@@ -14,7 +14,7 @@ function StripeView(props) {
 		<StripeProvider apiKey="pk_test_L76yOnUDjq2cNP8heEH9MkpA00Ktyd3MYn">
 			<Stripe>
 				<Elements>
-					<CheckoutForm user={props.user} />
+					<CheckoutForm />
 				</Elements>
 			</Stripe>
 		</StripeProvider>
