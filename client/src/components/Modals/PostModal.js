@@ -70,7 +70,7 @@ class PostModal extends React.Component {
           postDetails: this.props.post.postDetails,
           link: this.props.post.link,
           daysFromStart: this.props.post.daysFromStart,
-          trainingSeriesID: this.props.trainingSeriesID
+          trainingSeriesID: this.props.post.trainingSeriesID
         }
       });
   }
