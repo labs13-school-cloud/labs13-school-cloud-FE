@@ -79,7 +79,7 @@ class PostModal extends React.Component {
     if (this.props.modalType === "edit") {
       this.setState({
         open: true
-      })
+      });
     } else {
       this.setState({
         open: true,
@@ -87,12 +87,28 @@ class PostModal extends React.Component {
           ...this.state.post,
           trainingSeriesID: this.props.trainingSeries.trainingSeriesID
         }
-      })
+      });
     }
   };
 
   handleClose = () => {
-    this.setState({ open: false });
+    if (this.props.modalType !== "edit") {
+      this.clearForm();
+    } else {
+      this.setState({
+        post: {
+          postName: this.props.post.postName,
+          postDetails: this.props.post.postDetails,
+          link: this.props.post.link,
+          daysFromStart: this.props.post.daysFromStart,
+          trainingSeriesID: this.props.post.trainingSeriesID
+        }
+      });
+    }
+    
+    this.setState({
+        open: false
+      });
   };
 
   handleChange = e => {
@@ -122,7 +138,7 @@ class PostModal extends React.Component {
   handlePostSubmit = e => {
     e.preventDefault();
     if (this.props.modalType === "edit") {
-      this.props.editPost(this.props.post.postID, this.state.post)
+      this.props.editPost(this.props.post.postID, this.state.post);
     } else {
       this.props.createAPost(this.state.post);
       this.clearForm();
