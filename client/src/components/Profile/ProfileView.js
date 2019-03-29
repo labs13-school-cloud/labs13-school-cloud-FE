@@ -115,7 +115,7 @@ class ProfileView extends React.Component {
                 </CardActions>
               </Card>
             </div>
-            <StripeView user={JSON.parse(localStorage.getItem('Profile'))} />
+            <StripeView user={this.state.googleProfile} />
           </>
         )}
       </Container>
