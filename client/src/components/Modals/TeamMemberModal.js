@@ -70,13 +70,14 @@ class TeamMemberModal extends React.Component {
   };
 
   componentDidMount() {
-    this.props.modalType === "edit" &&
+    if (this.props.modalType === "edit" && this.props.teamMember) {
       this.setState({ teamMember: this.props.teamMember });
+    }
   }
 
   componentDidUpdate(prevProps) {
     // populates form with selected users information
-    if (prevProps.isEditing) {
+    if (prevProps.isEditing && this.props.teamMember) {
       this.setState({ teamMember: this.props.teamMember });
     }
   }
