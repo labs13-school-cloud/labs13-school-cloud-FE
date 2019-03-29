@@ -3,7 +3,7 @@ import { CardElement, injectStripe } from 'react-stripe-elements';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { getPlans, unsubscribe } from '../../store/actions/';
+import { getPlans, getCustomersPlan, unsubscribe, submit } from '../../store/actions/';
 
 // const stripe = require('stripe')('sk_test_I3A5cCkzbD6C7HqqHSt7uRHH00ht9noOJw');
 
@@ -24,23 +24,21 @@ import green from '@material-ui/core/colors/green';
 
 const styles = theme => ({
 	root: {
+		margin: '20 auto',
+		width: '100%',
+		maxWidth: 800,
 		display: 'flex',
 		flexDirection: 'column',
-		marginTop: 20,
-		marginLeft: 'auto',
-		marginRight: 'auto',
 	},
 	formControl: {
+		display: 'flex',
 		margin: theme.spacing.unit * 3,
-		width: 300,
 	},
 	submitButton: {
 		width: 100,
 		padding: 5,
 	},
-	group: {
-		margin: `${theme.spacing.unit}px 0`,
-	},
+
 	container: {
 		display: 'flex',
 		flexWrap: 'wrap',
@@ -50,12 +48,10 @@ const styles = theme => ({
 		marginRight: theme.spacing.unit,
 		width: 200,
 	},
-	dense: {
-		marginTop: 19,
-	},
-	menu: {
-		width: 200,
-	},
+
+	buttonLayout: { display: 'flex' },
+	button: { margin: 5 },
+	progress: { margin: '0 auto' },
 });
 const theme = createMuiTheme({
 	palette: {
@@ -75,19 +71,17 @@ class CheckoutForm extends Component {
 			billingEmail: '',
 			plan: '',
 			paymentToggle: false,
+			pro: false,
+			premium: false,
 		};
 	}
 	componentDidMount = () => {
 		this.props.getPlans();
+		const { stripe } = this.props.user;
+		console.log('stripe', this.props.user);
+		this.props.getCustomersPlan(stripe); // doesn't work, not getting user stripe id
 	};
-	// async getPlans() {
-	// 	try {
-	// 		let response = await axios.get(`${process.env.REACT_APP_API_LOCAL}/api/stripe/plans`);
-	// 		this.setState({ plans: response.data });
-	// 	} catch (error) {
-	// 		console.log(error);
-	// 	}
-	// }
+
 	handleChange = e => {
 		e.preventDefault();
 		if (e.currentTarget.name === 'plan') {
@@ -103,38 +97,15 @@ class CheckoutForm extends Component {
 		let { token } = await this.props.stripe.createToken({ userID: userID });
 		return token.id;
 	};
-
-	// submit = async () => {
-	// 	const { name, email, userID, stripe } = this.props.user;
-	// 	const { plan } = this.state;
-
-	// 	let { token } = this.createToken(userID);
-	// 	let response = await axios.post(`${process.env.REACT_APP_API}/api/stripe`, {
-	// 		token,
-	// 		name,
-	// 		email,
-	// 		userID,
-	// 		stripe,
-	// 		plan,
-	// 	});
-
-	// 	if (response.status === 200) this.setState({ complete: true, paymentToggle: false });
-	// };
-	// unsubscribe = async () => {
-	// 	const { userID, stripe } = this.props.user;
-	// 	this.setState({ paymentToggle: false });
-	// 	let response = await axios.post(
-	// 		`${process.env.REACT_APP_API_LOCAL}/api/stripe/unsubscribe`,
-	// 		{
-	// 			userID,
-	// 			stripe,
-	// 		}
-	// 	);
-
-	// 	if (response.status === 200) this.setState({ complete: true });
-	// };
+	submit = () => {
+		const { name, email, userID, stripe } = this.props.user;
+		const { plan } = this.state;
+		let { token } = this.createToken(userID);
+		this.props.submit(token, name, email, userID, stripe, plan);
+	};
 
 	render() {
+		console.log('props userp', this.props.user);
 		const { classes } = this.props;
 		let unsubscribe;
 		if (this.props.user.accountTypeID > 1) {
@@ -142,7 +113,7 @@ class CheckoutForm extends Component {
 				<Button
 					variant="contained"
 					color="primary"
-					className={classes.margin}
+					className={classes.button}
 					onClick={() =>
 						this.props.unsubscribe(this.props.user.userID, this.props.user.stripe)
 					}>
@@ -155,7 +126,7 @@ class CheckoutForm extends Component {
 					disabled
 					variant="contained"
 					color="primary"
-					className={classes.margin}
+					className={classes.button}
 					onClick={() => this.unsubscribe()}>
 					Unsubscribe
 				</Button>
@@ -166,27 +137,29 @@ class CheckoutForm extends Component {
 		if (this.props.isLoading) {
 			return <CircularProgress className={classes.progress} />;
 		} else {
-			console.log(this.props.plans);
 			return (
 				<div className={classes.root}>
 					<div>
 						<FormControl component="fieldset" className={classes.formControl}>
 							<FormLabel component="legend">Subscriptions</FormLabel>
 							<MuiThemeProvider theme={theme}>
-								{unsubscribe}
-								{this.props.plans.map(plan => {
-									return (
-										<Button
-											variant="contained"
-											color="primary"
-											name="plan"
-											className={classes.margin}
-											value={plan.id}
-											onClick={e => this.handleChange(e)}>
-											{plan.nickname}
-										</Button>
-									);
-								})}
+								<div className={classes.buttonLayout}>
+									{unsubscribe}
+									{this.props.plans.map(plan => {
+										return (
+											<Button
+												key={plan.created}
+												variant="contained"
+												color="primary"
+												name="plan"
+												className={classes.button}
+												value={plan.id}
+												onClick={e => this.handleChange(e)}>
+												{plan.nickname}
+											</Button>
+										);
+									})}
+								</div>
 							</MuiThemeProvider>
 						</FormControl>
 						{this.state.paymentToggle ? (
@@ -236,6 +209,7 @@ class CheckoutForm extends Component {
 const mapStateToProps = state => {
 	return {
 		plans: state.stripeReducer.plans,
+		plan: state.stripeReducer.plan,
 		isLoading: state.stripeReducer.isLoading,
 	};
 };
@@ -248,6 +222,8 @@ export default connect(
 	mapStateToProps,
 	{
 		getPlans,
+		getCustomersPlan,
 		unsubscribe,
+		submit,
 	}
 )(injectStripe(withStyles(styles)(CheckoutForm)));

@@ -4,6 +4,10 @@ import axios from 'axios';
 export const GET_PLANS_START = 'GET_PLANS_START';
 export const GET_PLANS_SUCCESS = 'GET_PLANS_SUCCESS';
 export const GET_PLANS_FAIL = 'GET_PLANS_FAIL';
+// GET CUSTOMER
+export const GET_CUSTOMER_PLAN_START = 'GET_CUSTOMER_PLAN_START';
+export const GET_CUSTOMER_PLAN_SUCCESS = 'GET_CUSTOMER_PLAN_SUCCESS';
+export const GET_CUSTOMER_PLAN_FAIL = 'GET_CUSTOMER_PLAN_FAIL';
 // POST UNSUBSCRIBE
 export const POST_UNSUBSCRIBE_START = 'POST_UNSUBSCRIBE_START';
 export const POST_UNSUBSCRIBE_SUCCESS = 'POST_UNSUBSCRIBE_SUCCESS';
@@ -13,7 +17,6 @@ export const POST_SUBSCRIBE_START = 'POST_SUBSCRIBE_START';
 export const POST_SUBSCRIBE_SUCCESS = 'POST_SUBSCRIBE_SUCCESS';
 export const POST_SUBSCRIBE_FAIL = 'POST_SUBSCRIBE_FAIL';
 
-// GET all posts for a training series
 export const getPlans = () => dispatch => {
 	dispatch({
 		type: GET_PLANS_START,
@@ -27,6 +30,22 @@ export const getPlans = () => dispatch => {
 			})
 		)
 		.catch(err => dispatch({ type: GET_PLANS_FAIL, error: err }));
+};
+
+// not currently working
+export const getCustomersPlan = stripe => dispatch => {
+	dispatch({
+		type: GET_CUSTOMER_PLAN_START,
+	});
+	axios
+		.get(`${process.env.REACT_APP_API}/api/stripe/customer/plan`, { stripe })
+		.then(res =>
+			dispatch({
+				type: GET_CUSTOMER_PLAN_SUCCESS,
+				payload: res.data,
+			})
+		)
+		.catch(err => dispatch({ type: GET_CUSTOMER_PLAN_FAIL, error: err }));
 };
 
 export const unsubscribe = (userID, stripe) => dispatch => {

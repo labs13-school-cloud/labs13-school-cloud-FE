@@ -1,22 +1,27 @@
-import { 
-    GET_PLANS_START, 
-    GET_PLANS_SUCCESS, 
-    GET_PLANS_FAIL ,
-   //
-    POST_UNSUBSCRIBE_START, 
-    POST_UNSUBSCRIBE_SUCCESS, 
-    POST_UNSUBSCRIBE_FAIL ,
-   //
-    POST_SUBSCRIBE_START, 
-    POST_SUBSCRIBE_SUCCESS, 
-    POST_SUBSCRIBE_FAIL ,
+import {
+	GET_PLANS_START,
+	GET_PLANS_SUCCESS,
+	GET_PLANS_FAIL,
+	//
+	GET_CUSTOMER_PLAN_START,
+	GET_CUSTOMER_PLAN_SUCCESS,
+	GET_CUSTOMER_PLAN_FAIL,
+	//
+	POST_UNSUBSCRIBE_START,
+	POST_UNSUBSCRIBE_SUCCESS,
+	POST_UNSUBSCRIBE_FAIL,
+	//
+	POST_SUBSCRIBE_START,
+	POST_SUBSCRIBE_SUCCESS,
+	POST_SUBSCRIBE_FAIL,
 } from '../actions';
 
 const initialState = {
-    plans: [],
-    isLoading:false,
-    subscribeLoading:false,
-    error:'',
+	plans: [],
+	plan: '',
+	isLoading: false,
+	subscribeLoading: false,
+	error: '',
 };
 
 const stripeReducer = (state = initialState, action) => {
@@ -35,6 +40,24 @@ const stripeReducer = (state = initialState, action) => {
 				plans: action.payload,
 			};
 		case GET_PLANS_FAIL:
+			return {
+				...state,
+				isLoading: false,
+				error: action.payload,
+			};
+		case GET_CUSTOMER_PLAN_START:
+			return {
+				...state,
+				isLoading: true,
+				error: '',
+			};
+		case GET_CUSTOMER_PLAN_SUCCESS:
+			return {
+				...state,
+				isLoading: false,
+				plan: action.payload,
+			};
+		case GET_CUSTOMER_PLAN_FAIL:
 			return {
 				...state,
 				isLoading: false,
