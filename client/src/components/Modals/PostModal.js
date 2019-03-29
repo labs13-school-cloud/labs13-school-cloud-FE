@@ -76,9 +76,19 @@ class PostModal extends React.Component {
   }
 
   handleOpen = () => {
-    this.setState({
-      open: true
-    });
+    if (this.props.modalType === "edit") {
+      this.setState({
+        open: true
+      })
+    } else {
+      this.setState({
+        open: true,
+        post: {
+          ...this.state.post,
+          trainingSeriesID: this.props.trainingSeries.trainingSeriesID
+        }
+      })
+    }
   };
 
   handleClose = () => {
