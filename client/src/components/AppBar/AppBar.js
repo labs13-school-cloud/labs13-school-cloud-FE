@@ -1,6 +1,6 @@
 // navigation includes tab navigation, breadcrumbs, user avatar
 import React from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { withRouter } from "react-router";
 
 //PropTypes
@@ -11,10 +11,10 @@ import { withStyles } from "@material-ui/core/styles";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import AppBar from "@material-ui/core/AppBar";
+
 //AUTH
 import { logout } from "../../Auth/Auth";
-// import { flex } from '@material-ui/system/flexbox';
-
+// import { flex } from '@material-ui/system/flexbox'
 //Images
 import logo from "../../img/training-bot.png";
 
@@ -45,14 +45,9 @@ const styles = {
 };
 
 const appBar = props => {
-
   const { classes } = props;
   // const [value, setValue] = React.useState(2);
-
-  const toDashboard = e => {
-    e.preventDefault();
-    props.history.push("/home");
-  };
+  console.log(props);
 
   const pushToHome = e => {
     e.preventDefault();
@@ -63,7 +58,7 @@ const appBar = props => {
     <>
       <AppBar className={classes.appBar}>
         <div className={classes.menuItems}>
-          <img src={logo} alt="logo" className={classes.logo} />
+          <img src={logo} alt='logo' className={classes.logo} />
 
           <Button onClick={e => pushToHome(e)}>Dashboard</Button>
 
@@ -71,9 +66,9 @@ const appBar = props => {
           <Button>Contact</Button>
           {
             <Button
-              variant="contained"
-              color="secondary"
-              size="small"
+              variant='contained'
+              color='secondary'
+              size='small'
               onClick={() => logout()}
             >
               Log Out
@@ -81,8 +76,8 @@ const appBar = props => {
           }
         </div>
 
-        <Link to="/profile">
-          <Avatar alt="Avatar" src={logo} className={classes.avatar} />
+        <Link to='/profile'>
+          <Avatar alt='Avatar' src={logo} className={classes.avatar} />
         </Link>
       </AppBar>
     </>

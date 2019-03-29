@@ -2,6 +2,7 @@ import React from "react";
 
 //Components
 import AppBar from "../AppBar/AppBar";
+import UserModal from "../Modals/userModal";
 import DeleteModal from "../Modals/deleteModal";
 
 //Stripe
@@ -74,7 +75,6 @@ class ProfileView extends React.Component {
     });
   }
   render() {
-    console.log(this.props);
     //Destructure user from userProfile
     const { user } = this.props.userProfile;
     const { classes } = this.props;
@@ -112,9 +112,12 @@ class ProfileView extends React.Component {
                   <div>Account Type: {accountType}</div>
                 </Typography>
                 <CardActions>
-                  <Button size='small' color='primary'>
-                    Edit
-                  </Button>
+                  {/* Button for editing */}
+                  <UserModal
+                    email={user.email}
+                    name={user.name}
+                    id={user.userID}
+                  />
                   {/* Buton for deleting */}
                   <DeleteModal deleteType='user' id={user.userID} />
                 </CardActions>
@@ -131,7 +134,8 @@ class ProfileView extends React.Component {
 const mapStateToProps = state => {
   return {
     userProfile: state.userReducer.userProfile,
-    doneLoading: state.userReducer.doneLoading
+    doneLoading: state.userReducer.doneLoading,
+    isEditing: state.userReducer.isEditing
   };
 };
 

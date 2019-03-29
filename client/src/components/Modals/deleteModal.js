@@ -4,10 +4,8 @@ import PropTypes from "prop-types";
 
 //Styles
 import { withStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
 import Modal from "@material-ui/core/Modal";
 import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
 
 //REDUX
 import { connect } from "react-redux";
@@ -17,6 +15,7 @@ import {
   deletePost,
   deleteUser
 } from "../../store/actions/";
+import { FormLabel } from "@material-ui/core";
 
 function getModalStyle() {
   const top = 50;
@@ -102,9 +101,7 @@ class TrainingSeriesModal extends React.Component {
 
     return (
       <div>
-        <Button onClick={this.handleOpen}>
-          Are you sure you want to delete this?
-        </Button>
+        <Button onClick={this.handleOpen}>Delete</Button>
         <Modal
           aria-labelledby='simple-modal-title'
           aria-describedby='simple-modal-description'
@@ -112,6 +109,7 @@ class TrainingSeriesModal extends React.Component {
           onClose={this.handleClose}
         >
           <div style={getModalStyle()} className={classes.paper}>
+            <FormLabel>Are you sure you want to delete this?</FormLabel>
             <Button
               onClick={() => this.handleDelete()}
               type='submit'
