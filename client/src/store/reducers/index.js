@@ -1,13 +1,15 @@
-import teamMembersReducer from "./teamMembersReducer";
-import trainingSeriesReducer from "./trainingSeriesReducer";
+import teamMembersReducer from './teamMembersReducer';
+import trainingSeriesReducer from './trainingSeriesReducer';
 import postsReducer from './postsReducer';
+import stripeReducer from './stripeReducer';
 
-import { combineReducers } from "redux";
+import { combineReducers } from 'redux';
 
 const rootReducer = combineReducers({
-  teamMembersReducer,
-  trainingSeriesReducer,
-  postsReducer
+	teamMembersReducer,
+	trainingSeriesReducer,
+	postsReducer,
+	stripeReducer,
 });
 
 export default rootReducer;
