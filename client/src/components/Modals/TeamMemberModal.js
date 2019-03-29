@@ -1,18 +1,18 @@
-import React from 'react';
+import React from "react";
 
-import {connect} from 'react-redux';
+import { connect } from "react-redux";
 
 //Prop Types
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
-import {editTeamMember} from '../../store/actions';
+import { editTeamMember } from "../../store/actions";
 
 //Styles
-import {withStyles} from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import Modal from '@material-ui/core/Modal';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
+import { withStyles } from "@material-ui/core/styles";
+import Typography from "@material-ui/core/Typography";
+import Modal from "@material-ui/core/Modal";
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
 
 function getModalStyle() {
   const top = 50;
@@ -21,81 +21,85 @@ function getModalStyle() {
   return {
     top: `${top}%`,
     left: `${left}%`,
-    transform: `translate(-${top}%, -${left}%)`,
+    transform: `translate(-${top}%, -${left}%)`
   };
 }
 
 const styles = theme => ({
   paper: {
-    position: 'absolute',
+    position: "absolute",
     width: theme.spacing.unit * 50,
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
     padding: theme.spacing.unit * 4,
-    outline: 'none',
+    outline: "none"
   },
   container: {
-    display: 'flex',
-    'flex-direction': 'column',
-    flexWrap: 'wrap',
-    'align-items': 'center',
+    display: "flex",
+    "flex-direction": "column",
+    flexWrap: "wrap",
+    "align-items": "center"
   },
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
-    width: '90%',
+    width: "90%"
   },
   dense: {
-    marginTop: 19,
+    marginTop: 19
   },
   menu: {
-    width: 200,
+    width: 200
   },
   button: {
-    margin: theme.spacing.unit,
-  },
+    margin: theme.spacing.unit
+  }
 });
 
 class TeamMemberModal extends React.Component {
   state = {
     open: false,
     teamMember: {
-      firstName: '',
-      lastName: '',
-      jobDescription: '',
-      email: '',
-      phoneNumber: '',
-      user_ID: '',
-    },
+      firstName: "",
+      lastName: "",
+      jobDescription: "",
+      email: "",
+      phoneNumber: "",
+      user_ID: ""
+    }
   };
 
   componentDidMount() {
-    this.props.modalType === 'edit' &&
-      this.setState({teamMember: this.props.teamMember});
+    this.props.modalType === "edit" &&
+      this.setState({ teamMember: this.props.teamMember });
   }
 
   componentDidUpdate(prevProps) {
     // populates form with selected users information
     if (prevProps.isEditing) {
-      this.props.teamMember &&
-        this.setState({teamMember: this.props.teamMember, open: false});
+      this.setState({ teamMember: this.props.teamMember });
     }
   }
 
   handleOpen = () => {
-    this.setState({open: true});
+    this.setState({ open: true });
   };
 
   handleClose = () => {
     this.setState({
-      open: false,
+      open: false
+    });
+  };
+
+  clearForm = () => {
+    this.setState({
       teamMember: {
-        firstName: '',
-        lastName: '',
-        jobDescription: '',
-        email: '',
-        phoneNumber: '',
-      },
+        firstName: "",
+        lastName: "",
+        jobDescription: "",
+        email: "",
+        phoneNumber: ""
+      }
     });
   };
 
@@ -103,35 +107,37 @@ class TeamMemberModal extends React.Component {
     this.setState({
       teamMember: {
         ...this.state.teamMember,
-        [name]: event.target.value,
-      },
+        [name]: event.target.value
+      }
     });
   };
 
   handleSubmit = e => {
     e.preventDefault();
 
-    if (this.props.modalType === 'edit') {
-      console.log('Edit Fired');
+    if (this.props.modalType === "edit") {
+      console.log("Edit Fired");
       this.props.editTeamMember(this.props.teamMemberId, this.state.teamMember);
+      this.handleClose();
     } else {
       const newMember = {
         ...this.state.teamMember,
-        user_ID: this.props.userId,
+        user_ID: this.props.userId
       };
 
       this.props.addTeamMember(newMember);
 
       this.handleClose();
+      this.clearForm();
     }
   };
 
   render() {
-    const {classes} = this.props;
+    const { classes } = this.props;
     return (
       <div>
         <Button onClick={this.handleOpen}>
-          {this.props.modalType === 'edit' ? 'Edit' : 'Add new team member'}
+          {this.props.modalType === "edit" ? "Edit" : "Add new team member"}
         </Button>
         <Modal
           aria-labelledby="simple-modal-title"
@@ -141,9 +147,9 @@ class TeamMemberModal extends React.Component {
         >
           <div style={getModalStyle()} className={classes.paper}>
             <Typography variant="h6" id="modal-title" align="center">
-              {this.props.modalType === 'edit'
-                ? 'Edit Team Member Info'
-                : 'Add a new team member'}
+              {this.props.modalType === "edit"
+                ? "Edit Team Member Info"
+                : "Add a new team member"}
             </Typography>
             <form
               onSubmit={e => this.handleSubmit(e)}
@@ -156,7 +162,7 @@ class TeamMemberModal extends React.Component {
                 label="first name"
                 className={classes.textField}
                 value={this.state.teamMember.firstName}
-                onChange={this.handleChange('firstName')}
+                onChange={this.handleChange("firstName")}
                 margin="normal"
               />
               <TextField
@@ -164,7 +170,7 @@ class TeamMemberModal extends React.Component {
                 label="last name"
                 className={classes.textField}
                 value={this.state.teamMember.lastName}
-                onChange={this.handleChange('lastName')}
+                onChange={this.handleChange("lastName")}
                 margin="normal"
               />
               <TextField
@@ -172,7 +178,7 @@ class TeamMemberModal extends React.Component {
                 label="job description"
                 className={classes.textField}
                 value={this.state.teamMember.jobDescription}
-                onChange={this.handleChange('jobDescription')}
+                onChange={this.handleChange("jobDescription")}
                 margin="normal"
               />
               <TextField
@@ -180,7 +186,7 @@ class TeamMemberModal extends React.Component {
                 label="email"
                 className={classes.textField}
                 value={this.state.teamMember.email}
-                onChange={this.handleChange('email')}
+                onChange={this.handleChange("email")}
                 margin="normal"
               />
               <TextField
@@ -188,7 +194,7 @@ class TeamMemberModal extends React.Component {
                 label="phone"
                 className={classes.textField}
                 value={this.state.teamMember.phoneNumber}
-                onChange={this.handleChange('phoneNumber')}
+                onChange={this.handleChange("phoneNumber")}
                 margin="normal"
               />
               <Button
@@ -196,7 +202,7 @@ class TeamMemberModal extends React.Component {
                 variant="contained"
                 className={classes.button}
               >
-                {this.props.modalType === 'edit' ? 'Save Update' : 'Save'}
+                {this.props.modalType === "edit" ? "Save Update" : "Save"}
               </Button>
             </form>
           </div>
@@ -207,13 +213,13 @@ class TeamMemberModal extends React.Component {
 }
 
 TeamMemberModal.propTypes = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => {
   return {
     isEditing: state.teamMembersReducer.status.isEditing,
-    editSuccess: state.teamMembersReducer.status.editSuccess,
+    editSuccess: state.teamMembersReducer.status.editSuccess
   };
 };
 
@@ -222,5 +228,5 @@ const TeamMemberModalWrapped = withStyles(styles)(TeamMemberModal);
 
 export default connect(
   mapStateToProps,
-  {editTeamMember}
+  { editTeamMember }
 )(TeamMemberModalWrapped);
