@@ -81,7 +81,6 @@ class CheckoutForm extends Component {
 		console.log('stripe', this.props.user);
 		this.props.getCustomersPlan(stripe); // doesn't work, not getting user stripe id
 	};
-
 	handleChange = e => {
 		e.preventDefault();
 		if (e.currentTarget.name === 'plan') {

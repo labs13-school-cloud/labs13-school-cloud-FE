@@ -16,14 +16,14 @@ export const ADD_POST_SUCCESS = "ADD_POST_SUCCESS";
 export const ADD_POST_FAIL = "ADD_POST_FAIL";
 
 // EDIT A POST
-// export const EDIT_POST_START = "EDIT_POST_START";
-// export const EDIT_POST_SUCCESS = "EDIT_POST_SUCCESS";
-// export const EDIT_POST_FAIL = "EDIT_POST_FAIL";
+export const EDIT_POST_START = "EDIT_POST_START";
+export const EDIT_POST_SUCCESS = "EDIT_POST_SUCCESS";
+export const EDIT_POST_FAIL = "EDIT_POST_FAIL";
 
 // // DELETE A POST
-// export const DELETE_POST_START = "DELETE_POST_START";
-// export const DELETE_POST_SUCCESS = "DELETE_POST_SUCCESS";
-// export const DELETE_POST_FAIL = "DELETE_POST_FAIL";
+export const DELETE_POST_START = "DELETE_POST_START";
+export const DELETE_POST_SUCCESS = "DELETE_POST_SUCCESS";
+export const DELETE_POST_FAIL = "DELETE_POST_FAIL";
 
 // GET all posts for a training series
 export const getTrainingSeriesPosts = id => dispatch => {
@@ -35,7 +35,7 @@ export const getTrainingSeriesPosts = id => dispatch => {
     .then(res =>
       dispatch({
         type: GET_POSTS_SUCCESS,
-        payload: res.data.posts
+        payload: res.data
       })
     )
     .catch(err => dispatch({ type: GET_POSTS_FAIL, error: err }));
@@ -55,6 +55,7 @@ export const getPostById = id => dispatch => {
 // POST a new post
 export const createAPost = post => dispatch => {
   dispatch({ type: ADD_POST_START });
+  console.log("post in createAPost", post);
   axios
     .post(`${process.env.REACT_APP_API}/api/posts`, post)
     .then(res =>
@@ -64,5 +65,22 @@ export const createAPost = post => dispatch => {
 };
 
 // PUT a post
-
+export const editPost = (id, updates) => dispatch => {
+  dispatch({ type: EDIT_POST_START });
+  axios
+    .put(`${process.env.REACT_APP_API}/api/posts/${id}`, updates)
+    .then(res =>
+      dispatch({ type: EDIT_POST_SUCCESS, payload: res.data.updatedPost })
+    )
+    .catch(err => dispatch({ type: EDIT_POST_FAIL, error: err }));
+};
 // DELETE a post
+export const deletePost = id => dispatch => {
+  dispatch({ type: DELETE_POST_START });
+  axios
+    .delete(`${process.env.REACT_APP_API}/api/posts/${id}`)
+    .then(res =>
+      dispatch({ type: DELETE_POST_SUCCESS, payload: res.data.message })
+    )
+    .catch(err => dispatch({ type: DELETE_POST_FAIL, error: err }));
+};

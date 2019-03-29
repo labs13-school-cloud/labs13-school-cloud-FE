@@ -12,6 +12,10 @@ export const DELETE_MEMBER_START = "DELETE_MEMBER_START";
 export const DELETE_MEMBER_SUCCESS = "DELETE_MEMBER_SUCCESS";
 export const DELETE_MEMBER_FAIL = "DELETE_MEMBER_FAIL";
 
+export const EDIT_MEMBER_START = "EDIT_MEMBER_START";
+export const EDIT_MEMBER_SUCCESS = "EDIT_MEMBER_SUCCESS";
+export const EDIT_MEMBER_FAIL = "EDIT_MEMBER_FAIL";
+
 const baseUrl = `${process.env.REACT_APP_API}/api`;
 
 export const getTeamMembers = id => dispatch => {
@@ -36,7 +40,20 @@ export const addTeamMember = teamMember => dispatch => {
     .catch(err => dispatch({ type: ADD_MEMBER_FAIL, payload: err }));
 };
 
-export const editTeamMember = changes => dispatch => {};
+export const editTeamMember = (id, changes) => dispatch => {
+  dispatch({ type: EDIT_MEMBER_START });
+
+  axios
+    .put(`${baseUrl}/team-members/${id}`, changes)
+    .then(res => {
+      console.log("EDIT RESPONSE", res.data);
+      dispatch({
+        type: EDIT_MEMBER_SUCCESS,
+        payload: res.data.updatedTeamMember
+      });
+    })
+    .catch(err => dispatch({ type: EDIT_MEMBER_FAIL, payload: err }));
+};
 
 export const deleteTeamMember = id => dispatch => {
   dispatch({ type: DELETE_MEMBER_START });
