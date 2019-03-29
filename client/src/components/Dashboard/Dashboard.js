@@ -10,9 +10,6 @@ import TrainingSeriesView from '../TrainingSeries/TrainingSeriesView';
 import {NavigationView} from '../Navigation';
 import ProgressCircle from '../Progress/ProgressCircle';
 
-//Axios
-import axios from 'axios';
-
 //Auth
 import {getUserProfile} from '../../Auth/Auth';
 import Authenticate from '../authenticate/authenticate';
@@ -31,29 +28,10 @@ class Dashboard extends React.Component {
       this.props.getUser();
     });
   }
-  //Gets the users Profile
-  getProfile = () => {
-    getUserProfile(() => {
-      const userData = JSON.parse(localStorage.getItem('Profile'));
-      const {email, name} = userData;
-
-      axios
-        .post(`${process.env.REACT_APP_API}/api/auth`, {
-          email,
-          name,
-        })
-        .then(res => {
-          let userData = res.data;
-          this.setState({user: {...userData}, doneLoading: true});
-        })
-        .catch(err => {
-          console.log(err);
-        });
-    });
-  };
 
   render() {
     const {user} = this.props.userProfile;
+    console.log(this.props);
     return (
       <>
         {this.props.doneLoading ? (

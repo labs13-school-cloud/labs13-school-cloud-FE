@@ -35,5 +35,5 @@ const LogoImage = styled.img`
   width: 25px;
   position: absolute;
   right: 45.8%;
-  top: 51.8%;
+  top: 52.5%;
 `;
