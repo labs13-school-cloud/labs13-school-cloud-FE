@@ -5,14 +5,8 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import { getPlans, getCustomersPlan, unsubscribe, submit } from '../../store/actions/';
 
-// const stripe = require('stripe')('sk_test_I3A5cCkzbD6C7HqqHSt7uRHH00ht9noOJw');
-
-// stripe.charges.retrieve('ch_1EI51gChlDwQi04Izf2PqAxC', {
-// 	api_key: 'sk_test_I3A5cCkzbD6C7HqqHSt7uRHH00ht9noOJw',
-// });
 import {
 	withStyles,
-	MuiThemeProvider,
 	createMuiTheme,
 	FormControl,
 	FormLabel,
@@ -77,7 +71,7 @@ class CheckoutForm extends Component {
 	}
 	componentDidMount = () => {
 		this.props.getPlans();
-		const { stripe } = this.props.userProfile;
+		const stripe = this.props.userProfile.stripe;
 		this.props.getCustomersPlan(stripe); // doesn't work, not getting user stripe id
 	};
 	handleChange = e => {
@@ -91,14 +85,15 @@ class CheckoutForm extends Component {
 			[e.currentTarget.name]: e.currentTarget.value,
 		});
 	};
-	createToken = async userID => {
-		let { token } = await this.props.stripe.createToken({ userID: userID });
+	createToken = async email => {
+		let { token } = await this.props.stripe.createToken({ email: email });
 		return token.id;
 	};
 	submit = () => {
 		const { name, email, userID, stripe } = this.props.userProfile;
+
 		const { plan } = this.state;
-		let { token } = this.createToken(userID);
+		let token = this.createToken(email);
 		this.props.submit(token, name, email, userID, stripe, plan);
 	};
 
@@ -142,29 +137,27 @@ class CheckoutForm extends Component {
 					<div>
 						<FormControl component="fieldset" className={classes.formControl}>
 							<FormLabel component="legend">Subscriptions</FormLabel>
-							<MuiThemeProvider theme={theme}>
-								<div className={classes.buttonLayout}>
-									{unsubscribe}
-									{this.props.plans.map(plan => {
-										return (
-											<Button
-												key={plan.created}
-												variant="contained"
-												color="primary"
-												name="plan"
-												className={classes.button}
-												value={plan.id}
-												onClick={e => this.handleChange(e)}>
-												{plan.nickname}
-											</Button>
-										);
-									})}
-								</div>
-							</MuiThemeProvider>
+							<div className={classes.buttonLayout}>
+								{unsubscribe}
+								{this.props.plans.map(plan => {
+									return (
+										<Button
+											key={plan.created}
+											variant="contained"
+											color="primary"
+											name="plan"
+											className={classes.button}
+											value={plan.id}
+											onClick={e => this.handleChange(e)}>
+											{plan.nickname}
+										</Button>
+									);
+								})}
+							</div>
 						</FormControl>
 						{this.state.paymentToggle ? (
 							<FormControl component="fieldset" className={classes.formControl}>
-								<TextField
+								{/* <TextField
 									id="name"
 									name="billingName"
 									label="Name"
@@ -186,7 +179,7 @@ class CheckoutForm extends Component {
 									margin="normal"
 									placeholder="jenny@email.com"
 									required
-								/>
+								/> */}
 								<CardElement style={{ base: { fontSize: '18px' } }} />
 							</FormControl>
 						) : (

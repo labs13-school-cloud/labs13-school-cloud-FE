@@ -8,11 +8,11 @@ import {
 	GET_CUSTOMER_PLAN_FAIL,
 	//
 	POST_UNSUBSCRIBE_START,
-	POST_UNSUBSCRIBE_SUCCESS,
+	// POST_UNSUBSCRIBE_SUCCESS,
 	POST_UNSUBSCRIBE_FAIL,
 	//
 	POST_SUBSCRIBE_START,
-	POST_SUBSCRIBE_SUCCESS,
+	// POST_SUBSCRIBE_SUCCESS,
 	POST_SUBSCRIBE_FAIL,
 } from '../actions';
 
@@ -72,12 +72,12 @@ const stripeReducer = (state = initialState, action) => {
 				isLoading: true,
 				error: '',
 			};
-		case POST_UNSUBSCRIBE_SUCCESS:
-			return {
-				...state,
-				unsubscribe: action.payload,
-				isLoading: false,
-			};
+		// case POST_UNSUBSCRIBE_SUCCESS:
+		// 	return {
+		// 		...state,
+		// 		unsubscribe: action.payload,
+		// 		isLoading: false,
+		// 	};
 		case POST_UNSUBSCRIBE_FAIL:
 			return {
 				...state,
@@ -90,12 +90,12 @@ const stripeReducer = (state = initialState, action) => {
 				subscribeLoading: true,
 				error: '',
 			};
-		case POST_SUBSCRIBE_SUCCESS:
-			return {
-				...state,
-				subscription: action.payload,
-				subscribeLoading: false,
-			};
+		// case POST_SUBSCRIBE_SUCCESS:
+		// 	return {
+		// 		...state,
+		// 		subscription: action.payload,
+		// 		subscribeLoading: false,
+		// 	};
 		case POST_SUBSCRIBE_FAIL:
 			return {
 				...state,
