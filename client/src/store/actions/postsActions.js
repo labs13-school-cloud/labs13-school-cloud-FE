@@ -80,7 +80,7 @@ export const deletePost = id => dispatch => {
   axios
     .delete(`${process.env.REACT_APP_API}/api/posts/${id}`)
     .then(res =>
-      dispatch({ type: DELETE_POST_SUCCESS, payload: res.data.message })
+      dispatch({ type: DELETE_POST_SUCCESS, payload: id })
     )
     .catch(err => dispatch({ type: DELETE_POST_FAIL, error: err }));
 };
