@@ -72,7 +72,7 @@ class CheckoutForm extends Component {
 	componentDidMount = () => {
 		this.props.getPlans();
 		const stripe = this.props.userProfile.stripe;
-		this.props.getCustomersPlan(stripe); // doesn't work, not getting user stripe id
+		this.props.getCustomersPlan(this.props.stripe); // doesn't work, not getting user stripe id
 	};
 	handleChange = e => {
 		e.preventDefault();

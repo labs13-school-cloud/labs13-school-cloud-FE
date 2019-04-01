@@ -62,11 +62,17 @@ const userReducer = (state = initialState, action) => {
 				error: action.payload,
 			};
 		case POST_SUBSCRIBE_SUCCESS:
+			let accountTypeID;
+			if (action.payload.plan.id === 'plan_EmJallrSdkqpPS') {
+				accountTypeID = 2;
+			} else if (action.payload.plan.id === 'plan_EmJaXZor4Ef3co') {
+				accountTypeID = 3;
+			}
 			let update = {
 				message: state.userProfile.message,
 				user: {
 					userID: state.userProfile.user.userID,
-					accountTypeID: action.payload,
+					accountTypeID: accountTypeID,
 					email: state.userProfile.user.email,
 					name: state.userProfile.user.name,
 					stripe: state.userProfile.user.stripe,
