@@ -123,7 +123,17 @@ class TeamMemberModal extends React.Component {
       this.props.addTeamMember(newMember);
 
       this.handleClose();
-      this.clearForm();
+
+      this.setState({
+        teamMember: {
+          firstName: "",
+          lastName: "",
+          jobDescription: "",
+          email: "",
+          phoneNumber: "",
+          user_ID: ""
+        }
+      });
     }
   };
 
