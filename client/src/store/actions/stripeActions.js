@@ -16,6 +16,10 @@ export const POST_UNSUBSCRIBE_FAIL = 'POST_UNSUBSCRIBE_FAIL';
 export const POST_SUBSCRIBE_START = 'POST_SUBSCRIBE_START';
 export const POST_SUBSCRIBE_SUCCESS = 'POST_SUBSCRIBE_SUCCESS';
 export const POST_SUBSCRIBE_FAIL = 'POST_SUBSCRIBE_FAIL';
+// POST REGISTERSTRIPE
+export const POST_REGISTERSTRIPE_START = 'POST_REGISTERSTRIPE_START';
+export const POST_REGISTERSTRIPE_SUCCESS = 'POST_REGISTERSTRIPE_SUCCESS';
+export const POST_REGISTERSTRIPE_FAIL = 'POST_REGISTERSTRIPE_FAIL';
 
 export const getPlans = () => dispatch => {
 	dispatch({
@@ -62,20 +66,37 @@ export const unsubscribe = (userID, stripe) => dispatch => {
 };
 
 export const submit = (token, name, email, userID, stripe, plan) => dispatch => {
-	dispatch({
-		type: POST_SUBSCRIBE_START,
-	});
-	axios
-		.post(`${process.env.REACT_APP_API}/api/stripe`, {
-			token,
-			name,
-			email,
-			userID,
-			stripe,
-			plan,
-		})
-		.then(res => dispatch({ type: POST_SUBSCRIBE_SUCCESS, payload: res.data }))
-		.catch(err => dispatch({ type: POST_SUBSCRIBE_FAIL, error: err }));
+	if (stripe) {
+		dispatch({
+			type: POST_SUBSCRIBE_START,
+		});
+		axios
+			.post(`${process.env.REACT_APP_API}/api/stripe`, {
+				token,
+				name,
+				email,
+				userID,
+				stripe,
+				plan,
+			})
+			.then(res => dispatch({ type: POST_SUBSCRIBE_SUCCESS, payload: res.data }))
+			.catch(err => dispatch({ type: POST_SUBSCRIBE_FAIL, error: err }));
+	} else {
+		dispatch({
+			type: POST_REGISTERSTRIPE_START,
+		});
+		axios
+			.post(`${process.env.REACT_APP_API}/api/stripe/register`, {
+				token,
+				name,
+				email,
+				userID,
+				stripe,
+				plan,
+			})
+			.then(res => dispatch({ type: POST_REGISTERSTRIPE_SUCCESS, payload: res.data }))
+			.catch(err => dispatch({ type: POST_REGISTERSTRIPE_FAIL, error: err }));
+	}
 };
 
 // const { name, email, userID, stripe } = this.props.user;

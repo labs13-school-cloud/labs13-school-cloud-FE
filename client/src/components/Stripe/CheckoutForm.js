@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { getPlans, getCustomersPlan, unsubscribe, submit } from '../../store/actions/';
+import { getUser } from '../../store/actions/userActions';
 
 import {
 	withStyles,
@@ -71,8 +72,8 @@ class CheckoutForm extends Component {
 	}
 	componentDidMount = () => {
 		this.props.getPlans();
-		const stripe = this.props.userProfile.stripe;
-		this.props.getCustomersPlan(this.props.stripe); // doesn't work, not getting user stripe id
+		// const stripe = this.props.userProfile.stripe;
+		// this.props.getCustomersPlan(this.props.stripe); // doesn't work, not getting user stripe id
 	};
 	handleChange = e => {
 		e.preventDefault();
@@ -89,12 +90,17 @@ class CheckoutForm extends Component {
 		let { token } = await this.props.stripe.createToken({ email: email });
 		return token.id;
 	};
-	submit = () => {
+	submit = async () => {
 		const { name, email, userID, stripe } = this.props.userProfile;
+		console.log('email', email);
 
 		const { plan } = this.state;
-		let token = this.createToken(email);
-		this.props.submit(token, name, email, userID, stripe, plan);
+		let token = await this.createToken(email);
+		console.log('token', token);
+		await this.props.submit(token, name, email, userID, stripe, plan);
+		this.setState({
+			paymentToggle: false,
+		});
 	};
 
 	render() {
@@ -223,5 +229,6 @@ export default connect(
 		getCustomersPlan,
 		unsubscribe,
 		submit,
+		getUser,
 	}
 )(injectStripe(withStyles(styles)(CheckoutForm)));
