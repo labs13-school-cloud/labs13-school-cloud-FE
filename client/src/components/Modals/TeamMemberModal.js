@@ -1,7 +1,6 @@
 import React from "react";
 
 import { connect } from "react-redux";
-import moment from "moment";
 
 //Prop Types
 import PropTypes from "prop-types";
@@ -114,6 +113,7 @@ class TeamMemberModal extends React.Component {
 
     if (this.props.modalType === "edit") {
       this.props.editTeamMember(this.props.teamMemberId, this.state.teamMember);
+      this.handleClose();
     } else {
       const newMember = {
         ...this.state.teamMember,
@@ -123,6 +123,7 @@ class TeamMemberModal extends React.Component {
       this.props.addTeamMember(newMember);
 
       this.handleClose();
+      this.clearForm();
     }
   };
 
