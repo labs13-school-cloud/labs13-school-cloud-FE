@@ -36,7 +36,7 @@ class AppBar extends Component {
                   {" "}
                   <Avatar />
                 </Link>
-                <a onClick={() => logout()}>Logout</a>
+                <LogoutStyling onClick={() => logout()}>Logout</LogoutStyling>
               </RightItemsContainer>
             </>
           )}
@@ -70,7 +70,7 @@ const NavItemsContainer = styled.div`
   padding: 0px 40px;
   width: 100%;
   @media only screen and (max-width: 600px) {
-    padding: 0;
+    padding: 0 10px;
   }
   a {
     margin: 0 10px;
@@ -90,4 +90,11 @@ const NavigationLogo = styled.img`
 const RightItemsContainer = styled.div`
   display: flex;
   align-items: center;
+  @media only screen and (max-width: 600px) {
+    flex-direction: column-reverse;
+    margin-top: 10px;
+  }
+`;
+const LogoutStyling = styled.a`
+  padding-bottom: 10px;
 `;
