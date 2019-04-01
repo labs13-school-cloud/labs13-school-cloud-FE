@@ -87,7 +87,6 @@ class ProfileView extends React.Component {
       <Container>
         {this.props.doneLoading && (
           <>
-            <AppBar />
             <div className="profile-area">
               <Card className={classes.card}>
                 <Typography gutterBottom variant="h5" component="h1">
