@@ -66,7 +66,8 @@ class TeamMemberModal extends React.Component {
       email: "",
       phoneNumber: "",
       user_ID: ""
-    }
+    },
+    startDate: ""
   };
 
   componentDidMount() {
@@ -92,18 +93,6 @@ class TeamMemberModal extends React.Component {
     });
   };
 
-  clearForm = () => {
-    this.setState({
-      teamMember: {
-        firstName: "",
-        lastName: "",
-        jobDescription: "",
-        email: "",
-        phoneNumber: ""
-      }
-    });
-  };
-
   handleChange = name => event => {
     this.setState({
       teamMember: {
@@ -113,11 +102,16 @@ class TeamMemberModal extends React.Component {
     });
   };
 
+  handleDate = name => event => {
+    this.setState({
+      [name]: event.target.value
+    });
+  };
+
   handleSubmit = e => {
     e.preventDefault();
 
     if (this.props.modalType === "edit") {
-      console.log("Edit Fired");
       this.props.editTeamMember(this.props.teamMemberId, this.state.teamMember);
       this.handleClose();
     } else {
@@ -135,6 +129,7 @@ class TeamMemberModal extends React.Component {
 
   render() {
     const { classes } = this.props;
+    console.log("MODAL TS", this.props.trainingSeries);
     return (
       <div>
         <Button onClick={this.handleOpen}>
@@ -198,6 +193,17 @@ class TeamMemberModal extends React.Component {
                 onChange={this.handleChange("phoneNumber")}
                 margin="normal"
               />
+              <TextField
+                id="date"
+                label="start date"
+                type="date"
+                // defaultValue="2017-05-24"
+                className={classes.textField}
+                onChange={this.handleDate("startDate")}
+                InputLabelProps={{
+                  shrink: true
+                }}
+              />
               <Button
                 type="submit"
                 variant="contained"
@@ -220,7 +226,8 @@ TeamMemberModal.propTypes = {
 const mapStateToProps = state => {
   return {
     isEditing: state.teamMembersReducer.status.isEditing,
-    editSuccess: state.teamMembersReducer.status.editSuccess
+    editSuccess: state.teamMembersReducer.status.editSuccess,
+    trainingSeries: state.trainingSeriesReducer.trainingSeries
   };
 };
 
