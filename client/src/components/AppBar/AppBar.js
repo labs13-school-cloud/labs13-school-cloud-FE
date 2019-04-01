@@ -52,7 +52,6 @@ const NavigationContainer = styled.div`
   margin: 0 auto;
   width: 100%;
   display: flex;
-  max-width: 1280px;
   flex-direction: column;
   align-items: center;
 `;
