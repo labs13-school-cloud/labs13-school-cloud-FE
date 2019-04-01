@@ -1,4 +1,6 @@
-export * from './teamMembersActions';
+export * from "./userActions";
+
+export * from "./teamMembersActions";
 
 export * from './trainingSeriesActions';
 
