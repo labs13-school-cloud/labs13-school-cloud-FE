@@ -2,27 +2,19 @@ import React, { Component } from "react";
 
 //Styling
 import CssBaseline from "@material-ui/core/CssBaseline";
-import Button from "@material-ui/core/Button";
-import styled from "styled-components";
-import { login } from "./Auth/Auth";
+
+//Components
+import LandingPageView from "./components/LandingPage/LandingPageView";
 
 class App extends Component {
   render() {
     return (
       <>
         <CssBaseline />
-        <LoginContainer>
-          <Button onClick={() => login()} color="primary" variant="contained">
-            Register
-          </Button>
-        </LoginContainer>
+        <LandingPageView />
       </>
     );
   }
 }
-
-const LoginContainer = styled.div`
-  margin-top: 150px;
-`;
 
 export default App;

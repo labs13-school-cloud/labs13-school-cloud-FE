@@ -1,91 +1,116 @@
-// navigation includes tab navigation, breadcrumbs, user avatar
-import React from "react";
+
+import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { withRouter } from "react-router";
 
-//PropTypes
-import PropTypes from "prop-types";
-
 //Styling
-import { withStyles } from "@material-ui/core/styles";
+import styled from "styled-components";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import AppBar from "@material-ui/core/AppBar";
 
+//Logo
+import Logo from "../../img/training-bot.png";
+
 //AUTH
-import { logout } from "../../Auth/Auth";
-// import { flex } from '@material-ui/system/flexbox'
-//Images
-import logo from "../../img/training-bot.png";
+import { login, logout } from "../../Auth/Auth";
 
-//Customized Styling
-const styles = {
-  avatar: {
-    margin: 10
-  },
 
-  appBar: {
-    display: "flex",
-    justifyContent: "space-between",
-    flexDirection: "row",
-    color: "white",
-    backgroundColor: "",
-    padding: 5
-  },
-  logo: {
-    width: 50,
-    height: 50,
-    marginRight: 10
-  },
-  menuItems: {
-    display: "flex",
-    alignItems: "center",
-    color: "white"
+class AppBar extends Component {
+  render() {
+    return (
+      <NavigationContainer>
+        <NavigationTop />
+        <NavItemsContainer>
+          {this.props.history.location.pathname === "/" ? (
+            <>
+              <NavigationLogo src={Logo} />
+              <NavLinkItems>
+                <Link to='/home'>Dashboard</Link>
+                <Link to='/pricing'>Pricing</Link>
+              </NavLinkItems>
+              <a onClick={() => login()}>Login</a>
+            </>
+          ) : (
+            <>
+              <NavigationLogo src={Logo} />
+              <NavLinkItems>
+                <Link to='/home'>Dashboard</Link>
+                <Link to='/pricing'>Pricing</Link>
+              </NavLinkItems>
+              <RightItemsContainer>
+                <Link to='/profile'>
+                  {" "}
+                  <Avatar />
+                </Link>
+                <LogoutStyling onClick={() => logout()}>Logout</LogoutStyling>
+              </RightItemsContainer>
+            </>
+          )}
+        </NavItemsContainer>
+      </NavigationContainer>
+    );
   }
-};
 
-const appBar = props => {
-  const { classes } = props;
-  // const [value, setValue] = React.useState(2);
-  console.log(props);
-
-  const pushToHome = e => {
-    e.preventDefault();
-    props.history.push("/home");
-  };
-
-  return (
-    <>
-      <AppBar className={classes.appBar}>
-        <div className={classes.menuItems}>
-          <img src={logo} alt='logo' className={classes.logo} />
-
-          <Button onClick={e => pushToHome(e)}>Dashboard</Button>
-
-          <Button>About</Button>
-          <Button>Contact</Button>
-          {
-            <Button
-              variant='contained'
-              color='secondary'
-              size='small'
-              onClick={() => logout()}
-            >
-              Log Out
-            </Button>
-          }
-        </div>
-
-        <Link to='/profile'>
-          <Avatar alt='Avatar' src={logo} className={classes.avatar} />
-        </Link>
-      </AppBar>
-    </>
-  );
-};
 
 appBar.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
 export default withStyles(styles)(withRouter(appBar));
+
+}
+
+export default withRouter(AppBar);
+
+const NavigationContainer = styled.div`
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+const NavigationTop = styled.div`
+  background-color: #3ebd93;
+  width: 100%;
+  padding: 8px 0;
+`;
+const NavItemsContainer = styled.div`
+  display: flex;
+  box-sizing: border-box;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 0;
+  padding: 0px 40px;
+  width: 100%;
+  @media only screen and (max-width: 600px) {
+    padding: 0 10px;
+  }
+  a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: #690cb0;
+    &: hover {
+      cursor: pointer;
+    }
+  }
+`;
+const NavLinkItems = styled.div`
+  display: flex;
+`;
+const NavigationLogo = styled.img`
+  height: 35px;
+`;
+const RightItemsContainer = styled.div`
+  display: flex;
+  align-items: center;
+  @media only screen and (max-width: 600px) {
+    flex-direction: column-reverse;
+    margin-top: 10px;
+  }
+`;
+const LogoutStyling = styled.a`
+  padding-bottom: 10px;
+`;
+

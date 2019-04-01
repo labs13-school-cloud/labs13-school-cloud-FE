@@ -129,10 +129,12 @@ const postsReducer = (state = initialState, action) => {
             error: ""
         };
         case DELETE_POST_SUCCESS:
+        const filteredPosts = state.posts.filter(post => post.postID !== action.payload)
         return {
             ...state,
             isDeleting: false,
-            deletedSuccessfully: true
+            deletedSuccessfully: true,
+            posts: filteredPosts
         };
         case DELETE_POST_FAIL:
         return {
