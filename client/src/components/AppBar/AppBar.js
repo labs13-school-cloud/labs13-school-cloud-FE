@@ -1,12 +1,15 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { withRouter } from "react-router";
+
 //Styling
 import styled from "styled-components";
 import Avatar from "@material-ui/core/Avatar";
+
 //Logo
 import Logo from "../../img/training-bot.png";
 
+//AUTH
 import { login, logout } from "../../Auth/Auth";
 
 class AppBar extends Component {

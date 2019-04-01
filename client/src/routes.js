@@ -37,10 +37,10 @@ export const makeMainRoutes = () => {
         <>
           <AppBar />
           <div>
-            <Route exact path="/" component={App} />
-            <Route path="/home" component={Dashboard} />
-            <Route path="/profile" component={ProfileView} />
-            <Route path="/callback" component={Callback} />
+            <Route exact path='/' component={App} />
+            <Route path='/home' component={Dashboard} />
+            <Route path='/profile' component={ProfileView} />
+            <Route path='/callback' component={Callback} />
           </div>
         </>
       </Router>
