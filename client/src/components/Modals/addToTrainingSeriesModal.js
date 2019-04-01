@@ -80,7 +80,7 @@ class UserModal extends React.Component {
   handleChange = name => event => {
     this.setState({ [name]: event.target.value });
   };
-
+  //
   handleUserInformationSubmit = e => {
     e.preventDefault();
     const data = {
