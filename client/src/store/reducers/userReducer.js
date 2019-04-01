@@ -22,68 +22,66 @@ import {
 } from '../actions/stripeActions';
 
 const initialState = {
-  userProfile: [],
-  error: "",
-  isLoading: false,
-  isEditing: false,
-  doneLoading: false
+	userProfile: [],
+	error: '',
+	isLoading: false,
+	isEditing: false,
+	doneLoading: false,
 };
 
 const userReducer = (state = initialState, action) => {
 	switch (action.type) {
-    case GET_USER_START:
-      return {
-        ...state,
-        isLoading: true,
-        doneLoading: false,
-        error: ""
-      };
-    case GET_USER_SUCCESS:
-      return {
-        ...state,
-        userProfile: action.payload,
-        isLoading: false,
-        doneLoading: true,
-        error: ""
-      };
-    case GET_USER_FAIL:
-      return {
-        ...state,
-        isLoading: false,
-        doneLoading: false,
-        error: action.payload
-      };
-    case EDIT_USER_START:
-      return {
-        ...state,
-        isLoading: true,
-        isEditing: true,
-        error: ""
-      };
-    case EDIT_USER_SUCCESS:
-      console.log(state.userProfile);
-      return {
-        ...state,
-        userProfile: {
-          ...state.userProfile,
-          user: {
-            email: action.payload.email,
-            name: action.payload.name
-          }
-        },
-        isLoading: false,
-        isEditing: false,
-        error: ""
-      };
-    case EDIT_USER_FAIL:
-      return {
-        ...state,
-        isLoading: false,
-        isEditing: false,
-        error: action.payload
-      };
-    default:
-      return state;
+		case GET_USER_START:
+			return {
+				...state,
+				isLoading: true,
+				doneLoading: false,
+				error: '',
+			};
+		case GET_USER_SUCCESS:
+			return {
+				...state,
+				userProfile: action.payload,
+				isLoading: false,
+				doneLoading: true,
+				error: '',
+			};
+		case GET_USER_FAIL:
+			return {
+				...state,
+				isLoading: false,
+				doneLoading: false,
+				error: action.payload,
+			};
+		case EDIT_USER_START:
+			return {
+				...state,
+				isLoading: true,
+				isEditing: true,
+				error: '',
+			};
+		case EDIT_USER_SUCCESS:
+			console.log(state.userProfile);
+			return {
+				...state,
+				userProfile: {
+					...state.userProfile,
+					user: {
+						email: action.payload.email,
+						name: action.payload.name,
+					},
+				},
+				isLoading: false,
+				isEditing: false,
+				error: '',
+			};
+		case EDIT_USER_FAIL:
+			return {
+				...state,
+				isLoading: false,
+				isEditing: false,
+				error: action.payload,
+			};
 
 		// STRIPE SUBSCRIPTION REDUCERS
 		case POST_SUBSCRIBE_START:
