@@ -8,7 +8,9 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
+
 import TeamMemberModal from "../Modals/TeamMemberModal";
+import DeleteModal from "../Modals/deleteModal";
 
 import { withRouter } from "react-router";
 import { Link } from "react-router-dom";
@@ -71,15 +73,14 @@ function TeamMember(props) {
           teamMember={props.teamMember}
           teamMemberId={props.teamMember.teamMemberID}
         />
-        <Button
+        {/* <Button
           size="small"
           onClick={e => props.deleteTeamMember(e, teamMemberID)}
         >
           Delete
-        </Button>
-        <Button size="small" onClick={routeToMemberPage}>
-          View
-        </Button>
+        </Button> */}
+        <Button onClick={routeToMemberPage}>View</Button>
+        <DeleteModal deleteType="teamMember" id={teamMemberID} />
       </CardActions>
     </Card>
   );
