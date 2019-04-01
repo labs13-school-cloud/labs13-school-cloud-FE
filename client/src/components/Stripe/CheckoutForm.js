@@ -135,6 +135,8 @@ class CheckoutForm extends Component {
 			return (
 				<div className={classes.root}>
 					<div>
+						{this.props.userError}
+						{this.props.stripeError}
 						<FormControl component="fieldset" className={classes.formControl}>
 							<FormLabel component="legend">Subscriptions</FormLabel>
 							<div className={classes.buttonLayout}>
@@ -205,6 +207,8 @@ const mapStateToProps = state => {
 		plan: state.stripeReducer.plan,
 		isLoading: state.stripeReducer.isLoading,
 		userProfile: state.userReducer.userProfile.user,
+		userError: state.userReducer.error,
+		stripeError: state.stripeReducer.error,
 	};
 };
 

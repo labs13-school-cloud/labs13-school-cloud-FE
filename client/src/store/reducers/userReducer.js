@@ -9,7 +9,14 @@ import {
 	DELETE_USER_SUCCESS,
 	DELETE_USER_FAIL,
 } from '../actions/userActions';
-import { POST_SUBSCRIBE_SUCCESS, POST_UNSUBSCRIBE_SUCCESS } from '../actions/stripeActions';
+import {
+	POST_SUBSCRIBE_START,
+	POST_SUBSCRIBE_SUCCESS,
+	POST_SUBSCRIBE_FAIL,
+	POST_UNSUBSCRIBE_START,
+	POST_UNSUBSCRIBE_SUCCESS,
+	POST_UNSUBSCRIBE_FAIL,
+} from '../actions/stripeActions';
 
 const initialState = {
 	userProfile: [],
@@ -61,6 +68,15 @@ const userReducer = (state = initialState, action) => {
 				isLoading: false,
 				error: action.payload,
 			};
+
+		// STRIPE SUBSCRIPTION REDUCERS
+		case POST_SUBSCRIBE_START:
+			return {
+				...state,
+				subscribeLoading: true,
+				error: '',
+			};
+
 		case POST_SUBSCRIBE_SUCCESS:
 			let accountTypeID;
 			if (action.payload.plan.id === 'plan_EmJallrSdkqpPS') {
@@ -81,14 +97,28 @@ const userReducer = (state = initialState, action) => {
 			};
 			return {
 				...state,
+				isLoading: false,
 				userProfile: update,
 			};
+		case POST_SUBSCRIBE_FAIL:
+			return {
+				...state,
+				subscribeLoading: false,
+				error: action.payload,
+			};
+		case POST_UNSUBSCRIBE_START:
+			return {
+				...state,
+				isLoading: true,
+				error: '',
+			};
+
 		case POST_UNSUBSCRIBE_SUCCESS:
 			let update2 = {
 				message: state.userProfile.message,
 				user: {
 					userID: state.userProfile.user.userID,
-					accountTypeID: action.payload,
+					accountTypeID: 1,
 					email: state.userProfile.user.email,
 					name: state.userProfile.user.name,
 					stripe: state.userProfile.user.stripe,
@@ -97,7 +127,14 @@ const userReducer = (state = initialState, action) => {
 			};
 			return {
 				...state,
+				isLoading: false,
 				userProfile: update2,
+			};
+		case POST_UNSUBSCRIBE_FAIL:
+			return {
+				...state,
+				isLoading: false,
+				error: action.payload,
 			};
 
 		default:

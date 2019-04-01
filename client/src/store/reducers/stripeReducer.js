@@ -66,42 +66,42 @@ const stripeReducer = (state = initialState, action) => {
 				error: action.payload,
 			};
 		//---POST ACTIVITIES---
-		case POST_UNSUBSCRIBE_START:
-			return {
-				...state,
-				isLoading: true,
-				error: '',
-			};
+		// case POST_UNSUBSCRIBE_START:
+		// 	return {
+		// 		...state,
+		// 		// isLoading: true,
+		// 		error: '',
+		// 	};
 		// case POST_UNSUBSCRIBE_SUCCESS:
 		// 	return {
 		// 		...state,
 		// 		unsubscribe: action.payload,
 		// 		isLoading: false,
 		// 	};
-		case POST_UNSUBSCRIBE_FAIL:
-			return {
-				...state,
-				isLoading: false,
-				error: action.payload,
-			};
-		case POST_SUBSCRIBE_START:
-			return {
-				...state,
-				subscribeLoading: true,
-				error: '',
-			};
+		// case POST_UNSUBSCRIBE_FAIL:
+		// 	return {
+		// 		...state,
+		// 		isLoading: false,
+		// 		error: action.payload,
+		// 	};
+		// case POST_SUBSCRIBE_START:
+		// 	return {
+		// 		...state,
+		// 		subscribeLoading: true,
+		// 		error: '',
+		// 	};
 		// case POST_SUBSCRIBE_SUCCESS:
 		// 	return {
 		// 		...state,
 		// 		subscription: action.payload,
 		// 		subscribeLoading: false,
 		// 	};
-		case POST_SUBSCRIBE_FAIL:
-			return {
-				...state,
-				subscribeLoading: false,
-				error: action.payload,
-			};
+		// case POST_SUBSCRIBE_FAIL:
+		// 	return {
+		// 		...state,
+		// 		subscribeLoading: false,
+		// 		error: action.payload,
+		// 	};
 		default:
 			return state;
 	}
