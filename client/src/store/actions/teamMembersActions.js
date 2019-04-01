@@ -16,6 +16,13 @@ export const EDIT_MEMBER_START = "EDIT_MEMBER_START";
 export const EDIT_MEMBER_SUCCESS = "EDIT_MEMBER_SUCCESS";
 export const EDIT_MEMBER_FAIL = "EDIT_MEMBER_FAIL";
 
+export const ADD_MEMBER_TO_TRAININGSERIES_START =
+  "ADD_MEMBER_TO_TRAININGSERIES_START";
+export const ADD_MEMBER_TO_TRAININGSERIES_SUCCESS =
+  "ADD_MEMBER_TO_TRAININGSERIES_SUCCESS";
+export const ADD_MEMBER_TO_TRAININGSERIES_FAIL =
+  "ADD_MEMBER_TO_TRAININGSERIES_FAIL";
+
 const baseUrl = `${process.env.REACT_APP_API}/api`;
 
 export const getTeamMembers = id => dispatch => {
@@ -65,4 +72,20 @@ export const deleteTeamMember = id => dispatch => {
       dispatch({ type: DELETE_MEMBER_SUCCESS, payload: id });
     })
     .catch(err => dispatch({ type: DELETE_MEMBER_FAIL, payload: err }));
+};
+
+export const addTeamMemberToTrainingSeries = (id, data) => dispatch => {
+  dispatch({ type: ADD_MEMBER_TO_TRAININGSERIES_START });
+
+  axios
+    .post(`${baseUrl}/team-members/${id}/training-series`, data)
+    .then(res =>
+      dispatch({
+        type: ADD_MEMBER_TO_TRAININGSERIES_SUCCESS,
+        payload: res.data
+      })
+    )
+    .catch(err =>
+      dispatch({ type: ADD_MEMBER_TO_TRAININGSERIES_FAIL, error: err })
+    );
 };
