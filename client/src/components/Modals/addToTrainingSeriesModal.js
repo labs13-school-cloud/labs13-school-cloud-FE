@@ -1,21 +1,26 @@
-import React from 'react';
+import React from "react";
 //Prop Types
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
 //Styles
-import { withStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import Modal from '@material-ui/core/Modal';
-import Button from '@material-ui/core/Button';
-import BottomNavigation from '@material-ui/core/BottomNavigation';
-import AddIcon from '@material-ui/icons/Add';
-import Fab from '@material-ui/core/Fab';
-import Checkbox from '@material-ui/core/Checkbox';
+import { withStyles } from "@material-ui/core/styles";
+import Typography from "@material-ui/core/Typography";
+import Modal from "@material-ui/core/Modal";
+import Button from "@material-ui/core/Button";
+import BottomNavigation from "@material-ui/core/BottomNavigation";
+import AddIcon from "@material-ui/icons/Add";
+import Fab from "@material-ui/core/Fab";
+import Checkbox from "@material-ui/core/Checkbox";
+import FormLabel from "@material-ui/core/FormLabel";
+import FormControl from "@material-ui/core/FormControl";
+import FormGroup from "@material-ui/core/FormGroup";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import FormHelperText from "@material-ui/core/FormHelperText";
 
 //REDUX
-import { connect } from 'react-redux';
-import { addTeamMemberToTrainingSeries } from '../../store/actions/';
-import { TransitionGroup } from 'react-transition-group';
+import { connect } from "react-redux";
+import { addTeamMemberToTrainingSeries } from "../../store/actions/";
+import { TransitionGroup } from "react-transition-group";
 
 function getModalStyle() {
   const top = 50;
@@ -30,16 +35,16 @@ function getModalStyle() {
 
 const styles = theme => ({
   paper: {
-    position: 'absolute',
+    position: "absolute",
     width: 400,
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
     padding: theme.spacing.unit * 4,
-    outline: 'none'
+    outline: "none"
   },
   container: {
-    display: 'flex',
-    flexWrap: 'wrap'
+    display: "flex",
+    flexWrap: "wrap"
   },
   textField: {
     marginLeft: theme.spacing.unit,
@@ -56,21 +61,27 @@ const styles = theme => ({
     margin: theme.spacing.unit
   },
   memberList: {
-    display: 'flex',
-    flexDirection: 'column'
+    display: "flex",
+    flexDirection: "column"
   }
 });
 
 class UserModal extends React.Component {
   state = {
     open: false,
-    trainingSeries_ID: '',
-    startDate: '',
+    trainingSeriesID: "",
+    startDate: "",
     selectedTeamMembers: []
   };
 
   componentDidMount() {
-    this.setState({ email: this.props.email, name: this.props.name });
+    if (this.props.modalType === "assignMultiple") {
+      this.setState({
+        trainingSeriesID: this.props.trainingSeriesID
+      });
+    } else {
+      this.setState({ email: this.props.email, name: this.props.name });
+    }
   }
   componentDidUpdate(prevProps) {
     if (prevProps.isEditing) {
@@ -89,7 +100,24 @@ class UserModal extends React.Component {
   handleChange = name => event => {
     this.setState({ [name]: event.target.value });
   };
-  //
+
+  handleChecked = id => {
+    if (!this.state.selectedTeamMembers.includes(id)) {
+      this.setState({
+        ...this.state,
+        selectedTeamMembers: [...this.state.selectedTeamMembers, id]
+      });
+    } else {
+      let filteredTeamMembers = this.state.selectedTeamMembers.filter(
+        member => member !== id
+      );
+      this.setState({
+        ...this.state,
+        selectedTeamMembers: filteredTeamMembers
+      });
+    }
+  };
+
   handleSubmit = e => {
     e.preventDefault();
     const data = {
@@ -106,19 +134,26 @@ class UserModal extends React.Component {
 
     let modalMap;
     let modalTitle;
-    if (this.props.modalType === 'assignMultiple') {
+    if (this.props.modalType === "assignMultiple") {
       modalMap = this.props.teamMembers.map(member => (
-        <div>
-          <Checkbox />
-          <p>
-            {member.firstName} {member.lastName}
-          </p>
-        </div>
+        <>
+          <FormControlLabel
+            control={
+              <Checkbox
+                name={member.teamMemberID}
+                onChange={() => this.handleChecked(member.teamMemberID)}
+              />
+            }
+            label={`${member.firstName} ${member.lastName}`}
+          />
+        </>
       ));
-      modalTitle = 'Assign Team Members';
+      modalTitle = (
+        <FormLabel component="legend">Assign Team Members</FormLabel>
+      );
     } else {
       modalMap = this.props.trainingSeries.map(t => <>{t.title}</>);
-      modalTitle = 'Assign Training Series';
+      modalTitle = "Assign Training Series";
     }
 
     return (
