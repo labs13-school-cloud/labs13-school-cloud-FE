@@ -9,28 +9,11 @@ import {
 	withStyles,
 	FormControl,
 	FormLabel,
-	// TextField,
 	Button,
 	CircularProgress,
 	Modal,
-	Typography
 } from '@material-ui/core/';
-
-function rand() {
-	return Math.round(Math.random() * 20) - 10;
-}
-
-function getModalStyle() {
-	const top = 50 + rand();
-	const left = 50 + rand();
-
-	return {
-		top: `${top}%`,
-		left: `${left}%`,
-		transform: `translate(-${top}%, -${left}%)`,
-	};
-}
-
+import UnsubscribeModal from './unsubscribeModal';
 
 const styles = theme => ({
 	paper: {
@@ -86,7 +69,6 @@ class CheckoutForm extends Component {
 			pro: false,
 			premium: false,
 			open: false,
-
 		};
 	}
 	handleOpen = () => {
@@ -99,8 +81,6 @@ class CheckoutForm extends Component {
 
 	componentDidMount = () => {
 		this.props.getPlans();
-		// const stripe = this.props.userProfile.stripe;
-		// this.props.getCustomersPlan(this.props.stripe); // doesn't work, not getting user stripe id
 	};
 	handleChange = e => {
 		e.preventDefault();
@@ -129,14 +109,10 @@ class CheckoutForm extends Component {
 			paymentToggle: false,
 		});
 	};
-	 unsub=(userID, stripe)=>{
-		this.props.unsubscribe(
-			userID,
-			stripe
-		)
+	unsub = (userID, stripe) => {
+		this.props.unsubscribe(userID, stripe);
 		this.setState({ open: false });
-
-	}
+	};
 
 	render() {
 		const { classes } = this.props;
@@ -147,19 +123,13 @@ class CheckoutForm extends Component {
 					variant="contained"
 					color="primary"
 					className={classes.button}
-					onClick={this.handleOpen
-					}>
+					onClick={this.handleOpen}>
 					Unsubscribe
 				</Button>
 			);
 		} else {
 			unsubscribe = (
-				<Button
-					disabled
-					variant="contained"
-					color="primary"
-					className={classes.button}
-					onClick={() => this.unsubscribe()}>
+				<Button disabled variant="contained" color="primary" className={classes.button}>
 					Unsubscribe
 				</Button>
 			);
@@ -213,39 +183,15 @@ class CheckoutForm extends Component {
 					) : (
 						<span />
 					)}
-									<Modal
-					aria-labelledby="simple-modal-title"
-					aria-describedby="simple-modal-description"
-					open={this.state.open}
-					onClose={this.handleClose}>
-					<div style={getModalStyle()} className={classes.paper}>
-						<Typography variant="h6" id="modal-title">
-							Are you sure you want to unsubscribe?
-						</Typography>
-						
-							<div>
-							<Button
-								variant="contained"
-								color="secondary"
-								onClick={() => {
-									this.unsub(this.props.userProfile.userID,
-										this.props.userProfile.stripe)
-									
-								}}>
-								Yes
-							</Button>
-							<Button
-								variant="contained"
-								color="secondary"
-								onClick={() => {
-									this.handleClose();
-								}}>
-								No
-							</Button>
-						</div>
-						</div>
-				</Modal>
 
+					{/* Unsubscribe Modal */}
+					<Modal
+						aria-labelledby="simple-modal-title"
+						aria-describedby="simple-modal-description"
+						open={this.state.open}
+						onClose={this.handleClose}>
+						<UnsubscribeModal handleClose={this.handleClose} unsub={this.unsub} />
+					</Modal>
 				</div>
 			);
 		}

@@ -1,9 +1,9 @@
 import React from 'react';
 
 //Components
-import AppBar from '../AppBar/AppBar';
+// import AppBar from '../AppBar/AppBar';
 import UserModal from '../Modals/userModal';
-import DeleteModal from '../Modals/deleteModal';
+// import DeleteModal from '../Modals/deleteModal';
 
 //Stripe
 import StripeView from '../Stripe/StripeView';
