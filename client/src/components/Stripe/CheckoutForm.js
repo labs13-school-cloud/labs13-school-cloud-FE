@@ -1,43 +1,46 @@
 import React, { Component } from 'react';
 import { CardElement, injectStripe } from 'react-stripe-elements';
 import PropTypes from 'prop-types';
-import axios from 'axios';
+import { connect } from 'react-redux';
+import { getPlans, getCustomersPlan, unsubscribe, submit } from '../../store/actions/';
+import { getUser } from '../../store/actions/userActions';
 
-// const stripe = require('stripe')('sk_test_I3A5cCkzbD6C7HqqHSt7uRHH00ht9noOJw');
-
-// stripe.charges.retrieve('ch_1EI51gChlDwQi04Izf2PqAxC', {
-// 	api_key: 'sk_test_I3A5cCkzbD6C7HqqHSt7uRHH00ht9noOJw',
-// });
 import {
 	withStyles,
-	MuiThemeProvider,
-	createMuiTheme,
 	FormControl,
 	FormLabel,
-	TextField,
 	Button,
+	CircularProgress,
+	Modal,
 } from '@material-ui/core/';
-import green from '@material-ui/core/colors/green';
+import UnsubscribeModal from './unsubscribeModal';
 
 const styles = theme => ({
+	paper: {
+		position: 'absolute',
+		width: theme.spacing.unit * 50,
+		backgroundColor: theme.palette.background.paper,
+		boxShadow: theme.shadows[5],
+		padding: theme.spacing.unit * 4,
+		outline: 'none',
+	},
+
 	root: {
+		margin: '20 auto',
+		width: '100%',
+		maxWidth: 800,
 		display: 'flex',
 		flexDirection: 'column',
-		marginTop: 20,
-		marginLeft: 'auto',
-		marginRight: 'auto',
 	},
 	formControl: {
+		display: 'flex',
 		margin: theme.spacing.unit * 3,
-		width: 300,
 	},
 	submitButton: {
 		width: 100,
 		padding: 5,
 	},
-	group: {
-		margin: `${theme.spacing.unit}px 0`,
-	},
+
 	container: {
 		display: 'flex',
 		flexWrap: 'wrap',
@@ -47,21 +50,12 @@ const styles = theme => ({
 		marginRight: theme.spacing.unit,
 		width: 200,
 	},
-	dense: {
-		marginTop: 19,
-	},
-	menu: {
-		width: 200,
-	},
+
+	buttonLayout: { display: 'flex' },
+	button: { margin: 5 },
+	progress: { margin: '20px auto', maxWidth: 40, width: 40 },
 });
-const theme = createMuiTheme({
-	palette: {
-		primary: green,
-	},
-	typography: {
-		useNextVariants: true,
-	},
-});
+
 class CheckoutForm extends Component {
 	constructor(props) {
 		super(props);
@@ -72,19 +66,22 @@ class CheckoutForm extends Component {
 			billingEmail: '',
 			plan: '',
 			paymentToggle: false,
+			pro: false,
+			premium: false,
+			open: false,
 		};
 	}
-	componentDidMount = () => {
-		this.getPlans();
+	handleOpen = () => {
+		this.setState({ open: true });
 	};
-	async getPlans() {
-		try {
-			let response = await axios.get(`${process.env.REACT_APP_API}/api/stripe/plans`);
-			this.setState({ plans: response.data });
-		} catch (error) {
-			console.log(error);
-		}
-	}
+
+	handleClose = () => {
+		this.setState({ open: false });
+	};
+
+	componentDidMount = () => {
+		this.props.getPlans();
+	};
 	handleChange = e => {
 		e.preventDefault();
 		if (e.currentTarget.name === 'plan') {
@@ -96,120 +93,83 @@ class CheckoutForm extends Component {
 			[e.currentTarget.name]: e.currentTarget.value,
 		});
 	};
-	createToken = async userID => {
-		let { token } = await this.props.stripe.createToken({ userID: userID });
+	createToken = async email => {
+		let { token } = await this.props.stripe.createToken({ email: email });
 		return token.id;
 	};
-
 	submit = async () => {
-		const { name, email, userID, stripe } = this.props.user;
+		const { name, email, userID, stripe } = this.props.userProfile;
+		console.log('email', email);
+
 		const { plan } = this.state;
-
-		let { token } = this.createToken(userID);
-		let response = await axios.post(`${process.env.REACT_APP_API}/api/stripe`, {
-			token,
-			name,
-			email,
-			userID,
-			stripe,
-			plan,
+		let token = await this.createToken(email);
+		console.log('token', token);
+		await this.props.submit(token, name, email, userID, stripe, plan);
+		this.setState({
+			paymentToggle: false,
 		});
-
-		if (response.status === 200) this.setState({ complete: true, paymentToggle: false });
 	};
-	unsubscribe = async () => {
-		const { userID, stripe } = this.props.user;
-		this.setState({ paymentToggle: false });
-		let response = await axios.post(`${process.env.REACT_APP_API}/api/stripe/unsubscribe`, {
-			userID,
-			stripe,
-		});
-
-		if (response.status === 200) this.setState({ complete: true });
+	unsub = (userID, stripe) => {
+		this.props.unsubscribe(userID, stripe);
+		this.setState({ open: false });
 	};
 
 	render() {
 		const { classes } = this.props;
 		let unsubscribe;
-		if (this.props.user.accountTypeID > 1) {
+		if (this.props.userProfile.accountTypeID > 1) {
 			unsubscribe = (
 				<Button
 					variant="contained"
 					color="primary"
-					className={classes.margin}
-					onClick={() => this.unsubscribe()}>
+					className={classes.button}
+					onClick={this.handleOpen}>
 					Unsubscribe
 				</Button>
 			);
 		} else {
 			unsubscribe = (
-				<Button
-					disabled
-					variant="contained"
-					color="primary"
-					className={classes.margin}
-					onClick={() => this.unsubscribe()}>
+				<Button disabled variant="contained" color="primary" className={classes.button}>
 					Unsubscribe
 				</Button>
 			);
 		}
 
 		if (this.state.complete) return <h1>Purchase Complete</h1>;
-		if (!this.state.plans) {
-			return <div>Loading</div>;
+		if (this.props.stripeLoading || this.props.userLoading) {
+			return (
+				<div className={classes.progress}>
+					<CircularProgress />
+				</div>
+			);
 		} else {
 			return (
 				<div className={classes.root}>
 					<div>
+						{this.props.userError}
+						{this.props.stripeError}
 						<FormControl component="fieldset" className={classes.formControl}>
 							<FormLabel component="legend">Subscriptions</FormLabel>
-							<MuiThemeProvider theme={theme}>
+							<div className={classes.buttonLayout}>
 								{unsubscribe}
-								<Button
-									variant="contained"
-									color="primary"
-									name="plan"
-									className={classes.margin}
-									value={this.state.plans[1].id}
-									onClick={e => this.handleChange(e)}>
-									Premium
-								</Button>
-								<Button
-									variant="contained"
-									color="primary"
-									name="plan"
-									className={classes.margin}
-									value={this.state.plans[0].id}
-									onClick={e => this.handleChange(e)}>
-									Pro
-								</Button>
-							</MuiThemeProvider>
+								{this.props.plans.map(plan => {
+									return (
+										<Button
+											key={plan.created}
+											variant="contained"
+											color="primary"
+											name="plan"
+											className={classes.button}
+											value={plan.id}
+											onClick={e => this.handleChange(e)}>
+											{plan.nickname}
+										</Button>
+									);
+								})}
+							</div>
 						</FormControl>
 						{this.state.paymentToggle ? (
 							<FormControl component="fieldset" className={classes.formControl}>
-								<TextField
-									id="name"
-									name="billingName"
-									label="Name"
-									className={classes.textField}
-									value={this.state.name}
-									onChange={e => this.handleChange(e)}
-									margin="normal"
-									placeholder="Jenny Rosen"
-									required
-								/>
-
-								<TextField
-									id="email"
-									name="billingEmail"
-									label="email"
-									className={classes.textField}
-									value={this.state.name}
-									onChange={e => this.handleChange(e)}
-									margin="normal"
-									placeholder="jenny@email.com"
-									required
-								/>
 								<CardElement style={{ base: { fontSize: '18px' } }} />
 							</FormControl>
 						) : (
@@ -223,14 +183,44 @@ class CheckoutForm extends Component {
 					) : (
 						<span />
 					)}
+
+					{/* Unsubscribe Modal */}
+					<Modal
+						aria-labelledby="simple-modal-title"
+						aria-describedby="simple-modal-description"
+						open={this.state.open}
+						onClose={this.handleClose}>
+						<UnsubscribeModal handleClose={this.handleClose} unsub={this.unsub} />
+					</Modal>
 				</div>
 			);
 		}
 	}
 }
 
+const mapStateToProps = state => {
+	return {
+		plans: state.stripeReducer.plans,
+		plan: state.stripeReducer.plan,
+		stripeLoading: state.stripeReducer.isLoading,
+		userLoading: state.userReducer.isLoading,
+		userProfile: state.userReducer.userProfile.user,
+		userError: state.userReducer.error,
+		stripeError: state.stripeReducer.error,
+	};
+};
+
 CheckoutForm.propTypes = {
 	classes: PropTypes.object.isRequired,
 };
 
-export default injectStripe(withStyles(styles)(CheckoutForm));
+export default connect(
+	mapStateToProps,
+	{
+		getPlans,
+		getCustomersPlan,
+		unsubscribe,
+		submit,
+		getUser,
+	}
+)(injectStripe(withStyles(styles)(CheckoutForm)));

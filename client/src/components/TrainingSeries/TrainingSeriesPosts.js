@@ -9,7 +9,8 @@ import { connect } from "react-redux";
 import {
   getTrainingSeriesPosts,
   createAPost,
-  editPost
+  editPost,
+  deletePost
 } from "../../store/actions";
 
 //PropTypes
@@ -19,7 +20,6 @@ import PropTypes from "prop-types";
 import Button from "@material-ui/core/Button";
 
 class TrainingSeriesPosts extends React.Component {
-
   componentDidMount() {
     this.getTrainingSeriesWithPosts(this.props.match.params.id);
   }
@@ -27,6 +27,12 @@ class TrainingSeriesPosts extends React.Component {
   getTrainingSeriesWithPosts = id => {
     this.props.getTrainingSeriesPosts(id);
   };
+
+  deletePost = (e, id) => {
+    e.preventDefault();
+    console.log(id);
+    this.props.deletePost(id);
+  }
 
   render() {
     return (
@@ -53,6 +59,7 @@ class TrainingSeriesPosts extends React.Component {
                     editPost={this.props.editPost}
                     modalType="edit"
                   />
+                  <Button onClick={e => this.deletePost(e, post.postID)}>Delete Post</Button>
                 </div>
               ))}
             </div>
@@ -73,5 +80,5 @@ TrainingSeriesPosts.propTypes = {};
 
 export default connect(
   mapStateToProps,
-  { getTrainingSeriesPosts, createAPost, editPost }
+  { getTrainingSeriesPosts, createAPost, editPost, deletePost }
 )(TrainingSeriesPosts);
