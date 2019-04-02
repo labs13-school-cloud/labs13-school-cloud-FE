@@ -1,21 +1,18 @@
 import React, { Component } from 'react';
 import { CardElement, injectStripe } from 'react-stripe-elements';
 import PropTypes from 'prop-types';
-import axios from 'axios';
 import { connect } from 'react-redux';
 import { getPlans, getCustomersPlan, unsubscribe, submit } from '../../store/actions/';
 import { getUser } from '../../store/actions/userActions';
 
 import {
 	withStyles,
-	createMuiTheme,
 	FormControl,
 	FormLabel,
 	TextField,
 	Button,
 	CircularProgress,
 } from '@material-ui/core/';
-import green from '@material-ui/core/colors/green';
 
 const styles = theme => ({
 	root: {
@@ -46,16 +43,9 @@ const styles = theme => ({
 
 	buttonLayout: { display: 'flex' },
 	button: { margin: 5 },
-	progress: { margin: '0 auto' },
+	progress: { margin: '20px auto', maxWidth: 40, width: 40 },
 });
-const theme = createMuiTheme({
-	palette: {
-		primary: green,
-	},
-	typography: {
-		useNextVariants: true,
-	},
-});
+
 class CheckoutForm extends Component {
 	constructor(props) {
 		super(props);
@@ -135,8 +125,12 @@ class CheckoutForm extends Component {
 		}
 
 		if (this.state.complete) return <h1>Purchase Complete</h1>;
-		if (this.props.isLoading) {
-			return <CircularProgress className={classes.progress} />;
+		if (this.props.stripeLoading || this.props.userLoading) {
+			return (
+				<div className={classes.progress}>
+					<CircularProgress />
+				</div>
+			);
 		} else {
 			return (
 				<div className={classes.root}>
@@ -211,7 +205,8 @@ const mapStateToProps = state => {
 	return {
 		plans: state.stripeReducer.plans,
 		plan: state.stripeReducer.plan,
-		isLoading: state.stripeReducer.isLoading,
+		stripeLoading: state.stripeReducer.isLoading,
+		userLoading: state.userReducer.isLoading,
 		userProfile: state.userReducer.userProfile.user,
 		userError: state.userReducer.error,
 		stripeError: state.stripeReducer.error,
