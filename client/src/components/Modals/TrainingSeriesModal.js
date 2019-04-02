@@ -104,7 +104,11 @@ class TrainingSeriesModal extends React.Component {
     return (
       <>
         <div>
-          {this.props.modalType === "edit" ? <div onClick={this.handleOpen}>Edit Training Series</div> : <Button onClick={this.handleOpen}>Add New Training Series</Button>}
+          {this.props.modalType === "edit" ? (
+            <div onClick={this.handleOpen}>Edit Training Series</div>
+          ) : (
+            <Button onClick={this.handleOpen}>Add New Training Series</Button>
+          )}
         </div>
         <Modal
           aria-labelledby="simple-modal-title"

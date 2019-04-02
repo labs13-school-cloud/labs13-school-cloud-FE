@@ -1,21 +1,20 @@
 import React from "react";
+
+import DatePicker from "react-datepicker";
 //Prop Types
 import PropTypes from "prop-types";
 
 //Styles
+import "react-datepicker/dist/react-datepicker.css";
 import { withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Modal from "@material-ui/core/Modal";
 import Button from "@material-ui/core/Button";
-import BottomNavigation from "@material-ui/core/BottomNavigation";
 import AddIcon from "@material-ui/icons/Add";
 import Fab from "@material-ui/core/Fab";
 import Checkbox from "@material-ui/core/Checkbox";
 import FormLabel from "@material-ui/core/FormLabel";
-import FormControl from "@material-ui/core/FormControl";
-import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
-import FormHelperText from "@material-ui/core/FormHelperText";
 
 //REDUX
 import { connect } from "react-redux";
@@ -76,8 +75,11 @@ class UserModal extends React.Component {
 
   componentDidMount() {
     if (this.props.modalType === "assignMultiple") {
+      let d = new Date();
+      let formattedDate = d.toISOString();
       this.setState({
-        trainingSeriesID: this.props.trainingSeriesID
+        trainingSeriesID: this.props.trainingSeriesID,
+        startDate: formattedDate
       });
     } else {
       this.setState({ email: this.props.email, name: this.props.name });
@@ -118,14 +120,21 @@ class UserModal extends React.Component {
     }
   };
 
+  handleDateChange = date => {
+    let d = date;
+    this.setState({
+      startDate: d.toISOString()
+    });
+  };
+
   handleSubmit = e => {
     e.preventDefault();
     const data = {
-      trainingSeries_ID: this.state.trainingSeries_ID,
-      startDate: this.state.startDate
-    };
-    this.setState(data);
-    this.props.addTeamMemberToTrainingSeries(this.props.id, data);
+      startDate: this.state.startDate,
+      trainingSeriesID: this.state.trainingSeriesID,
+      assignments: this.state.selectedTeamMembers
+    }
+    this.props.addTeamMemberToTrainingSeries(data)
     this.handleClose();
   };
 
@@ -158,7 +167,7 @@ class UserModal extends React.Component {
 
     return (
       <div>
-        <Fab color="primary" aria-label="Add" className={classes.fab}>
+        <Fab color="primary" aria-label="Add">
           <AddIcon onClick={this.handleOpen} />
         </Fab>
 
@@ -172,7 +181,11 @@ class UserModal extends React.Component {
             <Typography variant="h6" id="modal-title">
               {modalTitle}
             </Typography>
-
+            <DatePicker
+              inline
+              selected={this.state.startDate}
+              onChange={this.handleDateChange}
+            />
             <form
               variant="body1"
               id="modal-title"
