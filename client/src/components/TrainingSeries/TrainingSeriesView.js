@@ -46,7 +46,7 @@ class TrainingSeriesView extends Component {
               />
             )}
           />
-          <Route
+          {/* <Route
             path={`${this.props.match.path}/training-series/:id`}
             render={props => (
               <TrainingSeriesPosts
@@ -54,7 +54,7 @@ class TrainingSeriesView extends Component {
                 trainingSeries={this.props.trainingSeries}
               />
             )}
-          />
+          /> */}
         </>
       </div>
     );

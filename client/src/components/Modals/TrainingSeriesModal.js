@@ -95,6 +95,7 @@ class TrainingSeriesModal extends React.Component {
       this.clearForm();
     }
     this.handleClose();
+    this.props.handleClose();
   };
 
   render() {
@@ -102,18 +103,18 @@ class TrainingSeriesModal extends React.Component {
 
     return (
       <div>
-        <Button onClick={this.handleOpen}>
+        <div onClick={this.handleOpen}><p>
           {this.props.modalType === "edit" ? "Edit " : "Add new "}
-          training series
-        </Button>
+          Training Series</p>
+        </div>
         <Modal
-          aria-labelledby='simple-modal-title'
-          aria-describedby='simple-modal-description'
+          aria-labelledby="simple-modal-title"
+          aria-describedby="simple-modal-description"
           open={this.state.open}
           onClose={this.handleClose}
         >
           <div style={getModalStyle()} className={classes.paper}>
-            <Typography variant='h6' id='modal-title'>
+            <Typography variant="h6" id="modal-title">
               {this.props.modalType === "edit" ? "Edit " : "Create a new "}
               Training series
             </Typography>
@@ -121,19 +122,19 @@ class TrainingSeriesModal extends React.Component {
               onSubmit={e => this.handleTrainingSeriesSubmit(e)}
               className={classes.container}
               noValidate
-              autoComplete='off'
+              autoComplete="off"
             >
               <TextField
-                id='standard-name'
-                label='Title'
+                id="standard-name"
+                label="Title"
                 className={classes.textField}
                 value={this.state.title}
                 onChange={this.handleChange("title")}
-                margin='normal'
+                margin="normal"
               />
               <Button
-                type='submit'
-                variant='contained'
+                type="submit"
+                variant="contained"
                 className={classes.button}
               >
                 Submit
