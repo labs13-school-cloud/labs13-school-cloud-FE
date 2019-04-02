@@ -90,12 +90,12 @@ class TrainingSeriesModal extends React.Component {
     if (this.props.modalType === "edit") {
       this.setState({ title: this.props.title });
       this.props.editTrainingSeries(this.props.trainingSeriesID, data);
+      this.props.handleClose();
     } else {
       this.props.addTrainingSeries(data);
       this.clearForm();
     }
     this.handleClose();
-    this.props.handleClose();
   };
 
   render() {
