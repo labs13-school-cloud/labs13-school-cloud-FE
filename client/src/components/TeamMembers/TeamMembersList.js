@@ -25,6 +25,6 @@ export default TeamMembersList;
 
 const ListStyles = styled.div`
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
+  flex-direction: column;
+  align-items: center;
 `;
