@@ -1,32 +1,32 @@
 // component to contain all the components related to team members
 
-import React from 'react';
+import React from "react";
 
-//API Dependency
-import axios from 'axios';
-import TeamMembersList from './TeamMembersList';
+
+//Components
+import TeamMembersList from "./TeamMembersList";
+
+import { connect } from "react-redux";
 import styled from 'styled-components';
-
-import { connect } from 'react-redux';
 import {
   getTeamMembers,
   addTeamMember,
-  deleteTeamMember,
-} from '../../store/actions';
+  deleteTeamMember
+} from "../../store/actions";
 
-import TeamMemberModal from '../Modals/TeamMemberModal';
+import TeamMemberModal from "../Modals/TeamMemberModal";
 
 class TeamMembersView extends React.Component {
   state = {
     users: [],
     profile: [],
-    teamMembers: [],
+    teamMembers: []
   };
 
   componentDidMount() {
     this.props.getTeamMembers(this.props.userId);
     this.setState({
-      teamMembers: this.props.teamMembers,
+      teamMembers: this.props.teamMembers
     });
   }
 
@@ -58,7 +58,7 @@ const mapStateToProps = state => {
     isAdding: state.teamMembersReducer.status.isAdding,
     addSuccess: state.teamMembersReducer.status.addSuccess,
     addFailed: state.teamMembersReducer.status.addFailed,
-    teamMembers: state.teamMembersReducer.teamMembers,
+    teamMembers: state.teamMembersReducer.teamMembers
   };
 };
 

@@ -10,9 +10,11 @@ import {
   DELETE_MEMBER_SUCCESS,
   EDIT_MEMBER_START,
   EDIT_MEMBER_SUCCESS,
-  EDIT_MEMBER_FAIL
+  EDIT_MEMBER_FAIL,
+  ADD_MEMBER_TO_TRAININGSERIES_START,
+  ADD_MEMBER_TO_TRAININGSERIES_SUCCESS,
+  ADD_MEMBER_TO_TRAININGSERIES_FAIL
 } from "../actions";
-import { CardActions } from "@material-ui/core";
 
 const initialState = {
   teamMembers: [],
@@ -172,6 +174,17 @@ const teamMembersReducer = (state = initialState, action) => {
         },
         error: action.payload
       };
+    case ADD_MEMBER_TO_TRAININGSERIES_START:
+      return {
+        ...state
+      };
+    case ADD_MEMBER_TO_TRAININGSERIES_SUCCESS:
+      return {
+        ...state
+      };
+    case ADD_MEMBER_TO_TRAININGSERIES_FAIL:
+      return { ...state };
+
     default:
       return state;
   }

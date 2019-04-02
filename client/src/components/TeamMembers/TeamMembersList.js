@@ -1,4 +1,4 @@
-// main page for displaying all team members
+// main page for displaying all tyarn eam members
 
 import React from "react";
 import TeamMember from "./TeamMember";

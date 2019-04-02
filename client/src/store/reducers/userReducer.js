@@ -1,13 +1,11 @@
 import {
+
 	GET_USER_START,
 	GET_USER_SUCCESS,
 	GET_USER_FAIL,
 	EDIT_USER_START,
 	EDIT_USER_SUCCESS,
 	EDIT_USER_FAIL,
-	// DELETE_USER_START,
-	// DELETE_USER_SUCCESS,
-	// DELETE_USER_FAIL,
 } from '../actions/userActions';
 import {
 	POST_SUBSCRIBE_START,
@@ -20,6 +18,7 @@ import {
 	POST_REGISTERSTRIPE_SUCCESS,
 	POST_REGISTERSTRIPE_FAIL,
 } from '../actions/stripeActions';
+
 
 const initialState = {
 	userProfile: [],

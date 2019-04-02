@@ -75,6 +75,7 @@ const styles = theme => ({
 	},
 });
 
+
 const Container = styled.div`
 	margin-top: 80px;
 `;
@@ -207,6 +208,7 @@ class ProfileView extends React.Component {
 			</Container>
 		);
 	}
+
 }
 
 const mapStateToProps = state => {

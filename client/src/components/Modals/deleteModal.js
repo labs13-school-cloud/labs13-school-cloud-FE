@@ -10,12 +10,13 @@ import Button from '@material-ui/core/Button';
 //REDUX
 import { connect } from 'react-redux';
 import {
-	deleteTrainingSeries,
-	deleteTeamMember,
-	deletePost,
-	deleteUser,
-} from '../../store/actions/';
-import { FormLabel } from '@material-ui/core';
+  deleteTrainingSeries,
+  deleteTeamMember,
+  deletePost,
+  deleteUser
+} from "../../store/actions/";
+import { FormLabel, Typography } from "@material-ui/core";
+
 
 function getModalStyle() {
 	const top = 50;
@@ -58,69 +59,75 @@ const styles = theme => ({
 });
 
 class TrainingSeriesModal extends React.Component {
-	state = {
-		open: false,
-		title: '',
-	};
+  state = {
+    open: false,
+    title: ""
+  };
 
-	handleOpen = () => {
-		this.setState({ open: true });
-	};
+  handleOpen = () => {
+    this.setState({ open: true });
+  };
 
-	handleClose = () => {
-		this.setState({ open: false });
-	};
+  handleClose = () => {
+    this.setState({ open: false });
+  };
 
-	clearForm = () => {
-		this.setState({ title: '' });
-	};
+  clearForm = () => {
+    this.setState({ title: "" });
+  };
 
-	handleDelete = () => {
-		switch (this.props.deleteType) {
-			case 'post':
-				this.props.deletePost(this.props.id);
-				break;
-			case 'teamMember':
-				this.props.deleteTeamMember(this.props.id);
-				break;
-			case 'trainingSeries':
-				this.props.deleteTrainingSeries(this.props.id);
-				break;
-			case 'user':
-				this.props.deleteUser(this.props.id);
-				// this.props.history.push("/");
-				break;
-			default:
-				break;
-		}
-		this.handleClose();
-	};
+  handleDelete = () => {
+    switch (this.props.deleteType) {
+      case "post":
+        this.props.deletePost(this.props.id);
+        break;
+      case "teamMember":
+        this.props.deleteTeamMember(this.props.id);
+        break;
+      case "trainingSeries":
+        this.props.deleteTrainingSeries(this.props.id);
+        break;
+      case "user":
+        this.props.deleteUser(this.props.id);
+        this.props.reRouteOnDelete();
+        break;
+      default:
+        break;
+    }
+    this.handleClose();
+  };
 
-	render() {
-		const { classes } = this.props;
+  render() {
+    const { classes } = this.props;
 
-		return (
-			<div>
-				<Button onClick={this.handleOpen}>Delete</Button>
-				<Modal
-					aria-labelledby="simple-modal-title"
-					aria-describedby="simple-modal-description"
-					open={this.state.open}
-					onClose={this.handleClose}>
-					<div style={getModalStyle()} className={classes.paper}>
-						<FormLabel>Are you sure you want to delete this?</FormLabel>
-						<Button
-							onClick={() => this.handleDelete()}
-							type="submit"
-							variant="contained"
-							className={classes.button}>
-							Delete Item
-						</Button>
-					</div>
-				</Modal>
-			</div>
-		);
-	}
+    return (
+      <div>
+        {this.props.deleteType === "teamMember" ? (
+          <Typography onClick={this.handleOpen}>Delete</Typography>
+        ) : (
+          <Button onClick={this.handleOpen}>Delete</Button>
+        )}
+        <Modal
+          aria-labelledby='simple-modal-title'
+          aria-describedby='simple-modal-description'
+          open={this.state.open}
+          onClose={this.handleClose}
+        >
+          <div style={getModalStyle()} className={classes.paper}>
+            <FormLabel>Are you sure you want to delete this?</FormLabel>
+            <Button
+              onClick={() => this.handleDelete()}
+              type='submit'
+              variant='contained'
+              className={classes.button}
+            >
+              Delete Item
+            </Button>
+          </div>
+        </Modal>
+      </div>
+    );
+  }
 }
 
 TrainingSeriesModal.propTypes = {
