@@ -1,19 +1,13 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 //Components
-// import AppBar from '../AppBar/AppBar';
 import UserModal from '../Modals/userModal';
-// import DeleteModal from '../Modals/deleteModal';
-
-//Stripe
 import StripeView from '../Stripe/StripeView';
-
-//Auth
 import { logout, getUserProfile } from '../../Auth/Auth';
 import Authentication from '../authenticate/authenticate';
 
 //State Management
-import { connect } from 'react-redux';
 import { getUser, editUser, deleteUser } from '../../store/actions/userActions';
 
 //Styling
@@ -21,11 +15,16 @@ import {
 	Button,
 	Card,
 	CardActions,
-	CardMedia,
 	Typography,
 	withStyles,
 	Modal,
+	Avatar,
+	IconButton,
 } from '@material-ui/core';
+
+import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit';
+
 import styled from 'styled-components';
 
 function rand() {
@@ -55,6 +54,12 @@ const styles = theme => ({
 	card: {
 		maxWidth: 800,
 		margin: '0 auto',
+		padding: 10,
+	},
+	payment: {
+		maxWidth: 800,
+		margin: '10px auto',
+		padding: 10,
 	},
 	cardContent: {
 		backgroundColor: '#E8E9EB',
@@ -62,6 +67,11 @@ const styles = theme => ({
 	media: {
 		height: 200,
 		width: 200,
+	},
+	bigAvatar: {
+		margin: 10,
+		width: 150,
+		height: 150,
 	},
 });
 
@@ -135,14 +145,14 @@ class ProfileView extends React.Component {
 								<Typography gutterBottom variant="h5" component="h1">
 									{user.name}
 								</Typography>
-
-								<CardMedia
-									className={classes.media}
-									image={this.state.googleProfile.picture}
-								/>
-								<Typography gutterBottom variant="h5" component="h5">
+								<Typography variant="subtitle1" gutterBottom>
 									{user.email}
 								</Typography>
+								<Avatar
+									alt="Remy Sharp"
+									src={this.state.googleProfile.picture}
+									className={classes.bigAvatar}
+								/>
 								<Typography gutterBottom variant="h5" component="h5">
 									<div>Account Type: {accountType}</div>
 								</Typography>
@@ -153,13 +163,19 @@ class ProfileView extends React.Component {
 										name={user.name}
 										id={user.userID}
 									/>
-									{/* Buton for deleting */}
-									{/* <DeleteModal deleteType="user" id={user.userID} /> */}
-									<Button onClick={this.handleOpen}>Delete Account</Button>
+									{/* Button for deleting */}
+									<IconButton
+										aria-label="Delete"
+										className={classes.margin}
+										onClick={this.handleOpen}>
+										<DeleteIcon />
+									</IconButton>
 								</CardActions>
 							</Card>
 						</div>
-						<StripeView user={this.state.googleProfile} />
+						<Card className={classes.payment}>
+							<StripeView user={this.state.googleProfile} />
+						</Card>
 					</>
 				)}
 				<Modal

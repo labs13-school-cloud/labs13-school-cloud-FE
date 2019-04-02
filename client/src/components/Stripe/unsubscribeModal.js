@@ -26,6 +26,12 @@ const styles = theme => ({
 		padding: theme.spacing.unit * 4,
 		outline: 'none',
 	},
+	buttonContainer: {
+		margin: '0 auto',
+	},
+	button: {
+		margin: 5,
+	},
 });
 class UnsubscribeModal extends React.Component {
 	render() {
@@ -36,10 +42,11 @@ class UnsubscribeModal extends React.Component {
 					Are you sure you want to unsubscribe?
 				</Typography>
 
-				<div>
+				<div className={classes.buttonContainer}>
 					<Button
+						className={classes.button}
 						variant="contained"
-						color="secondary"
+						color="default"
 						onClick={() => {
 							this.props.unsub(
 								this.props.userProfile.userID,
@@ -49,8 +56,9 @@ class UnsubscribeModal extends React.Component {
 						Yes
 					</Button>
 					<Button
+						className={classes.button}
 						variant="contained"
-						color="secondary"
+						color="default"
 						onClick={() => {
 							this.props.handleClose();
 						}}>
