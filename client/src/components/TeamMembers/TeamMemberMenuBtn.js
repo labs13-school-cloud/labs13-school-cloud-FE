@@ -23,32 +23,28 @@ class TeamMemberMenuBtn extends React.Component {
     this.setState({ anchorEl: null });
   };
 
-  routeToMemberPage = e => {
+  routeToMemberPage = (e, id) => {
     e.preventDefault();
-    this.props.history.push({
-      pathname: "/team-member",
-      state: {
-        teamMember: this.props.teamMember
-      }
-    });
+    this.props.history.push(`/team-member/${id}`);
   };
 
   render() {
+    console.log(this.props);
     const { anchorEl } = this.state;
     const open = Boolean(anchorEl);
 
     return (
       <div>
         <IconButton
-          aria-label="More"
+          aria-label='More'
           aria-owns={open ? "simple-menu" : undefined}
-          aria-haspopup="true"
+          aria-haspopup='true'
           onClick={this.handleClick}
         >
           <MoreVertIcon />
         </IconButton>
         <Menu
-          id="long-menu"
+          id='long-menu'
           anchorEl={anchorEl}
           open={open}
           onClose={this.handleClose}
@@ -59,10 +55,16 @@ class TeamMemberMenuBtn extends React.Component {
             }
           }}
         >
-          <MenuItem onClick={e => this.routeToMemberPage(e)}>Edit</MenuItem>
+          <MenuItem
+            onClick={e =>
+              this.routeToMemberPage(e, this.props.teamMember.teamMemberID)
+            }
+          >
+            Edit
+          </MenuItem>
           <MenuItem>
             <DeleteModal
-              deleteType="teamMember"
+              deleteType='teamMember'
               id={this.props.teamMember.teamMemberID}
             />
           </MenuItem>

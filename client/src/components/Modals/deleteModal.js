@@ -15,7 +15,7 @@ import {
   deletePost,
   deleteUser
 } from "../../store/actions/";
-import { FormLabel } from "@material-ui/core";
+import { FormLabel, Typography } from "@material-ui/core";
 
 function getModalStyle() {
   const top = 50;
@@ -101,7 +101,11 @@ class TrainingSeriesModal extends React.Component {
 
     return (
       <div>
-        <Button onClick={this.handleOpen}>Delete</Button>
+        {this.props.deleteType === "teamMember" ? (
+          <Typography onClick={this.handleOpen}>Delete</Typography>
+        ) : (
+          <Button onClick={this.handleOpen}>Delete</Button>
+        )}
         <Modal
           aria-labelledby='simple-modal-title'
           aria-describedby='simple-modal-description'
