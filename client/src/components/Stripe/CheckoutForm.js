@@ -9,12 +9,39 @@ import {
 	withStyles,
 	FormControl,
 	FormLabel,
-	TextField,
+	// TextField,
 	Button,
 	CircularProgress,
+	Modal,
+	Typography
 } from '@material-ui/core/';
 
+function rand() {
+	return Math.round(Math.random() * 20) - 10;
+}
+
+function getModalStyle() {
+	const top = 50 + rand();
+	const left = 50 + rand();
+
+	return {
+		top: `${top}%`,
+		left: `${left}%`,
+		transform: `translate(-${top}%, -${left}%)`,
+	};
+}
+
+
 const styles = theme => ({
+	paper: {
+		position: 'absolute',
+		width: theme.spacing.unit * 50,
+		backgroundColor: theme.palette.background.paper,
+		boxShadow: theme.shadows[5],
+		padding: theme.spacing.unit * 4,
+		outline: 'none',
+	},
+
 	root: {
 		margin: '20 auto',
 		width: '100%',
@@ -58,8 +85,18 @@ class CheckoutForm extends Component {
 			paymentToggle: false,
 			pro: false,
 			premium: false,
+			open: false,
+
 		};
 	}
+	handleOpen = () => {
+		this.setState({ open: true });
+	};
+
+	handleClose = () => {
+		this.setState({ open: false });
+	};
+
 	componentDidMount = () => {
 		this.props.getPlans();
 		// const stripe = this.props.userProfile.stripe;
@@ -92,6 +129,14 @@ class CheckoutForm extends Component {
 			paymentToggle: false,
 		});
 	};
+	 unsub=(userID, stripe)=>{
+		this.props.unsubscribe(
+			userID,
+			stripe
+		)
+		this.setState({ open: false });
+
+	}
 
 	render() {
 		const { classes } = this.props;
@@ -102,11 +147,7 @@ class CheckoutForm extends Component {
 					variant="contained"
 					color="primary"
 					className={classes.button}
-					onClick={() =>
-						this.props.unsubscribe(
-							this.props.userProfile.userID,
-							this.props.userProfile.stripe
-						)
+					onClick={this.handleOpen
 					}>
 					Unsubscribe
 				</Button>
@@ -159,29 +200,6 @@ class CheckoutForm extends Component {
 						</FormControl>
 						{this.state.paymentToggle ? (
 							<FormControl component="fieldset" className={classes.formControl}>
-								{/* <TextField
-									id="name"
-									name="billingName"
-									label="Name"
-									className={classes.textField}
-									value={this.state.name}
-									onChange={e => this.handleChange(e)}
-									margin="normal"
-									placeholder="Jenny Rosen"
-									required
-								/>
-
-								<TextField
-									id="email"
-									name="billingEmail"
-									label="email"
-									className={classes.textField}
-									value={this.state.name}
-									onChange={e => this.handleChange(e)}
-									margin="normal"
-									placeholder="jenny@email.com"
-									required
-								/> */}
 								<CardElement style={{ base: { fontSize: '18px' } }} />
 							</FormControl>
 						) : (
@@ -195,6 +213,39 @@ class CheckoutForm extends Component {
 					) : (
 						<span />
 					)}
+									<Modal
+					aria-labelledby="simple-modal-title"
+					aria-describedby="simple-modal-description"
+					open={this.state.open}
+					onClose={this.handleClose}>
+					<div style={getModalStyle()} className={classes.paper}>
+						<Typography variant="h6" id="modal-title">
+							Are you sure you want to unsubscribe?
+						</Typography>
+						
+							<div>
+							<Button
+								variant="contained"
+								color="secondary"
+								onClick={() => {
+									this.unsub(this.props.userProfile.userID,
+										this.props.userProfile.stripe)
+									
+								}}>
+								Yes
+							</Button>
+							<Button
+								variant="contained"
+								color="secondary"
+								onClick={() => {
+									this.handleClose();
+								}}>
+								No
+							</Button>
+						</div>
+						</div>
+				</Modal>
+
 				</div>
 			);
 		}
