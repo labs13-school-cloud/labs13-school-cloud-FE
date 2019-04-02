@@ -102,10 +102,9 @@ class TrainingSeriesModal extends React.Component {
     const { classes } = this.props;
 
     return (
-      <div>
-        <div onClick={this.handleOpen}><p>
-          {this.props.modalType === "edit" ? "Edit " : "Add new "}
-          Training Series</p>
+      <>
+        <div>
+          {this.props.modalType === "edit" ? <div onClick={this.handleOpen}>Edit Training Series</div> : <Button onClick={this.handleOpen}>Add New Training Series</Button>}
         </div>
         <Modal
           aria-labelledby="simple-modal-title"
@@ -142,7 +141,7 @@ class TrainingSeriesModal extends React.Component {
             </form>
           </div>
         </Modal>
-      </div>
+      </>
     );
   }
 }

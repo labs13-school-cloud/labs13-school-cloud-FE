@@ -71,6 +71,5 @@ export default connect(
 const TeamMembersContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 33%;
-  border: 1px solid black;
+  margin: 0 20px;
 `;

@@ -139,7 +139,6 @@ class TeamMemberModal extends React.Component {
 
   render() {
     const { classes } = this.props;
-    console.log("MODAL TS", this.props.trainingSeries);
     return (
       <div>
         <Button onClick={this.handleOpen}>

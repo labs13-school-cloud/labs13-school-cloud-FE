@@ -16,6 +16,7 @@ class TrainingSeriesSubView extends Component {
           deleteTrainingSeries={this.props.deleteTrainingSeries}
           trainingSeries={this.props.trainingSeries}
           match={this.props.match}
+          userID={this.props.userID}
         />
       </>
     );
