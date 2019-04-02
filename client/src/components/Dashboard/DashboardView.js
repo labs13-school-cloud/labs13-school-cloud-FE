@@ -12,7 +12,7 @@ import TeamMembersView from "../TeamMembers/TeamMembersView";
 import TrainingSeriesView from "../TrainingSeries/TrainingSeriesView";
 import { NavigationView } from "../Navigation";
 import ProgressCircle from "../Progress/ProgressCircle";
-import TeamMemberPage from "../TeamMembers/TeamMemberPage";
+import TeamMemberPageView from "../TeamMembers/TeamMemberPage/TeamMemberPageView";
 import ProfileView from "../Profile/ProfileView";
 import AppBar from "../AppBar/AppBar";
 
@@ -58,7 +58,7 @@ class Dashboard extends React.Component {
                 <Route
                   exact
                   path="/home/team-member/:id"
-                  component={TeamMemberPage}
+                  component={TeamMemberPageView}
                 />
               </Router>
 

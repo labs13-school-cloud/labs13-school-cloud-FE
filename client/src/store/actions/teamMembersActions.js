@@ -99,7 +99,11 @@ export const getTeamMemberByID = id => dispatch => {
   axios
     .get(`${baseUrl}/team-members/${id}`)
     .then(res => {
-      dispatch({ type: FETCH_SINGLE_MEMBER_SUCCESS, payload: res.data });
+      console.log("ACTIONS", res.data);
+      dispatch({
+        type: FETCH_SINGLE_MEMBER_SUCCESS,
+        payload: res.data
+      });
     })
     .catch(err => dispatch({ type: FETCH_SINGLE_MEMBER_FAIL, error: err }));
 };
