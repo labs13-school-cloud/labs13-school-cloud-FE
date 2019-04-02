@@ -13,7 +13,10 @@ import {
   EDIT_MEMBER_FAIL,
   ADD_MEMBER_TO_TRAININGSERIES_START,
   ADD_MEMBER_TO_TRAININGSERIES_SUCCESS,
-  ADD_MEMBER_TO_TRAININGSERIES_FAIL
+  ADD_MEMBER_TO_TRAININGSERIES_FAIL,
+  FETCH_SINGLE_MEMBER_START,
+  FETCH_SINGLE_MEMBER_SUCCESS,
+  FETCH_SINGLE_MEMBER_FAIL
 } from "../actions";
 
 const initialState = {
@@ -68,6 +71,38 @@ const teamMembersReducer = (state = initialState, action) => {
           loadFailed: true
         }
       };
+    case FETCH_SINGLE_MEMBER_START:
+      return {
+        ...state,
+        status: {
+          ...state.status,
+          isLoading: true,
+          loadSuccess: false,
+          loadFailed: false
+        }
+      };
+    case FETCH_SINGLE_MEMBER_SUCCESS:
+      return {
+        ...state,
+        teamMember: action.payload,
+        status: {
+          ...state.status,
+          isLoading: false,
+          loadSuccess: true,
+          loadFailed: false
+        }
+      };
+    case FETCH_SINGLE_MEMBER_FAIL: {
+      return {
+        ...state,
+        state: {
+          ...state.status,
+          isLoading: false,
+          loadSuccess: false,
+          loadFailed: true
+        }
+      };
+    }
     case ADD_MEMBER_START:
       return {
         ...state,

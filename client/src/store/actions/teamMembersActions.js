@@ -4,6 +4,10 @@ export const FETCH_TEAM_START = "FETCH_TEAM_START";
 export const FETCH_TEAM_SUCCESS = "FETCH_TEAM_SUCCESS";
 export const FETCH_TEAM_FAIL = "FETCH_TEAM_FAIL";
 
+export const FETCH_SINGLE_MEMBER_START = "FETCH_SINGLE_MEMBER_START";
+export const FETCH_SINGLE_MEMBER_SUCCESS = "FETCH_SINGLE_MEMBER_SUCCESS";
+export const FETCH_SINGLE_MEMBER_FAIL = "FETCH_SINGLE_MEMBER_FAIL";
+
 export const ADD_MEMBER_START = "ADD_MEMBER_START";
 export const ADD_MEMBER_SUCCESS = "ADD_MEMBER_SUCCESS";
 export const ADD_MEMBER_FAIL = " ADD_MEMBER_FAIL";
@@ -88,4 +92,14 @@ export const addTeamMemberToTrainingSeries = data => dispatch => {
     .catch(err =>
       dispatch({ type: ADD_MEMBER_TO_TRAININGSERIES_FAIL, error: err })
     );
+};
+
+export const getTeamMemberByID = id => dispatch => {
+  dispatch({ type: FETCH_SINGLE_MEMBER_START });
+  axios
+    .get(`${baseUrl}/team-members/${id}`)
+    .then(res => {
+      dispatch({ type: FETCH_SINGLE_MEMBER_SUCCESS, payload: res.data });
+    })
+    .catch(err => dispatch({ type: FETCH_SINGLE_MEMBER_FAIL, error: err }));
 };

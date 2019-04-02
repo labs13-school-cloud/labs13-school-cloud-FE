@@ -22,8 +22,8 @@ class AppBar extends Component {
             <>
               <NavigationLogo src={Logo} />
               <NavLinkItems>
-                <Link to='/home'>Dashboard</Link>
-                <Link to='/pricing'>Pricing</Link>
+                <Link to="/home">Dashboard</Link>
+                <Link to="/pricing">Pricing</Link>
               </NavLinkItems>
               <a onClick={() => login()}>Login</a>
             </>
@@ -31,11 +31,11 @@ class AppBar extends Component {
             <>
               <NavigationLogo src={Logo} />
               <NavLinkItems>
-                <Link to='/home'>Dashboard</Link>
-                <Link to='/pricing'>Pricing</Link>
+                <Link to="/home">Dashboard</Link>
+                <Link to="/pricing">Pricing</Link>
               </NavLinkItems>
               <RightItemsContainer>
-                <Link to='/profile'>
+                <Link to="/home/profile">
                   {" "}
                   <Avatar />
                 </Link>

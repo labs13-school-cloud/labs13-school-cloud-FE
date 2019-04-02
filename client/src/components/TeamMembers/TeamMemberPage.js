@@ -14,7 +14,11 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import Button from "@material-ui/core/Button";
 
 // Team Member Actions
-import { editTeamMember, getTrainingSeries } from "../../store/actions";
+import {
+  editTeamMember,
+  getTrainingSeries,
+  getTeamMemberByID
+} from "../../store/actions";
 
 //Components
 import AddToTrainingSeriesModal from "../Modals/addToTrainingSeriesModal";
@@ -56,63 +60,74 @@ class TeamMemberPage extends React.Component {
       email: "",
       phoneNumber: "",
       user_ID: ""
-    }
+    },
+    assignments: [],
+    trainingSeries: []
   };
 
   componentDidMount() {
     this.props.getTrainingSeries();
-    if (this.props.teamMember) {
-      this.setState({ teamMember: this.props.teamMember });
-    }
+    this.props.getTeamMemberByID(this.props.match.params.id);
+    this.props.loadSuccess && this.getTeamMember();
   }
 
   componentDidUpdate(prevProps) {
-    // populates form with selected users information
     if (prevProps.isEditing && this.props.teamMember) {
       this.setState({ teamMember: this.props.teamMember });
     }
   }
 
+  getTeamMember = () => {
+    const { teamMember, assignments } = this.props.teamMember;
+    console.log("TEAM MEMBER", this.props.teamMember);
+
+    this.setState({
+      teamMember: teamMember,
+      assignments: assignments
+    });
+  };
+
   render() {
     const { classes } = this.props;
 
-    console.log("MEMBER PAGE PROPS", this.props);
+    console.log("MEMBER PAGE STATE", this.state);
+
     return (
       <MainContainer>
         <form className={classes.form}>
           <Button
-            variant='contained'
-            color='primary'
+            variant="contained"
+            color="primary"
             className={classes.button}
           >
-            Primary
+            Save
           </Button>
           <Paper className={classes.root}>
             <Typography>Team Member Info</Typography>
             <MemberInfoContainer>
               <TextField
-                id='standard-name'
-                label='first name'
+                id="standard-name"
+                label="first name"
                 className={classes.textField}
                 //   value={this.state.teamMember.firstName}
                 //   onChange={this.handleChange("firstName")}
-                margin='normal'
+                margin="normal"
               />
               <TextField
-                id='standard-name'
-                label='last name'
+                id="standard-name"
+                label="last name"
                 className={classes.textField}
                 //   value={this.state.teamMember.lastName}
                 //   onChange={this.handleChange("lastName")}
-                margin='normal'
+                margin="normal"
               />
               <TextField
-                id='standard-name'
-                label='job description'
+                id="standard-name"
+                label="job description"
                 className={classes.textField}
                 //   value={this.state.teamMember.jobDescription}
                 //   onChange={this.handleChange("jobDescription")}
-                margin='normal'
+                margin="normal"
               />
             </MemberInfoContainer>
           </Paper>
@@ -120,26 +135,26 @@ class TeamMemberPage extends React.Component {
             <Typography>Contact Info</Typography>
             <MemberInfoContainer>
               <TextField
-                id='standard-name'
-                label='email'
+                id="standard-name"
+                label="email"
                 className={classes.textField}
                 // value={this.state.teamMember.email}
                 // onChange={this.handleChange("email")}
-                margin='normal'
+                margin="normal"
               />
               <TextField
-                id='standard-name'
-                label='phone'
+                id="standard-name"
+                label="phone"
                 className={classes.textField}
                 // value={this.state.teamMember.phoneNumber}
                 // onChange={this.handleChange("phoneNumber")}
-                margin='normal'
+                margin="normal"
               />
 
               <TextField
-                id='date'
-                label='start date'
-                type='date'
+                id="date"
+                label="start date"
+                type="date"
                 // defaultValue="2017-05-24"
                 className={classes.textField}
                 // onChange={this.handleDate("startDate")}
@@ -174,13 +189,19 @@ const MemberInfoContainer = styled.div`
 const mapStateToProps = state => {
   return {
     isEditing: state.teamMembersReducer.status.isEditing,
-    trainingSeries: state.trainingSeriesReducer.trainingSeries
+    isLoading: state.teamMembersReducer.status.isLoading,
+    loadSuccess: state.teamMembersReducer.status.loadSuccess,
+    loadFailed: state.teamMembersReducer.status.loadFailed,
+    trainingSeries: state.trainingSeriesReducer.trainingSeries,
+    teamMember: state.teamMembersReducer.teamMember
   };
 };
 
 export default connect(
   mapStateToProps,
   {
-    getTrainingSeries
+    getTrainingSeries,
+    getTeamMemberByID,
+    editTeamMember
   }
 )(withStyles(styles)(TeamMemberPage));
