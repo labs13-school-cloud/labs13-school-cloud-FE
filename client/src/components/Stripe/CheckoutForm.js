@@ -1,23 +1,30 @@
 import React, { Component } from 'react';
 import { CardElement, injectStripe } from 'react-stripe-elements';
 import PropTypes from 'prop-types';
-import axios from 'axios';
 import { connect } from 'react-redux';
 import { getPlans, getCustomersPlan, unsubscribe, submit } from '../../store/actions/';
 import { getUser } from '../../store/actions/userActions';
 
 import {
 	withStyles,
-	createMuiTheme,
 	FormControl,
 	FormLabel,
-	TextField,
 	Button,
 	CircularProgress,
+	Modal,
 } from '@material-ui/core/';
-import green from '@material-ui/core/colors/green';
+import UnsubscribeModal from './unsubscribeModal';
 
 const styles = theme => ({
+	paper: {
+		position: 'absolute',
+		width: theme.spacing.unit * 50,
+		backgroundColor: theme.palette.background.paper,
+		boxShadow: theme.shadows[5],
+		padding: theme.spacing.unit * 4,
+		outline: 'none',
+	},
+
 	root: {
 		margin: '20 auto',
 		width: '100%',
@@ -46,16 +53,9 @@ const styles = theme => ({
 
 	buttonLayout: { display: 'flex' },
 	button: { margin: 5 },
-	progress: { margin: '0 auto' },
+	progress: { margin: '20px auto', maxWidth: 40, width: 40 },
 });
-const theme = createMuiTheme({
-	palette: {
-		primary: green,
-	},
-	typography: {
-		useNextVariants: true,
-	},
-});
+
 class CheckoutForm extends Component {
 	constructor(props) {
 		super(props);
@@ -68,12 +68,19 @@ class CheckoutForm extends Component {
 			paymentToggle: false,
 			pro: false,
 			premium: false,
+			open: false,
 		};
 	}
+	handleOpen = () => {
+		this.setState({ open: true });
+	};
+
+	handleClose = () => {
+		this.setState({ open: false });
+	};
+
 	componentDidMount = () => {
 		this.props.getPlans();
-		// const stripe = this.props.userProfile.stripe;
-		// this.props.getCustomersPlan(this.props.stripe); // doesn't work, not getting user stripe id
 	};
 	handleChange = e => {
 		e.preventDefault();
@@ -102,6 +109,10 @@ class CheckoutForm extends Component {
 			paymentToggle: false,
 		});
 	};
+	unsub = (userID, stripe) => {
+		this.props.unsubscribe(userID, stripe);
+		this.setState({ open: false });
+	};
 
 	render() {
 		const { classes } = this.props;
@@ -112,31 +123,25 @@ class CheckoutForm extends Component {
 					variant="contained"
 					color="primary"
 					className={classes.button}
-					onClick={() =>
-						this.props.unsubscribe(
-							this.props.userProfile.userID,
-							this.props.userProfile.stripe
-						)
-					}>
+					onClick={this.handleOpen}>
 					Unsubscribe
 				</Button>
 			);
 		} else {
 			unsubscribe = (
-				<Button
-					disabled
-					variant="contained"
-					color="primary"
-					className={classes.button}
-					onClick={() => this.unsubscribe()}>
+				<Button disabled variant="contained" color="primary" className={classes.button}>
 					Unsubscribe
 				</Button>
 			);
 		}
 
 		if (this.state.complete) return <h1>Purchase Complete</h1>;
-		if (this.props.isLoading) {
-			return <CircularProgress className={classes.progress} />;
+		if (this.props.stripeLoading || this.props.userLoading) {
+			return (
+				<div className={classes.progress}>
+					<CircularProgress />
+				</div>
+			);
 		} else {
 			return (
 				<div className={classes.root}>
@@ -165,29 +170,6 @@ class CheckoutForm extends Component {
 						</FormControl>
 						{this.state.paymentToggle ? (
 							<FormControl component="fieldset" className={classes.formControl}>
-								{/* <TextField
-									id="name"
-									name="billingName"
-									label="Name"
-									className={classes.textField}
-									value={this.state.name}
-									onChange={e => this.handleChange(e)}
-									margin="normal"
-									placeholder="Jenny Rosen"
-									required
-								/>
-
-								<TextField
-									id="email"
-									name="billingEmail"
-									label="email"
-									className={classes.textField}
-									value={this.state.name}
-									onChange={e => this.handleChange(e)}
-									margin="normal"
-									placeholder="jenny@email.com"
-									required
-								/> */}
 								<CardElement style={{ base: { fontSize: '18px' } }} />
 							</FormControl>
 						) : (
@@ -201,6 +183,15 @@ class CheckoutForm extends Component {
 					) : (
 						<span />
 					)}
+
+					{/* Unsubscribe Modal */}
+					<Modal
+						aria-labelledby="simple-modal-title"
+						aria-describedby="simple-modal-description"
+						open={this.state.open}
+						onClose={this.handleClose}>
+						<UnsubscribeModal handleClose={this.handleClose} unsub={this.unsub} />
+					</Modal>
 				</div>
 			);
 		}
@@ -211,7 +202,8 @@ const mapStateToProps = state => {
 	return {
 		plans: state.stripeReducer.plans,
 		plan: state.stripeReducer.plan,
-		isLoading: state.stripeReducer.isLoading,
+		stripeLoading: state.stripeReducer.isLoading,
+		userLoading: state.userReducer.isLoading,
 		userProfile: state.userReducer.userProfile.user,
 		userError: state.userReducer.error,
 		stripeError: state.stripeReducer.error,
