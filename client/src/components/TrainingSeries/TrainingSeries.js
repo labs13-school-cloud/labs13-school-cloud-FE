@@ -1,18 +1,19 @@
 // displays training series card
 import React from 'react';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 //PropTypes
 import PropTypes from 'prop-types';
 
 //Styling
-import {withStyles} from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
+import SlideDownModal from '../Modals/SlideDownModal';
 import TrainingSeriesModal from '../Modals/TrainingSeriesModal';
 //Customized Styling
 const styles = {
@@ -27,7 +28,7 @@ const styles = {
 };
 
 function SeriesCard(props) {
-  const {classes} = props;
+  const { classes } = props;
   return (
     <Card className={classes.card}>
       <CardContent>
@@ -39,32 +40,24 @@ function SeriesCard(props) {
         >
           {props.data.title}
         </Typography>
-        <Typography>test data</Typography>
       </CardContent>
       <CardActions>
         <Link
           to={`${props.match.url}/training-series/${
             props.data.trainingSeriesID
-          }`}
+            }`}
         >
           <Button size="small">View Posts</Button>
         </Link>
-        <TrainingSeriesModal
+        {/* <TrainingSeriesModal
           trainingSeriesID={props.data.trainingSeriesID}
           title={props.data.title}
           modalType="edit"
-        />
+        /> */}
         {/* <Button onClick={() => props.openModal()} size='small'>
           Edit
         </Button> */}
-        <Button
-          onClick={() =>
-            props.deleteTrainingSeries(props.data.trainingSeriesID)
-          }
-          size="small"
-        >
-          Delete
-        </Button>
+        <SlideDownModal deleteTrainingSeries={props.deleteTrainingSeries} data={props.data} />
       </CardActions>
     </Card>
   );

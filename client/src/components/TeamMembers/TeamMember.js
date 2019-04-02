@@ -43,8 +43,6 @@ function TeamMember(props) {
           {firstName + " " + lastName}
         </Typography>
         <Typography>Job: {jobDescription}</Typography>
-        <Typography>Series: Waiter Fundamentals</Typography>
-        <Typography>Start Date: March 8</Typography>
       </CardContent>
       <CardActions>
         <TeamMemberModal
