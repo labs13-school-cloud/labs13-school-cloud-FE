@@ -10,16 +10,19 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 
 import TeamMemberModal from "../Modals/TeamMemberModal";
-import DeleteModal from "../Modals/deleteModal";
+
+import TeamMemberMenuBtn from "../TeamMembers/TeamMemberMenuBtn";
 
 import { withRouter } from "react-router";
 import { Link } from "react-router-dom";
+import { FormHelperText } from "@material-ui/core";
 
 const styles = {
   card: {
     minWidth: 275,
     maxWidth: 250,
     marginBottom: 20,
+    display: "flex",
     "&:hover": {
       background: "#C8C8C8"
     }
@@ -39,21 +42,8 @@ function TeamMember(props) {
     teamMemberID
   } = props.teamMember;
 
-  const routeToMemberPage = e => {
-    e.preventDefault();
-    props.history.push({
-      pathname: "/team-member",
-      state: {
-        teamMemberId: teamMemberID
-      }
-    });
-  };
-
   return (
-    <Card
-      className={classes.card}
-      //Need to pass down team member info to populate team member page
-    >
+    <Card className={classes.card}>
       <CardContent>
         <Typography
           className={classes.title}
@@ -68,19 +58,7 @@ function TeamMember(props) {
         <Typography>Start Date: March 8</Typography>
       </CardContent>
       <CardActions>
-        <TeamMemberModal
-          modalType="edit"
-          teamMember={props.teamMember}
-          teamMemberId={props.teamMember.teamMemberID}
-        />
-        {/* <Button
-          size="small"
-          onClick={e => props.deleteTeamMember(e, teamMemberID)}
-        >
-          Delete
-        </Button> */}
-        <Button onClick={routeToMemberPage}>View</Button>
-        <DeleteModal deleteType="teamMember" id={teamMemberID} />
+        <TeamMemberMenuBtn teamMember={props.teamMember} />
       </CardActions>
     </Card>
   );
