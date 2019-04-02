@@ -27,11 +27,10 @@ class SlideDownModal extends React.Component {
   render() {
     return (
       <>
-        <Button>
+        <Button onClick={this.handleClick}>
           <MoreHorizIcon
             aria-owns={this.state.anchorEl ? "simple-menu" : undefined}
             aria-haspopup="true"
-            onClick={this.handleClick}
           />
         </Button>
         <Menu
