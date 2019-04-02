@@ -88,7 +88,7 @@ class TrainingSeriesModal extends React.Component {
         break;
       case "user":
         this.props.deleteUser(this.props.id);
-        // this.props.history.push("/");
+        this.props.reRouteOnDelete();
         break;
       default:
         break;

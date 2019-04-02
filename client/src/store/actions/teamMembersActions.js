@@ -74,11 +74,11 @@ export const deleteTeamMember = id => dispatch => {
     .catch(err => dispatch({ type: DELETE_MEMBER_FAIL, payload: err }));
 };
 
-export const addTeamMemberToTrainingSeries = (id, data) => dispatch => {
+export const addTeamMemberToTrainingSeries = data => dispatch => {
   dispatch({ type: ADD_MEMBER_TO_TRAININGSERIES_START });
 
   axios
-    .post(`${baseUrl}/team-members/${id}/training-series`, data)
+    .post(`${baseUrl}/team-members/assign`, data)
     .then(res =>
       dispatch({
         type: ADD_MEMBER_TO_TRAININGSERIES_SUCCESS,

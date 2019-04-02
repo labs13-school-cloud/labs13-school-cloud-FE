@@ -1,7 +1,6 @@
 import React from "react";
 
 //Components
-import AppBar from "../AppBar/AppBar";
 import UserModal from "../Modals/userModal";
 import DeleteModal from "../Modals/deleteModal";
 
@@ -18,7 +17,6 @@ import { getUser, editUser, deleteUser } from "../../store/actions/userActions";
 
 //Styling
 import {
-  Button,
   Card,
   CardActions,
   CardMedia,
@@ -74,7 +72,13 @@ class ProfileView extends React.Component {
       });
     });
   }
+
+  reRouteOnDelete = () => {
+    //Put a notification for delete success
+    this.props.history.push("/");
+  };
   render() {
+    console.log(this.props);
     //Destructure user from userProfile
     const { user } = this.props.userProfile;
     const { classes } = this.props;
@@ -93,7 +97,7 @@ class ProfileView extends React.Component {
       <Container>
         {this.props.doneLoading && (
           <>
-            <div className="profile-area">
+            <div className='profile-area'>
               <Card className={classes.card}>
                 <Typography gutterBottom variant='h5' component='h1'>
                   {user.name}
@@ -118,7 +122,11 @@ class ProfileView extends React.Component {
                     id={user.userID}
                   />
                   {/* Buton for deleting */}
-                  <DeleteModal deleteType='user' id={user.userID} />
+                  <DeleteModal
+                    reRouteOnDelete={this.reRouteOnDelete}
+                    deleteType='user'
+                    id={user.userID}
+                  />
                 </CardActions>
               </Card>
             </div>

@@ -2,8 +2,7 @@
 
 import React from "react";
 
-//API Dependency
-import axios from "axios";
+//Components
 import TeamMembersList from "./TeamMembersList";
 
 import { connect } from "react-redux";

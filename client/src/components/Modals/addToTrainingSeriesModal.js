@@ -7,11 +7,13 @@ import { withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Modal from "@material-ui/core/Modal";
 import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
+import BottomNavigation from "@material-ui/core/BottomNavigation";
+import AddIcon from "@material-ui/icons/Add";
+import Fab from "@material-ui/core/Fab";
 
 //REDUX
 import { connect } from "react-redux";
-import { addTeamMemberToTrainingSeries } from "../../store/actions/teamMembersActions";
+import { addTeamMemberToTrainingSeries } from "../../store/actions/";
 
 function getModalStyle() {
   const top = 50;
@@ -81,7 +83,7 @@ class UserModal extends React.Component {
     this.setState({ [name]: event.target.value });
   };
   //
-  handleUserInformationSubmit = e => {
+  handleSubmit = e => {
     e.preventDefault();
     const data = {
       trainingSeries_ID: this.state.trainingSeries_ID,
@@ -93,11 +95,15 @@ class UserModal extends React.Component {
   };
 
   render() {
+    console.log(this.props);
     const { classes } = this.props;
 
     return (
       <div>
-        <Button onClick={this.handleOpen}>Edit</Button>
+        <Fab color='primary' aria-label='Add' className={classes.fab}>
+          <AddIcon onClick={this.handleOpen} />
+        </Fab>
+
         <Modal
           aria-labelledby='simple-modal-title'
           aria-describedby='simple-modal-description'
@@ -106,38 +112,27 @@ class UserModal extends React.Component {
         >
           <div style={getModalStyle()} className={classes.paper}>
             <Typography variant='h6' id='modal-title'>
-              Edit your Information
+              Assign Training Series
+            </Typography>
+
+            <Typography variant='body1' id='modal-title'>
+              {this.props.trainingSeries.map(t => (
+                <>{t.title}</>
+              ))}
             </Typography>
             <form
-              onSubmit={e => this.handleUserInformationSubmit(e)}
+              onSubmit={e => this.handleSubmit(e)}
               className={classes.container}
               noValidate
               autoComplete='off'
+            />
+            <BottomNavigation
+              onChange={this.handleChange}
+              showLabels
+              className={classes.root}
             >
-              <TextField
-                id='standard-name'
-                label='Email'
-                className={classes.textField}
-                value={this.state.email}
-                onChange={this.handleChange("email")}
-                margin='normal'
-              />
-              <TextField
-                id='standard-name'
-                label='Name'
-                className={classes.textField}
-                value={this.state.name}
-                onChange={this.handleChange("name")}
-                margin='normal'
-              />
-              <Button
-                type='submit'
-                variant='contained'
-                className={classes.button}
-              >
-                Submit
-              </Button>
-            </form>
+              <Button type='submit'>Submit</Button>
+            </BottomNavigation>
           </div>
         </Modal>
       </div>
@@ -151,6 +146,7 @@ UserModal.propTypes = {
 
 const mapStateToProps = state => {
   return {
+    trainingSeries: state.trainingSeriesReducer.trainingSeries,
     isLoading: state.userReducer.isLoading
   };
 };

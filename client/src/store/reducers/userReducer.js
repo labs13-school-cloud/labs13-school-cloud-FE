@@ -4,10 +4,7 @@ import {
   GET_USER_FAIL,
   EDIT_USER_START,
   EDIT_USER_SUCCESS,
-  EDIT_USER_FAIL,
-  DELETE_USER_START,
-  DELETE_USER_SUCCESS,
-  DELETE_USER_FAIL
+  EDIT_USER_FAIL
 } from "../actions/userActions";
 
 const initialState = {

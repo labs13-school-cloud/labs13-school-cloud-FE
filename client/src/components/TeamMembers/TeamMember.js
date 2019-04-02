@@ -13,7 +13,6 @@ import TeamMemberModal from "../Modals/TeamMemberModal";
 import DeleteModal from "../Modals/deleteModal";
 
 import { withRouter } from "react-router";
-import { Link } from "react-router-dom";
 
 const styles = {
   card: {
@@ -42,7 +41,7 @@ function TeamMember(props) {
   const routeToMemberPage = e => {
     e.preventDefault();
     props.history.push({
-      pathname: "/team-member",
+      pathname: "/team-member/${id}",
       state: {
         teamMemberId: teamMemberID
       }
@@ -57,8 +56,8 @@ function TeamMember(props) {
       <CardContent>
         <Typography
           className={classes.title}
-          variant="h5"
-          component="h3"
+          variant='h5'
+          component='h3'
           gutterBottom
         >
           {firstName + " " + lastName}
@@ -69,7 +68,7 @@ function TeamMember(props) {
       </CardContent>
       <CardActions>
         <TeamMemberModal
-          modalType="edit"
+          modalType='edit'
           teamMember={props.teamMember}
           teamMemberId={props.teamMember.teamMemberID}
         />
@@ -80,7 +79,7 @@ function TeamMember(props) {
           Delete
         </Button> */}
         <Button onClick={routeToMemberPage}>View</Button>
-        <DeleteModal deleteType="teamMember" id={teamMemberID} />
+        <DeleteModal deleteType='teamMember' id={teamMemberID} />
       </CardActions>
     </Card>
   );
