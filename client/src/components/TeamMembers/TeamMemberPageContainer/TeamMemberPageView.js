@@ -8,7 +8,7 @@ import {
   editTeamMember,
   getTrainingSeries,
   getTeamMemberByID
-} from "../../store/actions";
+} from "../../../store/actions";
 
 class TeamMemberPageView extends React.Component {
   componentDidMount() {}

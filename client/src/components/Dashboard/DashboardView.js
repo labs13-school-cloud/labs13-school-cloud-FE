@@ -10,11 +10,10 @@ import styled from "styled-components";
 //Components
 import TeamMembersView from "../TeamMembers/TeamMembersView";
 import TrainingSeriesView from "../TrainingSeries/TrainingSeriesView";
-import { NavigationView } from "../Navigation";
 import ProgressCircle from "../Progress/ProgressCircle";
-import TeamMemberPageView from "../TeamMembers/TeamMemberPage/TeamMemberPageView";
 import ProfileView from "../Profile/ProfileView";
 import AppBar from "../AppBar/AppBar";
+import TeamMemberPageView from "../TeamMembers/TeamMemberPageContainer/TeamMemberPageView";
 
 //Auth
 import { getUserProfile } from "../../Auth/Auth";
@@ -53,11 +52,11 @@ class Dashboard extends React.Component {
             <AppBar />
             <DashboardContainer>
               <Router history={history}>
-                <Route exact path="/home" component={this.renderDashboard} />
-                <Route path="/home/profile" component={ProfileView} />
+                <Route exact path='/home' component={this.renderDashboard} />
+                <Route path='/home/profile' component={ProfileView} />
                 <Route
                   exact
-                  path="/home/team-member/:id"
+                  path='/home/team-member/:id'
                   component={TeamMemberPageView}
                 />
               </Router>

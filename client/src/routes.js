@@ -6,9 +6,6 @@ import { Route, Router } from "react-router-dom";
 //Components
 import App from "./App";
 import DashboardView from "./components/Dashboard/DashboardView";
-import ProfileView from "./components/Profile/ProfileView";
-import AppBar from "./components/AppBar/AppBar";
-import TeamMemberPage from "./components/TeamMembers/TeamMemberPage";
 
 //Callback
 import Callback from "./components/Callback/callback";
@@ -36,13 +33,10 @@ export const makeMainRoutes = () => {
     <Provider store={store}>
       <Router history={history}>
         <>
-          {/* <AppBar /> */}
           <div>
-            <Route exact path="/" component={App} />
-            <Route path="/home" component={DashboardView} />
-            {/* <Route path='/profile' component={ProfileView} />
-            <Route path='/team-member/:id' component={TeamMemberPage} /> */}
-            <Route path="/callback" component={Callback} />
+            <Route exact path='/' component={App} />
+            <Route path='/home' component={DashboardView} />
+            <Route path='/callback' component={Callback} />
           </div>
         </>
       </Router>
