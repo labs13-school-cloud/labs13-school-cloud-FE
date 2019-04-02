@@ -2,10 +2,12 @@
 
 import React from "react";
 
+
 //Components
 import TeamMembersList from "./TeamMembersList";
 
 import { connect } from "react-redux";
+
 import {
   getTeamMembers,
   addTeamMember,
@@ -35,7 +37,7 @@ class TeamMembersView extends React.Component {
 
   render() {
     return (
-      <>
+      <TeamMembersContainer>
         <TeamMemberModal
           userId={this.props.userId}
           addTeamMember={this.props.addTeamMember}
@@ -44,8 +46,7 @@ class TeamMembersView extends React.Component {
           teamMembers={this.props.teamMembers}
           deleteTeamMember={this.deleteMember}
         />
-        ;
-      </>
+      </TeamMembersContainer>
     );
   }
 }
@@ -65,3 +66,11 @@ export default connect(
   mapStateToProps,
   { getTeamMembers, addTeamMember, deleteTeamMember }
 )(TeamMembersView);
+
+
+const TeamMembersContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 33%;
+  border: 1px solid black;
+`;
