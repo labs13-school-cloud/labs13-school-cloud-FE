@@ -25,7 +25,7 @@ class TeamMemberMenuBtn extends React.Component {
 
   routeToMemberPage = (e, id) => {
     e.preventDefault();
-    this.props.history.push(`/team-member/${id}`);
+    this.props.history.push(`/home/team-member/${id}`);
   };
 
   render() {
@@ -36,15 +36,15 @@ class TeamMemberMenuBtn extends React.Component {
     return (
       <div>
         <IconButton
-          aria-label='More'
+          aria-label="More"
           aria-owns={open ? "simple-menu" : undefined}
-          aria-haspopup='true'
+          aria-haspopup="true"
           onClick={this.handleClick}
         >
           <MoreVertIcon />
         </IconButton>
         <Menu
-          id='long-menu'
+          id="long-menu"
           anchorEl={anchorEl}
           open={open}
           onClose={this.handleClose}
@@ -64,7 +64,7 @@ class TeamMemberMenuBtn extends React.Component {
           </MenuItem>
           <MenuItem>
             <DeleteModal
-              deleteType='teamMember'
+              deleteType="teamMember"
               id={this.props.teamMember.teamMemberID}
             />
           </MenuItem>

@@ -167,7 +167,8 @@ class UserModal extends React.Component {
 
     return (
       <div>
-        <Fab color="primary" aria-label="Add">
+        <Fab color="primary" aria-label="Add" className={classes.fab}>
+
           <AddIcon onClick={this.handleOpen} />
         </Fab>
 
@@ -179,7 +180,14 @@ class UserModal extends React.Component {
         >
           <div style={getModalStyle()} className={classes.paper}>
             <Typography variant="h6" id="modal-title">
-              {modalTitle}
+              Assign Training Series
+            </Typography>
+
+            <Typography variant="body1" id="modal-title">
+              {this.props.trainingSeries.map(t => (
+                <>{t.title}</>
+              ))}
+
             </Typography>
             <DatePicker
               inline
@@ -200,12 +208,18 @@ class UserModal extends React.Component {
               className={classes.container}
               noValidate
               autoComplete="off"
-            /> */}
-            {/* <BottomNavigation
+
+            />
+            <BottomNavigation
+
               onChange={this.handleChange}
               showLabels
               className={classes.root}
             >
+
+              <Button type="submit">Submit</Button>
+            </BottomNavigation>
+
             </BottomNavigation> */}
           </div>
         </Modal>
