@@ -125,20 +125,41 @@ class UserModal extends React.Component {
     console.log(data);
   };
 
+  // var trainingSeries = ['a', 'b', 'c', 'd', 'e'];
+  // var assignments = ['b', 'd', 'f'];
+
+  // selectSeries = trainingSeries.filter(series {
+  //   return !assignment.includes(series);
+  // })
+  // console.log(array1); // [ 'a', 'c', 'e' ]
+  // console.log(array2); // [ 'b', 'd', 'f' ]
+
   renderTrainingSeriesInDropDown = () => {
-    return this.props.trainingSeries.map(series => {
-      console.log(series);
-      return (
-        <MenuItem
-          name="trainingSeriesID"
-          label={`${series.title}`}
-          value={series.trainingSeriesID}
-        >
-          {series.title}
-        </MenuItem>
-      );
-    });
+    let assignments = this.props.assignments.map(
+      assignment => {
+        console.log(assignment);
+        assignment.trainingSeriesID}
+    );
+    console.log('ASSIGNMENTS', assignments)
+    let filteredSeries = this.props.trainingSeries.filter(series =>
+      assignments.includes(series.trainingSeriesID)
+    );
+    console.log('FILTERED SERIES',filteredSeries);
   };
+
+  // return this.props.trainingSeries.map(series => {
+  //   if (series.trainingSeriesID === ) {
+  //     return (
+  //       <MenuItem
+  //         name="trainingSeriesID"
+  //         label={`${series.title}`}
+  //         value={series.trainingSeriesID}
+  //       >
+  //         {series.title}
+  //       </MenuItem>
+  //     );
+  //   }
+  // });
 
   render() {
     const {classes} = this.props;

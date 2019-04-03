@@ -160,6 +160,7 @@ class TeamMemberPage extends React.Component {
                 modalType={'assignMultiple'}
                 userId={this.props.userId}
                 urlId={this.props.urlId}
+                assignments={this.props.teamMember.assignments}
               />
               {this.props.teamMember.assignments &&
                 this.props.teamMember.assignments.map(trainingSeries => (
