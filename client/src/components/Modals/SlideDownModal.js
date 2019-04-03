@@ -1,7 +1,8 @@
 import React from "react";
+import {Link} from 'react-router-dom'
 
 import Button from "@material-ui/core/Button";
-import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
+import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 
@@ -29,7 +30,7 @@ class SlideDownModal extends React.Component {
     return (
       <>
         <Button onClick={this.handleClick}>
-          <MoreHorizIcon
+          <MoreVertIcon 
             aria-owns={this.state.anchorEl ? "simple-menu" : undefined}
             aria-haspopup="true"
           />
@@ -40,7 +41,11 @@ class SlideDownModal extends React.Component {
           open={Boolean(this.state.anchorEl)}
           onClose={this.handleClose}
         >
+          <Link to={`home/training-series/${
+            this.props.data.trainingSeriesID
+            }`}>
           <MenuItem onClick={this.handleClose}>Manage Posts</MenuItem>
+          </Link>
           <MenuItem>
             <AddToTrainingSeriesModal
               modalType="assignMultiple"

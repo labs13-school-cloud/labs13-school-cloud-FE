@@ -17,10 +17,12 @@ const styles = {
     minWidth: 275,
     maxWidth: 250,
     marginBottom: 20,
-    display: "flex",
-    "&:hover": {
-      background: "#C8C8C8"
-    }
+    display:'flex',
+    justifyContent:'space-between'
+
+    // "&:hover": {
+    //   background: "#C8C8C8"
+    // }
   },
 
   title: {

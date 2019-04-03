@@ -22,7 +22,10 @@ const styles = {
     maxWidth: 325,
     marginBottom: 20,
     marginLeft: 20,
-    marginRight: 20
+    marginRight: 20,
+    display:'flex',
+    justifyContent:'space-between'
+
   },
   title: {
     fontSize: 16,
@@ -44,21 +47,6 @@ function SeriesCard(props) {
         </Typography>
       </CardContent>
       <CardActions>
-        <Link
-          to={`${props.match.url}/training-series/${
-            props.data.trainingSeriesID
-            }`}
-        >
-          <Button size="small">View Posts</Button>
-        </Link>
-        {/* <TrainingSeriesModal
-          trainingSeriesID={props.data.trainingSeriesID}
-          title={props.data.title}
-          modalType="edit"
-        /> */}
-        {/* <Button onClick={() => props.openModal()} size='small'>
-          Edit
-        </Button> */}
         <SlideDownModal deleteTrainingSeries={props.deleteTrainingSeries} data={props.data} userID={props.userID} />
       </CardActions>
     </Card>

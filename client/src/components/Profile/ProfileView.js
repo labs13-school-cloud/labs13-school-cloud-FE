@@ -42,21 +42,24 @@ function getModalStyle() {
 }
 
 const styles = theme => ({
-	paper: {
-		position: 'absolute',
-		width: theme.spacing.unit * 50,
-		backgroundColor: theme.palette.background.paper,
-		boxShadow: theme.shadows[5],
-		padding: theme.spacing.unit * 4,
-		outline: 'none',
-	},
+	// paper: {
+	// 	// position: 'absolute',
+	// 	width: 800,
+	// 	margin:'0 auto',
+	// 	backgroundColor: theme.palette.background.paper,
+	// 	boxShadow: theme.shadows[5],
+	// 	padding: theme.spacing.unit * 4,
+	// 	outline: 'none',
+	// },
 	card: {
-		maxWidth: 800,
+		maxWidth: '100%',
+		width: 600,
 		margin: '0 auto',
 		padding: 10,
 	},
 	payment: {
-		maxWidth: 800,
+		// maxWidth: 600,
+		// width: '100%',
 		margin: '10px auto',
 		padding: 10,
 	},
@@ -128,7 +131,7 @@ class ProfileView extends React.Component {
 			<Container>
 				{this.props.doneLoading && (
 					<>
-						<div className="profile-area">
+						<div>
 							<Card className={classes.card}>
 								<Typography gutterBottom variant="h5" component="h1">
 									{user.name}
