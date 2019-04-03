@@ -15,6 +15,7 @@ import Fab from "@material-ui/core/Fab";
 import Checkbox from "@material-ui/core/Checkbox";
 import FormLabel from "@material-ui/core/FormLabel";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
+import styled from "styled-components";
 
 //REDUX
 import { connect } from "react-redux";
@@ -70,7 +71,7 @@ class UserModal extends React.Component {
     open: false,
     trainingSeriesID: "",
     startDate: "",
-    selectedTeamMembers: []
+    selectedTrainingSeries: []
   };
 
   componentDidMount() {
@@ -104,18 +105,18 @@ class UserModal extends React.Component {
   };
 
   handleChecked = id => {
-    if (!this.state.selectedTeamMembers.includes(id)) {
+    if (!this.state.selectedTrainingSeries.includes(id)) {
       this.setState({
         ...this.state,
-        selectedTeamMembers: [...this.state.selectedTeamMembers, id]
+        selectedTrainingSeries: [...this.state.selectedTrainingSeries, id]
       });
     } else {
-      let filteredTeamMembers = this.state.selectedTeamMembers.filter(
+      let filteredTrainingSeries = this.state.selectedTrainingSeries.filter(
         member => member !== id
       );
       this.setState({
         ...this.state,
-        selectedTeamMembers: filteredTeamMembers
+        selectedTrainingSeries: filteredTrainingSeries
       });
     }
   };
@@ -144,29 +145,29 @@ class UserModal extends React.Component {
     let modalMap;
     let modalTitle;
     if (this.props.modalType === "assignMultiple") {
-      modalMap = this.props.teamMembers.map(member => (
+      modalMap = this.props.trainingSeries.map(series => (
         <>
           <FormControlLabel
             control={
               <Checkbox
-                name={member.teamMemberID}
-                onChange={() => this.handleChecked(member.teamMemberID)}
+                name={series.trainingSeriesID}
+                onChange={() => this.handleChecked(series.trainingSeriesID)}
               />
             }
-            label={`${member.firstName} ${member.lastName}`}
+            label={`${series.title}`}
           />
         </>
       ));
       modalTitle = (
-        <FormLabel component='legend'>Assign Team Members</FormLabel>
+        <FormLabel component='legend'>Assign Training Series</FormLabel>
       );
     } else {
-      modalMap = this.props.trainingSeries.map(t => <>{t.title}</>);
+      modalMap = this.props.trainingSeries.map(t => <p>{t.title}</p>);
       modalTitle = "Assign Training Series";
     }
 
     return (
-      <div>
+      <>
         <Fab color='primary' aria-label='Add' className={classes.fab}>
           <AddIcon onClick={this.handleOpen} />
         </Fab>
@@ -180,12 +181,6 @@ class UserModal extends React.Component {
           <div style={getModalStyle()} className={classes.paper}>
             <Typography variant='h6' id='modal-title'>
               Assign Training Series
-            </Typography>
-
-            <Typography variant='body1' id='modal-title'>
-              {this.props.trainingSeries.map(t => (
-                <>{t.title}</>
-              ))}
             </Typography>
             <DatePicker
               inline
@@ -201,27 +196,9 @@ class UserModal extends React.Component {
               {modalMap}
               <Button type='submit'>Submit</Button>
             </form>
-            {/* <form
-              onSubmit={e => this.handleSubmit(e)}
-              className={classes.container}
-              noValidate
-              autoComplete="off"
-
-            />
-            <BottomNavigation
-
-              onChange={this.handleChange}
-              showLabels
-              className={classes.root}
-            >
-
-              <Button type="submit">Submit</Button>
-            </BottomNavigation>
-
-            </BottomNavigation> */}
           </div>
         </Modal>
-      </div>
+      </>
     );
   }
 }

@@ -17,15 +17,6 @@ class TeamMemberPageView extends React.Component {
     this.props.getTrainingSeries(this.props.userId);
   }
 
-  // componentDidUpdate(prevProps) {
-  //   if (prevProps.isDeleting !== this.props.isDeleting) {
-  //     console.log("PREV PROPS");
-  //     setTimeout(() => {
-  //       this.props.history.push("/home");
-  //     }, 1000);
-  //   }
-  // }
-
   editTeamMember = (e, changes) => {
     e.preventDefault();
 
@@ -39,20 +30,6 @@ class TeamMemberPageView extends React.Component {
     setTimeout(() => {
       this.props.history.push("/home");
     }, 400);
-
-    // try {
-    //   await this.props.deleteTeamMember(this.props.match.params.id);
-    //   console.log(this.props.deleteSuccess);
-    //   if (!this.props.isDeleting) {
-    //     this.props.history.push("/home");
-    //   }
-    // } catch (error) {
-    //   console.log(error);
-    // }
-
-    // setTimeout(() => {
-    //   this.props.history.goBack();
-    // }, 1000);
   };
 
   render() {
