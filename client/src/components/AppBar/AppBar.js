@@ -1,16 +1,16 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import { withRouter } from "react-router";
+import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
+import {withRouter} from 'react-router';
 
 //Styling
-import styled from "styled-components";
-import Avatar from "@material-ui/core/Avatar";
+import styled from 'styled-components';
+import Avatar from '@material-ui/core/Avatar';
 
 //Logo
-import Logo from "../../img/training-bot.png";
+import Logo from '../../img/training-bot.png';
 
 //AUTH
-import { login, logout } from "../../Auth/Auth";
+import {login, logout} from '../../Auth/Auth';
 
 class AppBar extends Component {
   render() {
@@ -18,7 +18,7 @@ class AppBar extends Component {
       <NavigationContainer>
         <NavigationTop />
         <NavItemsContainer>
-          {this.props.history.location.pathname === "/" ? (
+          {this.props.history.location.pathname === '/' ? (
             <>
               <NavigationLogo src={Logo} />
               <NavLinkItems>
@@ -36,8 +36,10 @@ class AppBar extends Component {
               </NavLinkItems>
               <RightItemsContainer>
                 <Link to="/home/profile">
-                  {" "}
-                  <Avatar />
+                  {' '}
+                  <Avatar
+                    src={JSON.parse(localStorage.getItem('Profile')).picture}
+                  />
                 </Link>
                 <LogoutStyling onClick={() => logout()}>Logout</LogoutStyling>
               </RightItemsContainer>
