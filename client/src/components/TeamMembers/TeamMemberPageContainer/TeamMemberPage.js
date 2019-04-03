@@ -81,6 +81,7 @@ class TeamMemberPage extends React.Component {
 
   render() {
     const { classes } = this.props;
+    console.log("TEAM MEMBER PAGE", this.props);
     return (
       <MainContainer>
         <form className={classes.form}>
@@ -158,7 +159,13 @@ class TeamMemberPage extends React.Component {
               <AddTeamMemberToTrainingSeriesModal
                 modalType={"assignMultiple"}
                 userId={this.props.userId}
+                urlId={this.props.urlId}
               />
+              {this.props.teamMember.assignments.map(trainingSeries => (
+                <>
+                  <h2>{trainingSeries.title}</h2>{" "}
+                </>
+              ))}
             </MemberInfoContainer>
           </Paper>
         </form>

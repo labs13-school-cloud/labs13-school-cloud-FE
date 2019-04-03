@@ -17,6 +17,13 @@ class TeamMemberPageView extends React.Component {
     this.props.getTrainingSeries(this.props.userId);
   }
 
+  // componentDidUpdate(prevProps) {
+  //   if (prevProps.isAssigning !== this.props.isAssigning) {
+  //     console.log(this.props.isAssigning);
+  //     this.props.getTeamMemberByID(this.props.match.params.id);
+  //   }
+  // }
+
   editTeamMember = (e, changes) => {
     e.preventDefault();
 
@@ -33,8 +40,10 @@ class TeamMemberPageView extends React.Component {
   };
 
   render() {
-    console.log("IS DELETING", this.props.isDeleting);
-    console.log("PROPS ON TMPV", this.props);
+    // console.log("IS DELETING", this.props.isDeleting);
+    // console.log("PROPS ON TMPV", this.props);
+    // console.log("PAGE VIEW", this.props.teamMember);
+    console.log("TS ADD STATUS", this.props.isAssigning);
     return (
       <>
         {this.props.loadSuccess && (
@@ -59,6 +68,7 @@ const mapStateToProps = state => {
     loadFailed: state.teamMembersReducer.status.loadFailed,
     deleteSuccess: state.teamMembersReducer.status.deleteSuccess,
     isDeleting: state.teamMembersReducer.status.isDeleting,
+    isAssigning: state.teamMembersReducer.status.isAssigning,
     trainingSeries: state.trainingSeriesReducer.trainingSeries,
     teamMember: state.teamMembersReducer.teamMember
   };

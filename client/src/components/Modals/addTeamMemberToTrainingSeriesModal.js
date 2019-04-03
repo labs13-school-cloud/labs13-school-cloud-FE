@@ -1,8 +1,6 @@
 import React from "react";
 
 import DatePicker from "react-datepicker";
-//Prop Types
-import PropTypes from "prop-types";
 
 //Styles
 import "react-datepicker/dist/react-datepicker.css";
@@ -16,7 +14,8 @@ import Checkbox from "@material-ui/core/Checkbox";
 import FormLabel from "@material-ui/core/FormLabel";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import styled from "styled-components";
-
+import Radio from "@material-ui/core/Radio";
+import RadioGroup from "@material-ui/core/RadioGroup";
 //REDUX
 import { connect } from "react-redux";
 import { addTeamMemberToTrainingSeries } from "../../store/actions/";
@@ -71,7 +70,7 @@ class UserModal extends React.Component {
     open: false,
     trainingSeriesID: "",
     startDate: "",
-    selectedTrainingSeries: []
+    value: ""
   };
 
   componentDidMount() {
@@ -100,25 +99,8 @@ class UserModal extends React.Component {
     this.setState({ open: false });
   };
 
-  handleChange = name => event => {
-    this.setState({ [name]: event.target.value });
-  };
-
-  handleChecked = id => {
-    if (!this.state.selectedTrainingSeries.includes(id)) {
-      this.setState({
-        ...this.state,
-        selectedTrainingSeries: [...this.state.selectedTrainingSeries, id]
-      });
-    } else {
-      let filteredTrainingSeries = this.state.selectedTrainingSeries.filter(
-        member => member !== id
-      );
-      this.setState({
-        ...this.state,
-        selectedTrainingSeries: filteredTrainingSeries
-      });
-    }
+  handleChange = event => {
+    this.setState({ value: event.target.value });
   };
 
   handleDateChange = date => {
@@ -132,11 +114,12 @@ class UserModal extends React.Component {
     e.preventDefault();
     const data = {
       startDate: this.state.startDate,
-      trainingSeriesID: this.state.trainingSeriesID,
-      assignments: this.state.selectedTeamMembers
+      trainingSeriesID: this.state.selectedTrainingSeries,
+      assignments: [this.props.urlId]
     };
     this.props.addTeamMemberToTrainingSeries(data);
     this.handleClose();
+    console.log(data);
   };
 
   render() {
@@ -148,13 +131,9 @@ class UserModal extends React.Component {
       modalMap = this.props.trainingSeries.map(series => (
         <>
           <FormControlLabel
-            control={
-              <Checkbox
-                name={series.trainingSeriesID}
-                onChange={() => this.handleChecked(series.trainingSeriesID)}
-              />
-            }
+            control={<Radio />}
             label={`${series.title}`}
+            value={series.trainingSeriesID}
           />
         </>
       ));
@@ -165,6 +144,8 @@ class UserModal extends React.Component {
       modalMap = this.props.trainingSeries.map(t => <p>{t.title}</p>);
       modalTitle = "Assign Training Series";
     }
+
+    console.log("MODAL", this.state.trainingSeriesID);
 
     return (
       <>
@@ -193,7 +174,13 @@ class UserModal extends React.Component {
               className={classes.memberList}
               onSubmit={e => this.handleSubmit(e)}
             >
-              {modalMap}
+              <RadioGroup
+                onChange={this.handleChange}
+                name='TrainingSeries'
+                value={this.state.value}
+              >
+                {modalMap}
+              </RadioGroup>
               <Button type='submit'>Submit</Button>
             </form>
           </div>
@@ -202,10 +189,6 @@ class UserModal extends React.Component {
     );
   }
 }
-
-UserModal.propTypes = {
-  classes: PropTypes.object.isRequired
-};
 
 const mapStateToProps = state => {
   return {

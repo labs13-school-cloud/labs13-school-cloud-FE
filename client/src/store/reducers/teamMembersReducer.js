@@ -221,15 +221,16 @@ const teamMembersReducer = (state = initialState, action) => {
     case ADD_MEMBER_TO_TRAININGSERIES_SUCCESS:
       return {
         ...state,
+        teamMember: action.payload,
         isAssigning: false,
         assignSuccess: true
       };
     case ADD_MEMBER_TO_TRAININGSERIES_FAIL:
-      return { 
+      return {
         ...state,
         isAssigning: false,
         error: action.error
-       };
+      };
 
     default:
       return state;

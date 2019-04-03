@@ -78,32 +78,38 @@ export const deleteTeamMember = id => dispatch => {
     .catch(err => dispatch({ type: DELETE_MEMBER_FAIL, payload: err }));
 };
 
-export const addTeamMemberToTrainingSeries = data => dispatch => {
-  dispatch({ type: ADD_MEMBER_TO_TRAININGSERIES_START });
-  console.log("data from action", data)
-  axios
-    .post(`${baseUrl}/team-members/assign`, data)
-    .then(res =>
-      dispatch({
-        type: ADD_MEMBER_TO_TRAININGSERIES_SUCCESS,
-        payload: res.data
-      })
-    )
-    .catch(err =>
-      dispatch({ type: ADD_MEMBER_TO_TRAININGSERIES_FAIL, error: err })
-    );
-};
-
 export const getTeamMemberByID = id => dispatch => {
   dispatch({ type: FETCH_SINGLE_MEMBER_START });
   axios
     .get(`${baseUrl}/team-members/${id}`)
     .then(res => {
-      console.log("ACTIONS", res.data);
       dispatch({
         type: FETCH_SINGLE_MEMBER_SUCCESS,
         payload: res.data
       });
     })
     .catch(err => dispatch({ type: FETCH_SINGLE_MEMBER_FAIL, error: err }));
+};
+
+export const addTeamMemberToTrainingSeries = data => dispatch => {
+  dispatch({ type: ADD_MEMBER_TO_TRAININGSERIES_START });
+  console.log("data from action", data);
+  axios
+    .post(`${baseUrl}/team-members/assign`, data)
+    .then(res => {
+      console.log("ADD TEAM MEMBER DATA", res.data);
+      axios
+        .get(`${baseUrl}/team-members/${data.assignments[0]}`)
+        .then(res => {
+          console.log("PAYLOAD FROM ACTION", res.data);
+          dispatch({
+            type: ADD_MEMBER_TO_TRAININGSERIES_SUCCESS,
+            payload: res.data
+          });
+        })
+        .catch(err => console.log(err));
+    })
+    .catch(err =>
+      dispatch({ type: ADD_MEMBER_TO_TRAININGSERIES_FAIL, error: err })
+    );
 };
