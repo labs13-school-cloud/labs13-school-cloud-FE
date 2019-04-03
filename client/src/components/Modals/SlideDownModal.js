@@ -1,13 +1,14 @@
-import React from "react";
-import {Link} from 'react-router-dom'
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-import Button from "@material-ui/core/Button";
+import Button from '@material-ui/core/Button';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import Menu from "@material-ui/core/Menu";
-import MenuItem from "@material-ui/core/MenuItem";
+import IconButton from '@material-ui/core/IconButton';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
 
-import TrainingSeriesModal from "./TrainingSeriesModal";
-import AddToTrainingSeriesModal from "../Modals/addToTrainingSeriesModal";
+import TrainingSeriesModal from './TrainingSeriesModal';
+import AddToTrainingSeriesModal from '../Modals/addToTrainingSeriesModal';
 
 class SlideDownModal extends React.Component {
   state = {
@@ -28,23 +29,25 @@ class SlideDownModal extends React.Component {
 
   render() {
     return (
-      <>
-        <Button onClick={this.handleClick}>
-          <MoreVertIcon 
-            aria-owns={this.state.anchorEl ? "simple-menu" : undefined}
+      <div>
+        <IconButton
+          aria-label="More"
+          aria-haspopup="true"
+          onClick={this.handleClick}
+        >
+          <MoreVertIcon
+            aria-owns={this.state.anchorEl ? 'simple-menu' : undefined}
             aria-haspopup="true"
           />
-        </Button>
+        </IconButton>
         <Menu
           id="simple-menu"
           anchorEl={this.state.anchorEl}
           open={Boolean(this.state.anchorEl)}
           onClose={this.handleClose}
         >
-          <Link to={`home/training-series/${
-            this.props.data.trainingSeriesID
-            }`}>
-          <MenuItem onClick={this.handleClose}>Manage Posts</MenuItem>
+          <Link to={`home/training-series/${this.props.data.trainingSeriesID}`}>
+            <MenuItem onClick={this.handleClose}>Manage Posts</MenuItem>
           </Link>
           <MenuItem>
             <AddToTrainingSeriesModal
@@ -70,7 +73,7 @@ class SlideDownModal extends React.Component {
             Delete
           </MenuItem>
         </Menu>
-      </>
+      </div>
     );
   }
 }

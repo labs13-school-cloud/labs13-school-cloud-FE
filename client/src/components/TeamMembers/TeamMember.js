@@ -1,24 +1,23 @@
 // displays individual team member card
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
 //Styles
-import { withStyles } from "@material-ui/core/styles";
-import Card from "@material-ui/core/Card";
-import CardActions from "@material-ui/core/CardActions";
-import CardContent from "@material-ui/core/CardContent";
-import Typography from "@material-ui/core/Typography";
-import TeamMemberMenuBtn from "../TeamMembers/TeamMemberMenuBtn";
+import { withStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import Typography from '@material-ui/core/Typography';
+import TeamMemberMenuBtn from '../TeamMembers/TeamMemberMenuBtn';
 //Routing
-import { withRouter } from "react-router";
+import { withRouter } from 'react-router';
 
 const styles = {
   card: {
-    minWidth: 275,
-    maxWidth: 250,
+    width: '100%',
     marginBottom: 20,
-    display:'flex',
-    justifyContent:'space-between'
+    display: 'flex',
+    justifyContent: 'space-between'
 
     // "&:hover": {
     //   background: "#C8C8C8"
@@ -44,13 +43,13 @@ function TeamMember(props) {
       <CardContent>
         <Typography
           className={classes.title}
-          variant='h5'
-          component='h3'
+          variant="h5"
+          component="h3"
           gutterBottom
         >
-          {firstName + " " + lastName}
+          {firstName + ' ' + lastName}
         </Typography>
-        <Typography>Job: {jobDescription}</Typography>
+        <Typography variant="caption">Job: {jobDescription}</Typography>
       </CardContent>
       <CardActions>
         <TeamMemberMenuBtn teamMember={props.teamMember} />
