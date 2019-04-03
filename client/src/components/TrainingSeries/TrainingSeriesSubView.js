@@ -4,37 +4,42 @@ import React, { Component } from 'react';
 import TrainingSeriesList from './TrainingSeriesList';
 import TrainingSeriesModal from '../Modals/TrainingSeriesModal';
 import { withStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
+import { Paper, List, Typography } from '@material-ui/core/';
 
 const styles = theme => ({
-  root: {
-    ...theme.mixins.gutters(),
-    paddingTop: theme.spacing.unit * 2,
-    paddingBottom: theme.spacing.unit * 2,
-    width: '55%',
-    overflowY: 'auto'
-  }
+	root: {
+		...theme.mixins.gutters(),
+		paddingTop: theme.spacing.unit * 2,
+		paddingBottom: theme.spacing.unit * 2,
+		width: '55%',
+		overflowY: 'auto',
+	},
+	columnHeader: { display: 'flex', justifyContent: 'space-between', alignItems: 'center' },
 });
 
 class TrainingSeriesSubView extends Component {
-  render() {
-    const { classes } = this.props;
+	render() {
+		const { classes } = this.props;
 
-    return (
-      <Paper className={classes.root} elevation={2}>
-        <TrainingSeriesModal
-          getTrainingSeries={this.props.getTrainingSeries}
-          userID={this.props.userID}
-        />
-        <TrainingSeriesList
-          deleteTrainingSeries={this.props.deleteTrainingSeries}
-          trainingSeries={this.props.trainingSeries}
-          match={this.props.match}
-          userID={this.props.userID}
-        />
-      </Paper>
-    );
-  }
+		return (
+			<Paper className={classes.root} elevation={2}>
+				<div className={classes.columnHeader}>
+					<Typography variant="h5">Training Series</Typography>
+					<TrainingSeriesModal
+						getTrainingSeries={this.props.getTrainingSeries}
+						userID={this.props.userID}
+					/>
+				</div>
+
+				<TrainingSeriesList
+					deleteTrainingSeries={this.props.deleteTrainingSeries}
+					trainingSeries={this.props.trainingSeries}
+					match={this.props.match}
+					userID={this.props.userID}
+				/>
+			</Paper>
+		);
+	}
 }
 
 export default withStyles(styles)(TrainingSeriesSubView);
