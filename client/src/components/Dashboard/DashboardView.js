@@ -104,8 +104,9 @@ export default connect(
 const DashboardContainer = styled.div`
   display: flex;
   justify-content: space-around;
-  margin: 100px auto;
+  margin: 5% auto;
   max-width: 1000px;
+  height: 70vh;
 `;
 
 const hidden = {

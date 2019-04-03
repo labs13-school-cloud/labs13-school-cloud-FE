@@ -11,7 +11,8 @@ const styles = theme => ({
     ...theme.mixins.gutters(),
     paddingTop: theme.spacing.unit * 2,
     paddingBottom: theme.spacing.unit * 2,
-    width: '55%'
+    width: '55%',
+    overflowY: 'auto'
   }
 });
 
