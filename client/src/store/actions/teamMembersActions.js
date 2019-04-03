@@ -80,7 +80,7 @@ export const deleteTeamMember = id => dispatch => {
 
 export const addTeamMemberToTrainingSeries = data => dispatch => {
   dispatch({ type: ADD_MEMBER_TO_TRAININGSERIES_START });
-
+  console.log("data from action", data)
   axios
     .post(`${baseUrl}/team-members/assign`, data)
     .then(res =>

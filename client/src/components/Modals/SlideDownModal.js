@@ -5,7 +5,8 @@ import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 
-import TrainingSeriesModal from './TrainingSeriesModal';
+import TrainingSeriesModal from "./TrainingSeriesModal";
+import AddToTrainingSeriesModal from "../Modals/addToTrainingSeriesModal";
 
 class SlideDownModal extends React.Component {
   state = {
@@ -40,15 +41,29 @@ class SlideDownModal extends React.Component {
           onClose={this.handleClose}
         >
           <MenuItem onClick={this.handleClose}>Manage Posts</MenuItem>
-          <MenuItem onClick={this.handleClose}>Manage Team Members</MenuItem>
+          <MenuItem>
+            <AddToTrainingSeriesModal
+              modalType="assignMultiple"
+              userID={this.props.userID}
+              trainingSeriesID={this.props.data.trainingSeriesID}
+            />
+          </MenuItem>
           {/* <MenuItem onClick={this.handleClose}>Edit Training Series</MenuItem> */}
-          <MenuItem><TrainingSeriesModal
-          trainingSeriesID={this.props.data.trainingSeriesID}
-          title={this.props.data.title}
-          modalType="edit"
-          handleClose={this.handleClose}
-        /></MenuItem>
-          <MenuItem onClick={() => this.props.deleteTrainingSeries(this.props.data.trainingSeriesID)}>Delete</MenuItem>
+          <MenuItem>
+            <TrainingSeriesModal
+              trainingSeriesID={this.props.data.trainingSeriesID}
+              title={this.props.data.title}
+              modalType="edit"
+              handleClose={this.handleClose}
+            />
+          </MenuItem>
+          <MenuItem
+            onClick={() =>
+              this.props.deleteTrainingSeries(this.props.data.trainingSeriesID)
+            }
+          >
+            Delete
+          </MenuItem>
         </Menu>
       </>
     );
