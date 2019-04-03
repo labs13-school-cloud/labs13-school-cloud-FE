@@ -66,7 +66,8 @@ class TeamMemberModal extends React.Component {
       email: "",
       phoneNumber: "",
       user_ID: ""
-    }
+    },
+    startDate: ""
   };
 
   componentDidMount() {
@@ -92,18 +93,6 @@ class TeamMemberModal extends React.Component {
     });
   };
 
-  clearForm = () => {
-    this.setState({
-      teamMember: {
-        firstName: "",
-        lastName: "",
-        jobDescription: "",
-        email: "",
-        phoneNumber: ""
-      }
-    });
-  };
-
   handleChange = name => event => {
     this.setState({
       teamMember: {
@@ -113,11 +102,16 @@ class TeamMemberModal extends React.Component {
     });
   };
 
+  handleDate = name => event => {
+    this.setState({
+      [name]: event.target.value
+    });
+  };
+
   handleSubmit = e => {
     e.preventDefault();
 
     if (this.props.modalType === "edit") {
-      console.log("Edit Fired");
       this.props.editTeamMember(this.props.teamMemberId, this.state.teamMember);
       this.handleClose();
     } else {
@@ -129,7 +123,17 @@ class TeamMemberModal extends React.Component {
       this.props.addTeamMember(newMember);
 
       this.handleClose();
-      this.clearForm();
+
+      this.setState({
+        teamMember: {
+          firstName: "",
+          lastName: "",
+          jobDescription: "",
+          email: "",
+          phoneNumber: "",
+          user_ID: ""
+        }
+      });
     }
   };
 
@@ -198,6 +202,7 @@ class TeamMemberModal extends React.Component {
                 onChange={this.handleChange("phoneNumber")}
                 margin="normal"
               />
+
               <Button
                 type="submit"
                 variant="contained"
@@ -220,7 +225,8 @@ TeamMemberModal.propTypes = {
 const mapStateToProps = state => {
   return {
     isEditing: state.teamMembersReducer.status.isEditing,
-    editSuccess: state.teamMembersReducer.status.editSuccess
+    editSuccess: state.teamMembersReducer.status.editSuccess,
+    trainingSeries: state.trainingSeriesReducer.trainingSeries
   };
 };
 

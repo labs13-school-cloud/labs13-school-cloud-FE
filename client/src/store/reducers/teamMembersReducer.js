@@ -10,9 +10,14 @@ import {
   DELETE_MEMBER_SUCCESS,
   EDIT_MEMBER_START,
   EDIT_MEMBER_SUCCESS,
-  EDIT_MEMBER_FAIL
+  EDIT_MEMBER_FAIL,
+  ADD_MEMBER_TO_TRAININGSERIES_START,
+  ADD_MEMBER_TO_TRAININGSERIES_SUCCESS,
+  ADD_MEMBER_TO_TRAININGSERIES_FAIL,
+  FETCH_SINGLE_MEMBER_START,
+  FETCH_SINGLE_MEMBER_SUCCESS,
+  FETCH_SINGLE_MEMBER_FAIL
 } from "../actions";
-import { CardActions } from "@material-ui/core";
 
 const initialState = {
   teamMembers: [],
@@ -30,7 +35,9 @@ const initialState = {
     editFailed: false,
     isDeleting: false,
     deleteSuccess: false,
-    deleteFailed: false
+    deleteFailed: false,
+    isAssigning: false,
+    assignSuccess: false
   }
 };
 
@@ -66,6 +73,38 @@ const teamMembersReducer = (state = initialState, action) => {
           loadFailed: true
         }
       };
+    case FETCH_SINGLE_MEMBER_START:
+      return {
+        ...state,
+        status: {
+          ...state.status,
+          isLoading: true,
+          loadSuccess: false,
+          loadFailed: false
+        }
+      };
+    case FETCH_SINGLE_MEMBER_SUCCESS:
+      return {
+        ...state,
+        teamMember: action.payload,
+        status: {
+          ...state.status,
+          isLoading: false,
+          loadSuccess: true,
+          loadFailed: false
+        }
+      };
+    case FETCH_SINGLE_MEMBER_FAIL: {
+      return {
+        ...state,
+        state: {
+          ...state.status,
+          isLoading: false,
+          loadSuccess: false,
+          loadFailed: true
+        }
+      };
+    }
     case ADD_MEMBER_START:
       return {
         ...state,
@@ -158,6 +197,7 @@ const teamMembersReducer = (state = initialState, action) => {
           )
         ],
         status: {
+          ...state.status,
           isDeleting: false,
           deleteSuccess: true
         }
@@ -172,6 +212,25 @@ const teamMembersReducer = (state = initialState, action) => {
         },
         error: action.payload
       };
+    case ADD_MEMBER_TO_TRAININGSERIES_START:
+      return {
+        ...state,
+        isAssigning: true,
+        assignSuccess: false
+      };
+    case ADD_MEMBER_TO_TRAININGSERIES_SUCCESS:
+      return {
+        ...state,
+        isAssigning: false,
+        assignSuccess: true
+      };
+    case ADD_MEMBER_TO_TRAININGSERIES_FAIL:
+      return { 
+        ...state,
+        isAssigning: false,
+        error: action.error
+       };
+
     default:
       return state;
   }

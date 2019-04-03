@@ -1,5 +1,6 @@
 // parent component for app once logged in
 import React from 'react';
+import Paper from '@material-ui/core/Paper';
 
 //Styling
 import styled from 'styled-components';
@@ -7,16 +8,16 @@ import styled from 'styled-components';
 //Components
 import TeamMembersView from '../TeamMembers/TeamMembersView';
 import TrainingSeriesView from '../TrainingSeries/TrainingSeriesView';
-import {NavigationView} from '../Navigation';
+import { NavigationView } from '../Navigation';
 import ProgressCircle from '../Progress/ProgressCircle';
 
 //Auth
-import {getUserProfile} from '../../Auth/Auth';
+import { getUserProfile } from '../../Auth/Auth';
 import Authenticate from '../authenticate/authenticate';
 
 //State Management
-import {connect} from 'react-redux';
-import {getUser} from '../../store/actions/userActions';
+import { connect } from 'react-redux';
+import { getUser } from '../../store/actions/userActions';
 
 class Dashboard extends React.Component {
   state = {
@@ -30,33 +31,32 @@ class Dashboard extends React.Component {
   }
 
   render() {
-    const {user} = this.props.userProfile;
+    const { user } = this.props.userProfile;
     console.log(this.props);
     return (
       <>
         {this.props.doneLoading ? (
           <>
             <DashboardContainer>
-              <NavigationView
+              {/* <NavigationView
                 tabValue={this.state.tabValue}
                 changeTabValue={this.changeTabValue}
-              />
-              <div>
-                <div style={this.state.tabValue === 0 ? active : hidden}>
-                  <TrainingSeriesView
-                    userId={user.userID}
-                    match={this.props.match}
-                  />
-                </div>
-                <div style={this.state.tabValue === 1 ? active : hidden}>
-                  <TeamMembersView userId={user.userID} />
-                </div>
-              </div>
+              /> */}
+              <Paper>
+                <TeamMembersView userId={user.userID} />
+              </Paper>
+              <Paper>
+                <TrainingSeriesView
+                  userId={user.userID}
+                  match={this.props.match}
+                />
+              </Paper>
             </DashboardContainer>
           </>
         ) : (
-          <ProgressCircle />
-        )}
+            <ProgressCircle />
+          )
+        }
       </>
     );
   }
@@ -85,6 +85,8 @@ export default connect(
 
 //Styled Components
 const DashboardContainer = styled.div`
+  display: flex;
+  justify-content: space-around;
   margin: 100px 0;
 `;
 

@@ -1,19 +1,13 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 //Components
-// import AppBar from '../AppBar/AppBar';
 import UserModal from '../Modals/userModal';
-// import DeleteModal from '../Modals/deleteModal';
-
-//Stripe
 import StripeView from '../Stripe/StripeView';
-
-//Auth
 import { logout, getUserProfile } from '../../Auth/Auth';
 import Authentication from '../authenticate/authenticate';
 
 //State Management
-import { connect } from 'react-redux';
 import { getUser, editUser, deleteUser } from '../../store/actions/userActions';
 
 //Styling
@@ -21,11 +15,15 @@ import {
 	Button,
 	Card,
 	CardActions,
-	CardMedia,
 	Typography,
 	withStyles,
 	Modal,
+	Avatar,
+	IconButton,
 } from '@material-ui/core';
+
+import DeleteIcon from '@material-ui/icons/Delete';
+
 import styled from 'styled-components';
 
 function rand() {
@@ -44,17 +42,26 @@ function getModalStyle() {
 }
 
 const styles = theme => ({
-	paper: {
-		position: 'absolute',
-		width: theme.spacing.unit * 50,
-		backgroundColor: theme.palette.background.paper,
-		boxShadow: theme.shadows[5],
-		padding: theme.spacing.unit * 4,
-		outline: 'none',
-	},
+	// paper: {
+	// 	// position: 'absolute',
+	// 	width: 800,
+	// 	margin:'0 auto',
+	// 	backgroundColor: theme.palette.background.paper,
+	// 	boxShadow: theme.shadows[5],
+	// 	padding: theme.spacing.unit * 4,
+	// 	outline: 'none',
+	// },
 	card: {
-		maxWidth: 800,
+		maxWidth: '100%',
+		width: 600,
 		margin: '0 auto',
+		padding: 10,
+	},
+	payment: {
+		// maxWidth: 600,
+		// width: '100%',
+		margin: '10px auto',
+		padding: 10,
 	},
 	cardContent: {
 		backgroundColor: '#E8E9EB',
@@ -62,6 +69,11 @@ const styles = theme => ({
 	media: {
 		height: 200,
 		width: 200,
+	},
+	bigAvatar: {
+		margin: 10,
+		width: 150,
+		height: 150,
 	},
 });
 
@@ -95,17 +107,6 @@ class ProfileView extends React.Component {
 		this.props.deleteUser(this.props.userProfile.user.userID);
 	};
 
-	componentDidMount() {
-		//Gets profile from Auth0(Google)
-		getUserProfile(() => {
-			//Gets the user from DB
-			this.props.getUser();
-			// Sets profile to Local storage -- Assigns it to state
-			this.setState({
-				googleProfile: JSON.parse(localStorage.getItem('Profile')),
-			});
-		});
-	}
 	render() {
 		//Destructure user from userProfile
 		const { user } = this.props.userProfile;
@@ -130,19 +131,19 @@ class ProfileView extends React.Component {
 			<Container>
 				{this.props.doneLoading && (
 					<>
-						<div className="profile-area">
+						<div>
 							<Card className={classes.card}>
 								<Typography gutterBottom variant="h5" component="h1">
 									{user.name}
 								</Typography>
-
-								<CardMedia
-									className={classes.media}
-									image={this.state.googleProfile.picture}
-								/>
-								<Typography gutterBottom variant="h5" component="h5">
+								<Typography variant="subtitle1" gutterBottom>
 									{user.email}
 								</Typography>
+								<Avatar
+									alt="Remy Sharp"
+									src={JSON.parse(localStorage.getItem('Profile')).picture}
+									className={classes.bigAvatar}
+								/>
 								<Typography gutterBottom variant="h5" component="h5">
 									<div>Account Type: {accountType}</div>
 								</Typography>
@@ -153,13 +154,19 @@ class ProfileView extends React.Component {
 										name={user.name}
 										id={user.userID}
 									/>
-									{/* Buton for deleting */}
-									{/* <DeleteModal deleteType="user" id={user.userID} /> */}
-									<Button onClick={this.handleOpen}>Delete Account</Button>
+									{/* Button for deleting */}
+									<IconButton
+										aria-label="Delete"
+										className={classes.margin}
+										onClick={this.handleOpen}>
+										<DeleteIcon />
+									</IconButton>
 								</CardActions>
 							</Card>
 						</div>
-						<StripeView user={this.state.googleProfile} />
+						<Card className={classes.payment}>
+							<StripeView user={this.state.googleProfile} />
+						</Card>
 					</>
 				)}
 				<Modal

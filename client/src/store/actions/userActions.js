@@ -1,8 +1,5 @@
 import axios from "axios";
 
-//AUTH
-import { getUserProfile } from "../../Auth/Auth";
-
 //GET USER
 export const GET_USER_START = "GET_USER_START";
 export const GET_USER_SUCCESS = "GET_USER_SUCCESS";

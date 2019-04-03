@@ -1,4 +1,4 @@
-// main page for displaying all team members
+// main page for displaying all tyarn eam members
 
 import React from "react";
 import TeamMember from "./TeamMember";
@@ -25,6 +25,6 @@ export default TeamMembersList;
 
 const ListStyles = styled.div`
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
+  flex-direction: column;
+  align-items: center;
 `;

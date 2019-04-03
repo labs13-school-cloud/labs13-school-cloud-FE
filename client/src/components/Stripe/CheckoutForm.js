@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getPlans, getCustomersPlan, unsubscribe, submit } from '../../store/actions/';
 import { getUser } from '../../store/actions/userActions';
+import logo from '../../img/trainingBot.gif';
 
 import {
 	withStyles,
@@ -11,6 +12,7 @@ import {
 	FormLabel,
 	Button,
 	CircularProgress,
+	Typography,
 	Modal,
 } from '@material-ui/core/';
 import UnsubscribeModal from './unsubscribeModal';
@@ -24,7 +26,16 @@ const styles = theme => ({
 		padding: theme.spacing.unit * 4,
 		outline: 'none',
 	},
+	button: {
+		margin: theme.spacing.unit,
+	},
+	submitBtn: {
+		// margin: theme.spacing.unit,
+		maxWidth: 100,
+		width: '100%',
 
+		margin: '0 auto',
+	},
 	root: {
 		margin: '20 auto',
 		width: '100%',
@@ -52,8 +63,8 @@ const styles = theme => ({
 	},
 
 	buttonLayout: { display: 'flex' },
-	button: { margin: 5 },
-	progress: { margin: '20px auto', maxWidth: 40, width: 40 },
+
+	progress: { margin: '50px auto', maxWidth: 100, width: 100 },
 });
 
 class CheckoutForm extends Component {
@@ -69,6 +80,7 @@ class CheckoutForm extends Component {
 			pro: false,
 			premium: false,
 			open: false,
+			buttonState: '',
 		};
 	}
 	handleOpen = () => {
@@ -82,11 +94,12 @@ class CheckoutForm extends Component {
 	componentDidMount = () => {
 		this.props.getPlans();
 	};
-	handleChange = e => {
+	handleChange = (e, nickname) => {
 		e.preventDefault();
 		if (e.currentTarget.name === 'plan') {
 			this.setState({
 				paymentToggle: true,
+				buttonState: nickname,
 			});
 		}
 		this.setState({
@@ -99,11 +112,8 @@ class CheckoutForm extends Component {
 	};
 	submit = async () => {
 		const { name, email, userID, stripe } = this.props.userProfile;
-		console.log('email', email);
-
 		const { plan } = this.state;
 		let token = await this.createToken(email);
-		console.log('token', token);
 		await this.props.submit(token, name, email, userID, stripe, plan);
 		this.setState({
 			paymentToggle: false,
@@ -121,15 +131,9 @@ class CheckoutForm extends Component {
 			unsubscribe = (
 				<Button
 					variant="contained"
-					color="primary"
+					color="default"
 					className={classes.button}
 					onClick={this.handleOpen}>
-					Unsubscribe
-				</Button>
-			);
-		} else {
-			unsubscribe = (
-				<Button disabled variant="contained" color="primary" className={classes.button}>
 					Unsubscribe
 				</Button>
 			);
@@ -139,7 +143,8 @@ class CheckoutForm extends Component {
 		if (this.props.stripeLoading || this.props.userLoading) {
 			return (
 				<div className={classes.progress}>
-					<CircularProgress />
+					{/* <CircularProgress /> */}
+					<img src={logo} alt="loader" />
 				</div>
 			);
 		} else {
@@ -149,19 +154,25 @@ class CheckoutForm extends Component {
 						{this.props.userError}
 						{this.props.stripeError}
 						<FormControl component="fieldset" className={classes.formControl}>
-							<FormLabel component="legend">Subscriptions</FormLabel>
+							<Typography variant="h4" gutterBottom>
+								Subscriptions
+							</Typography>
 							<div className={classes.buttonLayout}>
 								{unsubscribe}
 								{this.props.plans.map(plan => {
 									return (
 										<Button
 											key={plan.created}
-											variant="contained"
+											variant={
+												this.state.buttonState === plan.nickname
+													? 'contained'
+													: 'outlined'
+											}
 											color="primary"
 											name="plan"
 											className={classes.button}
 											value={plan.id}
-											onClick={e => this.handleChange(e)}>
+											onClick={e => this.handleChange(e, plan.nickname)}>
 											{plan.nickname}
 										</Button>
 									);
@@ -177,9 +188,13 @@ class CheckoutForm extends Component {
 						)}
 					</div>
 					{this.state.paymentToggle ? (
-						<button className={classes.submitButton} onClick={this.submit}>
-							Send
-						</button>
+						<Button
+							variant="contained"
+							color="primary"
+							className={classes.submitBtn}
+							onClick={this.submit}>
+							Submit
+						</Button>
 					) : (
 						<span />
 					)}
