@@ -1,75 +1,82 @@
 // component to contain all the components related to team members
 
-import React from "react";
-
+import React from 'react';
 
 //Components
-import TeamMembersList from "./TeamMembersList";
+import TeamMembersList from './TeamMembersList';
 
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
 import styled from 'styled-components';
-import {
-  getTeamMembers,
-  addTeamMember,
-  deleteTeamMember
-} from "../../store/actions";
+import { getTeamMembers, addTeamMember, deleteTeamMember } from '../../store/actions';
 
-import TeamMemberModal from "../Modals/TeamMemberModal";
+import { withStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
 
+import TeamMemberModal from '../Modals/TeamMemberModal';
+
+const styles = theme => ({
+	root: {
+		...theme.mixins.gutters(),
+		paddingTop: theme.spacing.unit * 2,
+		paddingBottom: theme.spacing.unit * 2,
+	},
+});
 class TeamMembersView extends React.Component {
-  state = {
-    users: [],
-    profile: [],
-    teamMembers: []
-  };
+	state = {
+		users: [],
+		profile: [],
+		teamMembers: [],
+	};
 
-  componentDidMount() {
-    this.props.getTeamMembers(this.props.userId);
-    this.setState({
-      teamMembers: this.props.teamMembers
-    });
-  }
+	componentDidMount() {
+		this.props.getTeamMembers(this.props.userId);
+		this.setState({
+			teamMembers: this.props.teamMembers,
+		});
+	}
 
-  deleteMember = (e, id) => {
-    e.preventDefault();
-    this.props.deleteTeamMember(id);
-  };
+	deleteMember = (e, id) => {
+		e.preventDefault();
+		this.props.deleteTeamMember(id);
+	};
 
-  render() {
-    return (
-      <TeamMembersContainer>
-        <TeamMemberModal
-          userId={this.props.userId}
-          addTeamMember={this.props.addTeamMember}
-        />
-        <TeamMembersList
-          teamMembers={this.props.teamMembers}
-          deleteTeamMember={this.deleteMember}
-        />
-      </TeamMembersContainer>
-    );
-  }
+	render() {
+		const { classes } = this.props;
+		return (
+			<Paper className={classes.root} elevation={2}>
+				<TeamMembersContainer>
+					<TeamMemberModal
+						userId={this.props.userId}
+						addTeamMember={this.props.addTeamMember}
+					/>
+					<TeamMembersList
+						teamMembers={this.props.teamMembers}
+						deleteTeamMember={this.deleteMember}
+					/>
+				</TeamMembersContainer>
+			</Paper>
+		);
+	}
 }
 
 const mapStateToProps = state => {
-  return {
-    isLoading: state.teamMembersReducer.status.isLoading,
-    loadFailed: state.teamMembersReducer.status.loadFailed,
-    isAdding: state.teamMembersReducer.status.isAdding,
-    addSuccess: state.teamMembersReducer.status.addSuccess,
-    addFailed: state.teamMembersReducer.status.addFailed,
-    teamMembers: state.teamMembersReducer.teamMembers
-  };
+	return {
+		isLoading: state.teamMembersReducer.status.isLoading,
+		loadFailed: state.teamMembersReducer.status.loadFailed,
+		isAdding: state.teamMembersReducer.status.isAdding,
+		addSuccess: state.teamMembersReducer.status.addSuccess,
+		addFailed: state.teamMembersReducer.status.addFailed,
+		teamMembers: state.teamMembersReducer.teamMembers,
+	};
 };
 
 export default connect(
-  mapStateToProps,
-  { getTeamMembers, addTeamMember, deleteTeamMember }
-)(TeamMembersView);
-
+	mapStateToProps,
+	{ getTeamMembers, addTeamMember, deleteTeamMember }
+)(withStyles(styles)(TeamMembersView));
 
 const TeamMembersContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin: 0 20px;
+	display: flex;
+	flex-direction: column;
+	margin: 0 20px;
 `;
