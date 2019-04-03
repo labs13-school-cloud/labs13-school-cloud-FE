@@ -32,7 +32,9 @@ const initialState = {
     editFailed: false,
     isDeleting: false,
     deleteSuccess: false,
-    deleteFailed: false
+    deleteFailed: false,
+    isAssigning: false,
+    assignSuccess: false
   }
 };
 
@@ -176,14 +178,22 @@ const teamMembersReducer = (state = initialState, action) => {
       };
     case ADD_MEMBER_TO_TRAININGSERIES_START:
       return {
-        ...state
+        ...state,
+        isAssigning: true,
+        assignSuccess: false
       };
     case ADD_MEMBER_TO_TRAININGSERIES_SUCCESS:
       return {
-        ...state
+        ...state,
+        isAssigning: false,
+        assignSuccess: true
       };
     case ADD_MEMBER_TO_TRAININGSERIES_FAIL:
-      return { ...state };
+      return { 
+        ...state,
+        isAssigning: false,
+        error: action.error
+       };
 
     default:
       return state;

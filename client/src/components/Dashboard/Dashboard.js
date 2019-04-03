@@ -1,5 +1,6 @@
 // parent component for app once logged in
 import React from 'react';
+import Paper from '@material-ui/core/Paper';
 
 //Styling
 import styled from 'styled-components';
@@ -41,16 +42,21 @@ class Dashboard extends React.Component {
                 tabValue={this.state.tabValue}
                 changeTabValue={this.changeTabValue}
               /> */}
-              <TeamMembersView userId={user.userID} />
-              <TrainingSeriesView
-                userId={user.userID}
-                match={this.props.match}
-              />
+              <Paper>
+                <TeamMembersView userId={user.userID} />
+              </Paper>
+              <Paper>
+                <TrainingSeriesView
+                  userId={user.userID}
+                  match={this.props.match}
+                />
+              </Paper>
             </DashboardContainer>
           </>
         ) : (
             <ProgressCircle />
-          )}
+          )
+        }
       </>
     );
   }
@@ -82,7 +88,6 @@ const DashboardContainer = styled.div`
   display: flex;
   justify-content: space-around;
   margin: 100px 0;
-  border: 1px solid red;
 `;
 
 const hidden = {

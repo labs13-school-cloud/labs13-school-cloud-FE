@@ -20,6 +20,7 @@ const TrainingSeriesList = props => {
               deleteTrainingSeries={props.deleteTrainingSeries}
               data={series}
               match={props.match}
+              userID={props.userID}
             />
           );
         })}
@@ -32,6 +33,6 @@ export default TrainingSeriesList;
 //Styled Components
 const ListStyles = styled.div`
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
+  flex-direction: column;
+  align-items: center;
 `;

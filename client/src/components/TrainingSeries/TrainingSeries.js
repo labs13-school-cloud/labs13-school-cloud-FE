@@ -21,6 +21,8 @@ const styles = {
     minWidth: 275,
     maxWidth: 325,
     marginBottom: 20,
+    marginLeft: 20,
+    marginRight: 20
   },
   title: {
     fontSize: 16,
@@ -57,7 +59,7 @@ function SeriesCard(props) {
         {/* <Button onClick={() => props.openModal()} size='small'>
           Edit
         </Button> */}
-        <SlideDownModal deleteTrainingSeries={props.deleteTrainingSeries} data={props.data} />
+        <SlideDownModal deleteTrainingSeries={props.deleteTrainingSeries} data={props.data} userID={props.userID} />
       </CardActions>
     </Card>
   );
