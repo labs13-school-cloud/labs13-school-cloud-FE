@@ -55,16 +55,10 @@ class Dashboard extends React.Component {
                 <Route exact path='/home' component={this.renderDashboard} />
                 <Route path='/home/profile' component={ProfileView} />
                 <Route
-                  exact
                   path='/home/team-member/:id'
                   component={TeamMemberPageView}
                 />
               </Router>
-
-              {/* <NavigationView
-                tabValue={this.state.tabValue}
-                changeTabValue={this.changeTabValue}
-              /> */}
             </DashboardContainer>
           </>
         ) : (

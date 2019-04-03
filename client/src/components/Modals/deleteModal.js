@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import Button from "@material-ui/core/Button";
-
+import { withRouter } from "react-router";
 //REDUX
 import { connect } from "react-redux";
 import {
@@ -82,7 +82,10 @@ class TrainingSeriesModal extends React.Component {
         break;
       case "teamMember":
         this.props.deleteTeamMember(this.props.id);
-        this.props.reRouteOnDelete();
+        break;
+      case "inTeamMemberPage":
+        this.props.deleteTeamMember(this.props.id);
+        this.props.deleteSuccess && console.log("PUSHED TO HOME!");
         break;
       case "trainingSeries":
         this.props.deleteTrainingSeries(this.props.id);
@@ -139,7 +142,9 @@ TrainingSeriesModal.propTypes = {
 };
 
 const mapStateToProps = state => {
-  return {};
+  return {
+    deleteSuccess: state.teamMembersReducer.status.deleteSuccess
+  };
 };
 
 const TrainingSeriesModalWrapped = withStyles(styles)(TrainingSeriesModal);
@@ -152,4 +157,4 @@ export default connect(
     deleteUser,
     deleteTrainingSeries
   }
-)(TrainingSeriesModalWrapped);
+)(withRouter(TrainingSeriesModalWrapped));

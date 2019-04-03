@@ -92,7 +92,15 @@ class TeamMemberPage extends React.Component {
           >
             Save
           </Button>
-          <DeleteModal deleteType='teamMember' id={this.props.urlId} />
+          <Button
+            variant='contained'
+            color='primary'
+            className={classes.button}
+            onClick={e => this.props.deleteTeamMember(e, this.state.teamMember)}
+          >
+            Delete
+          </Button>
+          {/* <DeleteModal deleteType='inTeamMemberPage' id={this.props.urlId} /> */}
           <Paper className={classes.root}>
             <Typography>Team Member Info</Typography>
             <MemberInfoContainer>

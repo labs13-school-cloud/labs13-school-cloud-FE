@@ -195,6 +195,7 @@ const teamMembersReducer = (state = initialState, action) => {
           )
         ],
         status: {
+          ...state.status,
           isDeleting: false,
           deleteSuccess: true
         }
