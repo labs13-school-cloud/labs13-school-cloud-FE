@@ -17,6 +17,7 @@ import styled from 'styled-components';
 import Select from '@material-ui/core/Select';
 import FormControl from '@material-ui/core/FormControl';
 import {MenuItem} from '@material-ui/core';
+import InputLabel from '@material-ui/core/InputLabel';
 
 //REDUX
 import {connect} from 'react-redux';
@@ -116,7 +117,7 @@ class UserModal extends React.Component {
     e.preventDefault();
     const data = {
       startDate: this.state.startDate,
-      trainingSeriesID: this.state.selectedTrainingSeries,
+      trainingSeriesID: this.state.trainingSeriesID,
       assignments: [this.props.urlId],
     };
     this.props.addTeamMemberToTrainingSeries(data);
@@ -169,6 +170,9 @@ class UserModal extends React.Component {
               onSubmit={e => this.handleSubmit(e)}
             >
               <FormControl className={''}>
+                <InputLabel htmlFor="trainingSeriesID">
+                  Training Series
+                </InputLabel>
                 <Select
                   value={this.state.trainingSeriesID}
                   onChange={this.handleChange}
