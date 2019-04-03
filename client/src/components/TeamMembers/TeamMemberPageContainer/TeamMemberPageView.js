@@ -14,6 +14,7 @@ import {
 class TeamMemberPageView extends React.Component {
   componentDidMount() {
     this.props.getTeamMemberByID(this.props.match.params.id);
+    this.props.getTrainingSeries(this.props.userId);
   }
 
   // componentDidUpdate(prevProps) {
@@ -37,7 +38,7 @@ class TeamMemberPageView extends React.Component {
 
     setTimeout(() => {
       this.props.history.push("/home");
-    }, 500);
+    }, 400);
 
     // try {
     //   await this.props.deleteTeamMember(this.props.match.params.id);
@@ -56,6 +57,7 @@ class TeamMemberPageView extends React.Component {
 
   render() {
     console.log("IS DELETING", this.props.isDeleting);
+    console.log("PROPS ON TMPV", this.props);
     return (
       <>
         {this.props.loadSuccess && (
@@ -64,6 +66,7 @@ class TeamMemberPageView extends React.Component {
             urlId={this.props.match.params.id}
             editTeamMember={this.editTeamMember}
             deleteTeamMember={this.deleteTeamMember}
+            userId={this.props.userId}
           />
         )}
       </>

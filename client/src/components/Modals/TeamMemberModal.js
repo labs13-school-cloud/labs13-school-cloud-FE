@@ -203,17 +203,7 @@ class TeamMemberModal extends React.Component {
                 onChange={this.handleChange("phoneNumber")}
                 margin="normal"
               />
-              <TextField
-                id="date"
-                label="start date"
-                type="date"
-                // defaultValue="2017-05-24"
-                className={classes.textField}
-                onChange={this.handleDate("startDate")}
-                InputLabelProps={{
-                  shrink: true
-                }}
-              />
+
               <Button
                 type="submit"
                 variant="contained"

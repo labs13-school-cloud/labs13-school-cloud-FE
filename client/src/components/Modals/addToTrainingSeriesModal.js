@@ -100,22 +100,22 @@ class UserModal extends React.Component {
 
     return (
       <div>
-        <Fab color='primary' aria-label='Add' className={classes.fab}>
+        <Fab color="primary" aria-label="Add" className={classes.fab}>
           <AddIcon onClick={this.handleOpen} />
         </Fab>
 
         <Modal
-          aria-labelledby='simple-modal-title'
-          aria-describedby='simple-modal-description'
+          aria-labelledby="simple-modal-title"
+          aria-describedby="simple-modal-description"
           open={this.state.open}
           onClose={this.handleClose}
         >
           <div style={getModalStyle()} className={classes.paper}>
-            <Typography variant='h6' id='modal-title'>
+            <Typography variant="h6" id="modal-title">
               Assign Training Series
             </Typography>
 
-            <Typography variant='body1' id='modal-title'>
+            <Typography variant="body1" id="modal-title">
               {this.props.trainingSeries.map(t => (
                 <>{t.title}</>
               ))}
@@ -124,14 +124,14 @@ class UserModal extends React.Component {
               onSubmit={e => this.handleSubmit(e)}
               className={classes.container}
               noValidate
-              autoComplete='off'
+              autoComplete="off"
             />
             <BottomNavigation
               onChange={this.handleChange}
               showLabels
               className={classes.root}
             >
-              <Button type='submit'>Submit</Button>
+              <Button type="submit">Submit</Button>
             </BottomNavigation>
           </div>
         </Modal>

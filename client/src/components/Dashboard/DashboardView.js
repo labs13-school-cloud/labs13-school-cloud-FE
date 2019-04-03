@@ -52,11 +52,16 @@ class Dashboard extends React.Component {
             <AppBar />
             <DashboardContainer>
               <Router history={history}>
-                <Route exact path='/home' component={this.renderDashboard} />
-                <Route path='/home/profile' component={ProfileView} />
+                <Route exact path="/home" component={this.renderDashboard} />
+                <Route path="/home/profile" component={ProfileView} />
                 <Route
-                  path='/home/team-member/:id'
-                  component={TeamMemberPageView}
+                  path="/home/team-member/:id"
+                  render={props => (
+                    <TeamMemberPageView
+                      {...props}
+                      userId={this.props.userProfile.user.userID}
+                    />
+                  )}
                 />
               </Router>
             </DashboardContainer>
