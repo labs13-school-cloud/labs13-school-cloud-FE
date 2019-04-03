@@ -1,14 +1,14 @@
 // component to contain all the components related to training series
-import React, { Component } from "react";
-import { Route } from "react-router-dom";
+import React, { Component } from 'react';
+import { Route } from 'react-router-dom';
 
 //REDUX
-import { connect } from "react-redux";
-import { getTrainingSeries, deleteTrainingSeries } from "../../store/actions/";
+import { connect } from 'react-redux';
+import { getTrainingSeries, deleteTrainingSeries } from '../../store/actions/';
 
 //Components
-import TrainingSeriesSubView from "./TrainingSeriesSubView";
-import TrainingSeriesPosts from "./TrainingSeriesPosts";
+import TrainingSeriesSubView from './TrainingSeriesSubView';
+import TrainingSeriesPosts from './TrainingSeriesPosts';
 
 class TrainingSeriesView extends Component {
   componentDidMount() {
@@ -31,22 +31,21 @@ class TrainingSeriesView extends Component {
 
   render() {
     return (
-      <div>
-        <>
-          <Route
-            exact
-            path={`${this.props.match.path}`}
-            render={props => (
-              <TrainingSeriesSubView
-                {...props}
-                trainingSeries={this.props.trainingSeries}
-                deleteTrainingSeries={this.deleteTrainingSeries}
-                getTrainingSeries={this.props.getTrainingSeries}
-                userID={this.props.userId}
-              />
-            )}
-          />
-          {/* <Route
+      <>
+        <Route
+          exact
+          path={`${this.props.match.path}`}
+          render={props => (
+            <TrainingSeriesSubView
+              {...props}
+              trainingSeries={this.props.trainingSeries}
+              deleteTrainingSeries={this.deleteTrainingSeries}
+              getTrainingSeries={this.props.getTrainingSeries}
+              userID={this.props.userId}
+            />
+          )}
+        />
+        {/* <Route
             path={`${this.props.match.path}/training-series/:id`}
             render={props => (
               <TrainingSeriesPosts
@@ -55,8 +54,7 @@ class TrainingSeriesView extends Component {
               />
             )}
           /> */}
-        </>
-      </div>
+      </>
     );
   }
 }
