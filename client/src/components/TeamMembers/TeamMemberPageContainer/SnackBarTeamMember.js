@@ -118,11 +118,25 @@ class CustomizedSnackbars extends React.Component {
           <MySnackbarContentWrapper
             onClose={this.handleClose}
             variant="success"
-            message="This is a success message!"
+            message="Success!"
+          />
+        );
+      case 'delete':
+        return (
+          <MySnackbarContentWrapper
+            onClose={this.handleClose}
+            variant="error"
+            message="An error has occurred"
           />
         );
       default:
-        break;
+        return (
+          <MySnackbarContentWrapper
+            onClose={this.handleClose}
+            variant="success"
+            message="Success!"
+          />
+        );
     }
   };
 
@@ -131,8 +145,13 @@ class CustomizedSnackbars extends React.Component {
 
     return (
       <div>
-        <Button className={classes.margin} onClick={e => this.handleClick(e)}>
-          Open success snackbar
+        <Button
+          variant="contained"
+          color="primary"
+          className={classes.button}
+          onClick={e => this.handleClick(e)}
+        >
+          Save
         </Button>
         <Snackbar
           anchorOrigin={{

@@ -85,19 +85,23 @@ class TeamMemberPage extends React.Component {
     return (
       <MainContainer>
         <form className={classes.form}>
-          <NotificationWidget
-            teamMember={this.state.teamMember}
-            editTeamMember={this.props.editTeamMember}
-            type="edit"
-          />
-          <Button
-            variant="contained"
-            color="primary"
-            className={classes.button}
-            onClick={e => this.props.deleteTeamMember(e, this.state.teamMember)}
-          >
-            Delete
-          </Button>
+          <ButtonContainer>
+            <NotificationWidget
+              teamMember={this.state.teamMember}
+              editTeamMember={this.props.editTeamMember}
+              type="success"
+            />
+            <Button
+              variant="contained"
+              color="primary"
+              className={classes.button}
+              onClick={e =>
+                this.props.deleteTeamMember(e, this.state.teamMember)
+              }
+            >
+              Delete
+            </Button>
+          </ButtonContainer>
           {/* <DeleteModal deleteType='inTeamMemberPage' id={this.props.urlId} /> */}
           <Paper className={classes.root}>
             <Typography>Team Member Info</Typography>
@@ -169,6 +173,12 @@ const MemberInfoContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: baseline;
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  margin-top: 10px;
+  justify-content: center;
 `;
 
 export default withStyles(styles)(TeamMemberPage);
