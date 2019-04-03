@@ -23,7 +23,6 @@ import {
 } from '@material-ui/core';
 
 import DeleteIcon from '@material-ui/icons/Delete';
-import EditIcon from '@material-ui/icons/Edit';
 
 import styled from 'styled-components';
 
@@ -75,7 +74,6 @@ const styles = theme => ({
 	},
 });
 
-
 const Container = styled.div`
 	margin-top: 80px;
 `;
@@ -106,17 +104,6 @@ class ProfileView extends React.Component {
 		this.props.deleteUser(this.props.userProfile.user.userID);
 	};
 
-	componentDidMount() {
-		//Gets profile from Auth0(Google)
-		getUserProfile(() => {
-			//Gets the user from DB
-			this.props.getUser();
-			// Sets profile to Local storage -- Assigns it to state
-			this.setState({
-				googleProfile: JSON.parse(localStorage.getItem('Profile')),
-			});
-		});
-	}
 	render() {
 		//Destructure user from userProfile
 		const { user } = this.props.userProfile;
@@ -151,7 +138,7 @@ class ProfileView extends React.Component {
 								</Typography>
 								<Avatar
 									alt="Remy Sharp"
-									src={this.state.googleProfile.picture}
+									src={JSON.parse(localStorage.getItem('Profile')).picture}
 									className={classes.bigAvatar}
 								/>
 								<Typography gutterBottom variant="h5" component="h5">
@@ -208,7 +195,6 @@ class ProfileView extends React.Component {
 			</Container>
 		);
 	}
-
 }
 
 const mapStateToProps = state => {
