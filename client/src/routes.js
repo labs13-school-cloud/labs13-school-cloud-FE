@@ -5,10 +5,7 @@ import { Route, Router } from 'react-router-dom';
 
 //Components
 import App from './App';
-import Dashboard from './components/Dashboard/Dashboard';
-import ProfileView from './components/Profile/ProfileView';
-import AppBar from './components/AppBar/AppBar';
-import NotificationsView from './components/Notifications/NotificationsView';
+import DashboardView from './components/Dashboard/DashboardView';
 
 //Callback
 import Callback from './components/Callback/callback';
@@ -38,10 +35,8 @@ export const makeMainRoutes = () => {
         <>
           <div>
             <Route exact path="/" component={App} />
-            <Route path="/home" component={Dashboard} />
-            <Route path="/profile" component={ProfileView} />
+            <Route path="/home" component={DashboardView} />
             <Route path="/callback" component={Callback} />
-            <Route path="/notifications" component={NotificationsView} />
           </div>
         </>
       </Router>
