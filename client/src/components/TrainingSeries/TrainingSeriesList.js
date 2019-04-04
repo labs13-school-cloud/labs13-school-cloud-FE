@@ -1,6 +1,6 @@
 // main page for displaying list of all training series
 import React from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 
 //Styling
 import styled from 'styled-components';

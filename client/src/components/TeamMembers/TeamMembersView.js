@@ -21,7 +21,6 @@ const styles = theme => ({
 		paddingBottom: theme.spacing.unit * 2,
 		width: '30%',
 		'@media (max-width:768px)': {
-			// eslint-disable-line no-useless-computed-key
 			width: '92%',
 			marginBottom: 10,
 		},

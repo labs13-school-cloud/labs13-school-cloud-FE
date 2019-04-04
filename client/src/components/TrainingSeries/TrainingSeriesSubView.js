@@ -5,16 +5,8 @@ import TrainingSeriesList from './TrainingSeriesList';
 import TrainingSeriesModal from '../Modals/TrainingSeriesModal';
 
 import { withStyles } from '@material-ui/core/styles';
-import { Paper, List, Typography, Fab } from '@material-ui/core/';
+import { Paper, Typography, Fab, FormControl, NativeSelect, InputLabel } from '@material-ui/core/';
 import Pagination from 'material-ui-flat-pagination';
-import Input from '@material-ui/core/Input';
-import OutlinedInput from '@material-ui/core/OutlinedInput';
-import FilledInput from '@material-ui/core/FilledInput';
-import InputLabel from '@material-ui/core/InputLabel';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import NativeSelect from '@material-ui/core/NativeSelect';
 
 const styles = theme => ({
 	root: {
@@ -24,7 +16,6 @@ const styles = theme => ({
 		width: '55%',
 
 		'@media (max-width:768px)': {
-			// eslint-disable-line no-useless-computed-key
 			width: '92%',
 			marginBottom: 10,
 		},
