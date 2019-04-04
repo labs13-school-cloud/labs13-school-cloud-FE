@@ -14,12 +14,12 @@ class LandingPageView extends React.Component {
       <>
         <LandingPageContainer>
           <NavbarContainer>
-            <img src={Logo} />
+            <img src={Logo} alt='A cute, personable robot' />
             <NavbarItemsContainer>
               <h3>Team</h3>
               <h3>Pricing</h3>
               <h3>Blog</h3>
-              <h2>Sign Up</h2>
+              <h2 onClick={login}>Sign Up</h2>
             </NavbarItemsContainer>
           </NavbarContainer>
           <LandingPageContentContainer>
@@ -73,7 +73,6 @@ const NavbarContainer = styled.nav`
   justify-content: space-between;
   border-bottom: 1px solid #f0f4f8;
   padding: 0 25px;
-
   img {
     width: 50px;
   }
@@ -89,7 +88,6 @@ const NavbarContainer = styled.nav`
     border: 1px solid #451476;
     background-color: white;
     padding: 8px;
-
     border-radius: 7%;
     &:hover {
       background-color: #451476;
@@ -98,12 +96,12 @@ const NavbarContainer = styled.nav`
   }
   h3 {
     color: #451476;
-    font-weight: 400;
   }
 `;
 
 const NavbarItemsContainer = styled.div`
   display: flex;
+  align-items: center;
 `;
 
 const LandingPageButtonContainer = styled.div`
