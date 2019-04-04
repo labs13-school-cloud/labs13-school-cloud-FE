@@ -9,7 +9,7 @@ import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import NotificationWidget from "./SnackBarTeamMember";
-
+import Skeleton from "react-skeleton-loader";
 //Components
 import AddTeamMemberToTrainingSeriesModal from "../../Modals/addTeamMemberToTrainingSeriesModal";
 import TrainingSeriesAssignments from "./TrainingSeriesAssigments";
@@ -102,11 +102,11 @@ class TeamMemberPage extends React.Component {
             <NotificationWidget
               teamMember={this.state.teamMember}
               editTeamMember={this.props.editTeamMember}
-              type="success"
+              type='success'
             />
             <Button
-              variant="contained"
-              color="primary"
+              variant='contained'
+              color='primary'
               className={classes.button}
               onClick={e =>
                 this.props.deleteTeamMember(e, this.state.teamMember)
@@ -117,31 +117,31 @@ class TeamMemberPage extends React.Component {
           </ButtonContainer>
           {/* <DeleteModal deleteType='inTeamMemberPage' id={this.props.urlId} /> */}
           <Paper className={classes.root}>
-            <Typography>Team Member Info</Typography>
+            <Typography>{`Team Member Info` || <Skeleton />}</Typography>
             <MemberInfoContainer>
               <TextField
-                id="standard-name"
-                label="first name"
+                id='standard-name'
+                label='first name'
                 className={classes.textField}
                 value={this.state.teamMember.firstName}
                 onChange={this.handleChange("firstName")}
-                margin="normal"
+                margin='normal'
               />
               <TextField
-                id="standard-name"
-                label="last name"
+                id='standard-name'
+                label='last name'
                 className={classes.textField}
                 value={this.state.teamMember.lastName}
                 onChange={this.handleChange("lastName")}
-                margin="normal"
+                margin='normal'
               />
               <TextField
-                id="standard-name"
-                label="job description"
+                id='standard-name'
+                label='job description'
                 className={classes.textField}
                 value={this.state.teamMember.jobDescription}
                 onChange={this.handleChange("jobDescription")}
-                margin="normal"
+                margin='normal'
               />
             </MemberInfoContainer>
           </Paper>
@@ -149,20 +149,20 @@ class TeamMemberPage extends React.Component {
             <Typography>Contact Info</Typography>
             <MemberInfoContainer>
               <TextField
-                id="standard-name"
-                label="email"
+                id='standard-name'
+                label='email'
                 className={classes.textField}
                 value={this.state.teamMember.email}
                 onChange={this.handleChange("email")}
-                margin="normal"
+                margin='normal'
               />
               <TextField
-                id="standard-name"
-                label="phone"
+                id='standard-name'
+                label='phone'
                 className={classes.textField}
                 value={this.state.teamMember.phoneNumber}
                 onChange={this.handleChange("phoneNumber")}
-                margin="normal"
+                margin='normal'
               />
             </MemberInfoContainer>
           </Paper>
