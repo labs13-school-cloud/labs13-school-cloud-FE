@@ -14,6 +14,8 @@ import Fab from "@material-ui/core/Fab";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 
+import DeleteModal from "../../Modals/deleteModal";
+
 const moment = require("moment");
 
 const styles = theme => ({
@@ -65,13 +67,12 @@ const TrainingSeriesAssignments = props => {
         <Typography>Title: {props.trainingSeries.title}</Typography>
         <Typography>Start Date: {startDate} </Typography>
       </CardContent>
-      <IconButton
-        aria-label="Delete"
-        className={classes.margin}
-        onClick={e => handleDelete(e)}
-      >
-        <DeleteIcon fontSize="small" />
-      </IconButton>
+
+      <DeleteModal
+        teamMemberId={teamMemberId}
+        trainingSeries_Id={trainingSeries_ID}
+        deleteType="removeMemberFromTS"
+      />
     </Card>
   );
 };

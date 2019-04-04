@@ -1,21 +1,26 @@
-import React from 'react';
+import React from "react";
 //Prop Types
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
 //Styles
-import {withStyles} from '@material-ui/core/styles';
-import Modal from '@material-ui/core/Modal';
-import Button from '@material-ui/core/Button';
-import {withRouter} from 'react-router';
+import { withStyles } from "@material-ui/core/styles";
+import Modal from "@material-ui/core/Modal";
+import Button from "@material-ui/core/Button";
+import { withRouter } from "react-router";
 //REDUX
-import {connect} from 'react-redux';
+import { connect } from "react-redux";
 import {
   deleteTrainingSeries,
   deleteTeamMember,
   deletePost,
   deleteUser,
-} from '../../store/actions/';
-import {FormLabel, Typography} from '@material-ui/core';
+  deleteTeamMemberFromTrainingSeries
+} from "../../store/actions/";
+
+import { FormLabel, Typography } from "@material-ui/core";
+
+import DeleteIcon from "@material-ui/icons/Delete";
+import IconButton from "@material-ui/core/IconButton";
 
 function getModalStyle() {
   const top = 50;
@@ -24,73 +29,79 @@ function getModalStyle() {
   return {
     top: `${top}%`,
     left: `${left}%`,
-    transform: `translate(-${top}%, -${left}%)`,
+    transform: `translate(-${top}%, -${left}%)`
   };
 }
 
 const styles = theme => ({
   paper: {
-    position: 'absolute',
+    position: "absolute",
     width: theme.spacing.unit * 25,
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
     padding: theme.spacing.unit * 4,
-    outline: 'none',
+    outline: "none"
   },
   container: {
-    display: 'flex',
-    flexWrap: 'wrap',
+    display: "flex",
+    flexWrap: "wrap"
   },
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
-    width: 200,
+    width: 200
   },
   dense: {
-    marginTop: 19,
+    marginTop: 19
   },
   menu: {
-    width: 200,
+    width: 200
   },
   button: {
-    margin: theme.spacing.unit,
-  },
+    margin: theme.spacing.unit
+  }
 });
 
 class TrainingSeriesModal extends React.Component {
   state = {
     open: false,
-    title: '',
+    title: ""
   };
 
   handleOpen = () => {
-    this.setState({open: true});
+    this.setState({ open: true });
   };
 
   handleClose = () => {
-    this.setState({open: false});
+    this.setState({ open: false });
   };
 
   clearForm = () => {
-    this.setState({title: ''});
+    this.setState({ title: "" });
   };
 
   handleDelete = () => {
     switch (this.props.deleteType) {
-      case 'post':
+      case "post":
         this.props.deletePost(this.props.id);
         break;
-      case 'teamMember':
+      case "teamMember":
         this.props.deleteTeamMember(this.props.id);
         break;
-      case 'inTeamMemberPage':
+      case "inTeamMemberPage":
         this.props.deleteTeamMember(this.props.id);
-        this.props.deleteSuccess && console.log('PUSHED TO HOME!');
+        this.props.deleteSuccess && console.log("PUSHED TO HOME!");
         break;
-      case 'trainingSeries':
+      case "removeMemberFromTS":
+        this.props.deleteTeamMemberFromTrainingSeries(
+          this.props.teamMemberId,
+          this.props.trainingSeries_Id
+        );
+        break;
+      case "trainingSeries":
         this.props.deleteTrainingSeries(this.props.id);
         break;
-      case 'user':
+      case "user":
         this.props.deleteUser(this.props.id);
         this.props.reRouteOnDelete();
         break;
@@ -101,18 +112,33 @@ class TrainingSeriesModal extends React.Component {
   };
 
   render() {
-    const {classes} = this.props;
+    const { classes } = this.props;
+    console.log(
+      "DELETE MODAL",
+      this.props.teamMemberId,
+      this.props.trainingSeries_Id
+    );
 
     return (
       <div>
-        <Button
-          variant="contained"
-          color="secondary"
-          size="small"
-          onClick={this.handleOpen}
-        >
-          Delete
-        </Button>
+        {this.props.deleteType === "removeMemberFromTS" ? (
+          <IconButton
+            aria-label="Delete"
+            className={classes.margin}
+            onClick={this.handleOpen}
+          >
+            <DeleteIcon fontSize="small" />
+          </IconButton>
+        ) : (
+          <Button
+            variant="contained"
+            color="secondary"
+            size="small"
+            onClick={this.handleOpen}
+          >
+            Delete
+          </Button>
+        )}
 
         <Modal
           aria-labelledby="simple-modal-title"
@@ -138,12 +164,12 @@ class TrainingSeriesModal extends React.Component {
 }
 
 TrainingSeriesModal.propTypes = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => {
   return {
-    deleteSuccess: state.teamMembersReducer.status.deleteSuccess,
+    deleteSuccess: state.teamMembersReducer.status.deleteSuccess
   };
 };
 
@@ -156,5 +182,6 @@ export default connect(
     deleteTeamMember,
     deleteUser,
     deleteTrainingSeries,
+    deleteTeamMemberFromTrainingSeries
   }
 )(withRouter(TrainingSeriesModalWrapped));
