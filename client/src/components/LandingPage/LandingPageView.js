@@ -19,21 +19,33 @@ class LandingPageView extends React.Component {
               <h3>Team</h3>
               <h3>Pricing</h3>
               <h3>Blog</h3>
-              <h2 onClick={login}>Sign Up</h2>
+              <h2 onClick={login}>Sign In</h2>
             </NavbarItemsContainer>
           </NavbarContainer>
-          <LandingPageContentContainer>
-            <h1>Training Bot</h1>
-            <p>
-              “Training Bot empowers team leaders with tools to assist with
-              their team’s continual learning by sending automated Text
-              messages/emails on a scheduled interval to team members”.
-            </p>
-            <LandingPageButtonContainer>
-              <Button onClick={login}>Get Started</Button>
-              <Button variant='outlined'>Learn More</Button>
-            </LandingPageButtonContainer>
-          </LandingPageContentContainer>
+          <FirstSection>
+            <LandingPageContentContainer>
+              <h1>Training Bot</h1>
+              <p>
+                “Training Bot empowers team leaders with tools to assist with
+                their team’s continual learning by sending automated Text
+                messages/emails on a scheduled interval to team members”.
+              </p>
+              <LandingPageButtonContainer>
+                <Button onClick={login}>Get Started</Button>
+                <Button variant='outlined'>Learn More</Button>
+              </LandingPageButtonContainer>
+            </LandingPageContentContainer>
+            <VideoContainer>
+              <iframe
+                width='100%'
+                height='400'
+                src='https://www.youtube.com/embed/CQ85sUNBK7w'
+                frameborder='0'
+                allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture'
+                allowfullscreen
+              />
+            </VideoContainer>
+          </FirstSection>
         </LandingPageContainer>
       </>
     );
@@ -43,25 +55,8 @@ export default LandingPageView;
 
 const LandingPageContainer = styled.div`
   margin: 0 auto;
-  background-color: #f0f4f8;
+
   width: 100%;
-`;
-const LandingPageContentContainer = styled.div`
-  background-color: #FFFFFF
-  width: 95%;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 0 100px;
-  h1 {
-    color: #3dbd93;
-    font-size: 42px;
-  }
-  p {
-    color: #3dbd93;
-  }
 `;
 
 const NavbarContainer = styled.nav`
@@ -104,19 +99,53 @@ const NavbarItemsContainer = styled.div`
   align-items: center;
 `;
 
+const FirstSection = styled.div`
+  background-color: #ffffff;
+  width: 95%;
+  margin: 20px auto;
+  padding: 50px 10px;
+  display: flex;
+`;
+
+const LandingPageContentContainer = styled.div`
+  width: 50%;
+  margin: 0 auto;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 100px;
+  h1 {
+    color: #451476;
+    font-size: 42px;
+  }
+  p {
+    color: #2699fb;
+  }
+`;
+
 const LandingPageButtonContainer = styled.div`
   display: flex;
   margin-top: 30px;
   button:first-child {
     margin: 0 10px;
-    background-color: #3dbd93;
+    background-color: #451476;
     color: white;
   }
   button:nth-child(2) {
-    border: 1px solid #3dbd93;
+    border: 1px solid #451476;
+    color: #451476;
     &: hover {
-      background-color: #3dbd93;
+      background-color: #451476;
       color: white;
     }
+  }
+`;
+
+const VideoContainer = styled.div`
+  width: 50%;
+  @media (max-width: 1000px) {
+    display: none;
   }
 `;
