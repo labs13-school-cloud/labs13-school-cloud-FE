@@ -48,6 +48,29 @@ class LandingPageView extends React.Component {
               />
             </VideoContainer>
           </FirstSection>
+          <TrainingBotTestimonyContainer>
+            <TestimonyContainer>
+              <TestimonyPerson>
+                <FaceIcon />
+                <h4>Random Cat 1</h4>
+              </TestimonyPerson>
+
+              <p>
+                "Pork sirloin burgdoggen venison strip steak beef brisket kevin
+                tenderloin"
+              </p>
+            </TestimonyContainer>
+            <TestimonyContainer>
+              <TestimonyPerson>
+                <FaceIcon />
+                <h4>Random Tabby cat</h4>
+              </TestimonyPerson>
+              <p>
+                "Pork sirloin burgdoggen venison strip steak beef brisket kevin
+                tenderloin"
+              </p>
+            </TestimonyContainer>
+          </TrainingBotTestimonyContainer>
           <TrainingBotStoryContainer>
             <h3>The Training Bot Story</h3>
             <StorySection>
@@ -69,29 +92,15 @@ class LandingPageView extends React.Component {
               </StoryContent>
             </StorySection>
           </TrainingBotStoryContainer>
-          <TrainingBotTestimonyContainer>
-            <TestimonyContainer>
-              <TestimonyPerson>
-                <FaceIcon />
-                <h4>Alex King</h4>
-              </TestimonyPerson>
-
-              <p>
-                Pork sirloin burgdoggen venison strip steak beef brisket kevin
-                tenderloin
-              </p>
-            </TestimonyContainer>
-            <TestimonyContainer>
-              <TestimonyPerson>
-                <FaceIcon />
-                <h4>Alex King</h4>
-              </TestimonyPerson>
-              <p>
-                Pork sirloin burgdoggen venison strip steak beef brisket kevin
-                tenderloin
-              </p>
-            </TestimonyContainer>
-          </TrainingBotTestimonyContainer>
+          <GetStartetContainer>
+            <IconBox>
+              <img src={Logo} alt='This robot loves showing up' />
+            </IconBox>
+            <GetStartedBox>
+              <h4>Use Training Bot for FREE</h4>
+              <Button>Try Now</Button>
+            </GetStartedBox>
+          </GetStartetContainer>
         </LandingPageContainer>
       </>
     );
@@ -102,6 +111,7 @@ export default LandingPageView;
 const LandingPageContainer = styled.div`
   margin: 0 auto;
   width: 100%;
+  max-width: 1280px;
   background-color: white;
 `;
 
@@ -148,7 +158,7 @@ const NavbarItemsContainer = styled.div`
 const FirstSection = styled.div`
   background-color: #fafafa;
   width: 95%;
-  margin: 20px auto;
+  margin: 0px auto 20px;
   padding: 50px 10px;
   display: flex;
 `;
@@ -163,6 +173,7 @@ const LandingPageContentContainer = styled.div`
   align-items: center;
   padding: 0 80px;
   h1 {
+    margin-top: 0;
     color: #451476;
     font-size: 42px;
   }
@@ -269,4 +280,24 @@ const TestimonyPerson = styled.div`
     position: relative;
     left: -30px;
   }
+`;
+
+const GetStartetContainer = styled.div`
+  display: flex;
+  width: 70%;
+  margin: 0 auto;
+  justify-content: center;
+`;
+const IconBox = styled.div`
+  background-color: #7fc4fd;
+  width: 100px;
+
+  img {
+    width: 100px;
+    position: relative;
+    left: -50px;
+  }
+`;
+const GetStartedBox = styled.div`
+  background-color: #fafafa;
 `;
