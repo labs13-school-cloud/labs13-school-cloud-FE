@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from "react-redux";
 
 import styled from "styled-components";
 
@@ -13,6 +14,8 @@ import NotificationWidget from "./SnackBarTeamMember";
 //Components
 import AddTeamMemberToTrainingSeriesModal from "../../Modals/addTeamMemberToTrainingSeriesModal";
 import TrainingSeriesAssignments from "./TrainingSeriesAssigments";
+
+import { addTeamMember } from "../../../store/actions";
 
 const styles = theme => ({
   root: {
@@ -50,19 +53,17 @@ class TeamMemberPage extends React.Component {
       jobDescription: "",
       email: "",
       phoneNumber: "",
-      user_ID: "",
-      TeamMemberCol: "",
-      teamMemberID: ""
+      user_ID: ""
     },
     assignments: [],
     trainingSeries: []
   };
 
   componentDidMount() {
-    this.setState({
-      teamMember: this.props.teamMember.teamMember,
-      assignments: this.props.teamMember.assignments
-    });
+    // this.setState({
+    //   teamMember: this.props.teamMember.teamMember,
+    //   assignments: this.props.teamMember.assignments
+    // });
   }
 
   handleChange = name => event => {
@@ -74,6 +75,17 @@ class TeamMemberPage extends React.Component {
     });
   };
 
+  addNewTeamMember = e => {
+    e.preventDefault();
+
+    const newMember = {
+      ...this.state.teamMember,
+      user_ID: this.props.userId
+    };
+
+    this.props.addTeamMember(newMember);
+  };
+
   handleDate = name => event => {
     this.setState({
       [name]: event.target.value
@@ -82,18 +94,18 @@ class TeamMemberPage extends React.Component {
 
   render() {
     const { classes } = this.props;
-
-    const trainingAssigments =
-      this.props.teamMember.assignments &&
-      this.props.teamMember.assignments.map(trainingSeries => {
-        // return console.log("****", trainingSeries);
-        return (
-          <TrainingSeriesAssignments
-            trainingSeries={trainingSeries}
-            teamMemberId={this.props.urlId}
-          />
-        );
-      });
+    console.log("ADD MEMBER PAGE", this.props);
+    // const trainingAssigments =
+    //   this.props.teamMember.assignments &&
+    //   this.props.teamMember.assignments.map(trainingSeries => {
+    //     // return console.log("****", trainingSeries);
+    //     return (
+    //       <TrainingSeriesAssignments
+    //         trainingSeries={trainingSeries}
+    //         teamMemberId={this.props.urlId}
+    //       />
+    //     );
+    //   });
 
     return (
       <MainContainer>
@@ -102,10 +114,11 @@ class TeamMemberPage extends React.Component {
             <NotificationWidget
               teamMember={this.state.teamMember}
               editTeamMember={this.props.editTeamMember}
+              addTeamMember={this.addNewTeamMember}
               type="success"
-              submitType="edit"
+              submitType="add"
             />
-            <Button
+            {/* <Button
               variant="contained"
               color="primary"
               className={classes.button}
@@ -114,7 +127,7 @@ class TeamMemberPage extends React.Component {
               }
             >
               Delete
-            </Button>
+            </Button> */}
           </ButtonContainer>
           {/* <DeleteModal deleteType='inTeamMemberPage' id={this.props.urlId} /> */}
           <Paper className={classes.root}>
@@ -167,7 +180,7 @@ class TeamMemberPage extends React.Component {
               />
             </MemberInfoContainer>
           </Paper>
-          <Paper className={classes.root}>
+          {/* <Paper className={classes.root}>
             <Typography>Training Series</Typography>
             <MemberInfoContainer>
               <div>
@@ -182,7 +195,7 @@ class TeamMemberPage extends React.Component {
                 {trainingAssigments}
               </TrainingSeriesContainer>
             </MemberInfoContainer>
-          </Paper>
+          </Paper> */}
         </form>
       </MainContainer>
     );
@@ -212,4 +225,7 @@ const ButtonContainer = styled.div`
   justify-content: center;
 `;
 
-export default withStyles(styles)(TeamMemberPage);
+export default connect(
+  null,
+  { addTeamMember }
+)(withStyles(styles)(TeamMemberPage));

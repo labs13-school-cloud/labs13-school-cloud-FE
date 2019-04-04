@@ -14,6 +14,8 @@ import SnackbarContent from "@material-ui/core/SnackbarContent";
 import WarningIcon from "@material-ui/icons/Warning";
 import { withStyles } from "@material-ui/core/styles";
 
+import { withRouter } from "react-router";
+
 const variantIcon = {
   success: CheckCircleIcon,
   warning: WarningIcon,
@@ -54,18 +56,18 @@ function MySnackbarContent(props) {
   return (
     <SnackbarContent
       className={classNames(classes[variant], className)}
-      aria-describedby='client-snackbar'
+      aria-describedby="client-snackbar"
       message={
-        <span id='client-snackbar' className={classes.message}>
+        <span id="client-snackbar" className={classes.message}>
           <Icon className={classNames(classes.icon, classes.iconVariant)} />
           {message}
         </span>
       }
       action={[
         <IconButton
-          key='close'
-          aria-label='Close'
-          color='inherit'
+          key="close"
+          aria-label="Close"
+          color="inherit"
           className={classes.close}
           onClick={onClose}
         >
@@ -91,8 +93,16 @@ class CustomizedSnackbars extends React.Component {
   };
 
   handleClick = e => {
-    this.props.editTeamMember(e, this.props.teamMember);
-    this.setState({ open: true });
+    if (this.props.submitType === "edit") {
+      this.props.editTeamMember(e, this.props.teamMember);
+      this.setState({ open: true });
+    } else if (this.props.submitType === "add") {
+      this.props.addTeamMember(e);
+      this.setState({ open: true });
+      // setTimeout(() => {
+      //   this.props.history.push("/home");
+      // }, 1000);
+    }
   };
 
   handleClose = (event, reason) => {
@@ -109,24 +119,24 @@ class CustomizedSnackbars extends React.Component {
         return (
           <MySnackbarContentWrapper
             onClose={this.handleClose}
-            variant='success'
-            message='Success!'
+            variant="success"
+            message="Success!"
           />
         );
       case "delete":
         return (
           <MySnackbarContentWrapper
             onClose={this.handleClose}
-            variant='error'
-            message='An error has occurred'
+            variant="error"
+            message="An error has occurred"
           />
         );
       default:
         return (
           <MySnackbarContentWrapper
             onClose={this.handleClose}
-            variant='success'
-            message='Success!'
+            variant="success"
+            message="Success!"
           />
         );
     }
@@ -134,12 +144,12 @@ class CustomizedSnackbars extends React.Component {
 
   render() {
     const { classes } = this.props;
-
+    console.log("WIDGET", this.props);
     return (
       <div>
         <Button
-          variant='contained'
-          color='primary'
+          variant="contained"
+          color="primary"
           className={classes.button}
           onClick={e => this.handleClick(e)}
         >
@@ -161,4 +171,4 @@ class CustomizedSnackbars extends React.Component {
   }
 }
 
-export default withStyles(styles2)(CustomizedSnackbars);
+export default withStyles(styles2)(withRouter(CustomizedSnackbars));
