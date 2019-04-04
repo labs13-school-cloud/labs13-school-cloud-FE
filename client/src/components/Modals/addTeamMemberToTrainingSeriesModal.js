@@ -149,8 +149,13 @@ class UserModal extends React.Component {
     const { classes } = this.props;
     return (
       <>
-        <Fab color="primary" aria-label="Add" className={classes.fab}>
-          <AddIcon onClick={this.handleOpen} />
+        <Fab
+          color="primary"
+          aria-label="Add"
+          className={classes.fab}
+          onClick={this.handleOpen}
+        >
+          <AddIcon />
         </Fab>
 
         <Modal

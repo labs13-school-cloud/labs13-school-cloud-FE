@@ -87,10 +87,14 @@ class TeamMemberPage extends React.Component {
       this.props.teamMember.assignments &&
       this.props.teamMember.assignments.map(trainingSeries => {
         // return console.log("****", trainingSeries);
-        return <TrainingSeriesAssignments trainingSeries={trainingSeries} />;
+        return (
+          <TrainingSeriesAssignments
+            trainingSeries={trainingSeries}
+            teamMemberId={this.props.urlId}
+          />
+        );
       });
 
-    console.log("*****", trainingAssigments);
     return (
       <MainContainer>
         <form className={classes.form}>

@@ -1,5 +1,9 @@
 import React from "react";
 
+import { connect } from "react-redux";
+import { deleteTeamMemberFromTrainingSeries } from "../../../store/actions";
+
+// Material UI
 import { withStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
@@ -14,7 +18,8 @@ const moment = require("moment");
 
 const styles = theme => ({
   card: {
-    minWidth: 275,
+    // minWidth: 275,
+    width: 275,
     margin: "10px 5px",
     display: "flex",
     "justify-content": "space-between",
@@ -39,9 +44,20 @@ const styles = theme => ({
 const TrainingSeriesAssignments = props => {
   const { classes } = props;
 
+  const { teamMemberId } = props;
+  const { trainingSeries_ID } = props.trainingSeries;
+
   const startDate = moment(props.trainingSeries.startDate).format(
     "MMMM Do, YYYY "
   );
+
+  const handleDelete = e => {
+    e.preventDefault();
+
+    props.deleteTeamMemberFromTrainingSeries(teamMemberId, trainingSeries_ID);
+  };
+
+  console.log("***ASSIGNMENTS***", teamMemberId, trainingSeries_ID);
 
   return (
     <Card className={classes.card}>
@@ -49,11 +65,22 @@ const TrainingSeriesAssignments = props => {
         <Typography>Title: {props.trainingSeries.title}</Typography>
         <Typography>Start Date: {startDate} </Typography>
       </CardContent>
-      <IconButton aria-label="Delete" className={classes.margin}>
+      <IconButton
+        aria-label="Delete"
+        className={classes.margin}
+        onClick={e => handleDelete(e)}
+      >
         <DeleteIcon fontSize="small" />
       </IconButton>
     </Card>
   );
 };
 
-export default withStyles(styles)(TrainingSeriesAssignments);
+const mapStateToProps = state => {
+  return {};
+};
+
+export default connect(
+  mapStateToProps,
+  { deleteTeamMemberFromTrainingSeries }
+)(withStyles(styles)(TrainingSeriesAssignments));
