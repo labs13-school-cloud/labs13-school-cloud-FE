@@ -138,12 +138,12 @@ class TeamMemberModal extends React.Component {
 	render() {
 		const { classes } = this.props;
 		return (
-			<div>
+			<>
 				<Fab
 					color="primary"
 					size="small"
 					aria-label="Add"
-					className={classes.fab}
+					className={classes.fab2}
 					onClick={this.handleOpen}>
 					{this.props.modalType === 'edit' ? 'Edit' : '+'}
 				</Fab>
@@ -213,7 +213,7 @@ class TeamMemberModal extends React.Component {
 						</form>
 					</div>
 				</Modal>
-			</div>
+			</>
 		);
 	}
 }

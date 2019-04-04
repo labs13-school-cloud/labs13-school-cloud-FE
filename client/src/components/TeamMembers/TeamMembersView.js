@@ -10,7 +10,7 @@ import styled from 'styled-components';
 import { getTeamMembers, addTeamMember, deleteTeamMember } from '../../store/actions';
 
 import { withStyles } from '@material-ui/core/styles';
-import { Paper, Typography } from '@material-ui/core/';
+import { Paper, Typography, Fab } from '@material-ui/core/';
 
 import TeamMemberModal from '../Modals/TeamMemberModal';
 
@@ -21,7 +21,16 @@ const styles = theme => ({
 		paddingBottom: theme.spacing.unit * 2,
 		width: '30%',
 	},
-	columnHeader: { display: 'flex', justifyContent: 'space-between', alignItems: 'center' },
+	columnHeader: {
+		display: 'flex',
+		justifyContent: 'space-between',
+		alignItems: 'center',
+	},
+	icons: {
+		display: 'flex',
+		alignItems: 'center',
+	},
+	fab: { margin: 5 },
 });
 class TeamMembersView extends React.Component {
 	state = {
@@ -48,11 +57,21 @@ class TeamMembersView extends React.Component {
 			<Paper className={classes.root} elevation={2}>
 				<div className={classes.columnHeader}>
 					<Typography variant="h5">Team Members</Typography>
-					<TeamMemberModal
-						userId={this.props.userId}
-						addTeamMember={this.props.addTeamMember}
-						// modalType="Add new team member"
-					/>
+					<div className={classes.icons}>
+						<Fab
+							color="primary"
+							size="small"
+							aria-label="Add"
+							className={classes.fab}
+							onClick={this.handleOpen}>
+							<i className="material-icons">search</i>
+						</Fab>
+						<TeamMemberModal
+							userId={this.props.userId}
+							addTeamMember={this.props.addTeamMember}
+							// modalType="Add new team member"
+						/>
+					</div>
 				</div>
 				<TeamMembersList
 					teamMembers={this.props.teamMembers}

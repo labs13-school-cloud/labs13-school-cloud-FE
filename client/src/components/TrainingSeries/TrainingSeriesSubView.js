@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import TrainingSeriesList from './TrainingSeriesList';
 import TrainingSeriesModal from '../Modals/TrainingSeriesModal';
 import { withStyles } from '@material-ui/core/styles';
-import { Paper, List, Typography } from '@material-ui/core/';
+import { Paper, List, Typography, Fab } from '@material-ui/core/';
 
 const styles = theme => ({
 	root: {
@@ -14,7 +14,16 @@ const styles = theme => ({
 		width: '55%',
 		overflowY: 'auto',
 	},
-	columnHeader: { display: 'flex', justifyContent: 'space-between', alignItems: 'center' },
+	columnHeader: {
+		display: 'flex',
+		justifyContent: 'space-between',
+		alignItems: 'center',
+	},
+	icons: {
+		display: 'flex',
+		alignItems: 'center',
+	},
+	fab: { margin: 5 },
 });
 
 class TrainingSeriesSubView extends Component {
@@ -25,10 +34,20 @@ class TrainingSeriesSubView extends Component {
 			<Paper className={classes.root} elevation={2}>
 				<div className={classes.columnHeader}>
 					<Typography variant="h5">Training Series</Typography>
-					<TrainingSeriesModal
-						getTrainingSeries={this.props.getTrainingSeries}
-						userID={this.props.userID}
-					/>
+					<div className={classes.icons}>
+						<Fab
+							color="primary"
+							size="small"
+							aria-label="Add"
+							className={classes.fab}
+							onClick={this.handleOpen}>
+							<i className="material-icons">search</i>
+						</Fab>
+						<TrainingSeriesModal
+							getTrainingSeries={this.props.getTrainingSeries}
+							userID={this.props.userID}
+						/>
+					</div>
 				</div>
 
 				<TrainingSeriesList
