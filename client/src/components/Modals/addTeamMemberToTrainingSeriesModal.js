@@ -138,7 +138,7 @@ class UserModal extends React.Component {
     let assignments = this.props.assignments.map(
       assignment => {
         console.log(assignment);
-        assignment.trainingSeriesID}
+      }
     );
     console.log('ASSIGNMENTS', assignments)
     let filteredSeries = this.props.trainingSeries.filter(series =>
