@@ -1,29 +1,30 @@
 // component to contain all the components related to team members
 
-import React from 'react';
+import React from "react";
 
 //Components
-import TeamMembersList from './TeamMembersList';
+import TeamMembersList from "./TeamMembersList";
 
-import { connect } from 'react-redux';
-import styled from 'styled-components';
+import { connect } from "react-redux";
+import styled from "styled-components";
 import {
   getTeamMembers,
   addTeamMember,
   deleteTeamMember
-} from '../../store/actions';
+} from "../../store/actions";
 
-import { withStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
+import { withStyles } from "@material-ui/core/styles";
+import Paper from "@material-ui/core/Paper";
 
-import TeamMemberModal from '../Modals/TeamMemberModal';
+import TeamMemberModal from "../Modals/TeamMemberModal";
 
 const styles = theme => ({
   root: {
     ...theme.mixins.gutters(),
     paddingTop: theme.spacing.unit * 2,
     paddingBottom: theme.spacing.unit * 2,
-    width: '30%'
+    width: "30%",
+    overflowY: "auto"
   }
 });
 class TeamMembersView extends React.Component {
