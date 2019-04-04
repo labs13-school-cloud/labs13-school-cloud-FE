@@ -1,16 +1,19 @@
 // contains all components for landing page
-import React from "react";
+import React from 'react';
 
 //Styling
-import styled from "styled-components";
-import Button from "@material-ui/core/Button";
+import styled from 'styled-components';
+import Button from '@material-ui/core/Button';
 //Icons & Images
-import FaceIcon from "@material-ui/icons/Face";
-import { ArrowUpward } from "@material-ui/icons";
-import Logo from "../../img/training-bot.png";
-import undrawFolder from "../../img/undraw_folder_39kl.svg";
+import FaceIcon from '@material-ui/icons/Face';
+import {ArrowUpward} from '@material-ui/icons';
+import Logo from '../../img/training-bot.png';
+
+import undrawFolder from '../../img/undraw_folder_39kl.svg';
+import undrawNotify from '../../img/undraw_notify_88a4.svg';
+import undrawTask from '../../img/undraw_task_31wc (1).svg';
 //Auth
-import { login } from "../../Auth/Auth";
+import {login} from '../../Auth/Auth';
 
 class LandingPageView extends React.Component {
   render() {
@@ -18,7 +21,7 @@ class LandingPageView extends React.Component {
       <>
         <LandingPageContainer>
           <NavbarContainer>
-            <img src={Logo} alt='A cute, personable robot' />
+            <img src={Logo} alt="A cute, personable robot" />
             <NavbarItemsContainer>
               <h3>Team</h3>
               <h3>Pricing</h3>
@@ -36,23 +39,36 @@ class LandingPageView extends React.Component {
               </p>
               <LandingPageButtonContainer>
                 <Button onClick={login}>Get Started</Button>
-                <Button variant='outlined'>Learn More</Button>
+                <Button variant="outlined">Learn More</Button>
               </LandingPageButtonContainer>
             </LandingPageContentContainer>
             <VideoContainer>
               <iframe
-                width='100%'
-                height='400'
-                src='https://www.youtube.com/embed/CQ85sUNBK7w'
-                frameborder='0'
-                allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture'
+                width="100%"
+                height="400"
+                src="https://www.youtube.com/embed/CQ85sUNBK7w"
+                frameborder="0"
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                 allowfullscreen
-                title='Marketing Video'
+                title="Marketing Video"
               />
             </VideoContainer>
           </FirstSection>
           <MarketingContentContainer>
-            <img src={undrawFolder} />
+            <MarketingSection>
+              <MarketingImage>
+                <img src={undrawFolder} />
+              </MarketingImage>
+              <MarketingContent>
+                <h3>TEST</h3>
+              </MarketingContent>
+            </MarketingSection>
+            <MarketingSection>
+              <img src={undrawNotify} />
+            </MarketingSection>
+            <MarketingSection>
+              <img src={undrawTask} />
+            </MarketingSection>
           </MarketingContentContainer>
           <TrainingBotTestimonyContainer>
             <TestimonyContainer>
@@ -99,7 +115,7 @@ class LandingPageView extends React.Component {
           </TrainingBotStoryContainer>
           <GetStartedContainer>
             <IconBox>
-              <img src={Logo} alt='This robot loves showing up' />
+              <img src={Logo} alt="This robot loves showing up" />
             </IconBox>
             <GetStartedBox>
               <h4>Use Training Bot for FREE</h4>
@@ -176,7 +192,28 @@ const FirstSection = styled.div`
   display: flex;
 `;
 
-const MarketingContentContainer = styled.div``;
+const MarketingContentContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+`;
+
+const MarketingSection = styled.div`
+  width: 100%;
+  display: flex;
+
+  img {
+    width: 100%;
+  }
+`;
+
+const MarketingImage = styled.div`
+  width: 50%;
+`;
+
+const MarketingContent = styled.div``;
 
 const LandingPageContentContainer = styled.div`
   width: 50%;
