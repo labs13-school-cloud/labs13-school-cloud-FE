@@ -26,9 +26,9 @@ class LandingPageView extends React.Component {
             <LandingPageContentContainer>
               <h1>Training Bot</h1>
               <p>
-                “Training Bot empowers team leaders with tools to assist with
-                their team’s continual learning by sending automated Text
-                messages/emails on a scheduled interval to team members”.
+                "Empowers team leaders with tools to assist with their team’s
+                continual learning by sending automated Text messages/emails on
+                a scheduled interval to team members”.
               </p>
               <LandingPageButtonContainer>
                 <Button onClick={login}>Get Started</Button>
@@ -43,9 +43,31 @@ class LandingPageView extends React.Component {
                 frameborder='0'
                 allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture'
                 allowfullscreen
+                title='Marketing Video'
               />
             </VideoContainer>
           </FirstSection>
+          <TrainingBotStoryContainer>
+            <h3>The Training Bot Story</h3>
+            <StorySection>
+              <StoryContent>
+                Pork chop prosciutto beef ribs cow, fatback flank t-bone sirloin
+                strip steak cupim pork belly. Boudin shank hamburger, bacon
+                kielbasa pork chop meatloaf short ribs. Pork sirloin burgdoggen
+                venison strip steak beef brisket kevin tenderloin. Chicken
+                buffalo frankfurter porchetta, rump short ribs andouille.
+                Meatloaf short loin rump, beef porchetta filet mignon leberkas.
+              </StoryContent>
+              <StoryContent>
+                Pork chop prosciutto beef ribs cow, fatback flank t-bone sirloin
+                strip steak cupim pork belly. Boudin shank hamburger, bacon
+                kielbasa pork chop meatloaf short ribs. Pork sirloin burgdoggen
+                venison strip steak beef brisket kevin tenderloin. Chicken
+                buffalo frankfurter porchetta, rump short ribs andouille.
+                Meatloaf short loin rump, beef porchetta filet mignon leberkas.
+              </StoryContent>
+            </StorySection>
+          </TrainingBotStoryContainer>
         </LandingPageContainer>
       </>
     );
@@ -55,8 +77,8 @@ export default LandingPageView;
 
 const LandingPageContainer = styled.div`
   margin: 0 auto;
-
   width: 100%;
+  background-color: white;
 `;
 
 const NavbarContainer = styled.nav`
@@ -100,7 +122,7 @@ const NavbarItemsContainer = styled.div`
 `;
 
 const FirstSection = styled.div`
-  background-color: #ffffff;
+  background-color: #fafafa;
   width: 95%;
   margin: 20px auto;
   padding: 50px 10px;
@@ -115,13 +137,22 @@ const LandingPageContentContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 0 100px;
+  padding: 0 80px;
   h1 {
     color: #451476;
     font-size: 42px;
   }
   p {
     color: #2699fb;
+  }
+
+  @media (max-width: 1000px) {
+    width: 100%;
+    padding: 0;
+    text-align: center;
+    p {
+      padding: 0 50px;
+    }
   }
 `;
 
@@ -147,5 +178,37 @@ const VideoContainer = styled.div`
   width: 50%;
   @media (max-width: 1000px) {
     display: none;
+  }
+`;
+
+const TrainingBotStoryContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+
+  h3 {
+    color: #451476;
+    font-weight: 400;
+    font-size: 32px;
+    text-align: center;
+    margin-bottom: 5px;
+  }
+`;
+
+const StorySection = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  margin: 0 auto;
+  @media (max-width: 1000px) {
+    flex-direction: column;
+  }
+`;
+const StoryContent = styled.p`
+  color: #2699fb;
+  padding: 0 10px;
+  width: 30%;
+  @media (max-width: 1000px) {
+    width: 100%;
   }
 `;
