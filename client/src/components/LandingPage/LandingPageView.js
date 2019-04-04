@@ -4,9 +4,12 @@ import React from "react";
 //Styling
 import styled from "styled-components";
 import Button from "@material-ui/core/Button";
+//Icons & Images
 import FaceIcon from "@material-ui/icons/Face";
+import { ArrowUpward } from "@material-ui/icons";
 import Logo from "../../img/training-bot.png";
-
+import undrawFolder from "../../img/undraw_folder_39kl.svg";
+//Auth
 import { login } from "../../Auth/Auth";
 
 class LandingPageView extends React.Component {
@@ -48,11 +51,13 @@ class LandingPageView extends React.Component {
               />
             </VideoContainer>
           </FirstSection>
+          <MarketingContentContainer>
+            <img src={undrawFolder} />
+          </MarketingContentContainer>
           <TrainingBotTestimonyContainer>
             <TestimonyContainer>
               <TestimonyPerson>
-                <FaceIcon />
-                <h4>Random Cat 1</h4>
+                <FaceIcon /> <h4>Random Cat 1</h4>
               </TestimonyPerson>
 
               <p>
@@ -92,7 +97,7 @@ class LandingPageView extends React.Component {
               </StoryContent>
             </StorySection>
           </TrainingBotStoryContainer>
-          <GetStartetContainer>
+          <GetStartedContainer>
             <IconBox>
               <img src={Logo} alt='This robot loves showing up' />
             </IconBox>
@@ -100,7 +105,15 @@ class LandingPageView extends React.Component {
               <h4>Use Training Bot for FREE</h4>
               <Button>Try Now</Button>
             </GetStartedBox>
-          </GetStartetContainer>
+          </GetStartedContainer>
+          <FooterContainer>
+            <FooterItemsContainer>
+              <h3>Team</h3>
+              <h3>Pricing</h3>
+              <h3>Blog</h3>
+            </FooterItemsContainer>
+            <ArrowUpward />
+          </FooterContainer>
         </LandingPageContainer>
       </>
     );
@@ -162,6 +175,8 @@ const FirstSection = styled.div`
   padding: 50px 10px;
   display: flex;
 `;
+
+const MarketingContentContainer = styled.div``;
 
 const LandingPageContentContainer = styled.div`
   width: 50%;
@@ -272,33 +287,79 @@ const TestimonyContainer = styled.div`
 const TestimonyPerson = styled.div`
   display: flex;
   align-items: center;
-  h4 {
-    position: relative;
-    left: -23px;
-  }
+
   svg {
-    position: relative;
-    left: -30px;
     color: #2699fb;
+    margin-right: 5px;
   }
 `;
 
-const GetStartetContainer = styled.div`
+const GetStartedContainer = styled.div`
   display: flex;
-  width: 70%;
+  width: 50%;
   margin: 0 auto;
   justify-content: center;
+  align-items: center;
+
+  @media (max-width: 700px) {
+    width: 70%;
+  }
 `;
 const IconBox = styled.div`
   background-color: #7fc4fd;
-  width: 100px;
+  width: 25%;
 
   img {
-    width: 100px;
+    width: 100%;
     position: relative;
-    left: -50px;
+    left: -50%;
   }
 `;
 const GetStartedBox = styled.div`
   background-color: #fafafa;
+  width: 75%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  h4 {
+    color: #451476;
+    font-size: 24px;
+  }
+  button {
+    margin: 0 10px;
+    background-color: #7fc4fd;
+    color: white;
+    width: 100px;
+    &: hover {
+      background-color: #451476;
+      color: white;
+    }
+  }
+`;
+
+const FooterContainer = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin-top: 100px;
+  svg {
+    margin: 0 auto;
+    font-size: 30px;
+    cursor: pointer;
+  }
+`;
+
+const FooterItemsContainer = styled.div`
+  background-color: #451476;
+  display: flex;
+  color: white;
+  justify-content: center;
+  width: 90%;
+  h3 {
+    font-size: 16px;
+    font-weight: 500;
+    padding: 0 20px;
+    cursor: pointer;
+  }
 `;
