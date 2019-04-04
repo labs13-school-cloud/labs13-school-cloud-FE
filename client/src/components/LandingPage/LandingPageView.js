@@ -4,6 +4,7 @@ import React from "react";
 //Styling
 import styled from "styled-components";
 import Button from "@material-ui/core/Button";
+import FaceIcon from "@material-ui/icons/Face";
 import Logo from "../../img/training-bot.png";
 
 import { login } from "../../Auth/Auth";
@@ -68,6 +69,29 @@ class LandingPageView extends React.Component {
               </StoryContent>
             </StorySection>
           </TrainingBotStoryContainer>
+          <TrainingBotTestimonyContainer>
+            <TestimonyContainer>
+              <TestimonyPerson>
+                <FaceIcon />
+                <h4>Alex King</h4>
+              </TestimonyPerson>
+
+              <p>
+                Pork sirloin burgdoggen venison strip steak beef brisket kevin
+                tenderloin
+              </p>
+            </TestimonyContainer>
+            <TestimonyContainer>
+              <TestimonyPerson>
+                <FaceIcon />
+                <h4>Alex King</h4>
+              </TestimonyPerson>
+              <p>
+                Pork sirloin burgdoggen venison strip steak beef brisket kevin
+                tenderloin
+              </p>
+            </TestimonyContainer>
+          </TrainingBotTestimonyContainer>
         </LandingPageContainer>
       </>
     );
@@ -185,13 +209,17 @@ const TrainingBotStoryContainer = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
-
+  width: 70%;
+  margin: 0 auto 50px;
   h3 {
     color: #451476;
     font-weight: 400;
     font-size: 32px;
     text-align: center;
     margin-bottom: 5px;
+  }
+  @media (max-width: 1000px) {
+    width: 100%;
   }
 `;
 
@@ -207,8 +235,38 @@ const StorySection = styled.div`
 const StoryContent = styled.p`
   color: #2699fb;
   padding: 0 10px;
-  width: 30%;
-  @media (max-width: 1000px) {
-    width: 100%;
+`;
+
+const TrainingBotTestimonyContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 70%;
+  margin: 0 auto;
+`;
+
+const TestimonyContainer = styled.div`
+  display: flex;
+  padding: 5px;
+  flex-direction: column;
+  margin: 0 20px;
+  h4 {
+    margin: 0;
+    color: #451476;
+  }
+  p {
+    color: #2699fb;
+  }
+`;
+
+const TestimonyPerson = styled.div`
+  display: flex;
+  align-items: center;
+  h4 {
+    position: relative;
+    left: -23px;
+  }
+  svg {
+    position: relative;
+    left: -30px;
   }
 `;
