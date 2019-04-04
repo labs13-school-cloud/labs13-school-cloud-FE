@@ -1,15 +1,15 @@
-import React from 'react';
+import React from "react";
 
-import {connect} from 'react-redux';
+import { connect } from "react-redux";
 
-import TeamMemberPage from './TeamMemberPage';
+import TeamMemberPage from "./TeamMemberPage";
 
 import {
   editTeamMember,
   getTrainingSeries,
   getTeamMemberByID,
-  deleteTeamMember,
-} from '../../../store/actions';
+  deleteTeamMember
+} from "../../../store/actions";
 
 class TeamMemberPageView extends React.Component {
   componentDidMount() {
@@ -27,12 +27,15 @@ class TeamMemberPageView extends React.Component {
     this.props.deleteTeamMember(this.props.match.params.id);
 
     setTimeout(() => {
-      this.props.history.push('/home');
+      this.props.history.push("/home");
     }, 400);
   };
 
   renderTeamMemberPage = () => {
-    if (this.props.loadSuccess && !this.props.isLoading) {
+    if (
+      this.props.loadSuccess &&
+      Object.keys(this.props.teamMember).length !== 0
+    ) {
       return (
         <TeamMemberPage
           teamMember={this.props.teamMember}
@@ -46,10 +49,6 @@ class TeamMemberPageView extends React.Component {
   };
 
   render() {
-    // console.log("IS DELETING", this.props.isDeleting);
-    // console.log("PROPS ON TMPV", this.props);
-    // console.log("PAGE VIEW", this.props.teamMember);
-    console.log('TS ADD STATUS', this.props.isAssigning);
     return <>{this.renderTeamMemberPage()}</>;
   }
 }
@@ -64,11 +63,11 @@ const mapStateToProps = state => {
     isDeleting: state.teamMembersReducer.status.isDeleting,
     isAssigning: state.teamMembersReducer.status.isAssigning,
     trainingSeries: state.trainingSeriesReducer.trainingSeries,
-    teamMember: state.teamMembersReducer.teamMember,
+    teamMember: state.teamMembersReducer.teamMember
   };
 };
 
 export default connect(
   mapStateToProps,
-  {getTeamMemberByID, editTeamMember, getTrainingSeries, deleteTeamMember}
+  { getTeamMemberByID, editTeamMember, getTrainingSeries, deleteTeamMember }
 )(TeamMemberPageView);

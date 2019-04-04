@@ -79,6 +79,7 @@ const teamMembersReducer = (state = initialState, action) => {
     case FETCH_SINGLE_MEMBER_START:
       return {
         ...state,
+        teamMember: {},
         status: {
           ...state.status,
           isLoading: true,
@@ -122,6 +123,7 @@ const teamMembersReducer = (state = initialState, action) => {
       return {
         ...state,
         teamMembers: [...state.teamMembers, action.payload],
+        teamMember: action.payload,
         status: {
           ...state.status,
           isAdding: false,

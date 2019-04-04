@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from "react-redux";
 
 import styled from "styled-components";
 
@@ -13,6 +14,8 @@ import NotificationWidget from "./SnackBarTeamMember";
 //Components
 import AddTeamMemberToTrainingSeriesModal from "../../Modals/addTeamMemberToTrainingSeriesModal";
 import TrainingSeriesAssignments from "./TrainingSeriesAssigments";
+
+import { addTeamMember } from "../../../store/actions";
 
 const styles = theme => ({
   root: {
@@ -50,20 +53,25 @@ class TeamMemberPage extends React.Component {
       jobDescription: "",
       email: "",
       phoneNumber: "",
-      user_ID: "",
-      TeamMemberCol: "",
-      teamMemberID: ""
+      user_ID: ""
     },
     assignments: [],
     trainingSeries: []
   };
 
   componentDidMount() {
-    if (Object.keys(this.props.teamMember).length !== 0) {
-      this.setState({
-        teamMember: this.props.teamMember.teamMember,
-        assignments: this.props.teamMember.assignments
-      });
+    // this.setState({
+    //   teamMember: this.props.teamMember.teamMember,
+    //   assignments: this.props.teamMember.assignments
+    // });
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.addSuccess !== this.props.addSuccess) {
+      setTimeout(() => {
+        const { teamMemberID } = this.props.teamMember && this.props.teamMember;
+        this.props.history.push(`/home/team-member/${teamMemberID}`);
+      }, 400);
     }
   }
 
@@ -76,6 +84,17 @@ class TeamMemberPage extends React.Component {
     });
   };
 
+  addNewTeamMember = e => {
+    e.preventDefault();
+
+    const newMember = {
+      ...this.state.teamMember,
+      user_ID: this.props.userId
+    };
+
+    this.props.addTeamMember(newMember);
+  };
+
   handleDate = name => event => {
     this.setState({
       [name]: event.target.value
@@ -85,37 +104,26 @@ class TeamMemberPage extends React.Component {
   render() {
     const { classes } = this.props;
 
-    const trainingAssigments =
-      this.props.teamMember.assignments &&
-      this.props.teamMember.assignments.map(trainingSeries => {
-        // return console.log("****", trainingSeries);
-        return (
-          <TrainingSeriesAssignments
-            trainingSeries={trainingSeries}
-            teamMemberId={this.props.urlId}
-          />
-        );
-      });
-
     return (
       <MainContainer>
+        <Typography variant="display1" align="center" gutterBottom>
+          Add A New Team Member
+        </Typography>
         <form className={classes.form}>
           <ButtonContainer>
             <NotificationWidget
               teamMember={this.state.teamMember}
               editTeamMember={this.props.editTeamMember}
+              addTeamMember={this.addNewTeamMember}
               type="success"
-              submitType="edit"
+              submitType="add"
             />
             <Button
               variant="contained"
-              color="primary"
               className={classes.button}
-              onClick={e =>
-                this.props.deleteTeamMember(e, this.state.teamMember)
-              }
+              onClick={e => this.props.history.push("/home")}
             >
-              Delete
+              Cancel
             </Button>
           </ButtonContainer>
           {/* <DeleteModal deleteType='inTeamMemberPage' id={this.props.urlId} /> */}
@@ -169,7 +177,7 @@ class TeamMemberPage extends React.Component {
               />
             </MemberInfoContainer>
           </Paper>
-          <Paper className={classes.root}>
+          {/* <Paper className={classes.root}>
             <Typography>Training Series</Typography>
             <MemberInfoContainer>
               <div>
@@ -184,7 +192,7 @@ class TeamMemberPage extends React.Component {
                 {trainingAssigments}
               </TrainingSeriesContainer>
             </MemberInfoContainer>
-          </Paper>
+          </Paper> */}
         </form>
       </MainContainer>
     );
@@ -214,4 +222,14 @@ const ButtonContainer = styled.div`
   justify-content: center;
 `;
 
-export default withStyles(styles)(TeamMemberPage);
+const mapStateToProps = state => {
+  return {
+    addSuccess: state.teamMembersReducer.status.addSuccess,
+    teamMember: state.teamMembersReducer.teamMember
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  { addTeamMember }
+)(withStyles(styles)(TeamMemberPage));
