@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import NotificationsList from './NotificationsList';
 
 import { withStyles } from '@material-ui/core/styles';
-import { Paper, Typography, Fab } from '@material-ui/core/';
+import { Paper, Typography } from '@material-ui/core/';
 import Pagination from 'material-ui-flat-pagination';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
@@ -72,7 +72,7 @@ class NotificationsView extends Component {
             onClick={(e, offset) => this.handleClick(offset)}
           />
 
-          {this.props.notifications.length < 5 ? (
+          {this.state.notifications.length < 5 ? (
             ''
           ) : (
             <FormControl className={classes.formControl}>
