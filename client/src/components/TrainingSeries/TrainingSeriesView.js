@@ -13,8 +13,6 @@ import TrainingSeriesPosts from './TrainingSeriesPosts';
 class TrainingSeriesView extends Component {
 	componentDidMount() {
 		this.getTrainingSeries();
-		// let limit = this.props.trainingSeries.length / 5;
-		// this.setState({ limit: limit });
 	}
 
 	getTrainingSeries = () => {
@@ -38,7 +36,6 @@ class TrainingSeriesView extends Component {
 							deleteTrainingSeries={this.deleteTrainingSeries}
 							getTrainingSeries={this.props.getTrainingSeries}
 							userID={this.props.userId}
-							limit={this.props.limit}
 						/>
 					)}
 				/>

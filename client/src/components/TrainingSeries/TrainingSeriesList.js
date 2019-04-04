@@ -12,7 +12,7 @@ const TrainingSeriesList = props => {
 	let arr = [];
 	let offset = props.offset;
 	let x = offset;
-	let y = offset + 10;
+	let y = offset + props.limit;
 	console.log('Offset Spacing', x, y);
 	arr = props.trainingSeries.slice(x, y);
 
