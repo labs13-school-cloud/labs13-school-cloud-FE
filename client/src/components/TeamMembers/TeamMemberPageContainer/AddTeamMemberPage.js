@@ -66,6 +66,15 @@ class TeamMemberPage extends React.Component {
     // });
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.addSuccess !== this.props.addSuccess) {
+      setTimeout(() => {
+        const { teamMemberID } = this.props.teamMember && this.props.teamMember;
+        this.props.history.push(`/home/team-member/${teamMemberID}`);
+      }, 400);
+    }
+  }
+
   handleChange = name => event => {
     this.setState({
       teamMember: {
@@ -94,21 +103,12 @@ class TeamMemberPage extends React.Component {
 
   render() {
     const { classes } = this.props;
-    console.log("ADD MEMBER PAGE", this.props);
-    // const trainingAssigments =
-    //   this.props.teamMember.assignments &&
-    //   this.props.teamMember.assignments.map(trainingSeries => {
-    //     // return console.log("****", trainingSeries);
-    //     return (
-    //       <TrainingSeriesAssignments
-    //         trainingSeries={trainingSeries}
-    //         teamMemberId={this.props.urlId}
-    //       />
-    //     );
-    //   });
 
     return (
       <MainContainer>
+        <Typography variant="display1" align="center" gutterBottom>
+          Add A New Team Member
+        </Typography>
         <form className={classes.form}>
           <ButtonContainer>
             <NotificationWidget
@@ -118,16 +118,13 @@ class TeamMemberPage extends React.Component {
               type="success"
               submitType="add"
             />
-            {/* <Button
+            <Button
               variant="contained"
-              color="primary"
               className={classes.button}
-              onClick={e =>
-                this.props.deleteTeamMember(e, this.state.teamMember)
-              }
+              onClick={e => this.props.history.push("/home")}
             >
-              Delete
-            </Button> */}
+              Cancel
+            </Button>
           </ButtonContainer>
           {/* <DeleteModal deleteType='inTeamMemberPage' id={this.props.urlId} /> */}
           <Paper className={classes.root}>
@@ -225,7 +222,14 @@ const ButtonContainer = styled.div`
   justify-content: center;
 `;
 
+const mapStateToProps = state => {
+  return {
+    addSuccess: state.teamMembersReducer.status.addSuccess,
+    teamMember: state.teamMembersReducer.teamMember
+  };
+};
+
 export default connect(
-  null,
+  mapStateToProps,
   { addTeamMember }
 )(withStyles(styles)(TeamMemberPage));

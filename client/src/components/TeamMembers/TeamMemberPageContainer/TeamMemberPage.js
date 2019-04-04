@@ -59,10 +59,12 @@ class TeamMemberPage extends React.Component {
   };
 
   componentDidMount() {
-    this.setState({
-      teamMember: this.props.teamMember.teamMember,
-      assignments: this.props.teamMember.assignments
-    });
+    if (Object.keys(this.props.teamMember).length !== 0) {
+      this.setState({
+        teamMember: this.props.teamMember.teamMember,
+        assignments: this.props.teamMember.assignments
+      });
+    }
   }
 
   handleChange = name => event => {
