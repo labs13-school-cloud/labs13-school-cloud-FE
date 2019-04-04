@@ -5,6 +5,8 @@ import React from "react";
 import styled from "styled-components";
 import Button from "@material-ui/core/Button";
 
+import { login } from "../../Auth/Auth";
+
 class LandingPageView extends React.Component {
   render() {
     return (
@@ -18,8 +20,8 @@ class LandingPageView extends React.Component {
               messages/emails on a scheduled interval to team members”.
             </p>
             <LandingPageButtonContainer>
-              <Button>Get Started</Button>
-              <Button variant='outlined'>Learn More</Button>
+              <Button onClick={login}>Get Started</Button>
+              <Button variant="outlined">Learn More</Button>
             </LandingPageButtonContainer>
           </LandingPageContentContainer>
         </LandingPageContainer>

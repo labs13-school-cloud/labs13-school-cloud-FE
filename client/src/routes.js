@@ -36,7 +36,6 @@ export const makeMainRoutes = () => {
     <Provider store={store}>
       <Router history={history}>
         <>
-          <AppBar />
           <div>
             <Route exact path="/" component={App} />
             <Route path="/home" component={Dashboard} />

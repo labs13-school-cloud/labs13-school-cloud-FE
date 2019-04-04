@@ -4,6 +4,10 @@ export const FETCH_TEAM_START = "FETCH_TEAM_START";
 export const FETCH_TEAM_SUCCESS = "FETCH_TEAM_SUCCESS";
 export const FETCH_TEAM_FAIL = "FETCH_TEAM_FAIL";
 
+export const FETCH_SINGLE_MEMBER_START = "FETCH_SINGLE_MEMBER_START";
+export const FETCH_SINGLE_MEMBER_SUCCESS = "FETCH_SINGLE_MEMBER_SUCCESS";
+export const FETCH_SINGLE_MEMBER_FAIL = "FETCH_SINGLE_MEMBER_FAIL";
+
 export const ADD_MEMBER_START = "ADD_MEMBER_START";
 export const ADD_MEMBER_SUCCESS = "ADD_MEMBER_SUCCESS";
 export const ADD_MEMBER_FAIL = " ADD_MEMBER_FAIL";
@@ -15,6 +19,17 @@ export const DELETE_MEMBER_FAIL = "DELETE_MEMBER_FAIL";
 export const EDIT_MEMBER_START = "EDIT_MEMBER_START";
 export const EDIT_MEMBER_SUCCESS = "EDIT_MEMBER_SUCCESS";
 export const EDIT_MEMBER_FAIL = "EDIT_MEMBER_FAIL";
+
+export const ADD_MEMBER_TO_TRAININGSERIES_START =
+  "ADD_MEMBER_TO_TRAININGSERIES_START";
+export const ADD_MEMBER_TO_TRAININGSERIES_SUCCESS =
+  "ADD_MEMBER_TO_TRAININGSERIES_SUCCESS";
+export const ADD_MEMBER_TO_TRAININGSERIES_FAIL =
+  "ADD_MEMBER_TO_TRAININGSERIES_FAIL";
+
+export const REMOVE_MEMBER_FROM_TS_START = "REMOVE_MEMBER_FROM_TS_START";
+export const REMOVE_MEMBER_FROM_TS_SUCCESS = "REMOVE_MEMBER_FROM_TS_SUCCESS";
+export const REMOVE_MEMBER_FROM_TS_FAIL = "REMOVE_MEMBER_FROM_TS_FAIL";
 
 const baseUrl = `${process.env.REACT_APP_API}/api`;
 
@@ -65,4 +80,64 @@ export const deleteTeamMember = id => dispatch => {
       dispatch({ type: DELETE_MEMBER_SUCCESS, payload: id });
     })
     .catch(err => dispatch({ type: DELETE_MEMBER_FAIL, payload: err }));
+};
+
+export const getTeamMemberByID = id => dispatch => {
+  dispatch({ type: FETCH_SINGLE_MEMBER_START });
+  axios
+    .get(`${baseUrl}/team-members/${id}`)
+    .then(res => {
+      dispatch({
+        type: FETCH_SINGLE_MEMBER_SUCCESS,
+        payload: res.data
+      });
+    })
+    .catch(err => dispatch({ type: FETCH_SINGLE_MEMBER_FAIL, error: err }));
+};
+
+export const addTeamMemberToTrainingSeries = data => dispatch => {
+  dispatch({ type: ADD_MEMBER_TO_TRAININGSERIES_START });
+  console.log("data from action", data);
+  axios
+    .post(`${baseUrl}/team-members/assign`, data)
+    .then(res => {
+      console.log("ADD TEAM MEMBER DATA", res.data);
+      axios
+        .get(`${baseUrl}/team-members/${data.assignments[0]}`)
+        .then(res => {
+          console.log("PAYLOAD FROM ACTION", res.data);
+          dispatch({
+            type: ADD_MEMBER_TO_TRAININGSERIES_SUCCESS,
+            payload: res.data
+          });
+        })
+        .catch(err => console.log(err));
+    })
+    .catch(err =>
+      dispatch({ type: ADD_MEMBER_TO_TRAININGSERIES_FAIL, error: err })
+    );
+};
+
+export const deleteTeamMemberFromTrainingSeries = (id, ts_id) => dispatch => {
+  dispatch({ type: REMOVE_MEMBER_FROM_TS_START });
+
+  axios
+    .delete(`${baseUrl}/team-members/${id}/assign/${ts_id}`)
+    .then(res => {
+      console.log("DELETE CALL FIRED", res.data);
+      axios
+        .get(`${baseUrl}/team-members/${id}`)
+        .then(res => {
+          dispatch({ type: FETCH_SINGLE_MEMBER_START });
+          console.log("PAYLOAD FROM ACTION", res.data);
+          dispatch({
+            type: FETCH_SINGLE_MEMBER_SUCCESS,
+            payload: res.data
+          });
+        })
+        .catch(err =>
+          dispatch({ type: FETCH_SINGLE_MEMBER_FAIL, payload: err })
+        );
+    })
+    .catch(err => dispatch({ type: REMOVE_MEMBER_FROM_TS_FAIL, eror: err }));
 };
