@@ -57,17 +57,33 @@ class LandingPageView extends React.Component {
           <MarketingContentContainer>
             <MarketingSection>
               <MarketingImage>
-                <img src={undrawFolder} />
+                <img
+                  src={undrawFolder}
+                  alt="A drawing of an employee standing next to a folder"
+                />
               </MarketingImage>
               <MarketingContent>
-                <h3>TEST</h3>
+                <h3>Manage Your Employees. Stress Free.</h3>
+                <p>
+                  With Training Bot, we take the stress out of managing your
+                  employees recurring training modules.
+                </p>
               </MarketingContent>
             </MarketingSection>
             <MarketingSection>
-              <img src={undrawNotify} />
-            </MarketingSection>
-            <MarketingSection>
-              <img src={undrawTask} />
+              <MarketingImage>
+                <img
+                  src={undrawNotify}
+                  alt="A drawing of an employee notifying someone. "
+                />
+              </MarketingImage>
+              <MarketingContent>
+                <h3>Manage Your Employees. Stress Free.</h3>
+                <p>
+                  With Training Bot, we take the stress out of managing your
+                  employees recurring training modules.
+                </p>
+              </MarketingContent>
             </MarketingSection>
           </MarketingContentContainer>
           <TrainingBotTestimonyContainer>
@@ -198,6 +214,7 @@ const MarketingContentContainer = styled.div`
   justify-content: center;
   align-items: center;
   margin: 0 auto;
+  padding: 0 20px;
 `;
 
 const MarketingSection = styled.div`
@@ -213,7 +230,12 @@ const MarketingImage = styled.div`
   width: 50%;
 `;
 
-const MarketingContent = styled.div``;
+const MarketingContent = styled.div`
+  h3 {
+    font-size: 32px;
+    color: #451476;
+  }
+`;
 
 const LandingPageContentContainer = styled.div`
   width: 50%;
