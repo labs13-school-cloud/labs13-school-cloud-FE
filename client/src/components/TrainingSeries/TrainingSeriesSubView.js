@@ -3,8 +3,10 @@ import React, { Component } from 'react';
 //Components
 import TrainingSeriesList from './TrainingSeriesList';
 import TrainingSeriesModal from '../Modals/TrainingSeriesModal';
+
 import { withStyles } from '@material-ui/core/styles';
 import { Paper, List, Typography, Fab } from '@material-ui/core/';
+import Pagination from 'material-ui-flat-pagination';
 
 const styles = theme => ({
 	root: {
@@ -12,7 +14,7 @@ const styles = theme => ({
 		paddingTop: theme.spacing.unit * 2,
 		paddingBottom: theme.spacing.unit * 2,
 		width: '55%',
-		overflowY: 'auto',
+		// overflowY: 'auto',
 	},
 	columnHeader: {
 		display: 'flex',
@@ -27,8 +29,21 @@ const styles = theme => ({
 });
 
 class TrainingSeriesSubView extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			trainingSeries: [],
+			offset: 0,
+		};
+	}
+
+	handleClick(offset) {
+		this.setState({ offset });
+	}
 	render() {
 		const { classes } = this.props;
+
+		// let x = Math.ceil(this.props.trainingSeries.length / limit);
 
 		return (
 			<Paper className={classes.root} elevation={2}>
@@ -49,12 +64,18 @@ class TrainingSeriesSubView extends Component {
 						/>
 					</div>
 				</div>
-
 				<TrainingSeriesList
 					deleteTrainingSeries={this.props.deleteTrainingSeries}
 					trainingSeries={this.props.trainingSeries}
+					offset={this.state.offset}
 					match={this.props.match}
 					userID={this.props.userID}
+				/>
+				<Pagination
+					limit={10}
+					offset={this.state.offset}
+					total={this.props.trainingSeries.length}
+					onClick={(e, offset) => this.handleClick(offset)}
 				/>
 			</Paper>
 		);

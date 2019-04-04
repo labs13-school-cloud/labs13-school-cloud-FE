@@ -9,10 +9,17 @@ import styled from 'styled-components';
 import TrainingSeries from './TrainingSeries';
 
 const TrainingSeriesList = props => {
+	let arr = [];
+	let offset = props.offset;
+	let x = offset;
+	let y = offset + 10;
+	console.log('Offset Spacing', x, y);
+	arr = props.trainingSeries.slice(x, y);
+
 	return (
 		<>
 			<ListStyles>
-				{props.trainingSeries.map(series => {
+				{arr.map(series => {
 					// Get training series posts count
 					// const postCount = await axios.get(
 					//   `${process.env.REACT_APP_API}/api/training-series/${
