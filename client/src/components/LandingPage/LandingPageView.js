@@ -220,7 +220,7 @@ const TrainingBotStoryContainer = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
-  width: 70%;
+  width: 83%;
   margin: 0 auto 50px;
   h3 {
     color: #451476;
@@ -251,7 +251,7 @@ const StoryContent = styled.p`
 const TrainingBotTestimonyContainer = styled.div`
   display: flex;
   justify-content: center;
-  width: 70%;
+  width: 83%;
   margin: 0 auto;
 `;
 
@@ -279,6 +279,7 @@ const TestimonyPerson = styled.div`
   svg {
     position: relative;
     left: -30px;
+    color: #2699fb;
   }
 `;
 
