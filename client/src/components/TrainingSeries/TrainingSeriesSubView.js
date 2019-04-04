@@ -22,7 +22,12 @@ const styles = theme => ({
 		paddingTop: theme.spacing.unit * 2,
 		paddingBottom: theme.spacing.unit * 2,
 		width: '55%',
-		// overflowY: 'auto',
+
+		'@media (max-width:768px)': {
+			// eslint-disable-line no-useless-computed-key
+			width: '92%',
+			marginBottom: 10,
+		},
 	},
 	columnHeader: {
 		display: 'flex',
@@ -33,10 +38,9 @@ const styles = theme => ({
 		display: 'flex',
 		alignItems: 'center',
 	},
-  fab: { margin: 5 },
-  footer: { display: 'flex', justifyContent: 'space-between' },
+	fab: { margin: 5 },
+	footer: { display: 'flex', justifyContent: 'space-between' },
 	pagination: { width: '90%' },
-
 });
 
 class TrainingSeriesSubView extends Component {
@@ -85,36 +89,36 @@ class TrainingSeriesSubView extends Component {
 					userID={this.props.userID}
 					limit={this.state.limit}
 				/>
-        <div className={classes.footer}>
+				<div className={classes.footer}>
+					<Pagination
+						limit={this.state.limit}
+						reduced={true}
+						offset={this.state.offset}
+						total={this.props.trainingSeries.length}
+						onClick={(e, offset) => this.handleClick(offset)}
+					/>
 
-				<Pagination
-					limit={this.state.limit}
-					offset={this.state.offset}
-					total={this.props.trainingSeries.length}
-					onClick={(e, offset) => this.handleClick(offset)}
-          />
-
-				{this.props.trainingSeries.length < 5 ? (
-          ''
-          ) : (
-            <FormControl className={classes.formControl}>
-						<InputLabel htmlFor="pagination-selector">View</InputLabel>
-						<Select
-							native
-							value={this.state.limit}
-							onChange={e=>this.handleChange(e)}
-							inputProps={{
-								id: 'pagination-selector',
-							}}>
-							<option value={5}>5</option>
-							<option value={10}>10</option>
-							<option value={15}>15</option>
-							<option value={20}>20</option>
-							<option value={25}>25</option>
-						</Select>
-					</FormControl>
-				)}
-        </div>
+					{this.props.trainingSeries.length < 5 ? (
+						''
+					) : (
+						<FormControl className={classes.formControl}>
+							<InputLabel htmlFor="pagination-selector">View</InputLabel>
+							<NativeSelect
+								native
+								value={this.state.limit}
+								onChange={e => this.handleChange(e)}
+								inputProps={{
+									id: 'pagination-selector',
+								}}>
+								<option value={5}>5</option>
+								<option value={10}>10</option>
+								<option value={15}>15</option>
+								<option value={20}>20</option>
+								<option value={25}>25</option>
+							</NativeSelect>
+						</FormControl>
+					)}
+				</div>
 			</Paper>
 		);
 	}
