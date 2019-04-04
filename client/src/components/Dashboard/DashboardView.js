@@ -23,6 +23,7 @@ import Authenticate from '../authenticate/authenticate';
 import { connect } from 'react-redux';
 import { getUser } from '../../store/actions/userActions';
 import TrainingSeriesPosts from '../TrainingSeries/TrainingSeriesPosts';
+import AddTeamMemberPage from '../TeamMembers/TeamMemberPageContainer/AddTeamMemberPage';
 
 class Dashboard extends React.Component {
 	state = {
@@ -59,6 +60,15 @@ class Dashboard extends React.Component {
 									path="/home/team-member/:id"
 									render={props => (
 										<TeamMemberPageView
+											{...props}
+											userId={this.props.userProfile.user.userID}
+										/>
+									)}
+								/>
+								<Route
+									path="/home/create-team-member/"
+									render={props => (
+										<AddTeamMemberPage
 											{...props}
 											userId={this.props.userProfile.user.userID}
 										/>

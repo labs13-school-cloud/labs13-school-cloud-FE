@@ -7,21 +7,12 @@ import TeamMembersList from './TeamMembersList';
 import Pagination from 'material-ui-flat-pagination';
 
 import { connect } from 'react-redux';
-import styled from 'styled-components';
-import { getTeamMembers, addTeamMember, deleteTeamMember } from '../../store/actions';
+import { withRouter } from 'react-router';
 
 import { withStyles } from '@material-ui/core/styles';
-import { Paper, Typography, Fab } from '@material-ui/core/';
-import Input from '@material-ui/core/Input';
-import OutlinedInput from '@material-ui/core/OutlinedInput';
-import FilledInput from '@material-ui/core/FilledInput';
-import InputLabel from '@material-ui/core/InputLabel';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import NativeSelect from '@material-ui/core/NativeSelect';
+import { Paper, Typography, Fab, InputLabel, FormControl, Select } from '@material-ui/core/';
 
-import TeamMemberModal from '../Modals/TeamMemberModal';
+import { getTeamMembers, addTeamMember, deleteTeamMember } from '../../store/actions';
 
 const styles = theme => ({
 	root: {
@@ -59,23 +50,26 @@ class TeamMembersView extends React.Component {
 		limit: 5,
 	};
 
-	handleClick(offset) {
-		this.setState({ offset });
-	}
-	handleChange = (e) => {
-		this.setState({ limit: parseInt(e.target.value, 10) });
-	};
-
 	componentDidMount() {
 		this.props.getTeamMembers(this.props.userId);
 		this.setState({
 			teamMembers: this.props.teamMembers,
 		});
 	}
+	handleClick(offset) {
+		this.setState({ offset });
+	}
+	handleChange = e => {
+		this.setState({ limit: parseInt(e.target.value, 10) });
+	};
 
 	deleteMember = (e, id) => {
 		e.preventDefault();
 		this.props.deleteTeamMember(id);
+	};
+
+	routeToCreateMemberPage = () => {
+		this.props.history.push('/home/create-team-member');
 	};
 
 	render() {
@@ -93,18 +87,21 @@ class TeamMembersView extends React.Component {
 							onClick={this.handleOpen}>
 							<i className="material-icons">search</i>
 						</Fab>
-						<TeamMemberModal
-							userId={this.props.userId}
-							addTeamMember={this.props.addTeamMember}
-							// modalType="Add new team member"
-						/>
+						<Fab
+							color="primary"
+							size="small"
+							aria-label="Add"
+							className={classes.fab}
+							onClick={this.routeToCreateMemberPage}>
+							<i className="material-icons">add</i>
+						</Fab>
 					</div>
 				</div>
 				<TeamMembersList
 					teamMembers={this.props.teamMembers}
 					deleteTeamMember={this.deleteMember}
-				limit={this.state.limit}
-				offset={this.state.offset}
+					limit={this.state.limit}
+					offset={this.state.offset}
 				/>
 				<div className={classes.footer}>
 					<Pagination
@@ -121,9 +118,8 @@ class TeamMembersView extends React.Component {
 							<Select
 								native
 								value={this.state.limit}
-								onChange={(e)=>this.handleChange(e)}
+								onChange={e => this.handleChange(e)}
 								inputProps={{
-
 									id: 'pagination-selector',
 								}}>
 								<option value={5}>5</option>
@@ -154,4 +150,4 @@ const mapStateToProps = state => {
 export default connect(
 	mapStateToProps,
 	{ getTeamMembers, addTeamMember, deleteTeamMember }
-)(withStyles(styles)(TeamMembersView));
+)(withStyles(styles)(withRouter(TeamMembersView)));
