@@ -8,17 +8,11 @@ import { getTrainingSeries, deleteTrainingSeries } from '../../store/actions/';
 
 //Components
 import TrainingSeriesSubView from './TrainingSeriesSubView';
-import TrainingSeriesPosts from './TrainingSeriesPosts';
+// import TrainingSeriesPosts from './TrainingSeriesPosts';
 
 class TrainingSeriesView extends Component {
   componentDidMount() {
     this.getTrainingSeries();
-  }
-
-  componentDidUpdate() {
-    // if (this.props.isDoneAdding) {
-    //   this.getTrainingSeries();
-    // }
   }
 
   getTrainingSeries = () => {
@@ -45,15 +39,6 @@ class TrainingSeriesView extends Component {
             />
           )}
         />
-        {/* <Route
-            path={`${this.props.match.path}/training-series/:id`}
-            render={props => (
-              <TrainingSeriesPosts
-                {...props}
-                trainingSeries={this.props.trainingSeries}
-              />
-            )}
-          /> */}
       </>
     );
   }

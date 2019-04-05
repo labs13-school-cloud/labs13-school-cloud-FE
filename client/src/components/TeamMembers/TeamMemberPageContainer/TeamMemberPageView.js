@@ -1,5 +1,9 @@
 import React from "react";
 
+import { connect } from "react-redux";
+
+import TeamMemberPage from "./TeamMemberPage";
+
 //Components
 import TeamMemberPage from "./TeamMemberPage";
 //Redux
@@ -32,7 +36,10 @@ class TeamMemberPageView extends React.Component {
   };
 
   renderTeamMemberPage = () => {
-    if (this.props.loadSuccess && !this.props.isLoading) {
+    if (
+      this.props.loadSuccess &&
+      Object.keys(this.props.teamMember).length !== 0
+    ) {
       return (
         <TeamMemberPage
           teamMember={this.props.teamMember}

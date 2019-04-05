@@ -4,10 +4,7 @@ import PropTypes from "prop-types";
 
 //Styles
 import { withStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
-import Modal from "@material-ui/core/Modal";
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
+import { Typography, Fab, Modal, Button, TextField } from "@material-ui/core/";
 
 //REDUX
 import { connect } from "react-redux";
@@ -50,7 +47,8 @@ const styles = theme => ({
   },
   button: {
     margin: theme.spacing.unit
-  }
+  },
+  fab: { margin: 5 }
 });
 
 class TrainingSeriesModal extends React.Component {
@@ -107,7 +105,17 @@ class TrainingSeriesModal extends React.Component {
           {this.props.modalType === "edit" ? (
             <div onClick={this.handleOpen}>Edit Training Series</div>
           ) : (
-            <Button onClick={this.handleOpen}>Add New Training Series</Button>
+            <Fab
+              color="primary"
+              size="small"
+              aria-label="Add"
+              className={classes.fab}
+              onClick={this.handleOpen}
+            >
+              <i className="material-icons">add</i>
+            </Fab>
+
+            // <Button onClick={this.handleOpen}>Add New Training Series</Button>
           )}
         </div>
         <Modal
