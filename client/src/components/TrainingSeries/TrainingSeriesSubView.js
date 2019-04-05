@@ -5,6 +5,7 @@ import TrainingSeriesList from './TrainingSeriesList';
 import TrainingSeriesModal from '../Modals/TrainingSeriesModal';
 
 import { withStyles } from '@material-ui/core/styles';
+
 import { Paper, Typography, Fab, FormControl, NativeSelect, InputLabel } from '@material-ui/core/';
 import Pagination from 'material-ui-flat-pagination';
 
@@ -35,23 +36,23 @@ const styles = theme => ({
 });
 
 class TrainingSeriesSubView extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			offset: 0,
-			limit: 5,
-		};
-	}
+  constructor(props) {
+    super(props);
+    this.state = {
+      offset: 0,
+      limit: 5
+    };
+  }
 
-	handleClick(offset) {
-		this.setState({ offset });
-	}
-	handleChange = e => {
-		this.setState({ limit: parseInt(e.target.value, 10) });
-	};
+  handleClick(offset) {
+    this.setState({ offset });
+  }
+  handleChange = e => {
+    this.setState({ limit: parseInt(e.target.value, 10) });
+  };
 
-	render() {
-		const { classes } = this.props;
+  render() {
+    const { classes } = this.props;
 
 		return (
 			<Paper className={classes.root} elevation={2}>

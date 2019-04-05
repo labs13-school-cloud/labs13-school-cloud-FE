@@ -1,28 +1,28 @@
-import React from "react";
+import React from 'react';
 
-import DatePicker from "react-datepicker";
+import DatePicker from 'react-datepicker';
 
 //Styles
-import "react-datepicker/dist/react-datepicker.css";
-import { withStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
-import Modal from "@material-ui/core/Modal";
-import Button from "@material-ui/core/Button";
-import AddIcon from "@material-ui/icons/Add";
-import Fab from "@material-ui/core/Fab";
-import Checkbox from "@material-ui/core/Checkbox";
-import FormLabel from "@material-ui/core/FormLabel";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import styled from "styled-components";
-import Select from "@material-ui/core/Select";
-import FormControl from "@material-ui/core/FormControl";
-import { MenuItem } from "@material-ui/core";
-import InputLabel from "@material-ui/core/InputLabel";
+import 'react-datepicker/dist/react-datepicker.css';
+import { withStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+import Modal from '@material-ui/core/Modal';
+import Button from '@material-ui/core/Button';
+import AddIcon from '@material-ui/icons/Add';
+import Fab from '@material-ui/core/Fab';
+// import Checkbox from "@material-ui/core/Checkbox";
+// import FormLabel from "@material-ui/core/FormLabel";
+// import FormControlLabel from "@material-ui/core/FormControlLabel";
+// import styled from "styled-components";
+import Select from '@material-ui/core/Select';
+import FormControl from '@material-ui/core/FormControl';
+import { MenuItem } from '@material-ui/core';
+import InputLabel from '@material-ui/core/InputLabel';
 
 //REDUX
-import { connect } from "react-redux";
-import { addTeamMemberToTrainingSeries } from "../../store/actions/";
-import { TransitionGroup } from "react-transition-group";
+import { connect } from 'react-redux';
+import { addTeamMemberToTrainingSeries } from '../../store/actions/';
+import { TransitionGroup } from 'react-transition-group';
 
 function getModalStyle() {
   const top = 50;
@@ -37,6 +37,7 @@ function getModalStyle() {
 
 const styles = theme => ({
   paper: {
+
     position: "absolute",
     width: theme.spacing.unit * 50,
     backgroundColor: theme.palette.background.paper,
@@ -48,8 +49,8 @@ const styles = theme => ({
     }
   },
   container: {
-    display: "flex",
-    flexWrap: "wrap"
+    display: 'flex',
+    flexWrap: 'wrap'
   },
   textField: {
     marginLeft: theme.spacing.unit,
@@ -66,8 +67,8 @@ const styles = theme => ({
     margin: theme.spacing.unit
   },
   memberList: {
-    display: "flex",
-    flexDirection: "column"
+    display: 'flex',
+    flexDirection: 'column'
   },
   selectEmpty: {
     marginTop: theme.spacing.unit * 2
@@ -77,9 +78,9 @@ const styles = theme => ({
 class UserModal extends React.Component {
   state = {
     open: false,
-    trainingSeriesID: "",
-    startDate: "",
-    value: ""
+    trainingSeriesID: '',
+    startDate: '',
+    value: ''
   };
 
   componentDidMount() {
@@ -182,7 +183,7 @@ class UserModal extends React.Component {
               className={classes.memberList}
               onSubmit={e => this.handleSubmit(e)}
             >
-              <FormControl className={""}>
+              <FormControl className={''}>
                 <InputLabel htmlFor="trainingSeriesID">
                   Training Series
                 </InputLabel>
