@@ -42,12 +42,13 @@ const styles = theme => ({
 class NotificationsView extends Component {
   state = {
     offset: 0,
-    limit: 5
+    limit: 5,
+    filterType: 'all'
   };
 
   componentDidMount() {
-    this.props.getTextNotifications(2);
-    this.props.getEmailNotifications(2);
+    this.props.getTextNotifications(this.props.userId);
+    this.props.getEmailNotifications(this.props.userId);
   }
 
   handleClick(offset) {
@@ -55,6 +56,9 @@ class NotificationsView extends Component {
   }
   handleChange = e => {
     this.setState({ limit: parseInt(e.target.value, 10) });
+  };
+  handleFilter = e => {
+    this.setState({ filterType: e.target.value });
   };
 
   render() {
@@ -64,17 +68,42 @@ class NotificationsView extends Component {
       ...this.props.emailNotifications
     ];
 
-    allNotifications.sort((a, b) =>
+    const notificationCount = allNotifications.length;
+
+    const filteredNotifications = allNotifications.filter(notification => {
+      // check if first key included email or text
+      if (notification.hasOwnProperty(this.state.filterType)) {
+        return notification;
+      } else if (this.state.filterType === 'all') {
+        return notification;
+      }
+    });
+
+    filteredNotifications.sort((a, b) =>
       a.sendDate > b.sendDate ? 1 : b.sendDate > a.sendDate ? -1 : 0
     );
 
     return (
       <Paper className={classes.root} elevation={2}>
         <div className={classes.columnHeader}>
-          <Typography variant="h5">Pending Outgoing Notifications</Typography>
+          <Typography variant="h5">{`${notificationCount} Pending Notifications`}</Typography>
+          <FormControl className={classes.formControl}>
+            <Select
+              native
+              value={this.state.filterType}
+              onChange={e => this.handleFilter(e)}
+              inputProps={{
+                id: 'pagination-selector'
+              }}
+            >
+              <option value={'all'}>All</option>
+              <option value={'phoneNumber'}>Text</option>
+              <option value={'email'}>Email</option>
+            </Select>
+          </FormControl>
         </div>
         <NotificationsList
-          notifications={allNotifications}
+          notifications={filteredNotifications}
           offset={this.state.offset}
           match={this.props.match}
           userID={this.props.userID}
@@ -84,11 +113,11 @@ class NotificationsView extends Component {
           <Pagination
             limit={this.state.limit}
             offset={this.state.offset}
-            total={allNotifications.length}
+            total={filteredNotifications.length}
             onClick={(e, offset) => this.handleClick(offset)}
           />
 
-          {allNotifications.length < 5 ? (
+          {filteredNotifications.length < 5 ? (
             ''
           ) : (
             <FormControl className={classes.formControl}>
