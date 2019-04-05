@@ -37,12 +37,16 @@ function getModalStyle() {
 
 const styles = theme => ({
   paper: {
-    position: 'absolute',
-    width: 400,
+
+    position: "absolute",
+    width: theme.spacing.unit * 50,
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
     padding: theme.spacing.unit * 4,
-    outline: 'none'
+    outline: "none",
+    "@media (max-width: 768px)": {
+      width: "65%",
+    }
   },
   container: {
     display: 'flex',

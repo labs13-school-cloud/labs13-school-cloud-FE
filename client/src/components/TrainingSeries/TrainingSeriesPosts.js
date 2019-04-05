@@ -13,6 +13,7 @@ import { withStyles } from '@material-ui/core/styles';
 // Styling
 import {
 	Paper,
+	List,
 	ListItem,
 	ListItemText,
 	ListItemSecondaryAction,
@@ -20,17 +21,27 @@ import {
 
 const styles = theme => ({
 	paper: {
-		position: 'absolute',
-		width: theme.spacing.unit * 100,
+		width: "80%",
 		backgroundColor: theme.palette.background.paper,
 		boxShadow: theme.shadows[5],
 		padding: theme.spacing.unit * 4,
 		outline: 'none',
+		margin: "20px auto",
+		"@media (max-width: 480px)": {
+			width: "75%",
+		  }
+	},
+	listItem: {
+		display: "flex",
+		alignItems: "center"
 	},
 	secondaryAction: {
-		dispaly: 'flex',
-		flexDirection: 'row',
+		display: "flex",
+		flexDirection: "row"
 	},
+	list: {
+		listStyleType: "none"
+	}
 });
 class TrainingSeriesPosts extends React.Component {
 	componentDidMount() {
@@ -64,7 +75,8 @@ class TrainingSeriesPosts extends React.Component {
 						/>
 						<div>
 							{this.props.posts.map(post => (
-								<ListItem key={post.postID} className={classes.secondaryAction}>
+								<List className={classes.list}>
+								<ListItem key={post.postID} className={classes.listItem}>
 									<ListItemText
 										primary={post.postName}
 										secondary={post.postDetails}
@@ -81,6 +93,7 @@ class TrainingSeriesPosts extends React.Component {
 										{/* </IconButton> */}
 									</ListItemSecondaryAction>
 								</ListItem>
+								</List>
 							))}
 						</div>
 					</Paper>
