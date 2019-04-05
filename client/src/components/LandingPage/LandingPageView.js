@@ -20,6 +20,7 @@ class LandingPageView extends React.Component {
     return (
       <>
         <LandingPageContainer>
+          {/* NAVIGATION */}
           <NavbarContainer>
             <img src={Logo} alt="A cute, personable robot" />
             <NavbarItemsContainer>
@@ -29,6 +30,7 @@ class LandingPageView extends React.Component {
               <h2 onClick={login}>Sign In</h2>
             </NavbarItemsContainer>
           </NavbarContainer>
+          {/* JUMBOTRON STYLED SECTION */}
           <FirstSection>
             <LandingPageContentContainer>
               <h1>Training Bot</h1>
@@ -54,6 +56,7 @@ class LandingPageView extends React.Component {
               />
             </VideoContainer>
           </FirstSection>
+          {/* MARKETING CONTAINER / UNDRAW PHOTO SECTION */}
           <MarketingContentContainer>
             <MarketingSection>
               <MarketingImage>
@@ -101,6 +104,7 @@ class LandingPageView extends React.Component {
               </MarketingContent>
             </MarketingSection>
           </MarketingContentContainer>
+          {/* TESTIMONY SECTION */}
           <TrainingBotTestimonyContainer>
             <TestimonyContainer>
               <TestimonyPerson>
@@ -122,6 +126,7 @@ class LandingPageView extends React.Component {
               </p>
             </TestimonyContainer>
           </TrainingBotTestimonyContainer>
+          {/* STORY SECTION */}
           <TrainingBotStoryContainer>
             <h3>The Training Bot Story</h3>
             <StorySection>
@@ -143,6 +148,7 @@ class LandingPageView extends React.Component {
               </StoryContent>
             </StorySection>
           </TrainingBotStoryContainer>
+          {/* GET STARTED CONTAINER */}
           <GetStartedContainer>
             <IconBox>
               <img src={Logo} alt="This robot loves showing up" />
