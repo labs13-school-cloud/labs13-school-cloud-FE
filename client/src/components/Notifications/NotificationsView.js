@@ -23,7 +23,10 @@ const styles = theme => ({
     ...theme.mixins.gutters(),
     paddingTop: theme.spacing.unit * 2,
     paddingBottom: theme.spacing.unit * 2,
-    width: '55%'
+    width: '65%',
+    '@media (max-width: 768px)': {
+      width: '80%'
+    }
   },
   columnHeader: {
     display: 'flex',

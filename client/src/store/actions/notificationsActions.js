@@ -14,7 +14,7 @@ export const getTextNotifications = id => dispatch => {
     type: GET_TEXT_NOTIFICATIONS_START
   });
   axios
-    .get(`http://localhost:5000/api/users/${id}/text-notifications/`)
+    .get(`${process.env.REACT_APP_API}/api/users/${id}/text-notifications/`)
     .then(res =>
       dispatch({
         type: GET_TEXT_NOTIFICATIONS_SUCCESS,
@@ -29,7 +29,7 @@ export const getEmailNotifications = id => dispatch => {
     type: GET_EMAIL_NOTIFICATIONS_START
   });
   axios
-    .get(`http://localhost:5000/api/users/${id}/email-notifications/`)
+    .get(`${process.env.REACT_APP_API}/api/users/${id}/email-notifications/`)
     .then(res =>
       dispatch({
         type: GET_EMAIL_NOTIFICATIONS_SUCCESS,
