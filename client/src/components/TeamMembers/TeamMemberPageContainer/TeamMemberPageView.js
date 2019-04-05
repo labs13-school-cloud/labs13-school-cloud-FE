@@ -2,8 +2,6 @@ import React from "react";
 
 import { connect } from "react-redux";
 
-import TeamMemberPage from "./TeamMemberPage";
-
 //Components
 import TeamMemberPage from "./TeamMemberPage";
 //Redux
