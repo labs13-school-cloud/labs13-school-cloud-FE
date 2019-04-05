@@ -26,6 +26,9 @@ const styles = theme => ({
 		boxShadow: theme.shadows[5],
 		padding: theme.spacing.unit * 4,
 		outline: 'none',
+		"@media (max-width: 768px)": {
+			width: "65%",
+		  }
 	},
 	container: {
 		display: 'flex',
