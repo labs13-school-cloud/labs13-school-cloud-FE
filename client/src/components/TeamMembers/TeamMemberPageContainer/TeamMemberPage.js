@@ -1,18 +1,17 @@
-import React from "react";
+import React from 'react';
 
-import styled from "styled-components";
+import styled from 'styled-components';
 
 // Material UI
-import { withStyles } from "@material-ui/core/styles";
-import Paper from "@material-ui/core/Paper";
-import Typography from "@material-ui/core/Typography";
-import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
-import NotificationWidget from "./SnackBarTeamMember";
-
+import {withStyles} from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import NotificationWidget from './SnackBarTeamMember';
 //Components
-import AddTeamMemberToTrainingSeriesModal from "../../Modals/addTeamMemberToTrainingSeriesModal";
-import TrainingSeriesAssignments from "./TrainingSeriesAssigments";
+import AddTeamMemberToTrainingSeriesModal from '../../Modals/addTeamMemberToTrainingSeriesModal';
+import TrainingSeriesAssignments from './TrainingSeriesAssigments';
 
 const styles = theme => ({
   root: {
@@ -30,35 +29,35 @@ const styles = theme => ({
     margin: "0 auto",
   },
   info: {
-    "margin-right": "50px"
+    'margin-right': '50px',
   },
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
-    width: "100%"
+    width: '100%',
   },
   fab: {
-    margin: theme.spacing.unit
+    margin: theme.spacing.unit,
   },
   button: {
-    "margin-left": theme.spacing.unit
-  }
+    'margin-left': theme.spacing.unit,
+  },
 });
 
 class TeamMemberPage extends React.Component {
   state = {
     teamMember: {
-      firstName: "",
-      lastName: "",
-      jobDescription: "",
-      email: "",
-      phoneNumber: "",
-      user_ID: "",
-      TeamMemberCol: "",
-      teamMemberID: ""
+      firstName: '',
+      lastName: '',
+      jobDescription: '',
+      email: '',
+      phoneNumber: '',
+      user_ID: '',
+      TeamMemberCol: '',
+      teamMemberID: '',
     },
     assignments: [],
-    trainingSeries: []
+    trainingSeries: [],
   };
 
   componentDidMount() {
@@ -74,19 +73,19 @@ class TeamMemberPage extends React.Component {
     this.setState({
       teamMember: {
         ...this.state.teamMember,
-        [name]: event.target.value
-      }
+        [name]: event.target.value,
+      },
     });
   };
 
   handleDate = name => event => {
     this.setState({
-      [name]: event.target.value
+      [name]: event.target.value,
     });
   };
 
   render() {
-    const { classes } = this.props;
+    const {classes} = this.props;
 
     const trainingAssigments =
       this.props.teamMember.assignments &&
@@ -123,14 +122,14 @@ class TeamMemberPage extends React.Component {
           </ButtonContainer>
           {/* <DeleteModal deleteType='inTeamMemberPage' id={this.props.urlId} /> */}
           <Paper className={classes.root}>
-            <Typography>Team Member Info</Typography>
+            <Typography>{`Team Member Info`}</Typography>
             <MemberInfoContainer>
               <TextField
                 id="standard-name"
                 label="first name"
                 className={classes.textField}
                 value={this.state.teamMember.firstName}
-                onChange={this.handleChange("firstName")}
+                onChange={this.handleChange('firstName')}
                 margin="normal"
               />
               <TextField
@@ -138,7 +137,7 @@ class TeamMemberPage extends React.Component {
                 label="last name"
                 className={classes.textField}
                 value={this.state.teamMember.lastName}
-                onChange={this.handleChange("lastName")}
+                onChange={this.handleChange('lastName')}
                 margin="normal"
               />
               <TextField
@@ -146,7 +145,7 @@ class TeamMemberPage extends React.Component {
                 label="job description"
                 className={classes.textField}
                 value={this.state.teamMember.jobDescription}
-                onChange={this.handleChange("jobDescription")}
+                onChange={this.handleChange('jobDescription')}
                 margin="normal"
               />
             </MemberInfoContainer>
@@ -159,7 +158,7 @@ class TeamMemberPage extends React.Component {
                 label="email"
                 className={classes.textField}
                 value={this.state.teamMember.email}
-                onChange={this.handleChange("email")}
+                onChange={this.handleChange('email')}
                 margin="normal"
               />
               <TextField
@@ -167,7 +166,7 @@ class TeamMemberPage extends React.Component {
                 label="phone"
                 className={classes.textField}
                 value={this.state.teamMember.phoneNumber}
-                onChange={this.handleChange("phoneNumber")}
+                onChange={this.handleChange('phoneNumber')}
                 margin="normal"
               />
             </MemberInfoContainer>
@@ -177,7 +176,7 @@ class TeamMemberPage extends React.Component {
             <MemberInfoContainer>
               <div>
                 <AddTeamMemberToTrainingSeriesModal
-                  modalType={"assignMultiple"}
+                  modalType={'assignMultiple'}
                   userId={this.props.userId}
                   urlId={this.props.urlId}
                   assignments={this.props.teamMember.assignments}
