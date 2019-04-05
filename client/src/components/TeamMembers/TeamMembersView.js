@@ -10,7 +10,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 
 import { withStyles } from '@material-ui/core/styles';
-import { Paper, Typography, Fab, InputLabel, FormControl, Select } from '@material-ui/core/';
+import { Paper, Typography, Fab, InputLabel, FormControl, NativeSelect } from '@material-ui/core/';
 
 import { getTeamMembers, addTeamMember, deleteTeamMember } from '../../store/actions';
 
@@ -20,6 +20,10 @@ const styles = theme => ({
 		paddingTop: theme.spacing.unit * 2,
 		paddingBottom: theme.spacing.unit * 2,
 		width: '30%',
+		'@media (max-width:768px)': {
+			width: '92%',
+			marginBottom: 10,
+		},
 	},
 	columnHeader: {
 		display: 'flex',
@@ -33,13 +37,13 @@ const styles = theme => ({
 	fab: { margin: 5 },
 	formControl: {
 		margin: theme.spacing.unit,
-		minWidth: 120,
+		// minWidth: 120,
 	},
 	selectEmpty: {
 		marginTop: theme.spacing.unit * 2,
 	},
 	footer: { display: 'flex', justifyContent: 'space-between' },
-	pagination: { width: '90%' },
+	// pagination: { width: '90%' },
 });
 class TeamMembersView extends React.Component {
 	state = {
@@ -106,6 +110,7 @@ class TeamMembersView extends React.Component {
 				<div className={classes.footer}>
 					<Pagination
 						limit={this.state.limit}
+						reduced={true}
 						offset={this.state.offset}
 						total={this.props.teamMembers.length}
 						onClick={(e, offset) => this.handleClick(offset)}
@@ -115,7 +120,7 @@ class TeamMembersView extends React.Component {
 					) : (
 						<FormControl className={classes.formControl}>
 							<InputLabel htmlFor="pagination-selector">View</InputLabel>
-							<Select
+							<NativeSelect
 								native
 								value={this.state.limit}
 								onChange={e => this.handleChange(e)}
@@ -127,7 +132,7 @@ class TeamMembersView extends React.Component {
 								<option value={15}>15</option>
 								<option value={20}>20</option>
 								<option value={25}>25</option>
-							</Select>
+							</NativeSelect>
 						</FormControl>
 					)}
 				</div>

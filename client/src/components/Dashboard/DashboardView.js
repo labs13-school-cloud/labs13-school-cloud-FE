@@ -122,11 +122,16 @@ export default connect(
 
 //Styled Components
 const DashboardContainer = styled.div`
-  display: flex;
-  justify-content: space-around;
-  margin: 0 auto;
-  max-width: 1000px;
-  /* height: 70vh; */
+
+	display: flex;
+	justify-content: space-around;
+	margin: 0 auto;
+	max-width: 1000px;
+	/* height: 70vh; */
+	@media (max-width: 768px) {
+		flex-direction: column;
+		padding: 10px;
+	}
 `;
 
 const hidden = {
