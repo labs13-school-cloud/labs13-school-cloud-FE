@@ -233,7 +233,7 @@ const MarketingContentContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 0 auto;
+  margin: 0 auto 100px;
   padding: 0 20px;
 `;
 
@@ -255,10 +255,18 @@ const MarketingImage = styled.div`
 
 const MarketingContent = styled.div`
   width: 50%;
-  padding: 0 10px;
+  padding: 0 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   h3 {
     font-size: 32px;
     color: #451476;
+    margin-bottom: 0;
+  }
+  p {
+    font-size: 20px;
   }
 `;
 
