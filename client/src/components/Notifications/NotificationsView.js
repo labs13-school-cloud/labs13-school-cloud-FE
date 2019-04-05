@@ -3,12 +3,20 @@ import React, { Component } from 'react';
 //Components
 import NotificationsList from './NotificationsList';
 
+//Styling
 import { withStyles } from '@material-ui/core/styles';
 import { Paper, Typography } from '@material-ui/core/';
 import Pagination from 'material-ui-flat-pagination';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+
+//State Management
+import { connect } from 'react-redux';
+import {
+  getTextNotifications,
+  getEmailNotifications
+} from '../../store/actions/notificationsActions';
 
 const styles = theme => ({
   root: {
@@ -33,13 +41,13 @@ const styles = theme => ({
 
 class NotificationsView extends Component {
   state = {
-    notifications: [{ test: 'working' }],
     offset: 0,
     limit: 5
   };
 
   componentDidMount() {
-    // this.getNotifications();
+    this.props.getTextNotifications(2);
+    this.props.getEmailNotifications(2);
   }
 
   handleClick(offset) {
@@ -51,14 +59,22 @@ class NotificationsView extends Component {
 
   render() {
     const { classes } = this.props;
+    const allNotifications = [
+      ...this.props.textNotifications,
+      ...this.props.emailNotifications
+    ];
+
+    allNotifications.sort((a, b) =>
+      a.sendDate > b.sendDate ? 1 : b.sendDate > a.sendDate ? -1 : 0
+    );
 
     return (
       <Paper className={classes.root} elevation={2}>
         <div className={classes.columnHeader}>
-          <Typography variant="h5">Upcoming Notifications</Typography>
+          <Typography variant="h5">Pending Outgoing Notifications</Typography>
         </div>
         <NotificationsList
-          notifications={this.state.notifications}
+          notifications={allNotifications}
           offset={this.state.offset}
           match={this.props.match}
           userID={this.props.userID}
@@ -68,11 +84,11 @@ class NotificationsView extends Component {
           <Pagination
             limit={this.state.limit}
             offset={this.state.offset}
-            total={this.state.notifications.length}
+            total={allNotifications.length}
             onClick={(e, offset) => this.handleClick(offset)}
           />
 
-          {this.state.notifications.length < 5 ? (
+          {allNotifications.length < 5 ? (
             ''
           ) : (
             <FormControl className={classes.formControl}>
@@ -99,4 +115,19 @@ class NotificationsView extends Component {
   }
 }
 
-export default withStyles(styles)(NotificationsView);
+const mapStateToProps = state => {
+  return {
+    textNotifications: state.notificationsReducer.textNotifications,
+    emailNotifications: state.notificationsReducer.emailNotifications,
+    isLoading: state.notificationsReducer.isLoading,
+    isDoneAdding: state.notificationsReducer.isDoneAdding
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  {
+    getTextNotifications,
+    getEmailNotifications
+  }
+)(withStyles(styles)(NotificationsView));

@@ -1,5 +1,5 @@
-// displays training series card
 import React from 'react';
+import moment from 'moment';
 
 //PropTypes
 import PropTypes from 'prop-types';
@@ -25,13 +25,12 @@ const styles = {
 
 function Notification(props) {
   const { classes } = props;
+  const { firstName, lastName, sendDate, postName } = props.notification;
 
   return (
     <ListItem className={classes.listItem}>
-      <ListItemText
-        primary={props.notification.title}
-        secondary="Posts: 10 | Assigned: 5"
-      />
+      <ListItemText primary={postName} secondary={`${firstName} ${lastName}`} />
+      <p>{moment(sendDate).format('MMMM Do')}</p>
     </ListItem>
   );
 }
