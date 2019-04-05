@@ -32,12 +32,15 @@ import {
 
 const styles = theme => ({
   paper: {
-    position: "absolute",
-    width: theme.spacing.unit * 100,
+    width: "80%",
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
     padding: theme.spacing.unit * 4,
-    outline: "none"
+    outline: "none",
+    margin: "20px auto",
+    "@media (max-width: 480px)": {
+      width: "75%"
+    }
   },
   secondaryAction: {
     display: "flex",
@@ -68,6 +71,9 @@ const styles = theme => ({
   },
   button: {
     margin: theme.spacing.unit
+  },
+  list: {
+    listStyleType: "none"
   }
 });
 class TrainingSeriesPosts extends React.Component {

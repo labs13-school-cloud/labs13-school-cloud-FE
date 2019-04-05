@@ -20,11 +20,14 @@ const styles = theme => ({
     paddingTop: theme.spacing.unit * 2,
     paddingBottom: theme.spacing.unit * 2,
     width: "80%",
-    margin: "20px auto"
+    margin: "20px auto",
+    "@media (max-width: 480px)": {
+      width: "100%",
+    }
   },
   form: {
     width: "90%",
-    margin: "0 auto"
+    margin: "0 auto",
   },
   info: {
     "margin-right": "50px"
@@ -199,6 +202,11 @@ const MemberInfoContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: baseline;
+
+  @media (max-width:480px) {
+      flex-direction: column;
+      width: 90%;
+    }
 `;
 
 const TrainingSeriesContainer = styled.div`

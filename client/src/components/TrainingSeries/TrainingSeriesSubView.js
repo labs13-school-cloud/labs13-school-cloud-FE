@@ -21,8 +21,12 @@ const styles = theme => ({
     ...theme.mixins.gutters(),
     paddingTop: theme.spacing.unit * 2,
     paddingBottom: theme.spacing.unit * 2,
-    width: "55%"
-    // overflowY: 'auto',
+    width: "55%",
+
+    "@media (max-width:768px)": {
+      width: "92%",
+      marginBottom: 10
+    }
   },
   columnHeader: {
     display: "flex",

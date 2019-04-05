@@ -124,6 +124,10 @@ const DashboardContainer = styled.div`
   margin: 0 auto;
   max-width: 1000px;
   /* height: 70vh; */
+  @media (max-width: 768px) {
+    flex-direction: column;
+    padding: 10px;
+  }
 `;
 
 const hidden = {
