@@ -132,7 +132,13 @@ class CreatePost extends React.Component {
             <Button
               variant="contained"
               className={classes.button}
-              onClick={e => this.props.history.push("/home")}
+              onClick={e =>
+                this.props.history.push(
+                  `/home/training-series/${
+                    this.props.location.state.trainingSeriesId
+                  }`
+                )
+              }
             >
               Cancel
             </Button>
@@ -149,6 +155,7 @@ class CreatePost extends React.Component {
                 value={this.state.post.postName}
                 onChange={this.handleChange("postName")}
                 margin="normal"
+                required
               />
               <TextField
                 id="standard-name"
@@ -157,6 +164,7 @@ class CreatePost extends React.Component {
                 value={this.state.post.postDetails}
                 onChange={this.handleChange("postDetails")}
                 margin="normal"
+                required
               />
               <TextField
                 id="standard-name"
@@ -165,6 +173,7 @@ class CreatePost extends React.Component {
                 value={this.state.post.link}
                 onChange={this.handleChange("link")}
                 margin="normal"
+                required
               />
               <TextField
                 id="outlined-number"
@@ -176,6 +185,7 @@ class CreatePost extends React.Component {
                 value={this.state.post.daysFromStart}
                 step="1"
                 inputProps={{ min: 1 }}
+                required
               />
             </PostContainer>
           </Paper>
