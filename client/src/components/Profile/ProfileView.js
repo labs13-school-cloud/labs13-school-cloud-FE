@@ -26,6 +26,9 @@ import DeleteIcon from '@material-ui/icons/Delete';
 
 import styled from 'styled-components';
 
+// function rand() {
+// 	return Math.round(Math.random() * 20) - 10;
+// }
 function rand() {
 	return Math.round(Math.random() * 20) - 10;
 }
@@ -42,15 +45,15 @@ function getModalStyle() {
 }
 
 const styles = theme => ({
-	// paper: {
-	// 	// position: 'absolute',
-	// 	width: 800,
-	// 	margin:'0 auto',
-	// 	backgroundColor: theme.palette.background.paper,
-	// 	boxShadow: theme.shadows[5],
-	// 	padding: theme.spacing.unit * 4,
-	// 	outline: 'none',
-	// },
+	paper: {
+		position: 'absolute',
+		width: 800,
+		margin: '0 auto',
+		backgroundColor: theme.palette.background.paper,
+		boxShadow: theme.shadows[5],
+		padding: theme.spacing.unit * 4,
+		outline: 'none',
+	},
 	card: {
 		maxWidth: '100%',
 		width: 600,
@@ -149,11 +152,11 @@ class ProfileView extends React.Component {
 								</Typography>
 								<CardActions>
 									{/* Button for editing */}
-									<UserModal
+									{/* <UserModal
 										email={user.email}
 										name={user.name}
 										id={user.userID}
-									/>
+									/> */}
 									{/* Button for deleting */}
 									<IconButton
 										aria-label="Delete"
@@ -175,23 +178,30 @@ class ProfileView extends React.Component {
 					open={this.state.open}
 					onClose={this.handleClose}>
 					<div style={getModalStyle()} className={classes.paper}>
-						<Typography variant="h6" id="modal-title">
-							Are you sure?
-						</Typography>
 						{account ? (
-							<Typography>
-								Please unsubscribe from your current subescription before deleting
-								your account.
-							</Typography>
+							<>
+								<Typography variant="h6" id="modal-title">
+									Active subscription
+								</Typography>
+								<Typography>
+									Please unsubscribe from your current subescription before
+									deleting your account.
+								</Typography>
+							</>
 						) : (
-							<Button
-								variant="contained"
-								color="secondary"
-								onClick={() => {
-									this.props.deleteUser(user.userID);
-								}}>
-								Delete Account
-							</Button>
+							<>
+								<Typography variant="h6" id="modal-title">
+									Are you sure?
+								</Typography>
+								<Button
+									variant="contained"
+									color="secondary"
+									onClick={() => {
+										this.props.deleteUser(user.userID);
+									}}>
+									Delete Account
+								</Button>
+							</>
 						)}
 					</div>
 				</Modal>
