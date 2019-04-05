@@ -8,54 +8,54 @@ import { getTrainingSeries, deleteTrainingSeries } from '../../store/actions/';
 
 //Components
 import TrainingSeriesSubView from './TrainingSeriesSubView';
-import TrainingSeriesPosts from './TrainingSeriesPosts';
+// import TrainingSeriesPosts from './TrainingSeriesPosts';
 
 class TrainingSeriesView extends Component {
-	componentDidMount() {
-		this.getTrainingSeries();
-	}
+  componentDidMount() {
+    this.getTrainingSeries();
+  }
 
-	getTrainingSeries = () => {
-		this.props.getTrainingSeries(this.props.userId);
-	};
+  getTrainingSeries = () => {
+    this.props.getTrainingSeries(this.props.userId);
+  };
 
-	deleteTrainingSeries = id => {
-		this.props.deleteTrainingSeries(id);
-	};
+  deleteTrainingSeries = id => {
+    this.props.deleteTrainingSeries(id);
+  };
 
-	render() {
-		return (
-			<>
-				<Route
-					exact
-					path={`${this.props.match.path}`}
-					render={props => (
-						<TrainingSeriesSubView
-							{...props}
-							trainingSeries={this.props.trainingSeries}
-							deleteTrainingSeries={this.deleteTrainingSeries}
-							getTrainingSeries={this.props.getTrainingSeries}
-							userID={this.props.userId}
-						/>
-					)}
-				/>
-			</>
-		);
-	}
+  render() {
+    return (
+      <>
+        <Route
+          exact
+          path={`${this.props.match.path}`}
+          render={props => (
+            <TrainingSeriesSubView
+              {...props}
+              trainingSeries={this.props.trainingSeries}
+              deleteTrainingSeries={this.deleteTrainingSeries}
+              getTrainingSeries={this.props.getTrainingSeries}
+              userID={this.props.userId}
+            />
+          )}
+        />
+      </>
+    );
+  }
 }
 
 const mapStateToProps = state => {
-	return {
-		trainingSeries: state.trainingSeriesReducer.trainingSeries,
-		isLoading: state.trainingSeriesReducer.isLoading,
-		isDoneAdding: state.trainingSeriesReducer.isDoneAdding,
-	};
+  return {
+    trainingSeries: state.trainingSeriesReducer.trainingSeries,
+    isLoading: state.trainingSeriesReducer.isLoading,
+    isDoneAdding: state.trainingSeriesReducer.isDoneAdding
+  };
 };
 
 export default connect(
-	mapStateToProps,
-	{
-		getTrainingSeries,
-		deleteTrainingSeries,
-	}
+  mapStateToProps,
+  {
+    getTrainingSeries,
+    deleteTrainingSeries
+  }
 )(TrainingSeriesView);
