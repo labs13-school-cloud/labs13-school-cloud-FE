@@ -4,6 +4,7 @@ import React, { Component } from "react";
 import TrainingSeriesList from "./TrainingSeriesList";
 import TrainingSeriesModal from "../Modals/TrainingSeriesModal";
 
+
 import { withStyles } from "@material-ui/core/styles";
 import { Paper, List, Typography, Fab } from "@material-ui/core/";
 import Pagination from "material-ui-flat-pagination";
@@ -15,6 +16,8 @@ import FormHelperText from "@material-ui/core/FormHelperText";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import NativeSelect from "@material-ui/core/NativeSelect";
+import Pagination from 'material-ui-flat-pagination';
+
 
 const styles = theme => ({
   root: {
