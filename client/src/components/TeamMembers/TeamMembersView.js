@@ -88,7 +88,8 @@ class TeamMembersView extends React.Component {
 							size="small"
 							aria-label="Add"
 							className={classes.fab}
-							onClick={this.handleOpen}>
+							onClick={this.handleOpen}
+							disabled>
 							<i className="material-icons">search</i>
 						</Fab>
 						<Fab
