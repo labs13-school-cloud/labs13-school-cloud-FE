@@ -8,22 +8,13 @@ import history from "../../history";
 import styled from "styled-components";
 
 //Components
-<<<<<<< HEAD
+
 import TeamMembersView from "../TeamMembers/TeamMembersView";
 import TrainingSeriesView from "../TrainingSeries/TrainingSeriesView";
 import ProgressCircle from "../Progress/ProgressCircle";
 import ProfileView from "../Profile/ProfileView";
 import AppBar from "../AppBar/AppBar";
 import TeamMemberPageView from "../TeamMembers/TeamMemberPageContainer/TeamMemberPageView";
-=======
-import TeamMembersView from '../TeamMembers/TeamMembersView';
-import TrainingSeriesView from '../TrainingSeries/TrainingSeriesView';
-import ProgressCircle from '../Progress/ProgressCircle';
-import ProfileView from '../Profile/ProfileView';
-import AppBar from '../AppBar/AppBar';
-import TeamMemberPageView from '../TeamMembers/TeamMemberPageContainer/TeamMemberPageView';
-import NotificationsView from '../Notifications/NotificationsView';
->>>>>>> development
 
 //Auth
 import { getUserProfile } from "../../Auth/Auth";
@@ -36,6 +27,7 @@ import TrainingSeriesPosts from "../TrainingSeries/TrainingSeriesPosts";
 import AddTeamMemberPage from "../TeamMembers/TeamMemberPageContainer/AddTeamMemberPage";
 import CreatePost from "../TrainingSeries/CreatePost";
 import PostPage from "../TrainingSeries/PostPage";
+import NotificationsView from "../Notifications/NotificationsView";
 
 class Dashboard extends React.Component {
   state = {
@@ -91,12 +83,12 @@ class Dashboard extends React.Component {
                   render={props => <TrainingSeriesPosts {...props} />}
                 />
                 <Route
-<<<<<<< HEAD
                   path="/home/create-post"
                   render={props => <CreatePost {...props} />}
                 />
                 <Route path="/home/post/:id" component={PostPage} />
-=======
+
+                <Route
                   path="/home/notifications"
                   render={props => (
                     <NotificationsView
@@ -105,7 +97,6 @@ class Dashboard extends React.Component {
                     />
                   )}
                 />
->>>>>>> development
               </Router>
             </DashboardContainer>
           </>
@@ -140,7 +131,6 @@ export default connect(
 
 //Styled Components
 const DashboardContainer = styled.div`
-<<<<<<< HEAD
   display: flex;
   justify-content: space-around;
   margin: 0 auto;
@@ -158,26 +148,6 @@ const hidden = {
 
 const active = {
   display: "block"
-=======
-
-	display: flex;
-	justify-content: space-around;
-	margin: 0 auto;
-	max-width: 1000px;
-	/* height: 70vh; */
-	@media (max-width: 768px) {
-		flex-direction: column;
-		padding: 10px;
-	}
-`;
-
-const hidden = {
-  display: 'none'
-};
-
-const active = {
-  display: 'block'
->>>>>>> development
 };
 
 // const toggleTrainingSeries = tabValue => {
