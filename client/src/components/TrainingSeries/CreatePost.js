@@ -64,10 +64,15 @@ class CreatePost extends React.Component {
   };
 
   componentDidMount() {
-    // this.setState({
-    //   teamMember: this.props.teamMember.teamMember,
-    //   assignments: this.props.teamMember.assignments
-    // });
+    if (this.props.location.state.trainingSeriesId) {
+      this.setState({
+        ...this.state,
+        post: {
+          ...this.state.post,
+          trainingSeriesID: this.props.location.state.trainingSeriesId
+        }
+      });
+    }
   }
 
   //   componentDidUpdate(prevProps) {
@@ -89,40 +94,41 @@ class CreatePost extends React.Component {
     });
   };
 
-  addNewTeamMember = e => {
+  handlePostSubmit = e => {
     e.preventDefault();
 
-    const newMember = {
-      ...this.state.teamMember,
-      user_ID: this.props.userId
-    };
-
-    this.props.addTeamMember(newMember);
-  };
-
-  handleDate = name => event => {
-    this.setState({
-      [name]: event.target.value
-    });
+    this.props.createAPost(this.state.post);
+    this.props.history.push(
+      `/home/training-series/${this.props.location.state.trainingSeriesId}`
+    );
   };
 
   render() {
     const { classes } = this.props;
 
+    console.log("POST PAGE", this.state);
     return (
       <MainContainer>
         <Typography variant="display1" align="center" gutterBottom>
-          Add A New Team Member
+          Create A New Post
         </Typography>
         <form className={classes.form}>
           <ButtonContainer>
-            <NotificationWidget
+            {/* <NotificationWidget
               teamMember={this.state.teamMember}
               editTeamMember={this.props.editTeamMember}
               addTeamMember={this.addNewTeamMember}
               type="success"
               submitType="add"
-            />
+            /> */}
+            <Button
+              variant="contained"
+              color="primary"
+              className={classes.button}
+              onClick={e => this.handlePostSubmit(e)}
+            >
+              Save
+            </Button>
             <Button
               variant="contained"
               className={classes.button}
@@ -132,6 +138,7 @@ class CreatePost extends React.Component {
             </Button>
           </ButtonContainer>
           {/* <DeleteModal deleteType='inTeamMemberPage' id={this.props.urlId} /> */}
+
           <Paper className={classes.root}>
             <Typography>Create A Post</Typography>
             <PostContainer>
@@ -153,7 +160,7 @@ class CreatePost extends React.Component {
               />
               <TextField
                 id="standard-name"
-                label="link"
+                label="Link"
                 className={classes.textField}
                 value={this.state.post.link}
                 onChange={this.handleChange("link")}
@@ -167,28 +174,11 @@ class CreatePost extends React.Component {
                 onChange={this.handleChange("daysFromStart")}
                 type="number"
                 value={this.state.post.daysFromStart}
-                // step="1"
-                // min="1"
+                step="1"
+                inputProps={{ min: 1 }}
               />
             </PostContainer>
           </Paper>
-
-          {/* <Paper className={classes.root}>
-            <Typography>Training Series</Typography>
-            <MemberInfoContainer>
-              <div>
-                <AddTeamMemberToTrainingSeriesModal
-                  modalType={"assignMultiple"}
-                  userId={this.props.userId}
-                  urlId={this.props.urlId}
-                  assignments={this.props.teamMember.assignments}
-                />
-              </div>
-              <TrainingSeriesContainer>
-                {trainingAssigments}
-              </TrainingSeriesContainer>
-            </MemberInfoContainer>
-          </Paper> */}
         </form>
       </MainContainer>
     );
@@ -222,5 +212,11 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  {}
+  {
+    getTrainingSeriesPosts,
+    createAPost,
+    editPost,
+    deletePost,
+    getPostById
+  }
 )(withStyles(styles)(CreatePost));

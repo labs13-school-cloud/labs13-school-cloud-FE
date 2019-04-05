@@ -1,6 +1,8 @@
 // displays all posts of a training series
 import React from "react";
 
+import Button from "@material-ui/core/Button";
+
 // Components
 import PostModal from "../Modals/PostModal";
 import PostOptionsModal from "../Modals/PostOptionsModal";
@@ -35,6 +37,9 @@ const styles = theme => ({
   secondaryAction: {
     dispaly: "flex",
     flexDirection: "row"
+  },
+  button: {
+    margin: theme.spacing.unit
   }
 });
 class TrainingSeriesPosts extends React.Component {
@@ -52,9 +57,19 @@ class TrainingSeriesPosts extends React.Component {
     this.props.deletePost(id);
   };
 
+  routeToPostPage = e => {
+    e.preventDefault();
+    this.props.history.push({
+      pathname: "/home/create-post",
+      state: {
+        trainingSeriesId: this.props.singleTrainingSeries.trainingSeriesID
+      }
+    });
+  };
+
   render() {
     const { classes } = this.props;
-    console.log("POSTS", this.props);
+    // console.log("POSTS", this.props);
     return (
       <>
         {/* Gives app time to fetch data */}
@@ -62,11 +77,18 @@ class TrainingSeriesPosts extends React.Component {
         {!this.props.isLoading && (
           <Paper className={classes.paper}>
             <h1>{this.props.singleTrainingSeries.title}</h1>
-            <PostModal
+            {/* <PostModal
               trainingSeries={this.props.singleTrainingSeries}
               createAPost={this.props.createAPost}
               editPost={this.props.editPost}
-            />
+            /> */}
+            <Button
+              variant="contained"
+              className={classes.button}
+              onClick={e => this.routeToPostPage(e)}
+            >
+              Create A New Post
+            </Button>
             <div>
               {this.props.posts.map(post => (
                 <ListItem key={post.postID} className={classes.secondaryAction}>
