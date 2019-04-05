@@ -1,5 +1,7 @@
 import React from "react";
+
 import { connect } from "react-redux";
+import { withRouter } from "react-router";
 
 import styled from "styled-components";
 
@@ -51,7 +53,7 @@ const styles = theme => ({
   }
 });
 
-class CreatePost extends React.Component {
+class PostPage extends React.Component {
   state = {
     open: false,
     isUpdating: false,
@@ -59,19 +61,17 @@ class CreatePost extends React.Component {
       postName: "",
       postDetails: "",
       link: "",
-      daysFromStart: 1,
-      trainingSeriesID: ""
+      daysFromStart: "",
+      trainingSeriesID: "",
+      postID: ""
     }
   };
 
   componentDidMount() {
-    if (this.props.location.state.trainingSeriesId) {
+    if (this.props.location.state.post) {
       this.setState({
         ...this.state,
-        post: {
-          ...this.state.post,
-          trainingSeriesID: this.props.location.state.trainingSeriesId
-        }
+        post: this.props.location.state.post
       });
     }
   }
@@ -98,20 +98,24 @@ class CreatePost extends React.Component {
   handlePostSubmit = e => {
     e.preventDefault();
 
-    this.props.createAPost(this.state.post);
-    this.props.history.push(
-      `/home/training-series/${this.props.location.state.trainingSeriesId}`
-    );
+    this.props.editPost(this.state.post.postID, this.state.post);
+
+    setTimeout(() => {
+      this.props.history.push(
+        `/home/training-series/${this.state.post.trainingSeriesID}`
+      );
+    }, 1000);
   };
 
   render() {
     const { classes } = this.props;
 
-    console.log("POST PAGE", this.state);
+    console.log("EDIT POST PAGE PROPS", this.props);
+    console.log("EDIT POST PAGE STATE", this.state);
     return (
       <MainContainer>
         <Typography variant="display1" align="center" gutterBottom>
-          Create A New Post
+          Edit Post
         </Typography>
         <form
           className={classes.form}
@@ -140,9 +144,7 @@ class CreatePost extends React.Component {
               className={classes.button}
               onClick={e =>
                 this.props.history.push(
-                  `/home/training-series/${
-                    this.props.location.state.trainingSeriesId
-                  }`
+                  `/home/training-series/${this.state.post.trainingSeriesID}`
                 )
               }
             >
@@ -235,4 +237,4 @@ export default connect(
     deletePost,
     getPostById
   }
-)(withStyles(styles)(CreatePost));
+)(withStyles(styles)(withRouter(PostPage)));

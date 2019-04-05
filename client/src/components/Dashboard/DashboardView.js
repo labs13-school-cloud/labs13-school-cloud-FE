@@ -25,6 +25,7 @@ import { getUser } from "../../store/actions/userActions";
 import TrainingSeriesPosts from "../TrainingSeries/TrainingSeriesPosts";
 import AddTeamMemberPage from "../TeamMembers/TeamMemberPageContainer/AddTeamMemberPage";
 import CreatePost from "../TrainingSeries/CreatePost";
+import PostPage from "../TrainingSeries/PostPage";
 
 class Dashboard extends React.Component {
   state = {
@@ -83,6 +84,7 @@ class Dashboard extends React.Component {
                   path="/home/create-post"
                   render={props => <CreatePost {...props} />}
                 />
+                <Route path="/home/post/:id" component={PostPage} />
               </Router>
             </DashboardContainer>
           </>
