@@ -15,6 +15,7 @@ import Fab from "@material-ui/core/Fab";
 import Checkbox from "@material-ui/core/Checkbox";
 import FormLabel from "@material-ui/core/FormLabel";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
+import MenuItem from "@material-ui/core/MenuItem";
 
 //REDUX
 import { connect } from "react-redux";
@@ -133,8 +134,8 @@ class UserModal extends React.Component {
       startDate: this.state.startDate,
       trainingSeriesID: this.state.trainingSeriesID,
       assignments: this.state.selectedTeamMembers
-    }
-    this.props.addTeamMemberToTrainingSeries(data)
+    };
+    this.props.addTeamMemberToTrainingSeries(data);
     this.handleClose();
   };
 
@@ -167,10 +168,10 @@ class UserModal extends React.Component {
 
     return (
       <div>
-        <Fab color="primary" aria-label="Add" className={classes.fab}>
-
+        {/* <Fab color="primary" aria-label="Add" className={classes.fab}>
           <AddIcon onClick={this.handleOpen} />
-        </Fab>
+        </Fab> */}
+        <div onClick={this.handleOpen}>Assign Training Series</div>
 
         <Modal
           aria-labelledby="simple-modal-title"
@@ -187,7 +188,6 @@ class UserModal extends React.Component {
               {this.props.trainingSeries.map(t => (
                 <>{t.title}</>
               ))}
-
             </Typography>
             <DatePicker
               inline

@@ -1,9 +1,9 @@
 import React from "react";
 
-import { connect } from "react-redux";
-
+//Components
 import TeamMemberPage from "./TeamMemberPage";
-
+//Redux
+import { connect } from "react-redux";
 import {
   editTeamMember,
   getTrainingSeries,
@@ -17,18 +17,8 @@ class TeamMemberPageView extends React.Component {
     this.props.getTrainingSeries(this.props.userId);
   }
 
-  // componentDidUpdate(prevProps) {
-  //   if (prevProps.isDeleting !== this.props.isDeleting) {
-  //     console.log("PREV PROPS");
-  //     setTimeout(() => {
-  //       this.props.history.push("/home");
-  //     }, 1000);
-  //   }
-  // }
-
   editTeamMember = (e, changes) => {
     e.preventDefault();
-
     this.props.editTeamMember(this.props.match.params.id, changes);
   };
 
@@ -39,49 +29,39 @@ class TeamMemberPageView extends React.Component {
     setTimeout(() => {
       this.props.history.push("/home");
     }, 400);
+  };
 
-    // try {
-    //   await this.props.deleteTeamMember(this.props.match.params.id);
-    //   console.log(this.props.deleteSuccess);
-    //   if (!this.props.isDeleting) {
-    //     this.props.history.push("/home");
-    //   }
-    // } catch (error) {
-    //   console.log(error);
-    // }
-
-    // setTimeout(() => {
-    //   this.props.history.goBack();
-    // }, 1000);
+  renderTeamMemberPage = () => {
+    if (
+      this.props.loadSuccess &&
+      Object.keys(this.props.teamMember).length !== 0
+    ) {
+      return (
+        <TeamMemberPage
+          teamMember={this.props.teamMember}
+          urlId={this.props.match.params.id}
+          editTeamMember={this.editTeamMember}
+          deleteTeamMember={this.deleteTeamMember}
+          userId={this.props.userId}
+        />
+      );
+    }
   };
 
   render() {
-    console.log("IS DELETING", this.props.isDeleting);
-    console.log("PROPS ON TMPV", this.props);
-    return (
-      <>
-        {this.props.loadSuccess && (
-          <TeamMemberPage
-            teamMember={this.props.teamMember}
-            urlId={this.props.match.params.id}
-            editTeamMember={this.editTeamMember}
-            deleteTeamMember={this.deleteTeamMember}
-            userId={this.props.userId}
-          />
-        )}
-      </>
-    );
+    return <>{this.renderTeamMemberPage()}</>;
   }
 }
 
 const mapStateToProps = state => {
   return {
     isEditing: state.teamMembersReducer.status.isEditing,
-    isLoading: state.teamMembersReducer.status.isLoading,
+    isLoading: state.trainingSeriesReducer.isLoading,
     loadSuccess: state.teamMembersReducer.status.loadSuccess,
     loadFailed: state.teamMembersReducer.status.loadFailed,
     deleteSuccess: state.teamMembersReducer.status.deleteSuccess,
     isDeleting: state.teamMembersReducer.status.isDeleting,
+    isAssigning: state.teamMembersReducer.status.isAssigning,
     trainingSeries: state.trainingSeriesReducer.trainingSeries,
     teamMember: state.teamMembersReducer.teamMember
   };
