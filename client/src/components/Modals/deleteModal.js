@@ -59,6 +59,13 @@ const styles = theme => ({
   },
   button: {
     margin: theme.spacing.unit
+  },
+  icons: {
+    display: "block",
+    width: 20,
+    color: "gray",
+    cursor: "pointer",
+    "&:hover": { color: "#2699FB" }
   }
 });
 
@@ -121,7 +128,7 @@ class TrainingSeriesModal extends React.Component {
 
     return (
       <div>
-        {this.props.deleteType === "removeMemberFromTS" ? (
+        {/* {this.props.deleteType === "removeMemberFromTS" ? (
           <IconButton
             aria-label="Delete"
             className={classes.margin}
@@ -138,7 +145,15 @@ class TrainingSeriesModal extends React.Component {
           >
             Delete
           </Button>
-        )}
+        )} */}
+
+        <i
+          // fontSize="small"
+          onClick={this.handleOpen}
+          className={`material-icons ${classes.icons}`}
+        >
+          delete
+        </i>
 
         <Modal
           aria-labelledby="simple-modal-title"
