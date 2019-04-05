@@ -63,7 +63,7 @@ class LandingPageView extends React.Component {
                 />
               </MarketingImage>
               <MarketingContent>
-                <h3>Manage Your Employees. Stress Free.</h3>
+                <h3>Manage Your team. Stress Free.</h3>
                 <p>
                   With Training Bot, we take the stress out of managing your
                   employees recurring training modules.
@@ -74,14 +74,29 @@ class LandingPageView extends React.Component {
               <MarketingImage>
                 <img
                   src={undrawNotify}
-                  alt="A drawing of an employee notifying someone. "
+                  alt="A drawing of an employee with a explanation mark."
                 />
               </MarketingImage>
               <MarketingContent>
-                <h3>Manage Your Employees. Stress Free.</h3>
+                <h3>Keep your engagement high. Sky high.</h3>
                 <p>
-                  With Training Bot, we take the stress out of managing your
-                  employees recurring training modules.
+                  Your employees will no longer forget if they have a task to
+                  accomplish. Training Bot handles that for you.
+                </p>
+              </MarketingContent>
+            </MarketingSection>
+            <MarketingSection>
+              <MarketingImage>
+                <img
+                  src={undrawTask}
+                  alt="A drawing of an employee moving text messages."
+                />
+              </MarketingImage>
+              <MarketingContent>
+                <h3>Notifications. Your way.</h3>
+                <p>
+                  Send text messages or email notifications to your employees.
+                  Modern communication for the mordern workplace.
                 </p>
               </MarketingContent>
             </MarketingSection>
@@ -91,7 +106,6 @@ class LandingPageView extends React.Component {
               <TestimonyPerson>
                 <FaceIcon /> <h4>Random Cat 1</h4>
               </TestimonyPerson>
-
               <p>
                 "Pork sirloin burgdoggen venison strip steak beef brisket kevin
                 tenderloin"
@@ -220,7 +234,10 @@ const MarketingContentContainer = styled.div`
 const MarketingSection = styled.div`
   width: 100%;
   display: flex;
-
+  margin-bottom: 40px;
+  &:nth-child(even) {
+    flex-direction: row-reverse;
+  }
   img {
     width: 100%;
   }
@@ -231,6 +248,8 @@ const MarketingImage = styled.div`
 `;
 
 const MarketingContent = styled.div`
+  width: 50%;
+  padding: 0 10px;
   h3 {
     font-size: 32px;
     color: #451476;
@@ -250,9 +269,6 @@ const LandingPageContentContainer = styled.div`
     margin-top: 0;
     color: #451476;
     font-size: 42px;
-  }
-  p {
-    color: #2699fb;
   }
 
   @media (max-width: 1000px) {
@@ -294,13 +310,15 @@ const TrainingBotStoryContainer = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
-  width: 83%;
-  margin: 0 auto 50px;
+  width: 85%;
+  margin: 40px auto;
+  background-color: #fafafa;
+  padding: 30px 20px;
   h3 {
     color: #451476;
-    font-weight: 400;
     font-size: 32px;
     text-align: center;
+    margin: 0;
     margin-bottom: 5px;
   }
   @media (max-width: 1000px) {
@@ -318,7 +336,6 @@ const StorySection = styled.div`
   }
 `;
 const StoryContent = styled.p`
-  color: #2699fb;
   padding: 0 10px;
 `;
 
@@ -337,9 +354,6 @@ const TestimonyContainer = styled.div`
   h4 {
     margin: 0;
     color: #451476;
-  }
-  p {
-    color: #2699fb;
   }
 `;
 
