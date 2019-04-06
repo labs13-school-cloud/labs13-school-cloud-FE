@@ -53,7 +53,12 @@ const styles = theme => ({
 	selectEmpty: {
 		marginTop: theme.spacing.unit * 2
 	},
-	footer: { display: 'flex', justifyContent: 'space-between' }
+	footer: {
+		display: 'flex',
+		justifyContent: 'space-between',
+		position: 'sticky',
+		top: '100%'
+	}
 	// pagination: { width: '90%' },
 });
 class TeamMembersView extends React.Component {
@@ -129,8 +134,10 @@ class TeamMembersView extends React.Component {
 						total={this.props.teamMembers.length}
 						onClick={(e, offset) => this.handleClick(offset)}
 					/>
-					{this.props.teamMembers.length < 5 ? (
-						''
+
+					{/****** View per page ******/}
+					{/* {this.props.teamMembers.length < 5 ? (
+						<span />
 					) : (
 						<FormControl className={classes.formControl}>
 							<InputLabel htmlFor='pagination-selector'>View</InputLabel>
@@ -149,7 +156,7 @@ class TeamMembersView extends React.Component {
 								<option value={25}>25</option>
 							</NativeSelect>
 						</FormControl>
-					)}
+					)} */}
 				</div>
 			</Paper>
 		);
