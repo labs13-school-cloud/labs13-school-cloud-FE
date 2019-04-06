@@ -4,10 +4,7 @@ import styled from 'styled-components';
 
 // Material UI
 import { withStyles } from '@material-ui/core/styles';
-import { Paper, List } from '@material-ui/core/';
-import Typography from '@material-ui/core/Typography';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
+import { Paper, List, Typography, TextField, Button } from '@material-ui/core/';
 import NotificationWidget from './SnackBarTeamMember';
 //Components
 import AddTeamMemberToTrainingSeriesModal from '../../Modals/addTeamMemberToTrainingSeriesModal';
@@ -18,10 +15,10 @@ const styles = theme => ({
 		...theme.mixins.gutters(),
 		paddingTop: theme.spacing.unit * 2,
 		paddingBottom: theme.spacing.unit * 2,
-		width: '92%',
+		width: '94%',
 		margin: '20px auto',
 		'@media (max-width: 480px)': {
-			width: '92%'
+			width: '94%'
 		}
 	},
 	// form: {
@@ -46,6 +43,12 @@ const styles = theme => ({
 		display: 'flex',
 		justifyContent: 'space-between'
 	}
+	// form: {
+	// 	'@media (max-width: 480px)': {
+	// 		flexDirection: 'column',
+	// 		width: '95%'
+	// 	}
+	// }
 });
 
 class TeamMemberPage extends React.Component {
@@ -199,27 +202,25 @@ class TeamMemberPage extends React.Component {
 	}
 }
 
-const MainContainer = styled.div`
-	margin: 0 auto;
-`;
+const MainContainer = styled.div``;
 
 const MemberInfoContainer = styled.div`
 	display: flex;
 	justify-content: space-between;
 	align-items: baseline;
 
-	@media (max-width: 480px) {
+	/* @media (max-width: 480px) {
 		flex-direction: column;
 		width: 90%;
-	}
+	} */
 `;
 
-const TrainingSeriesContainer = styled.div`
-	display: flex;
-	width: 90%;
-	/* justify-content: space-evenly; */
-	/* flex-wrap: wrap; */
-`;
+// const TrainingSeriesContainer = styled.div`
+// 	display: flex;
+// 	width: 90%;
+// 	justify-content: space-evenly; */
+// 	flex-wrap: wrap;
+// `;
 
 const ButtonContainer = styled.div`
 	display: flex;

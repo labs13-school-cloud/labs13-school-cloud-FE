@@ -1,27 +1,24 @@
 import React from 'react';
 
 import { connect } from 'react-redux';
+import DeleteModal from '../../Modals/deleteModal';
 import { deleteTeamMemberFromTrainingSeries } from '../../../store/actions';
 import styled from 'styled-components';
 
 // Material UI
 import { withStyles } from '@material-ui/core/styles';
 import {
-	Card,
+	// Card,
+	// CardContent,
+	// IconButton,
+	// Fab,
+	// Button,
+	// Typography,
 	ListItem,
 	ListItemText,
 	ListItemSecondaryAction
 } from '@material-ui/core/';
-// import CardActions from "@material-ui/core/CardActions";
-import CardContent from '@material-ui/core/CardContent';
-// import Button from "@material-ui/core/Button";
 // import DeleteIcon from "@material-ui/icons/Delete";
-// import Fab from "@material-ui/core/Fab";
-// import IconButton from "@material-ui/core/IconButton";
-import Typography from '@material-ui/core/Typography';
-
-import DeleteModal from '../../Modals/deleteModal';
-
 const moment = require('moment');
 
 const styles = theme => ({

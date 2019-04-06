@@ -1,13 +1,13 @@
 // displays all posts of a training series
 import React from 'react';
 
-import Button from '@material-ui/core/Button';
+// import Button from '@material-ui/core/Button';
 import Fab from '@material-ui/core/Fab';
 // Components
-import PostModal from '../Modals/PostModal';
-import PostOptionsModal from '../Modals/PostOptionsModal';
+// import PostModal from '../Modals/PostModal';
+// import PostOptionsModal from '../Modals/PostOptionsModal';
 import DeleteModal from '../Modals/deleteModal';
-import IconButton from '@material-ui/core/IconButton';
+// import IconButton from '@material-ui/core/IconButton';
 
 import styled from 'styled-components';
 
@@ -39,7 +39,9 @@ const styles = theme => ({
 		outline: 'none',
 		margin: '20px auto',
 		'@media (max-width: 480px)': {
-			width: '75%'
+			width: '89%',
+			padding: 0,
+			margin: '0 auto'
 		}
 	},
 	secondaryAction: {

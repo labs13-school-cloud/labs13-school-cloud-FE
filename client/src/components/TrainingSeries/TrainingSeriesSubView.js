@@ -24,22 +24,22 @@ const styles = theme => ({
 		width: '55%',
 
 		'@media (max-width:768px)': {
-			width: '92%',
-			marginBottom: 10,
-		},
+			width: '94%',
+			marginBottom: 10
+		}
 	},
 	columnHeader: {
 		display: 'flex',
 		justifyContent: 'space-between',
-		alignItems: 'center',
+		alignItems: 'center'
 	},
 	icons: {
 		display: 'flex',
-		alignItems: 'center',
+		alignItems: 'center'
 	},
 	fab: { margin: 5 },
 	footer: { display: 'flex', justifyContent: 'space-between' },
-	pagination: { width: '90%' },
+	pagination: { width: '90%' }
 });
 
 class TrainingSeriesSubView extends Component {
@@ -47,7 +47,7 @@ class TrainingSeriesSubView extends Component {
 		super(props);
 		this.state = {
 			offset: 0,
-			limit: 5,
+			limit: 5
 		};
 	}
 
@@ -64,16 +64,17 @@ class TrainingSeriesSubView extends Component {
 		return (
 			<Paper className={classes.root} elevation={2}>
 				<div className={classes.columnHeader}>
-					<Typography variant="h5">Training Series</Typography>
+					<Typography variant='h5'>Training Series</Typography>
 					<div className={classes.icons}>
 						<Fab
-							color="primary"
-							size="small"
-							aria-label="Add"
+							color='primary'
+							size='small'
+							aria-label='Add'
 							className={classes.fab}
 							onClick={this.handleOpen}
-							disabled>
-							<i className="material-icons">search</i>
+							disabled
+						>
+							<i className='material-icons'>search</i>
 						</Fab>
 
 						<TrainingSeriesModal
@@ -102,14 +103,15 @@ class TrainingSeriesSubView extends Component {
 						''
 					) : (
 						<FormControl className={classes.formControl}>
-							<InputLabel htmlFor="pagination-selector">View</InputLabel>
+							<InputLabel htmlFor='pagination-selector'>View</InputLabel>
 							<Select
 								native
 								value={this.state.limit}
 								onChange={e => this.handleChange(e)}
 								inputProps={{
-									id: 'pagination-selector',
-								}}>
+									id: 'pagination-selector'
+								}}
+							>
 								<option value={5}>5</option>
 								<option value={10}>10</option>
 								<option value={15}>15</option>
