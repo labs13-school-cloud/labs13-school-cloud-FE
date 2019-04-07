@@ -45,7 +45,7 @@ const styles = theme => ({
 class NotificationsView extends Component {
   state = {
     offset: 0,
-    limit: 5,
+    limit: 10,
     filterType: 'all'
   };
 
@@ -119,28 +119,6 @@ class NotificationsView extends Component {
             total={filteredNotifications.length}
             onClick={(e, offset) => this.handleClick(offset)}
           />
-
-          {filteredNotifications.length < 5 ? (
-            ''
-          ) : (
-            <FormControl className={classes.formControl}>
-              <InputLabel htmlFor="pagination-selector">View</InputLabel>
-              <Select
-                native
-                value={this.state.limit}
-                onChange={e => this.handleChange(e)}
-                inputProps={{
-                  id: 'pagination-selector'
-                }}
-              >
-                <option value={5}>5</option>
-                <option value={10}>10</option>
-                <option value={15}>15</option>
-                <option value={20}>20</option>
-                <option value={25}>25</option>
-              </Select>
-            </FormControl>
-          )}
         </div>
       </Paper>
     );

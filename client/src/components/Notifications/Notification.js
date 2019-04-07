@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 
 //Styling
 import { withStyles } from '@material-ui/core/styles';
-import { ListItem, ListItemText } from '@material-ui/core/';
+import { ListItem, ListItemText, Typography } from '@material-ui/core/';
 
 //Customized Styling
 const styles = {
@@ -20,17 +20,37 @@ const styles = {
   },
   title: {
     fontSize: 16
+  },
+  sendDate: {
+    fontSize: 13,
+    textAlign: 'right'
   }
 };
 
 function Notification(props) {
   const { classes } = props;
-  const { firstName, lastName, sendDate, postName } = props.notification;
+  const {
+    firstName,
+    lastName,
+    sendDate,
+    postName,
+    email,
+    phoneNumber
+  } = props.notification;
 
   return (
     <ListItem className={classes.listItem}>
-      <ListItemText primary={postName} secondary={`${firstName} ${lastName}`} />
-      <p>{moment(sendDate).format('MMMM Do')}</p>
+      <ListItemText
+        primary={`${postName} | Waiter Fundamentals`}
+        secondary={`${firstName} ${lastName}  | ${email ? email : phoneNumber}`}
+      />
+      <Typography className={classes.sendDate}>
+        Send Date
+        <br />
+        {moment(sendDate)
+          .add(1, 'days')
+          .format('MMMM Do')}
+      </Typography>
     </ListItem>
   );
 }

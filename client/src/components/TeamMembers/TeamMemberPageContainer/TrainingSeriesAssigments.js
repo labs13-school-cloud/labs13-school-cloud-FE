@@ -49,9 +49,9 @@ const TrainingSeriesAssignments = props => {
   const { teamMemberId } = props;
   const { trainingSeries_ID } = props.trainingSeries;
 
-  const startDate = moment(props.trainingSeries.startDate).format(
-    'MMMM Do, YYYY '
-  );
+  const startDate = moment(props.trainingSeries.startDate)
+    .add(1, 'days')
+    .format('MMMM Do, YYYY ');
 
   const handleDelete = e => {
     e.preventDefault();
