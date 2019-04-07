@@ -7,17 +7,21 @@ import styled from 'styled-components';
 //Components
 import Notification from './Notification';
 
-import { withStyles } from '@material-ui/core';
-
 const NotificationsList = props => {
+  let arr = [];
+  let offset = props.offset;
+  let x = offset;
+  let y = offset + props.limit;
+  arr = props.notifications.slice(x, y);
+
   return (
     <>
       <ListStyles>
-        {props.notifications.map(notification => {
+        {arr.map(notification => {
           return (
             <Notification
               key={notification.notificationID}
-              data={notification}
+              notification={notification}
               match={props.match}
             />
           );
