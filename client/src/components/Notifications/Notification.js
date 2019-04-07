@@ -45,7 +45,7 @@ function Notification(props) {
         secondary={`${firstName} ${lastName}  | ${email ? email : phoneNumber}`}
       />
       <Typography className={classes.sendDate}>
-        Send Date
+        {props.filterSent === 'pending' ? 'Send Date' : 'Sent on'}
         <br />
         {moment(sendDate)
           .add(1, 'days')

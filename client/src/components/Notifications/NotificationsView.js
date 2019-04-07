@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import moment from 'moment';
 
 //Components
 import NotificationsList from './NotificationsList';
@@ -7,7 +8,6 @@ import NotificationsList from './NotificationsList';
 import { withStyles } from '@material-ui/core/styles';
 import { Paper, Typography } from '@material-ui/core/';
 import Pagination from 'material-ui-flat-pagination';
-import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 
@@ -21,6 +21,7 @@ import {
 const styles = theme => ({
   root: {
     ...theme.mixins.gutters(),
+    marginTop: 30,
     paddingTop: theme.spacing.unit * 2,
     paddingBottom: theme.spacing.unit * 2,
     width: '65%',
@@ -31,7 +32,8 @@ const styles = theme => ({
   columnHeader: {
     display: 'flex',
     justifyContent: 'space-between',
-    alignItems: 'center'
+    alignItems: 'center',
+    marginBottom: 15
   },
   icons: {
     display: 'flex',
@@ -39,14 +41,16 @@ const styles = theme => ({
   },
   fab: { margin: 5 },
   footer: { display: 'flex', justifyContent: 'space-between' },
-  pagination: { width: '90%' }
+  pagination: { width: '90%' },
+  selection: { margin: '0 10px' }
 });
 
 class NotificationsView extends Component {
   state = {
     offset: 0,
-    limit: 10,
-    filterType: 'all'
+    limit: 6,
+    filterType: 'all',
+    filterSent: 'pending'
   };
 
   componentDidMount() {
@@ -63,6 +67,9 @@ class NotificationsView extends Component {
   handleFilter = e => {
     this.setState({ filterType: e.target.value });
   };
+  handleFilterSent = e => {
+    this.setState({ filterSent: e.target.value });
+  };
 
   render() {
     const { classes } = this.props;
@@ -71,7 +78,7 @@ class NotificationsView extends Component {
       ...this.props.emailNotifications
     ];
 
-    const notificationCount = allNotifications.length;
+    const currentTime = moment().format();
 
     const filteredNotifications = allNotifications.filter(notification => {
       // check if first key included email or text
@@ -86,27 +93,60 @@ class NotificationsView extends Component {
       a.sendDate > b.sendDate ? 1 : b.sendDate > a.sendDate ? -1 : 0
     );
 
+    const filteredReturn =
+      this.state.filterSent === 'pending'
+        ? filteredNotifications.filter(
+            notification => notification.sendDate > currentTime
+          )
+        : filteredNotifications.filter(
+            notification => notification.sendDate < currentTime
+          );
+
+    const notificationCount = filteredReturn.length;
+
     return (
       <Paper className={classes.root} elevation={2}>
         <div className={classes.columnHeader}>
-          <Typography variant="h5">{`${notificationCount} Pending Notifications`}</Typography>
-          <FormControl className={classes.formControl}>
-            <Select
-              native
-              value={this.state.filterType}
-              onChange={e => this.handleFilter(e)}
-              inputProps={{
-                id: 'pagination-selector'
-              }}
-            >
-              <option value={'all'}>All</option>
-              <option value={'phoneNumber'}>Text</option>
-              <option value={'email'}>Email</option>
-            </Select>
-          </FormControl>
+          <Typography variant="h5">
+            {this.state.filterSent === 'pending'
+              ? `${notificationCount} Pending Notifications`
+              : 'Sent Notifications'}
+          </Typography>
+          <div>
+            <FormControl className={classes.formControl}>
+              <Select
+                native
+                className={classes.selection}
+                value={this.state.filterType}
+                onChange={e => this.handleFilter(e)}
+                inputProps={{
+                  id: 'pagination-selector'
+                }}
+              >
+                <option value={'all'}>All</option>
+                <option value={'phoneNumber'}>Text</option>
+                <option value={'email'}>Email</option>
+              </Select>
+            </FormControl>
+            <FormControl className={classes.formControl}>
+              <Select
+                native
+                className={classes.selection}
+                value={this.state.filterSent}
+                onChange={e => this.handleFilterSent(e)}
+                inputProps={{
+                  id: 'pagination-selector'
+                }}
+              >
+                <option value={'pending'}>Pending</option>
+                <option value={'sent'}>Sent</option>
+              </Select>
+            </FormControl>
+          </div>
         </div>
         <NotificationsList
-          notifications={filteredNotifications}
+          notifications={filteredReturn}
+          filterSent={this.state.filterSent}
           offset={this.state.offset}
           match={this.props.match}
           userID={this.props.userID}
@@ -116,7 +156,7 @@ class NotificationsView extends Component {
           <Pagination
             limit={this.state.limit}
             offset={this.state.offset}
-            total={filteredNotifications.length}
+            total={filteredReturn.length}
             onClick={(e, offset) => this.handleClick(offset)}
           />
         </div>
