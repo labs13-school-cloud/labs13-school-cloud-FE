@@ -1,14 +1,13 @@
 // parent component for app once logged in
-import React from "react";
-import { Router, Route } from "react-router-dom";
+import React from 'react';
+import { Router, Route } from 'react-router-dom';
 
-import history from "../../history";
+import history from '../../history';
 
 //Styling
-import styled from "styled-components";
+import styled from 'styled-components';
 
 //Components
-<<<<<<< HEAD
 import TeamMembersView from '../TeamMembers/TeamMembersView';
 import TrainingSeriesView from '../TrainingSeries/TrainingSeriesView';
 import ProgressCircle from '../Progress/ProgressCircle';
@@ -16,28 +15,19 @@ import ProfileView from '../Profile/ProfileView';
 import AppBar from '../AppBar/AppBar';
 import TeamMemberPageView from '../TeamMembers/TeamMemberPageContainer/TeamMemberPageView';
 import NotificationView from '../Notifications/NotificationsView';
-=======
-
-import TeamMembersView from "../TeamMembers/TeamMembersView";
-import TrainingSeriesView from "../TrainingSeries/TrainingSeriesView";
-import ProgressCircle from "../Progress/ProgressCircle";
-import ProfileView from "../Profile/ProfileView";
-import AppBar from "../AppBar/AppBar";
-import TeamMemberPageView from "../TeamMembers/TeamMemberPageContainer/TeamMemberPageView";
->>>>>>> 150b2d5e5bad64a652d302ddc4795f2352d92db5
 
 //Auth
-import { getUserProfile } from "../../Auth/Auth";
-import Authenticate from "../authenticate/authenticate";
+import { getUserProfile } from '../../Auth/Auth';
+import Authenticate from '../authenticate/authenticate';
 
 //State Management
-import { connect } from "react-redux";
-import { getUser } from "../../store/actions/userActions";
-import TrainingSeriesPosts from "../TrainingSeries/TrainingSeriesPosts";
-import AddTeamMemberPage from "../TeamMembers/TeamMemberPageContainer/AddTeamMemberPage";
-import CreatePost from "../TrainingSeries/CreatePost";
-import PostPage from "../TrainingSeries/PostPage";
-import NotificationsView from "../Notifications/NotificationsView";
+import { connect } from 'react-redux';
+import { getUser } from '../../store/actions/userActions';
+import TrainingSeriesPosts from '../TrainingSeries/TrainingSeriesPosts';
+import AddTeamMemberPage from '../TeamMembers/TeamMemberPageContainer/AddTeamMemberPage';
+import CreatePost from '../TrainingSeries/CreatePost';
+import PostPage from '../TrainingSeries/PostPage';
+import NotificationsView from '../Notifications/NotificationsView';
 
 class Dashboard extends React.Component {
   state = {
@@ -93,11 +83,6 @@ class Dashboard extends React.Component {
                   render={props => <TrainingSeriesPosts {...props} />}
                 />
                 <Route
-<<<<<<< HEAD
-                  path="/home/notifications"
-                  render={props => (
-                    <NotificationView
-=======
                   path="/home/create-post"
                   render={props => <CreatePost {...props} />}
                 />
@@ -107,7 +92,6 @@ class Dashboard extends React.Component {
                   path="/home/notifications"
                   render={props => (
                     <NotificationsView
->>>>>>> 150b2d5e5bad64a652d302ddc4795f2352d92db5
                       {...props}
                       userId={this.props.userProfile.user.userID}
                     />
@@ -152,7 +136,10 @@ const DashboardContainer = styled.div`
   margin: 0 auto;
   max-width: 1000px;
   /* height: 70vh; */
-<<<<<<< HEAD
+  @media (max-width: 768px) {
+    flex-direction: column;
+    padding: 10px;
+  }
 `;
 
 const hidden = {
@@ -161,20 +148,6 @@ const hidden = {
 
 const active = {
   display: 'block'
-=======
-  @media (max-width: 768px) {
-    flex-direction: column;
-    padding: 10px;
-  }
-`;
-
-const hidden = {
-  display: "none"
-};
-
-const active = {
-  display: "block"
->>>>>>> 150b2d5e5bad64a652d302ddc4795f2352d92db5
 };
 
 // const toggleTrainingSeries = tabValue => {

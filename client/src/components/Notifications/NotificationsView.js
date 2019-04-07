@@ -65,37 +65,48 @@ class NotificationsView extends Component {
   };
 
   render() {
+    const { classes } = this.props;
+    const allNotifications = [
+      ...this.props.textNotifications,
+      ...this.props.emailNotifications
+    ];
+
+    const notificationCount = allNotifications.length;
+
+    const filteredNotifications = allNotifications.filter(notification => {
+      // check if first key included email or text
+      if (notification.hasOwnProperty(this.state.filterType)) {
+        return notification;
+      } else if (this.state.filterType === 'all') {
+        return notification;
+      }
     });
 
     filteredNotifications.sort((a, b) =>
       a.sendDate > b.sendDate ? 1 : b.sendDate > a.sendDate ? -1 : 0
     );
->>>>>>> 150b2d5e5bad64a652d302ddc4795f2352d92db5
 
     return (
       <Paper className={classes.root} elevation={2}>
         <div className={classes.columnHeader}>
-          <Typography variant="h5">Upcoming Notifications</Typography>
-        </div>
-        <NotificationsList
-          notifications={this.state.notifications}
           <Typography variant="h5">{`${notificationCount} Pending Notifications`}</Typography>
           <FormControl className={classes.formControl}>
             <Select
               native
               value={this.state.filterType}
+              onChange={e => this.handleFilter(e)}
               inputProps={{
                 id: 'pagination-selector'
               }}
             >
               <option value={'all'}>All</option>
+              <option value={'phoneNumber'}>Text</option>
               <option value={'email'}>Email</option>
             </Select>
           </FormControl>
         </div>
         <NotificationsList
           notifications={filteredNotifications}
->>>>>>> 150b2d5e5bad64a652d302ddc4795f2352d92db5
           offset={this.state.offset}
           match={this.props.match}
           userID={this.props.userID}
@@ -140,8 +151,7 @@ const mapStateToProps = state => {
   return {
     textNotifications: state.notificationsReducer.textNotifications,
     emailNotifications: state.notificationsReducer.emailNotifications,
-    isLoading: state.notificationsReducer.isLoading,
-    isDoneAdding: state.notificationsReducer.isDoneAdding
+    isLoading: state.notificationsReducer.isLoading
   };
 };
 
