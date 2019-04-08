@@ -22,6 +22,7 @@ const NotificationsList = props => {
             <Notification
               key={notification.notificationID}
               notification={notification}
+              filterSent={props.filterSent}
               match={props.match}
             />
           );

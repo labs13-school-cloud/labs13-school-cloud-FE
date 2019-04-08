@@ -1,33 +1,33 @@
 // parent component for app once logged in
-import React from "react";
-import { Router, Route } from "react-router-dom";
+import React from 'react';
+import { Router, Route } from 'react-router-dom';
 
-import history from "../../history";
+import history from '../../history';
 
 //Styling
-import styled from "styled-components";
+import styled from 'styled-components';
 
 //Components
-
-import TeamMembersView from "../TeamMembers/TeamMembersView";
-import TrainingSeriesView from "../TrainingSeries/TrainingSeriesView";
-import ProgressCircle from "../Progress/ProgressCircle";
-import ProfileView from "../Profile/ProfileView";
-import AppBar from "../AppBar/AppBar";
-import TeamMemberPageView from "../TeamMembers/TeamMemberPageContainer/TeamMemberPageView";
+import TeamMembersView from '../TeamMembers/TeamMembersView';
+import TrainingSeriesView from '../TrainingSeries/TrainingSeriesView';
+import ProgressCircle from '../Progress/ProgressCircle';
+import ProfileView from '../Profile/ProfileView';
+import AppBar from '../AppBar/AppBar';
+import TeamMemberPageView from '../TeamMembers/TeamMemberPageContainer/TeamMemberPageView';
+import NotificationView from '../Notifications/NotificationsView';
 
 //Auth
-import { getUserProfile } from "../../Auth/Auth";
-import Authenticate from "../authenticate/authenticate";
+import { getUserProfile } from '../../Auth/Auth';
+import Authenticate from '../authenticate/authenticate';
 
 //State Management
-import { connect } from "react-redux";
-import { getUser } from "../../store/actions/userActions";
-import TrainingSeriesPosts from "../TrainingSeries/TrainingSeriesPosts";
-import AddTeamMemberPage from "../TeamMembers/TeamMemberPageContainer/AddTeamMemberPage";
-import CreatePost from "../TrainingSeries/CreatePost";
-import PostPage from "../TrainingSeries/PostPage";
-import NotificationsView from "../Notifications/NotificationsView";
+import { connect } from 'react-redux';
+import { getUser } from '../../store/actions/userActions';
+import TrainingSeriesPosts from '../TrainingSeries/TrainingSeriesPosts';
+import AddTeamMemberPage from '../TeamMembers/TeamMemberPageContainer/AddTeamMemberPage';
+import CreatePost from '../TrainingSeries/CreatePost';
+import PostPage from '../TrainingSeries/PostPage';
+import NotificationsView from '../Notifications/NotificationsView';
 
 class Dashboard extends React.Component {
   state = {
@@ -143,11 +143,11 @@ const DashboardContainer = styled.div`
 `;
 
 const hidden = {
-  display: "none"
+  display: 'none'
 };
 
 const active = {
-  display: "block"
+  display: 'block'
 };
 
 // const toggleTrainingSeries = tabValue => {
