@@ -39,7 +39,7 @@ function SeriesCard(props) {
 	const { classes } = props;
 	const [postLength, setPostLength] = useState(0);
 
-	async function getData() {
+	async function getPostCount() {
 		await axios
 			.get(`${process.env.REACT_APP_API}/api/training-series/${props.trainingSeriesID}/posts`)
 			.then(res => {
@@ -51,15 +51,12 @@ function SeriesCard(props) {
 	}
 
 	useEffect(() => {
-		getData();
+		getPostCount();
 	});
 
 	return (
 		<ListItem className={classes.listItem}>
-			<ListItemText
-				primary={props.data.title}
-				secondary={`Posts: ${postLength} | Assigned: 5`}
-			/>
+			<ListItemText primary={props.data.title} secondary={`Posts: ${postLength}`} />
 
 			<SlideDownModal
 				deleteTrainingSeries={props.deleteTrainingSeries}
