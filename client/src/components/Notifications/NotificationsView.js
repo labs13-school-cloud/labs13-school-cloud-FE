@@ -109,8 +109,8 @@ class NotificationsView extends Component {
         <div className={classes.columnHeader}>
           <Typography variant="h5">
             {this.state.filterSent === 'pending'
-              ? `${notificationCount} Pending Notifications`
-              : 'Sent Notifications'}
+              ? `${notificationCount} Pending Messages`
+              : 'Sent Messages'}
           </Typography>
           <div>
             <FormControl className={classes.formControl}>
