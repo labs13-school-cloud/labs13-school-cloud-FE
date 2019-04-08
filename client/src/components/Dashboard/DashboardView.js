@@ -8,13 +8,13 @@ import history from '../../history';
 import styled from 'styled-components';
 
 //Components
-
 import TeamMembersView from '../TeamMembers/TeamMembersView';
 import TrainingSeriesView from '../TrainingSeries/TrainingSeriesView';
 import ProgressCircle from '../Progress/ProgressCircle';
 import ProfileView from '../Profile/ProfileView';
 import AppBar from '../AppBar/AppBar';
 import TeamMemberPageView from '../TeamMembers/TeamMemberPageContainer/TeamMemberPageView';
+import NotificationView from '../Notifications/NotificationsView';
 
 //Auth
 import { getUserProfile } from '../../Auth/Auth';
@@ -31,7 +31,7 @@ import NotificationsView from '../Notifications/NotificationsView';
 
 class Dashboard extends React.Component {
 	state = {
-		tabValue: 0
+		tabValue: 0,
 	};
 
 	componentDidMount() {
@@ -58,10 +58,10 @@ class Dashboard extends React.Component {
 						<AppBar />
 						<DashboardContainer>
 							<Router history={history}>
-								<Route exact path='/home' component={this.renderDashboard} />
-								<Route path='/home/profile' component={ProfileView} />
+								<Route exact path="/home" component={this.renderDashboard} />
+								<Route path="/home/profile" component={ProfileView} />
 								<Route
-									path='/home/team-member/:id'
+									path="/home/team-member/:id"
 									render={props => (
 										<TeamMemberPageView
 											{...props}
@@ -70,7 +70,7 @@ class Dashboard extends React.Component {
 									)}
 								/>
 								<Route
-									path='/home/create-team-member/'
+									path="/home/create-team-member/"
 									render={props => (
 										<AddTeamMemberPage
 											{...props}
@@ -79,17 +79,17 @@ class Dashboard extends React.Component {
 									)}
 								/>
 								<Route
-									path='/home/training-series/:id'
+									path="/home/training-series/:id"
 									render={props => <TrainingSeriesPosts {...props} />}
 								/>
 								<Route
-									path='/home/create-post'
+									path="/home/create-post"
 									render={props => <CreatePost {...props} />}
 								/>
-								<Route path='/home/post/:id' component={PostPage} />
+								<Route path="/home/post/:id" component={PostPage} />
 
 								<Route
-									path='/home/notifications'
+									path="/home/notifications"
 									render={props => (
 										<NotificationsView
 											{...props}
@@ -110,7 +110,7 @@ class Dashboard extends React.Component {
 	// tracking the tab value in navigation.js
 	changeTabValue = value => {
 		this.setState({
-			tabValue: value
+			tabValue: value,
 		});
 	};
 }
@@ -118,14 +118,14 @@ class Dashboard extends React.Component {
 const mapStateToProps = state => {
 	return {
 		userProfile: state.userReducer.userProfile,
-		doneLoading: state.userReducer.doneLoading
+		doneLoading: state.userReducer.doneLoading,
 	};
 };
 
 export default connect(
 	mapStateToProps,
 	{
-		getUser
+		getUser,
 	}
 )(Authenticate(Dashboard));
 
@@ -147,11 +147,11 @@ const DashboardContainer = styled.div`
 `;
 
 const hidden = {
-	display: 'none'
+	display: 'none',
 };
 
 const active = {
-	display: 'block'
+	display: 'block',
 };
 
 // const toggleTrainingSeries = tabValue => {
