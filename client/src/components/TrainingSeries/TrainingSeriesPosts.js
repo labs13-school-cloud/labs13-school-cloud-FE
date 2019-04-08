@@ -13,12 +13,7 @@ import styled from 'styled-components';
 
 // Redux
 import { connect } from 'react-redux';
-import {
-	getTrainingSeriesPosts,
-	createAPost,
-	editPost,
-	deletePost
-} from '../../store/actions';
+import { getTrainingSeriesPosts, createAPost, editPost, deletePost } from '../../store/actions';
 import { withStyles } from '@material-ui/core/styles';
 
 // Styling
@@ -27,7 +22,7 @@ import {
 	ListItem,
 	ListItemText,
 	ListItemSecondaryAction,
-	Typography
+	Typography,
 } from '@material-ui/core/';
 
 const styles = theme => ({
@@ -41,13 +36,13 @@ const styles = theme => ({
 		'@media (max-width: 480px)': {
 			width: '89%',
 			padding: 0,
-			margin: '0 auto'
-		}
+			margin: '0 auto',
+		},
 	},
 	secondaryAction: {
 		display: 'flex',
 		flexDirection: 'row',
-		'align-items': 'center'
+		'align-items': 'center',
 	},
 	listItem: {
 		width: '79%',
@@ -57,7 +52,7 @@ const styles = theme => ({
 		display: 'flex',
 		justifyContent: 'space-between',
 		alignItems: 'center',
-		borderBottom: '1px solid #E8E9EB'
+		borderBottom: '1px solid #E8E9EB',
 		// "list-style": "none"
 	},
 	icons: {
@@ -66,21 +61,21 @@ const styles = theme => ({
 		marginBottom: 10,
 		color: 'gray',
 		cursor: 'pointer',
-		'&:hover': { color: '#2699FB' }
+		'&:hover': { color: '#2699FB' },
 	},
 	hidden: {
-		display: 'none'
+		display: 'none',
 	},
 	button: {
-		margin: theme.spacing.unit
+		margin: theme.spacing.unit,
 	},
 	list: {
-		listStyleType: 'none'
-	}
+		listStyleType: 'none',
+	},
 });
 class TrainingSeriesPosts extends React.Component {
 	state = {
-		active: false
+		active: false,
 	};
 
 	componentDidMount() {
@@ -102,8 +97,8 @@ class TrainingSeriesPosts extends React.Component {
 		this.props.history.push({
 			pathname: '/home/create-post',
 			state: {
-				trainingSeriesId: this.props.singleTrainingSeries.trainingSeriesID
-			}
+				trainingSeriesId: this.props.singleTrainingSeries.trainingSeriesID,
+			},
 		});
 	};
 
@@ -113,8 +108,8 @@ class TrainingSeriesPosts extends React.Component {
 		this.props.history.push({
 			pathname: `/home/post/${post.postID}`,
 			state: {
-				post
-			}
+				post,
+			},
 		});
 	};
 
@@ -135,15 +130,14 @@ class TrainingSeriesPosts extends React.Component {
               editPost={this.props.editPost}
             /> */}
 							<ButtonContainer>
-								<Typography variant='subtitle1'>Create A New Post</Typography>
+								<Typography variant="subtitle1">Create A New Post</Typography>
 								<Fab
-									color='primary'
-									size='small'
-									aria-label='Add'
+									color="primary"
+									size="small"
+									aria-label="Add"
 									className={classes.fab}
-									onClick={e => this.routeToPostPage(e)}
-								>
-									<i className='material-icons'>add</i>
+									onClick={e => this.routeToPostPage(e)}>
+									<i className="material-icons">add</i>
 								</Fab>
 							</ButtonContainer>
 						</HeaderContainer>
@@ -168,14 +162,13 @@ class TrainingSeriesPosts extends React.Component {
 										<ListButtonContainer>
 											<i
 												className={`material-icons ${classes.icons}`}
-												onClick={e => this.routeToEditPostPage(e, post)}
-											>
+												onClick={e => this.routeToEditPostPage(e, post)}>
 												edit
 											</i>
 
 											<DeleteModal
 												className={`material-icons ${classes.icons}`}
-												deleteType='post'
+												deleteType="post"
 												id={post.postID}
 											/>
 										</ListButtonContainer>
@@ -223,7 +216,7 @@ const ListButtonContainer = styled.div`
 const mapStateToProps = state => ({
 	isLoading: state.postsReducer.isLoading,
 	singleTrainingSeries: state.postsReducer.singleTrainingSeries,
-	posts: state.postsReducer.posts
+	posts: state.postsReducer.posts,
 });
 
 TrainingSeriesPosts.propTypes = {};

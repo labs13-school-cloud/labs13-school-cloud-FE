@@ -1,6 +1,7 @@
 // displays training series card
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 //PropTypes
 import PropTypes from 'prop-types';
@@ -12,8 +13,8 @@ import {
 	// CardContent,
 	// Typography,
 	// List,
-	ListItem,
 	// ListItemSecondaryAction,
+	ListItem,
 	ListItemText,
 } from '@material-ui/core/';
 
@@ -36,10 +37,29 @@ const styles = {
 
 function SeriesCard(props) {
 	const { classes } = props;
+	const [postLength, setPostLength] = useState(0);
+
+	async function getData() {
+		await axios
+			.get(`${process.env.REACT_APP_API}/api/training-series/${props.trainingSeriesID}/posts`)
+			.then(res => {
+				setPostLength(res.data.posts.length);
+			})
+			.catch(err => {
+				console.log(err);
+			});
+	}
+
+	useEffect(() => {
+		getData();
+	});
 
 	return (
 		<ListItem className={classes.listItem}>
-			<ListItemText primary={props.data.title} secondary="Posts: 10 | Assigned: 5" />
+			<ListItemText
+				primary={props.data.title}
+				secondary={`Posts: ${postLength} | Assigned: 5`}
+			/>
 
 			<SlideDownModal
 				deleteTrainingSeries={props.deleteTrainingSeries}
@@ -47,25 +67,6 @@ function SeriesCard(props) {
 				userID={props.userID}
 			/>
 		</ListItem>
-
-		// <Card className={classes.card}>
-		//   <CardContent>
-		//     <Typography
-		//       className={classes.title}
-		//       variant="h5"
-		//       component="h3"
-		//       gutterBottom
-		//     >
-		//       {props.data.title}
-		//     </Typography>
-		//     <Typography variant="caption">Posts: 10 | Assigned: 5</Typography>
-		//   </CardContent>
-		//   <SlideDownModal
-		//     deleteTrainingSeries={props.deleteTrainingSeries}
-		//     data={props.data}
-		//     userID={props.userID}
-		//   />
-		// </Card>
 	);
 }
 
