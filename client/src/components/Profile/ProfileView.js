@@ -19,13 +19,16 @@ import {
 	withStyles,
 	Modal,
 	Avatar,
-	IconButton,
+	IconButton
 } from '@material-ui/core';
 
 import DeleteIcon from '@material-ui/icons/Delete';
 
 import styled from 'styled-components';
 
+// function rand() {
+// 	return Math.round(Math.random() * 20) - 10;
+// }
 function rand() {
 	return Math.round(Math.random() * 20) - 10;
 }
@@ -37,48 +40,52 @@ function getModalStyle() {
 	return {
 		top: `${top}%`,
 		left: `${left}%`,
-		transform: `translate(-${top}%, -${left}%)`,
+		transform: `translate(-${top}%, -${left}%)`
 	};
 }
 
 const styles = theme => ({
-	// paper: {
-	// 	// position: 'absolute',
-	// 	width: 800,
-	// 	margin:'0 auto',
-	// 	backgroundColor: theme.palette.background.paper,
-	// 	boxShadow: theme.shadows[5],
-	// 	padding: theme.spacing.unit * 4,
-	// 	outline: 'none',
-	// },
-	card: {
-		maxWidth: '100%',
-		width: 600,
+	paper: {
+		position: 'absolute',
+		width: 800,
 		margin: '0 auto',
-		padding: 10,
+		backgroundColor: theme.palette.background.paper,
+		boxShadow: theme.shadows[5],
+		padding: theme.spacing.unit * 4,
+		outline: 'none',
+		alignItems: 'center'
+	},
+	profileContainer: {
+		display: 'flex',
+		flexDirection: 'column',
+		alignItems: 'center',
+		maxWidth: '100%',
+		// width: 600,
+		margin: '0 auto',
+		padding: 10
 	},
 	payment: {
 		// maxWidth: 600,
 		// width: '100%',
 		margin: '10px auto',
-		padding: 10,
+		padding: 10
 	},
 	cardContent: {
-		backgroundColor: '#E8E9EB',
+		backgroundColor: '#E8E9EB'
 	},
 	media: {
 		height: 200,
-		width: 200,
+		width: 200
 	},
 	bigAvatar: {
 		margin: 10,
 		width: 150,
-		height: 150,
-	},
+		height: 150
+	}
 });
 
 const Container = styled.div`
-	margin-top: 80px;
+	/* margin-top: 80px; */
 `;
 
 class ProfileView extends React.Component {
@@ -86,7 +93,7 @@ class ProfileView extends React.Component {
 		super(props);
 		this.state = {
 			googleProfile: [],
-			open: false,
+			open: false
 		};
 	}
 	handleOpen = () => {
@@ -131,67 +138,87 @@ class ProfileView extends React.Component {
 			<Container>
 				{this.props.doneLoading && (
 					<>
-						<div>
-							<Card className={classes.card}>
-								<Typography gutterBottom variant="h5" component="h1">
-									{user.name}
-								</Typography>
-								<Typography variant="subtitle1" gutterBottom>
-									{user.email}
-								</Typography>
-								<Avatar
-									alt="Remy Sharp"
-									src={JSON.parse(localStorage.getItem('Profile')).picture}
-									className={classes.bigAvatar}
-								/>
-								<Typography gutterBottom variant="h5" component="h5">
-									<div>Account Type: {accountType}</div>
-								</Typography>
-								<CardActions>
-									{/* Button for editing */}
-									<UserModal
+						<Card className={classes.profileContainer}>
+							<Avatar
+								alt='Remy Sharp'
+								src={JSON.parse(localStorage.getItem('Profile')).picture}
+								className={classes.bigAvatar}
+							/>
+							<Typography gutterBottom variant='h5' component='h1'>
+								{user.name}
+							</Typography>
+							<Typography variant='subtitle1' gutterBottom>
+								{user.email}
+							</Typography>
+							<Typography
+								gutterBottom
+								variant='subtitle1'
+								component='subtitle1'
+							>
+								<div>Account Type: {accountType}</div>
+							</Typography>
+							<CardActions>
+								{/* Button for editing */}
+								{/* <UserModal
 										email={user.email}
 										name={user.name}
 										id={user.userID}
-									/>
-									{/* Button for deleting */}
-									<IconButton
-										aria-label="Delete"
-										className={classes.margin}
-										onClick={this.handleOpen}>
-										<DeleteIcon />
-									</IconButton>
-								</CardActions>
-							</Card>
-						</div>
+									/> */}
+								{/* Button for deleting */}
+								<Button
+									variant='contained'
+									onClick={this.handleOpen}
+									className={classes.button}
+								>
+									Delete Acccount
+								</Button>
+								{/* <IconButton
+									aria-label='Delete'
+									onClick={this.handleOpen}
+									className={classes.margin}
+								>
+									<DeleteIcon />
+								</IconButton> */}
+							</CardActions>
+						</Card>
+
 						<Card className={classes.payment}>
 							<StripeView user={this.state.googleProfile} />
 						</Card>
 					</>
 				)}
 				<Modal
-					aria-labelledby="simple-modal-title"
-					aria-describedby="simple-modal-description"
+					aria-labelledby='simple-modal-title'
+					aria-describedby='simple-modal-description'
 					open={this.state.open}
-					onClose={this.handleClose}>
+					onClose={this.handleClose}
+				>
 					<div style={getModalStyle()} className={classes.paper}>
-						<Typography variant="h6" id="modal-title">
-							Are you sure?
-						</Typography>
 						{account ? (
-							<Typography>
-								Please unsubscribe from your current subescription before deleting
-								your account.
-							</Typography>
+							<>
+								<Typography variant='h6' id='modal-title'>
+									Active subscription
+								</Typography>
+								<Typography>
+									Please unsubscribe from your current subescription before
+									deleting your account.
+								</Typography>
+							</>
 						) : (
-							<Button
-								variant="contained"
-								color="secondary"
-								onClick={() => {
-									this.props.deleteUser(user.userID);
-								}}>
-								Delete Account
-							</Button>
+							<>
+								<Typography variant='h6' id='modal-title'>
+									Are you sure?
+								</Typography>
+								<Button
+									variant='contained'
+									color='secondary'
+									onClick={() => {
+										this.props.deleteUser(user.userID);
+									}}
+								>
+									Delete Account
+								</Button>
+							</>
 						)}
 					</div>
 				</Modal>
@@ -204,7 +231,7 @@ const mapStateToProps = state => {
 	return {
 		userProfile: state.userReducer.userProfile,
 		doneLoading: state.userReducer.doneLoading,
-		isEditing: state.userReducer.isEditing,
+		isEditing: state.userReducer.isEditing
 	};
 };
 
@@ -213,6 +240,6 @@ export default connect(
 	{
 		getUser,
 		editUser,
-		deleteUser,
+		deleteUser
 	}
 )(withStyles(styles)(Authentication(ProfileView)));

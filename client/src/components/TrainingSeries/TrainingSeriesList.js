@@ -29,6 +29,7 @@ const TrainingSeriesList = props => {
 
 					return (
 						<TrainingSeries
+							trainingSeriesID={series.trainingSeriesID}
 							key={series.trainingSeriesID}
 							deleteTrainingSeries={props.deleteTrainingSeries}
 							data={series}
