@@ -43,7 +43,7 @@ function Notification(props) {
     <ListItem className={classes.listItem}>
       <ListItemText
         primary={`${postName} | ${title}`}
-        secondary={`${firstName} ${lastName}  | ${email ? email : phoneNumber}`}
+        secondary={`${firstName} ${lastName} | ${email ? email : phoneNumber}`}
       />
       <Typography className={classes.sendDate}>
         {props.filterSent === 'pending' ? 'Send Date' : 'Sent on'}
