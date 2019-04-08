@@ -35,13 +35,14 @@ function Notification(props) {
     sendDate,
     postName,
     email,
-    phoneNumber
+    phoneNumber,
+    title
   } = props.notification;
 
   return (
     <ListItem className={classes.listItem}>
       <ListItemText
-        primary={`${postName} | Waiter Fundamentals`}
+        primary={`${postName} | ${title}`}
         secondary={`${firstName} ${lastName}  | ${email ? email : phoneNumber}`}
       />
       <Typography className={classes.sendDate}>
