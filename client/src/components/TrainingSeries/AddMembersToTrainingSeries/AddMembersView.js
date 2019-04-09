@@ -18,6 +18,7 @@ class AddMembersView extends Component {
   }
 
   componentDidMount() {
+    console.log(this.props);
     let d = new Date();
     let formattedDate = d.toISOString();
     this.setState({
@@ -69,7 +70,14 @@ class AddMembersView extends Component {
     }
   };
   render() {
-    return <AddMember handler={this.handler} />;
+    console.log(this.state);
+    return (
+      <AddMember
+        startDate={this.state.startDate}
+        teamMembers={this.props.teamMembers}
+        handler={this.handler}
+      />
+    );
   }
 }
 

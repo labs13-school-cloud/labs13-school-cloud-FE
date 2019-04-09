@@ -51,9 +51,36 @@ const styles = theme => ({
 function AddMember(props) {
   console.log(props);
   const { classes } = props;
+
   return (
     <div>
-      <h1>TEST</h1>
+      {props.teamMembers.length ? (
+        <>
+          <DatePicker
+            inline
+            selected={props.startDate}
+            onChange={props.handler.handleDateChange}
+          />
+
+          {props.teamMembers.map(member => (
+            <>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    name={member.teamMemberID}
+                    onChange={() =>
+                      props.handler.handleChecked(member.teamMemberID)
+                    }
+                  />
+                }
+                label={`${member.firstName} ${member.lastName}`}
+              />
+            </>
+          ))}
+        </>
+      ) : (
+        <h2> You need to create Team members! </h2>
+      )}
     </div>
   );
 }
