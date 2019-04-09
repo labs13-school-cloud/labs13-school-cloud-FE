@@ -39,7 +39,7 @@ const stripeReducer = (state = initialState, action) => {
 			return {
 				...state,
 				isLoading: false,
-				plans: action.payload,
+				plans: action.payload.reverse(),
 			};
 		case GET_PLANS_FAIL:
 			return {

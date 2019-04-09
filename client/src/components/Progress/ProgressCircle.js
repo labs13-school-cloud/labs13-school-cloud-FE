@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Logo from '../../img/training-bot.png';
 import styled from 'styled-components';
-// import logo from '../../img/trainingBot.gif';
+import logo from '../../img/trainingBot.gif';
 
 const styles = theme => ({
 	progress: {
@@ -21,9 +21,9 @@ function ProgressCircle(props) {
 	return (
 		<div>
 			{/* Animated bouncing GIF */}
-			{/* <LogoImage src={logo} alt="loading" /> */}
-			<LogoImage src={Logo} />
-			<CircularProgress className={classes.progress} size="50px" />
+			<LogoImage src={logo} alt="loading" />
+			{/* <LogoImage src={Logo} />
+			<CircularProgress className={classes.progress} size="50px" /> */}
 		</div>
 	);
 }

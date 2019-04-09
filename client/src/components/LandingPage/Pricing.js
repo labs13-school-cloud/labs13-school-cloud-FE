@@ -13,7 +13,7 @@ const Column = Styled.div`
     border: 1px solid #451476;
 `;
 const Title = Styled.p`
-font-size: 1.6rem;
+    font-size: 1.6rem;
     text-align:center;
     padding: 5px;
     margin:0;
@@ -24,7 +24,7 @@ font-size: 1.6rem;
     top:0;
 `;
 
-function Pricing() {
+function Pricing(props) {
 	return (
 		<Container>
 			<Column>
@@ -38,7 +38,7 @@ function Pricing() {
 				</ul>
 			</Column>
 			<Column>
-				<Title>Premier</Title>
+				<Title>Premium</Title>
 				<ul>
 					<li>Item 1</li>
 					<li>Item 2</li>

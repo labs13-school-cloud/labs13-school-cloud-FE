@@ -15,6 +15,8 @@ import ProfileView from '../Profile/ProfileView';
 import AppBar from '../AppBar/AppBar';
 import TeamMemberPageView from '../TeamMembers/TeamMemberPageContainer/TeamMemberPageView';
 import NotificationView from '../Notifications/NotificationsView';
+import CreateTrainingSeries from '../TrainingSeries/CreateTrainingSeries';
+import ReturnToDashboardButton from '../Navigation/ReturnToDashboard';
 
 //Auth
 import { getUserProfile } from '../../Auth/Auth';
@@ -59,6 +61,7 @@ class Dashboard extends React.Component {
 				{this.props.doneLoading ? (
 					<>
 						<AppBar />
+						{this.props.location.pathname !== '/home' && <ReturnToDashboardButton />}
 						<DashboardContainer>
 							<Router history={history}>
 								<Route exact path="/home" component={this.renderDashboard} />
@@ -76,6 +79,15 @@ class Dashboard extends React.Component {
 									path="/home/create-team-member/"
 									render={props => (
 										<AddTeamMemberPage
+											{...props}
+											userId={this.props.userProfile.user.userID}
+										/>
+									)}
+								/>
+								<Route
+									path="/home/create-training-series"
+									render={props => (
+										<CreateTrainingSeries
 											{...props}
 											userId={this.props.userProfile.user.userID}
 										/>

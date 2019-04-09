@@ -61,13 +61,12 @@ const styles = theme => ({
 		alignItems: 'center',
 		width: '30%',
 		padding: 10,
-		height: 350,
 	},
 	pricing: {
 		width: '70%',
 		margin: '0px 0px 0px 10px',
 		padding: 10,
-		height: 350,
+		// height: 350,
 	},
 	cardContent: {
 		backgroundColor: '#E8E9EB',
@@ -90,6 +89,8 @@ const Container = styled.div`
 	display: flex;
 	max-width: 1000px;
 	width: 100%;
+	height: 430px;
+	align-items: stretch;
 `;
 
 class ProfileView extends React.Component {
@@ -175,7 +176,7 @@ class ProfileView extends React.Component {
 						</Card>
 
 						<Card className={classes.pricing}>
-							<Pricing />
+							{/* <Pricing /> */}
 							<StripeView user={this.state.googleProfile} />
 						</Card>
 					</>
