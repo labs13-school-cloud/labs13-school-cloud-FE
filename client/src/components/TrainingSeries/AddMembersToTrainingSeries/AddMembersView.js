@@ -96,7 +96,7 @@ class AddMembersView extends Component {
         teamMembers={this.props.teamMembers}
         selectedTeamMembers={this.state.selectedTeamMembers}
         handler={this.handler}
-        isRouting={this.setState.isRouting}
+        isRouting={this.state.isRouting}
       />
     );
   }

@@ -30,6 +30,7 @@ import {
   ListItemSecondaryAction,
   Typography,
 } from '@material-ui/core/';
+import AddMemberSnackbar from './AddMembersToTrainingSeries/AddMemberSnackbar';
 
 const styles = theme => ({
   paper: {
@@ -82,10 +83,18 @@ const styles = theme => ({
 class TrainingSeriesPosts extends React.Component {
   state = {
     active: false,
+    displaySnackbar: false,
   };
 
   componentDidMount() {
+    console.log(this.props);
     this.getTrainingSeriesWithPosts(this.props.match.params.id);
+    if (this.props.location.state) {
+      this.setState({
+        displaySnackbar: this.props.location.state.success,
+      });
+    }
+    this.resetHistory();
   }
 
   getTrainingSeriesWithPosts = id => {
@@ -127,11 +136,25 @@ class TrainingSeriesPosts extends React.Component {
     });
   };
 
+  resetHistory = () => {
+    this.props.history.replace({
+      state: null,
+    });
+  };
+
   render() {
     const {classes} = this.props;
     // console.log("POSTS", this.props);
     return (
       <>
+        {this.state.displaySnackbar && (
+          <>
+            <AddMemberSnackbar
+              message="Your team members have be successfully added."
+              type="success"
+            />
+          </>
+        )}
         {/* Gives app time to fetch data */}
         {this.props.isLoading && <p>Please wait...</p>}
         {!this.props.isLoading && (

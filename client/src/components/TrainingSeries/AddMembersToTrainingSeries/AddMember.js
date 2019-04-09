@@ -15,6 +15,7 @@ import FormLabel from '@material-ui/core/FormLabel';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import styled from 'styled-components';
+import TrainingBotGIF from '../../../img/trainingBot.gif';
 
 const styles = theme => ({
   paper: {
@@ -115,10 +116,18 @@ function AddMember(props) {
                 </>
               ))}
               <Button
-                disabled={props.selectedTeamMembers < 1 && 'true'}
+                disabled={
+                  props.selectedTeamMembers < 1 || props.isRouting === true
+                    ? 'true'
+                    : null
+                }
                 type="submit"
               >
-                Submit
+                {props.isRouting ? (
+                  <LoadingImage src={TrainingBotGIF} alt="loader" />
+                ) : (
+                  `Submit`
+                )}
               </Button>
               <Button onClick={props.handler.routeToPostPage}>Cancel</Button>
             </form>
@@ -140,6 +149,13 @@ const AddMemberContainer = styled.div`
 const TeamMemberContainer = styled.div`
   display: flex;
   flex-direction: column;
+`;
+
+const LoadingImage = styled.img`
+  width: 40px;
+  overflow: hidden;
+  pointerEvents: none,
+  cursor: not-allowed,
 `;
 
 const disabled = {
