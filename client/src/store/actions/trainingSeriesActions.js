@@ -84,8 +84,7 @@ export const deleteTrainingSeries = id => dispatch => {
 export const getMembersAssigned = id => dispatch => {
   dispatch({ type: GET_MEMBERS_ASSIGNED_START });
   axios
-  // .get(`${process.env.REACT_APP_API}/api/training-series/${id}/assignments`)
-  .get(`${process.env.REACT_APP_API_LOCAL}/api/training-series/${id}/assignments`)
+  .get(`${process.env.REACT_APP_API}/api/training-series/${id}/assignments`)
   .then(res => dispatch({ type: GET_MEMBERS_ASSIGNED_SUCCESS, payload: res.data.assignments }))
   .catch(err => dispatch({ type: GET_MEMBERS_ASSIGNED_FAIL, error: err }))
 }
