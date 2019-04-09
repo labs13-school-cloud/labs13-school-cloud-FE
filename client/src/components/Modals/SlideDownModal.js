@@ -1,16 +1,16 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { withRouter } from "react-router";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router';
 
-import { withStyles } from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
-import IconButton from "@material-ui/core/IconButton";
-import Menu from "@material-ui/core/Menu";
-import MenuItem from "@material-ui/core/MenuItem";
+import { withStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
+import IconButton from '@material-ui/core/IconButton';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
 
-import TrainingSeriesModal from "./TrainingSeriesModal";
-import AddToTrainingSeriesModal from "../Modals/addToTrainingSeriesModal";
+import TrainingSeriesModal from './TrainingSeriesModal';
+import AddToTrainingSeriesModal from '../Modals/addToTrainingSeriesModal';
 
 const styles = theme => ({});
 
@@ -56,7 +56,7 @@ class SlideDownModal extends React.Component {
 						edit
 					</i> */}
           <MoreVertIcon
-            aria-owns={this.state.anchorEl ? "simple-menu" : undefined}
+            aria-owns={this.state.anchorEl ? 'simple-menu' : undefined}
             aria-haspopup="true"
           />
         </IconButton>
@@ -70,7 +70,7 @@ class SlideDownModal extends React.Component {
             <MenuItem onClick={this.handleClose}>Manage Posts</MenuItem>
           </Link> */}
           <MenuItem onClick={e => this.routeToTrainingSeriesPage(e)}>
-            Manage Posts
+            Manage Messages
           </MenuItem>
           <MenuItem>
             <AddToTrainingSeriesModal
