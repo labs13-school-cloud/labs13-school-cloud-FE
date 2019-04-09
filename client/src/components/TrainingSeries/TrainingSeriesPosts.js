@@ -1,11 +1,12 @@
 // displays all posts of a training series
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 // import Button from '@material-ui/core/Button';
 import Fab from "@material-ui/core/Fab";
 // Components
 // import PostModal from '../Modals/PostModal';
 // import PostOptionsModal from '../Modals/PostOptionsModal';
+import ProgressCircle from '../Progress/ProgressCircle';
 import DeleteModal from "../Modals/deleteModal";
 import TrainingSeriesAssignment from "./TrainingSeriesAssignment";
 // import IconButton from '@material-ui/core/IconButton';
@@ -86,8 +87,7 @@ const styles = theme => ({
 class TrainingSeriesPosts extends React.Component {
   state = {
     active: false,
-    editingTitle: false,
-    title: ""
+    editingTitle: false
   };
 
   componentDidMount() {
@@ -128,7 +128,6 @@ class TrainingSeriesPosts extends React.Component {
 
   beginTitleEdit = e => {
     this.setState({
-      ...this.state,
       editingTitle: true,
       title: this.props.singleTrainingSeries.title
     });
@@ -138,10 +137,11 @@ class TrainingSeriesPosts extends React.Component {
     this.setState({ [name]: event.target.value });
   };
 
-  updateTitle = e => {
+ updateTitle = async e => {
     e.preventDefault();
     const data = {title: this.state.title}
-    this.props.editTrainingSeries(this.props.singleTrainingSeries.trainingSeriesID, data)
+    await this.props.editTrainingSeries(this.props.singleTrainingSeries.trainingSeriesID, data);
+    await this.getTrainingSeriesWithPosts(this.props.match.params.id);
     this.setState({
       ...this.state,
       editingTitle: false
@@ -183,11 +183,8 @@ class TrainingSeriesPosts extends React.Component {
       );
     }
     return (
-      <>
-        {/* Gives app time to fetch data */}
-        {this.props.isLoading && <p>Please wait...</p>}
-        {!this.props.isLoading && (
           <>
+            {this.props.isLoading && <ProgressCircle />}
             <PageContainer>
               <Paper className={classes.paper}>{titleEdit}</Paper>
               <Paper className={classes.paper}>
@@ -261,8 +258,6 @@ class TrainingSeriesPosts extends React.Component {
               </Paper>
             </PageContainer>
           </>
-        )}
-      </>
     );
   }
 }
@@ -306,7 +301,8 @@ const mapStateToProps = state => ({
   isLoading: state.postsReducer.isLoading,
   singleTrainingSeries: state.postsReducer.singleTrainingSeries,
   posts: state.postsReducer.posts,
-  assignments: state.trainingSeriesReducer.assignments
+  assignments: state.trainingSeriesReducer.assignments,
+  trainingSeries: state.trainingSeriesReducer.trainingSeries
 });
 
 TrainingSeriesPosts.propTypes = {};
