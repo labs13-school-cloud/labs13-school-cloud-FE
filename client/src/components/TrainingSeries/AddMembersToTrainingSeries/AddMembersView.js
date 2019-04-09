@@ -1,9 +1,9 @@
-import React, { Component } from "react";
+import React, {Component} from 'react';
 
 //State Management
-import { connect } from "react-redux";
-import { addTeamMemberToTrainingSeries } from "../../../store/actions/";
-import AddMember from "./AddMember";
+import {connect} from 'react-redux';
+import {addTeamMemberToTrainingSeries} from '../../../store/actions/';
+import AddMember from './AddMember';
 
 // I need to bring in the user ID and the training series ID
 
@@ -11,9 +11,9 @@ class AddMembersView extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      trainingSeriesID: "",
-      startDate: "",
-      selectedTeamMembers: []
+      trainingSeriesID: '',
+      startDate: '',
+      selectedTeamMembers: [],
     };
   }
 
@@ -23,13 +23,13 @@ class AddMembersView extends Component {
     let formattedDate = d.toISOString();
     this.setState({
       trainingSeriesID: this.props.location.state.trainingSeriesID,
-      startDate: formattedDate
+      startDate: formattedDate,
     });
   }
 
   componentDidUpdate(prevProps) {
     if (prevProps.isEditing) {
-      this.setState({ email: this.props.email, name: this.props.name });
+      this.setState({email: this.props.email, name: this.props.name});
     }
   }
 
@@ -37,7 +37,7 @@ class AddMembersView extends Component {
     handleDateChange: date => {
       let d = date;
       this.setState({
-        startDate: d.toISOString()
+        startDate: d.toISOString(),
       });
     },
     handleSubmit: e => {
@@ -45,15 +45,18 @@ class AddMembersView extends Component {
       const data = {
         startDate: this.state.startDate,
         trainingSeriesID: this.state.trainingSeriesID,
-        assignments: this.state.selectedTeamMembers
+        assignments: this.state.selectedTeamMembers,
       };
       this.props.addTeamMemberToTrainingSeries(data);
+      this.props.history.push(
+        `/home/training-series/${this.state.trainingSeriesID}`
+      );
     },
     handleChecked: id => {
       if (!this.state.selectedTeamMembers.includes(id)) {
         this.setState({
           ...this.state,
-          selectedTeamMembers: [...this.state.selectedTeamMembers, id]
+          selectedTeamMembers: [...this.state.selectedTeamMembers, id],
         });
       } else {
         let filteredTeamMembers = this.state.selectedTeamMembers.filter(
@@ -61,13 +64,13 @@ class AddMembersView extends Component {
         );
         this.setState({
           ...this.state,
-          selectedTeamMembers: filteredTeamMembers
+          selectedTeamMembers: filteredTeamMembers,
         });
       }
     },
     handleChange: name => event => {
-      this.setState({ [name]: event.target.value });
-    }
+      this.setState({[name]: event.target.value});
+    },
   };
   render() {
     console.log(this.state);
@@ -85,13 +88,13 @@ const mapStateToProps = state => {
   return {
     trainingSeries: state.trainingSeriesReducer.trainingSeries,
     isLoading: state.userReducer.isLoading,
-    teamMembers: state.teamMembersReducer.teamMembers
+    teamMembers: state.teamMembersReducer.teamMembers,
   };
 };
 
 export default connect(
   mapStateToProps,
   {
-    addTeamMemberToTrainingSeries
+    addTeamMemberToTrainingSeries,
   }
 )(AddMembersView);
