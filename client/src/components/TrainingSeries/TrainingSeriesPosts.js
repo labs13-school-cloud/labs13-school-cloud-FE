@@ -1,25 +1,27 @@
 // displays all posts of a training series
-import React from 'react';
+import React from "react";
 
 // import Button from '@material-ui/core/Button';
-import Fab from '@material-ui/core/Fab';
+import Fab from "@material-ui/core/Fab";
 // Components
 // import PostModal from '../Modals/PostModal';
 // import PostOptionsModal from '../Modals/PostOptionsModal';
-import DeleteModal from '../Modals/deleteModal';
+import DeleteModal from "../Modals/deleteModal";
+import TrainingSeriesAssignment from './TrainingSeriesAssignment';
 // import IconButton from '@material-ui/core/IconButton';
 
-import styled from 'styled-components';
+import styled from "styled-components";
 
 // Redux
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 import {
   getTrainingSeriesPosts,
   createAPost,
   editPost,
-  deletePost
-} from '../../store/actions';
-import { withStyles } from '@material-ui/core/styles';
+  deletePost,
+  getMembersAssigned
+} from "../../store/actions";
+import { withStyles } from "@material-ui/core/styles";
 
 // Styling
 import {
@@ -28,54 +30,54 @@ import {
   ListItemText,
   ListItemSecondaryAction,
   Typography
-} from '@material-ui/core/';
+} from "@material-ui/core/";
 
 const styles = theme => ({
   paper: {
-    width: '100%',
+    width: "100%",
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
     padding: theme.spacing.unit * 4,
-    outline: 'none',
-    margin: '5px auto',
-    '@media (max-width: 480px)': {
-      width: '89%',
+    outline: "none",
+    margin: "5px auto",
+    "@media (max-width: 480px)": {
+      width: "89%",
       padding: 0,
-      margin: '0 auto'
+      margin: "0 auto"
     }
   },
   secondaryAction: {
-    display: 'flex',
-    flexDirection: 'row',
-    'align-items': 'center'
+    display: "flex",
+    flexDirection: "row",
+    "align-items": "center"
   },
   listItem: {
-    width: '79%',
+    width: "79%",
     height: 95,
     marginBottom: 20,
     paddingBottom: 10,
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    borderBottom: '1px solid #E8E9EB'
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    borderBottom: "1px solid #E8E9EB"
     // "list-style": "none"
   },
   icons: {
-    display: 'block',
+    display: "block",
     width: 20,
     marginBottom: 10,
-    color: 'gray',
-    cursor: 'pointer',
-    '&:hover': { color: '#2699FB' }
+    color: "gray",
+    cursor: "pointer",
+    "&:hover": { color: "#2699FB" }
   },
   hidden: {
-    display: 'none'
+    display: "none"
   },
   button: {
     margin: theme.spacing.unit
   },
   list: {
-    listStyleType: 'none'
+    listStyleType: "none"
   }
 });
 class TrainingSeriesPosts extends React.Component {
@@ -85,6 +87,7 @@ class TrainingSeriesPosts extends React.Component {
 
   componentDidMount() {
     this.getTrainingSeriesWithPosts(this.props.match.params.id);
+    this.props.getMembersAssigned(this.props.match.params.id);
   }
 
   getTrainingSeriesWithPosts = id => {
@@ -100,7 +103,7 @@ class TrainingSeriesPosts extends React.Component {
   routeToPostPage = e => {
     e.preventDefault();
     this.props.history.push({
-      pathname: '/home/create-post',
+      pathname: "/home/create-post",
       state: {
         trainingSeriesId: this.props.singleTrainingSeries.trainingSeriesID
       }
@@ -109,7 +112,7 @@ class TrainingSeriesPosts extends React.Component {
 
   routeToEditPostPage = (e, post) => {
     e.preventDefault();
-    console.log('FIRED');
+    console.log("FIRED");
     this.props.history.push({
       pathname: `/home/post/${post.postID}`,
       state: {
@@ -121,84 +124,92 @@ class TrainingSeriesPosts extends React.Component {
   render() {
     const { classes } = this.props;
     // console.log("POSTS", this.props);
+  
     return (
       <>
         {/* Gives app time to fetch data */}
         {this.props.isLoading && <p>Please wait...</p>}
         {!this.props.isLoading && (
           <>
-          <PageContainer>
-          <Paper className={classes.paper}>
-          <Typography variant="headline">{this.props.singleTrainingSeries.title}</Typography>
-          </Paper>
-          <Paper className={classes.paper}>
-            <HeaderContainer>
-              {/* <PostModal
+            <PageContainer>
+              <Paper className={classes.paper}>
+                <Typography variant="headline">
+                  {this.props.singleTrainingSeries.title}
+                </Typography>
+              </Paper>
+              <Paper className={classes.paper}>
+                <HeaderContainer>
+                  {/* <PostModal
               trainingSeries={this.props.singleTrainingSeries}
               createAPost={this.props.createAPost}
               editPost={this.props.editPost}
             /> */}
-            <Typography variant="title">Messages</Typography>
-              <ButtonContainer>
-                <Fab
-                  color="primary"
-                  size="small"
-                  aria-label="Add"
-                  className={classes.fab}
-                  onClick={e => this.routeToPostPage(e)}
-                >
-                  <i className="material-icons">add</i>
-                </Fab>
-                <Typography variant="subtitle1">
-                  Create A New Message
-                </Typography>
-              </ButtonContainer>
-            </HeaderContainer>
-            <ListStyles>
-              {this.props.posts.map(post => (
-                <ListItem key={post.postID} className={classes.listItem}>
-                  <ListItemText
-                    primary={post.postName}
-                    secondary={post.postDetails}
-                  />
-                  <ListItemSecondaryAction className={classes.secondaryAction}>
-                    {/* <IconButton aria-label="Delete"> */}
-                    <div>
-                      <p>{post.daysFromStart} days</p>
-                    </div>
-                    {/* <PostOptionsModal
+                  <Typography variant="title">Messages</Typography>
+                  <ButtonContainer>
+                    <Fab
+                      color="primary"
+                      size="small"
+                      aria-label="Add"
+                      className={classes.fab}
+                      onClick={e => this.routeToPostPage(e)}
+                    >
+                      <i className="material-icons">add</i>
+                    </Fab>
+                    <Typography variant="subtitle1">
+                      Create A New Message
+                    </Typography>
+                  </ButtonContainer>
+                </HeaderContainer>
+                <ListStyles>
+                  {this.props.posts.map(post => (
+                    <ListItem key={post.postID} className={classes.listItem}>
+                      <ListItemText
+                        primary={post.postName}
+                        secondary={post.postDetails}
+                      />
+                      <ListItemSecondaryAction
+                        className={classes.secondaryAction}
+                      >
+                        {/* <IconButton aria-label="Delete"> */}
+                        <div>
+                          <p>{post.daysFromStart} days</p>
+                        </div>
+                        {/* <PostOptionsModal
                       editPost={this.props.editPost}
                       deletePost={this.props.deletePost}
                       singleTrainingSeries={this.props.singleTrainingSeries}
                       post={post}
                     /> */}
-                    <ListButtonContainer>
-                      <i
-                        className={`material-icons ${classes.icons}`}
-                        onClick={e => this.routeToEditPostPage(e, post)}
-                      >
-                        edit
-                      </i>
+                        <ListButtonContainer>
+                          <i
+                            className={`material-icons ${classes.icons}`}
+                            onClick={e => this.routeToEditPostPage(e, post)}
+                          >
+                            edit
+                          </i>
 
-                      <DeleteModal
-                        className={`material-icons ${classes.icons}`}
-                        deleteType="post"
-                        id={post.postID}
-                      />
-                    </ListButtonContainer>
-                    {/* </IconButton> */}
-                  </ListItemSecondaryAction>
-                </ListItem>
-              ))}
-            </ListStyles>
-          </Paper>
-          <Paper className={classes.paper}>
-          <Typography variant="title">Assigned Team Members</Typography>
-          </Paper>
-          <Paper className={classes.paper}>
-          <Typography variant="title">Pending Notifications</Typography>
-          </Paper>
-          </PageContainer>
+                          <DeleteModal
+                            className={`material-icons ${classes.icons}`}
+                            deleteType="post"
+                            id={post.postID}
+                          />
+                        </ListButtonContainer>
+                        {/* </IconButton> */}
+                      </ListItemSecondaryAction>
+                    </ListItem>
+                  ))}
+                </ListStyles>
+              </Paper>
+              <Paper className={classes.paper}>
+                <Typography variant="title">Assigned Team Members</Typography>
+                {this.props.assignments.map(member => (
+                  <TrainingSeriesAssignment member={member} />
+                ))}
+              </Paper>
+              <Paper className={classes.paper}>
+                <Typography variant="title">Pending Notifications</Typography>
+              </Paper>
+            </PageContainer>
           </>
         )}
       </>
@@ -207,9 +218,9 @@ class TrainingSeriesPosts extends React.Component {
 }
 
 const PageContainer = styled.div`
-display: flex;
-flex-direction: column;
-width: 80%;
+  display: flex;
+  flex-direction: column;
+  width: 80%;
 `;
 
 const HeaderContainer = styled.div`
@@ -244,12 +255,19 @@ const ListButtonContainer = styled.div`
 const mapStateToProps = state => ({
   isLoading: state.postsReducer.isLoading,
   singleTrainingSeries: state.postsReducer.singleTrainingSeries,
-  posts: state.postsReducer.posts
+  posts: state.postsReducer.posts,
+  assignments: state.trainingSeriesReducer.assignments
 });
 
 TrainingSeriesPosts.propTypes = {};
 
 export default connect(
   mapStateToProps,
-  { getTrainingSeriesPosts, createAPost, editPost, deletePost }
+  {
+    getTrainingSeriesPosts,
+    createAPost,
+    editPost,
+    deletePost,
+    getMembersAssigned
+  }
 )(withStyles(styles)(TrainingSeriesPosts));
