@@ -46,6 +46,7 @@ class Dashboard extends React.Component {
 			<>
 				<TeamMembersView userId={user.userID} />
 				<TrainingSeriesView userId={user.userID} match={this.props.match} />
+				<NotificationView />
 			</>
 		);
 	};
@@ -132,9 +133,10 @@ export default connect(
 //Styled Components
 const DashboardContainer = styled.div`
 	display: flex;
+	flex-wrap: wrap;
 	justify-content: space-around;
 	margin: 0 auto;
-	max-width: 1000px;
+	max-width: 1400px;
 	/* height: 70vh; */
 	@media (max-width: 618px) {
 		flex-direction: column;

@@ -11,7 +11,7 @@ import {
 	FormControl,
 	InputLabel,
 	Typography,
-	Fab
+	Fab,
 	// List,
 	// Input,
 	// OutlinedInput,
@@ -26,30 +26,32 @@ const styles = theme => ({
 		...theme.mixins.gutters(),
 		paddingTop: theme.spacing.unit * 2,
 		paddingBottom: theme.spacing.unit * 2,
+		maxWidth: 300,
 		width: '55%',
+		marginBottom: 10,
 
 		'@media (max-width:768px)': {
 			width: '94%',
-			marginBottom: 10
-		}
+			marginBottom: 10,
+		},
 	},
 	columnHeader: {
 		display: 'flex',
 		justifyContent: 'space-between',
-		alignItems: 'center'
+		alignItems: 'center',
 	},
 	icons: {
 		display: 'flex',
-		alignItems: 'center'
+		alignItems: 'center',
 	},
 	fab: { margin: 5 },
 	footer: {
 		display: 'flex',
 		justifyContent: 'space-between',
 		position: 'sticky',
-		top: '100%'
+		top: '100%',
 	},
-	pagination: { width: '90%' }
+	pagination: { width: '90%' },
 });
 
 class TrainingSeriesSubView extends Component {
@@ -57,7 +59,7 @@ class TrainingSeriesSubView extends Component {
 		super(props);
 		this.state = {
 			offset: 0,
-			limit: 5
+			limit: 5,
 		};
 	}
 
@@ -74,17 +76,16 @@ class TrainingSeriesSubView extends Component {
 		return (
 			<Paper className={classes.root} elevation={2}>
 				<div className={classes.columnHeader}>
-					<Typography variant='h5'>Training Series</Typography>
+					<Typography variant="h5">Training Series</Typography>
 					<div className={classes.icons}>
 						<Fab
-							color='primary'
-							size='small'
-							aria-label='Add'
+							color="primary"
+							size="small"
+							aria-label="Add"
 							className={classes.fab}
 							onClick={this.handleOpen}
-							disabled
-						>
-							<i className='material-icons'>search</i>
+							disabled>
+							<i className="material-icons">search</i>
 						</Fab>
 
 						<TrainingSeriesModal
