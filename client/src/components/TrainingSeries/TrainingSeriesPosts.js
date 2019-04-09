@@ -19,13 +19,11 @@ import {
   createAPost,
   editPost,
   deletePost,
+  getMembersAssigned,
+  editTrainingSeries
 } from '../../store/actions';
 
 import {withStyles} from '@material-ui/core/styles';
-  getMembersAssigned,
-  editTrainingSeries
-} from "../../store/actions";
-
 
 // Styling
 import {
