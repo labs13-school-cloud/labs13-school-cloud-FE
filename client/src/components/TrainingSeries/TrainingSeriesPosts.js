@@ -98,8 +98,7 @@ class TrainingSeriesPosts extends React.Component {
     this.props.deletePost(id);
   };
 
-  routeToPostPage = e => {
-    e.preventDefault();
+  routeToPostPage = () => {
     this.props.history.push({
       pathname: '/home/create-post',
       state: {

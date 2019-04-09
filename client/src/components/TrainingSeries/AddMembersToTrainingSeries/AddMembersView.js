@@ -17,6 +17,7 @@ class AddMembersView extends Component {
       trainingSeriesID: '',
       startDate: '',
       selectedTeamMembers: [],
+      isRouting: false,
     };
   }
 
@@ -52,12 +53,15 @@ class AddMembersView extends Component {
         assignments: this.state.selectedTeamMembers,
       };
       this.props.addTeamMemberToTrainingSeries(data);
-      this.props.history.push({
-        path: `/home/training-series/${this.state.trainingSeriesID}`,
-        state: {
-          success: true,
-        },
-      });
+      this.setState({isRouting: true});
+      setTimeout(() => {
+        this.props.history.push({
+          pathname: `/home/training-series/${this.state.trainingSeriesID}`,
+          state: {
+            success: true,
+          },
+        });
+      }, 1000);
     },
     handleChecked: id => {
       if (!this.state.selectedTeamMembers.includes(id)) {
@@ -78,6 +82,11 @@ class AddMembersView extends Component {
     handleChange: name => event => {
       this.setState({[name]: event.target.value});
     },
+    routeToPostPage: () => {
+      this.props.history.push(
+        `/home/training-series/${this.state.trainingSeriesID}`
+      );
+    },
   };
   render() {
     console.log(this.state);
@@ -85,7 +94,9 @@ class AddMembersView extends Component {
       <AddMember
         startDate={this.state.startDate}
         teamMembers={this.props.teamMembers}
+        selectedTeamMembers={this.state.selectedTeamMembers}
         handler={this.handler}
+        isRouting={this.setState.isRouting}
       />
     );
   }
