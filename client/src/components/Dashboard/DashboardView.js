@@ -34,7 +34,7 @@ import NotificationsView from '../Notifications/NotificationsView';
 
 class Dashboard extends React.Component {
   state = {
-    tabValue: 0
+    tabValue: 0,
   };
 
   componentDidMount() {
@@ -44,7 +44,7 @@ class Dashboard extends React.Component {
   }
 
   renderDashboard = () => {
-    const { user } = this.props.userProfile;
+    const {user} = this.props.userProfile;
     return (
       <>
         <TeamMembersView userId={user.userID} />
@@ -85,13 +85,6 @@ class Dashboard extends React.Component {
                   )}
                 />
                 <Route
-                  path="/home/training-series/:id"
-                  render={props => <TrainingSeriesPosts {...props} />}
-                />
-                <Route
-                  path="/home/assign-members/:id"
-                  render={props => (
-                    <AddTrainingSeriesView
                   path="/home/create-training-series"
                   render={props => (
                     <CreateTrainingSeries
@@ -107,6 +100,15 @@ class Dashboard extends React.Component {
                 <Route
                   path="/home/create-post"
                   render={props => <CreatePost {...props} />}
+                />
+                <Route
+                  path="/home/assign-members/:id"
+                  render={props => (
+                    <AddTrainingSeriesView
+                      {...props}
+                      userId={this.props.userProfile.user.userID}
+                    />
+                  )}
                 />
                 <Route path="/home/post/:id" component={PostPage} />
 
@@ -132,7 +134,7 @@ class Dashboard extends React.Component {
   // tracking the tab value in navigation.js
   changeTabValue = value => {
     this.setState({
-      tabValue: value
+      tabValue: value,
     });
   };
 }
@@ -140,14 +142,14 @@ class Dashboard extends React.Component {
 const mapStateToProps = state => {
   return {
     userProfile: state.userReducer.userProfile,
-    doneLoading: state.userReducer.doneLoading
+    doneLoading: state.userReducer.doneLoading,
   };
 };
 
 export default connect(
   mapStateToProps,
   {
-    getUser
+    getUser,
   }
 )(Authenticate(Dashboard));
 
@@ -174,9 +176,8 @@ const hidden = {
 
 const active = {
   display: 'block',
-  display: 'none'
+  display: 'none',
 };
-
 
 // const toggleTrainingSeries = tabValue => {
 
