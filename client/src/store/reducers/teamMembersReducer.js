@@ -20,7 +20,7 @@ import {
   REMOVE_MEMBER_FROM_TS_START,
   REMOVE_MEMBER_FROM_TS_SUCCESS,
   REMOVE_MEMBER_FROM_TS_FAIL
-} from "../actions";
+} from '../actions';
 
 const initialState = {
   teamMembers: [],
@@ -59,7 +59,7 @@ const teamMembersReducer = (state = initialState, action) => {
     case FETCH_TEAM_SUCCESS:
       return {
         ...state,
-        teamMembers: action.payload,
+        teamMembers: action.payload.reverse(),
         status: {
           ...state.status,
           isLoading: false,

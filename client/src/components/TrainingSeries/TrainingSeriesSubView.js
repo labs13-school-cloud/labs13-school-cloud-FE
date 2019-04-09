@@ -77,55 +77,56 @@ class TrainingSeriesSubView extends Component {
     const { classes } = this.props;
 
     return (
-      <Paper className={classes.root} elevation={2}>
-        <div className={classes.columnHeader}>
-          <Typography variant="h5">Training Series</Typography>
-          <div className={classes.icons}>
-            <Fab
-              color="primary"
-              size="small"
-              aria-label="Add"
-              className={classes.fab}
-              onClick={this.handleOpen}
-              disabled
-            >
-              <i className="material-icons">search</i>
-            </Fab>
+      <>
+        <Paper className={classes.root} elevation={2}>
+          <div className={classes.columnHeader}>
+            <Typography variant="h5">Training Series</Typography>
+            <div className={classes.icons}>
+              <Fab
+                color="primary"
+                size="small"
+                aria-label="Add"
+                className={classes.fab}
+                onClick={this.handleOpen}
+                disabled
+              >
+                <i className="material-icons">search</i>
+              </Fab>
 
-            <Fab
-              color="primary"
-              size="small"
-              aria-label="Add"
-              className={classes.fab}
-              onClick={e => this.routeToCreateTrainingSeries(e)}
-            >
-              <i className="material-icons">add</i>
-            </Fab>
+              <Fab
+                color="primary"
+                size="small"
+                aria-label="Add"
+                className={classes.fab}
+                onClick={e => this.routeToCreateTrainingSeries(e)}
+              >
+                <i className="material-icons">add</i>
+              </Fab>
 
-            {/* <TrainingSeriesModal
+              {/* <TrainingSeriesModal
 							getTrainingSeries={this.props.getTrainingSeries}
 							userID={this.props.userID}
 						/> */}
+            </div>
           </div>
-        </div>
-        <TrainingSeriesList
-          deleteTrainingSeries={this.props.deleteTrainingSeries}
-          trainingSeries={this.props.trainingSeries}
-          offset={this.state.offset}
-          match={this.props.match}
-          userID={this.props.userID}
-          limit={this.state.limit}
-        />
-        <div className={classes.footer}>
-          <Pagination
-            limit={this.state.limit}
+          <TrainingSeriesList
+            deleteTrainingSeries={this.props.deleteTrainingSeries}
+            trainingSeries={this.props.trainingSeries}
             offset={this.state.offset}
-            total={this.props.trainingSeries.length}
-            onClick={(e, offset) => this.handleClick(offset)}
+            match={this.props.match}
+            userID={this.props.userID}
+            limit={this.state.limit}
           />
+          <div className={classes.footer}>
+            <Pagination
+              limit={this.state.limit}
+              offset={this.state.offset}
+              total={this.props.trainingSeries.length}
+              onClick={(e, offset) => this.handleClick(offset)}
+            />
 
-          {/****** View per page ******/}
-          {/* {this.props.trainingSeries.length < 5 ? (
+            {/****** View per page ******/}
+            {/* {this.props.trainingSeries.length < 5 ? (
 						<span></span>
 					) : (
 						<FormControl className={classes.formControl}>
@@ -145,8 +146,9 @@ class TrainingSeriesSubView extends Component {
 							</NativeSelect>
 						</FormControl>
 					)} */}
-        </div>
-      </Paper>
+          </div>
+        </Paper>
+      </>
     );
   }
 }

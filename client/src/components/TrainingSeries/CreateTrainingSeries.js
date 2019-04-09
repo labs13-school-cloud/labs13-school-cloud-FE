@@ -66,8 +66,6 @@ class CreateTrainingSeries extends React.Component {
 
   render() {
     const { classes } = this.props;
-    console.log(this.state.isRouting);
-
     return this.state.isRouting ? (
       <ProgressCircle />
     ) : (
