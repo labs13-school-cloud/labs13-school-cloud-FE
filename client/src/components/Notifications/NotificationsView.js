@@ -21,13 +21,22 @@ import {
 const styles = theme => ({
 	root: {
 		...theme.mixins.gutters(),
-		marginTop: 0,
 		paddingTop: theme.spacing.unit * 2,
 		paddingBottom: theme.spacing.unit * 2,
-		// width: '100%',
-		maxWidth: 600,
+		display: 'flex',
+		flexDirection: 'column',
+		width: '50%',
+		height: '100%',
+		margin: 5,
+		'@media (max-width: 1400px)': {
+			width: '1000%',
+		},
+		'@media (max-width: 1000px)': {
+			width: '100%',
+		},
+
 		'@media (max-width: 768px)': {
-			width: '80%',
+			width: '92%',
 		},
 	},
 	columnHeader: {
@@ -41,7 +50,12 @@ const styles = theme => ({
 		alignItems: 'center',
 	},
 	fab: { margin: 5 },
-	footer: { display: 'flex', justifyContent: 'space-between' },
+	footer: {
+		display: 'flex',
+		justifyContent: 'space-between',
+		position: 'sticky',
+		top: '100%',
+	},
 	pagination: { width: '90%' },
 	selection: { margin: '0 10px' },
 });

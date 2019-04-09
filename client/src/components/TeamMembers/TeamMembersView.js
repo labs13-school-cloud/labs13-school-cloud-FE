@@ -19,11 +19,15 @@ const styles = theme => ({
 		...theme.mixins.gutters(),
 		paddingTop: theme.spacing.unit * 2,
 		paddingBottom: theme.spacing.unit * 2,
-		maxWidth: 300,
-		width: '30%',
-		marginBottom: 10,
+		display: 'flex',
+		flexDirection: 'column',
+
+		width: '50%',
+		height: '100%',
+		margin: 5,
+
 		'@media (max-width:768px)': {
-			width: '94%',
+			width: '92%',
 			marginBottom: 10,
 		},
 	},

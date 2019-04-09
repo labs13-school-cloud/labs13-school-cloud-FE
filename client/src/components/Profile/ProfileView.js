@@ -174,13 +174,6 @@ class ProfileView extends React.Component {
 										className={classes.button}>
 										Delete Acccount
 									</Button>
-									{/* <IconButton
-									aria-label='Delete'
-									onClick={this.handleOpen}
-									className={classes.margin}
-									>
-									<DeleteIcon />
-								</IconButton> */}
 								</CardActions>
 							</Card>
 

@@ -44,8 +44,10 @@ class Dashboard extends React.Component {
 		const { user } = this.props.userProfile;
 		return (
 			<>
-				<TeamMembersView userId={user.userID} />
-				<TrainingSeriesView userId={user.userID} match={this.props.match} />
+				<SmallColumns>
+					<TeamMembersView userId={user.userID} />
+					<TrainingSeriesView userId={user.userID} match={this.props.match} />
+				</SmallColumns>
 				<NotificationView />
 			</>
 		);
@@ -133,18 +135,36 @@ export default connect(
 //Styled Components
 const DashboardContainer = styled.div`
 	display: flex;
-	flex-wrap: wrap;
-	justify-content: space-around;
+	justify-content: space-between;
 	margin: 0 auto;
 	max-width: 1400px;
-	/* height: 70vh; */
-	@media (max-width: 618px) {
+	height: 580px;
+	@media (max-width: 1400px) {
+		flex-wrap: wrap;
+		max-width: 1000px;
+		padding: 10px;
+	}
+	/* @media (max-width: 1000px) {
+		padding: 10px;
+	} */
+	@media (max-width: 768px) {
+		max-width: 768px;
+		height: 100%;
 		flex-direction: column;
 		padding: 10px;
 	}
+`;
+
+const SmallColumns = styled.div`
+	display: flex;
+	width: 50%;
+	@media (max-width: 1400px) {
+		width: 100%;
+		margin-bottom: 50px;
+	}
 	@media (max-width: 768px) {
 		flex-direction: column;
-		padding: 10px;
+		margin-bottom: 5px;
 	}
 `;
 
@@ -155,20 +175,3 @@ const hidden = {
 const active = {
 	display: 'block',
 };
-
-// const toggleTrainingSeries = tabValue => {
-
-//   return tabValue === 0 ? active : hidden;
-// };
-
-// const toggleTeamMembers = tabValue => {
-//   const hidden = {
-//     display: "none"
-//   };
-
-//   const active = {
-//     display: "block"
-//   };
-
-//   return tabValue === 1 ? active : hidden;
-// };
