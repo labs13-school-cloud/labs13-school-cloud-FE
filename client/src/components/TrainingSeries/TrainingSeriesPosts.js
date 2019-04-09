@@ -6,7 +6,6 @@ import Fab from "@material-ui/core/Fab";
 // Components
 // import PostModal from '../Modals/PostModal';
 // import PostOptionsModal from '../Modals/PostOptionsModal';
-import ProgressCircle from '../Progress/ProgressCircle';
 import DeleteModal from "../Modals/deleteModal";
 import TrainingSeriesAssignment from "./TrainingSeriesAssignment";
 // import IconButton from '@material-ui/core/IconButton';
@@ -184,7 +183,6 @@ class TrainingSeriesPosts extends React.Component {
     }
     return (
           <>
-            {this.props.isLoading && <ProgressCircle />}
             <PageContainer>
               <Paper className={classes.paper}>{titleEdit}</Paper>
               <Paper className={classes.paper}>
