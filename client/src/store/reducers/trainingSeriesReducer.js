@@ -18,24 +18,27 @@ import {
 
 const initialState = {
   trainingSeries: [],
-  error: "",
+  trainingSeriesID: '',
+  error: '',
   isLoading: false,
   isEditing: false,
   isGettingAssignments: false,
-  assignments: []
+  assignments: [],
+  isAdding: false,
+  addSuccess: false
 };
 
 const trainingSeriesReducer = (state = initialState, action) => {
   switch (action.type) {
     // ---GET TRAINING SERIES---
     case GET_TRAINING_SERIES_START:
-      return { ...state, isLoading: true, error: "" };
+      return { ...state, isLoading: true, error: '' };
     case GET_TRAINING_SERIES_SUCCESS:
       return {
         ...state,
-        trainingSeries: action.payload,
+        trainingSeries: action.payload.reverse(),
         isLoading: false,
-        error: ""
+        error: ''
       };
     case GET_TRAINING_SERIES_FAIL:
       return {
@@ -45,13 +48,21 @@ const trainingSeriesReducer = (state = initialState, action) => {
       };
     // ---ADD TRAINING SERIES---
     case ADD_TRIANING_SERIES_START:
-      return { ...state, isLoading: true, error: "" };
+      return {
+        ...state,
+        isLoading: true,
+        isAdding: true,
+        error: ''
+      };
     case ADD_TRIANING_SERIES_SUCCESS:
       return {
         ...state,
         trainingSeries: [...state.trainingSeries, action.payload],
+        trainingSeriesID: action.payload.trainingSeriesID,
         isLoading: false,
-        error: ""
+        isAdding: false,
+        addSuccess: true,
+        error: ''
       };
     case ADD_TRIANING_SERIES_FAIL:
       return {
@@ -64,7 +75,7 @@ const trainingSeriesReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: true,
-        error: "",
+        error: '',
         isEditing: true
       };
     case EDIT_TRIANING_SERIES_SUCCESS:
@@ -80,7 +91,7 @@ const trainingSeriesReducer = (state = initialState, action) => {
         ...state,
         isEditing: false,
         isLoading: false,
-        error: "",
+        error: '',
         trainingSeries: updatedItem
       };
 
@@ -103,7 +114,7 @@ const trainingSeriesReducer = (state = initialState, action) => {
           )
         ],
         isLoading: false,
-        error: ""
+        error: ''
       };
     case DELETE_TRIANING_SERIES_FAIL:
       return { ...state, isLoading: false, error: action.payload };
