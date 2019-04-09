@@ -32,12 +32,12 @@ import {
 
 const styles = theme => ({
   paper: {
-    width: '80%',
+    width: '100%',
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
     padding: theme.spacing.unit * 4,
     outline: 'none',
-    margin: '20px auto',
+    margin: '5px auto',
     '@media (max-width: 480px)': {
       width: '89%',
       padding: 0,
@@ -126,18 +126,20 @@ class TrainingSeriesPosts extends React.Component {
         {/* Gives app time to fetch data */}
         {this.props.isLoading && <p>Please wait...</p>}
         {!this.props.isLoading && (
+          <>
+          <PageContainer>
+          <Paper className={classes.paper}>
+          <Typography variant="headline">{this.props.singleTrainingSeries.title}</Typography>
+          </Paper>
           <Paper className={classes.paper}>
             <HeaderContainer>
-              <h1>{this.props.singleTrainingSeries.title}</h1>
               {/* <PostModal
               trainingSeries={this.props.singleTrainingSeries}
               createAPost={this.props.createAPost}
               editPost={this.props.editPost}
             /> */}
+            <Typography variant="title">Messages</Typography>
               <ButtonContainer>
-                <Typography variant="subtitle1">
-                  Create A New Message
-                </Typography>
                 <Fab
                   color="primary"
                   size="small"
@@ -147,6 +149,9 @@ class TrainingSeriesPosts extends React.Component {
                 >
                   <i className="material-icons">add</i>
                 </Fab>
+                <Typography variant="subtitle1">
+                  Create A New Message
+                </Typography>
               </ButtonContainer>
             </HeaderContainer>
             <ListStyles>
@@ -187,14 +192,28 @@ class TrainingSeriesPosts extends React.Component {
               ))}
             </ListStyles>
           </Paper>
+          <Paper className={classes.paper}>
+          <Typography variant="title">Assigned Team Members</Typography>
+          </Paper>
+          <Paper className={classes.paper}>
+          <Typography variant="title">Pending Notifications</Typography>
+          </Paper>
+          </PageContainer>
+          </>
         )}
       </>
     );
   }
 }
 
+const PageContainer = styled.div`
+display: flex;
+flex-direction: column;
+width: 80%;
+`;
+
 const HeaderContainer = styled.div`
-  width: 80%;
+  width: 100%;
   margin: 0 auto;
 `;
 
@@ -209,7 +228,7 @@ const ListStyles = styled.div`
   display: flex;
   flex-direction: column;
   align-items: space-around;
-  width: 80%;
+  width: 100%;
   margin: 20px auto;
   list-style: none;
 `;
