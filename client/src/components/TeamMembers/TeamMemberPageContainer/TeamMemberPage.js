@@ -18,31 +18,31 @@ const styles = theme => ({
 		width: '94%',
 		margin: '20px auto',
 		'@media (max-width: 480px)': {
-			width: '94%'
-		}
+			width: '94%',
+		},
 	},
 	// form: {
 	// 	width: '90%',
 	// 	margin: '0 auto'
 	// },
 	info: {
-		'margin-right': '50px'
+		'margin-right': '50px',
 	},
 	textField: {
 		marginLeft: theme.spacing.unit,
 		marginRight: theme.spacing.unit,
-		width: '100%'
+		width: '100%',
 	},
 	fab: {
-		margin: theme.spacing.unit
+		margin: theme.spacing.unit,
 	},
 	button: {
-		'margin-left': theme.spacing.unit
+		'margin-left': theme.spacing.unit,
 	},
 	trainingSeriesHeader: {
 		display: 'flex',
-		justifyContent: 'space-between'
-	}
+		justifyContent: 'space-between',
+	},
 	// form: {
 	// 	'@media (max-width: 480px)': {
 	// 		flexDirection: 'column',
@@ -61,17 +61,17 @@ class TeamMemberPage extends React.Component {
 			phoneNumber: '',
 			user_ID: '',
 			TeamMemberCol: '',
-			teamMemberID: ''
+			teamMemberID: '',
 		},
 		assignments: [],
-		trainingSeries: []
+		trainingSeries: [],
 	};
 
 	componentDidMount() {
 		if (Object.keys(this.props.teamMember).length !== 0) {
 			this.setState({
 				teamMember: this.props.teamMember.teamMember,
-				assignments: this.props.teamMember.assignments
+				assignments: this.props.teamMember.assignments,
 			});
 		}
 	}
@@ -80,14 +80,14 @@ class TeamMemberPage extends React.Component {
 		this.setState({
 			teamMember: {
 				...this.state.teamMember,
-				[name]: event.target.value
-			}
+				[name]: event.target.value,
+			},
 		});
 	};
 
 	handleDate = name => event => {
 		this.setState({
-			[name]: event.target.value
+			[name]: event.target.value,
 		});
 	};
 
@@ -113,17 +113,14 @@ class TeamMemberPage extends React.Component {
 						<NotificationWidget
 							teamMember={this.state.teamMember}
 							editTeamMember={this.props.editTeamMember}
-							type='success'
-							submitType='edit'
+							type="success"
+							submitType="edit"
 						/>
 						<Button
-							variant='contained'
-							color='primary'
+							variant="contained"
+							color="primary"
 							className={classes.button}
-							onClick={e =>
-								this.props.deleteTeamMember(e, this.state.teamMember)
-							}
-						>
+							onClick={e => this.props.deleteTeamMember(e, this.state.teamMember)}>
 							Delete
 						</Button>
 					</ButtonContainer>
@@ -132,28 +129,28 @@ class TeamMemberPage extends React.Component {
 						<Typography variant={'h5'}>{`Team Member Info`}</Typography>
 						<MemberInfoContainer>
 							<TextField
-								id='standard-name'
-								label='first name'
+								id="standard-name"
+								label="first name"
 								className={classes.textField}
 								value={this.state.teamMember.firstName}
 								onChange={this.handleChange('firstName')}
-								margin='normal'
+								margin="normal"
 							/>
 							<TextField
-								id='standard-name'
-								label='last name'
+								id="standard-name"
+								label="last name"
 								className={classes.textField}
 								value={this.state.teamMember.lastName}
 								onChange={this.handleChange('lastName')}
-								margin='normal'
+								margin="normal"
 							/>
 							<TextField
-								id='standard-name'
-								label='job description'
+								id="standard-name"
+								label="job description"
 								className={classes.textField}
 								value={this.state.teamMember.jobDescription}
 								onChange={this.handleChange('jobDescription')}
-								margin='normal'
+								margin="normal"
 							/>
 						</MemberInfoContainer>
 					</Paper>
@@ -161,20 +158,20 @@ class TeamMemberPage extends React.Component {
 						<Typography variant={'h5'}>Contact Info</Typography>
 						<MemberInfoContainer>
 							<TextField
-								id='standard-name'
-								label='email'
+								id="standard-name"
+								label="email"
 								className={classes.textField}
 								value={this.state.teamMember.email}
 								onChange={this.handleChange('email')}
-								margin='normal'
+								margin="normal"
 							/>
 							<TextField
-								id='standard-name'
-								label='phone'
+								id="standard-name"
+								label="phone"
 								className={classes.textField}
 								value={this.state.teamMember.phoneNumber}
 								onChange={this.handleChange('phoneNumber')}
-								margin='normal'
+								margin="normal"
 							/>
 						</MemberInfoContainer>
 					</Paper>
@@ -202,13 +199,15 @@ class TeamMemberPage extends React.Component {
 	}
 }
 
-const MainContainer = styled.div``;
+const MainContainer = styled.div`
+	margin: 0 auto;
+`;
 
 const MemberInfoContainer = styled.div`
 	display: flex;
 	justify-content: space-between;
 	align-items: baseline;
-
+	margin: 0 auto;
 	/* @media (max-width: 480px) {
 		flex-direction: column;
 		width: 90%;

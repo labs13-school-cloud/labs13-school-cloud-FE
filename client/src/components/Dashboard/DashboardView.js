@@ -46,11 +46,13 @@ class Dashboard extends React.Component {
 		const { user } = this.props.userProfile;
 		return (
 			<>
-				<SmallColumns>
-					<TeamMembersView userId={user.userID} />
-					<TrainingSeriesView userId={user.userID} match={this.props.match} />
-				</SmallColumns>
-				<NotificationView />
+				<TripleColumn>
+					<SmallColumns>
+						<TeamMembersView userId={user.userID} />
+						<TrainingSeriesView userId={user.userID} match={this.props.match} />
+					</SmallColumns>
+					<NotificationView />
+				</TripleColumn>
 			</>
 		);
 	};
@@ -145,11 +147,11 @@ export default connect(
 )(Authenticate(Dashboard));
 
 //Styled Components
-const DashboardContainer = styled.div`
+const TripleColumn = styled.div`
+	max-width: 1400px;
 	display: flex;
 	justify-content: space-between;
-	margin: 0 auto;
-	max-width: 1400px;
+	margin: 10px auto;
 	height: 580px;
 	@media (max-width: 1400px) {
 		flex-wrap: wrap;
@@ -165,6 +167,26 @@ const DashboardContainer = styled.div`
 		flex-direction: column;
 		padding: 10px;
 	}
+`;
+const DashboardContainer = styled.div`
+	display: flex;
+	/* justify-content: space-between;
+	margin: 10px auto;
+	height: 580px;
+	@media (max-width: 1400px) {
+		flex-wrap: wrap;
+		max-width: 1000px;
+		padding: 10px;
+	}
+	/* @media (max-width: 1000px) {
+		padding: 10px;
+	} */
+	@media (max-width: 768px) {
+		max-width: 768px;
+		height: 100%;
+		flex-direction: column;
+		padding: 10px;
+	} */
 `;
 
 const SmallColumns = styled.div`

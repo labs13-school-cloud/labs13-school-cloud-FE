@@ -35,7 +35,7 @@ ProgressCircle.propTypes = {
 export default withStyles(styles)(ProgressCircle);
 
 const LogoImage = styled.img`
-	width: 25px;
+	width: 100px;
 	position: absolute;
 	right: 45.8%;
 	top: 52.5%;
