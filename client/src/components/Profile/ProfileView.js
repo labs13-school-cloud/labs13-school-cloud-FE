@@ -25,6 +25,7 @@ import {
 import DeleteIcon from '@material-ui/icons/Delete';
 
 import styled from 'styled-components';
+import Pricing from '../LandingPage/Pricing';
 
 // function rand() {
 // 	return Math.round(Math.random() * 20) - 10;
@@ -47,7 +48,6 @@ function getModalStyle() {
 const styles = theme => ({
 	paper: {
 		position: 'absolute',
-		// width: 800,
 		margin: '0 auto',
 		backgroundColor: theme.palette.background.paper,
 		boxShadow: theme.shadows[5],
@@ -59,13 +59,12 @@ const styles = theme => ({
 		display: 'flex',
 		flexDirection: 'column',
 		alignItems: 'center',
-		width: '50%',
-		// margin: '0 auto',
+		width: '30%',
 		padding: 10,
 		height: 350,
 	},
-	payment: {
-		width: '100%',
+	pricing: {
+		width: '70%',
 		margin: '0px 0px 0px 10px',
 		padding: 10,
 		height: 350,
@@ -82,16 +81,15 @@ const styles = theme => ({
 		width: 150,
 		height: 150,
 	},
-	flex: {
-		display: 'flex',
-	},
 });
 
 const Container = styled.div`
 	/* margin-top: 80px; */
+	margin: 0 auto;
 	box-sizing: border-box;
 	display: flex;
-	flex-direction: column;
+	max-width: 1000px;
+	width: 100%;
 `;
 
 class ProfileView extends React.Component {
@@ -144,43 +142,42 @@ class ProfileView extends React.Component {
 			<Container>
 				{this.props.doneLoading && (
 					<>
-						<div className={classes.flex}>
-							<Card className={classes.profileContainer}>
-								<Avatar
-									alt="Remy Sharp"
-									src={JSON.parse(localStorage.getItem('Profile')).picture}
-									className={classes.bigAvatar}
-								/>
-								<Typography gutterBottom variant="h5" component="h1">
-									{user.name}
-								</Typography>
-								<Typography variant="subtitle1" gutterBottom>
-									{user.email}
-								</Typography>
-								<Typography gutterBottom variant="subtitle1" component="subtitle1">
-									<div>Account Type: {accountType}</div>
-								</Typography>
-								<CardActions>
-									{/* Button for editing */}
-									{/* <UserModal
+						<Card className={classes.profileContainer}>
+							<Avatar
+								alt="Remy Sharp"
+								src={JSON.parse(localStorage.getItem('Profile')).picture}
+								className={classes.bigAvatar}
+							/>
+							<Typography gutterBottom variant="h5" component="h1">
+								{user.name}
+							</Typography>
+							<Typography variant="subtitle1" gutterBottom>
+								{user.email}
+							</Typography>
+							<Typography gutterBottom variant="subtitle1" component="subtitle1">
+								<div>Account Type: {accountType}</div>
+							</Typography>
+							<CardActions>
+								{/* Button for editing */}
+								{/* <UserModal
 										email={user.email}
 										name={user.name}
 										id={user.userID}
 									/> */}
-									{/* Button for deleting */}
-									<Button
-										variant="contained"
-										onClick={this.handleOpen}
-										className={classes.button}>
-										Delete Acccount
-									</Button>
-								</CardActions>
-							</Card>
+								{/* Button for deleting */}
+								<Button
+									variant="contained"
+									onClick={this.handleOpen}
+									className={classes.button}>
+									Delete Acccount
+								</Button>
+							</CardActions>
+						</Card>
 
-							<Card className={classes.payment}>
-								<StripeView user={this.state.googleProfile} />
-							</Card>
-						</div>
+						<Card className={classes.pricing}>
+							<Pricing />
+							<StripeView user={this.state.googleProfile} />
+						</Card>
 					</>
 				)}
 				<Modal
