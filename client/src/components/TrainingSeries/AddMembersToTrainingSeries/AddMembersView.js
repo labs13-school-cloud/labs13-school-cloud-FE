@@ -2,7 +2,10 @@ import React, {Component} from 'react';
 
 //State Management
 import {connect} from 'react-redux';
-import {addTeamMemberToTrainingSeries} from '../../../store/actions/';
+import {
+  addTeamMemberToTrainingSeries,
+  getTeamMembers,
+} from '../../../store/actions/';
 import AddMember from './AddMember';
 
 // I need to bring in the user ID and the training series ID
@@ -18,11 +21,12 @@ class AddMembersView extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props);
+    console.log(this.props.userId);
+    this.props.getTeamMembers(this.props.userId);
     let d = new Date();
     let formattedDate = d.toISOString();
     this.setState({
-      trainingSeriesID: this.props.location.state.trainingSeriesID,
+      trainingSeriesID: this.props.match.params.id,
       startDate: formattedDate,
     });
   }
@@ -48,9 +52,12 @@ class AddMembersView extends Component {
         assignments: this.state.selectedTeamMembers,
       };
       this.props.addTeamMemberToTrainingSeries(data);
-      this.props.history.push(
-        `/home/training-series/${this.state.trainingSeriesID}`
-      );
+      this.props.history.push({
+        path: `/home/training-series/${this.state.trainingSeriesID}`,
+        state: {
+          success: true,
+        },
+      });
     },
     handleChecked: id => {
       if (!this.state.selectedTeamMembers.includes(id)) {
@@ -96,5 +103,6 @@ export default connect(
   mapStateToProps,
   {
     addTeamMemberToTrainingSeries,
+    getTeamMembers,
   }
 )(AddMembersView);
