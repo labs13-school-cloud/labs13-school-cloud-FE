@@ -32,6 +32,7 @@ class AddMembersView extends Component {
       this.setState({ email: this.props.email, name: this.props.name });
     }
   }
+
   handler = {
     handleDateChange: date => {
       let d = date;
@@ -47,7 +48,6 @@ class AddMembersView extends Component {
         assignments: this.state.selectedTeamMembers
       };
       this.props.addTeamMemberToTrainingSeries(data);
-      this.handleClose();
     },
     handleChecked: id => {
       if (!this.state.selectedTeamMembers.includes(id)) {

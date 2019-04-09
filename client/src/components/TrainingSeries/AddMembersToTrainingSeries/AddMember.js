@@ -14,6 +14,7 @@ import Checkbox from "@material-ui/core/Checkbox";
 import FormLabel from "@material-ui/core/FormLabel";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import MenuItem from "@material-ui/core/MenuItem";
+import styled from "styled-components";
 
 const styles = theme => ({
   paper: {
@@ -51,38 +52,86 @@ const styles = theme => ({
 function AddMember(props) {
   console.log(props);
   const { classes } = props;
+  //Need a way to see all of the currently assigned team members of that training series.
+  //Map over those assigned members.
+  //Display members not currently assigned
+
+  //   const renderMembers = () => {
+  //     //Map Through the current assignments for the team member, returns an array of ID's
+  //     let assignments = props.assignments.map(
+  //       assignment => assignment.trainingSeries_ID
+  //     );
+  //     console.log("ASSIGNMENTS", assignments);
+  //     //Filters the trainingSeries based on assignments
+  //     let filteredMembers = props.trainingSeries.filter(series => {
+  //       return !assignments.includes(series.trainingSeriesID);
+  //     });
+  //     console.log("FILTERED MEMBERS", filteredMembers);
+  //     return filteredMembers.map(member => (
+  //       <>
+  //         <FormControlLabel
+  //           control={
+  //             <Checkbox
+  //               name={member.teamMemberID}
+  //               onChange={() => props.handler.handleChecked(member.teamMemberID)}
+  //             />
+  //           }
+  //           label={`${member.firstName} ${member.lastName}`}
+  //         />
+  //       </>
+  //     ));
+  //   };
 
   return (
-    <div>
+    <AddMemberContainer>
       {props.teamMembers.length ? (
         <>
+          <h3>Assign Team Members </h3>
           <DatePicker
             inline
             selected={props.startDate}
             onChange={props.handler.handleDateChange}
           />
-
-          {props.teamMembers.map(member => (
-            <>
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    name={member.teamMemberID}
-                    onChange={() =>
-                      props.handler.handleChecked(member.teamMemberID)
+          <TeamMemberContainer>
+            <form
+              variant='body1'
+              id='modal-title'
+              className={classes.memberList}
+              onSubmit={e => props.handler.handleSubmit(e)}
+            >
+              {props.teamMembers.map(member => (
+                <>
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        name={member.teamMemberID}
+                        onChange={() =>
+                          props.handler.handleChecked(member.teamMemberID)
+                        }
+                      />
                     }
+                    label={`${member.firstName} ${member.lastName}`}
                   />
-                }
-                label={`${member.firstName} ${member.lastName}`}
-              />
-            </>
-          ))}
+                </>
+              ))}
+              <Button type='submit'>Submit</Button>
+            </form>
+          </TeamMemberContainer>
         </>
       ) : (
         <h2> You need to create Team members! </h2>
       )}
-    </div>
+    </AddMemberContainer>
   );
 }
 
 export default withStyles(styles)(AddMember);
+
+const AddMemberContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+const TeamMemberContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`;

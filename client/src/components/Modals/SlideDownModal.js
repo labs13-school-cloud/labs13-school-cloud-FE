@@ -38,7 +38,7 @@ class SlideDownModal extends React.Component {
       `home/training-series/${this.props.data.trainingSeriesID}`
     );
   };
-  routeToTrainingSeriesPage = e => {
+  routeToAssigning = e => {
     e.preventDefault();
     this.handleClose();
     this.props.history.push({
@@ -82,7 +82,7 @@ class SlideDownModal extends React.Component {
           <MenuItem onClick={e => this.routeToTrainingSeriesPage(e)}>
             Manage Messages
           </MenuItem>
-          <MenuItem onClick={e => this.routeToTrainingSeriesPage(e)}>
+          <MenuItem onClick={e => this.routeToAssigning(e)}>
             Add Members
             {/* <AddToTrainingSeriesModal
               modalType='assignMultiple'
