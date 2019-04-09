@@ -24,9 +24,15 @@ const styles = theme => ({
     padding: "5px"
   },
   listItem: {
+    // display: "flex",
+    // flexDirections: "column",
+    // width: "90%"
+    width: "79%",
+    height: 95,
     display: "flex",
-    flexDirections: "column",
-    width: "90%"
+    justifyContent: "space-between",
+    alignItems: "center",
+    borderBottom: "1px solid #E8E9EB"
   },
   bullet: {
     display: "inline-block",
@@ -45,27 +51,24 @@ const styles = theme => ({
 });
 
 const TrainingSeriesAssignment = props => {
+    const { classes } = props;
   const startDate = moment(props.member.startDate)
     .format("MMMM Do, YYYY ");
   return (
     <ListStyles>
-        <Paper>
-      <ListItem>
+      <ListItem className={classes.listItem}>
         <ListItemText
           classname
           primary={`Member: ${props.member.firstName} ${props.member.lastName}`}
           secondary={`Start Date: ${startDate}`}
         />
       </ListItem>
-      </Paper>
     </ListStyles>
   );
 };
 
 const ListStyles = styled.div`
   display: flex;
-  flex-direction: column;
-  align-items: center;
 `;
 
 export default withStyles(styles)(TrainingSeriesAssignment);

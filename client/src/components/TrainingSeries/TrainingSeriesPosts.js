@@ -7,7 +7,7 @@ import Fab from "@material-ui/core/Fab";
 // import PostModal from '../Modals/PostModal';
 // import PostOptionsModal from '../Modals/PostOptionsModal';
 import DeleteModal from "../Modals/deleteModal";
-import TrainingSeriesAssignment from './TrainingSeriesAssignment';
+import TrainingSeriesAssignment from "./TrainingSeriesAssignment";
 // import IconButton from '@material-ui/core/IconButton';
 
 import styled from "styled-components";
@@ -124,7 +124,6 @@ class TrainingSeriesPosts extends React.Component {
   render() {
     const { classes } = this.props;
     // console.log("POSTS", this.props);
-  
     return (
       <>
         {/* Gives app time to fetch data */}
@@ -205,9 +204,6 @@ class TrainingSeriesPosts extends React.Component {
                 {this.props.assignments.map(member => (
                   <TrainingSeriesAssignment member={member} />
                 ))}
-              </Paper>
-              <Paper className={classes.paper}>
-                <Typography variant="title">Pending Notifications</Typography>
               </Paper>
             </PageContainer>
           </>
