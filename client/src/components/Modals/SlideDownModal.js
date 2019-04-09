@@ -70,17 +70,28 @@ class SlideDownModal extends React.Component {
             <MenuItem onClick={this.handleClose}>Manage Posts</MenuItem>
           </Link> */}
           <MenuItem onClick={e => this.routeToTrainingSeriesPage(e)}>
-            Manage Messages
+            Manage
           </MenuItem>
-          {/* <MenuItem onClick={this.handleClose}>Edit Training Series</MenuItem> */}
+
+          {/* 
           <MenuItem>
-            <TrainingSeriesModal
+            <AddToTrainingSeriesModal
+              modalType="assignMultiple"
+              userID={this.props.userID}
+              trainingSeriesID={this.props.data.trainingSeriesID}
+            />
+          </MenuItem>
+          <MenuItem onClick={this.handleClose}>Edit Training Series</MenuItem>
+          <MenuItem>
+             <TrainingSeriesModal
               trainingSeriesID={this.props.data.trainingSeriesID}
               title={this.props.data.title}
               modalType="edit"
               handleClose={this.handleClose}
-            />
-          </MenuItem>
+            /> 
+           </MenuItem> 
+           */}
+
           <MenuItem
             onClick={() =>
               this.props.deleteTrainingSeries(this.props.data.trainingSeriesID)

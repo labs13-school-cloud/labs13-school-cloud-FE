@@ -158,9 +158,7 @@ class TrainingSeriesModal extends React.Component {
   }
 }
 
-TrainingSeriesModal.propTypes = {
-  classes: PropTypes.object.isRequired
-};
+
 
 const mapStateToProps = state => {
   return {
