@@ -16,6 +16,11 @@ export const EDIT_TRIANING_SERIES_FAIL = "EDIT_TRIANING_SERIES_FAIL";
 export const DELETE_TRIANING_SERIES_START = "DELETE_TRIANING_SERIES_START";
 export const DELETE_TRIANING_SERIES_SUCCESS = "DELETE_TRIANING_SERIES_SUCCESS";
 export const DELETE_TRIANING_SERIES_FAIL = "DELETE_TRIANING_SERIES_FAIL";
+//GET MEMBERS ASSIGNED TO SINGLE TRAINING SERIES
+export const GET_MEMBERS_ASSIGNED_START = "GET_MEMBERS_ASSIGNED_START";
+export const GET_MEMBERS_ASSIGNED_SUCCESS = "GET_MEMBERS_ASSIGNED_SUCCESS";
+export const GET_MEMBERS_ASSIGNED_FAIL = "GET_MEMBERS_ASSIGNED_FAIL";
+
 
 export const getTrainingSeries = id => dispatch => {
   dispatch({
@@ -75,3 +80,12 @@ export const deleteTrainingSeries = id => dispatch => {
     )
     .catch(err => dispatch({ type: DELETE_TRIANING_SERIES_FAIL, error: err }));
 };
+
+export const getMembersAssigned = id => dispatch => {
+  dispatch({ type: GET_MEMBERS_ASSIGNED_START });
+  axios
+  // .get(`${process.env.REACT_APP_API}/api/training-series/${id}/assignments`)
+  .get(`${process.env.REACT_APP_API_LOCAL}/api/training-series/${id}/assignments`)
+  .then(res => dispatch({ type: GET_MEMBERS_ASSIGNED_SUCCESS, payload: res.data.assignments }))
+  .catch(err => dispatch({ type: GET_MEMBERS_ASSIGNED_FAIL, error: err }))
+}

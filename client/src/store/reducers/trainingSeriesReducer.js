@@ -10,14 +10,19 @@ import {
   EDIT_TRIANING_SERIES_FAIL,
   DELETE_TRIANING_SERIES_START,
   DELETE_TRIANING_SERIES_SUCCESS,
-  DELETE_TRIANING_SERIES_FAIL
+  DELETE_TRIANING_SERIES_FAIL,
+  GET_MEMBERS_ASSIGNED_START,
+  GET_MEMBERS_ASSIGNED_SUCCESS,
+  GET_MEMBERS_ASSIGNED_FAIL
 } from "../actions";
 
 const initialState = {
   trainingSeries: [],
   error: "",
   isLoading: false,
-  isEditing: false
+  isEditing: false,
+  isGettingAssignments: false,
+  assignments: []
 };
 
 const trainingSeriesReducer = (state = initialState, action) => {
@@ -102,6 +107,24 @@ const trainingSeriesReducer = (state = initialState, action) => {
       };
     case DELETE_TRIANING_SERIES_FAIL:
       return { ...state, isLoading: false, error: action.payload };
+    case GET_MEMBERS_ASSIGNED_START:
+    return {
+      ...state,
+      isGettingAssignments: true,
+      error: ""
+    };
+    case GET_MEMBERS_ASSIGNED_SUCCESS:
+    return {
+      ...state,
+      isGettingAssignments: false,
+      assignments: action.payload
+    };
+    case GET_MEMBERS_ASSIGNED_FAIL:
+    return {
+      ...state,
+      isGettingAssignments: false,
+      error: action.error
+    }
     default:
       return state;
   }
