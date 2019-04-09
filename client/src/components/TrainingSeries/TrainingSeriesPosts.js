@@ -19,7 +19,8 @@ import {
   createAPost,
   editPost,
   deletePost,
-  getMembersAssigned
+  getMembersAssigned,
+  editTrainingSeries
 } from "../../store/actions";
 import { withStyles } from "@material-ui/core/styles";
 
@@ -29,7 +30,9 @@ import {
   ListItem,
   ListItemText,
   ListItemSecondaryAction,
-  Typography
+  Typography,
+  TextField,
+  Button
 } from "@material-ui/core/";
 
 const styles = theme => ({
@@ -82,7 +85,9 @@ const styles = theme => ({
 });
 class TrainingSeriesPosts extends React.Component {
   state = {
-    active: false
+    active: false,
+    editingTitle: false,
+    title: ""
   };
 
   componentDidMount() {
@@ -121,9 +126,62 @@ class TrainingSeriesPosts extends React.Component {
     });
   };
 
+  beginTitleEdit = e => {
+    this.setState({
+      ...this.state,
+      editingTitle: true,
+      title: this.props.singleTrainingSeries.title
+    });
+  };
+
+  handleChange = name => event => {
+    this.setState({ [name]: event.target.value });
+  };
+
+  updateTitle = e => {
+    e.preventDefault();
+    const data = {title: this.state.title}
+    this.props.editTrainingSeries(this.props.singleTrainingSeries.trainingSeriesID, data)
+    this.setState({
+      ...this.state,
+      editingTitle: false
+    })
+  };
+
   render() {
     const { classes } = this.props;
-    // console.log("POSTS", this.props);
+    let titleEdit;
+    if (this.state.editingTitle) {
+      titleEdit = (
+        <form onSubmit={e => this.updateTitle(e)} noValidate autoComplete="off">
+          <TextField
+            id="standard-name"
+            label="Title"
+            className={classes.textField}
+            value={this.state.title}
+            onChange={this.handleChange("title")}
+            margin="normal"
+          />
+          <Button type="submit" variant="contained" className={classes.button}>
+            Submit
+          </Button>
+        </form>
+      );
+    } else {
+      titleEdit = (
+        <>
+          <Typography variant="headline">
+            {this.props.singleTrainingSeries.title}
+          </Typography>
+          <i
+            className={`material-icons ${classes.icons}`}
+            onClick={e => this.beginTitleEdit(e)}
+          >
+            edit
+          </i>
+        </>
+      );
+    }
     return (
       <>
         {/* Gives app time to fetch data */}
@@ -131,11 +189,7 @@ class TrainingSeriesPosts extends React.Component {
         {!this.props.isLoading && (
           <>
             <PageContainer>
-              <Paper className={classes.paper}>
-                <Typography variant="headline">
-                  {this.props.singleTrainingSeries.title}
-                </Typography>
-              </Paper>
+              <Paper className={classes.paper}>{titleEdit}</Paper>
               <Paper className={classes.paper}>
                 <HeaderContainer>
                   {/* <PostModal
@@ -264,6 +318,7 @@ export default connect(
     createAPost,
     editPost,
     deletePost,
-    getMembersAssigned
+    getMembersAssigned,
+    editTrainingSeries
   }
 )(withStyles(styles)(TrainingSeriesPosts));
