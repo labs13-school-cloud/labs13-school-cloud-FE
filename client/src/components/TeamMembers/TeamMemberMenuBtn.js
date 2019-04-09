@@ -78,7 +78,7 @@ class TeamMemberMenuBtn extends React.Component {
               this.routeToMemberPage(e, this.props.teamMember.teamMemberID)
             }
           >
-            Edit
+            Manage
           </MenuItem>
           <MenuItem>
             <DeleteModal
