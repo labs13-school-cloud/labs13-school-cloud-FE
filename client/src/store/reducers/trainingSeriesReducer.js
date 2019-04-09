@@ -31,7 +31,7 @@ const trainingSeriesReducer = (state = initialState, action) => {
     case GET_TRAINING_SERIES_SUCCESS:
       return {
         ...state,
-        trainingSeries: action.payload,
+        trainingSeries: action.payload.reverse(),
         isLoading: false,
         error: ''
       };
