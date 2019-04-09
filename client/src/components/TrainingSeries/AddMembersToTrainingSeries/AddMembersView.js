@@ -22,7 +22,6 @@ class AddMembersView extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props.userId);
     this.props.getTeamMembers(this.props.userId);
     let d = new Date();
     let formattedDate = d.toISOString();

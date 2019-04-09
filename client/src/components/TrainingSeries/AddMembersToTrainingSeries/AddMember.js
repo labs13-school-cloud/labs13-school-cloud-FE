@@ -90,6 +90,7 @@ function AddMember(props) {
           <h3>Assign Team Members </h3>
           <DatePicker
             inline
+            minDate={new Date()}
             selected={props.startDate}
             onChange={props.handler.handleDateChange}
           />
