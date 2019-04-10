@@ -1,16 +1,18 @@
 import React, {Component} from 'react';
 //Loading SVG that gets displayed
 import loading from './loading.svg';
-
+import Progress from '../Progress/ProgressCircle';
 //Auth
-import {setAccessToken, setIdToken} from '../../Auth/Auth';
+import {setAccessToken, setIdToken, getUserProfile} from '../../Auth/Auth';
 import history from '../../history';
 
 class Callback extends Component {
   componentDidMount() {
     setAccessToken();
     setIdToken();
-    history.push('/home');
+    getUserProfile(() => {
+      this.props.history.push('/home');
+    });
   }
   render() {
     //Customized styling
@@ -29,7 +31,7 @@ class Callback extends Component {
 
     return (
       <div style={style}>
-        <img src={loading} alt="loading" />
+        <Progress />
       </div>
     );
   }

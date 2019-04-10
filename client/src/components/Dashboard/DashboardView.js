@@ -37,32 +37,37 @@ class Dashboard extends React.Component {
   };
 
   componentDidMount() {
-    setTimeout(() => {
-      getUserProfile(() => {
-        this.props.getUser();
-      });
-    }, 1500);
+    getUserProfile(() => {
+      this.props.getUser();
+    });
   }
 
   renderDashboard = () => {
-    const {user} = this.props.userProfile;
-    return (
-      <>
-        <TripleColumn>
-          <SmallColumns>
-            <TeamMembersView userId={user.userID} />
-            <TrainingSeriesView userId={user.userID} match={this.props.match} />
-          </SmallColumns>
-          <NotificationsView userId={user.userID} />
-        </TripleColumn>
-      </>
-    );
+    if (this.props.userProfile === undefined) {
+      return <ProgressCircle />;
+    } else {
+      const user = this.props.userProfile || this.props.userProfile.newUser;
+      return (
+        <>
+          <TripleColumn>
+            <SmallColumns>
+              <TeamMembersView userId={user.userID} />
+              <TrainingSeriesView
+                userId={user.userID}
+                match={this.props.match}
+              />
+            </SmallColumns>
+            <NotificationsView userId={user.userID} />
+          </TripleColumn>
+        </>
+      );
+    }
   };
 
   render() {
     return (
       <>
-        {this.props.doneLoading ? (
+        {this.props.doneLoading && this.props.userProfile !== undefined ? (
           <>
             <AppBar />
             {this.props.location.pathname !== '/home' && (
