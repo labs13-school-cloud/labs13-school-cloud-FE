@@ -51,7 +51,7 @@ class Dashboard extends React.Component {
 						<TeamMembersView userId={user.userID} />
 						<TrainingSeriesView userId={user.userID} match={this.props.match} />
 					</SmallColumns>
-					<NotificationsView />
+					<NotificationsView userId={user.userID}/>
 				</TripleColumn>
 			</>
 		);
@@ -113,16 +113,6 @@ class Dashboard extends React.Component {
 									)}
 								/>
 								<Route path="/home/post/:id" component={PostPage} />
-
-								<Route
-									path="/home/notifications"
-									render={props => (
-										<NotificationsView
-											{...props}
-											userId={this.props.userProfile.user.userID}
-										/>
-									)}
-								/>
 							</Router>
 						</DashboardContainer>
 					</>

@@ -87,6 +87,8 @@ class NotificationsView extends Component {
 	};
 
 	render() {
+		console.log("THIS SHOULD BE MY USER ID", this.props.userId);
+
 		const { classes } = this.props;
 		const allNotifications = [
 			...this.props.textNotifications,
