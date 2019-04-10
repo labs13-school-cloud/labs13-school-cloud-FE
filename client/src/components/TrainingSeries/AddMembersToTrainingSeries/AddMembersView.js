@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
+
+import Pagination from 'material-ui-flat-pagination';
 
 //State Management
 import { connect } from 'react-redux';
@@ -21,6 +22,13 @@ const styles = theme => ({
 		paddingBottom: theme.spacing.unit * 2,
 		margin: '0 auto',
 	},
+	footer: {
+		display: 'flex',
+		justifyContent: 'space-between',
+		position: 'sticky',
+		top: '100%',
+	},
+	pagination: { width: '90%' },
 });
 
 class AddMembersView extends Component {
@@ -31,6 +39,8 @@ class AddMembersView extends Component {
 			startDate: '',
 			selectedTeamMembers: [],
 			isRouting: false,
+			offset: 0,
+			limit: 5,
 		};
 	}
 
@@ -50,7 +60,9 @@ class AddMembersView extends Component {
 			this.setState({ email: this.props.email, name: this.props.name });
 		}
 	}
-
+	handleClick(offset) {
+		this.setState({ offset });
+	}
 	getAssigned = () => {
 		this.props.getMembersAssigned(this.props.match.params.id);
 	};
@@ -66,7 +78,20 @@ class AddMembersView extends Component {
 					assignments={this.props.assignments}
 					handler={this.handler}
 					isRouting={this.state.isRouting}
+					limit={this.state.limit}
+					offset={this.state.offset}
 				/>
+				{/****** Following used for pagination ******/}
+				{/* 
+				<div className={classes.footer}>
+					<Pagination
+						limit={this.state.limit}
+						offset={this.state.offset}
+						total={this.props.teamMembers.length}
+						centerRipple={true}
+						onClick={(e, offset) => this.handleClick(offset)}
+					/>
+				</div> */}
 			</Paper>
 		);
 	}
