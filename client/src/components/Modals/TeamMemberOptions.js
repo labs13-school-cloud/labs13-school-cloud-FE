@@ -2,9 +2,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router';
 
+// styles
 import { withStyles } from '@material-ui/core/styles';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { IconButton, Menu, MenuItem } from '@material-ui/core/';
+
+// components
+import DeleteModal from '../Modals/deleteModal';
 
 const styles = theme => ({});
 
@@ -57,9 +61,13 @@ class TeamMemberOptions extends React.Component {
             Manage
           </MenuItem>
           <MenuItem
-            onClick={e => this.props.handleDelete(e, this.props.teamMemberID)}
+          // onClick={e => this.props.handleDelete(e, this.props.teamMemberID)}
           >
-            Delete
+            <DeleteModal
+              deleteType="teamMember"
+              teamMemberId={this.props.teamMemberID}
+              displayButton
+            />
           </MenuItem>
         </Menu>
       </div>

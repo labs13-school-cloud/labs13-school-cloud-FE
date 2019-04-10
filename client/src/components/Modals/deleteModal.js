@@ -72,15 +72,8 @@ const styles = theme => ({
 class TrainingSeriesModal extends React.Component {
   state = {
     open: false,
-    title: '',
-    displayButton: false
+    title: ''
   };
-
-  componentDidMount() {
-    if (this.props.displayButton) {
-      this.setState({ displayButton: true });
-    }
-  }
 
   handleOpen = () => {
     this.setState({ open: true });
@@ -100,7 +93,7 @@ class TrainingSeriesModal extends React.Component {
         this.props.deletePost(this.props.id);
         break;
       case 'teamMember':
-        this.props.deleteTeamMember(this.props.id);
+        this.props.deleteTeamMember(this.props.teamMemberId);
         break;
       case 'inTeamMemberPage':
         this.props.deleteTeamMember(this.props.id);
@@ -135,8 +128,8 @@ class TrainingSeriesModal extends React.Component {
 
     return (
       <div>
-        {this.state.displayButton ? (
-          <p>Delete</p>
+        {this.props.displayButton ? (
+          <p onClick={this.handleOpen}>Delete</p>
         ) : (
           <i
             onClick={this.handleOpen}
