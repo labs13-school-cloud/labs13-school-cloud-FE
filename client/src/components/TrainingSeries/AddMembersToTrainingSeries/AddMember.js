@@ -4,7 +4,7 @@ import React from 'react';
 import DatePicker from 'react-datepicker';
 //Styles
 import 'react-datepicker/dist/react-datepicker.css';
-import { withStyles } from '@material-ui/core/styles';
+import {withStyles} from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -46,7 +46,7 @@ const styles = theme => ({
 
 function AddMember(props) {
   console.log(props);
-  const { classes } = props;
+  const {classes} = props;
 
   const renderMembers = () => {
     //Map Through the current assignments for the team member, returns an array of ID's
@@ -102,16 +102,16 @@ function AddMember(props) {
                 {props.isRouting ? (
                   <LoadingImage src={TrainingBotGIF} alt="loader" />
                 ) : (
-                    `Submit`
-                  )}
+                  `Submit`
+                )}
               </Button>
               <Button onClick={props.handler.routeToPostPage}>Cancel</Button>
             </form>
           </TeamMemberContainer>
         </>
       ) : (
-          <h2> You need to create Team members! </h2>
-        )}
+        <h2> You need to create Team members! </h2>
+      )}
     </AddMemberContainer>
   );
 }
@@ -130,6 +130,6 @@ const TeamMemberContainer = styled.div`
 const LoadingImage = styled.img`
   width: 40px;
   overflow: hidden;
-  pointerEvents: none;
+  pointerevents: none;
   cursor: not-allowed;
 `;
