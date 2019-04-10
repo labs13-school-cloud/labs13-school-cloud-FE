@@ -24,7 +24,7 @@ class AddMembersView extends Component {
 
   componentDidMount() {
     this.props.getTeamMembers(this.props.userId);
-    this.props.getMembersAssigned(this.props.match.params.id);
+    this.getAssigned();
     let d = new Date();
     let formattedDate = d.toISOString();
     this.setState({
@@ -39,13 +39,17 @@ class AddMembersView extends Component {
     }
   }
 
+  getAssigned = () => {
+    this.props.getMembersAssigned(this.props.match.params.id);
+  };
+
   render() {
     return (
       <AddMember
         startDate={this.state.startDate}
         teamMembers={this.props.teamMembers}
         selectedTeamMembers={this.state.selectedTeamMembers}
-        assignedTeamMembers={this.props.assignments}
+        assignments={this.props.assignments}
         handler={this.handler}
         isRouting={this.state.isRouting}
       />

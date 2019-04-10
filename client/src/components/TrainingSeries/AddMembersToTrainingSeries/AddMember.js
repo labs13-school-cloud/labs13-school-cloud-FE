@@ -5,15 +5,9 @@ import DatePicker from 'react-datepicker';
 //Styles
 import 'react-datepicker/dist/react-datepicker.css';
 import {withStyles} from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import Modal from '@material-ui/core/Modal';
 import Button from '@material-ui/core/Button';
-import AddIcon from '@material-ui/icons/Add';
-import Fab from '@material-ui/core/Fab';
 import Checkbox from '@material-ui/core/Checkbox';
-import FormLabel from '@material-ui/core/FormLabel';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import MenuItem from '@material-ui/core/MenuItem';
 import styled from 'styled-components';
 import TrainingBotGIF from '../../../img/trainingBot.gif';
 
@@ -51,37 +45,36 @@ const styles = theme => ({
 });
 
 function AddMember(props) {
-  console.log(props);
+  console.log('ADD MEMBER PROPS', props);
   const {classes} = props;
   //Need a way to see all of the currently assigned team members of that training series.
   //Map over those assigned members.
   //Display members not currently assigned
 
-  //   const renderMembers = () => {
-  //     //Map Through the current assignments for the team member, returns an array of ID's
-  //     let assignments = props.assignments.map(
-  //       assignment => assignment.trainingSeries_ID
-  //     );
-  //     console.log("ASSIGNMENTS", assignments);
-  //     //Filters the trainingSeries based on assignments
-  //     let filteredMembers = props.trainingSeries.filter(series => {
-  //       return !assignments.includes(series.trainingSeriesID);
-  //     });
-  //     console.log("FILTERED MEMBERS", filteredMembers);
-  //     return filteredMembers.map(member => (
-  //       <>
-  //         <FormControlLabel
-  //           control={
-  //             <Checkbox
-  //               name={member.teamMemberID}
-  //               onChange={() => props.handler.handleChecked(member.teamMemberID)}
-  //             />
-  //           }
-  //           label={`${member.firstName} ${member.lastName}`}
-  //         />
-  //       </>
-  //     ));
-  //   };
+  const renderMembers = () => {
+    //Map Through the current assignments for the team member, returns an array of ID's
+    let assignments = props.assignments.map(
+      assignment => assignment.teamMember_ID
+    );
+
+    //Filters the trainingSeries based on assignments
+    let filteredMembers = props.teamMembers.filter(member => {
+      return !assignments.includes(member.teamMemberID);
+    });
+    return filteredMembers.map(member => (
+      <>
+        <FormControlLabel
+          control={
+            <Checkbox
+              name={member.teamMemberID}
+              onChange={() => props.handler.handleChecked(member.teamMemberID)}
+            />
+          }
+          label={`${member.firstName} ${member.lastName}`}
+        />
+      </>
+    ));
+  };
   console.log(props.selectedTeamMembers);
   return (
     <AddMemberContainer>
@@ -101,21 +94,7 @@ function AddMember(props) {
               className={classes.memberList}
               onSubmit={e => props.handler.handleSubmit(e)}
             >
-              {props.teamMembers.map(member => (
-                <>
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        name={member.teamMemberID}
-                        onChange={() =>
-                          props.handler.handleChecked(member.teamMemberID)
-                        }
-                      />
-                    }
-                    label={`${member.firstName} ${member.lastName}`}
-                  />
-                </>
-              ))}
+              {renderMembers()}
               <Button
                 disabled={
                   props.selectedTeamMembers < 1 || props.isRouting === true
