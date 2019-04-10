@@ -17,19 +17,18 @@ import TeamMemberPageView from '../TeamMembers/TeamMemberPageContainer/TeamMembe
 import AddTrainingSeriesView from '../TrainingSeries/AddMembersToTrainingSeries/AddMembersView.js';
 import CreateTrainingSeries from '../TrainingSeries/CreateTrainingSeries';
 import ReturnToDashboardButton from '../Navigation/ReturnToDashboard';
-
-//Auth
-import {getUserProfile} from '../../Auth/Auth';
-import Authenticate from '../authenticate/authenticate';
-
-//State Management
-import {connect} from 'react-redux';
-import {getUser} from '../../store/actions/userActions';
 import TrainingSeriesPosts from '../TrainingSeries/TrainingSeriesPosts';
 import AddTeamMemberPage from '../TeamMembers/TeamMemberPageContainer/AddTeamMemberPage';
 import CreatePost from '../TrainingSeries/CreatePost';
 import PostPage from '../TrainingSeries/PostPage';
 import NotificationsView from '../Notifications/NotificationsView';
+
+//Auth
+import Authenticate from '../authenticate/authenticate';
+
+//State Management
+import {connect} from 'react-redux';
+import {getUser} from '../../store/actions/userActions';
 
 class Dashboard extends React.Component {
   state = {
@@ -37,9 +36,7 @@ class Dashboard extends React.Component {
   };
 
   componentDidMount() {
-    getUserProfile(() => {
-      this.props.getUser();
-    });
+    this.props.getUser();
   }
 
   renderDashboard = () => {
@@ -62,6 +59,7 @@ class Dashboard extends React.Component {
       <>
         {this.props.doneLoading ? (
           <>
+            {this.props.getUser}
             <AppBar />
             {this.props.location.pathname !== '/home' && (
               <ReturnToDashboardButton />
