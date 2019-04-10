@@ -1,4 +1,5 @@
 import React from "react";
+import styled from "styled-components";
 
 import DatePicker from "react-datepicker";
 
@@ -28,6 +29,9 @@ const styles = theme => ({
       width: "65%"
     }
   },
+  heading: {
+    textAlign: "center"
+  },
   container: {
     display: "flex",
     flexWrap: "wrap"
@@ -48,10 +52,20 @@ const styles = theme => ({
   },
   memberList: {
     display: "flex",
-    flexDirection: "column"
+    flexDirection: "column",
+    width: "70%",
+    margin: "0 auto"
   },
   selectEmpty: {
     marginTop: theme.spacing.unit * 2
+  },
+  datePicker: {
+    display: "flex",
+    justifyContent: "center",
+    margin: "30px auto"
+  },
+  button: {
+    alignSelf: "center"
   }
 });
 
@@ -77,14 +91,6 @@ class AssignMemberPage extends React.Component {
     }
   }
 
-  handleOpen = () => {
-    this.setState({ open: true });
-  };
-
-  handleClose = () => {
-    this.setState({ open: false });
-  };
-
   handleChange = event => {
     this.setState({ [event.target.name]: event.target.value });
   };
@@ -104,7 +110,9 @@ class AssignMemberPage extends React.Component {
       assignments: [this.props.location.state.urlId]
     };
     this.props.addTeamMemberToTrainingSeries(data);
-    this.handleClose();
+    this.props.history.push({
+      pathname: "/home"
+    })
   };
 
   renderTrainingSeriesInDropDown = () => {
@@ -113,9 +121,11 @@ class AssignMemberPage extends React.Component {
       assignment => assignment.trainingSeries_ID
     );
     //Filters the trainingSeries based on assignments
-    let filteredSeries = this.props.location.state.trainingSeries.filter(series => {
-      return !assignments.includes(series.trainingSeriesID);
-    });
+    let filteredSeries = this.props.location.state.trainingSeries.filter(
+      series => {
+        return !assignments.includes(series.trainingSeriesID);
+      }
+    );
 
     return filteredSeries.map(series => {
       return (
@@ -133,37 +143,50 @@ class AssignMemberPage extends React.Component {
     const { classes } = this.props;
     return (
       <>
-          <div className={classes.paper}>
-            <Typography variant="h6" id="modal-title">
-              Assign Training Series
-            </Typography>
+        <div className={classes.paper}>
+          <Typography variant="h6" className={classes.heading}>
+            Assign Training Series
+          </Typography>
+          <div className={classes.datePicker}>
             <DatePicker
               inline
               selected={this.state.startDate}
               onChange={this.handleDateChange}
             />
-            <form
-              variant="body1"
-              id="modal-title"
-              className={classes.memberList}
-              onSubmit={e => this.handleSubmit(e)}
-            >
-              <FormControl className={""}>
-                <InputLabel htmlFor="trainingSeriesID">
-                  Training Series
-                </InputLabel>
-                <Select
-                  value={this.state.trainingSeriesID}
-                  onChange={this.handleChange}
-                  name="trainingSeriesID"
-                >
-                  {this.props.location.state.assignments &&
-                    this.renderTrainingSeriesInDropDown()}
-                </Select>
-              </FormControl>
-              <Button type="submit">Submit</Button>
-            </form>
           </div>
+          <form
+            variant="body1"
+            id="modal-title"
+            className={classes.memberList}
+            onSubmit={e => this.handleSubmit(e)}
+          >
+            <FormControl className={""}>
+              <InputLabel htmlFor="trainingSeriesID">
+                Training Series
+              </InputLabel>
+              <Select
+                value={this.state.trainingSeriesID}
+                onChange={this.handleChange}
+                name="trainingSeriesID"
+              >
+                {this.props.location.state.assignments &&
+                  this.renderTrainingSeriesInDropDown()}
+              </Select>
+            </FormControl>
+            <ButtonContainer>
+              <Button
+                className={classes.button}
+                variant="contained"
+                type="submit"
+              >
+                Assign
+              </Button>
+              <Button className={classes.button} variant="primary">
+                Cancel
+              </Button>
+            </ButtonContainer>
+          </form>
+        </div>
       </>
     );
   }
@@ -181,3 +204,9 @@ export default connect(
   mapStateToProps,
   { addTeamMemberToTrainingSeries }
 )(withStyles(styles)(AssignMemberPage));
+
+const ButtonContainer = styled.div`
+  display: flex;
+  margin-top: 25px;
+  justify-content: center;
+`;
