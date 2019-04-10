@@ -9,9 +9,7 @@ import logo from '../../img/trainingBot.gif';
 import {
 	withStyles,
 	FormControl,
-	FormLabel,
 	Button,
-	CircularProgress,
 	Typography,
 	Modal,
 } from '@material-ui/core/';
@@ -184,8 +182,8 @@ class CheckoutForm extends Component {
 								<CardElement style={{ base: { fontSize: '18px' } }} />
 							</FormControl>
 						) : (
-							<span />
-						)}
+								<span />
+							)}
 					</div>
 					{this.state.paymentToggle ? (
 						<Button
@@ -196,8 +194,8 @@ class CheckoutForm extends Component {
 							Submit
 						</Button>
 					) : (
-						<span />
-					)}
+							<span />
+						)}
 
 					{/* Unsubscribe Modal */}
 					<Modal

@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 // Material UI
 import { withStyles } from '@material-ui/core/styles';
-import { Paper, List, Typography, TextField, Button } from '@material-ui/core/';
+import { Paper, List, Typography, TextField } from '@material-ui/core/';
 import NotificationWidget from './SnackBarTeamMember';
 //Components
 import AddTeamMemberToTrainingSeriesModal from '../../Modals/addTeamMemberToTrainingSeriesModal';
@@ -93,13 +93,12 @@ class TeamMemberPage extends React.Component {
   };
 
   render() {
-    console.log(this.props);
     const { classes } = this.props;
 
     const trainingAssigments =
       this.props.teamMember.assignments &&
       this.props.teamMember.assignments.map(trainingSeries => {
-        // return console.log("****", trainingSeries);
+
         return (
           <TrainingSeriesAssignments
             trainingSeries={trainingSeries}

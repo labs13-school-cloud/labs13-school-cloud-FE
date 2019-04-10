@@ -17,10 +17,7 @@ import {
   deleteTeamMemberFromTrainingSeries
 } from '../../store/actions/';
 
-import { FormLabel, Typography } from '@material-ui/core';
-
-import DeleteIcon from '@material-ui/icons/Delete';
-import IconButton from '@material-ui/core/IconButton';
+import { FormLabel } from '@material-ui/core';
 
 function getModalStyle() {
   const top = 50;
@@ -149,11 +146,6 @@ class TrainingSeriesModal extends React.Component {
 
   render() {
     const { classes } = this.props;
-    console.log(
-      'DELETE MODAL',
-      this.props.teamMemberId,
-      this.props.trainingSeries_Id
-    );
 
     return (
       <div>

@@ -13,10 +13,7 @@ import { withStyles } from '@material-ui/core/styles';
 import {
 	Paper,
 	Typography,
-	Fab,
-	InputLabel,
-	FormControl,
-	NativeSelect
+	Fab
 } from '@material-ui/core/';
 
 import {

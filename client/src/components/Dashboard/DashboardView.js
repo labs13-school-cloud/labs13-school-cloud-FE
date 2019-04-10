@@ -1,6 +1,6 @@
 // parent component for app once logged in
 import React from 'react';
-import {Router, Route} from 'react-router-dom';
+import { Router, Route } from 'react-router-dom';
 
 import history from '../../history';
 
@@ -14,18 +14,17 @@ import ProgressCircle from '../Progress/ProgressCircle';
 import ProfileView from '../Profile/ProfileView';
 import AppBar from '../AppBar/AppBar';
 import TeamMemberPageView from '../TeamMembers/TeamMemberPageContainer/TeamMemberPageView';
-import NotificationView from '../Notifications/NotificationsView';
 import AddTrainingSeriesView from '../TrainingSeries/AddMembersToTrainingSeries/AddMembersView.js';
 import CreateTrainingSeries from '../TrainingSeries/CreateTrainingSeries';
 import ReturnToDashboardButton from '../Navigation/ReturnToDashboard';
 
 //Auth
-import {getUserProfile} from '../../Auth/Auth';
+import { getUserProfile } from '../../Auth/Auth';
 import Authenticate from '../authenticate/authenticate';
 
 //State Management
-import {connect} from 'react-redux';
-import {getUser} from '../../store/actions/userActions';
+import { connect } from 'react-redux';
+import { getUser } from '../../store/actions/userActions';
 import TrainingSeriesPosts from '../TrainingSeries/TrainingSeriesPosts';
 import AddTeamMemberPage from '../TeamMembers/TeamMemberPageContainer/AddTeamMemberPage';
 import CreatePost from '../TrainingSeries/CreatePost';
@@ -44,7 +43,7 @@ class Dashboard extends React.Component {
   }
 
   renderDashboard = () => {
-    const {user} = this.props.userProfile;
+    const { user } = this.props.userProfile;
     return (
       <>
         <TeamMembersView userId={user.userID} />
@@ -125,8 +124,8 @@ class Dashboard extends React.Component {
             </DashboardContainer>
           </>
         ) : (
-          <ProgressCircle />
-        )}
+            <ProgressCircle />
+          )}
       </>
     );
   }
@@ -170,14 +169,13 @@ const DashboardContainer = styled.div`
   }
 `;
 
-const hidden = {
-  display: 'none',
-};
+// const hidden = {
+//   display: 'none',
+// };
 
-const active = {
-  display: 'block',
-  display: 'none',
-};
+// const active = {
+//   display: 'block',
+// };
 
 // const toggleTrainingSeries = tabValue => {
 

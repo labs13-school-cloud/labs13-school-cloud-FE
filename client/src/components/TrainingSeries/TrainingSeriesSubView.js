@@ -2,22 +2,12 @@ import React, { Component } from 'react';
 
 //Components
 import TrainingSeriesList from './TrainingSeriesList';
-import TrainingSeriesModal from '../Modals/TrainingSeriesModal';
 
 import { withStyles } from '@material-ui/core/styles';
 import {
   Paper,
-  NativeSelect,
-  FormControl,
-  InputLabel,
   Typography,
   Fab
-  // List,
-  // Input,
-  // OutlinedInput,
-  // FilledInput,
-  // FormHelperText,
-  // Select,
 } from '@material-ui/core/';
 import Pagination from 'material-ui-flat-pagination';
 

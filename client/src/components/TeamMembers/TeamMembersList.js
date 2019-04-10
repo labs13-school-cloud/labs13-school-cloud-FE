@@ -9,11 +9,7 @@ const TeamMembersList = props => {
 	let offset = props.offset;
 	let x = offset;
 	let y = offset + props.limit;
-	console.log('Offset Spacing', x, y, props.limit);
 	arr = props.teamMembers.slice(x, y);
-
-	console.log('Arr', arr);
-	console.log('teamMembers', props.teamMembers);
 
 	return (
 		<>

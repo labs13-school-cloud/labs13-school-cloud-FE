@@ -1,5 +1,5 @@
 // displays all posts of a training series
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 
 // import Button from '@material-ui/core/Button';
 import Fab from '@material-ui/core/Fab';
