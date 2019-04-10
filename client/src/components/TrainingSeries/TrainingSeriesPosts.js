@@ -1,7 +1,10 @@
 // displays all posts of a training series
 import React from 'react';
-import { Link } from 'react-router-dom';
+
+import {Link} from 'react-router-dom';
 import Fab from '@material-ui/core/Fab';
+import Fuse from 'fuse.js';
+
 
 // Components
 import DeleteModal from '../Modals/deleteModal';
@@ -10,7 +13,7 @@ import TrainingSeriesAssignment from './TrainingSeriesAssignment';
 import styled from 'styled-components';
 
 // Redux
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import {
 	getTrainingSeriesPosts,
 	getTeamMembers,
@@ -21,7 +24,7 @@ import {
 	editTrainingSeries,
 } from '../../store/actions';
 
-import { withStyles } from '@material-ui/core/styles';
+import {withStyles} from '@material-ui/core/styles';
 
 // Styling
 import {
@@ -32,82 +35,85 @@ import {
 	ListItemText,
 	ListItemSecondaryAction,
 	Typography,
+	InputAdornment,
 } from '@material-ui/core/';
 
 import AddMemberSnackbar from './AddMembersToTrainingSeries/AddMemberSnackbar';
 
 const styles = theme => ({
-	paper: {
-		width: '100%',
-		backgroundColor: theme.palette.background.paper,
-		boxShadow: theme.shadows[5],
-		padding: theme.spacing.unit * 4,
-		outline: 'none',
-		margin: '5px auto',
-		'@media (max-width: 480px)': {
-			width: '89%',
-			padding: 0,
-			margin: '0 auto',
-		},
-	},
-	paperTitle: {
-		width: '100%',
-		backgroundColor: theme.palette.background.paper,
-		boxShadow: theme.shadows[5],
-		padding: '16px 32px',
-		outline: 'none',
-		display: 'flex',
-		margin: '5px auto',
-		alignItems: 'baseline',
-		'@media (max-width: 480px)': {
-			width: '89%',
-			padding: 0,
-			margin: '0 auto',
-		},
-	},
-	secondaryAction: {
-		display: 'flex',
-		flexDirection: 'row',
-		'align-items': 'center',
-	},
-	listItem: {
-		width: '79%',
-		height: 95,
-		marginBottom: 20,
-		paddingBottom: 10,
-		display: 'flex',
-		justifyContent: 'space-between',
-		alignItems: 'center',
-		borderBottom: '1px solid #E8E9EB',
-		// "list-style": "none"
-	},
-	icons: {
-		display: 'block',
-		width: 20,
-		marginBottom: 10,
-		color: 'gray',
-		cursor: 'pointer',
-		'&:hover': { color: '#2699FB' },
-	},
-	hidden: {
-		display: 'none',
-	},
-	button: {
-		position: 'relative',
-		top: '5px',
-		right: '5px',
-		width: '160px',
-	},
-	list: {
-		listStyleType: 'none',
-	},
-	AssignBtn: {},
+  paper: {
+    width: '100%',
+    backgroundColor: theme.palette.background.paper,
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing.unit * 4,
+    outline: 'none',
+    margin: '5px auto',
+    '@media (max-width: 480px)': {
+      width: '89%',
+      padding: 0,
+      margin: '0 auto',
+    },
+  },
+  paperTitle: {
+    width: '100%',
+    backgroundColor: theme.palette.background.paper,
+    boxShadow: theme.shadows[5],
+    padding: '16px 32px',
+    outline: 'none',
+    display: 'flex',
+    margin: '5px auto',
+    alignItems: 'baseline',
+    '@media (max-width: 480px)': {
+      width: '89%',
+      padding: 0,
+      margin: '0 auto',
+    },
+  },
+  secondaryAction: {
+    display: 'flex',
+    flexDirection: 'row',
+    'align-items': 'center',
+  },
+  listItem: {
+    width: '79%',
+    height: 95,
+    marginBottom: 20,
+    paddingBottom: 10,
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    borderBottom: '1px solid #E8E9EB',
+    // "list-style": "none"
+  },
+  icons: {
+    display: 'block',
+    width: 20,
+    marginBottom: 10,
+    color: 'gray',
+    cursor: 'pointer',
+    '&:hover': {color: '#2699FB'},
+  },
+  hidden: {
+    display: 'none',
+  },
+  button: {
+    position: 'relative',
+    top: '5px',
+    right: '5px',
+    width: '160px',
+  },
+  list: {
+    listStyleType: 'none',
+  },
+  AssignBtn: {},
 });
 class TrainingSeriesPosts extends React.Component {
+
 	state = {
 		active: false,
 		displaySnackbar: false,
 		editingTitle: false,
+		searchInput: '',
 	};
 
 	componentDidMount() {
@@ -125,71 +131,92 @@ class TrainingSeriesPosts extends React.Component {
 		this.props.getTrainingSeriesPosts(id);
 	};
 
-	deletePost = (e, id) => {
-		e.preventDefault();
-		console.log(id);
-		this.props.deletePost(id);
-	};
+  deletePost = (e, id) => {
+    e.preventDefault();
+    console.log(id);
+    this.props.deletePost(id);
+  };
 
-	routeToPostPage = () => {
-		this.props.history.push({
-			pathname: '/home/create-post',
-			state: {
-				trainingSeriesId: this.props.singleTrainingSeries.trainingSeriesID,
-			},
-		});
-	};
+  routeToPostPage = () => {
+    this.props.history.push({
+      pathname: '/home/create-post',
+      state: {
+        trainingSeriesId: this.props.singleTrainingSeries.trainingSeriesID,
+      },
+    });
+  };
 
-	routeToEditPostPage = (e, post) => {
-		e.preventDefault();
-		console.log('FIRED');
-		this.props.history.push({
-			pathname: `/home/post/${post.postID}`,
-			state: {
-				post,
-			},
-		});
-	};
+  routeToEditPostPage = (e, post) => {
+    e.preventDefault();
+    console.log('FIRED');
+    this.props.history.push({
+      pathname: `/home/post/${post.postID}`,
+      state: {
+        post,
+      },
+    });
+  };
 
-	routeToAssigning = e => {
-		e.preventDefault();
-		this.props.history.push({
-			pathname: `/home/assign-members/${this.props.singleTrainingSeries.trainingSeriesID}`,
-		});
-	};
+  routeToAssigning = e => {
+    e.preventDefault();
+    this.props.history.push({
+      pathname: `/home/assign-members/${
+        this.props.singleTrainingSeries.trainingSeriesID
+      }`,
+    });
+  };
 
-	resetHistory = () => {
-		this.props.history.replace({
-			state: null,
-		});
-	};
+  resetHistory = () => {
+    this.props.history.replace({
+      state: null,
+    });
+  };
 
-	beginTitleEdit = e => {
-		this.setState({
-			editingTitle: true,
-			title: this.props.singleTrainingSeries.title,
-		});
-	};
+  beginTitleEdit = e => {
+    this.setState({
+      editingTitle: true,
+      title: this.props.singleTrainingSeries.title,
+    });
+  };
 
-	handleChange = name => event => {
-		this.setState({ [name]: event.target.value });
-	};
+  handleChange = name => event => {
+    this.setState({[name]: event.target.value});
+  };
 
-	updateTitle = async e => {
-		e.preventDefault();
-		const data = { title: this.state.title };
-		await this.props.editTrainingSeries(this.props.singleTrainingSeries.trainingSeriesID, data);
-		await this.getTrainingSeriesWithPosts(this.props.match.params.id);
-		this.setState({
-			...this.state,
-			editingTitle: false,
-		});
+  updateTitle = async e => {
+    e.preventDefault();
+    const data = {title: this.state.title};
+    await this.props.editTrainingSeries(
+      this.props.singleTrainingSeries.trainingSeriesID,
+      data
+    );
+    await this.getTrainingSeriesWithPosts(this.props.match.params.id);
+    this.setState({
+      ...this.state,
+      editingTitle: false,
+    });
+  };
+
+	searchedPosts = posts => {
+		var options = {
+			shouldSort: true,
+			threshold: 0.3,
+			location: 0,
+			distance: 100,
+			maxPatternLength: 32,
+			minMatchCharLength: 3,
+			keys: ['postName', 'postDetails', 'link'],
+		};
+
+		const fuse = new Fuse(posts, options);
+		const res = fuse.search(this.state.searchInput);
+		return res;
 	};
 
 	render() {
 		const { classes } = this.props;
-		console.log("team member length", this.props.teamMembers.length);
-		console.log("userID", this.props.userId);
+		console.log('POSTS', this.props.posts);
+		console.log('SEARCHED POSTS', this.searchedPosts(this.props.posts));
 		let titleEdit;
 		if (this.state.editingTitle) {
 			titleEdit = (
@@ -249,6 +276,17 @@ class TrainingSeriesPosts extends React.Component {
 				</>
 			);
 		}
+
+		const searchOn = this.state.searchInput.length > 0;
+
+		let posts;
+		// checks if the search field is active and there are results from the fuse search
+		if (searchOn && this.searchedPosts(this.props.posts).length > 0) {
+			posts = this.searchedPosts(this.props.posts);
+		} else {
+			posts = this.props.posts;
+		}
+
 		return (
 			<>
 				{this.state.displaySnackbar && (
@@ -268,8 +306,24 @@ class TrainingSeriesPosts extends React.Component {
 								New Message
 							</Button>
 						</HeaderContainer>
+
+						{/* Search Input */}
+						<TextField
+							id="standard-search"
+							type="search"
+							className={classes.textField}
+							onChange={e => this.setState({ searchInput: e.target.value })}
+							margin="normal"
+							InputProps={{
+								startAdornment: (
+									<InputAdornment position="start">
+										<i class="material-icons">search</i>
+									</InputAdornment>
+								),
+							}}
+						/>
 						<ListStyles>
-							{this.props.posts.map(post => (
+							{posts.map(post => (
 								<ListItem key={post.postID} className={classes.listItem}>
 									<ListItemText
 										primary={post.postName}
@@ -285,77 +339,77 @@ class TrainingSeriesPosts extends React.Component {
 												onClick={e => this.routeToEditPostPage(e, post)}>
 												edit
 											</i>
-
-											<DeleteModal
-												className={`material-icons ${classes.icons}`}
-												deleteType="post"
-												id={post.postID}
-											/>
-										</ListButtonContainer>
-									</ListItemSecondaryAction>
-								</ListItem>
-							))}
-						</ListStyles>
-					</Paper>
-					<Paper className={classes.paper}>
-						<Typography variant="title">Assigned Team Members</Typography>
-						{assignedMembersStatus}
-					</Paper>
-				</PageContainer>
-			</>
-		);
-	}
+                      <DeleteModal
+                        className={`material-icons ${classes.icons}`}
+                        deleteType="post"
+                        id={post.postID}
+                      />
+                    </ListButtonContainer>
+                  </ListItemSecondaryAction>
+                </ListItem>
+              ))}
+            </ListStyles>
+          </Paper>
+          <Paper className={classes.paper}>
+            <Typography variant="title">Assigned Team Members</Typography>
+            {assignedMembersStatus}
+          </Paper>
+        </PageContainer>
+      </>
+    );
+  }
 }
 
 const PageContainer = styled.div`
-	display: flex;
-	flex-direction: column;
-	max-width: 800px;
-	width: 100%;
-	margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  max-width: 800px;
+  width: 100%;
+  margin: 0 auto;
 `;
 
 const HeaderContainer = styled.div`
-	width: 100%;
-	margin: 0 auto;
+  width: 100%;
+  margin: 0 auto;
 `;
 
 const ButtonContainer = styled.div`
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	width: 250px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 250px;
 `;
 
 const ListStyles = styled.div`
-	display: flex;
-	flex-direction: column;
-	align-items: space-around;
-	width: 100%;
-	margin: 20px auto;
-	list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: space-around;
+  width: 100%;
+  margin: 20px auto;
+  list-style: none;
 `;
 
 const ListButtonContainer = styled.div`
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: space-between;
-	margin-left: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  margin-left: 40px;
 `;
 
 const mapStateToProps = state => ({
-	isLoading: state.postsReducer.isLoading,
-	singleTrainingSeries: state.postsReducer.singleTrainingSeries,
-	posts: state.postsReducer.posts,
-	assignments: state.trainingSeriesReducer.assignments,
-	trainingSeries: state.trainingSeriesReducer.trainingSeries,
-	teamMembers: state.teamMembersReducer.teamMembers,
+  isLoading: state.postsReducer.isLoading,
+  singleTrainingSeries: state.postsReducer.singleTrainingSeries,
+  posts: state.postsReducer.posts,
+  assignments: state.trainingSeriesReducer.assignments,
+  trainingSeries: state.trainingSeriesReducer.trainingSeries,
+  teamMembers: state.teamMembersReducer.teamMembers,
 });
 
 TrainingSeriesPosts.propTypes = {};
 
 export default connect(
+
 	mapStateToProps,
 	{
 		getTrainingSeriesPosts,
@@ -366,4 +420,5 @@ export default connect(
 		getMembersAssigned,
 		editTrainingSeries,
 	}
+
 )(withStyles(styles)(TrainingSeriesPosts));

@@ -101,7 +101,7 @@ class AssignMemberPage extends React.Component {
     const data = {
       startDate: this.state.startDate,
       trainingSeriesID: this.state.trainingSeriesID,
-      assignments: [this.props.urlId]
+      assignments: [this.props.location.state.urlId]
     };
     this.props.addTeamMemberToTrainingSeries(data);
     this.handleClose();
@@ -109,7 +109,7 @@ class AssignMemberPage extends React.Component {
 
   renderTrainingSeriesInDropDown = () => {
     //Map Through the current assignments for the team member, returns an array of ID's
-    let assignments = this.props.assignments.map(
+    let assignments = this.props.location.state.assignments.map(
       assignment => assignment.trainingSeries_ID
     );
     //Filters the trainingSeries based on assignments
@@ -157,7 +157,7 @@ class AssignMemberPage extends React.Component {
                   onChange={this.handleChange}
                   name="trainingSeriesID"
                 >
-                  {this.props.assignments &&
+                  {this.props.location.state.assignments &&
                     this.renderTrainingSeriesInDropDown()}
                 </Select>
               </FormControl>
