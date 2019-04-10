@@ -1,68 +1,68 @@
-import React from 'react';
+import React from "react";
 
-import styled from 'styled-components';
+import styled from "styled-components";
 
 // Material UI
-import {withStyles} from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
-import TrainingBotGIF from '../../../img/trainingBot.gif';
+import { withStyles } from "@material-ui/core/styles";
+import Paper from "@material-ui/core/Paper";
+import Typography from "@material-ui/core/Typography";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
+import TrainingBotGIF from "../../../img/trainingBot.gif";
 
 //State Management
-import {addTeamMember} from '../../../store/actions';
-import {connect} from 'react-redux';
+import { addTeamMember } from "../../../store/actions";
+import { connect } from "react-redux";
 
 const styles = theme => ({
   root: {
     ...theme.mixins.gutters(),
     paddingTop: theme.spacing.unit * 2,
     paddingBottom: theme.spacing.unit * 2,
-    width: '80%',
-    margin: '20px auto',
+    width: "80%",
+    margin: "20px auto"
   },
   form: {
-    width: '90%',
-    margin: '0 auto',
+    width: "90%",
+    margin: "0 auto"
   },
   info: {
-    'margin-right': '50px',
+    "margin-right": "50px"
   },
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
-    width: '100%',
+    width: "100%"
   },
   fab: {
-    margin: theme.spacing.unit,
+    margin: theme.spacing.unit
   },
   button: {
-    'margin-left': theme.spacing.unit,
-  },
+    "margin-left": theme.spacing.unit
+  }
 });
 
 class TeamMemberPage extends React.Component {
   state = {
     teamMember: {
-      firstName: '',
-      lastName: '',
-      jobDescription: '',
-      email: '',
-      phoneNumber: '',
-      user_ID: '',
+      firstName: "",
+      lastName: "",
+      jobDescription: "",
+      email: "",
+      phoneNumber: "",
+      user_ID: ""
     },
     assignments: [],
     trainingSeries: [],
-    isRouting: false,
+    isRouting: false
   };
 
   handleChange = name => event => {
     this.setState({
       teamMember: {
         ...this.state.teamMember,
-        [name]: event.target.value,
-      },
+        [name]: event.target.value
+      }
     });
   };
 
@@ -70,28 +70,33 @@ class TeamMemberPage extends React.Component {
     e.preventDefault();
     const newMember = {
       ...this.state.teamMember,
-      user_ID: this.props.userId,
+      user_ID: this.props.userId
     };
     this.props.addTeamMember(newMember);
-    this.setState({isRouting: true});
+    this.setState({ isRouting: true });
     setTimeout(() => {
       this.props.history.push({
         pathname: `/home/team-member/${this.props.teamMember.teamMemberID}`,
         state: {
-          success: true,
-        },
+          success: true
+        }
       });
     }, 1000);
   };
 
   handleDate = name => event => {
     this.setState({
-      [name]: event.target.value,
+      [name]: event.target.value
     });
   };
 
+  handleCancel = e => {
+    e.preventDefault();
+    this.props.history.push("/home");
+  };
+
   render() {
-    const {classes} = this.props;
+    const { classes } = this.props;
 
     return (
       <MainContainer>
@@ -108,7 +113,7 @@ class TeamMemberPage extends React.Component {
                 label="First Name"
                 className={classes.textField}
                 value={this.state.teamMember.firstName}
-                onChange={this.handleChange('firstName')}
+                onChange={this.handleChange("firstName")}
                 margin="normal"
                 required
               />
@@ -117,7 +122,7 @@ class TeamMemberPage extends React.Component {
                 label="Last Name"
                 className={classes.textField}
                 value={this.state.teamMember.lastName}
-                onChange={this.handleChange('lastName')}
+                onChange={this.handleChange("lastName")}
                 margin="normal"
                 required
               />
@@ -126,7 +131,7 @@ class TeamMemberPage extends React.Component {
                 label="Job Description"
                 className={classes.textField}
                 value={this.state.teamMember.jobDescription}
-                onChange={this.handleChange('jobDescription')}
+                onChange={this.handleChange("jobDescription")}
                 margin="normal"
                 required
               />
@@ -140,7 +145,7 @@ class TeamMemberPage extends React.Component {
                 label="Email"
                 className={classes.textField}
                 value={this.state.teamMember.email}
-                onChange={this.handleChange('email')}
+                onChange={this.handleChange("email")}
                 margin="normal"
                 required
               />
@@ -149,7 +154,7 @@ class TeamMemberPage extends React.Component {
                 label="Phone Number"
                 className={classes.textField}
                 value={this.state.teamMember.phoneNumber}
-                onChange={this.handleChange('phoneNumber')}
+                onChange={this.handleChange("phoneNumber")}
                 margin="normal"
                 required
               />
@@ -157,7 +162,7 @@ class TeamMemberPage extends React.Component {
           </Paper>
           <ButtonContainer>
             <Button
-              disabled={this.state.isRouting === true ? 'true' : null}
+              disabled={this.state.isRouting === true ? "true" : null}
               variant="primary"
               className={classes.button}
               type="submit"
@@ -165,13 +170,13 @@ class TeamMemberPage extends React.Component {
               {this.state.isRouting ? (
                 <LoadingImage src={TrainingBotGIF} alt="Loading Icon" />
               ) : (
-                'Submit'
+                "Submit"
               )}
             </Button>
             <Button
               variant="contained"
               className={classes.button}
-              type="submit"
+              onClick={e => this.handleCancel(e)}
             >
               Cancel
             </Button>
@@ -185,13 +190,13 @@ class TeamMemberPage extends React.Component {
 const mapStateToProps = state => {
   return {
     addSuccess: state.teamMembersReducer.status.addSuccess,
-    teamMember: state.teamMembersReducer.teamMember,
+    teamMember: state.teamMembersReducer.teamMember
   };
 };
 
 export default connect(
   mapStateToProps,
-  {addTeamMember}
+  { addTeamMember }
 )(withStyles(styles)(TeamMemberPage));
 
 const MainContainer = styled.div`
