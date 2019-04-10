@@ -117,6 +117,7 @@ const userReducer = (state = initialState, action) => {
           email: state.userProfile.user.email,
           name: state.userProfile.user.name,
           stripe: state.userProfile.user.stripe,
+          notificationCount: state.userProfile.user.notificationCount
         },
         trainingSeries: [...state.userProfile.trainingSeries],
       };
@@ -160,6 +161,7 @@ const userReducer = (state = initialState, action) => {
           email: state.userProfile.user.email,
           name: state.userProfile.user.name,
           stripe: action.payload.id,
+          notificationCount: state.userProfile.user.notificationCount
         },
         trainingSeries: [...state.userProfile.trainingSeries],
       };
@@ -192,6 +194,7 @@ const userReducer = (state = initialState, action) => {
           email: state.userProfile.user.email,
           name: state.userProfile.user.name,
           stripe: state.userProfile.user.stripe,
+          notificationCount: state.userProfile.user.notificationCount
         },
         trainingSeries: [...state.userProfile.trainingSeries],
       };

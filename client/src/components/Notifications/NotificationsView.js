@@ -63,7 +63,7 @@ const styles = theme => ({
 class NotificationsView extends Component {
   state = {
     offset: 0,
-    limit: 6,
+    limit: 5,
     filterType: 'all',
     filterSent: 'pending'
   };
