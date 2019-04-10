@@ -1,73 +1,72 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-import styled from "styled-components";
+import styled from 'styled-components';
 
 // Material UI
-import { withStyles } from "@material-ui/core/styles";
-import { Paper, List, Typography, TextField, Button } from "@material-ui/core/";
-import NotificationWidget from "./SnackBarTeamMember";
+import { withStyles } from '@material-ui/core/styles';
+import { Paper, List, Typography, TextField, Button } from '@material-ui/core/';
+import NotificationWidget from './SnackBarTeamMember';
 //Components
-import AddTeamMemberToTrainingSeriesModal from "../../Modals/addTeamMemberToTrainingSeriesModal";
-import TrainingSeriesAssignments from "./TrainingSeriesAssigments";
-import DeleteModal from "../../Modals/deleteModal";
+import AddTeamMemberToTrainingSeriesModal from '../../Modals/addTeamMemberToTrainingSeriesModal';
+import TrainingSeriesAssignments from './TrainingSeriesAssigments';
+import DeleteModal from '../../Modals/deleteModal';
 
 //Redux
-import { connect } from "react-redux";
-import { getTrainingSeries } from "../../../store/actions";
+import { connect } from 'react-redux';
+import { getTrainingSeries } from '../../../store/actions';
 
 const styles = theme => ({
   root: {
     ...theme.mixins.gutters(),
     paddingTop: theme.spacing.unit * 2,
     paddingBottom: theme.spacing.unit * 2,
-    width: "94%",
-    margin: "20px auto",
-    "@media (max-width: 480px)": {
-      width: "94%"
+    width: '94%',
+    margin: '20px auto',
+    '@media (max-width: 480px)': {
+      width: '94%'
     }
   },
-  // form: {
-  // 	width: '90%',
-  // 	margin: '0 auto'
-  // },
+  form: {
+    width: '90%',
+    margin: '0 auto'
+  },
   info: {
-    "margin-right": "50px"
+    'margin-right': '50px'
   },
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
-    width: "100%"
+    width: '100%'
   },
   fab: {
     margin: theme.spacing.unit
   },
   button: {
-    "margin-left": theme.spacing.unit
+    'margin-left': theme.spacing.unit
   },
   trainingSeriesHeader: {
-    display: "flex",
-    justifyContent: "space-between"
+    display: 'flex',
+    justifyContent: 'space-between'
+  },
+  messageText: {
+    marginTop: 20,
+    marginBottom: 20,
+    textAlign: 'center'
   }
-  // form: {
-  // 	'@media (max-width: 480px)': {
-  // 		flexDirection: 'column',
-  // 		width: '95%'
-  // 	}
-  // }
 });
 
 class TeamMemberPage extends React.Component {
   state = {
     teamMember: {
-      firstName: "",
-      lastName: "",
-      jobDescription: "",
-      email: "",
-      phoneNumber: "",
-      user_ID: "",
-      TeamMemberCol: "",
-      teamMemberID: ""
+      firstName: '',
+      lastName: '',
+      jobDescription: '',
+      email: '',
+      phoneNumber: '',
+      user_ID: '',
+      TeamMemberCol: '',
+      teamMemberID: ''
     },
     assignments: [],
     trainingSeries: [] //Leigh-Ann: this may not be needed?
@@ -98,6 +97,18 @@ class TeamMemberPage extends React.Component {
     });
   };
 
+  routeToAssigning = e => {
+    e.preventDefault();
+    this.props.history.push({
+      pathname: `/home/assign-series/${this.state.teamMember.teamMemberID}`,
+      state: {
+        userId: this.props.userId,
+        urlId: this.props.urlId,
+        assignments: this.props.teamMember.assignments
+      }
+    });
+  };
+
   render() {
     const { classes } = this.props;
 
@@ -119,13 +130,16 @@ class TeamMemberPage extends React.Component {
       disabledTrainingSeries = (
         <>
           <div className={classes.trainingSeriesHeader}>
-            <Typography variant={"h5"}>Training Series</Typography>
-            <AddTeamMemberToTrainingSeriesModal
+            <Typography variant={'h5'}>Training Series</Typography>
+            <Button variant="outlined" onClick={this.routeToAssigning}>
+              Assign to Training Series
+            </Button>
+            {/* <AddTeamMemberToTrainingSeriesModal
               modalType={"assignMultiple"}
               userId={this.props.userId}
               urlId={this.props.urlId}
               assignments={this.props.teamMember.assignments}
-            />
+            /> */}
           </div>
           <List>{trainingAssigments}</List>
         </>
@@ -135,14 +149,18 @@ class TeamMemberPage extends React.Component {
       disabledTrainingSeries = (
         <>
           <div className={classes.trainingSeriesHeader}>
-            <Typography variant={"h5"}>Training Series</Typography>
-            <AddTeamMemberToTrainingSeriesModal disabledBool={disabledBool} />
+            <Typography variant={'h5'}>Training Series</Typography>
+            <Button variant="outlined" disabled>
+              Assign to Training Series
+            </Button>
           </div>
-          <p>
-            You don't have any training series to assign.{" "}
+          <Typography variant="subheading" className={classes.messageText}>
+            You don't have any training series to assign.
+          </Typography>
+          <Typography variant="subheading" className={classes.messageText}>
             <Link to="/home/create-training-series">Click here</Link> to create
             your first training series.
-          </p>
+          </Typography>
         </>
       );
     }
@@ -152,14 +170,14 @@ class TeamMemberPage extends React.Component {
         <form className={classes.form}>
           {/* <DeleteModal deleteType='inTeamMemberPage' id={this.props.urlId} /> */}
           <Paper className={classes.root}>
-            <Typography variant={"h5"}>{`Team Member Info`}</Typography>
+            <Typography variant={'h5'}>{`Team Member Info`}</Typography>
             <MemberInfoContainer>
               <TextField
                 id="standard-name"
                 label="first name"
                 className={classes.textField}
                 value={this.state.teamMember.firstName}
-                onChange={this.handleChange("firstName")}
+                onChange={this.handleChange('firstName')}
                 margin="normal"
               />
               <TextField
@@ -167,7 +185,7 @@ class TeamMemberPage extends React.Component {
                 label="last name"
                 className={classes.textField}
                 value={this.state.teamMember.lastName}
-                onChange={this.handleChange("lastName")}
+                onChange={this.handleChange('lastName')}
                 margin="normal"
               />
               <TextField
@@ -175,20 +193,20 @@ class TeamMemberPage extends React.Component {
                 label="job description"
                 className={classes.textField}
                 value={this.state.teamMember.jobDescription}
-                onChange={this.handleChange("jobDescription")}
+                onChange={this.handleChange('jobDescription')}
                 margin="normal"
               />
             </MemberInfoContainer>
           </Paper>
           <Paper className={classes.root}>
-            <Typography variant={"h5"}>Contact Info</Typography>
+            <Typography variant={'h5'}>Contact Info</Typography>
             <MemberInfoContainer>
               <TextField
                 id="standard-name"
                 label="email"
                 className={classes.textField}
                 value={this.state.teamMember.email}
-                onChange={this.handleChange("email")}
+                onChange={this.handleChange('email')}
                 margin="normal"
               />
               <TextField
@@ -196,7 +214,7 @@ class TeamMemberPage extends React.Component {
                 label="phone"
                 className={classes.textField}
                 value={this.state.teamMember.phoneNumber}
-                onChange={this.handleChange("phoneNumber")}
+                onChange={this.handleChange('phoneNumber')}
                 margin="normal"
               />
             </MemberInfoContainer>
