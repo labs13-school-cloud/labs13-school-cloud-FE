@@ -43,31 +43,24 @@ class Dashboard extends React.Component {
   }
 
   renderDashboard = () => {
-    if (this.props.userProfile === undefined) {
-      return <ProgressCircle />;
-    } else {
-      const user = this.props.userProfile || this.props.userProfile.newUser;
-      return (
-        <>
-          <TripleColumn>
-            <SmallColumns>
-              <TeamMembersView userId={user.userID} />
-              <TrainingSeriesView
-                userId={user.userID}
-                match={this.props.match}
-              />
-            </SmallColumns>
-            <NotificationsView userId={user.userID} />
-          </TripleColumn>
-        </>
-      );
-    }
+    const user = this.props.userProfile.user;
+    return (
+      <>
+        <TripleColumn>
+          <SmallColumns>
+            <TeamMembersView userId={user.userID} />
+            <TrainingSeriesView userId={user.userID} match={this.props.match} />
+          </SmallColumns>
+          <NotificationsView userId={user.userID} />
+        </TripleColumn>
+      </>
+    );
   };
 
   render() {
     return (
       <>
-        {this.props.doneLoading && this.props.userProfile !== undefined ? (
+        {this.props.doneLoading ? (
           <>
             <AppBar />
             {this.props.location.pathname !== '/home' && (
@@ -137,14 +130,12 @@ class Dashboard extends React.Component {
     );
   }
 
-
-	// tracking the tab value in navigation.js
-	changeTabValue = value => {
-		this.setState({
-			tabValue: value,
-		});
-	};
-
+  // tracking the tab value in navigation.js
+  changeTabValue = value => {
+    this.setState({
+      tabValue: value,
+    });
+  };
 }
 
 const mapStateToProps = state => {
@@ -164,36 +155,35 @@ export default connect(
 //Styled Components
 const TripleColumn = styled.div`
   max-width: 1400px;
-	display: flex;
-	justify-content: space-between;
-	margin: 10px auto;
-	height: 580px;
-	@media (max-width: 1400px) {
-		flex-wrap: wrap;
-		max-width: 1000px;
-		padding: 10px;
-	}
-	@media (max-width: 768px) {
-		max-width: 768px;
-		height: 100%;
-		flex-direction: column;
-		padding: 10px;
-		/* margin: 0 auto 5px; */
-	}
+  display: flex;
+  justify-content: space-between;
+  margin: 10px auto;
+  height: 580px;
+  @media (max-width: 1400px) {
+    flex-wrap: wrap;
+    max-width: 1000px;
+    padding: 10px;
+  }
+  @media (max-width: 768px) {
+    max-width: 768px;
+    height: 100%;
+    flex-direction: column;
+    padding: 10px;
+    /* margin: 0 auto 5px; */
+  }
 `;
 const SmallColumns = styled.div`
-	display: flex;
-	width: 800px;
-	@media (max-width: 1400px) {
-		width: 100%;
-		margin-bottom: 50px;
-	}
-	@media (max-width: 768px) {
-		flex-direction: column;
-		/* margin: 0 auto 5px; */
-		margin-bottom: 5px;
-}
-
+  display: flex;
+  width: 800px;
+  @media (max-width: 1400px) {
+    width: 100%;
+    margin-bottom: 50px;
+  }
+  @media (max-width: 768px) {
+    flex-direction: column;
+    /* margin: 0 auto 5px; */
+    margin-bottom: 5px;
+  }
 `;
 const DashboardContainer = styled.div`
   display: flex;

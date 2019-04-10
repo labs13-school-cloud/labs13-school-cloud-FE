@@ -36,13 +36,27 @@ const userReducer = (state = initialState, action) => {
         error: '',
       };
     case GET_USER_SUCCESS:
-      return {
-        ...state,
-        userProfile: action.payload,
-        isLoading: false,
-        doneLoading: true,
-        error: '',
-      };
+      if (action.payload.newUser) {
+        return {
+          ...state,
+
+          userProfile: {
+            ...action.payload,
+            user: action.payload.newUser,
+          },
+          isLoading: false,
+          doneLoading: true,
+          error: '',
+        };
+      } else {
+        return {
+          ...state,
+          userProfile: action.payload,
+          isLoading: false,
+          doneLoading: true,
+          error: '',
+        };
+      }
     case GET_USER_FAIL:
       return {
         ...state,
