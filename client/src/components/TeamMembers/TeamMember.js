@@ -7,10 +7,7 @@ import { deleteTeamMember } from '../../store/actions';
 
 //Styles
 import { withStyles } from '@material-ui/core/styles';
-import {
-	ListItem,
-	ListItemText,
-} from '@material-ui/core/';
+import { ListItem, ListItemText } from '@material-ui/core/';
 
 //Routing
 import { withRouter } from 'react-router';
@@ -53,7 +50,7 @@ const styles = {
 };
 
 function TeamMember(props) {
-	// const { classes } = props;
+	const { classes } = props;
 	const { firstName, lastName, jobDescription, teamMemberID } = props.teamMember;
 	// const [id, setID] = useState(false);
 
@@ -68,7 +65,7 @@ function TeamMember(props) {
 	};
 
 	return (
-		<ListItem>
+		<ListItem className={classes.listItem}>
 			<ListItemText
 				primary={firstName + ' ' + lastName}
 				secondary={`Job: ${jobDescription}`}

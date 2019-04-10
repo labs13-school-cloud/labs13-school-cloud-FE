@@ -24,17 +24,19 @@ const styles = theme => ({
 		display: 'flex',
 		flexDirection: 'column',
 
-		width: '50%',
+		maxWidth: '500px',
+		width: '100%',
 		height: '100%',
 		margin: 5,
 
 		'@media (max-width:768px)': {
 			width: '92%',
 			marginBottom: 10,
+			maxWidth: 'none',
 		},
 	},
 	textField: {
-		width: '70%',
+		width: '100%',
 	},
 
 	columnHeader: {
@@ -71,6 +73,7 @@ class TeamMembersView extends React.Component {
 		offset: 0,
 		limit: 5,
 		searchInput: '',
+		searchOpen: false,
 	};
 
 	componentDidMount() {
@@ -79,6 +82,10 @@ class TeamMembersView extends React.Component {
 			teamMembers: this.props.teamMembers,
 		});
 	}
+	openSearch = e => {
+		e.preventDefault();
+		this.setState({ searchOpen: !this.state.searchOpen });
+	};
 	handleClick(offset) {
 		this.setState({ offset });
 	}
@@ -132,16 +139,14 @@ class TeamMembersView extends React.Component {
 				<div className={classes.columnHeader}>
 					<Typography variant="h5">Team Members</Typography>
 					<div className={classes.icons}>
-						{/* <Fab
-              color="primary"
-              size="small"
-              aria-label="Add"
-              className={classes.fab}
-              onClick={this.handleOpen}
-              disabled
-            >
-              <i className="material-icons">search</i>
-            </Fab> */}
+						<Fab
+							color="primary"
+							size="small"
+							aria-label="Add"
+							className={classes.fab}
+							onClick={e => this.openSearch(e)}>
+							<i className="material-icons">search</i>
+						</Fab>
 						<Fab
 							color="primary"
 							size="small"
@@ -153,21 +158,23 @@ class TeamMembersView extends React.Component {
 					</div>
 				</div>
 				<div>
-					<TextField
-						id="standard-search"
-						// label="Search Team Members"
-						type="search"
-						className={classes.textField}
-						onChange={e => this.setState({ searchInput: e.target.value })}
-						margin="normal"
-						InputProps={{
-							startAdornment: (
-								<InputAdornment position="start">
-									<i class="material-icons">search</i>
-								</InputAdornment>
-							),
-						}}
-					/>
+					{this.state.searchOpen && (
+						<TextField
+							id="standard-search"
+							// label="Search Team Members"
+							type="search"
+							className={classes.textField}
+							onChange={e => this.setState({ searchInput: e.target.value })}
+							margin="normal"
+							InputProps={{
+								startAdornment: (
+									<InputAdornment position="start">
+										<i class="material-icons">search</i>
+									</InputAdornment>
+								),
+							}}
+						/>
+					)}
 				</div>
 				<TeamMembersList
 					teamMembers={teamMembers}
@@ -181,6 +188,7 @@ class TeamMembersView extends React.Component {
 						reduced={true}
 						offset={this.state.offset}
 						total={teamMembers.length}
+						centerRipple={true}
 						onClick={(e, offset) => this.handleClick(offset)}
 					/>
 
