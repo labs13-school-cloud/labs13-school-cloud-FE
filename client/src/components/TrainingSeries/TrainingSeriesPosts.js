@@ -13,6 +13,7 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import {
 	getTrainingSeriesPosts,
+	getTeamMembers,
 	createAPost,
 	editPost,
 	deletePost,
@@ -111,6 +112,7 @@ class TrainingSeriesPosts extends React.Component {
 
 	componentDidMount() {
 		this.getTrainingSeriesWithPosts(this.props.match.params.id);
+		this.props.getTeamMembers(this.props.userId);
 		this.props.getMembersAssigned(this.props.match.params.id);
 		if (this.props.location.state) {
 			this.setState({
@@ -186,7 +188,8 @@ class TrainingSeriesPosts extends React.Component {
 
 	render() {
 		const { classes } = this.props;
-
+		console.log("team member length", this.props.teamMembers.length);
+		console.log("userID", this.props.userId);
 		let titleEdit;
 		if (this.state.editingTitle) {
 			titleEdit = (
@@ -356,6 +359,7 @@ export default connect(
 	mapStateToProps,
 	{
 		getTrainingSeriesPosts,
+		getTeamMembers,
 		createAPost,
 		editPost,
 		deletePost,
