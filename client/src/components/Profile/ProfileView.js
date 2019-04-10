@@ -19,7 +19,9 @@ import {
 	withStyles,
 	Modal,
 	Avatar,
+	Divider
 } from '@material-ui/core';
+
 
 import styled from 'styled-components';
 import Pricing from '../LandingPage/Pricing';
@@ -77,6 +79,14 @@ const styles = theme => ({
 		width: 150,
 		height: 150,
 	},
+	divider: {
+		width: '70%',
+		backgroundColor: '#E7E8EB',
+		margin: "5px 0 10px 0"
+	},
+	bold: {
+		fontWeight: 700
+	}
 });
 
 const Container = styled.div`
@@ -123,19 +133,24 @@ class ProfileView extends React.Component {
 
 		let accountType;
 		let account;
+		let maxCount;
 		if (this.props.doneLoading) {
 			let type = user.accountTypeID;
 			if (type === 3) {
 				accountType = <span>Pro</span>;
 				account = true;
+				maxCount = 1000
 			} else if (type === 2) {
 				accountType = <span>Premium</span>;
 				account = true;
+				maxCount = 200
 			} else if (type === 1) {
 				accountType = <span>Free</span>;
 				account = false;
+				maxCount = 50
 			}
 		}
+
 		return (
 			<Container>
 				{this.props.doneLoading && (
@@ -155,19 +170,19 @@ class ProfileView extends React.Component {
 							<Typography gutterBottom variant="subtitle1" component="subtitle1">
 								<div>Account Type: {accountType}</div>
 							</Typography>
+							<Divider variant="middle" className={classes.divider} />
+							<Typography gutterBottom variant="subtitle1" component="subtitle1" className={classes.bold}>
+								Messages Sent
+							</Typography>
+							<Typography gutterBottom variant="subtitle1" component="subtitle1">
+								{user.notificationCount} out of {maxCount}
+							</Typography>
 							<CardActions>
-								{/* Button for editing */}
-								{/* <UserModal
-										email={user.email}
-										name={user.name}
-										id={user.userID}
-									/> */}
-								{/* Button for deleting */}
 								<Button
 									variant="contained"
 									onClick={this.handleOpen}
 									className={classes.button}>
-									Delete Acccount
+									Delete Account
 								</Button>
 							</CardActions>
 						</Card>
@@ -195,20 +210,20 @@ class ProfileView extends React.Component {
 								</Typography>
 							</>
 						) : (
-							<>
-								<Typography variant="h6" id="modal-title">
-									Are you sure?
+								<>
+									<Typography variant="h6" id="modal-title">
+										Are you sure?
 								</Typography>
-								<Button
-									variant="contained"
-									color="secondary"
-									onClick={() => {
-										this.props.deleteUser(user.userID);
-									}}>
-									Delete Account
+									<Button
+										variant="contained"
+										color="secondary"
+										onClick={() => {
+											this.props.deleteUser(user.userID);
+										}}>
+										Delete Account
 								</Button>
-							</>
-						)}
+								</>
+							)}
 					</div>
 				</Modal>
 			</Container>
