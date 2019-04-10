@@ -15,6 +15,7 @@ import ProfileView from '../Profile/ProfileView';
 import AppBar from '../AppBar/AppBar';
 import TeamMemberPageView from '../TeamMembers/TeamMemberPageContainer/TeamMemberPageView';
 import NotificationView from '../Notifications/NotificationsView';
+import AddTrainingSeriesView from '../TrainingSeries/AddMembersToTrainingSeries/AddMembersView.js';
 import CreateTrainingSeries from '../TrainingSeries/CreateTrainingSeries';
 import ReturnToDashboardButton from '../Navigation/ReturnToDashboard';
 
@@ -103,6 +104,15 @@ class Dashboard extends React.Component {
 									path="/home/create-post"
 									render={props => <CreatePost {...props} />}
 								/>
+								<Route
+									path="/home/assign-members/:id"
+									render={props => (
+										<AddTrainingSeriesView
+											{...props}
+											userId={this.props.userProfile.user.userID}
+										/>
+									)}
+								/>
 								<Route path="/home/post/:id" component={PostPage} />
 
 								<Route
@@ -158,9 +168,6 @@ const TripleColumn = styled.div`
 		max-width: 1000px;
 		padding: 10px;
 	}
-	/* @media (max-width: 1000px) {
-		padding: 10px;
-	} */
 	@media (max-width: 768px) {
 		max-width: 768px;
 		height: 100%;
@@ -170,17 +177,7 @@ const TripleColumn = styled.div`
 `;
 const DashboardContainer = styled.div`
 	display: flex;
-	/* justify-content: space-between;
-	margin: 10px auto;
-	height: 580px;
-	@media (max-width: 1400px) {
-		flex-wrap: wrap;
-		max-width: 1000px;
-		padding: 10px;
-	}
-	/* @media (max-width: 1000px) {
-		padding: 10px;
-	} */
+
 	@media (max-width: 768px) {
 		max-width: 768px;
 		height: 100%;
@@ -208,4 +205,5 @@ const hidden = {
 
 const active = {
 	display: 'block',
+	display: 'none',
 };

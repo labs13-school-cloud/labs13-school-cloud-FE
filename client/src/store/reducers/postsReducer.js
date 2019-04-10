@@ -14,6 +14,9 @@ import {
     DELETE_POST_START,
     DELETE_POST_SUCCESS,
     DELETE_POST_FAIL,
+    EDIT_TRIANING_SERIES_START,
+    EDIT_TRIANING_SERIES_SUCCESS,
+    EDIT_TRIANING_SERIES_FAIL,
 } from '../actions';
 
 const initialState = {
@@ -141,6 +144,24 @@ const postsReducer = (state = initialState, action) => {
             ...state,
             isDeleting: false,
             error: action.error
+        };  
+        case EDIT_TRIANING_SERIES_START:
+        return {
+            ...state
+        };
+        case EDIT_TRIANING_SERIES_SUCCESS:
+        let updates = {
+            trainingSeriesID: state.singleTrainingSeries.trainingSeriesID,
+            title: action.payload.title,
+            userID: state.singleTrainingSeries.userID
+        }
+        return {
+            ...state,
+            singleTrainingSeries: updates
+        };
+        case EDIT_TRIANING_SERIES_FAIL:
+        return {
+            ...state
         };
         default: return state;
     }

@@ -1,8 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { withRouter } from 'react-router';
+import {Link} from 'react-router-dom';
+import {withRouter} from 'react-router';
 
-import { withStyles } from '@material-ui/core/styles';
+import {withStyles} from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import IconButton from '@material-ui/core/IconButton';
@@ -16,18 +16,18 @@ const styles = theme => ({});
 
 class SlideDownModal extends React.Component {
   state = {
-    anchorEl: null
+    anchorEl: null,
   };
 
   handleClick = e => {
     this.setState({
-      anchorEl: e.currentTarget
+      anchorEl: e.currentTarget,
     });
   };
 
   handleClose = e => {
     this.setState({
-      anchorEl: null
+      anchorEl: null,
     });
   };
 
@@ -40,7 +40,7 @@ class SlideDownModal extends React.Component {
   };
 
   render() {
-    const { classes } = this.props;
+    const {classes} = this.props;
 
     return (
       <div>
