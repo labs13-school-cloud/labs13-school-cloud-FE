@@ -1,5 +1,6 @@
 // displays all posts of a training series
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 // import Button from '@material-ui/core/Button';
 import Fab from '@material-ui/core/Fab';
@@ -174,6 +175,7 @@ class TrainingSeriesPosts extends React.Component {
 
 	render() {
 		const { classes } = this.props;
+
 		let titleEdit;
 		if (this.state.editingTitle) {
 			titleEdit = (
@@ -205,6 +207,33 @@ class TrainingSeriesPosts extends React.Component {
 				</>
 			);
 		}
+
+		let assignedMembersStatus;
+		if (this.props.teamMembers.length) {
+			assignedMembersStatus = (
+				<>
+					<Button className={classes.button} onClick={this.routeToAssigning}>
+						Assign Members
+					</Button>
+					{this.props.assignments.map(member => (
+						<TrainingSeriesAssignment member={member} />
+					))}
+				</>
+			);
+		} else {
+			assignedMembersStatus = (
+				<>
+					<Button variant="outlined" className={classes.button} disabled>
+						Assign Members
+					</Button>
+					<p>
+						You don't have any team members to assign.{' '}
+						<Link to="/home/create-team-member/">Click here</Link> to add a member to
+						your account.
+					</p>
+				</>
+			);
+		}
 		return (
 			<>
 				{this.state.displaySnackbar && (
@@ -224,7 +253,7 @@ class TrainingSeriesPosts extends React.Component {
 								variant="outlined"
 								className={classes.button}
 								onClick={e => this.routeToPostPage(e)}>
-								Assign Members
+								New Message
 							</Button>
 						</HeaderContainer>
 						<ListStyles>
@@ -235,7 +264,6 @@ class TrainingSeriesPosts extends React.Component {
 										secondary={post.postDetails}
 									/>
 									<ListItemSecondaryAction className={classes.secondaryAction}>
-										{/* <IconButton aria-label="Delete"> */}
 										<div>
 											<p>{post.daysFromStart} days</p>
 										</div>
@@ -259,15 +287,7 @@ class TrainingSeriesPosts extends React.Component {
 					</Paper>
 					<Paper className={classes.paper}>
 						<Typography variant="title">Assigned Team Members</Typography>
-						<Button
-							variant="outlined"
-							className={classes.button}
-							onClick={this.routeToAssigning}>
-							Assign Members
-						</Button>
-						{this.props.assignments.map(member => (
-							<TrainingSeriesAssignment member={member} />
-						))}
+						{assignedMembersStatus}
 					</Paper>
 				</PageContainer>
 			</>
@@ -318,6 +338,7 @@ const mapStateToProps = state => ({
 	posts: state.postsReducer.posts,
 	assignments: state.trainingSeriesReducer.assignments,
 	trainingSeries: state.trainingSeriesReducer.trainingSeries,
+	teamMembers: state.teamMembersReducer.teamMembers,
 });
 
 TrainingSeriesPosts.propTypes = {};
