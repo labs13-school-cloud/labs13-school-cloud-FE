@@ -271,7 +271,7 @@ class TrainingSeriesPosts extends React.Component {
             {`${this.props.singleTrainingSeries.title} \u00A0`}
           </Typography>
           <i
-            style={{ fontSize: 20 }}
+            style={{ fontSize: 25 }}
             className={`material-icons ${classes.icons}`}
             onClick={e => this.beginTitleEdit(e)}
           >
