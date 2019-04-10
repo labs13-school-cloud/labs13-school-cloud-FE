@@ -97,7 +97,12 @@ class Dashboard extends React.Component {
 								/>
 								<Route
 									path="/home/training-series/:id"
-									render={props => <TrainingSeriesPosts {...props} />}
+									render={props => (
+										<TrainingSeriesPosts
+											{...props}
+											userId={this.props.userProfile.user.userID}
+										/>
+									)}
 								/>
 								<Route
 									path="/home/create-post"
@@ -187,5 +192,5 @@ const DashboardContainer = styled.div`
 		height: 100%;
 		flex-direction: column;
 		padding: 10px;
-	} */
+	}
 `;

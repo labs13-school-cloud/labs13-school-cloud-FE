@@ -1,7 +1,10 @@
 // displays all posts of a training series
 import React from 'react';
+
 import {Link} from 'react-router-dom';
 import Fab from '@material-ui/core/Fab';
+import Fuse from 'fuse.js';
+
 
 // Components
 import DeleteModal from '../Modals/deleteModal';
@@ -12,25 +15,27 @@ import styled from 'styled-components';
 // Redux
 import {connect} from 'react-redux';
 import {
-  getTrainingSeriesPosts,
-  createAPost,
-  editPost,
-  deletePost,
-  getMembersAssigned,
-  editTrainingSeries,
+	getTrainingSeriesPosts,
+	getTeamMembers,
+	createAPost,
+	editPost,
+	deletePost,
+	getMembersAssigned,
+	editTrainingSeries,
 } from '../../store/actions';
 
 import {withStyles} from '@material-ui/core/styles';
 
 // Styling
 import {
-  Paper,
-  TextField,
-  Button,
-  ListItem,
-  ListItemText,
-  ListItemSecondaryAction,
-  Typography,
+	Paper,
+	TextField,
+	Button,
+	ListItem,
+	ListItemText,
+	ListItemSecondaryAction,
+	Typography,
+	InputAdornment,
 } from '@material-ui/core/';
 
 import AddMemberSnackbar from './AddMembersToTrainingSeries/AddMemberSnackbar';
@@ -103,25 +108,28 @@ const styles = theme => ({
   AssignBtn: {},
 });
 class TrainingSeriesPosts extends React.Component {
-  state = {
-    active: false,
-    displaySnackbar: false,
-    editingTitle: false,
-  };
 
-  componentDidMount() {
-    this.getTrainingSeriesWithPosts(this.props.match.params.id);
-    this.props.getMembersAssigned(this.props.match.params.id);
-    if (this.props.location.state) {
-      this.setState({
-        displaySnackbar: this.props.location.state.success,
-      });
-    }
-    this.resetHistory();
-  }
-  getTrainingSeriesWithPosts = id => {
-    this.props.getTrainingSeriesPosts(id);
-  };
+	state = {
+		active: false,
+		displaySnackbar: false,
+		editingTitle: false,
+		searchInput: '',
+	};
+
+	componentDidMount() {
+		this.getTrainingSeriesWithPosts(this.props.match.params.id);
+		this.props.getTeamMembers(this.props.userId);
+		this.props.getMembersAssigned(this.props.match.params.id);
+		if (this.props.location.state) {
+			this.setState({
+				displaySnackbar: this.props.location.state.success,
+			});
+		}
+		this.resetHistory();
+	}
+	getTrainingSeriesWithPosts = id => {
+		this.props.getTrainingSeriesPosts(id);
+	};
 
   deletePost = (e, id) => {
     e.preventDefault();
@@ -189,108 +197,148 @@ class TrainingSeriesPosts extends React.Component {
     });
   };
 
-  render() {
-    console.log(this.props);
-    const {classes} = this.props;
+	searchedPosts = posts => {
+		var options = {
+			shouldSort: true,
+			threshold: 0.3,
+			location: 0,
+			distance: 100,
+			maxPatternLength: 32,
+			minMatchCharLength: 3,
+			keys: ['postName', 'postDetails', 'link'],
+		};
 
-    let titleEdit;
-    if (this.state.editingTitle) {
-      titleEdit = (
-        <form onSubmit={e => this.updateTitle(e)} noValidate autoComplete="off">
-          <TextField
-            id="standard-name"
-            label="Title"
-            className={classes.textField}
-            value={this.state.title}
-            onChange={this.handleChange('title')}
-            margin="normal"
-          />
-          <Button type="submit" variant="contained" className={classes.button}>
-            Submit
-          </Button>
-        </form>
-      );
-    } else {
-      titleEdit = (
-        <>
-          <Typography variant="headline">
-            {`${this.props.singleTrainingSeries.title} \u00A0`}
-          </Typography>
-          <i
-            style={{fontSize: 20}}
-            className={`material-icons ${classes.icons}`}
-            onClick={e => this.beginTitleEdit(e)}
-          >
-            edit
-          </i>
-        </>
-      );
-    }
+		const fuse = new Fuse(posts, options);
+		const res = fuse.search(this.state.searchInput);
+		return res;
+	};
 
-    let assignedMembersStatus;
-    if (this.props.teamMembers.length > 0) {
-      assignedMembersStatus = (
-        <>
-          <Button variant="outlined" onClick={this.routeToAssigning}>
-            Assign Members
-          </Button>
-          {this.props.assignments.map(member => (
-            <TrainingSeriesAssignment member={member} />
-          ))}
-        </>
-      );
-    } else {
-      assignedMembersStatus = (
-        <>
-          <Button variant="outlined" disabled>
-            Assign Members
-          </Button>
-          <p>
-            You don't have any team members to assign.{' '}
-            <Link to="/home/create-team-member/">Click here</Link> to add a
-            member to your account.
-          </p>
-        </>
-      );
-    }
-    return (
-      <>
-        {this.state.displaySnackbar && (
-          <>
-            <AddMemberSnackbar
-              message="Your team members have be successfully added."
-              type="success"
-            />
-          </>
-        )}
-        <PageContainer>
-          <Paper className={classes.paperTitle}>{titleEdit}</Paper>
-          <Paper className={classes.paper}>
-            <HeaderContainer>
-              <Typography variant="title">Messages</Typography>
-              <Button variant="outlined" onClick={e => this.routeToPostPage(e)}>
-                New Message
-              </Button>
-            </HeaderContainer>
-            <ListStyles>
-              {this.props.posts.map(post => (
-                <ListItem key={post.postID} className={classes.listItem}>
-                  <ListItemText
-                    primary={post.postName}
-                    secondary={post.postDetails}
-                  />
-                  <ListItemSecondaryAction className={classes.secondaryAction}>
-                    <div>
-                      <p>{post.daysFromStart} days</p>
-                    </div>
-                    <ListButtonContainer>
-                      <i
-                        className={`material-icons ${classes.icons}`}
-                        onClick={e => this.routeToEditPostPage(e, post)}
-                      >
-                        edit
-                      </i>
+	render() {
+		const { classes } = this.props;
+		console.log('POSTS', this.props.posts);
+		console.log('SEARCHED POSTS', this.searchedPosts(this.props.posts));
+		let titleEdit;
+		if (this.state.editingTitle) {
+			titleEdit = (
+				<form onSubmit={e => this.updateTitle(e)} noValidate autoComplete="off">
+					<TextField
+						id="standard-name"
+						label="Title"
+						className={classes.textField}
+						value={this.state.title}
+						onChange={this.handleChange('title')}
+						margin="normal"
+					/>
+					<Button type="submit" variant="contained" className={classes.button}>
+						Submit
+					</Button>
+				</form>
+			);
+		} else {
+			titleEdit = (
+				<>
+					<Typography variant="headline">
+						{`${this.props.singleTrainingSeries.title} \u00A0`}
+					</Typography>
+					<i
+						style={{ fontSize: 20 }}
+						className={`material-icons ${classes.icons}`}
+						onClick={e => this.beginTitleEdit(e)}>
+						edit
+					</i>
+				</>
+			);
+		}
 
+		let assignedMembersStatus;
+		if (this.props.teamMembers.length) {
+			assignedMembersStatus = (
+				<>
+					<Button variant="outlined" onClick={this.routeToAssigning}>
+						Assign Members
+					</Button>
+					{this.props.assignments.map(member => (
+						<TrainingSeriesAssignment member={member} />
+					))}
+				</>
+			);
+		} else {
+			assignedMembersStatus = (
+				<>
+					<Button variant="outlined" disabled>
+						Assign Members
+					</Button>
+					<p>
+						You don't have any team members to assign.{' '}
+						<Link to="/home/create-team-member/">Click here</Link> to add a member to
+						your account.
+					</p>
+				</>
+			);
+		}
+
+		const searchOn = this.state.searchInput.length > 0;
+
+		let posts;
+		// checks if the search field is active and there are results from the fuse search
+		if (searchOn && this.searchedPosts(this.props.posts).length > 0) {
+			posts = this.searchedPosts(this.props.posts);
+		} else {
+			posts = this.props.posts;
+		}
+
+		return (
+			<>
+				{this.state.displaySnackbar && (
+					<>
+						<AddMemberSnackbar
+							message="Your team members have be successfully added."
+							type="success"
+						/>
+					</>
+				)}
+				<PageContainer>
+					<Paper className={classes.paperTitle}>{titleEdit}</Paper>
+					<Paper className={classes.paper}>
+						<HeaderContainer>
+							<Typography variant="title">Messages</Typography>
+							<Button variant="outlined" onClick={e => this.routeToPostPage(e)}>
+								New Message
+							</Button>
+						</HeaderContainer>
+
+						{/* Search Input */}
+						<TextField
+							id="standard-search"
+							type="search"
+							className={classes.textField}
+							onChange={e => this.setState({ searchInput: e.target.value })}
+							margin="normal"
+							InputProps={{
+								startAdornment: (
+									<InputAdornment position="start">
+										<i class="material-icons">search</i>
+									</InputAdornment>
+								),
+							}}
+						/>
+						<ListStyles>
+							{posts.map(post => (
+								<ListItem key={post.postID} className={classes.listItem}>
+									<ListItemText
+										primary={post.postName}
+										secondary={post.postDetails}
+									/>
+									<ListItemSecondaryAction className={classes.secondaryAction}>
+										<div>
+											<p>{post.daysFromStart} days</p>
+										</div>
+										<ListButtonContainer>
+											<i
+												className={`material-icons ${classes.icons}`}
+												onClick={e => this.routeToEditPostPage(e, post)}>
+												edit
+											</i>
                       <DeleteModal
                         className={`material-icons ${classes.icons}`}
                         deleteType="post"
@@ -361,13 +409,16 @@ const mapStateToProps = state => ({
 TrainingSeriesPosts.propTypes = {};
 
 export default connect(
-  mapStateToProps,
-  {
-    getTrainingSeriesPosts,
-    createAPost,
-    editPost,
-    deletePost,
-    getMembersAssigned,
-    editTrainingSeries,
-  }
+
+	mapStateToProps,
+	{
+		getTrainingSeriesPosts,
+		getTeamMembers,
+		createAPost,
+		editPost,
+		deletePost,
+		getMembersAssigned,
+		editTrainingSeries,
+	}
+
 )(withStyles(styles)(TrainingSeriesPosts));

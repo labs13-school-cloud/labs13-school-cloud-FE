@@ -152,6 +152,7 @@ class UserModal extends React.Component {
           aria-label="Add"
           className={classes.fab}
           onClick={this.handleOpen}
+          disabled={this.props.disabledBool ? 'true' : null}
         >
           <AddIcon />
         </Fab>

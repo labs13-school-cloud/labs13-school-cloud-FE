@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import styled from 'styled-components';
 
@@ -10,6 +11,10 @@ import NotificationWidget from './SnackBarTeamMember';
 import AddTeamMemberToTrainingSeriesModal from '../../Modals/addTeamMemberToTrainingSeriesModal';
 import TrainingSeriesAssignments from './TrainingSeriesAssigments';
 import DeleteModal from '../../Modals/deleteModal';
+
+//Redux
+import { connect } from 'react-redux';
+import { getTrainingSeries } from '../../../store/actions';
 
 const styles = theme => ({
 	root: {
@@ -65,10 +70,11 @@ class TeamMemberPage extends React.Component {
 			teamMemberID: '',
 		},
 		assignments: [],
-		trainingSeries: [],
+		trainingSeries: [], //Leigh-Ann: this may not be needed?
 	};
 
 	componentDidMount() {
+		this.props.getTrainingSeries(this.props.userId);
 		if (Object.keys(this.props.teamMember).length !== 0) {
 			this.setState({
 				teamMember: this.props.teamMember.teamMember,
@@ -106,6 +112,41 @@ class TeamMemberPage extends React.Component {
 				);
 			});
 
+		let disabledTrainingSeries;
+		let disabledBool;
+
+		if (this.props.trainingSeries.length) {
+			disabledTrainingSeries = (
+				<>
+					<div className={classes.trainingSeriesHeader}>
+						<Typography variant={'h5'}>Training Series</Typography>
+						<AddTeamMemberToTrainingSeriesModal
+							modalType={'assignMultiple'}
+							userId={this.props.userId}
+							urlId={this.props.urlId}
+							assignments={this.props.teamMember.assignments}
+						/>
+					</div>
+					<List>{trainingAssigments}</List>
+				</>
+			);
+		} else {
+			disabledBool = true;
+			disabledTrainingSeries = (
+				<>
+					<div className={classes.trainingSeriesHeader}>
+						<Typography variant={'h5'}>Training Series</Typography>
+						<AddTeamMemberToTrainingSeriesModal disabledBool={disabledBool} />
+					</div>
+					<p>
+						You don't have any training series to assign.{' '}
+						<Link to="/home/create-training-series">Click here</Link> to create your
+						first training series.
+					</p>
+				</>
+			);
+		}
+
 		return (
 			<MainContainer>
 				<form className={classes.form}>
@@ -117,8 +158,9 @@ class TeamMemberPage extends React.Component {
 							submitType="edit"
 						/>
 						<DeleteModal
-							deleteType="teamMember"
+							deleteType="inTeamMemberPage"
 							teamMemberId={this.state.teamMember.teamMemberID}
+							userId={this.props.userId}
 							displayType="button"
 						/>
 					</ButtonContainer>
@@ -173,24 +215,7 @@ class TeamMemberPage extends React.Component {
 							/>
 						</MemberInfoContainer>
 					</Paper>
-					<Paper className={classes.root}>
-						<div className={classes.trainingSeriesHeader}>
-							<Typography variant={'h5'}>Training Series</Typography>
-							<AddTeamMemberToTrainingSeriesModal
-								modalType={'assignMultiple'}
-								userId={this.props.userId}
-								urlId={this.props.urlId}
-								assignments={this.props.teamMember.assignments}
-							/>
-						</div>
-						<List>
-							{/* <MemberInfoContainer> */}
-							{/* <TrainingSeriesContainer> */}
-							{trainingAssigments}
-							{/* </TrainingSeriesContainer> */}
-							{/* </MemberInfoContainer> */}
-						</List>
-					</Paper>
+					<Paper className={classes.root}>{disabledTrainingSeries}</Paper>
 				</form>
 			</MainContainer>
 		);
@@ -225,4 +250,11 @@ const ButtonContainer = styled.div`
 	justify-content: center;
 `;
 
-export default withStyles(styles)(TeamMemberPage);
+const mapStateToProps = state => ({
+	trainingSeries: state.trainingSeriesReducer.trainingSeries,
+});
+
+export default connect(
+	mapStateToProps,
+	{ getTrainingSeries }
+)(withStyles(styles)(TeamMemberPage));
