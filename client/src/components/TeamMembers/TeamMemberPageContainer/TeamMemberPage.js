@@ -14,7 +14,7 @@ import DeleteModal from "../../Modals/deleteModal";
 
 //Redux
 import { connect } from "react-redux";
-import { getTrainingSeries } from '../../../store/actions';
+import { getTrainingSeries } from "../../../store/actions";
 
 const styles = theme => ({
   root: {
@@ -74,7 +74,7 @@ class TeamMemberPage extends React.Component {
   };
 
   componentDidMount() {
-	  this.props.getTrainingSeries(this.props.userId);
+    this.props.getTrainingSeries(this.props.userId);
     if (Object.keys(this.props.teamMember).length !== 0) {
       this.setState({
         teamMember: this.props.teamMember.teamMember,
@@ -112,8 +112,8 @@ class TeamMemberPage extends React.Component {
         );
       });
 
-	let disabledTrainingSeries;
-	let disabledBool;
+    let disabledTrainingSeries;
+    let disabledBool;
 
     if (this.props.trainingSeries.length) {
       disabledTrainingSeries = (
@@ -129,19 +129,21 @@ class TeamMemberPage extends React.Component {
           </div>
           <List>{trainingAssigments}</List>
         </>
-	  );
+      );
     } else {
-	  disabledBool = true;
+      disabledBool = true;
       disabledTrainingSeries = (
-        <div className={classes.trainingSeriesHeader}>
-          <Typography variant={"h5"}>Training Series</Typography>
-          <AddTeamMemberToTrainingSeriesModal disabledBool={disabledBool} />
+        <>
+          <div className={classes.trainingSeriesHeader}>
+            <Typography variant={"h5"}>Training Series</Typography>
+            <AddTeamMemberToTrainingSeriesModal disabledBool={disabledBool} />
+          </div>
           <p>
             You don't have any training series to assign.{" "}
             <Link to="/home/create-training-series">Click here</Link> to create
             your first training series.
           </p>
-        </div>
+        </>
       );
     }
 
@@ -248,10 +250,10 @@ const ButtonContainer = styled.div`
 `;
 
 const mapStateToProps = state => ({
-	trainingSeries: state.trainingSeriesReducer.trainingSeries
+  trainingSeries: state.trainingSeriesReducer.trainingSeries
 });
 
 export default connect(
   mapStateToProps,
-  {getTrainingSeries}
+  { getTrainingSeries }
 )(withStyles(styles)(TeamMemberPage));
