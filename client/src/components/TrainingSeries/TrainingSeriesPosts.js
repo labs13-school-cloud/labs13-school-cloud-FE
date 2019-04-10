@@ -53,6 +53,21 @@ const styles = theme => ({
 			margin: '0 auto',
 		},
 	},
+	paperTitle: {
+		width: '100%',
+		backgroundColor: theme.palette.background.paper,
+		boxShadow: theme.shadows[5],
+		padding: '16px 32px',
+		outline: 'none',
+		display: 'flex',
+		margin: '5px auto',
+		alignItems: 'baseline',
+		'@media (max-width: 480px)': {
+			width: '89%',
+			padding: 0,
+			margin: '0 auto',
+		},
+	},
 	secondaryAction: {
 		display: 'flex',
 		flexDirection: 'row',
@@ -197,9 +212,10 @@ class TrainingSeriesPosts extends React.Component {
 			titleEdit = (
 				<>
 					<Typography variant="headline">
-						{this.props.singleTrainingSeries.title}
+						{`${this.props.singleTrainingSeries.title} \u00A0`}
 					</Typography>
 					<i
+						style={{ fontSize: 20 }}
 						className={`material-icons ${classes.icons}`}
 						onClick={e => this.beginTitleEdit(e)}>
 						edit
@@ -245,7 +261,7 @@ class TrainingSeriesPosts extends React.Component {
 					</>
 				)}
 				<PageContainer>
-					<Paper className={classes.paper}>{titleEdit}</Paper>
+					<Paper className={classes.paperTitle}>{titleEdit}</Paper>
 					<Paper className={classes.paper}>
 						<HeaderContainer>
 							<Typography variant="title">Messages</Typography>
