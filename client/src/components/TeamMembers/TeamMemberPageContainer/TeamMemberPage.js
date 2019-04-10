@@ -8,7 +8,7 @@ import { withStyles } from "@material-ui/core/styles";
 import { Paper, List, Typography, TextField, Button } from "@material-ui/core/";
 import NotificationWidget from "./SnackBarTeamMember";
 //Components
-import AddTeamMemberToTrainingSeriesModal from "../../Modals/addTeamMemberToTrainingSeriesModal";
+// import AddTeamMemberToTrainingSeriesModal from "../../Modals/addTeamMemberToTrainingSeriesModal";
 import TrainingSeriesAssignments from "./TrainingSeriesAssigments";
 import DeleteModal from "../../Modals/deleteModal";
 
@@ -48,6 +48,13 @@ const styles = theme => ({
   trainingSeriesHeader: {
     display: "flex",
     justifyContent: "space-between"
+  },
+  messageDiv: {
+  },
+  messageText: {
+	  marginTop: 20,
+	  marginBottom: 20,
+	  textAlign: "center"
   }
   // form: {
   // 	'@media (max-width: 480px)': {
@@ -152,11 +159,13 @@ class TeamMemberPage extends React.Component {
               Assign to Training Series
             </Button>
           </div>
-          <p>
+          <Typography variant="subheading" className={classes.messageText}>
             You don't have any training series to assign.{" "}
-            <Link to="/home/create-training-series">Click here</Link> to create
+          </Typography>
+		  <Typography variant="subheading" className={classes.messageText}>
+		  <Link to="/home/create-training-series">Click here</Link> to create
             your first training series.
-          </p>
+			</Typography>
         </>
       );
     }
