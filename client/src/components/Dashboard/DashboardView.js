@@ -51,7 +51,7 @@ class Dashboard extends React.Component {
 						<TeamMembersView userId={user.userID} />
 						<TrainingSeriesView userId={user.userID} match={this.props.match} />
 					</SmallColumns>
-					<NotificationsView userId={user.userID}/>
+					<NotificationsView userId={user.userID} />
 				</TripleColumn>
 			</>
 		);
@@ -162,17 +162,19 @@ const TripleColumn = styled.div`
 		height: 100%;
 		flex-direction: column;
 		padding: 10px;
+		/* margin: 0 auto 5px; */
 	}
 `;
 const SmallColumns = styled.div`
 	display: flex;
-	width: 50%;
+	width: 800px;
 	@media (max-width: 1400px) {
 		width: 100%;
 		margin-bottom: 50px;
 	}
 	@media (max-width: 768px) {
 		flex-direction: column;
+		/* margin: 0 auto 5px; */
 		margin-bottom: 5px;
 	}
 `;
