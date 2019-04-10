@@ -98,6 +98,15 @@ class TeamMemberPage extends React.Component {
     });
   };
 
+  routeToAssigning = e => {
+    e.preventDefault();
+    this.props.history.push({
+      pathname: `/home/assign-series/${
+        this.state.teamMember.teamMemberID
+      }`
+    });
+  };
+
   render() {
     const { classes } = this.props;
 
@@ -120,12 +129,15 @@ class TeamMemberPage extends React.Component {
         <>
           <div className={classes.trainingSeriesHeader}>
             <Typography variant={"h5"}>Training Series</Typography>
-            <AddTeamMemberToTrainingSeriesModal
+            <Button variant="outlined" onClick={this.routeToAssigning}>
+              Assign to Training Series
+            </Button>
+            {/* <AddTeamMemberToTrainingSeriesModal
               modalType={"assignMultiple"}
               userId={this.props.userId}
               urlId={this.props.urlId}
               assignments={this.props.teamMember.assignments}
-            />
+            /> */}
           </div>
           <List>{trainingAssigments}</List>
         </>
@@ -136,7 +148,9 @@ class TeamMemberPage extends React.Component {
         <>
           <div className={classes.trainingSeriesHeader}>
             <Typography variant={"h5"}>Training Series</Typography>
-            <AddTeamMemberToTrainingSeriesModal disabledBool={disabledBool} />
+            <Button variant="outlined" disabled>
+              Assign to Training Series
+            </Button>
           </div>
           <p>
             You don't have any training series to assign.{" "}
