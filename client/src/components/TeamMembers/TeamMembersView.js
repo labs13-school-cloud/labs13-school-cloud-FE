@@ -34,17 +34,19 @@ const styles = theme => ({
     display: 'flex',
     flexDirection: 'column',
 
-    width: '50%',
+    maxWidth: '500px',
+    width: '100%',
     height: '100%',
     margin: 5,
 
     '@media (max-width:768px)': {
       width: '92%',
-      marginBottom: 10
+      marginBottom: 10,
+      maxWidth: 'none'
     }
   },
   textField: {
-    width: '70%'
+    width: '100%'
   },
 
   columnHeader: {
@@ -80,7 +82,8 @@ class TeamMembersView extends React.Component {
     teamMembers: [],
     offset: 0,
     limit: 5,
-    searchInput: ''
+    searchInput: '',
+    searchOpen: false
   };
 
   componentDidMount() {
@@ -89,6 +92,10 @@ class TeamMembersView extends React.Component {
       teamMembers: this.props.teamMembers
     });
   }
+  openSearch = e => {
+    e.preventDefault();
+    this.setState({ searchOpen: !this.state.searchOpen });
+  };
   handleClick(offset) {
     this.setState({ offset });
   }
@@ -142,16 +149,15 @@ class TeamMembersView extends React.Component {
         <div className={classes.columnHeader}>
           <Typography variant="h5">Team Members</Typography>
           <div className={classes.icons}>
-            {/* <Fab
+            <Fab
               color="primary"
               size="small"
               aria-label="Add"
               className={classes.fab}
-              onClick={this.handleOpen}
-              disabled
+              onClick={e => this.openSearch(e)}
             >
               <i className="material-icons">search</i>
-            </Fab> */}
+            </Fab>
             <Fab
               color="primary"
               size="small"
@@ -164,28 +170,30 @@ class TeamMembersView extends React.Component {
           </div>
         </div>
         <div>
-          <TextField
-            id="standard-search"
-            // label="Search Team Members"
-            type="search"
-            className={classes.textField}
-            onChange={e => this.setState({ searchInput: e.target.value })}
-            margin="normal"
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <i class="material-icons">search</i>
-                </InputAdornment>
-              )
-            }}
-          />
+          {this.state.searchOpen && (
+            <TextField
+              id="standard-search"
+              // label="Search Team Members"
+              type="search"
+              className={classes.textField}
+              onChange={e => this.setState({ searchInput: e.target.value })}
+              margin="normal"
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <i class="material-icons">search</i>
+                  </InputAdornment>
+                )
+              }}
+            />
+          )}
         </div>
         <TeamMembersList
           teamMembers={teamMembers}
-          userId={this.props.userId}
           deleteTeamMember={this.deleteMember}
           limit={this.state.limit}
           offset={this.state.offset}
+          userId={this.props.userId}
         />
         <div className={classes.footer}>
           <Pagination
@@ -193,31 +201,9 @@ class TeamMembersView extends React.Component {
             reduced={true}
             offset={this.state.offset}
             total={teamMembers.length}
+            centerRipple={true}
             onClick={(e, offset) => this.handleClick(offset)}
           />
-
-          {/****** View per page ******/}
-          {/* {this.props.teamMembers.length < 5 ? (
-						<span />
-					) : (
-						<FormControl className={classes.formControl}>
-							<InputLabel htmlFor='pagination-selector'>View</InputLabel>
-							<NativeSelect
-								native
-								value={this.state.limit}
-								onChange={e => this.handleChange(e)}
-								inputProps={{
-									id: 'pagination-selector'
-								}}
-							>
-								<option value={5}>5</option>
-								<option value={10}>10</option>
-								<option value={15}>15</option>
-								<option value={20}>20</option>
-								<option value={25}>25</option>
-							</NativeSelect>
-						</FormControl>
-					)} */}
         </div>
       </Paper>
     );

@@ -50,14 +50,13 @@ const styles = {
 };
 
 function TeamMember(props) {
-  // const { classes } = props;
+  const { classes } = props;
   const {
     firstName,
     lastName,
     jobDescription,
     teamMemberID
   } = props.teamMember;
-  // const [id, setID] = useState(false);
 
   const routeToMemberPage = (e, id) => {
     e.preventDefault();
@@ -70,7 +69,7 @@ function TeamMember(props) {
   };
 
   return (
-    <ListItem>
+    <ListItem className={classes.listItem}>
       <ListItemText
         primary={firstName + ' ' + lastName}
         secondary={`Job: ${jobDescription}`}

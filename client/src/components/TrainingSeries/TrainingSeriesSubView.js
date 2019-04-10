@@ -20,13 +20,15 @@ const styles = theme => ({
     paddingTop: theme.spacing.unit * 2,
     paddingBottom: theme.spacing.unit * 2,
 
-    width: '50%',
+    maxWidth: '500px',
+    width: '100%',
     height: '100%',
     margin: 5,
 
     '@media (max-width:768px)': {
       width: '92%',
-      marginBottom: 10
+      marginBottom: 10,
+      maxWidth: 'none'
     }
   },
   columnHeader: {
@@ -46,7 +48,7 @@ const styles = theme => ({
     top: '100%'
   },
   textField: {
-    width: '40%'
+    width: '100%'
   },
   pagination: { width: '90%' }
 });
@@ -57,10 +59,14 @@ class TrainingSeriesSubView extends Component {
     this.state = {
       offset: 0,
       limit: 5,
-      searchInput: ''
+      searchInput: '',
+      searchOpen: false
     };
   }
-
+  openSearch = e => {
+    e.preventDefault();
+    this.setState({ searchOpen: !this.state.searchOpen });
+  };
   handleClick(offset) {
     this.setState({ offset });
   }
@@ -113,16 +119,15 @@ class TrainingSeriesSubView extends Component {
           <div className={classes.columnHeader}>
             <Typography variant="h5">Training Series</Typography>
             <div className={classes.icons}>
-              {/* <Fab
+              <Fab
                 color="primary"
                 size="small"
                 aria-label="Add"
                 className={classes.fab}
-                onClick={this.handleOpen}
-                disabled
+                onClick={e => this.openSearch(e)}
               >
                 <i className="material-icons">search</i>
-              </Fab> */}
+              </Fab>
 
               <Fab
                 color="primary"
@@ -133,28 +138,25 @@ class TrainingSeriesSubView extends Component {
               >
                 <i className="material-icons">add</i>
               </Fab>
-
-              {/* <TrainingSeriesModal
-							getTrainingSeries={this.props.getTrainingSeries}
-							userID={this.props.userID}
-						/> */}
             </div>
           </div>
           <div>
-            <TextField
-              id="standard-search"
-              type="search"
-              className={classes.textField}
-              onChange={e => this.setState({ searchInput: e.target.value })}
-              margin="normal"
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <i class="material-icons">search</i>
-                  </InputAdornment>
-                )
-              }}
-            />
+            {this.state.searchOpen && (
+              <TextField
+                id="standard-search"
+                type="search"
+                className={classes.textField}
+                onChange={e => this.setState({ searchInput: e.target.value })}
+                margin="normal"
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <i class="material-icons">search</i>
+                    </InputAdornment>
+                  )
+                }}
+              />
+            )}
           </div>
           <TrainingSeriesList
             deleteTrainingSeries={this.props.deleteTrainingSeries}
@@ -169,30 +171,9 @@ class TrainingSeriesSubView extends Component {
               limit={this.state.limit}
               offset={this.state.offset}
               total={trainingSeries.length}
+              centerRipple={true}
               onClick={(e, offset) => this.handleClick(offset)}
             />
-
-            {/****** View per page ******/}
-            {/* {this.props.trainingSeries.length < 5 ? (
-						<span></span>
-					) : (
-						<FormControl className={classes.formControl}>
-							<InputLabel htmlFor='pagination-selector'>View</InputLabel>
-							<NativeSelect
-								value={this.state.limit}
-								onChange={e => this.handleChange(e)}
-								inputProps={{
-									id: 'pagination-selector'
-								}}
-							>
-								<option value={5}>5</option>
-								<option value={10}>10</option>
-								<option value={15}>15</option>
-								<option value={20}>20</option>
-								<option value={25}>25</option>
-							</NativeSelect>
-						</FormControl>
-					)} */}
           </div>
         </Paper>
       </>

@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 import {
   addTeamMemberToTrainingSeries,
   getTeamMembers,
+  getMembersAssigned,
 } from '../../../store/actions/';
 import AddMember from './AddMember';
 
@@ -23,6 +24,7 @@ class AddMembersView extends Component {
 
   componentDidMount() {
     this.props.getTeamMembers(this.props.userId);
+    this.getAssigned();
     let d = new Date();
     let formattedDate = d.toISOString();
     this.setState({
@@ -35,6 +37,23 @@ class AddMembersView extends Component {
     if (prevProps.isEditing) {
       this.setState({email: this.props.email, name: this.props.name});
     }
+  }
+
+  getAssigned = () => {
+    this.props.getMembersAssigned(this.props.match.params.id);
+  };
+
+  render() {
+    return (
+      <AddMember
+        startDate={this.state.startDate}
+        teamMembers={this.props.teamMembers}
+        selectedTeamMembers={this.state.selectedTeamMembers}
+        assignments={this.props.assignments}
+        handler={this.handler}
+        isRouting={this.state.isRouting}
+      />
+    );
   }
 
   handler = {
@@ -87,18 +106,6 @@ class AddMembersView extends Component {
       );
     },
   };
-  render() {
-    console.log(this.state);
-    return (
-      <AddMember
-        startDate={this.state.startDate}
-        teamMembers={this.props.teamMembers}
-        selectedTeamMembers={this.state.selectedTeamMembers}
-        handler={this.handler}
-        isRouting={this.state.isRouting}
-      />
-    );
-  }
 }
 
 const mapStateToProps = state => {
@@ -106,6 +113,7 @@ const mapStateToProps = state => {
     trainingSeries: state.trainingSeriesReducer.trainingSeries,
     isLoading: state.userReducer.isLoading,
     teamMembers: state.teamMembersReducer.teamMembers,
+    assignments: state.trainingSeriesReducer.assignments,
   };
 };
 
@@ -114,5 +122,6 @@ export default connect(
   {
     addTeamMemberToTrainingSeries,
     getTeamMembers,
+    getMembersAssigned,
   }
 )(AddMembersView);

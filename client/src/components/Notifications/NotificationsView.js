@@ -164,6 +164,7 @@ class NotificationsView extends Component {
           filterSent={this.state.filterSent}
           offset={this.state.offset}
           match={this.props.match}
+          userID={this.props.userID}
           limit={this.state.limit}
         />
         <div className={classes.footer}>
@@ -171,6 +172,7 @@ class NotificationsView extends Component {
             limit={this.state.limit}
             offset={this.state.offset}
             total={filteredReturn.length}
+            centerRipple={true}
             onClick={(e, offset) => this.handleClick(offset)}
           />
         </div>
