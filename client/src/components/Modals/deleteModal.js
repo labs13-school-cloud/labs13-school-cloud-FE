@@ -58,7 +58,7 @@ const styles = theme => ({
     width: 200
   },
   button: {
-    margin: theme.spacing.unit
+    'margin-left': theme.spacing.unit
   },
   icons: {
     display: 'block',
@@ -94,6 +94,7 @@ class TrainingSeriesModal extends React.Component {
         break;
       case 'teamMember':
         this.props.deleteTeamMember(this.props.teamMemberId);
+        this.props.history.push('/home');
         break;
       case 'inTeamMemberPage':
         this.props.deleteTeamMember(this.props.id);
@@ -121,7 +122,16 @@ class TrainingSeriesModal extends React.Component {
   handleDisplayType = () => {
     switch (this.props.displayType) {
       case 'button':
-        return <button>testing</button>;
+        return (
+          <Button
+            variant="contained"
+            color="primary"
+            style={{ marginLeft: 10 }}
+            onClick={this.handleOpen}
+          >
+            Delete
+          </Button>
+        );
       case 'text':
         return <p onClick={this.handleOpen}>Delete</p>;
       default:

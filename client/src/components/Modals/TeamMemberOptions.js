@@ -60,9 +60,7 @@ class TeamMemberOptions extends React.Component {
           >
             Manage
           </MenuItem>
-          <MenuItem
-          // onClick={e => this.props.handleDelete(e, this.props.teamMemberID)}
-          >
+          <MenuItem>
             <DeleteModal
               deleteType="teamMember"
               teamMemberId={this.props.teamMemberID}
