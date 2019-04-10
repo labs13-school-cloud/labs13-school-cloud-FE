@@ -1,5 +1,5 @@
 // displays individual team member card
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
@@ -8,15 +8,10 @@ import { deleteTeamMember } from '../../store/actions';
 //Styles
 import { withStyles } from '@material-ui/core/styles';
 import {
-	// Card,
-	// CardActions,
-	// CardContent,
-	// Typography,
 	ListItem,
 	ListItemText,
 } from '@material-ui/core/';
 
-import TeamMemberMenuBtn from '../TeamMembers/TeamMemberMenuBtn';
 //Routing
 import { withRouter } from 'react-router';
 import TeamMemberOptions from '../Modals/TeamMemberOptions';
@@ -58,9 +53,9 @@ const styles = {
 };
 
 function TeamMember(props) {
-	const { classes } = props;
+	// const { classes } = props;
 	const { firstName, lastName, jobDescription, teamMemberID } = props.teamMember;
-	const [id, setID] = useState(false);
+	// const [id, setID] = useState(false);
 
 	const routeToMemberPage = (e, id) => {
 		e.preventDefault();

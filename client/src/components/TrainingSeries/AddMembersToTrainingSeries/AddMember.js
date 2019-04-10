@@ -4,16 +4,10 @@ import React from 'react';
 import DatePicker from 'react-datepicker';
 //Styles
 import 'react-datepicker/dist/react-datepicker.css';
-import {withStyles} from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import Modal from '@material-ui/core/Modal';
+import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import AddIcon from '@material-ui/icons/Add';
-import Fab from '@material-ui/core/Fab';
 import Checkbox from '@material-ui/core/Checkbox';
-import FormLabel from '@material-ui/core/FormLabel';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import MenuItem from '@material-ui/core/MenuItem';
 import styled from 'styled-components';
 import TrainingBotGIF from '../../../img/trainingBot.gif';
 
@@ -52,7 +46,7 @@ const styles = theme => ({
 
 function AddMember(props) {
   console.log(props);
-  const {classes} = props;
+  const { classes } = props;
   //Need a way to see all of the currently assigned team members of that training series.
   //Map over those assigned members.
   //Display members not currently assigned
@@ -127,16 +121,16 @@ function AddMember(props) {
                 {props.isRouting ? (
                   <LoadingImage src={TrainingBotGIF} alt="loader" />
                 ) : (
-                  `Submit`
-                )}
+                    `Submit`
+                  )}
               </Button>
               <Button onClick={props.handler.routeToPostPage}>Cancel</Button>
             </form>
           </TeamMemberContainer>
         </>
       ) : (
-        <h2> You need to create Team members! </h2>
-      )}
+          <h2> You need to create Team members! </h2>
+        )}
     </AddMemberContainer>
   );
 }
@@ -159,8 +153,8 @@ const LoadingImage = styled.img`
   cursor: not-allowed;
 `;
 
-const disabled = {
+/* const disabled = {
   pointerEvents: 'none',
   cursor: 'not-allowed',
   opacity: '0.65',
-};
+}; */

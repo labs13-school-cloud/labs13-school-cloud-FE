@@ -1,7 +1,6 @@
 import React from 'react';
 // import PropTypes from "prop-types";
 import classNames from 'classnames';
-import Button from '@material-ui/core/Button';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import ErrorIcon from '@material-ui/icons/Error';
 import InfoIcon from '@material-ui/icons/Info';
@@ -12,9 +11,9 @@ import IconButton from '@material-ui/core/IconButton';
 import Snackbar from '@material-ui/core/Snackbar';
 import SnackbarContent from '@material-ui/core/SnackbarContent';
 import WarningIcon from '@material-ui/icons/Warning';
-import {withStyles} from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 
-import {withRouter} from 'react-router';
+import { withRouter } from 'react-router';
 
 const variantIcon = {
   success: CheckCircleIcon,
@@ -50,7 +49,7 @@ const styles1 = theme => ({
 });
 
 function MySnackbarContent(props) {
-  const {classes, className, message, onClose, variant, ...other} = props;
+  const { classes, className, message, onClose, variant, ...other } = props;
   const Icon = variantIcon[variant];
 
   return (
@@ -110,7 +109,7 @@ class CustomizedSnackbars extends React.Component {
       return;
     }
 
-    this.setState({open: false});
+    this.setState({ open: false });
   };
 
   renderSnackBar = () => {
@@ -143,8 +142,6 @@ class CustomizedSnackbars extends React.Component {
   };
 
   render() {
-    const {classes} = this.props;
-
     return (
       <div>
         <Snackbar

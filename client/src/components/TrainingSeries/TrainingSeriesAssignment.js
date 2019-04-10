@@ -3,19 +3,11 @@ import React from "react";
 import styled from 'styled-components'
 import { withStyles } from "@material-ui/core/styles";
 import {
-  // Card,
-  // CardContent,
-  // IconButton,
-  // Fab,
-  // Button,
-  // Typography,
   ListItem,
-  ListItemText,
-  ListItemSecondaryAction,
-  Paper
+  ListItemText
 } from "@material-ui/core/";
-// import DeleteIcon from "@material-ui/icons/Delete";
-const moment = require("moment");
+
+import moment from 'moment';
 
 const styles = theme => ({
   listStyle: {
@@ -51,7 +43,7 @@ const styles = theme => ({
 });
 
 const TrainingSeriesAssignment = props => {
-    const { classes } = props;
+  const { classes } = props;
   const startDate = moment(props.member.startDate)
     .format("MMMM Do, YYYY ");
   return (

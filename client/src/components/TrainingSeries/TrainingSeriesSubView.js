@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import Fuse from "fuse.js";
 
 //Components
-import TrainingSeriesList from "./TrainingSeriesList";
-import TrainingSeriesModal from "../Modals/TrainingSeriesModal";
+import TrainingSeriesList from './TrainingSeriesList';
+
 
 import { withStyles } from "@material-ui/core/styles";
 import {
@@ -12,8 +12,9 @@ import {
   Fab,
   TextField,
   InputAdornment
-} from "@material-ui/core/";
-import Pagination from "material-ui-flat-pagination";
+} from '@material-ui/core/';
+import Pagination from 'material-ui-flat-pagination';
+
 
 const styles = theme => ({
   root: {

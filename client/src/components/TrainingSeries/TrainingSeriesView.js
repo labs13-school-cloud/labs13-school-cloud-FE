@@ -8,8 +8,6 @@ import { getTrainingSeries, deleteTrainingSeries } from '../../store/actions/';
 
 //Components
 import TrainingSeriesSubView from './TrainingSeriesSubView';
-import ReturnToDashboardButton from '../Navigation/ReturnToDashboard';
-// import TrainingSeriesPosts from './TrainingSeriesPosts';
 
 class TrainingSeriesView extends Component {
   componentDidMount() {
