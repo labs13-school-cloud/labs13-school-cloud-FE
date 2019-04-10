@@ -1,8 +1,8 @@
 // main page for displaying all tyarn eam members
 
-import React from 'react';
-import TeamMember from './TeamMember';
-import styled from 'styled-components';
+import React from "react";
+import TeamMember from "./TeamMember";
+import styled from "styled-components";
 
 const TeamMembersList = props => {
 	let arr = [];
@@ -24,12 +24,13 @@ const TeamMembersList = props => {
 			</ListStyles>
 		</>
 	);
+
 };
 
 export default TeamMembersList;
 
 const ListStyles = styled.div`
-	display: flex;
-	flex-direction: column;
-	align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
