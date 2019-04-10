@@ -12,7 +12,13 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router";
 
 import { withStyles } from "@material-ui/core/styles";
-import { Paper, Typography, Fab, TextField } from "@material-ui/core/";
+import {
+  Paper,
+  Typography,
+  Fab,
+  TextField,
+  InputAdornment
+} from "@material-ui/core/";
 
 import {
   getTeamMembers,
@@ -159,6 +165,13 @@ class TeamMembersView extends React.Component {
             className={classes.textField}
             onChange={e => this.setState({ searchInput: e.target.value })}
             margin="normal"
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <i class="material-icons">search</i>
+                </InputAdornment>
+              )
+            }}
           />
         </div>
         <TeamMembersList

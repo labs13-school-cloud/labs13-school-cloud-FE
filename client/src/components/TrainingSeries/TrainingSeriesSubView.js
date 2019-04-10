@@ -141,11 +141,17 @@ class TrainingSeriesSubView extends Component {
           <div>
             <TextField
               id="standard-search"
-              label="Search Training Series"
               type="search"
               className={classes.textField}
               onChange={e => this.setState({ searchInput: e.target.value })}
               margin="normal"
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <i class="material-icons">search</i>
+                  </InputAdornment>
+                )
+              }}
             />
           </div>
           <TrainingSeriesList
