@@ -106,7 +106,7 @@ class TrainingSeriesModal extends React.Component {
         );
         break;
       case 'trainingSeries':
-        this.props.deleteTrainingSeries(this.props.id);
+        this.props.deleteTrainingSeries(this.props.trainingSeriesId);
         break;
       case 'user':
         this.props.deleteUser(this.props.id);
