@@ -87,7 +87,7 @@ class NotificationsView extends Component {
 	};
 
 	render() {
-		console.log("THIS SHOULD BE MY USER ID", this.props.userId);
+		console.log('THIS SHOULD BE MY USER ID', this.props.userId);
 
 		const { classes } = this.props;
 		const allNotifications = [
@@ -168,6 +168,7 @@ class NotificationsView extends Component {
 						limit={this.state.limit}
 						offset={this.state.offset}
 						total={filteredReturn.length}
+						centerRipple={true}
 						onClick={(e, offset) => this.handleClick(offset)}
 					/>
 				</div>
