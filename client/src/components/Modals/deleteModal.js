@@ -103,7 +103,7 @@ class TrainingSeriesModal extends React.Component {
         setTimeout(() => {
           this.props.getEmailNotifications(this.props.userId);
           this.props.getTextNotifications(this.props.userId);
-        }, 500);
+        }, 800);
         this.props.history.push('/home');
         break;
       case 'removeMemberFromTS':
