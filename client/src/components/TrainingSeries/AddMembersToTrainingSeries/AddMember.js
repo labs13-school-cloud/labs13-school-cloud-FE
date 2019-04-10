@@ -4,7 +4,7 @@ import React from 'react';
 import DatePicker from 'react-datepicker';
 //Styles
 import 'react-datepicker/dist/react-datepicker.css';
-import {withStyles} from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -45,18 +45,14 @@ const styles = theme => ({
 });
 
 function AddMember(props) {
-  console.log('ADD MEMBER PROPS', props);
-  const {classes} = props;
-  //Need a way to see all of the currently assigned team members of that training series.
-  //Map over those assigned members.
-  //Display members not currently assigned
+  console.log(props);
+  const { classes } = props;
 
   const renderMembers = () => {
     //Map Through the current assignments for the team member, returns an array of ID's
     let assignments = props.assignments.map(
       assignment => assignment.teamMember_ID
     );
-
     //Filters the trainingSeries based on assignments
     let filteredMembers = props.teamMembers.filter(member => {
       return !assignments.includes(member.teamMemberID);
@@ -106,16 +102,16 @@ function AddMember(props) {
                 {props.isRouting ? (
                   <LoadingImage src={TrainingBotGIF} alt="loader" />
                 ) : (
-                  `Submit`
-                )}
+                    `Submit`
+                  )}
               </Button>
               <Button onClick={props.handler.routeToPostPage}>Cancel</Button>
             </form>
           </TeamMemberContainer>
         </>
       ) : (
-        <h2> You need to create Team members! </h2>
-      )}
+          <h2> You need to create Team members! </h2>
+        )}
     </AddMemberContainer>
   );
 }
@@ -134,12 +130,6 @@ const TeamMemberContainer = styled.div`
 const LoadingImage = styled.img`
   width: 40px;
   overflow: hidden;
-  pointerEvents: none,
-  cursor: not-allowed,
+  pointerEvents: none;
+  cursor: not-allowed;
 `;
-
-const disabled = {
-  pointerEvents: 'none',
-  cursor: 'not-allowed',
-  opacity: '0.65',
-};

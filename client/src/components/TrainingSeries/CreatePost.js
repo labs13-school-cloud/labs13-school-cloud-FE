@@ -9,11 +9,8 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import NotificationWidget from './SnackBarTrainingSeries';
-import FormControl from '@material-ui/core/FormControl';
 
-//Components
-
+// Redux
 import {
   getTrainingSeriesPosts,
   createAPost,
@@ -139,7 +136,7 @@ class CreatePost extends React.Component {
               onClick={e =>
                 this.props.history.push(
                   `/home/training-series/${
-                    this.props.location.state.trainingSeriesId
+                  this.props.location.state.trainingSeriesId
                   }`
                 )
               }

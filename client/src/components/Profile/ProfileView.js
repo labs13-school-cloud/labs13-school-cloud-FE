@@ -2,9 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 //Components
-import UserModal from '../Modals/userModal';
+// import UserModal from '../Modals/userModal';
 import StripeView from '../Stripe/StripeView';
-import { logout, getUserProfile } from '../../Auth/Auth';
+import { logout } from '../../Auth/Auth';
 import Authentication from '../authenticate/authenticate';
 
 //State Management
@@ -19,12 +19,10 @@ import {
 	withStyles,
 	Modal,
 	Avatar,
-	IconButton
 } from '@material-ui/core';
 
-import DeleteIcon from '@material-ui/icons/Delete';
-
 import styled from 'styled-components';
+import Pricing from '../LandingPage/Pricing';
 
 // function rand() {
 // 	return Math.round(Math.random() * 20) - 10;
@@ -40,52 +38,56 @@ function getModalStyle() {
 	return {
 		top: `${top}%`,
 		left: `${left}%`,
-		transform: `translate(-${top}%, -${left}%)`
+		transform: `translate(-${top}%, -${left}%)`,
 	};
 }
 
 const styles = theme => ({
 	paper: {
 		position: 'absolute',
-		width: 800,
 		margin: '0 auto',
 		backgroundColor: theme.palette.background.paper,
 		boxShadow: theme.shadows[5],
 		padding: theme.spacing.unit * 4,
 		outline: 'none',
-		alignItems: 'center'
+		alignItems: 'center',
 	},
 	profileContainer: {
 		display: 'flex',
 		flexDirection: 'column',
 		alignItems: 'center',
-		maxWidth: '100%',
-		// width: 600,
-		margin: '0 auto',
-		padding: 10
+		width: '30%',
+		padding: 10,
 	},
-	payment: {
-		// maxWidth: 600,
-		// width: '100%',
-		margin: '10px auto',
-		padding: 10
+	pricing: {
+		width: '70%',
+		margin: '0px 0px 0px 10px',
+		padding: 10,
+		// height: 350,
 	},
 	cardContent: {
-		backgroundColor: '#E8E9EB'
+		backgroundColor: '#E8E9EB',
 	},
 	media: {
 		height: 200,
-		width: 200
+		width: 200,
 	},
 	bigAvatar: {
 		margin: 10,
 		width: 150,
-		height: 150
-	}
+		height: 150,
+	},
 });
 
 const Container = styled.div`
 	/* margin-top: 80px; */
+	margin: 0 auto;
+	box-sizing: border-box;
+	display: flex;
+	max-width: 1000px;
+	width: 100%;
+	height: 430px;
+	align-items: stretch;
 `;
 
 class ProfileView extends React.Component {
@@ -93,7 +95,7 @@ class ProfileView extends React.Component {
 		super(props);
 		this.state = {
 			googleProfile: [],
-			open: false
+			open: false,
 		};
 	}
 	handleOpen = () => {
@@ -140,21 +142,17 @@ class ProfileView extends React.Component {
 					<>
 						<Card className={classes.profileContainer}>
 							<Avatar
-								alt='Remy Sharp'
+								alt="Remy Sharp"
 								src={JSON.parse(localStorage.getItem('Profile')).picture}
 								className={classes.bigAvatar}
 							/>
-							<Typography gutterBottom variant='h5' component='h1'>
+							<Typography gutterBottom variant="h5" component="h1">
 								{user.name}
 							</Typography>
-							<Typography variant='subtitle1' gutterBottom>
+							<Typography variant="subtitle1" gutterBottom>
 								{user.email}
 							</Typography>
-							<Typography
-								gutterBottom
-								variant='subtitle1'
-								component='subtitle1'
-							>
+							<Typography gutterBottom variant="subtitle1" component="subtitle1">
 								<div>Account Type: {accountType}</div>
 							</Typography>
 							<CardActions>
@@ -166,37 +164,29 @@ class ProfileView extends React.Component {
 									/> */}
 								{/* Button for deleting */}
 								<Button
-									variant='contained'
+									variant="contained"
 									onClick={this.handleOpen}
-									className={classes.button}
-								>
+									className={classes.button}>
 									Delete Acccount
 								</Button>
-								{/* <IconButton
-									aria-label='Delete'
-									onClick={this.handleOpen}
-									className={classes.margin}
-								>
-									<DeleteIcon />
-								</IconButton> */}
 							</CardActions>
 						</Card>
 
-						<Card className={classes.payment}>
+						<Card className={classes.pricing}>
+							{/* <Pricing /> */}
 							<StripeView user={this.state.googleProfile} />
 						</Card>
 					</>
 				)}
 				<Modal
-					aria-labelledby='simple-modal-title'
-					aria-describedby='simple-modal-description'
+					aria-labelledby="simple-modal-title"
+					aria-describedby="simple-modal-description"
 					open={this.state.open}
-					onClose={this.handleClose}
-				>
+					onClose={this.handleClose}>
 					<div style={getModalStyle()} className={classes.paper}>
 						{account ? (
 							<>
-								<Typography variant='h6' id='modal-title'>
+								<Typography variant="h6" id="modal-title">
 									Active subscription
 								</Typography>
 								<Typography>
@@ -206,16 +196,15 @@ class ProfileView extends React.Component {
 							</>
 						) : (
 							<>
-								<Typography variant='h6' id='modal-title'>
+								<Typography variant="h6" id="modal-title">
 									Are you sure?
 								</Typography>
 								<Button
-									variant='contained'
-									color='secondary'
+									variant="contained"
+									color="secondary"
 									onClick={() => {
 										this.props.deleteUser(user.userID);
-									}}
-								>
+									}}>
 									Delete Account
 								</Button>
 							</>
@@ -231,7 +220,7 @@ const mapStateToProps = state => {
 	return {
 		userProfile: state.userReducer.userProfile,
 		doneLoading: state.userReducer.doneLoading,
-		isEditing: state.userReducer.isEditing
+		isEditing: state.userReducer.isEditing,
 	};
 };
 
@@ -240,6 +229,6 @@ export default connect(
 	{
 		getUser,
 		editUser,
-		deleteUser
+		deleteUser,
 	}
 )(withStyles(styles)(Authentication(ProfileView)));
