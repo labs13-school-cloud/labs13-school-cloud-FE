@@ -97,7 +97,7 @@ class SlideDownModal extends React.Component {
             <DeleteModal
               deleteType="trainingSeries"
               trainingSeriesId={this.props.data.trainingSeriesID}
-              displayButton
+              displayType="text"
             />
           </MenuItem>
         </Menu>

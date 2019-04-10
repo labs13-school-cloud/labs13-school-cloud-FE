@@ -66,7 +66,7 @@ class TeamMemberOptions extends React.Component {
             <DeleteModal
               deleteType="teamMember"
               teamMemberId={this.props.teamMemberID}
-              displayButton
+              displayType="text"
             />
           </MenuItem>
         </Menu>

@@ -118,6 +118,25 @@ class TrainingSeriesModal extends React.Component {
     this.handleClose();
   };
 
+  handleDisplayType = () => {
+    switch (this.props.displayType) {
+      case 'button':
+        return <button>testing</button>;
+      case 'text':
+        return <p onClick={this.handleOpen}>Delete</p>;
+      default:
+        const { classes } = this.props;
+        return (
+          <i
+            onClick={this.handleOpen}
+            className={`material-icons ${classes.icons}`}
+          >
+            delete
+          </i>
+        );
+    }
+  };
+
   render() {
     const { classes } = this.props;
     console.log(
@@ -128,16 +147,7 @@ class TrainingSeriesModal extends React.Component {
 
     return (
       <div>
-        {this.props.displayButton ? (
-          <p onClick={this.handleOpen}>Delete</p>
-        ) : (
-          <i
-            onClick={this.handleOpen}
-            className={`material-icons ${classes.icons}`}
-          >
-            delete
-          </i>
-        )}
+        {this.handleDisplayType()}
 
         <Modal
           aria-labelledby="simple-modal-title"
