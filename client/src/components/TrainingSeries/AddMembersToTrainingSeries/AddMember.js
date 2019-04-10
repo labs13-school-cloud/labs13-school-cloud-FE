@@ -155,8 +155,8 @@ const TeamMemberContainer = styled.div`
 const LoadingImage = styled.img`
   width: 40px;
   overflow: hidden;
-  pointerEvents: none,
-  cursor: not-allowed,
+  pointerEvents: none;
+  cursor: not-allowed;
 `;
 
 const disabled = {

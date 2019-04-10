@@ -1,5 +1,6 @@
 // displays all posts of a training series
-import React, {useState, useEffect} from 'react';
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 // import Button from '@material-ui/core/Button';
 import Fab from '@material-ui/core/Fab';
@@ -175,6 +176,7 @@ class TrainingSeriesPosts extends React.Component {
 
   render() {
     const {classes} = this.props;
+
     let titleEdit;
     if (this.state.editingTitle) {
       titleEdit = (
@@ -207,6 +209,29 @@ class TrainingSeriesPosts extends React.Component {
         </>
       );
     }
+
+    let assignedMembersStatus;
+    if (this.props.teamMembers.length) {
+      assignedMembersStatus = (
+        <>
+            <Button onClick={this.routeToAssigning}>
+              Click to assign members
+            </Button>
+            {this.props.assignments.map(member => (
+              <TrainingSeriesAssignment member={member} />
+            ))}
+        </>
+      )
+    } else {
+      assignedMembersStatus = (
+        <>
+            <Button disabled>
+              Click to assign members
+            </Button>
+            <p>You don't have any team members to assign. <Link to="/home/create-team-member/">Click here</Link> to add a member to your account.</p>
+        </>
+      )
+    }
     return (
       <>
         {this.state.displaySnackbar && (
@@ -220,15 +245,7 @@ class TrainingSeriesPosts extends React.Component {
         <PageContainer>
           <Paper className={classes.paper}>{titleEdit}</Paper>
           <Paper className={classes.paper}>
-            <Button onClick={this.routeToAssigning}>
-              Click to assign members
-            </Button>
             <HeaderContainer>
-              {/* <PostModal
-        trainingSeries={this.props.singleTrainingSeries}
-        createAPost={this.props.createAPost}
-        editPost={this.props.editPost}
-      /> */}
               <Typography variant="title">Messages</Typography>
               <ButtonContainer>
                 <Fab
@@ -253,16 +270,9 @@ class TrainingSeriesPosts extends React.Component {
                     secondary={post.postDetails}
                   />
                   <ListItemSecondaryAction className={classes.secondaryAction}>
-                    {/* <IconButton aria-label="Delete"> */}
                     <div>
                       <p>{post.daysFromStart} days</p>
                     </div>
-                    {/* <PostOptionsModal
-                editPost={this.props.editPost}
-                deletePost={this.props.deletePost}
-                singleTrainingSeries={this.props.singleTrainingSeries}
-                post={post}
-              /> */}
                     <ListButtonContainer>
                       <i
                         className={`material-icons ${classes.icons}`}
@@ -277,7 +287,6 @@ class TrainingSeriesPosts extends React.Component {
                         id={post.postID}
                       />
                     </ListButtonContainer>
-                    {/* </IconButton> */}
                   </ListItemSecondaryAction>
                 </ListItem>
               ))}
@@ -285,9 +294,7 @@ class TrainingSeriesPosts extends React.Component {
           </Paper>
           <Paper className={classes.paper}>
             <Typography variant="title">Assigned Team Members</Typography>
-            {this.props.assignments.map(member => (
-              <TrainingSeriesAssignment member={member} />
-            ))}
+                {assignedMembersStatus}
           </Paper>
         </PageContainer>
       </>
@@ -336,6 +343,7 @@ const mapStateToProps = state => ({
   posts: state.postsReducer.posts,
   assignments: state.trainingSeriesReducer.assignments,
   trainingSeries: state.trainingSeriesReducer.trainingSeries,
+  teamMembers: state.teamMembersReducer.teamMembers,
 });
 
 TrainingSeriesPosts.propTypes = {};
