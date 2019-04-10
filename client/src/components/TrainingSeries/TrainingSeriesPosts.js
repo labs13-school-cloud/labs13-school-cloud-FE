@@ -1,19 +1,16 @@
 // displays all posts of a training series
 import React from 'react';
-
-// import Button from '@material-ui/core/Button';
+import { Link } from 'react-router-dom'
 import Fab from '@material-ui/core/Fab';
+
 // Components
-// import PostModal from '../Modals/PostModal';
-// import PostOptionsModal from '../Modals/PostOptionsModal';
 import DeleteModal from '../Modals/deleteModal';
 import TrainingSeriesAssignment from './TrainingSeriesAssignment';
-// import IconButton from '@material-ui/core/IconButton';
 
 import styled from 'styled-components';
 
 // Redux
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import {
   getTrainingSeriesPosts,
   createAPost,
@@ -23,7 +20,7 @@ import {
   editTrainingSeries,
 } from '../../store/actions';
 
-import {withStyles} from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 
 // Styling
 import {
@@ -74,7 +71,7 @@ const styles = theme => ({
     marginBottom: 10,
     color: 'gray',
     cursor: 'pointer',
-    '&:hover': {color: '#2699FB'},
+    '&:hover': { color: '#2699FB' },
   },
   hidden: {
     display: 'none',
@@ -138,7 +135,7 @@ class TrainingSeriesPosts extends React.Component {
     this.props.history.push({
       pathname: `/home/assign-members/${
         this.props.singleTrainingSeries.trainingSeriesID
-      }`,
+        }`,
     });
   };
 
@@ -156,12 +153,12 @@ class TrainingSeriesPosts extends React.Component {
   };
 
   handleChange = name => event => {
-    this.setState({[name]: event.target.value});
+    this.setState({ [name]: event.target.value });
   };
 
   updateTitle = async e => {
     e.preventDefault();
-    const data = {title: this.state.title};
+    const data = { title: this.state.title };
     await this.props.editTrainingSeries(
       this.props.singleTrainingSeries.trainingSeriesID,
       data
@@ -174,7 +171,7 @@ class TrainingSeriesPosts extends React.Component {
   };
 
   render() {
-    const {classes} = this.props;
+    const { classes } = this.props;
 
     let titleEdit;
     if (this.state.editingTitle) {
@@ -213,21 +210,21 @@ class TrainingSeriesPosts extends React.Component {
     if (this.props.teamMembers.length) {
       assignedMembersStatus = (
         <>
-            <Button onClick={this.routeToAssigning}>
-              Click to assign members
+          <Button onClick={this.routeToAssigning}>
+            Click to assign members
             </Button>
-            {this.props.assignments.map(member => (
-              <TrainingSeriesAssignment member={member} />
-            ))}
+          {this.props.assignments.map(member => (
+            <TrainingSeriesAssignment member={member} />
+          ))}
         </>
       )
     } else {
       assignedMembersStatus = (
         <>
-            <Button disabled>
-              Click to assign members
+          <Button disabled>
+            Click to assign members
             </Button>
-            <p>You don't have any team members to assign. <Link to="/home/create-team-member/">Click here</Link> to add a member to your account.</p>
+          <p>You don't have any team members to assign. <Link to="/home/create-team-member/">Click here</Link> to add a member to your account.</p>
         </>
       )
     }
@@ -293,7 +290,7 @@ class TrainingSeriesPosts extends React.Component {
           </Paper>
           <Paper className={classes.paper}>
             <Typography variant="title">Assigned Team Members</Typography>
-                {assignedMembersStatus}
+            {assignedMembersStatus}
           </Paper>
         </PageContainer>
       </>

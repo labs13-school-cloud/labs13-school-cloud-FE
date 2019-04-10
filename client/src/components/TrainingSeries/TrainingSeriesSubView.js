@@ -9,7 +9,9 @@ import { withStyles } from "@material-ui/core/styles";
 import {
   Paper,
   Typography,
-  Fab
+  Fab,
+  TextField,
+  InputAdornment
 } from '@material-ui/core/';
 import Pagination from 'material-ui-flat-pagination';
 

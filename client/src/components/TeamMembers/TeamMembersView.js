@@ -13,9 +13,11 @@ import { withRouter } from "react-router";
 
 import { withStyles } from "@material-ui/core/styles";
 import {
-	Paper,
-	Typography,
-	Fab
+  Paper,
+  Typography,
+  Fab,
+  TextField,
+  InputAdornment
 } from '@material-ui/core/';
 
 
