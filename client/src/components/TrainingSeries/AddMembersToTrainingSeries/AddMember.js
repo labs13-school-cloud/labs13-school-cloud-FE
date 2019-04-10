@@ -47,35 +47,30 @@ const styles = theme => ({
 function AddMember(props) {
   console.log(props);
   const { classes } = props;
-  //Need a way to see all of the currently assigned team members of that training series.
-  //Map over those assigned members.
-  //Display members not currently assigned
 
-  //   const renderMembers = () => {
-  //     //Map Through the current assignments for the team member, returns an array of ID's
-  //     let assignments = props.assignments.map(
-  //       assignment => assignment.trainingSeries_ID
-  //     );
-  //     console.log("ASSIGNMENTS", assignments);
-  //     //Filters the trainingSeries based on assignments
-  //     let filteredMembers = props.trainingSeries.filter(series => {
-  //       return !assignments.includes(series.trainingSeriesID);
-  //     });
-  //     console.log("FILTERED MEMBERS", filteredMembers);
-  //     return filteredMembers.map(member => (
-  //       <>
-  //         <FormControlLabel
-  //           control={
-  //             <Checkbox
-  //               name={member.teamMemberID}
-  //               onChange={() => props.handler.handleChecked(member.teamMemberID)}
-  //             />
-  //           }
-  //           label={`${member.firstName} ${member.lastName}`}
-  //         />
-  //       </>
-  //     ));
-  //   };
+  const renderMembers = () => {
+    //Map Through the current assignments for the team member, returns an array of ID's
+    let assignments = props.assignments.map(
+      assignment => assignment.teamMember_ID
+    );
+    //Filters the trainingSeries based on assignments
+    let filteredMembers = props.teamMembers.filter(member => {
+      return !assignments.includes(member.teamMemberID);
+    });
+    return filteredMembers.map(member => (
+      <>
+        <FormControlLabel
+          control={
+            <Checkbox
+              name={member.teamMemberID}
+              onChange={() => props.handler.handleChecked(member.teamMemberID)}
+            />
+          }
+          label={`${member.firstName} ${member.lastName}`}
+        />
+      </>
+    ));
+  };
   console.log(props.selectedTeamMembers);
   return (
     <AddMemberContainer>
@@ -95,21 +90,7 @@ function AddMember(props) {
               className={classes.memberList}
               onSubmit={e => props.handler.handleSubmit(e)}
             >
-              {props.teamMembers.map(member => (
-                <>
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        name={member.teamMemberID}
-                        onChange={() =>
-                          props.handler.handleChecked(member.teamMemberID)
-                        }
-                      />
-                    }
-                    label={`${member.firstName} ${member.lastName}`}
-                  />
-                </>
-              ))}
+              {renderMembers()}
               <Button
                 disabled={
                   props.selectedTeamMembers < 1 || props.isRouting === true
@@ -152,9 +133,3 @@ const LoadingImage = styled.img`
   pointerEvents: none;
   cursor: not-allowed;
 `;
-
-/* const disabled = {
-  pointerEvents: 'none',
-  cursor: 'not-allowed',
-  opacity: '0.65',
-}; */
