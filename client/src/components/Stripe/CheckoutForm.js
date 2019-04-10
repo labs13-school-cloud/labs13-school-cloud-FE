@@ -6,15 +6,7 @@ import { getPlans, getCustomersPlan, unsubscribe, submit } from '../../store/act
 import { getUser } from '../../store/actions/userActions';
 import logo from '../../img/trainingBot.gif';
 
-import {
-	withStyles,
-	FormControl,
-	FormLabel,
-	Button,
-	CircularProgress,
-	Typography,
-	Modal,
-} from '@material-ui/core/';
+import { withStyles, FormControl, Button, Typography, Modal } from '@material-ui/core/';
 import UnsubscribeModal from './unsubscribeModal';
 import Pricing from '../LandingPage/Pricing';
 

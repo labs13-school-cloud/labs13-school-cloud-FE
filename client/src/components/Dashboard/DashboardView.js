@@ -14,7 +14,6 @@ import ProgressCircle from '../Progress/ProgressCircle';
 import ProfileView from '../Profile/ProfileView';
 import AppBar from '../AppBar/AppBar';
 import TeamMemberPageView from '../TeamMembers/TeamMemberPageContainer/TeamMemberPageView';
-import NotificationView from '../Notifications/NotificationsView';
 import AddTrainingSeriesView from '../TrainingSeries/AddMembersToTrainingSeries/AddMembersView.js';
 import CreateTrainingSeries from '../TrainingSeries/CreateTrainingSeries';
 import ReturnToDashboardButton from '../Navigation/ReturnToDashboard';
@@ -52,7 +51,7 @@ class Dashboard extends React.Component {
 						<TeamMembersView userId={user.userID} />
 						<TrainingSeriesView userId={user.userID} match={this.props.match} />
 					</SmallColumns>
-					<NotificationView />
+					<NotificationsView />
 				</TripleColumn>
 			</>
 		);
@@ -198,11 +197,27 @@ const DashboardContainer = styled.div`
 	} */
 `;
 
-const hidden = {
-	display: 'none',
-};
+// const hidden = {
+//   display: 'none',
+// };
 
-const active = {
-	display: 'block',
-	display: 'none',
-};
+// const active = {
+//   display: 'block',
+// };
+
+// const toggleTrainingSeries = tabValue => {
+
+//   return tabValue === 0 ? active : hidden;
+// };
+
+// const toggleTeamMembers = tabValue => {
+//   const hidden = {
+//     display: "none"
+//   };
+
+//   const active = {
+//     display: "block"
+//   };
+
+//   return tabValue === 1 ? active : hidden;
+// };

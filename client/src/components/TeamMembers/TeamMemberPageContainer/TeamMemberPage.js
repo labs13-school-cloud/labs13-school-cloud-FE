@@ -9,6 +9,7 @@ import NotificationWidget from './SnackBarTeamMember';
 //Components
 import AddTeamMemberToTrainingSeriesModal from '../../Modals/addTeamMemberToTrainingSeriesModal';
 import TrainingSeriesAssignments from './TrainingSeriesAssigments';
+import DeleteModal from '../../Modals/deleteModal';
 
 const styles = theme => ({
 	root: {
@@ -97,7 +98,6 @@ class TeamMemberPage extends React.Component {
 		const trainingAssigments =
 			this.props.teamMember.assignments &&
 			this.props.teamMember.assignments.map(trainingSeries => {
-				// return console.log("****", trainingSeries);
 				return (
 					<TrainingSeriesAssignments
 						trainingSeries={trainingSeries}
@@ -116,13 +116,11 @@ class TeamMemberPage extends React.Component {
 							type="success"
 							submitType="edit"
 						/>
-						<Button
-							variant="contained"
-							color="primary"
-							className={classes.button}
-							onClick={e => this.props.deleteTeamMember(e, this.state.teamMember)}>
-							Delete
-						</Button>
+						<DeleteModal
+							deleteType="teamMember"
+							teamMemberId={this.state.teamMember.teamMemberID}
+							displayType="button"
+						/>
 					</ButtonContainer>
 					{/* <DeleteModal deleteType='inTeamMemberPage' id={this.props.urlId} /> */}
 					<Paper className={classes.root}>

@@ -2,9 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 //Components
-import UserModal from '../Modals/userModal';
+// import UserModal from '../Modals/userModal';
 import StripeView from '../Stripe/StripeView';
-import { logout, getUserProfile } from '../../Auth/Auth';
+import { logout } from '../../Auth/Auth';
 import Authentication from '../authenticate/authenticate';
 
 //State Management
@@ -19,10 +19,7 @@ import {
 	withStyles,
 	Modal,
 	Avatar,
-	IconButton,
 } from '@material-ui/core';
-
-import DeleteIcon from '@material-ui/icons/Delete';
 
 import styled from 'styled-components';
 import Pricing from '../LandingPage/Pricing';

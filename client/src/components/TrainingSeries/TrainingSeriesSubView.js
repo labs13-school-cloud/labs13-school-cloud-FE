@@ -3,7 +3,6 @@ import Fuse from 'fuse.js';
 
 //Components
 import TrainingSeriesList from './TrainingSeriesList';
-import TrainingSeriesModal from '../Modals/TrainingSeriesModal';
 
 import { withStyles } from '@material-ui/core/styles';
 import { Paper, Typography, Fab, TextField, InputAdornment } from '@material-ui/core/';

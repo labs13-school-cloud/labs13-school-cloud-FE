@@ -8,16 +8,11 @@ import styled from 'styled-components';
 // Material UI
 import { withStyles } from '@material-ui/core/styles';
 import {
-	// Card,
-	// CardContent,
-	// IconButton,
-	// Fab,
-	// Button,
-	// Typography,
 	ListItem,
 	ListItemText,
 	ListItemSecondaryAction,
 } from '@material-ui/core/';
+
 // import DeleteIcon from "@material-ui/icons/Delete";
 const moment = require('moment');
 
@@ -49,7 +44,7 @@ const styles = theme => ({
 });
 
 const TrainingSeriesAssignments = props => {
-	const { classes } = props;
+	// const { classes } = props;
 
 	const { teamMemberId } = props;
 	const { trainingSeries_ID } = props.trainingSeries;
@@ -57,11 +52,10 @@ const TrainingSeriesAssignments = props => {
 		.add(1, 'days')
 		.format('MMMM Do, YYYY ');
 
-	const handleDelete = e => {
-		e.preventDefault();
-
-		props.deleteTeamMemberFromTrainingSeries(teamMemberId, trainingSeries_ID);
-	};
+	// const handleDelete = e => {
+	// 	e.preventDefault();
+	// 	props.deleteTeamMemberFromTrainingSeries(teamMemberId, trainingSeries_ID);
+	// };
 
 	console.log('***ASSIGNMENTS***', teamMemberId, trainingSeries_ID);
 

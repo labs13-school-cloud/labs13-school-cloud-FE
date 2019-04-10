@@ -1,15 +1,11 @@
 // displays all posts of a training series
 import React from 'react';
 import { Link } from 'react-router-dom';
-
-// import Button from '@material-ui/core/Button';
 import Fab from '@material-ui/core/Fab';
+
 // Components
-// import PostModal from '../Modals/PostModal';
-// import PostOptionsModal from '../Modals/PostOptionsModal';
 import DeleteModal from '../Modals/deleteModal';
 import TrainingSeriesAssignment from './TrainingSeriesAssignment';
-// import IconButton from '@material-ui/core/IconButton';
 
 import styled from 'styled-components';
 
@@ -228,10 +224,7 @@ class TrainingSeriesPosts extends React.Component {
 		if (this.props.teamMembers.length) {
 			assignedMembersStatus = (
 				<>
-					<Button
-						variant="outlined"
-						className={classes.button}
-						onClick={this.routeToAssigning}>
+					<Button variant="outlined" onClick={this.routeToAssigning}>
 						Assign Members
 					</Button>
 					{this.props.assignments.map(member => (
@@ -242,7 +235,7 @@ class TrainingSeriesPosts extends React.Component {
 		} else {
 			assignedMembersStatus = (
 				<>
-					<Button variant="outlined" className={classes.button} disabled>
+					<Button variant="outlined" disabled>
 						Assign Members
 					</Button>
 					<p>
@@ -268,10 +261,7 @@ class TrainingSeriesPosts extends React.Component {
 					<Paper className={classes.paper}>
 						<HeaderContainer>
 							<Typography variant="title">Messages</Typography>
-							<Button
-								variant="outlined"
-								className={classes.button}
-								onClick={e => this.routeToPostPage(e)}>
+							<Button variant="outlined" onClick={e => this.routeToPostPage(e)}>
 								New Message
 							</Button>
 						</HeaderContainer>

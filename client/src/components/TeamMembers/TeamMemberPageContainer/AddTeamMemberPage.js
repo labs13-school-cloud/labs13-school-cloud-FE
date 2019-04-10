@@ -11,10 +11,6 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import NotificationWidget from './SnackBarTeamMember';
 
-//Components
-// import AddTeamMemberToTrainingSeriesModal from "../../Modals/addTeamMemberToTrainingSeriesModal";
-// import TrainingSeriesAssignments from "./TrainingSeriesAssigments";
-
 import { addTeamMember } from '../../../store/actions';
 
 const styles = theme => ({
@@ -58,13 +54,6 @@ class TeamMemberPage extends React.Component {
     assignments: [],
     trainingSeries: []
   };
-
-  componentDidMount() {
-    // this.setState({
-    //   teamMember: this.props.teamMember.teamMember,
-    //   assignments: this.props.teamMember.assignments
-    // });
-  }
 
   componentDidUpdate(prevProps) {
     if (prevProps.addSuccess !== this.props.addSuccess) {
@@ -209,12 +198,12 @@ const MemberInfoContainer = styled.div`
   align-items: baseline;
 `;
 
-const TrainingSeriesContainer = styled.div`
-  display: flex;
-  width: 90%;
-  justify-content: space-evenly;
-  flex-wrap: wrap;
-`;
+// const TrainingSeriesContainer = styled.div`
+//   display: flex;
+//   width: 90%;
+//   justify-content: space-evenly;
+//   flex-wrap: wrap;
+// `;
 
 const ButtonContainer = styled.div`
   display: flex;

@@ -5,26 +5,26 @@ import TeamMember from "./TeamMember";
 import styled from "styled-components";
 
 const TeamMembersList = props => {
-  let arr = [];
-  let offset = props.offset;
-  let x = offset;
-  let y = offset + props.limit;
+	let arr = [];
+	let offset = props.offset;
+	let x = offset;
+	let y = offset + props.limit;
+	arr = props.teamMembers.slice(x, y);
 
-  arr = props.teamMembers.slice(x, y);
+	return (
+		<>
+			<ListStyles>
+				{arr.map(member => (
+					<TeamMember
+						key={member.teamMemberID}
+						teamMember={member}
+						deleteTeamMember={props.deleteTeamMember}
+					/>
+				))}
+			</ListStyles>
+		</>
+	);
 
-  return (
-    <>
-      <ListStyles>
-        {arr.map(member => (
-          <TeamMember
-            key={member.teamMemberID}
-            teamMember={member}
-            deleteTeamMember={props.deleteTeamMember}
-          />
-        ))}
-      </ListStyles>
-    </>
-  );
 };
 
 export default TeamMembersList;

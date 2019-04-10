@@ -1,6 +1,5 @@
 // displays training series card
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 //PropTypes
@@ -9,11 +8,6 @@ import PropTypes from 'prop-types';
 //Styling
 import { withStyles } from '@material-ui/core/styles';
 import {
-  // Card,
-  // CardContent,
-  // Typography,
-  // List,
-  // ListItemSecondaryAction,
   ListItem,
   ListItemText
 } from '@material-ui/core/';
