@@ -1,5 +1,4 @@
 import React from 'react';
-import {connect} from 'react-redux';
 
 import styled from 'styled-components';
 
@@ -9,9 +8,11 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import NotificationWidget from './SnackBarTeamMember';
+import TrainingBotGIF from '../../../img/trainingBot.gif';
 
+//State Management
 import {addTeamMember} from '../../../store/actions';
+import {connect} from 'react-redux';
 
 const styles = theme => ({
   root: {
@@ -53,16 +54,8 @@ class TeamMemberPage extends React.Component {
     },
     assignments: [],
     trainingSeries: [],
+    isRouting: false,
   };
-
-  componentDidUpdate(prevProps) {
-    if (prevProps.addSuccess !== this.props.addSuccess) {
-      setTimeout(() => {
-        const {teamMemberID} = this.props.teamMember && this.props.teamMember;
-        this.props.history.push(`/home/team-member/${teamMemberID}`);
-      }, 400);
-    }
-  }
 
   handleChange = name => event => {
     this.setState({
@@ -79,8 +72,16 @@ class TeamMemberPage extends React.Component {
       ...this.state.teamMember,
       user_ID: this.props.userId,
     };
-
     this.props.addTeamMember(newMember);
+    this.setState({isRouting: true});
+    setTimeout(() => {
+      this.props.history.push({
+        pathname: `/home/team-member/${this.props.teamMember.teamMemberID}`,
+        state: {
+          success: true,
+        },
+      });
+    }, 1000);
   };
 
   handleDate = name => event => {
@@ -155,19 +156,17 @@ class TeamMemberPage extends React.Component {
             </MemberInfoContainer>
           </Paper>
           <ButtonContainer>
-            {/* <NotificationWidget
-              teamMember={this.state.teamMember}
-              editTeamMember={this.props.editTeamMember}
-              addTeamMember={this.addNewTeamMember}
-              type="success"
-              submitType="add"
-            /> */}
             <Button
-              variant="contained"
+              disabled={this.state.isRouting === true ? 'true' : null}
+              variant="primary"
               className={classes.button}
               type="submit"
             >
-              Submit
+              {this.state.isRouting ? (
+                <LoadingImage src={TrainingBotGIF} alt="Loading Icon" />
+              ) : (
+                'Submit'
+              )}
             </Button>
             <Button
               variant="contained"
@@ -183,29 +182,6 @@ class TeamMemberPage extends React.Component {
   }
 }
 
-const MainContainer = styled.div`
-  margin: 0 auto;
-`;
-
-const MemberInfoContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-`;
-
-// const TrainingSeriesContainer = styled.div`
-//   display: flex;
-//   width: 90%;
-//   justify-content: space-evenly;
-//   flex-wrap: wrap;
-// `;
-
-const ButtonContainer = styled.div`
-  display: flex;
-  margin-top: 10px;
-  justify-content: center;
-`;
-
 const mapStateToProps = state => {
   return {
     addSuccess: state.teamMembersReducer.status.addSuccess,
@@ -217,3 +193,30 @@ export default connect(
   mapStateToProps,
   {addTeamMember}
 )(withStyles(styles)(TeamMemberPage));
+
+const MainContainer = styled.div`
+  margin: 0 auto;
+`;
+
+const MemberInfoContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  margin-top: 10px;
+  justify-content: center;
+`;
+
+const LoadingImage = styled.img`
+  width: 32px;
+  height: auto;
+  overflow: hidden;
+  cursor: not-allowed;
+  pointer-events: none;
+  position: relative;
+  padding: 0;
+  margin: 0;
+`;
