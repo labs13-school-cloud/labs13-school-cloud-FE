@@ -150,6 +150,7 @@ class AssignMemberPage extends React.Component {
           <div className={classes.datePicker}>
             <DatePicker
               inline
+              minDate={new Date()}
               selected={this.state.startDate}
               onChange={this.handleDateChange}
             />
