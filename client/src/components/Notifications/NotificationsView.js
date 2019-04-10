@@ -87,8 +87,6 @@ class NotificationsView extends Component {
 	};
 
 	render() {
-		console.log("THIS SHOULD BE MY USER ID", this.props.userId);
-
 		const { classes } = this.props;
 		const allNotifications = [
 			...this.props.textNotifications,
@@ -160,7 +158,6 @@ class NotificationsView extends Component {
 					filterSent={this.state.filterSent}
 					offset={this.state.offset}
 					match={this.props.match}
-					userID={this.props.userID}
 					limit={this.state.limit}
 				/>
 				<div className={classes.footer}>

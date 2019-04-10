@@ -7,10 +7,7 @@ import PropTypes from 'prop-types';
 
 //Styling
 import { withStyles } from '@material-ui/core/styles';
-import {
-  ListItem,
-  ListItemText
-} from '@material-ui/core/';
+import { ListItem, ListItemText } from '@material-ui/core/';
 
 import SlideDownModal from '../Modals/SlideDownModal';
 
@@ -62,7 +59,7 @@ function SeriesCard(props) {
       <SlideDownModal
         deleteTrainingSeries={props.deleteTrainingSeries}
         data={props.data}
-        userID={props.userID}
+        userId={props.userId}
       />
     </ListItem>
   );
