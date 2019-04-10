@@ -59,6 +59,7 @@ class TeamMemberPageView extends React.Component {
           editTeamMember={this.editTeamMember}
           deleteTeamMember={this.deleteTeamMember}
           userId={this.props.userId}
+          history={this.props.history}
         />
       );
     }

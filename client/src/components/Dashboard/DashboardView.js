@@ -1,11 +1,11 @@
 // parent component for app once logged in
-import React from 'react';
-import {Router, Route} from 'react-router-dom';
+import React from "react";
+import { Router, Route } from "react-router-dom";
 
-import history from '../../history';
+import history from "../../history";
 
 //Styling
-import styled from 'styled-components';
+import styled from "styled-components";
 
 //Components
 import TeamMembersView from '../TeamMembers/TeamMembersView';
@@ -131,7 +131,7 @@ class Dashboard extends React.Component {
   // tracking the tab value in navigation.js
   changeTabValue = value => {
     this.setState({
-      tabValue: value,
+      tabValue: value
     });
   };
 }
