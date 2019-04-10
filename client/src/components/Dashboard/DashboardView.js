@@ -17,7 +17,7 @@ import TeamMemberPageView from "../TeamMembers/TeamMemberPageContainer/TeamMembe
 import AddTrainingSeriesView from "../TrainingSeries/AddMembersToTrainingSeries/AddMembersView.js";
 import CreateTrainingSeries from "../TrainingSeries/CreateTrainingSeries";
 import ReturnToDashboardButton from "../Navigation/ReturnToDashboard";
-
+import AssignMemberPage from '../TeamMembers/TeamMemberPageContainer/AssignMemberPage';
 //Auth
 import { getUserProfile } from "../../Auth/Auth";
 import Authenticate from "../authenticate/authenticate";
@@ -122,7 +122,7 @@ class Dashboard extends React.Component {
 				                <Route
                   path="/home/assign-series/:id"
                   render={props => (
-                    <AddTrainingSeriesView
+                    <AssignMemberPage
                       {...props}
                       userId={this.props.userProfile.user.userID}
                     />

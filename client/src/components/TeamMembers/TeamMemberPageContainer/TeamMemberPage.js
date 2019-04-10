@@ -49,12 +49,11 @@ const styles = theme => ({
     display: "flex",
     justifyContent: "space-between"
   },
-  messageDiv: {
-  },
+  messageDiv: {},
   messageText: {
-	  marginTop: 20,
-	  marginBottom: 20,
-	  textAlign: "center"
+    marginTop: 20,
+    marginBottom: 20,
+    textAlign: "center"
   }
   // form: {
   // 	'@media (max-width: 480px)': {
@@ -108,9 +107,7 @@ class TeamMemberPage extends React.Component {
   routeToAssigning = e => {
     e.preventDefault();
     this.props.history.push({
-      pathname: `/home/assign-series/${
-        this.state.teamMember.teamMemberID
-      }`
+      pathname: `/home/assign-series/${this.state.teamMember.teamMemberID}`
     });
   };
 
@@ -160,12 +157,12 @@ class TeamMemberPage extends React.Component {
             </Button>
           </div>
           <Typography variant="subheading" className={classes.messageText}>
-            You don't have any training series to assign.{" "}
+            You don't have any training series to assign.
           </Typography>
-		  <Typography variant="subheading" className={classes.messageText}>
-		  <Link to="/home/create-training-series">Click here</Link> to create
+          <Typography variant="subheading" className={classes.messageText}>
+            <Link to="/home/create-training-series">Click here</Link> to create
             your first training series.
-			</Typography>
+          </Typography>
         </>
       );
     }
