@@ -25,7 +25,7 @@ const TrainingSeriesList = props => {
             deleteTrainingSeries={props.deleteTrainingSeries}
             data={series}
             match={props.match}
-            userID={props.userID}
+            userId={props.userId}
             // postCount={postCount}
           />
         ))}
