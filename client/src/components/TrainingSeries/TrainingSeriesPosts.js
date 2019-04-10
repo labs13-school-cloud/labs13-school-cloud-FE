@@ -83,7 +83,7 @@ const styles = theme => ({
 		position: 'relative',
 		top: '5px',
 		right: '5px',
-		width: '160px'
+		width: '160px',
 	},
 	list: {
 		listStyleType: 'none',
