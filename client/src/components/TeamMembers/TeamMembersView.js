@@ -31,6 +31,10 @@ const styles = theme => ({
       marginBottom: 10
     }
   },
+
+  textField: {
+    width: "70%"
+  },
   columnHeader: {
     display: "flex",
     justifyContent: "space-between",
@@ -56,6 +60,7 @@ const styles = theme => ({
   }
   // pagination: { width: '90%' },
 });
+
 class TeamMembersView extends React.Component {
   state = {
     users: [],
@@ -88,6 +93,7 @@ class TeamMembersView extends React.Component {
     this.props.history.push("/home/create-team-member");
   };
 
+  // function to set fuse option and return a response
   searchedMembers = team => {
     var options = {
       shouldSort: true,
@@ -106,17 +112,13 @@ class TeamMembersView extends React.Component {
 
   render() {
     const { classes } = this.props;
-    const searchOn = this.state.searchInput.length > 0;
 
-    console.log("SEARCh INPUT", this.state.searchInput);
-    console.log("TEAM MEMBERS", this.props.teamMembers);
-    console.log(
-      "SEARCHED TEAM MEMBERS",
-      this.searchedMembers(this.props.teamMembers)
-    );
+    // boolean for if the search input is active
+    const searchOn = this.state.searchInput.length > 0;
 
     let teamMembers;
 
+    // checks if the search field is active and there are results from the fuse search
     if (searchOn && this.searchedMembers(this.props.teamMembers).length > 0) {
       teamMembers = this.searchedMembers(this.props.teamMembers);
     } else {
@@ -128,7 +130,7 @@ class TeamMembersView extends React.Component {
         <div className={classes.columnHeader}>
           <Typography variant="h5">Team Members</Typography>
           <div className={classes.icons}>
-            <Fab
+            {/* <Fab
               color="primary"
               size="small"
               aria-label="Add"
@@ -137,7 +139,7 @@ class TeamMembersView extends React.Component {
               disabled
             >
               <i className="material-icons">search</i>
-            </Fab>
+            </Fab> */}
             <Fab
               color="primary"
               size="small"
@@ -152,7 +154,7 @@ class TeamMembersView extends React.Component {
         <div>
           <TextField
             id="standard-search"
-            label="Search field"
+            label="Search Team Members"
             type="search"
             className={classes.textField}
             onChange={e => this.setState({ searchInput: e.target.value })}
@@ -170,7 +172,7 @@ class TeamMembersView extends React.Component {
             limit={this.state.limit}
             reduced={true}
             offset={this.state.offset}
-            total={this.props.teamMembers.length}
+            total={teamMembers.length}
             onClick={(e, offset) => this.handleClick(offset)}
           />
 
