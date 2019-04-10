@@ -1,24 +1,12 @@
 import React, { Component } from 'react';
+import Fuse from 'fuse.js';
 
 //Components
 import TrainingSeriesList from './TrainingSeriesList';
 import TrainingSeriesModal from '../Modals/TrainingSeriesModal';
 
 import { withStyles } from '@material-ui/core/styles';
-import {
-	Paper,
-	NativeSelect,
-	FormControl,
-	InputLabel,
-	Typography,
-	Fab,
-	// List,
-	// Input,
-	// OutlinedInput,
-	// FilledInput,
-	// FormHelperText,
-	// Select,
-} from '@material-ui/core/';
+import { Paper, Typography, Fab, TextField, InputAdornment } from '@material-ui/core/';
 import Pagination from 'material-ui-flat-pagination';
 
 const styles = theme => ({
@@ -26,14 +14,10 @@ const styles = theme => ({
 		...theme.mixins.gutters(),
 		paddingTop: theme.spacing.unit * 2,
 		paddingBottom: theme.spacing.unit * 2,
-		display: 'flex',
-		flexDirection: 'column',
-		width: '50%',
-		height: '100%',
-		margin: 5,
+		width: '55%',
 
 		'@media (max-width:768px)': {
-			width: '92%',
+			width: '94%',
 			marginBottom: 10,
 		},
 	},
@@ -53,6 +37,9 @@ const styles = theme => ({
 		position: 'sticky',
 		top: '100%',
 	},
+	textField: {
+		width: '40%',
+	},
 	pagination: { width: '90%' },
 });
 
@@ -62,6 +49,7 @@ class TrainingSeriesSubView extends Component {
 		this.state = {
 			offset: 0,
 			limit: 5,
+			searchInput: '',
 		};
 	}
 
@@ -77,8 +65,36 @@ class TrainingSeriesSubView extends Component {
 		this.props.history.push('/home/create-training-series');
 	};
 
+	// function to set fuse option and return a response
+	searchedTrainingSeries = series => {
+		var options = {
+			shouldSort: true,
+			threshold: 0.3,
+			location: 0,
+			distance: 100,
+			maxPatternLength: 32,
+			minMatchCharLength: 3,
+			keys: ['title'],
+		};
+
+		const fuse = new Fuse(series, options);
+		const res = fuse.search(this.state.searchInput);
+		return res;
+	};
+
 	render() {
 		const { classes } = this.props;
+
+		const searchOn = this.state.searchInput.length > 0;
+
+		let trainingSeries;
+
+		// checks if the search field is active and there are results from the fuse search
+		if (searchOn && this.searchedTrainingSeries(this.props.trainingSeries).length > 0) {
+			trainingSeries = this.searchedTrainingSeries(this.props.trainingSeries);
+		} else {
+			trainingSeries = this.props.trainingSeries;
+		}
 
 		return (
 			<>
@@ -86,15 +102,16 @@ class TrainingSeriesSubView extends Component {
 					<div className={classes.columnHeader}>
 						<Typography variant="h5">Training Series</Typography>
 						<div className={classes.icons}>
-							<Fab
-								color="primary"
-								size="small"
-								aria-label="Add"
-								className={classes.fab}
-								onClick={this.handleOpen}
-								disabled>
-								<i className="material-icons">search</i>
-							</Fab>
+							{/* <Fab
+                color="primary"
+                size="small"
+                aria-label="Add"
+                className={classes.fab}
+                onClick={this.handleOpen}
+                disabled
+              >
+                <i className="material-icons">search</i>
+              </Fab> */}
 
 							<Fab
 								color="primary"
@@ -111,9 +128,25 @@ class TrainingSeriesSubView extends Component {
 						/> */}
 						</div>
 					</div>
+					<div>
+						<TextField
+							id="standard-search"
+							type="search"
+							className={classes.textField}
+							onChange={e => this.setState({ searchInput: e.target.value })}
+							margin="normal"
+							InputProps={{
+								startAdornment: (
+									<InputAdornment position="start">
+										<i class="material-icons">search</i>
+									</InputAdornment>
+								),
+							}}
+						/>
+					</div>
 					<TrainingSeriesList
 						deleteTrainingSeries={this.props.deleteTrainingSeries}
-						trainingSeries={this.props.trainingSeries}
+						trainingSeries={trainingSeries}
 						offset={this.state.offset}
 						match={this.props.match}
 						userID={this.props.userID}
@@ -123,7 +156,7 @@ class TrainingSeriesSubView extends Component {
 						<Pagination
 							limit={this.state.limit}
 							offset={this.state.offset}
-							total={this.props.trainingSeries.length}
+							total={trainingSeries.length}
 							onClick={(e, offset) => this.handleClick(offset)}
 						/>
 

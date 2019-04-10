@@ -2,6 +2,8 @@
 
 import React from 'react';
 
+import Fuse from 'fuse.js';
+
 //Components
 import TeamMembersList from './TeamMembersList';
 import Pagination from 'material-ui-flat-pagination';
@@ -10,7 +12,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 
 import { withStyles } from '@material-ui/core/styles';
-import { Paper, Typography, Fab, InputLabel, FormControl, NativeSelect } from '@material-ui/core/';
+import { Paper, Typography, Fab, TextField, InputAdornment } from '@material-ui/core/';
 
 import { getTeamMembers, addTeamMember, deleteTeamMember } from '../../store/actions';
 
@@ -31,6 +33,10 @@ const styles = theme => ({
 			marginBottom: 10,
 		},
 	},
+	textField: {
+		width: '70%',
+	},
+
 	columnHeader: {
 		display: 'flex',
 		justifyContent: 'space-between',
@@ -56,6 +62,7 @@ const styles = theme => ({
 	},
 	// pagination: { width: '90%' },
 });
+
 class TeamMembersView extends React.Component {
 	state = {
 		users: [],
@@ -63,6 +70,7 @@ class TeamMembersView extends React.Component {
 		teamMembers: [],
 		offset: 0,
 		limit: 5,
+		searchInput: '',
 	};
 
 	componentDidMount() {
@@ -87,22 +95,53 @@ class TeamMembersView extends React.Component {
 		this.props.history.push('/home/create-team-member');
 	};
 
+	// function to set fuse option and return a response
+	searchedMembers = team => {
+		var options = {
+			shouldSort: true,
+			threshold: 0.3,
+			location: 0,
+			distance: 100,
+			maxPatternLength: 32,
+			minMatchCharLength: 3,
+			keys: ['firstName', 'lastName', 'jobDescripton'],
+		};
+
+		const fuse = new Fuse(team, options);
+		const res = fuse.search(this.state.searchInput);
+		return res;
+	};
+
 	render() {
 		const { classes } = this.props;
+
+		// boolean for if the search input is active
+		const searchOn = this.state.searchInput.length > 0;
+
+		let teamMembers;
+
+		// checks if the search field is active and there are results from the fuse search
+		if (searchOn && this.searchedMembers(this.props.teamMembers).length > 0) {
+			teamMembers = this.searchedMembers(this.props.teamMembers);
+		} else {
+			teamMembers = this.props.teamMembers;
+		}
+
 		return (
 			<Paper className={classes.root} elevation={2}>
 				<div className={classes.columnHeader}>
 					<Typography variant="h5">Team Members</Typography>
 					<div className={classes.icons}>
-						<Fab
-							color="primary"
-							size="small"
-							aria-label="Add"
-							className={classes.fab}
-							onClick={this.handleOpen}
-							disabled>
-							<i className="material-icons">search</i>
-						</Fab>
+						{/* <Fab
+              color="primary"
+              size="small"
+              aria-label="Add"
+              className={classes.fab}
+              onClick={this.handleOpen}
+              disabled
+            >
+              <i className="material-icons">search</i>
+            </Fab> */}
 						<Fab
 							color="primary"
 							size="small"
@@ -113,8 +152,25 @@ class TeamMembersView extends React.Component {
 						</Fab>
 					</div>
 				</div>
+				<div>
+					<TextField
+						id="standard-search"
+						label="Search Team Members"
+						type="search"
+						className={classes.textField}
+						onChange={e => this.setState({ searchInput: e.target.value })}
+						margin="normal"
+						InputProps={{
+							startAdornment: (
+								<InputAdornment position="start">
+									<i class="material-icons">search</i>
+								</InputAdornment>
+							),
+						}}
+					/>
+				</div>
 				<TeamMembersList
-					teamMembers={this.props.teamMembers}
+					teamMembers={teamMembers}
 					deleteTeamMember={this.deleteMember}
 					limit={this.state.limit}
 					offset={this.state.offset}
@@ -124,7 +180,7 @@ class TeamMembersView extends React.Component {
 						limit={this.state.limit}
 						reduced={true}
 						offset={this.state.offset}
-						total={this.props.teamMembers.length}
+						total={teamMembers.length}
 						onClick={(e, offset) => this.handleClick(offset)}
 					/>
 
