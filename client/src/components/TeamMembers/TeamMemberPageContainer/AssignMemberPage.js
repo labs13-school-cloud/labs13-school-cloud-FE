@@ -18,8 +18,8 @@ import { addTeamMemberToTrainingSeries } from "../../../store/actions/";
 
 const styles = theme => ({
   paper: {
-    position: "absolute",
-    width: theme.spacing.unit * 50,
+    margin: "0 auto",
+    width: theme.spacing.unit * 70,
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
     padding: theme.spacing.unit * 4,
@@ -113,7 +113,7 @@ class AssignMemberPage extends React.Component {
       assignment => assignment.trainingSeries_ID
     );
     //Filters the trainingSeries based on assignments
-    let filteredSeries = this.props.trainingSeries.filter(series => {
+    let filteredSeries = this.props.location.state.trainingSeries.filter(series => {
       return !assignments.includes(series.trainingSeriesID);
     });
 
