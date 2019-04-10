@@ -1,6 +1,6 @@
 // parent component for app once logged in
 import React from 'react';
-import { Router, Route } from 'react-router-dom';
+import {Router, Route} from 'react-router-dom';
 
 import history from '../../history';
 
@@ -19,12 +19,12 @@ import CreateTrainingSeries from '../TrainingSeries/CreateTrainingSeries';
 import ReturnToDashboardButton from '../Navigation/ReturnToDashboard';
 
 //Auth
-import { getUserProfile } from '../../Auth/Auth';
+import {getUserProfile} from '../../Auth/Auth';
 import Authenticate from '../authenticate/authenticate';
 
 //State Management
-import { connect } from 'react-redux';
-import { getUser } from '../../store/actions/userActions';
+import {connect} from 'react-redux';
+import {getUser} from '../../store/actions/userActions';
 import TrainingSeriesPosts from '../TrainingSeries/TrainingSeriesPosts';
 import AddTeamMemberPage from '../TeamMembers/TeamMemberPageContainer/AddTeamMemberPage';
 import CreatePost from '../TrainingSeries/CreatePost';
@@ -134,25 +134,26 @@ class Dashboard extends React.Component {
 			tabValue: value,
 		});
 	};
+
 }
 
 const mapStateToProps = state => {
-	return {
-		userProfile: state.userReducer.userProfile,
-		doneLoading: state.userReducer.doneLoading,
-	};
+  return {
+    userProfile: state.userReducer.userProfile,
+    doneLoading: state.userReducer.doneLoading,
+  };
 };
 
 export default connect(
-	mapStateToProps,
-	{
-		getUser,
-	}
+  mapStateToProps,
+  {
+    getUser,
+  }
 )(Authenticate(Dashboard));
 
 //Styled Components
 const TripleColumn = styled.div`
-	max-width: 1400px;
+max-width: 1400px;
 	display: flex;
 	justify-content: space-between;
 	margin: 10px auto;
@@ -181,7 +182,7 @@ const SmallColumns = styled.div`
 		flex-direction: column;
 		/* margin: 0 auto 5px; */
 		margin-bottom: 5px;
-	}
+}
 `;
 const DashboardContainer = styled.div`
 	display: flex;
