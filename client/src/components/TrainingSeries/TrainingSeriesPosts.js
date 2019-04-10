@@ -1,7 +1,7 @@
 // displays all posts of a training series
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Fab from '@material-ui/core/Fab';
+import Fuse from 'fuse.js';
 
 // Components
 import DeleteModal from '../Modals/deleteModal';
@@ -32,6 +32,7 @@ import {
 	ListItemText,
 	ListItemSecondaryAction,
 	Typography,
+	InputAdornment,
 } from '@material-ui/core/';
 
 import AddMemberSnackbar from './AddMembersToTrainingSeries/AddMemberSnackbar';
@@ -108,6 +109,7 @@ class TrainingSeriesPosts extends React.Component {
 		active: false,
 		displaySnackbar: false,
 		editingTitle: false,
+		searchInput: '',
 	};
 
 	componentDidMount() {
@@ -186,10 +188,26 @@ class TrainingSeriesPosts extends React.Component {
 		});
 	};
 
+	searchedPosts = posts => {
+		var options = {
+			shouldSort: true,
+			threshold: 0.3,
+			location: 0,
+			distance: 100,
+			maxPatternLength: 32,
+			minMatchCharLength: 3,
+			keys: ['postName', 'postDetails', 'link'],
+		};
+
+		const fuse = new Fuse(posts, options);
+		const res = fuse.search(this.state.searchInput);
+		return res;
+	};
+
 	render() {
 		const { classes } = this.props;
-		console.log("team member length", this.props.teamMembers.length);
-		console.log("userID", this.props.userId);
+		console.log('POSTS', this.props.posts);
+		console.log('SEARCHED POSTS', this.searchedPosts(this.props.posts));
 		let titleEdit;
 		if (this.state.editingTitle) {
 			titleEdit = (
@@ -249,6 +267,17 @@ class TrainingSeriesPosts extends React.Component {
 				</>
 			);
 		}
+
+		const searchOn = this.state.searchInput.length > 0;
+
+		let posts;
+		// checks if the search field is active and there are results from the fuse search
+		if (searchOn && this.searchedPosts(this.props.posts).length > 0) {
+			posts = this.searchedPosts(this.props.posts);
+		} else {
+			posts = this.props.posts;
+		}
+
 		return (
 			<>
 				{this.state.displaySnackbar && (
@@ -268,8 +297,24 @@ class TrainingSeriesPosts extends React.Component {
 								New Message
 							</Button>
 						</HeaderContainer>
+
+						{/* Search Input */}
+						<TextField
+							id="standard-search"
+							type="search"
+							className={classes.textField}
+							onChange={e => this.setState({ searchInput: e.target.value })}
+							margin="normal"
+							InputProps={{
+								startAdornment: (
+									<InputAdornment position="start">
+										<i class="material-icons">search</i>
+									</InputAdornment>
+								),
+							}}
+						/>
 						<ListStyles>
-							{this.props.posts.map(post => (
+							{posts.map(post => (
 								<ListItem key={post.postID} className={classes.listItem}>
 									<ListItemText
 										primary={post.postName}

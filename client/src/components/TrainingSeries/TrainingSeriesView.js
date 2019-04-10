@@ -34,7 +34,7 @@ class TrainingSeriesView extends Component {
               trainingSeries={this.props.trainingSeries}
               deleteTrainingSeries={this.deleteTrainingSeries}
               getTrainingSeries={this.props.getTrainingSeries}
-              userID={this.props.userId}
+              userId={this.props.userId}
             />
           )}
         />
