@@ -155,7 +155,7 @@ class TeamMembersView extends React.Component {
 				<div>
 					<TextField
 						id="standard-search"
-						label="Search Team Members"
+						// label="Search Team Members"
 						type="search"
 						className={classes.textField}
 						onChange={e => this.setState({ searchInput: e.target.value })}

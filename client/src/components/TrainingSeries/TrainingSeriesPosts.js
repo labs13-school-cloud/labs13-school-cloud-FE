@@ -228,7 +228,10 @@ class TrainingSeriesPosts extends React.Component {
 		if (this.props.teamMembers.length) {
 			assignedMembersStatus = (
 				<>
-					<Button className={classes.button} onClick={this.routeToAssigning}>
+					<Button
+						variant="outlined"
+						className={classes.button}
+						onClick={this.routeToAssigning}>
 						Assign Members
 					</Button>
 					{this.props.assignments.map(member => (

@@ -14,10 +14,13 @@ const styles = theme => ({
 		...theme.mixins.gutters(),
 		paddingTop: theme.spacing.unit * 2,
 		paddingBottom: theme.spacing.unit * 2,
-		width: '55%',
+
+		width: '50%',
+		height: '100%',
+		margin: 5,
 
 		'@media (max-width:768px)': {
-			width: '94%',
+			width: '92%',
 			marginBottom: 10,
 		},
 	},
