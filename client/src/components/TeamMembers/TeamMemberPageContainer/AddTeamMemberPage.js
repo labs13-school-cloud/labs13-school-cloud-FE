@@ -15,15 +15,24 @@ import { addTeamMember } from "../../../store/actions";
 import { connect } from "react-redux";
 
 const styles = theme => ({
-  root: {
-    ...theme.mixins.gutters(),
-    paddingTop: theme.spacing.unit * 2,
-    paddingBottom: theme.spacing.unit * 2,
-    width: "80%",
-    margin: "20px auto"
+  paper: {
+    width: "100%",
+    backgroundColor: theme.palette.background.paper,
+    boxSizing: "border-box",
+    boxShadow: theme.shadows[5],
+    padding: "20px 30px",
+    outline: "none",
+    margin: "20px auto",
+    "@media (max-width: 768px)": {
+      textAlign: "center",
+      padding: "30px"
+    }
   },
   form: {
-    width: "90%",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
     margin: "0 auto"
   },
   info: {
@@ -76,7 +85,7 @@ class TeamMemberPage extends React.Component {
     this.setState({ isRouting: true });
     setTimeout(() => {
       this.props.history.push({
-        pathname: `/home/team-member/${this.props.teamMember.teamMemberID}`,
+        pathname: "/home",
         state: {
           success: true
         }
@@ -100,12 +109,12 @@ class TeamMemberPage extends React.Component {
 
     return (
       <MainContainer>
-        <Typography variant="display1" align="center" gutterBottom>
+        <Typography variant="display1" align="center">
           Add A New Team Member
         </Typography>
         <form className={classes.form} onSubmit={e => this.addNewTeamMember(e)}>
-          <Paper className={classes.root}>
-            <Typography>Team Member Info</Typography>
+          <Paper className={classes.paper}>
+            <Typography variant="title">Team Member Info</Typography>
             <MemberInfoContainer>
               <TextField
                 autoFocus="true"
@@ -136,9 +145,6 @@ class TeamMemberPage extends React.Component {
                 required
               />
             </MemberInfoContainer>
-          </Paper>
-          <Paper className={classes.root}>
-            <Typography>Contact Info</Typography>
             <MemberInfoContainer>
               <TextField
                 id="standard-name"
@@ -159,28 +165,28 @@ class TeamMemberPage extends React.Component {
                 required
               />
             </MemberInfoContainer>
+            <ButtonContainer>
+              <Button
+                disabled={this.state.isRouting === true ? "true" : null}
+                variant="contained"
+                className={classes.button}
+                type="submit"
+              >
+                {this.state.isRouting ? (
+                  <LoadingImage src={TrainingBotGIF} alt="Loading Icon" />
+                ) : (
+                  "Add Member"
+                )}
+              </Button>
+              <Button
+                variant="primary"
+                className={classes.button}
+                onClick={e => this.handleCancel(e)}
+              >
+                Cancel
+              </Button>
+            </ButtonContainer>
           </Paper>
-          <ButtonContainer>
-            <Button
-              disabled={this.state.isRouting === true ? "true" : null}
-              variant="primary"
-              className={classes.button}
-              type="submit"
-            >
-              {this.state.isRouting ? (
-                <LoadingImage src={TrainingBotGIF} alt="Loading Icon" />
-              ) : (
-                "Submit"
-              )}
-            </Button>
-            <Button
-              variant="contained"
-              className={classes.button}
-              onClick={e => this.handleCancel(e)}
-            >
-              Cancel
-            </Button>
-          </ButtonContainer>
         </form>
       </MainContainer>
     );
@@ -201,12 +207,21 @@ export default connect(
 
 const MainContainer = styled.div`
   margin: 0 auto;
+  max-width: 768px;
+  @media (max-width: 768px) {
+    width: 95%;
+  }
 `;
 
 const MemberInfoContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: baseline;
+  margin: 20px auto;
+  @media (max-width: 480px) {
+    flex-direction: column;
+    width: 90%;
+  }
 `;
 
 const ButtonContainer = styled.div`

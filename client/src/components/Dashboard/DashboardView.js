@@ -39,7 +39,7 @@ const styles = theme => ({
 })
 class Dashboard extends React.Component {
   state = {
-    tabValue: 0
+    tabValue: 0,
   };
 
   componentDidMount() {
