@@ -84,6 +84,14 @@ const MySnackbarContentWrapper = withStyles(styles1)(MySnackbarContent);
 const styles2 = theme => ({
   margin: {
     margin: theme.spacing.unit
+  },
+  button: {
+    "margin-left": theme.spacing.unit,
+    color: "#451476",
+    "&:hover": {
+      background: "#451476",
+      color: "white"
+    }
   }
 });
 
@@ -149,7 +157,8 @@ class CustomizedSnackbars extends React.Component {
       <div>
         <Button
           variant="outlined"
-          color="primary"
+          type="submit"
+          // color="primary"
           className={classes.button}
           onClick={e => this.handleClick(e)}
         >

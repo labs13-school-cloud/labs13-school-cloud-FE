@@ -38,6 +38,14 @@ const styles = theme => ({
   },
   button: {
     margin: theme.spacing.unit
+  },
+  createButton: {
+    "margin-left": theme.spacing.unit,
+    color: "#451476",
+    "&:hover": {
+      background: "#451476",
+      color: "white"
+    }
   }
 });
 
@@ -98,8 +106,7 @@ class CreateTrainingSeries extends React.Component {
             <Button
               type="submit"
               variant="outlined"
-              color="primary"
-              className={classes.button}
+              className={classes.createButton}
             >
               Create
             </Button>

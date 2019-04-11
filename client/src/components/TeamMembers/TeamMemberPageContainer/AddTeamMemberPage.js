@@ -39,6 +39,14 @@ const styles = theme => ({
   },
   button: {
     "margin-left": theme.spacing.unit
+  },
+  addButton: {
+    "margin-left": theme.spacing.unit,
+    color: "#451476",
+    "&:hover": {
+      background: "#451476",
+      color: "white"
+    }
   }
 });
 
@@ -164,8 +172,7 @@ class TeamMemberPage extends React.Component {
             <Button
               disabled={this.state.isRouting === true ? "true" : null}
               variant="outlined"
-              color="primary"
-              className={classes.button}
+              className={classes.addButton}
               type="submit"
             >
               {this.state.isRouting ? (

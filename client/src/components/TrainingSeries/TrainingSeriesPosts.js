@@ -100,14 +100,13 @@ const styles = theme => ({
     display: "none"
   },
   button: {
-    // position: 'relative',
-    // top: '5px',
-    // right: '5px',
-    // width: '160px',
-    // position: 'relative',
-    // left: '70%',
-    // top: '-40px',
-    margin: 5
+    // margin: 5,
+    "margin-left": theme.spacing.unit,
+    color: "#451476",
+    "&:hover": {
+      background: "#451476",
+      color: "white"
+    }
   },
   list: {
     listStyleType: "none"

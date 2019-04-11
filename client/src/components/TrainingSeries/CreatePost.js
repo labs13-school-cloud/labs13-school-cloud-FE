@@ -45,6 +45,13 @@ const styles = theme => ({
   },
   button: {
     "margin-left": theme.spacing.unit
+  },
+  createButton: {
+    "margin-left": theme.spacing.unit,
+    "&:hover": {
+      background: " #451476",
+      color: "white"
+    }
   }
 });
 
@@ -168,8 +175,7 @@ class CreatePost extends React.Component {
             /> */}
             <Button
               variant="outlined"
-              color="primary"
-              className={classes.button}
+              className={classes.createButton}
               type="submit"
               form="form1"
             >

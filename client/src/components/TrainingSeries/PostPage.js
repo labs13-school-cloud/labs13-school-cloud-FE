@@ -48,6 +48,15 @@ const styles = theme => ({
   },
   button: {
     "margin-left": theme.spacing.unit
+  },
+  saveButton: {
+    // margin: 5,
+    "margin-left": theme.spacing.unit,
+    color: "#451476",
+    "&:hover": {
+      background: "#451476",
+      color: "white"
+    }
   }
 });
 
@@ -168,8 +177,7 @@ class PostPage extends React.Component {
           <ButtonContainer>
             <Button
               variant="outlined"
-              color="primary"
-              className={classes.button}
+              className={classes.saveButton}
               type="submit"
               form="form1"
             >
