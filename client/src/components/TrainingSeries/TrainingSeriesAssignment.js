@@ -1,13 +1,10 @@
 import React from "react";
 
-import styled from 'styled-components'
+import styled from "styled-components";
 import { withStyles } from "@material-ui/core/styles";
-import {
-  ListItem,
-  ListItemText
-} from "@material-ui/core/";
+import { ListItem, ListItemText, Divider } from "@material-ui/core/";
 
-import moment from 'moment';
+import moment from "moment";
 
 const styles = theme => ({
   listStyle: {
@@ -22,9 +19,14 @@ const styles = theme => ({
     width: "79%",
     height: 95,
     display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    borderBottom: "1px solid #E8E9EB"
+    // justifyContent: "space-between",
+    // alignItems: "center",
+
+    "@media (max-width: 768px)": {
+      width: "100%",
+      margin: "0 auto",
+      textAlign: "center"
+    }
   },
   bullet: {
     display: "inline-block",
@@ -44,8 +46,7 @@ const styles = theme => ({
 
 const TrainingSeriesAssignment = props => {
   const { classes } = props;
-  const startDate = moment(props.member.startDate)
-    .format("MMMM Do, YYYY ");
+  const startDate = moment(props.member.startDate).format("MMMM Do, YYYY ");
   return (
     <ListStyles>
       <ListItem className={classes.listItem}>

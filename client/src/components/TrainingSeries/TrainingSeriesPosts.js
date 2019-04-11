@@ -42,16 +42,24 @@ import AddMemberSnackbar from "./AddMembersToTrainingSeries/AddMemberSnackbar";
 
 const styles = theme => ({
   paper: {
-    width: "100%",
+    // "max-width": 800,
+    width: "89%",
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
     padding: theme.spacing.unit * 4,
     outline: "none",
     margin: "5px auto",
-    "@media (max-width: 480px)": {
+
+    "@media (max-width: 768px)": {
       width: "89%",
-      padding: 0,
-      margin: "0 auto"
+      // padding: 0,
+      margin: "5px auto"
+    },
+
+    "@media (max-width: 480px)": {
+      width: "80%",
+      // padding: 0,
+      margin: "5px auto"
     }
   },
   paperTitle: {
@@ -79,15 +87,20 @@ const styles = theme => ({
   },
   listItem: {
     width: "79%",
-    height: 95,
-    marginBottom: 20,
+    height: 80,
+    marginBottom: 10,
     paddingBottom: 10,
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    borderBottom: "1px solid #E8E9EB"
+    wrap: "flex-wrap"
+
+    // borderBottom: "1px solid #E8E9EB"
     // "list-style": "none"
   },
+  // listItemText: {
+  //   width: "10%"
+  // },
   icons: {
     display: "block",
     width: 20,
@@ -106,12 +119,39 @@ const styles = theme => ({
     "&:hover": {
       background: "#451476",
       color: "white"
+    },
+
+    "@media (max-width: 768px)": {
+      margin: "10px 5px"
     }
+
+    // "@media (max-width: 480px)": {
+    //   fontSize: 11,
+    //   padding: 7
+    // }
+  },
+  assignButton: {
+    // margin: 5,
+    "margin-left": theme.spacing.unit,
+    color: "#451476",
+    "&:hover": {
+      background: "#451476",
+      color: "white"
+    },
+
+    "@media (max-width: 768px)": {
+      margin: "10px 5px"
+    }
+
+    // "@media (max-width: 480px)": {
+    //   fontSize: 11,
+    //   width: "45%",
+    //   padding: "7px 12px"
+    // }
   },
   list: {
     listStyleType: "none"
   },
-  AssignBtn: {},
   messageText: {
     marginTop: 20,
     marginBottom: 20,
@@ -286,9 +326,11 @@ class TrainingSeriesPosts extends React.Component {
       assignedMembersStatus = (
         <>
           <HeaderContainer>
-            <Typography variant="title">Assigned Team Members</Typography>
+            <Typography variant="title" className={classes.assignedTitle}>
+              Assigned Team Members
+            </Typography>
             <Button
-              className={classes.button}
+              className={classes.assignButton}
               variant="outlined"
               onClick={this.routeToAssigning}
             >
@@ -296,7 +338,10 @@ class TrainingSeriesPosts extends React.Component {
             </Button>
           </HeaderContainer>
           {this.props.assignments.map(member => (
-            <TrainingSeriesAssignment member={member} />
+            <>
+              <TrainingSeriesAssignment member={member} />
+              <Divider />
+            </>
           ))}
         </>
       );
@@ -384,30 +429,36 @@ class TrainingSeriesPosts extends React.Component {
             )}
             <ListStyles className={classes.listStyle}>
               {posts.map(post => (
-                <ListItem key={post.postID} className={classes.listItem}>
-                  <ListItemText
-                    primary={post.postName}
-                    secondary={post.postDetails}
-                  />
-                  <ListItemSecondaryAction className={classes.secondaryAction}>
-                    <div>
-                      <p>{post.daysFromStart} days</p>
-                    </div>
-                    <ListButtonContainer>
-                      <i
-                        className={`material-icons ${classes.icons}`}
-                        onClick={e => this.routeToEditPostPage(e, post)}
-                      >
-                        edit
-                      </i>
-                      <DeleteModal
-                        className={`material-icons ${classes.icons}`}
-                        deleteType="post"
-                        id={post.postID}
-                      />
-                    </ListButtonContainer>
-                  </ListItemSecondaryAction>
-                </ListItem>
+                <>
+                  <ListItem key={post.postID} className={classes.listItem}>
+                    <ListItemText
+                      primary={post.postName}
+                      secondary={post.postDetails}
+                      className={classes.listItemText}
+                    />
+                    <ListItemSecondaryAction
+                      className={classes.secondaryAction}
+                    >
+                      <div>
+                        <p>{post.daysFromStart} days</p>
+                      </div>
+                      <ListButtonContainer>
+                        <i
+                          className={`material-icons ${classes.icons}`}
+                          onClick={e => this.routeToEditPostPage(e, post)}
+                        >
+                          edit
+                        </i>
+                        <DeleteModal
+                          className={`material-icons ${classes.icons}`}
+                          deleteType="post"
+                          id={post.postID}
+                        />
+                      </ListButtonContainer>
+                    </ListItemSecondaryAction>
+                  </ListItem>
+                  <Divider />
+                </>
               ))}
             </ListStyles>
           </Paper>
@@ -431,6 +482,17 @@ const HeaderContainer = styled.div`
   justify-content: space-between;
   display: flex;
   align-items: baseline;
+
+  @media (max-width: 768px) {
+    max-width: 768px;
+    height: 100%;
+    flex-direction: column;
+
+    padding: 10px 0;
+    align-items: center;
+    margin: 0 auto;
+    text-align: center;
+  }
 `;
 
 const ListStyles = styled.div`
