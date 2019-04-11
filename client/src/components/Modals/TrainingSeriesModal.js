@@ -1,6 +1,4 @@
 import React from "react";
-//Prop Types
-import PropTypes from "prop-types";
 
 //Styles
 import { withStyles } from "@material-ui/core/styles";
@@ -158,9 +156,7 @@ class TrainingSeriesModal extends React.Component {
   }
 }
 
-TrainingSeriesModal.propTypes = {
-  classes: PropTypes.object.isRequired
-};
+
 
 const mapStateToProps = state => {
   return {

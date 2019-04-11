@@ -9,11 +9,8 @@ import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import NotificationWidget from "./SnackBarTrainingSeries";
-import FormControl from "@material-ui/core/FormControl";
 
-//Components
-
+// Redux
 import {
   getTrainingSeriesPosts,
   createAPost,
@@ -106,18 +103,61 @@ class CreatePost extends React.Component {
 
   render() {
     const { classes } = this.props;
-
-    console.log("POST PAGE", this.state);
     return (
       <MainContainer>
         <Typography variant="display1" align="center" gutterBottom>
-          Create A New Post
+          Create A New Message
         </Typography>
         <form
           className={classes.form}
           id="form1"
           onSubmit={e => this.handlePostSubmit(e)}
         >
+          {/* <DeleteModal deleteType='inTeamMemberPage' id={this.props.urlId} /> */}
+
+          <Paper className={classes.root}>
+            <PostContainer>
+              <TextField
+                id="standard-name"
+                label="Message Title"
+                className={classes.textField}
+                value={this.state.post.postName}
+                onChange={this.handleChange("postName")}
+                margin="normal"
+                required
+              />
+              <TextField
+                id="standard-name"
+                label="Message Content"
+                className={classes.textField}
+                value={this.state.post.postDetails}
+                onChange={this.handleChange("postDetails")}
+                margin="normal"
+                required
+              />
+              <TextField
+                id="standard-name"
+                label="Link"
+                className={classes.textField}
+                value={this.state.post.link}
+                onChange={this.handleChange("link")}
+                margin="normal"
+                required
+              />
+              <TextField
+                id="outlined-number"
+                label="Days from Start"
+                margin="normal"
+                className={classes.textField}
+                onChange={this.handleChange("daysFromStart")}
+                type="number"
+                value={this.state.post.daysFromStart}
+                step="1"
+                inputProps={{ min: 1 }}
+                required
+              />
+            </PostContainer>
+          </Paper>
           <ButtonContainer>
             {/* <NotificationWidget
               teamMember={this.state.teamMember}
@@ -149,52 +189,6 @@ class CreatePost extends React.Component {
               Cancel
             </Button>
           </ButtonContainer>
-          {/* <DeleteModal deleteType='inTeamMemberPage' id={this.props.urlId} /> */}
-
-          <Paper className={classes.root}>
-            <Typography>Create A Post</Typography>
-            <PostContainer>
-              <TextField
-                id="standard-name"
-                label="Post Title"
-                className={classes.textField}
-                value={this.state.post.postName}
-                onChange={this.handleChange("postName")}
-                margin="normal"
-                required
-              />
-              <TextField
-                id="standard-name"
-                label="Post Content"
-                className={classes.textField}
-                value={this.state.post.postDetails}
-                onChange={this.handleChange("postDetails")}
-                margin="normal"
-                required
-              />
-              <TextField
-                id="standard-name"
-                label="Link"
-                className={classes.textField}
-                value={this.state.post.link}
-                onChange={this.handleChange("link")}
-                margin="normal"
-                required
-              />
-              <TextField
-                id="outlined-number"
-                label="Days from Start"
-                margin="normal"
-                className={classes.textField}
-                onChange={this.handleChange("daysFromStart")}
-                type="number"
-                value={this.state.post.daysFromStart}
-                step="1"
-                inputProps={{ min: 1 }}
-                required
-              />
-            </PostContainer>
-          </Paper>
         </form>
       </MainContainer>
     );

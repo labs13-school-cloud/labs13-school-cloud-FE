@@ -1,54 +1,47 @@
 // displays individual team member card
-import React, { useState } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
-import { deleteTeamMember } from "../../store/actions";
+import { deleteTeamMember } from '../../store/actions';
 
 //Styles
-import { withStyles } from "@material-ui/core/styles";
-import {
-  // Card,
-  // CardActions,
-  // CardContent,
-  // Typography,
-  ListItem,
-  ListItemText
-} from "@material-ui/core/";
+import { withStyles } from '@material-ui/core/styles';
+import { ListItem, ListItemText } from '@material-ui/core/';
 
-import TeamMemberMenuBtn from "../TeamMembers/TeamMemberMenuBtn";
 //Routing
-import { withRouter } from "react-router";
+import { withRouter } from 'react-router';
+import TeamMemberOptions from '../Modals/TeamMemberOptions';
 
 const styles = {
   card: {
-    width: "100%",
+    width: '100%',
     marginBottom: 20,
-    display: "flex",
-    justifyContent: "space-between"
+    display: 'flex',
+    justifyContent: 'space-between'
 
     // "&:hover": {
     //   background: "#C8C8C8"
     // }
   },
   listItem: {
-    width: "100%",
+    width: '100%',
     height: 70,
     marginBottom: 10,
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    borderBottom: "1px solid #E8E9EB"
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    borderBottom: '1px solid #E8E9EB'
   },
   icons: {
-    display: "block",
+    display: 'block',
     width: 20,
-    color: "gray",
-    cursor: "pointer",
-    "&:hover": { color: "#2699FB" }
+    color: 'gray',
+    cursor: 'pointer',
+    '&:hover': { color: '#2699FB' }
   },
   hidden: {
-    display: "none"
+    display: 'none'
   },
 
   title: {
@@ -64,7 +57,6 @@ function TeamMember(props) {
     jobDescription,
     teamMemberID
   } = props.teamMember;
-  const [id, setID] = useState(false);
 
   const routeToMemberPage = (e, id) => {
     e.preventDefault();
@@ -77,56 +69,20 @@ function TeamMember(props) {
   };
 
   return (
-    <ListItem
-      className={classes.listItem}
-      onMouseEnter={() => {
-        setID(true);
-      }}
-      onMouseLeave={() => {
-        setID(false);
-      }}
-    >
+    <ListItem className={classes.listItem}>
       <ListItemText
-        primary={firstName + " " + lastName}
+        primary={firstName + ' ' + lastName}
         secondary={`Job: ${jobDescription}`}
       />
-      {id ? (
-        <div>
-          <i
-            className={`material-icons ${classes.icons}`}
-            onClick={e => routeToMemberPage(e, teamMemberID)}
-          >
-            edit
-          </i>
-          <i
-            className={`material-icons ${classes.icons}`}
-            onClick={e => handleDelete(e, teamMemberID)}
-          >
-            delete
-          </i>
-        </div>
-      ) : (
-        <></>
-      )}
-      {/* <TeamMemberMenuBtn teamMember={props.teamMember} /> */}
+      <div>
+        <TeamMemberOptions
+          routeToMemberPage={routeToMemberPage}
+          handleDelete={handleDelete}
+          teamMemberID={teamMemberID}
+          userId={props.userId}
+        />
+      </div>
     </ListItem>
-
-    // <Card className={classes.card}>
-    //   <CardContent>
-    //     <Typography
-    //       className={classes.title}
-    //       variant="h5"
-    //       component="h3"
-    //       gutterBottom
-    //     >
-    //       {firstName + ' ' + lastName}
-    //     </Typography>
-    //     <Typography variant="caption">Job: {jobDescription}</Typography>
-    //   </CardContent>
-    //   <CardActions>
-    //     <TeamMemberMenuBtn teamMember={props.teamMember} />
-    //   </CardActions>
-    // </Card>
   );
 }
 

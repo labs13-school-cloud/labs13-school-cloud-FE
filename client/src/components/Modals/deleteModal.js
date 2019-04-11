@@ -1,26 +1,25 @@
-import React from "react";
+import React from 'react';
 //Prop Types
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 
 //Styles
-import { withStyles } from "@material-ui/core/styles";
-import Modal from "@material-ui/core/Modal";
-import Button from "@material-ui/core/Button";
-import { withRouter } from "react-router";
+import { withStyles } from '@material-ui/core/styles';
+import Modal from '@material-ui/core/Modal';
+import Button from '@material-ui/core/Button';
+import { withRouter } from 'react-router';
 //REDUX
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
 import {
   deleteTrainingSeries,
   deleteTeamMember,
   deletePost,
   deleteUser,
-  deleteTeamMemberFromTrainingSeries
-} from "../../store/actions/";
+  deleteTeamMemberFromTrainingSeries,
+  getTextNotifications,
+  getEmailNotifications
+} from '../../store/actions/';
 
-import { FormLabel, Typography } from "@material-ui/core";
-
-import DeleteIcon from "@material-ui/icons/Delete";
-import IconButton from "@material-ui/core/IconButton";
+import { FormLabel } from '@material-ui/core';
 
 function getModalStyle() {
   const top = 50;
@@ -35,16 +34,16 @@ function getModalStyle() {
 
 const styles = theme => ({
   paper: {
-    position: "absolute",
+    position: 'absolute',
     width: theme.spacing.unit * 25,
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
     padding: theme.spacing.unit * 4,
-    outline: "none"
+    outline: 'none'
   },
   container: {
-    display: "flex",
-    flexWrap: "wrap"
+    display: 'flex',
+    flexWrap: 'wrap'
   },
   textField: {
     marginLeft: theme.spacing.unit,
@@ -58,21 +57,21 @@ const styles = theme => ({
     width: 200
   },
   button: {
-    margin: theme.spacing.unit
+    'margin-left': theme.spacing.unit
   },
   icons: {
-    display: "block",
+    display: 'block',
     width: 20,
-    color: "gray",
-    cursor: "pointer",
-    "&:hover": { color: "#2699FB" }
+    color: 'gray',
+    cursor: 'pointer',
+    '&:hover': { color: '#2699FB' }
   }
 });
 
 class TrainingSeriesModal extends React.Component {
   state = {
     open: false,
-    title: ""
+    title: ''
   };
 
   handleOpen = () => {
@@ -84,31 +83,44 @@ class TrainingSeriesModal extends React.Component {
   };
 
   clearForm = () => {
-    this.setState({ title: "" });
+    this.setState({ title: '' });
   };
 
   handleDelete = () => {
     switch (this.props.deleteType) {
-      case "post":
+      case 'post':
         this.props.deletePost(this.props.id);
         break;
-      case "teamMember":
-        this.props.deleteTeamMember(this.props.id);
+      case 'teamMember':
+        this.props.deleteTeamMember(this.props.teamMemberId);
+        setTimeout(() => {
+          this.props.getEmailNotifications(this.props.userId);
+          this.props.getTextNotifications(this.props.userId);
+        }, 500);
         break;
-      case "inTeamMemberPage":
-        this.props.deleteTeamMember(this.props.id);
-        this.props.deleteSuccess && console.log("PUSHED TO HOME!");
+      case 'inTeamMemberPage':
+        this.props.deleteTeamMember(this.props.teamMemberId);
+        setTimeout(() => {
+          this.props.getEmailNotifications(this.props.userId);
+          this.props.getTextNotifications(this.props.userId);
+        }, 800);
+        this.props.history.push('/home');
         break;
-      case "removeMemberFromTS":
+      case 'removeMemberFromTS':
         this.props.deleteTeamMemberFromTrainingSeries(
           this.props.teamMemberId,
           this.props.trainingSeries_Id
         );
         break;
-      case "trainingSeries":
-        this.props.deleteTrainingSeries(this.props.id);
+      case 'trainingSeries':
+        this.props.deleteTrainingSeries(this.props.trainingSeriesId);
+        setTimeout(() => {
+          this.props.getEmailNotifications(this.props.userId);
+          this.props.getTextNotifications(this.props.userId);
+        }, 500);
+
         break;
-      case "user":
+      case 'user':
         this.props.deleteUser(this.props.id);
         this.props.reRouteOnDelete();
         break;
@@ -118,42 +130,40 @@ class TrainingSeriesModal extends React.Component {
     this.handleClose();
   };
 
-  render() {
-    const { classes } = this.props;
-    console.log(
-      "DELETE MODAL",
-      this.props.teamMemberId,
-      this.props.trainingSeries_Id
-    );
-
-    return (
-      <div>
-        {/* {this.props.deleteType === "removeMemberFromTS" ? (
-          <IconButton
-            aria-label="Delete"
-            className={classes.margin}
-            onClick={this.handleOpen}
-          >
-            <DeleteIcon fontSize="small" />
-          </IconButton>
-        ) : (
+  handleDisplayType = () => {
+    switch (this.props.displayType) {
+      case 'button':
+        return (
           <Button
             variant="contained"
-            color="secondary"
-            size="small"
+            color="primary"
+            style={{ marginLeft: 10 }}
             onClick={this.handleOpen}
           >
             Delete
           </Button>
-        )} */}
+        );
+      case 'text':
+        return <p onClick={this.handleOpen}>Delete</p>;
+      default:
+        const { classes } = this.props;
+        return (
+          <i
+            onClick={this.handleOpen}
+            className={`material-icons ${classes.icons}`}
+          >
+            delete
+          </i>
+        );
+    }
+  };
 
-        <i
-          // fontSize="small"
-          onClick={this.handleOpen}
-          className={`material-icons ${classes.icons}`}
-        >
-          delete
-        </i>
+  render() {
+    const { classes } = this.props;
+
+    return (
+      <div>
+        {this.handleDisplayType()}
 
         <Modal
           aria-labelledby="simple-modal-title"
@@ -197,6 +207,8 @@ export default connect(
     deleteTeamMember,
     deleteUser,
     deleteTrainingSeries,
-    deleteTeamMemberFromTrainingSeries
+    deleteTeamMemberFromTrainingSeries,
+    getTextNotifications,
+    getEmailNotifications
   }
 )(withRouter(TrainingSeriesModalWrapped));

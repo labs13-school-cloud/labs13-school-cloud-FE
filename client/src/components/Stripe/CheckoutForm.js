@@ -6,16 +6,9 @@ import { getPlans, getCustomersPlan, unsubscribe, submit } from '../../store/act
 import { getUser } from '../../store/actions/userActions';
 import logo from '../../img/trainingBot.gif';
 
-import {
-	withStyles,
-	FormControl,
-	FormLabel,
-	Button,
-	CircularProgress,
-	Typography,
-	Modal,
-} from '@material-ui/core/';
+import { withStyles, FormControl, Button, Typography, Modal } from '@material-ui/core/';
 import UnsubscribeModal from './unsubscribeModal';
+import Pricing from '../LandingPage/Pricing';
 
 const styles = theme => ({
 	paper: {
@@ -47,6 +40,13 @@ const styles = theme => ({
 		display: 'flex',
 		margin: theme.spacing.unit * 3,
 	},
+	buttonLayout: {
+		display: 'flex',
+		flexDirection: 'column',
+		justifyContent: 'center',
+		width: 200,
+		margin: '0 auto',
+	},
 	submitButton: {
 		width: 100,
 		padding: 5,
@@ -61,9 +61,6 @@ const styles = theme => ({
 		marginRight: theme.spacing.unit,
 		width: 200,
 	},
-
-	buttonLayout: { display: 'flex' },
-
 	progress: { margin: '50px auto', maxWidth: 100, width: 100 },
 });
 
@@ -81,6 +78,7 @@ class CheckoutForm extends Component {
 			premium: false,
 			open: false,
 			buttonState: '',
+			error: '',
 		};
 	}
 	handleOpen = () => {
@@ -107,17 +105,25 @@ class CheckoutForm extends Component {
 		});
 	};
 	createToken = async email => {
-		let { token } = await this.props.stripe.createToken({ email: email });
-		return token.id;
+		try {
+			let { token } = await this.props.stripe.createToken({ email: email });
+			return token.id;
+		} catch (err) {
+			this.setState({ error: 'Please enter payment information' });
+		}
 	};
 	submit = async () => {
 		const { name, email, userID, stripe } = this.props.userProfile;
 		const { plan } = this.state;
 		let token = await this.createToken(email);
-		await this.props.submit(token, name, email, userID, stripe, plan);
-		this.setState({
-			paymentToggle: false,
-		});
+		if (token !== undefined) {
+			await this.props.submit(token, name, email, userID, stripe, plan);
+			this.setState({
+				paymentToggle: false,
+			});
+		} else {
+			this.setState({ error: 'Please enter payment information' });
+		}
 	};
 	unsub = (userID, stripe) => {
 		this.props.unsubscribe(userID, stripe);
@@ -126,7 +132,15 @@ class CheckoutForm extends Component {
 
 	render() {
 		const { classes } = this.props;
+		let accountType;
+		if (this.props.userProfile.accountTypeID === 2) {
+			accountType = 'Premium';
+		} else if (this.props.userProfile.accountTypeID === 3) {
+			accountType = 'Pro';
+		}
+
 		let unsubscribe;
+
 		if (this.props.userProfile.accountTypeID > 1) {
 			unsubscribe = (
 				<Button
@@ -134,6 +148,12 @@ class CheckoutForm extends Component {
 					color="default"
 					className={classes.button}
 					onClick={this.handleOpen}>
+					Unsubscribe
+				</Button>
+			);
+		} else {
+			unsubscribe = (
+				<Button variant="contained" color="default" className={classes.button} disabled>
 					Unsubscribe
 				</Button>
 			);
@@ -153,30 +173,30 @@ class CheckoutForm extends Component {
 					<div>
 						{this.props.userError}
 						{this.props.stripeError}
+						<Pricing />
 						<FormControl component="fieldset" className={classes.formControl}>
-							<Typography variant="h4" gutterBottom>
-								Subscriptions
-							</Typography>
 							<div className={classes.buttonLayout}>
+								<div>
+									{this.props.plans.map(plan => {
+										return plan.nickname === accountType ? (
+											<Button key={plan.created} disabled>
+												{plan.nickname}
+											</Button>
+										) : (
+											<Button
+												key={plan.created}
+												variant={'outlined'}
+												color="primary"
+												name="plan"
+												className={classes.button}
+												value={plan.id}
+												onClick={e => this.handleChange(e, plan.nickname)}>
+												{plan.nickname}
+											</Button>
+										);
+									})}
+								</div>
 								{unsubscribe}
-								{this.props.plans.map(plan => {
-									return (
-										<Button
-											key={plan.created}
-											variant={
-												this.state.buttonState === plan.nickname
-													? 'contained'
-													: 'outlined'
-											}
-											color="primary"
-											name="plan"
-											className={classes.button}
-											value={plan.id}
-											onClick={e => this.handleChange(e, plan.nickname)}>
-											{plan.nickname}
-										</Button>
-									);
-								})}
 							</div>
 						</FormControl>
 						{this.state.paymentToggle ? (
@@ -198,6 +218,7 @@ class CheckoutForm extends Component {
 					) : (
 						<span />
 					)}
+					{/* {this.state.error ? <p>{this.state.error}</p> : <span />} */}
 
 					{/* Unsubscribe Modal */}
 					<Modal

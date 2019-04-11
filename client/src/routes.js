@@ -1,24 +1,24 @@
-import React from "react";
+import React from 'react';
 
 //Routing
-import { Route, Router } from "react-router-dom";
+import { Route, Router } from 'react-router-dom';
 
 //Components
-import App from "./App";
-import DashboardView from "./components/Dashboard/DashboardView";
+import App from './App';
+import DashboardView from './components/Dashboard/DashboardView';
 
 //Callback
-import Callback from "./components/Callback/callback";
+import Callback from './components/Callback/callback';
 
 //History
-import history from "./history";
+import history from './history';
 
-import { Provider } from "react-redux";
-import { createStore, applyMiddleware, compose } from "redux";
-import thunk from "redux-thunk";
-import logger from "redux-logger";
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware, compose } from 'redux';
+import thunk from 'redux-thunk';
+import logger from 'redux-logger';
 
-import rootReducer from "./store/reducers";
+import rootReducer from './store/reducers';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -34,9 +34,9 @@ export const makeMainRoutes = () => {
       <Router history={history}>
         <>
           <div>
-            <Route exact path='/' component={App} />
-            <Route path='/home' component={DashboardView} />
-            <Route path='/callback' component={Callback} />
+            <Route exact path="/" component={App} />
+            <Route path="/home" component={DashboardView} />
+            <Route path="/callback" component={Callback} />
           </div>
         </>
       </Router>

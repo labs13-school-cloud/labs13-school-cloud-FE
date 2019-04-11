@@ -8,26 +8,28 @@ import history from "../../history";
 import styled from "styled-components";
 
 //Components
-
 import TeamMembersView from "../TeamMembers/TeamMembersView";
 import TrainingSeriesView from "../TrainingSeries/TrainingSeriesView";
 import ProgressCircle from "../Progress/ProgressCircle";
 import ProfileView from "../Profile/ProfileView";
 import AppBar from "../AppBar/AppBar";
 import TeamMemberPageView from "../TeamMembers/TeamMemberPageContainer/TeamMemberPageView";
-
-//Auth
-import { getUserProfile } from "../../Auth/Auth";
-import Authenticate from "../authenticate/authenticate";
-
-//State Management
-import { connect } from "react-redux";
-import { getUser } from "../../store/actions/userActions";
+import AddTrainingSeriesView from "../TrainingSeries/AddMembersToTrainingSeries/AddMembersView.js";
+import CreateTrainingSeries from "../TrainingSeries/CreateTrainingSeries";
+import ReturnToDashboardButton from "../Navigation/ReturnToDashboard";
 import TrainingSeriesPosts from "../TrainingSeries/TrainingSeriesPosts";
 import AddTeamMemberPage from "../TeamMembers/TeamMemberPageContainer/AddTeamMemberPage";
 import CreatePost from "../TrainingSeries/CreatePost";
 import PostPage from "../TrainingSeries/PostPage";
 import NotificationsView from "../Notifications/NotificationsView";
+import AssignMemberPage from "../TeamMembers/TeamMemberPageContainer/AssignMemberPage";
+
+//Auth
+import Authenticate from "../authenticate/authenticate";
+
+//State Management
+import { connect } from "react-redux";
+import { getUser } from "../../store/actions/userActions";
 
 class Dashboard extends React.Component {
   state = {
@@ -35,17 +37,20 @@ class Dashboard extends React.Component {
   };
 
   componentDidMount() {
-    getUserProfile(() => {
-      this.props.getUser();
-    });
+    this.props.getUser();
   }
 
   renderDashboard = () => {
-    const { user } = this.props.userProfile;
+    const user = this.props.userProfile.user;
     return (
       <>
-        <TeamMembersView userId={user.userID} />
-        <TrainingSeriesView userId={user.userID} match={this.props.match} />
+        <TripleColumn>
+          <SmallColumns>
+            <TeamMembersView userId={user.userID} />
+            <TrainingSeriesView userId={user.userID} match={this.props.match} />
+          </SmallColumns>
+          <NotificationsView userId={user.userID} />
+        </TripleColumn>
       </>
     );
   };
@@ -55,7 +60,11 @@ class Dashboard extends React.Component {
       <>
         {this.props.doneLoading ? (
           <>
+            {this.props.getUser}
             <AppBar />
+            {this.props.location.pathname !== "/home" && (
+              <ReturnToDashboardButton />
+            )}
             <DashboardContainer>
               <Router history={history}>
                 <Route exact path="/home" component={this.renderDashboard} />
@@ -79,24 +88,46 @@ class Dashboard extends React.Component {
                   )}
                 />
                 <Route
-                  path="/home/training-series/:id"
-                  render={props => <TrainingSeriesPosts {...props} />}
-                />
-                <Route
-                  path="/home/create-post"
-                  render={props => <CreatePost {...props} />}
-                />
-                <Route path="/home/post/:id" component={PostPage} />
-
-                <Route
-                  path="/home/notifications"
+                  path="/home/create-training-series"
                   render={props => (
-                    <NotificationsView
+                    <CreateTrainingSeries
                       {...props}
                       userId={this.props.userProfile.user.userID}
                     />
                   )}
                 />
+                <Route
+                  path="/home/training-series/:id"
+                  render={props => (
+                    <TrainingSeriesPosts
+                      {...props}
+                      userId={this.props.userProfile.user.userID}
+                    />
+                  )}
+                />
+                <Route
+                  path="/home/create-post"
+                  render={props => <CreatePost {...props} />}
+                />
+                <Route
+                  path="/home/assign-members/:id"
+                  render={props => (
+                    <AddTrainingSeriesView
+                      {...props}
+                      userId={this.props.userProfile.user.userID}
+                    />
+                  )}
+                />
+                <Route
+                  path="/home/assign-series/:id"
+                  render={props => (
+                    <AssignMemberPage
+                      {...props}
+                      userId={this.props.userProfile.user.userID}
+                    />
+                  )}
+                />
+                <Route path="/home/post/:id" component={PostPage} />
               </Router>
             </DashboardContainer>
           </>
@@ -130,39 +161,46 @@ export default connect(
 )(Authenticate(Dashboard));
 
 //Styled Components
+const TripleColumn = styled.div`
+  max-width: 1400px;
+  display: flex;
+  justify-content: space-between;
+  margin: 10px auto;
+  /* height: 500px; */
+  @media (max-width: 1400px) {
+    flex-wrap: wrap;
+    max-width: 1000px;
+    padding: 10px;
+  }
+  @media (max-width: 768px) {
+    max-width: 768px;
+    height: 100%;
+    flex-direction: column;
+    padding: 10px;
+    /* margin: 0 auto 5px; */
+  }
+`;
+const SmallColumns = styled.div`
+  display: flex;
+  width: 800px;
+  @media (max-width: 1400px) {
+    width: 100%;
+    margin-bottom: 50px;
+  }
+  @media (max-width: 768px) {
+    flex-direction: column;
+    /* margin: 0 auto 5px; */
+    margin-bottom: 5px;
+  }
+`;
 const DashboardContainer = styled.div`
   display: flex;
-  justify-content: space-around;
-  margin: 0 auto;
-  max-width: 1000px;
-  /* height: 70vh; */
+  /* background-color: #fafafa; */
+
   @media (max-width: 768px) {
+    max-width: 768px;
+    height: 100%;
     flex-direction: column;
     padding: 10px;
   }
 `;
-
-const hidden = {
-  display: "none"
-};
-
-const active = {
-  display: "block"
-};
-
-// const toggleTrainingSeries = tabValue => {
-
-//   return tabValue === 0 ? active : hidden;
-// };
-
-// const toggleTeamMembers = tabValue => {
-//   const hidden = {
-//     display: "none"
-//   };
-
-//   const active = {
-//     display: "block"
-//   };
-
-//   return tabValue === 1 ? active : hidden;
-// };

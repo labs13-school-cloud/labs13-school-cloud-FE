@@ -10,10 +10,6 @@ import Modal from '@material-ui/core/Modal';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
 import Fab from '@material-ui/core/Fab';
-// import Checkbox from "@material-ui/core/Checkbox";
-// import FormLabel from "@material-ui/core/FormLabel";
-// import FormControlLabel from "@material-ui/core/FormControlLabel";
-// import styled from "styled-components";
 import Select from '@material-ui/core/Select';
 import FormControl from '@material-ui/core/FormControl';
 import { MenuItem } from '@material-ui/core';
@@ -22,7 +18,6 @@ import InputLabel from '@material-ui/core/InputLabel';
 //REDUX
 import { connect } from 'react-redux';
 import { addTeamMemberToTrainingSeries } from '../../store/actions/';
-import { TransitionGroup } from 'react-transition-group';
 
 function getModalStyle() {
   const top = 50;
@@ -37,15 +32,14 @@ function getModalStyle() {
 
 const styles = theme => ({
   paper: {
-
-    position: "absolute",
+    position: 'absolute',
     width: theme.spacing.unit * 50,
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
     padding: theme.spacing.unit * 4,
-    outline: "none",
-    "@media (max-width: 768px)": {
-      width: "65%",
+    outline: 'none',
+    '@media (max-width: 768px)': {
+      width: '65%'
     }
   },
   container: {
@@ -158,6 +152,7 @@ class UserModal extends React.Component {
           aria-label="Add"
           className={classes.fab}
           onClick={this.handleOpen}
+          disabled={this.props.disabledBool ? 'true' : null}
         >
           <AddIcon />
         </Fab>

@@ -1,21 +1,13 @@
 // displays training series card
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 //PropTypes
 import PropTypes from 'prop-types';
 
 //Styling
 import { withStyles } from '@material-ui/core/styles';
-import {
-	// Card,
-	// CardContent,
-	// Typography,
-	// List,
-	ListItem,
-	// ListItemSecondaryAction,
-	ListItemText,
-} from '@material-ui/core/';
+import { ListItem, ListItemText } from '@material-ui/core/';
 
 import SlideDownModal from '../Modals/SlideDownModal';
 
@@ -36,36 +28,53 @@ const styles = {
 
 function SeriesCard(props) {
 	const { classes } = props;
+	const [postLength, setPostLength] = useState(0);
+	const [assignedLength, setAssignedLength] = useState(0);
+
+	async function getPostCount() {
+		await axios
+			.get(`${process.env.REACT_APP_API}/api/training-series/${props.trainingSeriesID}/posts`)
+			.then(res => {
+				setPostLength(res.data.posts.length);
+			})
+			.catch(err => {
+				console.log(err);
+			});
+	}
+	async function getMemberCount() {
+		await axios
+			.get(
+				`${process.env.REACT_APP_API}/api/training-series/${
+					props.trainingSeriesID
+				}/assignments`
+			)
+			.then(res => {
+				// console.log('getMemberCount', res.data.assignments.length);
+				setAssignedLength(res.data.assignments.length);
+			})
+			.catch(err => {
+				console.log(err);
+			});
+	}
+
+	useEffect(() => {
+		getPostCount();
+		getMemberCount();
+	});
 
 	return (
 		<ListItem className={classes.listItem}>
-			<ListItemText primary={props.data.title} secondary="Posts: 10 | Assigned: 5" />
+			<ListItemText
+				primary={props.data.title}
+				secondary={`Messages: ${postLength} | Assigned: ${assignedLength}`}
+			/>
 
 			<SlideDownModal
 				deleteTrainingSeries={props.deleteTrainingSeries}
 				data={props.data}
-				userID={props.userID}
+				userId={props.userId}
 			/>
 		</ListItem>
-
-		// <Card className={classes.card}>
-		//   <CardContent>
-		//     <Typography
-		//       className={classes.title}
-		//       variant="h5"
-		//       component="h3"
-		//       gutterBottom
-		//     >
-		//       {props.data.title}
-		//     </Typography>
-		//     <Typography variant="caption">Posts: 10 | Assigned: 5</Typography>
-		//   </CardContent>
-		//   <SlideDownModal
-		//     deleteTrainingSeries={props.deleteTrainingSeries}
-		//     data={props.data}
-		//     userID={props.userID}
-		//   />
-		// </Card>
 	);
 }
 

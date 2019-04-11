@@ -2,9 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 //Components
-import UserModal from '../Modals/userModal';
+// import UserModal from '../Modals/userModal';
 import StripeView from '../Stripe/StripeView';
-import { logout, getUserProfile } from '../../Auth/Auth';
+import { logout } from '../../Auth/Auth';
 import Authentication from '../authenticate/authenticate';
 
 //State Management
@@ -19,13 +19,16 @@ import {
 	withStyles,
 	Modal,
 	Avatar,
-	IconButton,
+	Divider
 } from '@material-ui/core';
 
-import DeleteIcon from '@material-ui/icons/Delete';
 
 import styled from 'styled-components';
+import Pricing from '../LandingPage/Pricing';
 
+// function rand() {
+// 	return Math.round(Math.random() * 20) - 10;
+// }
 function rand() {
 	return Math.round(Math.random() * 20) - 10;
 }
@@ -42,26 +45,27 @@ function getModalStyle() {
 }
 
 const styles = theme => ({
-	// paper: {
-	// 	// position: 'absolute',
-	// 	width: 800,
-	// 	margin:'0 auto',
-	// 	backgroundColor: theme.palette.background.paper,
-	// 	boxShadow: theme.shadows[5],
-	// 	padding: theme.spacing.unit * 4,
-	// 	outline: 'none',
-	// },
-	card: {
-		maxWidth: '100%',
-		width: 600,
+	paper: {
+		position: 'absolute',
 		margin: '0 auto',
+		backgroundColor: theme.palette.background.paper,
+		boxShadow: theme.shadows[5],
+		padding: theme.spacing.unit * 4,
+		outline: 'none',
+		alignItems: 'center',
+	},
+	profileContainer: {
+		display: 'flex',
+		flexDirection: 'column',
+		alignItems: 'center',
+		width: '30%',
 		padding: 10,
 	},
-	payment: {
-		// maxWidth: 600,
-		// width: '100%',
-		margin: '10px auto',
+	pricing: {
+		width: '70%',
+		margin: '0px 0px 0px 10px',
 		padding: 10,
+		// height: 350,
 	},
 	cardContent: {
 		backgroundColor: '#E8E9EB',
@@ -75,10 +79,28 @@ const styles = theme => ({
 		width: 150,
 		height: 150,
 	},
+	divider: {
+		width: '70%',
+		backgroundColor: '#E7E8EB',
+		margin: "5px 0 10px 0"
+	},
+	bold: {
+		fontWeight: 700
+	},
+	bottomSpace: {
+		marginBottom: 10
+	}
 });
 
 const Container = styled.div`
-	margin-top: 80px;
+	/* margin-top: 80px; */
+	margin: 0 auto;
+	box-sizing: border-box;
+	display: flex;
+	max-width: 1000px;
+	width: 100%;
+	height: 430px;
+	align-items: stretch;
 `;
 
 class ProfileView extends React.Component {
@@ -103,8 +125,9 @@ class ProfileView extends React.Component {
 		this.props.history.push('/');
 	};
 
-	handleDelete = () => {
-		this.props.deleteUser(this.props.userProfile.user.userID);
+	handleDelete = (id) => {
+		this.props.deleteUser(id);
+		this.props.history.push('/');
 	};
 
 	render() {
@@ -114,57 +137,63 @@ class ProfileView extends React.Component {
 
 		let accountType;
 		let account;
+		let maxCount;
 		if (this.props.doneLoading) {
 			let type = user.accountTypeID;
 			if (type === 3) {
 				accountType = <span>Pro</span>;
 				account = true;
+				maxCount = 1000
 			} else if (type === 2) {
 				accountType = <span>Premium</span>;
 				account = true;
+				maxCount = 200
 			} else if (type === 1) {
 				accountType = <span>Free</span>;
 				account = false;
+				maxCount = 50
 			}
 		}
+
 		return (
 			<Container>
 				{this.props.doneLoading && (
 					<>
-						<div>
-							<Card className={classes.card}>
-								<Typography gutterBottom variant="h5" component="h1">
-									{user.name}
-								</Typography>
-								<Typography variant="subtitle1" gutterBottom>
-									{user.email}
-								</Typography>
-								<Avatar
-									alt="Remy Sharp"
-									src={JSON.parse(localStorage.getItem('Profile')).picture}
-									className={classes.bigAvatar}
-								/>
-								<Typography gutterBottom variant="h5" component="h5">
-									<div>Account Type: {accountType}</div>
-								</Typography>
-								<CardActions>
-									{/* Button for editing */}
-									<UserModal
-										email={user.email}
-										name={user.name}
-										id={user.userID}
-									/>
-									{/* Button for deleting */}
-									<IconButton
-										aria-label="Delete"
-										className={classes.margin}
-										onClick={this.handleOpen}>
-										<DeleteIcon />
-									</IconButton>
-								</CardActions>
-							</Card>
-						</div>
-						<Card className={classes.payment}>
+						<Card className={classes.profileContainer}>
+							<Avatar
+								alt="Remy Sharp"
+								src={JSON.parse(localStorage.getItem('Profile')).picture}
+								className={classes.bigAvatar}
+							/>
+							<Typography gutterBottom variant="h5" component="h1">
+								{user.name}
+							</Typography>
+							<Typography variant="subtitle1" gutterBottom>
+								{user.email}
+							</Typography>
+							<Typography gutterBottom variant="subtitle1" component="subtitle1">
+								<div>Account Type: {accountType}</div>
+							</Typography>
+							<Divider variant="middle" className={classes.divider} />
+							<Typography gutterBottom variant="subtitle1" component="subtitle1" className={classes.bold}>
+								Messages Sent
+							</Typography>
+							<Typography gutterBottom variant="subtitle1" component="subtitle1">
+								{/* quick fix for minor bug, newUser object doesn't have notification count */}
+								{user.notificationCount ? user.notificationCount : 0} out of {maxCount}
+							</Typography>
+							<CardActions>
+								<Button
+									variant="contained"
+									onClick={this.handleOpen}
+									className={classes.button}>
+									Delete Account
+								</Button>
+							</CardActions>
+						</Card>
+
+						<Card className={classes.pricing}>
+							{/* <Pricing /> */}
 							<StripeView user={this.state.googleProfile} />
 						</Card>
 					</>
@@ -175,24 +204,34 @@ class ProfileView extends React.Component {
 					open={this.state.open}
 					onClose={this.handleClose}>
 					<div style={getModalStyle()} className={classes.paper}>
-						<Typography variant="h6" id="modal-title">
-							Are you sure?
-						</Typography>
 						{account ? (
-							<Typography>
-								Please unsubscribe from your current subescription before deleting
-								your account.
-							</Typography>
+							<>
+								<Typography variant="h6" id="modal-title">
+									Active subscription
+								</Typography>
+								<Typography>
+									Please unsubscribe from your current subscription before
+									deleting your account.
+								</Typography>
+							</>
 						) : (
-							<Button
-								variant="contained"
-								color="secondary"
-								onClick={() => {
-									this.props.deleteUser(user.userID);
-								}}>
-								Delete Account
-							</Button>
-						)}
+								<>
+									<Typography variant="h6" id="modal-title">
+										Are you sure you want to delete your account?
+									</Typography>
+									<Typography className={classes.bottomSpace}>
+										All data associated with this account will be permanently deleted.
+									</Typography>
+									<Button
+										variant="contained"
+										color="secondary"
+										onClick={() => {
+											this.handleDelete(user.userID);
+										}}>
+										Delete Account
+								</Button>
+								</>
+							)}
 					</div>
 				</Modal>
 			</Container>

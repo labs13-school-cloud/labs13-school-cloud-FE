@@ -5,35 +5,32 @@ import TeamMember from './TeamMember';
 import styled from 'styled-components';
 
 const TeamMembersList = props => {
-	let arr = [];
-	let offset = props.offset;
-	let x = offset;
-	let y = offset + props.limit;
-	console.log('Offset Spacing', x, y, props.limit);
-	arr = props.teamMembers.slice(x, y);
+  let arr = [];
+  let offset = props.offset;
+  let x = offset;
+  let y = offset + props.limit;
+  arr = props.teamMembers.slice(x, y);
 
-	console.log('Arr', arr);
-	console.log('teamMembers', props.teamMembers);
-
-	return (
-		<>
-			<ListStyles>
-				{arr.map(member => (
-					<TeamMember
-						key={member.teamMemberID}
-						teamMember={member}
-						deleteTeamMember={props.deleteTeamMember}
-					/>
-				))}
-			</ListStyles>
-		</>
-	);
+  return (
+    <>
+      <ListStyles>
+        {arr.map(member => (
+          <TeamMember
+            key={member.teamMemberID}
+            teamMember={member}
+            deleteTeamMember={props.deleteTeamMember}
+            userId={props.userId}
+          />
+        ))}
+      </ListStyles>
+    </>
+  );
 };
 
 export default TeamMembersList;
 
 const ListStyles = styled.div`
-	display: flex;
-	flex-direction: column;
-	align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
