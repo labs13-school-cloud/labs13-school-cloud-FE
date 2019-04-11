@@ -95,7 +95,12 @@ class CreateTrainingSeries extends React.Component {
             required
           />
           <div>
-            <Button type="submit" variant="outlined" className={classes.button}>
+            <Button
+              type="submit"
+              variant="outlined"
+              color="primary"
+              className={classes.button}
+            >
               Create
             </Button>
             <Button

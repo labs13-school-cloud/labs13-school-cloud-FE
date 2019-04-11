@@ -167,13 +167,13 @@ class CreatePost extends React.Component {
               submitType="add"
             /> */}
             <Button
-              variant="contained"
+              variant="outlined"
               color="primary"
               className={classes.button}
               type="submit"
               form="form1"
             >
-              Save
+              Create
             </Button>
             <Button
               variant="contained"
