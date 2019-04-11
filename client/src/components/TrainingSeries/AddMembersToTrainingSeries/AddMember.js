@@ -36,7 +36,12 @@ const styles = theme => ({
     width: 200
   },
   button: {
-    margin: theme.spacing.unit
+    margin: theme.spacing.unit,
+    color: "#451476",
+    "&:hover": {
+      background: "#451476",
+      color: "white"
+    }
   },
   memberList: {
     display: "flex",
@@ -104,6 +109,7 @@ function AddMember(props) {
                     : null
                 }
                 type="submit"
+                className={classes.button}
               >
                 {props.isRouting ? (
                   <LoadingImage src={TrainingBotGIF} alt="loader" />
