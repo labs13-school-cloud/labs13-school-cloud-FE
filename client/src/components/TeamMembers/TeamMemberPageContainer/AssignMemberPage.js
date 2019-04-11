@@ -115,6 +115,7 @@ class AssignMemberPage extends React.Component {
 
   routeBack = e => {
     e.preventDefault();
+    this.props.history.goBack();
   }
 
   renderTrainingSeriesInDropDown = () => {
