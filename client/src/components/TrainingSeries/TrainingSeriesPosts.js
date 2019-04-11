@@ -255,10 +255,11 @@ class TrainingSeriesPosts extends React.Component {
             <div>
               <Button
                 type="submit"
-                variant="contained"
+                variant="outlined"
+                color="primary"
                 className={classes.button}
               >
-                Submit
+                Save
               </Button>
             </div>
           </TrainingSeriesTitle>
