@@ -60,12 +60,35 @@ const styles = theme => ({
 		alignItems: 'center',
 		width: '30%',
 		padding: 10,
+		textAlign:'center',
+		['@media (max-width: 1000px)']: { // eslint-disable-line no-useless-computed-key
+			justifyContent:'space-around',
+			flexDirection:'row',
+			maxWidth: '768px',
+			width:'94%',
+			marginBottom: 10,
+		},
+		['@media (max-width: 768px)']: { // eslint-disable-line no-useless-computed-key
+			width: '94%'
+		},
+		['@media (max-width: 480px)']: { // eslint-disable-line no-useless-computed-key
+			flexDirection:'column',
+		}
 	},
 	pricing: {
 		width: '70%',
 		margin: '0px 0px 0px 10px',
 		padding: 10,
 		// height: 350,
+		['@media (max-width: 1000px)']: { // eslint-disable-line no-useless-computed-key
+			maxWidth: '768px',
+			width:'94%',
+			margin: 0,
+		},
+		['@media (max-width: 768px)']: { // eslint-disable-line no-useless-computed-key
+			width: '94%'
+		}
+		
 	},
 	cardContent: {
 		backgroundColor: '#E8E9EB',
@@ -101,6 +124,11 @@ const Container = styled.div`
 	width: 100%;
 	height: 430px;
 	align-items: stretch;
+	@media (max-width: 1000px) {
+		flex-direction: column;
+	height: 100%;
+align-items:center
+	}
 `;
 
 class ProfileView extends React.Component {
@@ -160,11 +188,12 @@ class ProfileView extends React.Component {
 				{this.props.doneLoading && (
 					<>
 						<Card className={classes.profileContainer}>
+						<div>
 							<Avatar
 								alt="Remy Sharp"
 								src={JSON.parse(localStorage.getItem('Profile')).picture}
 								className={classes.bigAvatar}
-							/>
+								/>
 							<Typography gutterBottom variant="h5" component="h1">
 								{user.name}
 							</Typography>
@@ -174,6 +203,9 @@ class ProfileView extends React.Component {
 							<Typography gutterBottom variant="subtitle1" component="subtitle1">
 								<div>Account Type: {accountType}</div>
 							</Typography>
+								</div>
+								<div>
+
 							<Divider variant="middle" className={classes.divider} />
 							<Typography gutterBottom variant="subtitle1" component="subtitle1" className={classes.bold}>
 								Messages Sent
@@ -190,6 +222,7 @@ class ProfileView extends React.Component {
 									Delete Account
 								</Button>
 							</CardActions>
+									</div>
 						</Card>
 
 						<Card className={classes.pricing}>
