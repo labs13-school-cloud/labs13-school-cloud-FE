@@ -96,7 +96,7 @@ class CreateTrainingSeries extends React.Component {
           />
           <div>
             <Button type="submit" variant="outlined" className={classes.button}>
-              Submit
+              Create
             </Button>
             <Button
               variant="contained"

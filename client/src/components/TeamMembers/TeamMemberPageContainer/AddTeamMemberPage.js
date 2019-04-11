@@ -163,14 +163,15 @@ class TeamMemberPage extends React.Component {
           <ButtonContainer>
             <Button
               disabled={this.state.isRouting === true ? "true" : null}
-              variant="primary"
+              variant="outlined"
+              color="primary"
               className={classes.button}
               type="submit"
             >
               {this.state.isRouting ? (
                 <LoadingImage src={TrainingBotGIF} alt="Loading Icon" />
               ) : (
-                "Submit"
+                "Add"
               )}
             </Button>
             <Button
