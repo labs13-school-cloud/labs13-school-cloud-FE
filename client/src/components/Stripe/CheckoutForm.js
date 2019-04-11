@@ -19,9 +19,6 @@ const styles = theme => ({
 		padding: theme.spacing.unit * 4,
 		outline: 'none',
 	},
-	button: {
-		margin: theme.spacing.unit,
-	},
 	submitBtn: {
 		// margin: theme.spacing.unit,
 		maxWidth: 100,
@@ -42,9 +39,7 @@ const styles = theme => ({
 	},
 	buttonLayout: {
 		display: 'flex',
-		flexDirection: 'column',
-		justifyContent: 'center',
-		width: 200,
+		justifyContent: 'space-around',
 		margin: '0 auto',
 	},
 	submitButton: {
@@ -62,6 +57,47 @@ const styles = theme => ({
 		width: 200,
 	},
 	progress: { margin: '50px auto', maxWidth: 100, width: 100 },
+	subCard: {
+		border: '1px solid #EBEBEB',
+		borderRadiusTopLeft: '3px',
+		borderRadiusTopRight: '3px',
+		width: '31%',
+		margin: 5,
+		textAlign: 'center'
+	},
+	title: {
+		textTransform: 'uppercase',
+		fontWeight: 700,
+		margin: 10
+	},
+	price: {
+		fontSize: 20,
+		margin: "10px 0"
+	},
+	subPrice: {
+		fontSize: 12,
+		color: 'grey'
+	},
+	content: {
+		margin: 15
+	},
+	feature: {
+
+	},
+	button: {
+		width: '100%',
+		marginTop: 10,
+		background: '#441476',
+		color: 'white',
+		borderRadius: 0,
+		"&:hover": {
+			background: '#3DBC93'
+		},
+		"&:disabled": {
+			color: 'grey',
+			background: '#EBEBEB',
+		}
+	}
 });
 
 class CheckoutForm extends Component {
@@ -139,22 +175,21 @@ class CheckoutForm extends Component {
 			accountType = 'Pro';
 		}
 
-		let unsubscribe;
+		let freeButton;
 
 		if (this.props.userProfile.accountTypeID > 1) {
-			unsubscribe = (
+			freeButton = (
 				<Button
-					variant="contained"
-					color="default"
+					color="primary"
 					className={classes.button}
 					onClick={this.handleOpen}>
-					Unsubscribe
+					Basic
 				</Button>
 			);
 		} else {
-			unsubscribe = (
-				<Button variant="contained" color="default" className={classes.button} disabled>
-					Unsubscribe
+			freeButton = (
+				<Button color="default" className={classes.button} disabled>
+					Current Plan
 				</Button>
 			);
 		}
@@ -173,30 +208,58 @@ class CheckoutForm extends Component {
 					<div>
 						{this.props.userError}
 						{this.props.stripeError}
-						<Pricing />
+						{/* <Pricing /> */}
 						<FormControl component="fieldset" className={classes.formControl}>
 							<div className={classes.buttonLayout}>
-								<div>
-									{this.props.plans.map(plan => {
-										return plan.nickname === accountType ? (
-											<Button key={plan.created} disabled>
-												{plan.nickname}
-											</Button>
-										) : (
-											<Button
-												key={plan.created}
-												variant={'outlined'}
-												color="primary"
-												name="plan"
-												className={classes.button}
-												value={plan.id}
-												onClick={e => this.handleChange(e, plan.nickname)}>
-												{plan.nickname}
-											</Button>
-										);
-									})}
+								<div className={classes.subCard}>
+									<Typography className={classes.title}>Basic</Typography>
+									<Typography className={classes.price}>FREE</Typography>
+									<div className={classes.content}>
+										<Typography className={classes.feature}>Feature</Typography>
+										<Typography className={classes.feature}>Feature</Typography>
+										<Typography className={classes.feature}>Feature</Typography>
+									</div>
+									{freeButton}
 								</div>
-								{unsubscribe}
+								{this.props.plans.map(plan => {
+									return plan.nickname === accountType ? (
+										<div className={classes.subCard}>
+											<Typography className={classes.title}>{plan.nickname}</Typography>
+											<Typography className={classes.price}>
+												${plan.amount / 100}<span className={classes.subPrice}> / mo</span>
+											</Typography>
+											<div className={classes.content}>
+												<Typography className={classes.feature}>Feature</Typography>
+												<Typography className={classes.feature}>Feature</Typography>
+												<Typography className={classes.feature}>Feature</Typography>
+											</div>
+											<Button key={plan.created} className={classes.button} disabled>
+												Current Plan
+											</Button>
+										</div>
+									) : (
+											<div className={classes.subCard}>
+												<Typography className={classes.title}>{plan.nickname}</Typography>
+												<Typography className={classes.price}>
+													${plan.amount / 100}<span className={classes.subPrice}> / mo</span>
+												</Typography>
+												<div className={classes.content}>
+													<Typography className={classes.feature}>Feature</Typography>
+													<Typography className={classes.feature}>Feature</Typography>
+													<Typography className={classes.feature}>Feature</Typography>
+												</div>
+												<Button
+													key={plan.created}
+													color="primary"
+													name="plan"
+													className={classes.button}
+													value={plan.id}
+													onClick={e => this.handleChange(e, plan.nickname)}>
+													{plan.nickname}
+												</Button>
+											</div>
+										);
+								})}
 							</div>
 						</FormControl>
 						{this.state.paymentToggle ? (
@@ -204,8 +267,8 @@ class CheckoutForm extends Component {
 								<CardElement style={{ base: { fontSize: '18px' } }} />
 							</FormControl>
 						) : (
-							<span />
-						)}
+								<span />
+							)}
 					</div>
 					{this.state.paymentToggle ? (
 						<Button
@@ -216,8 +279,8 @@ class CheckoutForm extends Component {
 							Submit
 						</Button>
 					) : (
-						<span />
-					)}
+							<span />
+						)}
 					{/* {this.state.error ? <p>{this.state.error}</p> : <span />} */}
 
 					{/* Unsubscribe Modal */}
