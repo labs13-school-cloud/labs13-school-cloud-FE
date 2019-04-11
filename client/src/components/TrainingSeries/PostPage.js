@@ -1,16 +1,16 @@
-import React from 'react';
+import React from "react";
 
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router';
+import { connect } from "react-redux";
+import { withRouter } from "react-router";
 
-import styled from 'styled-components';
+import styled from "styled-components";
 
 // Material UI
-import { withStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
+import { withStyles } from "@material-ui/core/styles";
+import Paper from "@material-ui/core/Paper";
+import Typography from "@material-ui/core/Typography";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
 
 //Components
 
@@ -20,34 +20,43 @@ import {
   editPost,
   deletePost,
   getPostById
-} from '../../store/actions';
+} from "../../store/actions";
 
 const styles = theme => ({
   root: {
     ...theme.mixins.gutters(),
     paddingTop: theme.spacing.unit * 2,
     paddingBottom: theme.spacing.unit * 2,
-    width: '100%',
-    margin: '20px auto'
+    width: "100%",
+    margin: "20px auto"
   },
   form: {
     // width: "100%",
-    margin: '0 auto'
+    margin: "0 auto"
   },
   info: {
-    'margin-right': '50px'
+    "margin-right": "50px"
   },
   textField: {
     // marginLeft: theme.spacing.unit,
     // marginRight: theme.spacing.unit,
-    width: '80%',
-    margin: '15px auto'
+    width: "80%",
+    margin: "15px auto"
   },
   fab: {
     margin: theme.spacing.unit
   },
   button: {
-    'margin-left': theme.spacing.unit
+    "margin-left": theme.spacing.unit
+  },
+  saveButton: {
+    // margin: 5,
+    "margin-left": theme.spacing.unit,
+    color: "#451476",
+    "&:hover": {
+      background: "#451476",
+      color: "white"
+    }
   }
 });
 
@@ -56,12 +65,12 @@ class PostPage extends React.Component {
     open: false,
     isUpdating: false,
     post: {
-      postName: '',
-      postDetails: '',
-      link: '',
-      daysFromStart: '',
-      trainingSeriesID: '',
-      postID: ''
+      postName: "",
+      postDetails: "",
+      link: "",
+      daysFromStart: "",
+      trainingSeriesID: "",
+      postID: ""
     }
   };
 
@@ -108,8 +117,8 @@ class PostPage extends React.Component {
   render() {
     const { classes } = this.props;
 
-    console.log('EDIT POST PAGE PROPS', this.props);
-    console.log('EDIT POST PAGE STATE', this.state);
+    console.log("EDIT POST PAGE PROPS", this.props);
+    console.log("EDIT POST PAGE STATE", this.state);
     return (
       <MainContainer>
         <Typography variant="display1" align="center" gutterBottom>
@@ -120,18 +129,55 @@ class PostPage extends React.Component {
           id="form1"
           onSubmit={e => this.handlePostSubmit(e)}
         >
+          {/* <DeleteModal deleteType='inTeamMemberPage' id={this.props.urlId} /> */}
+
+          <Paper className={classes.root}>
+            <PostContainer>
+              <TextField
+                id="standard-name"
+                label="Message Title"
+                className={classes.textField}
+                value={this.state.post.postName}
+                onChange={this.handleChange("postName")}
+                margin="normal"
+                required
+              />
+              <TextField
+                id="standard-name"
+                label="Message Content"
+                className={classes.textField}
+                value={this.state.post.postDetails}
+                onChange={this.handleChange("postDetails")}
+                margin="normal"
+                required
+              />
+              <TextField
+                id="standard-name"
+                label="Link"
+                className={classes.textField}
+                value={this.state.post.link}
+                onChange={this.handleChange("link")}
+                margin="normal"
+                required
+              />
+              <TextField
+                id="outlined-number"
+                label="Days from Start"
+                margin="normal"
+                className={classes.textField}
+                onChange={this.handleChange("daysFromStart")}
+                type="number"
+                value={this.state.post.daysFromStart}
+                step="1"
+                inputProps={{ min: 1 }}
+                required
+              />
+            </PostContainer>
+          </Paper>
           <ButtonContainer>
-            {/* <NotificationWidget
-              teamMember={this.state.teamMember}
-              editTeamMember={this.props.editTeamMember}
-              addTeamMember={this.addNewTeamMember}
-              type="success"
-              submitType="add"
-            /> */}
             <Button
-              variant="contained"
-              color="primary"
-              className={classes.button}
+              variant="outlined"
+              className={classes.saveButton}
               type="submit"
               form="form1"
             >
@@ -149,51 +195,6 @@ class PostPage extends React.Component {
               Cancel
             </Button>
           </ButtonContainer>
-          {/* <DeleteModal deleteType='inTeamMemberPage' id={this.props.urlId} /> */}
-
-          <Paper className={classes.root}>
-            <PostContainer>
-              <TextField
-                id="standard-name"
-                label="Message Title"
-                className={classes.textField}
-                value={this.state.post.postName}
-                onChange={this.handleChange('postName')}
-                margin="normal"
-                required
-              />
-              <TextField
-                id="standard-name"
-                label="Message Content"
-                className={classes.textField}
-                value={this.state.post.postDetails}
-                onChange={this.handleChange('postDetails')}
-                margin="normal"
-                required
-              />
-              <TextField
-                id="standard-name"
-                label="Link"
-                className={classes.textField}
-                value={this.state.post.link}
-                onChange={this.handleChange('link')}
-                margin="normal"
-                required
-              />
-              <TextField
-                id="outlined-number"
-                label="Days from Start"
-                margin="normal"
-                className={classes.textField}
-                onChange={this.handleChange('daysFromStart')}
-                type="number"
-                value={this.state.post.daysFromStart}
-                step="1"
-                inputProps={{ min: 1 }}
-                required
-              />
-            </PostContainer>
-          </Paper>
         </form>
       </MainContainer>
     );
