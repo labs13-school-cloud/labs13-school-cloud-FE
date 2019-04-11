@@ -6,6 +6,7 @@ import history from "../../history";
 
 //Styling
 import styled from "styled-components";
+import { withStyles } from '@material-ui/core/styles';
 
 //Components
 import TeamMembersView from "../TeamMembers/TeamMembersView";
@@ -31,6 +32,11 @@ import Authenticate from "../authenticate/authenticate";
 import { connect } from "react-redux";
 import { getUser } from "../../store/actions/userActions";
 
+const styles = theme => ({
+  router: {
+    // width: 900
+  }
+})
 class Dashboard extends React.Component {
   state = {
     tabValue: 0
@@ -56,6 +62,7 @@ class Dashboard extends React.Component {
   };
 
   render() {
+    const { classes } = this.props;
     return (
       <>
         {this.props.doneLoading ? (
@@ -158,7 +165,7 @@ export default connect(
   {
     getUser
   }
-)(Authenticate(Dashboard));
+)(withStyles(styles)(Authenticate(Dashboard)));
 
 //Styled Components
 const TripleColumn = styled.div`
@@ -194,6 +201,7 @@ const SmallColumns = styled.div`
   }
 `;
 const DashboardContainer = styled.div`
+/* DIV name in Inspector is sc-uJKMN kss0CW */
   display: flex;
   /* background-color: #fafafa; */
 

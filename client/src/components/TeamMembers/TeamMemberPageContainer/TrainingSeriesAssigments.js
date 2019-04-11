@@ -92,4 +92,5 @@ const ListStyles = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	border-bottom: 1px solid #E8E9EB;
 `;
