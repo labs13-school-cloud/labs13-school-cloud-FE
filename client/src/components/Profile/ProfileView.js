@@ -86,6 +86,9 @@ const styles = theme => ({
 	},
 	bold: {
 		fontWeight: 700
+	},
+	bottomSpace: {
+		marginBottom: 10
 	}
 });
 
@@ -122,8 +125,9 @@ class ProfileView extends React.Component {
 		this.props.history.push('/');
 	};
 
-	handleDelete = () => {
-		this.props.deleteUser(this.props.userProfile.user.userID);
+	handleDelete = (id) => {
+		this.props.deleteUser(id);
+		this.props.history.push('/');
 	};
 
 	render() {
@@ -175,7 +179,8 @@ class ProfileView extends React.Component {
 								Messages Sent
 							</Typography>
 							<Typography gutterBottom variant="subtitle1" component="subtitle1">
-								{user.notificationCount} out of {maxCount}
+								{/* quick fix for minor bug, newUser object doesn't have notification count */}
+								{user.notificationCount ? user.notificationCount : 0} out of {maxCount}
 							</Typography>
 							<CardActions>
 								<Button
@@ -205,20 +210,23 @@ class ProfileView extends React.Component {
 									Active subscription
 								</Typography>
 								<Typography>
-									Please unsubscribe from your current subescription before
+									Please unsubscribe from your current subscription before
 									deleting your account.
 								</Typography>
 							</>
 						) : (
 								<>
 									<Typography variant="h6" id="modal-title">
-										Are you sure?
-								</Typography>
+										Are you sure you want to delete your account?
+									</Typography>
+									<Typography className={classes.bottomSpace}>
+										All data associated with this account will be permanently deleted.
+									</Typography>
 									<Button
 										variant="contained"
 										color="secondary"
 										onClick={() => {
-											this.props.deleteUser(user.userID);
+											this.handleDelete(user.userID);
 										}}>
 										Delete Account
 								</Button>

@@ -42,7 +42,7 @@ const userReducer = (state = initialState, action) => {
 
           userProfile: {
             ...action.payload,
-            user: action.payload.newUser,
+            user: action.payload.newUser
           },
           isLoading: false,
           doneLoading: true,
