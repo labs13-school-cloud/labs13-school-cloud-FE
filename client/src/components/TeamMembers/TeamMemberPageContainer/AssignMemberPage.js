@@ -113,6 +113,10 @@ class AssignMemberPage extends React.Component {
     })
   };
 
+  routeBack = e => {
+    e.preventDefault();
+  }
+
   renderTrainingSeriesInDropDown = () => {
     //Map Through the current assignments for the team member, returns an array of ID's
     let assignments = this.props.location.state.assignments.map(
@@ -180,7 +184,7 @@ class AssignMemberPage extends React.Component {
               >
                 Assign
               </Button>
-              <Button className={classes.button} variant="primary">
+              <Button onClick={this.routeBack} className={classes.button} variant="primary">
                 Cancel
               </Button>
             </ButtonContainer>
@@ -208,7 +212,6 @@ const AssignMemberContainer = styled.div`
   margin: 0 auto;
   max-width: 768px;
   width: 100%;
-  border: 1px solid red;
   @media (max-width:768px) {
     width: 95%;
   }
