@@ -18,16 +18,16 @@ import { getTrainingSeries } from '../../../store/actions';
 const styles = theme => ({
   // these styles fixes the off-centering
   paper: {
-    width: "90%",
+    width: '100%',
     backgroundColor: theme.palette.background.paper,
+    boxSizing: 'border-box',
     boxShadow: theme.shadows[5],
     padding: "20px 30px",
     outline: "none",
     margin: '20px auto',
-    '@media (max-width: 480px)': {
-      width: '94%',
-      padding: 0,
-      margin: "0 auto"
+    '@media (max-width: 768px)': {
+      textAlign: 'center',
+      padding: "30px"
     }
   },
   form: {
@@ -35,7 +35,6 @@ const styles = theme => ({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    width: '90%',
     margin: '0 auto'
   },
   info: {
@@ -55,7 +54,10 @@ const styles = theme => ({
   trainingSeriesHeader: {
     display: 'flex',
     justifyContent: 'space-between',
-    alignItems: 'center'
+    alignItems: 'center',
+    '@media (max-width: 768px)': {
+      flexDirection: 'column'
+    }
   },
   messageText: {
     marginTop: 20,
@@ -65,6 +67,11 @@ const styles = theme => ({
   divider: {
     margin: "15px 0"
   },
+  assignBtn: {
+    '@media (max-width: 768px)': {
+      margin: "20px 0 15px"
+    }
+  }
 });
 
 class TeamMemberPage extends React.Component {
@@ -142,7 +149,7 @@ class TeamMemberPage extends React.Component {
         <>
           <div className={classes.trainingSeriesHeader}>
             <Typography variant="title">Assigned Training Series</Typography>
-            <Button variant="outlined" onClick={this.routeToAssigning}>
+            <Button className={classes.assignBtn} variant="outlined" onClick={this.routeToAssigning}>
               Assign to Training Series
             </Button>
           </div>
@@ -173,7 +180,7 @@ class TeamMemberPage extends React.Component {
       <MainContainer>
         <form className={classes.form}>
           <Paper className={classes.paper}>
-            <Typography variant="title">{`Team Member Info`}</Typography>
+            <Typography variant="title">Team Member Info</Typography>
             <Divider variant="fullWidth" className={classes.divider} />
 
             <MemberInfoContainer>
@@ -221,8 +228,7 @@ class TeamMemberPage extends React.Component {
                 margin="normal"
               />
             </MemberInfoContainer>
-          </Paper>
-                    <ButtonContainer>
+            <ButtonContainer>
             <NotificationWidget
               teamMember={this.state.teamMember}
               editTeamMember={this.props.editTeamMember}
@@ -236,9 +242,10 @@ class TeamMemberPage extends React.Component {
               displayType="button"
             />
           </ButtonContainer>
+          </Paper>
+        </form>
           <Paper className={classes.paper}>{disabledTrainingSeries}</Paper>
 
-        </form>
       </MainContainer>
     );
   }
@@ -246,8 +253,10 @@ class TeamMemberPage extends React.Component {
 
 const MainContainer = styled.div`
   margin: 0 auto;
-  width: 60%;
-  border: 1px solid red;
+  max-width: 768px;
+  @media (max-width:768px) {
+    width: 95%;
+  }
 `;
 
 const MemberInfoContainer = styled.div`
@@ -255,10 +264,10 @@ const MemberInfoContainer = styled.div`
   justify-content: space-between;
   align-items: baseline;
   margin: 20px auto;
-  /* @media (max-width: 480px) {
+  @media (max-width: 480px) {
 		flex-direction: column;
 		width: 90%;
-	} */
+	}
 `;
 
 const ButtonContainer = styled.div`

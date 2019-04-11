@@ -201,7 +201,6 @@ const SmallColumns = styled.div`
   }
 `;
 const DashboardContainer = styled.div`
-/* DIV name in Inspector is sc-uJKMN kss0CW */
   display: flex;
   /* background-color: #fafafa; */
 
