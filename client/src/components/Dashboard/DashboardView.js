@@ -183,7 +183,7 @@ const SmallColumns = styled.div`
 `;
 const DashboardContainer = styled.div`
 	display: flex;
-	background-color: #fafafa;
+	/* background-color: #fafafa; */
 
 	@media (max-width: 768px) {
 		max-width: 768px;
