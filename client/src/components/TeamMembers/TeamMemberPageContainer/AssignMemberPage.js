@@ -10,7 +10,7 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import Select from "@material-ui/core/Select";
 import FormControl from "@material-ui/core/FormControl";
-import { MenuItem } from "@material-ui/core";
+import { MenuItem, Paper } from "@material-ui/core";
 import InputLabel from "@material-ui/core/InputLabel";
 
 //REDUX
@@ -19,15 +19,13 @@ import { addTeamMemberToTrainingSeries } from "../../../store/actions/";
 
 const styles = theme => ({
   paper: {
-    margin: "0 auto",
-    width: theme.spacing.unit * 70,
+    width: "100%",
+    margin: "20px auto",
+    boxSizing: 'border-box',
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
-    padding: theme.spacing.unit * 4,
+    padding: '20px 30px',
     outline: "none",
-    "@media (max-width: 768px)": {
-      width: "65%"
-    }
   },
   heading: {
     textAlign: "center"
@@ -115,6 +113,11 @@ class AssignMemberPage extends React.Component {
     })
   };
 
+  routeBack = e => {
+    e.preventDefault();
+    this.props.history.goBack();
+  }
+
   renderTrainingSeriesInDropDown = () => {
     //Map Through the current assignments for the team member, returns an array of ID's
     let assignments = this.props.location.state.assignments.map(
@@ -142,8 +145,8 @@ class AssignMemberPage extends React.Component {
   render() {
     const { classes } = this.props;
     return (
-      <>
-        <div className={classes.paper}>
+      <AssignMemberContainer>
+        <Paper className={classes.paper}>
           <Typography variant="h6" className={classes.heading}>
             Assign Training Series
           </Typography>
@@ -182,13 +185,13 @@ class AssignMemberPage extends React.Component {
               >
                 Assign
               </Button>
-              <Button className={classes.button} variant="primary">
+              <Button onClick={this.routeBack} className={classes.button} variant="primary">
                 Cancel
               </Button>
             </ButtonContainer>
           </form>
-        </div>
-      </>
+        </Paper>
+      </AssignMemberContainer>
     );
   }
 }
@@ -205,6 +208,15 @@ export default connect(
   mapStateToProps,
   { addTeamMemberToTrainingSeries }
 )(withStyles(styles)(AssignMemberPage));
+
+const AssignMemberContainer = styled.div`
+  margin: 0 auto;
+  max-width: 768px;
+  width: 100%;
+  @media (max-width:768px) {
+    width: 95%;
+  }
+`;
 
 const ButtonContainer = styled.div`
   display: flex;

@@ -116,7 +116,8 @@ class TeamMembersView extends React.Component {
   };
 
   routeToCreateMemberPage = () => {
-    this.props.history.push("/home/create-team-member");
+    this.props.toggleFreakinSnackBar();
+    this.props.history.push('/home/create-team-member');
   };
 
   // function to set fuse option and return a response

@@ -135,7 +135,7 @@ class TrainingSeriesModal extends React.Component {
       case "button":
         return (
           <Button
-            variant="contained"
+            variant="primary"
             style={{ marginLeft: 10 }}
             onClick={this.handleOpen}
           >

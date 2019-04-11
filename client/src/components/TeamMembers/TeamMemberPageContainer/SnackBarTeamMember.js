@@ -162,7 +162,7 @@ class CustomizedSnackbars extends React.Component {
           className={classes.button}
           onClick={e => this.handleClick(e)}
         >
-          Save
+          Edit Info
         </Button>
         <Snackbar
           anchorOrigin={{

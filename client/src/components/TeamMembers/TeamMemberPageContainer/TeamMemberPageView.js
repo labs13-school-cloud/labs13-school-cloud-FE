@@ -71,7 +71,7 @@ class TeamMemberPageView extends React.Component {
         {this.state.displaySnackbar && (
           <>
             <Snackbar
-              message="Your team members have be successfully added."
+              message="Your team members have been successfully added."
               type="success"
             />
           </>

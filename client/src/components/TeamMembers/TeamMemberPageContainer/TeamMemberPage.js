@@ -5,10 +5,16 @@ import styled from "styled-components";
 
 // Material UI
 import { withStyles } from "@material-ui/core/styles";
-import { Paper, List, Typography, TextField, Button } from "@material-ui/core/";
+import {
+  Paper,
+  List,
+  Typography,
+  TextField,
+  Button,
+  Divider
+} from "@material-ui/core/";
 import NotificationWidget from "./SnackBarTeamMember";
 //Components
-import AddTeamMemberToTrainingSeriesModal from "../../Modals/addTeamMemberToTrainingSeriesModal";
 import TrainingSeriesAssignments from "./TrainingSeriesAssigments";
 import DeleteModal from "../../Modals/deleteModal";
 
@@ -17,18 +23,25 @@ import { connect } from "react-redux";
 import { getTrainingSeries } from "../../../store/actions";
 
 const styles = theme => ({
-  root: {
-    ...theme.mixins.gutters(),
-    paddingTop: theme.spacing.unit * 2,
-    paddingBottom: theme.spacing.unit * 2,
-    width: "94%",
+  // these styles fixes the off-centering
+  paper: {
+    width: "100%",
+    backgroundColor: theme.palette.background.paper,
+    boxSizing: "border-box",
+    boxShadow: theme.shadows[5],
+    padding: "20px 30px",
+    outline: "none",
     margin: "20px auto",
-    "@media (max-width: 480px)": {
-      width: "94%"
+    "@media (max-width: 768px)": {
+      textAlign: "center",
+      padding: "30px"
     }
   },
   form: {
-    width: "90%",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
     margin: "0 auto"
   },
   info: {
@@ -43,7 +56,7 @@ const styles = theme => ({
     margin: theme.spacing.unit
   },
   button: {
-    "margin-left": theme.spacing.unit,
+     "margin-left": theme.spacing.unit,
     color: "#451476",
     "&:hover": {
       background: "#451476",
@@ -52,12 +65,24 @@ const styles = theme => ({
   },
   trainingSeriesHeader: {
     display: "flex",
-    justifyContent: "space-between"
+    justifyContent: "space-between",
+    alignItems: "center",
+    "@media (max-width: 768px)": {
+      flexDirection: "column"
+    }
   },
   messageText: {
     marginTop: 20,
     marginBottom: 20,
     textAlign: "center"
+  },
+  divider: {
+    margin: "15px 0"
+  },
+  assignBtn: {
+    "@media (max-width: 768px)": {
+      margin: "20px 0 15px"
+    }
   }
 });
 
@@ -85,6 +110,8 @@ class TeamMemberPage extends React.Component {
         assignments: this.props.teamMember.assignments
       });
     }
+
+    console.log("team member", this.props.teamMember)
   }
 
   handleChange = name => event => {
@@ -130,37 +157,54 @@ class TeamMemberPage extends React.Component {
       });
 
     let disabledTrainingSeries;
-    let disabledBool;
 
-    if (this.props.trainingSeries.length) {
+    if (
+      this.props.trainingSeries.length > 0 &&
+      this.state.assignments.length === 0
+    ) {
       disabledTrainingSeries = (
         <>
           <div className={classes.trainingSeriesHeader}>
-            <Typography variant={"h5"}>Training Series</Typography>
+            <Typography variant="title">Training Series</Typography>
             <Button
+              className={classes.assignBtn}
+              variant="outlined"
+              onClick={this.routeToAssigning}
+            >
+              Assign to Training Series
+            </Button>
+          </div>
+          <Typography variant="subheading" className={classes.messageText}>
+            This team member currently does not have any assignments.
+          </Typography>
+          <Typography variant="subheading" className={classes.messageText}>
+            Click the button above to assign them to a training series.
+          </Typography>
+        </>
+      );
+    } else if (this.props.trainingSeries.length > 0) {
+      disabledTrainingSeries = (
+        <>
+          <div className={classes.trainingSeriesHeader}>
+            <Typography variant="title">Assigned Training Series</Typography>
+            <Button
+              className={classes.assignBtn}
               variant="outlined"
               className={classes.button}
               onClick={this.routeToAssigning}
             >
               Assign to Training Series
             </Button>
-            {/* <AddTeamMemberToTrainingSeriesModal
-              modalType={"assignMultiple"}
-              userId={this.props.userId}
-              urlId={this.props.urlId}
-              assignments={this.props.teamMember.assignments}
-            /> */}
           </div>
           <List>{trainingAssigments}</List>
         </>
       );
     } else {
-      disabledBool = true;
       disabledTrainingSeries = (
         <>
           <div className={classes.trainingSeriesHeader}>
-            <Typography variant={"h5"}>Training Series</Typography>
-            <Button variant="outlined" disabled>
+            <Typography variant="title">Training Series</Typography>
+            <Button className={classes.assignBtn} variant="outlined" disabled>
               Assign to Training Series
             </Button>
           </div>
@@ -178,9 +222,9 @@ class TeamMemberPage extends React.Component {
     return (
       <MainContainer>
         <form className={classes.form}>
-          {/* <DeleteModal deleteType='inTeamMemberPage' id={this.props.urlId} /> */}
-          <Paper className={classes.root}>
-            <Typography variant={"h5"}>{`Team Member Info`}</Typography>
+          <Paper className={classes.paper}>
+            <Typography variant="title">Team Member Info</Typography>
+            <Divider variant="fullWidth" className={classes.divider} />
             <MemberInfoContainer>
               <TextField
                 id="standard-name"
@@ -207,9 +251,6 @@ class TeamMemberPage extends React.Component {
                 margin="normal"
               />
             </MemberInfoContainer>
-          </Paper>
-          <Paper className={classes.root}>
-            <Typography variant={"h5"}>Contact Info</Typography>
             <MemberInfoContainer>
               <TextField
                 id="standard-name"
@@ -228,23 +269,23 @@ class TeamMemberPage extends React.Component {
                 margin="normal"
               />
             </MemberInfoContainer>
+            <ButtonContainer>
+              <NotificationWidget
+                teamMember={this.state.teamMember}
+                editTeamMember={this.props.editTeamMember}
+                type="success"
+                submitType="edit"
+              />
+              <DeleteModal
+                deleteType="inTeamMemberPage"
+                teamMemberId={this.state.teamMember.teamMemberID}
+                userId={this.props.userId}
+                displayType="button"
+              />
+            </ButtonContainer>
           </Paper>
-          <Paper className={classes.root}>{disabledTrainingSeries}</Paper>
-          <ButtonContainer>
-            <NotificationWidget
-              teamMember={this.state.teamMember}
-              editTeamMember={this.props.editTeamMember}
-              type="success"
-              submitType="edit"
-            />
-            <DeleteModal
-              deleteType="inTeamMemberPage"
-              teamMemberId={this.state.teamMember.teamMemberID}
-              userId={this.props.userId}
-              displayType="button"
-            />
-          </ButtonContainer>
         </form>
+        <Paper className={classes.paper}>{disabledTrainingSeries}</Paper>
       </MainContainer>
     );
   }
@@ -252,25 +293,22 @@ class TeamMemberPage extends React.Component {
 
 const MainContainer = styled.div`
   margin: 0 auto;
+  max-width: 768px;
+  @media (max-width: 768px) {
+    width: 95%;
+  }
 `;
 
 const MemberInfoContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  margin: 0 auto;
-  /* @media (max-width: 480px) {
-		flex-direction: column;
-		width: 90%;
-	} */
+  margin: 20px auto;
+  @media (max-width: 480px) {
+    flex-direction: column;
+    width: 90%;
+  }
 `;
-
-// const TrainingSeriesContainer = styled.div`
-// 	display: flex;
-// 	width: 90%;
-// 	justify-content: space-evenly; */
-// 	flex-wrap: wrap;
-// `;
 
 const ButtonContainer = styled.div`
   display: flex;
