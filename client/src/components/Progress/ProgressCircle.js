@@ -5,9 +5,9 @@ import styled from 'styled-components';
 
 function ProgressCircle(props) {
 	return (
-		<div>
-			<LogoImage src={logo} alt="loading" className="ld ld-bounce" />
-		</div>
+		// <div>
+		<LogoImage src={logo} alt="loading" style={{ width: props.width }} className="ld ld-bounce" />
+		// </div>
 	);
 }
 
