@@ -104,7 +104,8 @@ class TeamMemberPage extends React.Component {
       state: {
         userId: this.props.userId,
         urlId: this.props.urlId,
-        assignments: this.props.teamMember.assignments
+        assignments: this.props.teamMember.assignments,
+        trainingSeries: this.props.trainingSeries
       }
     });
   };
