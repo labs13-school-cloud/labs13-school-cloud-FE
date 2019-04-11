@@ -6,7 +6,7 @@ import history from "../../history";
 
 //Styling
 import styled from "styled-components";
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from "@material-ui/core/styles";
 
 //Components
 import TeamMembersView from "../TeamMembers/TeamMembersView";
@@ -24,6 +24,7 @@ import CreatePost from "../TrainingSeries/CreatePost";
 import PostPage from "../TrainingSeries/PostPage";
 import NotificationsView from "../Notifications/NotificationsView";
 import AssignMemberPage from "../TeamMembers/TeamMemberPageContainer/AssignMemberPage";
+import Snackbar from '../Snackbar/Snackbar';
 
 //Auth
 import Authenticate from "../authenticate/authenticate";
@@ -36,14 +37,31 @@ const styles = theme => ({
   router: {
     // width: 900
   }
-})
+});
 class Dashboard extends React.Component {
   state = {
     tabValue: 0,
+    displaySnackbar: false
   };
 
   componentDidMount() {
     this.props.getUser();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.location.state) {
+      if (this.props.location.state !== prevProps.location.state) {
+        this.setState({
+          displaySnackbar: true
+        });
+      }
+    }
+  }
+
+  toggleFreakinSnackBar = e => {
+    this.setState({
+      displaySnackbar: false
+    })
   }
 
   renderDashboard = () => {
@@ -52,7 +70,7 @@ class Dashboard extends React.Component {
       <>
         <TripleColumn>
           <SmallColumns>
-            <TeamMembersView userId={user.userID} />
+            <TeamMembersView toggleFreakinSnackBar={this.toggleFreakinSnackBar} userId={user.userID} />
             <TrainingSeriesView userId={user.userID} match={this.props.match} />
           </SmallColumns>
           <NotificationsView userId={user.userID} />
@@ -67,6 +85,14 @@ class Dashboard extends React.Component {
       <>
         {this.props.doneLoading ? (
           <>
+            {this.state.displaySnackbar && (
+              <>
+                <Snackbar
+                  message="Your team members have been successfully added."
+                  type="success"
+                />
+              </>
+            )}
             {this.props.getUser}
             <AppBar />
             {this.props.location.pathname !== "/home" && (

@@ -105,6 +105,8 @@ class TeamMemberPage extends React.Component {
         assignments: this.props.teamMember.assignments
       });
     }
+
+    console.log("team member", this.props.teamMember)
   }
 
   handleChange = name => event => {
@@ -151,12 +153,9 @@ class TeamMemberPage extends React.Component {
 
     let disabledTrainingSeries;
 
-    console.log("TS LENGTH", this.props.trainingSeries.length);
-    console.log("ASSIGN LENGTH", this.props.teamMember.assignments.length);
-
     if (
       this.props.trainingSeries.length > 0 &&
-      this.props.teamMember.assignments.length === 0
+      this.state.assignments.length === 0
     ) {
       disabledTrainingSeries = (
         <>

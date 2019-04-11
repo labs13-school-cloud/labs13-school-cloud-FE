@@ -63,7 +63,8 @@ class TeamMemberPage extends React.Component {
     },
     assignments: [],
     trainingSeries: [],
-    isRouting: false
+    isRouting: false,
+    snackState: false
   };
 
   handleChange = name => event => {
@@ -87,7 +88,7 @@ class TeamMemberPage extends React.Component {
       this.props.history.push({
         pathname: "/home",
         state: {
-          success: true
+          success: !this.state.snackState
         }
       });
     }, 1000);

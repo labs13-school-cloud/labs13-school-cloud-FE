@@ -83,7 +83,7 @@ class TeamMembersView extends React.Component {
     offset: 0,
     limit: 5,
     searchInput: '',
-    searchOpen: false
+    searchOpen: false,
   };
 
   componentDidMount() {
@@ -109,6 +109,7 @@ class TeamMembersView extends React.Component {
   };
 
   routeToCreateMemberPage = () => {
+    this.props.toggleFreakinSnackBar();
     this.props.history.push('/home/create-team-member');
   };
 
