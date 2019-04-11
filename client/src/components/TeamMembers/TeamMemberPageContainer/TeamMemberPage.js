@@ -56,7 +56,12 @@ const styles = theme => ({
     margin: theme.spacing.unit
   },
   button: {
-    "margin-left": theme.spacing.unit
+     "margin-left": theme.spacing.unit,
+    color: "#451476",
+    "&:hover": {
+      background: "#451476",
+      color: "white"
+    }
   },
   trainingSeriesHeader: {
     display: "flex",
@@ -185,6 +190,7 @@ class TeamMemberPage extends React.Component {
             <Button
               className={classes.assignBtn}
               variant="outlined"
+              className={classes.button}
               onClick={this.routeToAssigning}
             >
               Assign to Training Series
@@ -219,7 +225,6 @@ class TeamMemberPage extends React.Component {
           <Paper className={classes.paper}>
             <Typography variant="title">Team Member Info</Typography>
             <Divider variant="fullWidth" className={classes.divider} />
-
             <MemberInfoContainer>
               <TextField
                 id="standard-name"

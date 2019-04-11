@@ -1,64 +1,71 @@
 // component to contain all the components related to team members
 
-import React from 'react';
+import React from "react";
 
-import Fuse from 'fuse.js';
+import Fuse from "fuse.js";
 
 //Components
-import TeamMembersList from './TeamMembersList';
-import Pagination from 'material-ui-flat-pagination';
+import TeamMembersList from "./TeamMembersList";
+import Pagination from "material-ui-flat-pagination";
 
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router';
+import { connect } from "react-redux";
+import { withRouter } from "react-router";
 
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from "@material-ui/core/styles";
 import {
   Paper,
   Typography,
   Fab,
   TextField,
   InputAdornment
-} from '@material-ui/core/';
+} from "@material-ui/core/";
 
 import {
   getTeamMembers,
   addTeamMember,
   deleteTeamMember
-} from '../../store/actions';
+} from "../../store/actions";
 
 const styles = theme => ({
   root: {
     ...theme.mixins.gutters(),
     paddingTop: theme.spacing.unit * 2,
     paddingBottom: theme.spacing.unit * 2,
-    display: 'flex',
-    flexDirection: 'column',
+    display: "flex",
+    flexDirection: "column",
 
-    maxWidth: '500px',
-    width: '100%',
-    height: '100%',
+    maxWidth: "500px",
+    width: "100%",
+    height: "100%",
     margin: 5,
 
-    '@media (max-width:768px)': {
-      width: '92%',
+    "@media (max-width:768px)": {
+      width: "92%",
       marginBottom: 10,
-      maxWidth: 'none'
+      maxWidth: "none"
     }
   },
   textField: {
-    width: '100%'
+    width: "100%"
   },
 
   columnHeader: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center'
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center"
   },
   icons: {
-    display: 'flex',
-    alignItems: 'center'
+    display: "flex",
+    alignItems: "center"
   },
-  fab: { margin: 5 },
+  fab: {
+    margin: 5,
+    background: "#451476",
+    color: "white",
+    "&:hover": {
+      background: "#591a99"
+    }
+  },
   formControl: {
     margin: theme.spacing.unit
     // minWidth: 120,
@@ -67,10 +74,10 @@ const styles = theme => ({
     marginTop: theme.spacing.unit * 2
   },
   footer: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    position: 'sticky',
-    top: '100%'
+    display: "flex",
+    justifyContent: "space-between",
+    position: "sticky",
+    top: "100%"
   }
   // pagination: { width: '90%' },
 });
@@ -82,8 +89,8 @@ class TeamMembersView extends React.Component {
     teamMembers: [],
     offset: 0,
     limit: 5,
-    searchInput: '',
-    searchOpen: false,
+    searchInput: "",
+    searchOpen: false
   };
 
   componentDidMount() {
@@ -122,7 +129,7 @@ class TeamMembersView extends React.Component {
       distance: 100,
       maxPatternLength: 32,
       minMatchCharLength: 3,
-      keys: ['firstName', 'lastName', 'jobDescripton']
+      keys: ["firstName", "lastName", "jobDescripton"]
     };
 
     const fuse = new Fuse(team, options);
@@ -151,7 +158,6 @@ class TeamMembersView extends React.Component {
           <Typography variant="h5">Team Members</Typography>
           <div className={classes.icons}>
             <Fab
-              color="primary"
               size="small"
               aria-label="Add"
               className={classes.fab}
@@ -160,7 +166,6 @@ class TeamMembersView extends React.Component {
               <i className="material-icons">search</i>
             </Fab>
             <Fab
-              color="primary"
               size="small"
               aria-label="Add"
               className={classes.fab}

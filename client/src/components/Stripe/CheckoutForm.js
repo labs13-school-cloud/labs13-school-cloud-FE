@@ -8,7 +8,9 @@ import logo from '../../img/trainingBot.gif';
 
 import { withStyles, FormControl, Button, Typography, Modal } from '@material-ui/core/';
 import UnsubscribeModal from './unsubscribeModal';
-import Pricing from '../LandingPage/Pricing';
+import ProgressCircle from '../Progress/ProgressCircle';
+import TrainingBotGIF from "../../img/trainingBot.gif";
+
 
 const styles = theme => ({
 	paper: {
@@ -19,11 +21,8 @@ const styles = theme => ({
 		padding: theme.spacing.unit * 4,
 		outline: 'none',
 	},
-	button: {
-		margin: theme.spacing.unit,
-	},
 	submitBtn: {
-		// margin: theme.spacing.unit,
+		marginTop: 5,
 		maxWidth: 100,
 		width: '100%',
 
@@ -38,14 +37,22 @@ const styles = theme => ({
 	},
 	formControl: {
 		display: 'flex',
-		margin: theme.spacing.unit * 3,
+		margin: '15px 5px',
+	
+
 	},
 	buttonLayout: {
 		display: 'flex',
-		flexDirection: 'column',
-		justifyContent: 'center',
-		width: 200,
+		justifyContent: 'space-around',
 		margin: '0 auto',
+		['@media (max-width: 1000px)']: { // eslint-disable-line no-useless-computed-key
+		},
+		['@media (max-width: 720px)']: { // eslint-disable-line no-useless-computed-key
+			// flexDirection:'column',
+			justifyContent:'center',
+			flexWrap:'wrap'
+			// width: '94%'
+		},
 	},
 	submitButton: {
 		width: 100,
@@ -62,6 +69,70 @@ const styles = theme => ({
 		width: 200,
 	},
 	progress: { margin: '50px auto', maxWidth: 100, width: 100 },
+	subCard: {
+		border: '1px solid #EBEBEB',
+		borderRadiusTopLeft: '3px',
+		borderRadiusTopRight: '3px',
+		width: '31%',
+		minWidth:201,
+		margin: 5,
+		textAlign: 'center',
+	},
+	title: {
+		textTransform: 'uppercase',
+		fontWeight: 700,
+		margin: 10,
+	},
+	price: {
+		fontSize: 20,
+		margin: '10px 0',
+	},
+	subPrice: {
+		fontSize: 12,
+		color: 'grey',
+	},
+	content: {
+		margin: '15px auto',
+		width: '80%',
+	},
+	feature: {
+		padding: '5px 0',
+	},
+	spread: {
+		display: 'flex',
+		justifyContent: 'space-between',
+	},
+	button: {
+		position: 'sticky',
+		top: '100%',
+		width: '100%',
+		marginTop: 10,
+		background: '#441476',
+		color: 'white',
+		borderRadius: 0,
+		'&:hover': {
+			background: '#3DBC93',
+		},
+		'&:disabled': {
+			color: 'grey',
+			background: '#EBEBEB',
+		},
+	},
+	LoadingImg:{
+
+  height: 'auto',
+  overflow: 'hidden',
+  cursor: 'not-allowed',
+  pointerEvents: 'none',
+  position: 'relative',
+  padding: 0,
+  margin: "20px auto",
+	},
+	gifWrapper:{
+		width:'100%',
+		display:'flex',
+		justifyContent:'center'
+	}
 });
 
 class CheckoutForm extends Component {
@@ -139,100 +210,137 @@ class CheckoutForm extends Component {
 			accountType = 'Pro';
 		}
 
-		let unsubscribe;
+		let freeButton;
 
 		if (this.props.userProfile.accountTypeID > 1) {
-			unsubscribe = (
-				<Button
-					variant="contained"
-					color="default"
-					className={classes.button}
-					onClick={this.handleOpen}>
-					Unsubscribe
+			freeButton = (
+				<Button color="primary" className={classes.button} onClick={this.handleOpen}>
+					Basic
 				</Button>
 			);
 		} else {
-			unsubscribe = (
-				<Button variant="contained" color="default" className={classes.button} disabled>
-					Unsubscribe
+			freeButton = (
+				<Button color="default" className={classes.button} disabled>
+					Current Plan
 				</Button>
 			);
 		}
 
 		if (this.state.complete) return <h1>Purchase Complete</h1>;
-		if (this.props.stripeLoading || this.props.userLoading) {
-			return (
-				<div className={classes.progress}>
-					{/* <CircularProgress /> */}
-					<img src={logo} alt="loader" />
-				</div>
-			);
-		} else {
-			return (
-				<div className={classes.root}>
-					<div>
-						{this.props.userError}
-						{this.props.stripeError}
-						<Pricing />
-						<FormControl component="fieldset" className={classes.formControl}>
-							<div className={classes.buttonLayout}>
-								<div>
-									{this.props.plans.map(plan => {
-										return plan.nickname === accountType ? (
-											<Button key={plan.created} disabled>
-												{plan.nickname}
-											</Button>
-										) : (
-											<Button
-												key={plan.created}
-												variant={'outlined'}
-												color="primary"
-												name="plan"
-												className={classes.button}
-												value={plan.id}
-												onClick={e => this.handleChange(e, plan.nickname)}>
-												{plan.nickname}
-											</Button>
-										);
-									})}
+		// if (this.props.stripeLoading || this.props.userLoading) {
+		// 	return <ProgressCircle />;
+		// } else {
+		return (
+			<div className={classes.root}>
+				<div>
+					{this.props.userError}
+					{this.props.stripeError}
+					{/* <Pricing /> */}
+					<FormControl component="fieldset" className={classes.formControl}>
+						<div className={classes.buttonLayout}>
+							<div className={classes.subCard}>
+								<Typography className={classes.title}>Basic</Typography>
+								<Typography className={classes.price}>FREE</Typography>
+								<div className={classes.content}>
+									<Typography className={classes.feature}>Automated Text/Email</Typography>
+									<Typography className={classes.feature}>Unlimited Training Series</Typography>
+									<Typography className={classes.feature}>Unlimited Team Members</Typography>
+									<div className={classes.spread}>
+										<Typography className={classes.feature}>Message Limit</Typography>
+										<Typography className={classes.feature}>50 / mo</Typography>
+									</div>
 								</div>
-								{unsubscribe}
+								{freeButton}
 							</div>
+							{this.props.plans.map(plan => {
+								return plan.nickname === accountType ? (
+									<div className={classes.subCard}>
+										<Typography className={classes.title}>{plan.nickname}</Typography>
+										<Typography className={classes.price}>
+											${plan.amount / 100}
+											<span className={classes.subPrice}> / mo</span>
+										</Typography>
+										<div className={classes.content}>
+											<Typography className={classes.feature}>Automated Text/Email</Typography>
+											<Typography className={classes.feature}>Unlimited Training Series</Typography>
+											<Typography className={classes.feature}>Unlimited Team Members</Typography>
+											<div className={classes.spread}>
+												<Typography className={classes.feature}>Message Limit</Typography>
+												<Typography className={classes.feature}>200 / mo</Typography>
+											</div>
+										</div>
+										<Button key={plan.created} className={classes.button} disabled>
+											Current Plan
+										</Button>
+									</div>
+								) : (
+									<div className={classes.subCard}>
+										<Typography className={classes.title}>{plan.nickname}</Typography>
+										<Typography className={classes.price}>
+											${plan.amount / 100}
+											<span className={classes.subPrice}> / mo</span>
+										</Typography>
+										<div className={classes.content}>
+											<Typography className={classes.feature}>Automated Text/Email</Typography>
+											<Typography className={classes.feature}>Unlimited Training Series</Typography>
+											<Typography className={classes.feature}>Unlimited Team Members</Typography>
+											<div className={classes.spread}>
+												<Typography className={classes.feature}>Message Limit</Typography>
+												<Typography className={classes.feature}>1000 / mo</Typography>
+											</div>
+										</div>
+										<Button
+											key={plan.created}
+											color="primary"
+											name="plan"
+											className={classes.button}
+											value={plan.id}
+											onClick={e => this.handleChange(e, plan.nickname)}>
+											{plan.nickname}
+										</Button>
+									</div>
+								);
+							})}
+						</div>
+					</FormControl>
+					{/* Payment Handling Below */}
+					{this.props.paymentLoading ? (
+						<div className={classes.gifWrapper}>
+
+						<img src={TrainingBotGIF} alt="Loading Icon" className={classes.LoadingImg}/>
+						</div>
+
+					) : this.state.paymentToggle ? (
+						<FormControl component="fieldset" className={classes.formControl}>
+							<CardElement style={{ base: { fontSize: '18px' } }} />
+
+							<Button
+								variant="contained"
+								color="primary"
+								className={classes.submitBtn}
+								onClick={this.submit}>
+								Submit
+							</Button>
 						</FormControl>
-						{this.state.paymentToggle ? (
-							<FormControl component="fieldset" className={classes.formControl}>
-								<CardElement style={{ base: { fontSize: '18px' } }} />
-							</FormControl>
-						) : (
-							<span />
-						)}
-					</div>
-					{this.state.paymentToggle ? (
-						<Button
-							variant="contained"
-							color="primary"
-							className={classes.submitBtn}
-							onClick={this.submit}>
-							Submit
-						</Button>
 					) : (
 						<span />
 					)}
-					{/* {this.state.error ? <p>{this.state.error}</p> : <span />} */}
-
-					{/* Unsubscribe Modal */}
-					<Modal
-						aria-labelledby="simple-modal-title"
-						aria-describedby="simple-modal-description"
-						open={this.state.open}
-						onClose={this.handleClose}>
-						<UnsubscribeModal handleClose={this.handleClose} unsub={this.unsub} />
-					</Modal>
 				</div>
-			);
-		}
+
+				{/* Unsubscribe Modal */}
+				<Modal
+					aria-labelledby="simple-modal-title"
+					aria-describedby="simple-modal-description"
+					open={this.state.open}
+					onClose={this.handleClose}>
+					<UnsubscribeModal handleClose={this.handleClose} unsub={this.unsub} />
+				</Modal>
+			</div>
+		);
+		// }
 	}
 }
+
 
 const mapStateToProps = state => {
 	return {
@@ -243,6 +351,7 @@ const mapStateToProps = state => {
 		userProfile: state.userReducer.userProfile.user,
 		userError: state.userReducer.error,
 		stripeError: state.stripeReducer.error,
+		paymentLoading: state.userReducer.paymentLoading,
 	};
 };
 

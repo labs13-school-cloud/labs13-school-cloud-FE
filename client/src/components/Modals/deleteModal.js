@@ -1,14 +1,14 @@
-import React from 'react';
+import React from "react";
 //Prop Types
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
 //Styles
-import { withStyles } from '@material-ui/core/styles';
-import Modal from '@material-ui/core/Modal';
-import Button from '@material-ui/core/Button';
-import { withRouter } from 'react-router';
+import { withStyles } from "@material-ui/core/styles";
+import Modal from "@material-ui/core/Modal";
+import Button from "@material-ui/core/Button";
+import { withRouter } from "react-router";
 //REDUX
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 import {
   deleteTrainingSeries,
   deleteTeamMember,
@@ -17,9 +17,9 @@ import {
   deleteTeamMemberFromTrainingSeries,
   getTextNotifications,
   getEmailNotifications
-} from '../../store/actions/';
+} from "../../store/actions/";
 
-import { FormLabel } from '@material-ui/core';
+import { FormLabel } from "@material-ui/core";
 
 function getModalStyle() {
   const top = 50;
@@ -34,16 +34,16 @@ function getModalStyle() {
 
 const styles = theme => ({
   paper: {
-    position: 'absolute',
+    position: "absolute",
     width: theme.spacing.unit * 25,
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
     padding: theme.spacing.unit * 4,
-    outline: 'none'
+    outline: "none"
   },
   container: {
-    display: 'flex',
-    flexWrap: 'wrap'
+    display: "flex",
+    flexWrap: "wrap"
   },
   textField: {
     marginLeft: theme.spacing.unit,
@@ -57,21 +57,21 @@ const styles = theme => ({
     width: 200
   },
   button: {
-    'margin-left': theme.spacing.unit
+    "margin-left": theme.spacing.unit
   },
   icons: {
-    display: 'block',
+    display: "block",
     width: 20,
-    color: 'gray',
-    cursor: 'pointer',
-    '&:hover': { color: '#2699FB' }
+    color: "gray",
+    cursor: "pointer",
+    "&:hover": { color: "#2699FB" }
   }
 });
 
 class TrainingSeriesModal extends React.Component {
   state = {
     open: false,
-    title: ''
+    title: ""
   };
 
   handleOpen = () => {
@@ -83,36 +83,36 @@ class TrainingSeriesModal extends React.Component {
   };
 
   clearForm = () => {
-    this.setState({ title: '' });
+    this.setState({ title: "" });
   };
 
   handleDelete = () => {
     switch (this.props.deleteType) {
-      case 'post':
+      case "post":
         this.props.deletePost(this.props.id);
         break;
-      case 'teamMember':
+      case "teamMember":
         this.props.deleteTeamMember(this.props.teamMemberId);
         setTimeout(() => {
           this.props.getEmailNotifications(this.props.userId);
           this.props.getTextNotifications(this.props.userId);
         }, 500);
         break;
-      case 'inTeamMemberPage':
+      case "inTeamMemberPage":
         this.props.deleteTeamMember(this.props.teamMemberId);
         setTimeout(() => {
           this.props.getEmailNotifications(this.props.userId);
           this.props.getTextNotifications(this.props.userId);
         }, 800);
-        this.props.history.push('/home');
+        this.props.history.push("/home");
         break;
-      case 'removeMemberFromTS':
+      case "removeMemberFromTS":
         this.props.deleteTeamMemberFromTrainingSeries(
           this.props.teamMemberId,
           this.props.trainingSeries_Id
         );
         break;
-      case 'trainingSeries':
+      case "trainingSeries":
         this.props.deleteTrainingSeries(this.props.trainingSeriesId);
         setTimeout(() => {
           this.props.getEmailNotifications(this.props.userId);
@@ -120,7 +120,7 @@ class TrainingSeriesModal extends React.Component {
         }, 500);
 
         break;
-      case 'user':
+      case "user":
         this.props.deleteUser(this.props.id);
         this.props.reRouteOnDelete();
         break;
@@ -132,7 +132,7 @@ class TrainingSeriesModal extends React.Component {
 
   handleDisplayType = () => {
     switch (this.props.displayType) {
-      case 'button':
+      case "button":
         return (
           <Button
             variant="primary"
@@ -142,7 +142,7 @@ class TrainingSeriesModal extends React.Component {
             Delete
           </Button>
         );
-      case 'text':
+      case "text":
         return <p onClick={this.handleOpen}>Delete</p>;
       default:
         const { classes } = this.props;
