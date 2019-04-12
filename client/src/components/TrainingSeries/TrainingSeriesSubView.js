@@ -32,7 +32,8 @@ const styles = theme => ({
     "@media (max-width:768px)": {
       width: "92%",
       marginBottom: 10,
-      maxWidth: "none"
+      maxWidth: "none",
+      height: "533px"
     }
   },
   columnHeader: {
@@ -210,6 +211,5 @@ const MessageContainer = styled.div`
   justify-content: center;
   color: lightgray;
   height: 100%;
-  border: 1px solid red;
   text-align: center;
 `;

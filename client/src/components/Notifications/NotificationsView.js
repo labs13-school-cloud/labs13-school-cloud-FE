@@ -32,6 +32,7 @@ const styles = theme => ({
 		margin: 5,
 		'@media (max-width: 1400px)': {
 			width: '100%',
+			height: "533px"
 		},
 		'@media (max-width: 1000px)': {
 			width: '100%',
