@@ -276,8 +276,7 @@ class TrainingSeriesPosts extends React.Component {
 
   render() {
     const { classes } = this.props;
-    console.log("POSTS", this.props.posts);
-    console.log("SEARCHED POSTS", this.searchedPosts(this.props.posts));
+
     let titleEdit;
     if (this.state.editingTitle) {
       titleEdit = (
@@ -322,7 +321,31 @@ class TrainingSeriesPosts extends React.Component {
     }
 
     let assignedMembersStatus;
-    if (this.props.teamMembers.length) {
+    if (this.props.teamMembers.length > 0 && this.props.assignments.length === 0) {
+      assignedMembersStatus = (
+        <>
+        <HeaderContainer>
+          <Typography variant="title" className={classes.assignedTitle}>
+            Assigned Team Members
+          </Typography>
+          <Button
+            className={classes.assignButton}
+            variant="outlined"
+            onClick={this.routeToAssigning}
+          >
+            Assign Members
+          </Button>
+        </HeaderContainer>
+        <Typography variant="subheading" className={classes.messageText}>
+            This training series currently does not have any team members assigned to it.
+          </Typography>
+          <Typography variant="subheading" className={classes.messageText}>
+          Click the button above to create assignments.
+          </Typography>
+      </>
+      )
+
+    } else if (this.props.teamMembers.length > 0) {
       assignedMembersStatus = (
         <>
           <HeaderContainer>

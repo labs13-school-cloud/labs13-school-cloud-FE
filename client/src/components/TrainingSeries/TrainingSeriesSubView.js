@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import styled from "styled-components";
 import Fuse from "fuse.js";
 
 //Components
@@ -19,16 +20,20 @@ const styles = theme => ({
     ...theme.mixins.gutters(),
     paddingTop: theme.spacing.unit * 2,
     paddingBottom: theme.spacing.unit * 2,
-
+    display: 'flex',
+		flexDirection: 'column',
     maxWidth: "500px",
+    boxSizing: "border-box",
     width: "100%",
+    minHeight: "533px",
     height: "100%",
     margin: 5,
 
     "@media (max-width:768px)": {
       width: "92%",
       marginBottom: 10,
-      maxWidth: "none"
+      maxWidth: "none",
+      height: "533px"
     }
   },
   columnHeader: {
@@ -122,8 +127,27 @@ class TrainingSeriesSubView extends Component {
       trainingSeries = this.props.trainingSeries;
     }
 
+    let trainingSeriesDisplay;
+
+    if (this.props.trainingSeries.length === 0) {
+      trainingSeriesDisplay = (
+        <MessageContainer>
+          <p>You do not have any pending messages.</p>
+        </MessageContainer>
+      );
+    } else {
+      trainingSeriesDisplay = (
+        <TrainingSeriesList
+          deleteTrainingSeries={this.props.deleteTrainingSeries}
+          trainingSeries={trainingSeries}
+          offset={this.state.offset}
+          match={this.props.match}
+          userId={this.props.userId}
+          limit={this.state.limit}
+        />
+      );
+    }
     return (
-      <>
         <Paper className={classes.root} elevation={2}>
           <div className={classes.columnHeader}>
             <Typography variant="h5">Training Series</Typography>
@@ -165,14 +189,7 @@ class TrainingSeriesSubView extends Component {
               />
             )}
           </div>
-          <TrainingSeriesList
-            deleteTrainingSeries={this.props.deleteTrainingSeries}
-            trainingSeries={trainingSeries}
-            offset={this.state.offset}
-            match={this.props.match}
-            userId={this.props.userId}
-            limit={this.state.limit}
-          />
+          {trainingSeriesDisplay}
           <div className={classes.footer}>
             <Pagination
               limit={this.state.limit}
@@ -183,9 +200,17 @@ class TrainingSeriesSubView extends Component {
             />
           </div>
         </Paper>
-      </>
     );
   }
 }
 
 export default withStyles(styles)(TrainingSeriesSubView);
+
+const MessageContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: lightgray;
+  height: 100%;
+  text-align: center;
+`;

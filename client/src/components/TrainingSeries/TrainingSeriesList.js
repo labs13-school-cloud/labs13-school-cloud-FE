@@ -16,7 +16,6 @@ const TrainingSeriesList = props => {
   arr = props.trainingSeries.slice(x, y);
 
   return (
-    <>
       <ListStyles>
         {arr.map(series => (
           <TrainingSeries
@@ -30,7 +29,6 @@ const TrainingSeriesList = props => {
           />
         ))}
       </ListStyles>
-    </>
   );
 };
 

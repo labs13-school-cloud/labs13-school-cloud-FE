@@ -26,10 +26,13 @@ const styles = theme => ({
 		display: 'flex',
 		flexDirection: 'column',
 		width: '50%',
-		height: '100%',
+		boxSizing: "border-box",
+		minHeight: "533px",
+		height: "100%",
 		margin: 5,
 		'@media (max-width: 1400px)': {
-			width: '1000%',
+			width: '100%',
+			height: "533px"
 		},
 		'@media (max-width: 1000px)': {
 			width: '100%',
@@ -93,8 +96,6 @@ class NotificationsView extends Component {
 			...this.props.emailNotifications,
 		];
 
-		const currentTime = moment().format();
-
 		const filteredNotifications = allNotifications.filter(notification => {
 			// check if first key included email or text
 			if (notification.hasOwnProperty(this.state.filterType)) {
@@ -110,8 +111,8 @@ class NotificationsView extends Component {
 
 		const filteredReturn =
 			this.state.filterSent === 'pending'
-				? filteredNotifications.filter(notification => notification.sendDate > currentTime)
-				: filteredNotifications.filter(notification => notification.sendDate < currentTime);
+				? filteredNotifications.filter(notification => notification.sentText === 0 || notification.sentEmail === 0)
+				: filteredNotifications.filter(notification => notification.sentText === 1 || notification.sentEmail === 1);
 
 		const notificationCount = filteredReturn.length;
 
@@ -155,6 +156,7 @@ class NotificationsView extends Component {
 				</div>
 				<NotificationsList
 					notifications={filteredReturn}
+					notificationCount={notificationCount}
 					filterSent={this.state.filterSent}
 					offset={this.state.offset}
 					match={this.props.match}

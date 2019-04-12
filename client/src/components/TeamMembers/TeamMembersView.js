@@ -1,7 +1,7 @@
 // component to contain all the components related to team members
 
 import React from "react";
-
+import styled from 'styled-components';
 import Fuse from "fuse.js";
 
 //Components
@@ -33,16 +33,18 @@ const styles = theme => ({
     paddingBottom: theme.spacing.unit * 2,
     display: "flex",
     flexDirection: "column",
-
     maxWidth: "500px",
     width: "100%",
+    minHeight: "533px",
+    boxSizing: "border-box",
     height: "100%",
     margin: 5,
 
     "@media (max-width:768px)": {
       width: "92%",
       marginBottom: 10,
-      maxWidth: "none"
+      maxWidth: "none",
+      height: "533px"
     }
   },
   textField: {
@@ -152,6 +154,26 @@ class TeamMembersView extends React.Component {
       teamMembers = this.props.teamMembers;
     }
 
+    let teamMembersDisplay;
+
+    if (this.props.teamMembers.length === 0) {
+      teamMembersDisplay = (
+        <MessageContainer>
+        <p>You do not have any team members.</p>
+      </MessageContainer>
+      )
+    } else {
+      teamMembersDisplay = (
+        <TeamMembersList
+          teamMembers={teamMembers}
+          deleteTeamMember={this.deleteMember}
+          limit={this.state.limit}
+          offset={this.state.offset}
+          userId={this.props.userId}
+        />
+      )
+    }
+
     return (
       <Paper className={classes.root} elevation={2}>
         <div className={classes.columnHeader}>
@@ -194,13 +216,7 @@ class TeamMembersView extends React.Component {
             />
           )}
         </div>
-        <TeamMembersList
-          teamMembers={teamMembers}
-          deleteTeamMember={this.deleteMember}
-          limit={this.state.limit}
-          offset={this.state.offset}
-          userId={this.props.userId}
-        />
+        {teamMembersDisplay}
         <div className={classes.footer}>
           <Pagination
             limit={this.state.limit}
@@ -231,3 +247,12 @@ export default connect(
   mapStateToProps,
   { getTeamMembers, addTeamMember, deleteTeamMember }
 )(withStyles(styles)(withRouter(TeamMembersView)));
+
+const MessageContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: lightgray;
+  height: 100%;
+  text-align: center;
+`;
