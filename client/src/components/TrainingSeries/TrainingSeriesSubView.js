@@ -84,6 +84,7 @@ class TrainingSeriesSubView extends Component {
 
   routeToCreateTrainingSeries = e => {
     e.preventDefault();
+    this.props.toggleFreakinSnackBar();
     this.props.history.push("/home/create-training-series");
   };
 

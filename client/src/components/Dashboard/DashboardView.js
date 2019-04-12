@@ -71,7 +71,7 @@ class Dashboard extends React.Component {
         <TripleColumn>
           <SmallColumns>
             <TeamMembersView toggleFreakinSnackBar={this.toggleFreakinSnackBar} userId={user.userID} />
-            <TrainingSeriesView userId={user.userID} match={this.props.match} />
+            <TrainingSeriesView toggleFreakinSnackBar={this.toggleFreakinSnackBar} userId={user.userID} match={this.props.match} />
           </SmallColumns>
           <NotificationsView userId={user.userID} />
         </TripleColumn>
@@ -101,7 +101,7 @@ class Dashboard extends React.Component {
             <DashboardContainer>
               <Router history={history}>
                 <Route exact path="/home" component={this.renderDashboard} />
-                <Route path="/home/profile" component={ProfileView} />
+                <Route path="/home/profile" render={props => <ProfileView {...props} toggleFreakinSnackBar={this.toggleFreakinSnackBar} />} />
                 <Route
                   path="/home/team-member/:id"
                   render={props => (

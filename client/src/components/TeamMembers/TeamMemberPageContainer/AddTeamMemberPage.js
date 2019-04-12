@@ -96,7 +96,7 @@ class TeamMemberPage extends React.Component {
       this.props.history.push({
         pathname: "/home",
         state: {
-          success: !this.state.snackState
+          success: true
         }
       });
     }, 1000);
