@@ -62,6 +62,10 @@ const styles = theme => ({
     "&:hover": {
       background: "#591a99",
       color: "white"
+    },
+
+    "@media (max-width: 768px)": {
+      margin: "15px 0"
     }
   },
   trainingSeriesHeader: {
