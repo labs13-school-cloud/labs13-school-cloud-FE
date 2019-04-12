@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import styled from "styled-components";
 import Fuse from "fuse.js";
 
 //Components
@@ -121,6 +122,26 @@ class TrainingSeriesSubView extends Component {
       trainingSeries = this.props.trainingSeries;
     }
 
+    let trainingSeriesDisplay;
+
+    if (this.props.trainingSeries.length === 0) {
+      trainingSeriesDisplay = (
+        <MessageContainer>
+          <p>You do not have any pending messages.</p>
+        </MessageContainer>
+      );
+    } else {
+      trainingSeriesDisplay = (
+        <TrainingSeriesList
+          deleteTrainingSeries={this.props.deleteTrainingSeries}
+          trainingSeries={trainingSeries}
+          offset={this.state.offset}
+          match={this.props.match}
+          userId={this.props.userId}
+          limit={this.state.limit}
+        />
+      );
+    }
     return (
       <>
         <Paper className={classes.root} elevation={2}>
@@ -164,14 +185,7 @@ class TrainingSeriesSubView extends Component {
               />
             )}
           </div>
-          <TrainingSeriesList
-            deleteTrainingSeries={this.props.deleteTrainingSeries}
-            trainingSeries={trainingSeries}
-            offset={this.state.offset}
-            match={this.props.match}
-            userId={this.props.userId}
-            limit={this.state.limit}
-          />
+          {trainingSeriesDisplay}
           <div className={classes.footer}>
             <Pagination
               limit={this.state.limit}
@@ -188,3 +202,11 @@ class TrainingSeriesSubView extends Component {
 }
 
 export default withStyles(styles)(TrainingSeriesSubView);
+
+const MessageContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: lightgray;
+  border: 1px solid red;
+`;

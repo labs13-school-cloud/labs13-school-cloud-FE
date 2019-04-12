@@ -155,6 +155,7 @@ class NotificationsView extends Component {
 				</div>
 				<NotificationsList
 					notifications={filteredReturn}
+					notificationCount={notificationCount}
 					filterSent={this.state.filterSent}
 					offset={this.state.offset}
 					match={this.props.match}
