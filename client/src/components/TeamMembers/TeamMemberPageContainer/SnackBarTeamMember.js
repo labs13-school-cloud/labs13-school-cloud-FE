@@ -87,9 +87,10 @@ const styles2 = theme => ({
   },
   button: {
     "margin-left": theme.spacing.unit,
-    color: "#451476",
+    background: "#451476",
+    color: "white",
     "&:hover": {
-      background: "#451476",
+      background: "#591a99",
       color: "white"
     }
   }

@@ -56,10 +56,11 @@ const styles = theme => ({
     margin: theme.spacing.unit
   },
   button: {
-     "margin-left": theme.spacing.unit,
-    color: "#451476",
+    "margin-left": theme.spacing.unit,
+    background: "#451476",
+    color: "white",
     "&:hover": {
-      background: "#451476",
+      background: "#591a99",
       color: "white"
     }
   },
@@ -111,7 +112,7 @@ class TeamMemberPage extends React.Component {
       });
     }
 
-    console.log("team member", this.props.teamMember)
+    console.log("team member", this.props.teamMember);
   }
 
   handleChange = name => event => {
