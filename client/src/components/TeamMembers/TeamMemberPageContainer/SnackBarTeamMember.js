@@ -129,7 +129,7 @@ class CustomizedSnackbars extends React.Component {
           <MySnackbarContentWrapper
             onClose={this.handleClose}
             variant="success"
-            message="Success!"
+            message="Successfully updated team member"
           />
         );
       case "delete":
