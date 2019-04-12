@@ -21,6 +21,7 @@ import {
 
 const initialState = {
     posts: [],
+    newPost: [],
     singleTrainingSeries: {},
     isLoading: false,
     isAdding: false,
@@ -86,7 +87,7 @@ const postsReducer = (state = initialState, action) => {
             ...state,
             isAdding: false,
             addedSuccessfully: true,
-            posts: [...state.posts, action.payload]
+            singlePost: action.payload
         };
         case ADD_POST_FAIL:
         return {
