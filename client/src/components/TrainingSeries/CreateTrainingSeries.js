@@ -1,5 +1,7 @@
 import React from "react";
 
+import styled from "styled-components";
+
 //Prop Types
 import PropTypes from "prop-types";
 
@@ -9,26 +11,34 @@ import ProgressCircle from "../Progress/ProgressCircle";
 
 //Styles
 import { withStyles } from "@material-ui/core/styles";
-import { Typography, Button, TextField } from "@material-ui/core/";
+import { Typography, Button, TextField, Divider } from "@material-ui/core/";
 
 const styles = theme => ({
   paper: {
-    width: theme.spacing.unit * 60,
+    width: "89%",
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
     padding: theme.spacing.unit * 4,
     outline: "none",
-    margin: "0 auto"
+    margin: "5px auto",
+    boxSizing: "border-box",
+
+    "@media (max-width: 768px)": {
+      textAlign: "center"
+      // padding: "30px"
+    }
   },
   container: {
     display: "flex",
-    flexWrap: "wrap",
-    "align-items": "baseline"
+    // flexWrap: "wrap",
+    "flex-direction": "column",
+    "align-items": "center"
+    // "align-items": "baseline"
   },
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
-    width: 200
+    width: "100%"
   },
   dense: {
     marginTop: 19
@@ -41,11 +51,15 @@ const styles = theme => ({
   },
   createButton: {
     "margin-left": theme.spacing.unit,
-    color: "#451476",
+    background: "#451476",
+    color: "white",
     "&:hover": {
-      background: "#451476",
+      background: "#591a99",
       color: "white"
     }
+  },
+  divider: {
+    margin: "15px 0"
   }
 });
 
@@ -83,43 +97,45 @@ class CreateTrainingSeries extends React.Component {
     return this.state.isRouting ? (
       <ProgressCircle />
     ) : (
-      <div className={classes.paper}>
-        <Typography variant="h6" id="modal-title">
-          Create A New Training Series
-        </Typography>
-        <form
-          onSubmit={e => this.handleTrainingSeriesSubmit(e)}
-          className={classes.container}
-          noValidate
-          autoComplete="off"
-        >
-          <TextField
-            id="standard-name"
-            label="Title"
-            className={classes.textField}
-            value={this.state.title}
-            onChange={this.handleChange("title")}
-            margin="normal"
-            required
-          />
-          <div>
-            <Button
-              type="submit"
-              variant="outlined"
-              className={classes.createButton}
-            >
-              Create
-            </Button>
-            <Button
-              variant="contained"
-              className={classes.button}
-              onClick={e => this.handleCancel(e)}
-            >
-              Cancel
-            </Button>
-          </div>
-        </form>
-      </div>
+      <MainContainer>
+        <div className={classes.paper}>
+          <Typography variant="h6" id="modal-title">
+            Create A New Training Series
+          </Typography>
+          <Divider className={classes.divider} />
+          <form
+            onSubmit={e => this.handleTrainingSeriesSubmit(e)}
+            className={classes.container}
+            noValidate
+            autoComplete="off"
+          >
+            <TextField
+              id="standard-name"
+              label="Title"
+              className={classes.textField}
+              value={this.state.title}
+              onChange={this.handleChange("title")}
+              margin="normal"
+              required
+            />
+            <div>
+              <Button
+                type="submit"
+                variant="outlined"
+                className={classes.createButton}
+              >
+                Create
+              </Button>
+              <Button
+                className={classes.button}
+                onClick={e => this.handleCancel(e)}
+              >
+                Cancel
+              </Button>
+            </div>
+          </form>
+        </div>
+      </MainContainer>
     );
   }
 }
@@ -127,6 +143,16 @@ class CreateTrainingSeries extends React.Component {
 CreateTrainingSeries.propTypes = {
   classes: PropTypes.object.isRequired
 };
+
+const MainContainer = styled.div`
+  margin: 0 auto;
+  max-width: 768px;
+  width: 700px;
+  @media (max-width: 768px) {
+    width: 95%;
+    margin: 0 auto;
+  }
+`;
 
 const CreateTrainingSeriesWrapped = withStyles(styles)(CreateTrainingSeries);
 

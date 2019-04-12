@@ -3,11 +3,12 @@ import React from "react";
 import styled from "styled-components";
 
 // Material UI
-import { withStyles } from "@material-ui/core/styles";
+import { withStyles, withTheme } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+import Divider from "@material-ui/core/Divider";
 import TrainingBotGIF from "../../../img/trainingBot.gif";
 
 //State Management
@@ -16,16 +17,23 @@ import { connect } from "react-redux";
 
 const styles = theme => ({
   paper: {
-    width: "100%",
+    width: "89%",
     backgroundColor: theme.palette.background.paper,
-    boxSizing: "border-box",
     boxShadow: theme.shadows[5],
-    padding: "20px 30px",
+    padding: theme.spacing.unit * 4,
     outline: "none",
-    margin: "20px auto",
+    margin: "5px auto",
+
     "@media (max-width: 768px)": {
+      width: "89%",
       textAlign: "center",
       padding: "30px"
+    },
+
+    "@media (max-width: 480px)": {
+      width: "80%",
+      // padding: 0,
+      margin: "5px auto"
     }
   },
   form: {
@@ -51,11 +59,15 @@ const styles = theme => ({
   },
   addButton: {
     "margin-left": theme.spacing.unit,
-    color: "#451476",
+    background: "#451476",
+    color: "white",
     "&:hover": {
-      background: "#451476",
+      background: "#591a99",
       color: "white"
     }
+  },
+  divider: {
+    margin: "15px 0"
   }
 });
 
@@ -118,12 +130,15 @@ class TeamMemberPage extends React.Component {
 
     return (
       <MainContainer>
-        <Typography variant="display1" align="center">
+        {/* <Typography variant="display1" align="center">
           Add A New Team Member
-        </Typography>
+        </Typography> */}
         <form className={classes.form} onSubmit={e => this.addNewTeamMember(e)}>
           <Paper className={classes.paper}>
-            <Typography variant="title">Team Member Info</Typography>
+            <Typography variant="title" className>
+              Add A New Team Member
+            </Typography>
+            <Divider className={classes.divider} />
             <MemberInfoContainer>
               <TextField
                 autoFocus="true"
@@ -177,7 +192,7 @@ class TeamMemberPage extends React.Component {
             <ButtonContainer>
               <Button
                 disabled={this.state.isRouting === true ? "true" : null}
-                variant="outlined"
+                variant="contained"
                 className={classes.addButton}
                 type="submit"
               >
@@ -188,7 +203,6 @@ class TeamMemberPage extends React.Component {
                 )}
               </Button>
               <Button
-                variant="contained"
                 className={classes.button}
                 onClick={e => this.handleCancel(e)}
               >
