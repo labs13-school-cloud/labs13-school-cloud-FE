@@ -25,13 +25,14 @@ import { getTrainingSeries } from "../../../store/actions";
 const styles = theme => ({
   // these styles fixes the off-centering
   paper: {
-    width: "100%",
+    width: "89%",
     backgroundColor: theme.palette.background.paper,
     boxSizing: "border-box",
     boxShadow: theme.shadows[5],
-    padding: "20px 30px",
+    padding: theme.spacing.unit * 4,
     outline: "none",
-    margin: "20px auto",
+    margin: "5px auto",
+
     "@media (max-width: 768px)": {
       textAlign: "center",
       padding: "30px"
@@ -56,11 +57,16 @@ const styles = theme => ({
     margin: theme.spacing.unit
   },
   button: {
-     "margin-left": theme.spacing.unit,
-    color: "#451476",
+    "margin-left": theme.spacing.unit,
+    background: "#451476",
+    color: "white",
     "&:hover": {
-      background: "#451476",
+      background: "#591a99",
       color: "white"
+    },
+
+    "@media (max-width: 768px)": {
+      margin: "15px 0"
     }
   },
   trainingSeriesHeader: {
@@ -111,7 +117,7 @@ class TeamMemberPage extends React.Component {
       });
     }
 
-    console.log("team member", this.props.teamMember)
+    console.log("team member", this.props.teamMember);
   }
 
   handleChange = name => event => {

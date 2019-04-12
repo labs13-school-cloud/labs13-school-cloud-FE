@@ -87,9 +87,10 @@ const styles2 = theme => ({
   },
   button: {
     "margin-left": theme.spacing.unit,
-    color: "#451476",
+    background: "#451476",
+    color: "white",
     "&:hover": {
-      background: "#451476",
+      background: "#591a99",
       color: "white"
     }
   }
@@ -128,7 +129,7 @@ class CustomizedSnackbars extends React.Component {
           <MySnackbarContentWrapper
             onClose={this.handleClose}
             variant="success"
-            message="Success!"
+            message="Successfully updated team member"
           />
         );
       case "delete":
@@ -162,7 +163,7 @@ class CustomizedSnackbars extends React.Component {
           className={classes.button}
           onClick={e => this.handleClick(e)}
         >
-          Edit Info
+          Save
         </Button>
         <Snackbar
           anchorOrigin={{

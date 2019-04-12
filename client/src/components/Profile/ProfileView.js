@@ -139,6 +139,10 @@ class ProfileView extends React.Component {
 			open: false,
 		};
 	}
+
+	componentDidMount() {
+		this.props.toggleFreakinSnackBar();
+	}
 	handleOpen = () => {
 		this.setState({ open: true });
 	};

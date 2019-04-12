@@ -403,7 +403,7 @@ class TrainingSeriesPosts extends React.Component {
         {this.state.displaySnackbar && (
           <>
             <AddMemberSnackbar
-              message="Your team members have be successfully added."
+              message="Your team members have been successfully assigned."
               type="success"
             />
           </>
