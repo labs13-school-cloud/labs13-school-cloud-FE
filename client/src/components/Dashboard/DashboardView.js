@@ -50,7 +50,7 @@ class Dashboard extends React.Component {
 
   componentDidUpdate(prevProps) {
     if (this.props.location.state) {
-      if (this.props.location.state !== prevProps.location.state) {
+      if (this.props.location.state !== prevProps.location.state && this.props.location.state.success) {
         this.setState({
           displaySnackbar: true
         });
