@@ -110,7 +110,10 @@ class AssignMemberPage extends React.Component {
     this.props.addTeamMemberToTrainingSeries(data);
     setTimeout(() => {
       this.props.history.push({
-        pathname: "/home"
+        pathname: "/home",
+        state: {
+          success: true
+        }
       })
     }, 1000)
   };
