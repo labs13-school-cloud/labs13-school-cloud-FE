@@ -20,9 +20,12 @@ const styles = theme => ({
     ...theme.mixins.gutters(),
     paddingTop: theme.spacing.unit * 2,
     paddingBottom: theme.spacing.unit * 2,
-
+    display: 'flex',
+		flexDirection: 'column',
     maxWidth: "500px",
+    boxSizing: "border-box",
     width: "100%",
+    minHeight: "533px",
     height: "100%",
     margin: 5,
 
@@ -143,7 +146,6 @@ class TrainingSeriesSubView extends Component {
       );
     }
     return (
-      <>
         <Paper className={classes.root} elevation={2}>
           <div className={classes.columnHeader}>
             <Typography variant="h5">Training Series</Typography>
@@ -196,7 +198,6 @@ class TrainingSeriesSubView extends Component {
             />
           </div>
         </Paper>
-      </>
     );
   }
 }
@@ -208,5 +209,7 @@ const MessageContainer = styled.div`
   align-items: center;
   justify-content: center;
   color: lightgray;
+  height: 100%;
   border: 1px solid red;
+  text-align: center;
 `;

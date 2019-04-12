@@ -33,9 +33,10 @@ const styles = theme => ({
     paddingBottom: theme.spacing.unit * 2,
     display: "flex",
     flexDirection: "column",
-
     maxWidth: "500px",
     width: "100%",
+    minHeight: "533px",
+    boxSizing: "border-box",
     height: "100%",
     margin: 5,
 

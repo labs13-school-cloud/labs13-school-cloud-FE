@@ -61,4 +61,5 @@ align-items: center;
 justify-content: center;
 height: 100%;
 color: lightgray;
+border: 1px solid blue;
 `;
