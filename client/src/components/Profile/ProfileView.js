@@ -263,7 +263,11 @@ class ProfileView extends React.Component {
           <Paper style={getModalStyle()} className={classes.paper}>
             {account ? (
               <>
-                <Typography variant='subheading' id='modal-title'>
+                <Typography
+                  variant='h6'
+                  id='modal-title'
+                  style={{ marginBottom: 10 }}
+                >
                   Active subscription
                 </Typography>
                 <Typography>
