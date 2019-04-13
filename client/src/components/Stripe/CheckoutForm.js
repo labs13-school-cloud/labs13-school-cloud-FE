@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import styled from 'styled-components';
 import { CardElement, injectStripe } from 'react-stripe-elements';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -30,11 +31,15 @@ const styles = theme => ({
     outline: 'none'
   },
   submitBtn: {
-    marginTop: 5,
     maxWidth: 100,
     width: '100%',
-
-    margin: '0 auto'
+    background: '#451476',
+    color: 'white',
+    margin: '10px auto',
+    '&:hover': {
+      background: '#591a99',
+      color: 'white'
+    }
   },
   root: {
     margin: '20 auto',
@@ -119,7 +124,7 @@ const styles = theme => ({
     color: 'white',
     borderRadius: 0,
     '&:hover': {
-      background: '#3DBC93'
+      background: '#591a99'
     },
     '&:disabled': {
       color: 'grey',
@@ -365,10 +370,8 @@ class CheckoutForm extends Component {
           ) : this.state.paymentToggle ? (
             <FormControl component='fieldset' className={classes.formControl}>
               <CardElement style={{ base: { fontSize: '18px' } }} />
-
               <Button
                 variant='contained'
-                color='primary'
                 className={classes.submitBtn}
                 onClick={this.submit}
               >
