@@ -31,11 +31,11 @@ const styles = theme => ({
     outline: 'none'
   },
   submitBtn: {
-    maxWidth: 100,
+    maxWidth: 150,
     width: '100%',
     background: '#451476',
     color: 'white',
-    margin: '10px auto',
+    margin: '20px auto',
     '&:hover': {
       background: '#591a99',
       color: 'white'
@@ -51,6 +51,10 @@ const styles = theme => ({
   formControl: {
     display: 'flex',
     margin: '15px 5px'
+  },
+  paymentForm: {
+    display: 'flex',
+    margin: '30px 90px 0 90px'
   },
   buttonLayout: {
     display: 'flex',
@@ -368,14 +372,14 @@ class CheckoutForm extends Component {
               />
             </div>
           ) : this.state.paymentToggle ? (
-            <FormControl component='fieldset' className={classes.formControl}>
+            <FormControl component='fieldset' className={classes.paymentForm}>
               <CardElement style={{ base: { fontSize: '18px' } }} />
               <Button
                 variant='contained'
                 className={classes.submitBtn}
                 onClick={this.submit}
               >
-                Submit
+                Submit Payment
               </Button>
             </FormControl>
           ) : (
