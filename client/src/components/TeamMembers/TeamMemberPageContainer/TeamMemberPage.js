@@ -1,10 +1,10 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-import styled from "styled-components";
+import styled from 'styled-components';
 
 // Material UI
-import { withStyles } from "@material-ui/core/styles";
+import { withStyles } from '@material-ui/core/styles';
 import {
   Paper,
   List,
@@ -12,82 +12,82 @@ import {
   TextField,
   Button,
   Divider
-} from "@material-ui/core/";
-import NotificationWidget from "./SnackBarTeamMember";
+} from '@material-ui/core/';
+import NotificationWidget from './SnackBarTeamMember';
 //Components
-import TrainingSeriesAssignments from "./TrainingSeriesAssigments";
-import DeleteModal from "../../Modals/deleteModal";
+import TrainingSeriesAssignments from './TrainingSeriesAssigments';
+import DeleteModal from '../../Modals/deleteModal';
 
 //Redux
-import { connect } from "react-redux";
-import { getTrainingSeries } from "../../../store/actions";
+import { connect } from 'react-redux';
+import { getTrainingSeries } from '../../../store/actions';
 
 const styles = theme => ({
   // these styles fixes the off-centering
   paper: {
-    width: "89%",
+    width: '89%',
     backgroundColor: theme.palette.background.paper,
-    boxSizing: "border-box",
+    boxSizing: 'border-box',
     boxShadow: theme.shadows[5],
     padding: theme.spacing.unit * 4,
-    outline: "none",
-    margin: "5px auto",
+    outline: 'none',
+    margin: '5px auto',
 
-    "@media (max-width: 768px)": {
-      textAlign: "center",
-      padding: "30px"
+    '@media (max-width: 768px)': {
+      textAlign: 'center',
+      padding: '30px'
     }
   },
   form: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    margin: "0 auto"
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    margin: '0 auto'
   },
   info: {
-    "margin-right": "50px"
+    'margin-right': '50px'
   },
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
-    width: "100%"
+    width: '100%'
   },
   fab: {
     margin: theme.spacing.unit
   },
   button: {
-    "margin-left": theme.spacing.unit,
-    background: "#451476",
-    color: "white",
-    "&:hover": {
-      background: "#591a99",
-      color: "white"
+    'margin-left': theme.spacing.unit,
+    background: '#451476',
+    color: 'white',
+    '&:hover': {
+      background: '#591a99',
+      color: 'white'
     },
 
-    "@media (max-width: 768px)": {
-      margin: "15px 0"
+    '@media (max-width: 768px)': {
+      margin: '15px 0'
     }
   },
   trainingSeriesHeader: {
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    "@media (max-width: 768px)": {
-      flexDirection: "column"
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    '@media (max-width: 768px)': {
+      flexDirection: 'column'
     }
   },
   messageText: {
     marginTop: 20,
     marginBottom: 20,
-    textAlign: "center"
+    textAlign: 'center'
   },
   divider: {
-    margin: "15px 0"
+    margin: '15px 0'
   },
   assignBtn: {
-    "@media (max-width: 768px)": {
-      margin: "20px 0 15px"
+    '@media (max-width: 768px)': {
+      margin: '20px 0 15px'
     }
   }
 });
@@ -95,14 +95,14 @@ const styles = theme => ({
 class TeamMemberPage extends React.Component {
   state = {
     teamMember: {
-      firstName: "",
-      lastName: "",
-      jobDescription: "",
-      email: "",
-      phoneNumber: "",
-      user_ID: "",
-      TeamMemberCol: "",
-      teamMemberID: ""
+      firstName: '',
+      lastName: '',
+      jobDescription: '',
+      email: '',
+      phoneNumber: '',
+      user_ID: '',
+      TeamMemberCol: '',
+      teamMemberID: ''
     },
     assignments: [],
     trainingSeries: [] //Leigh-Ann: this may not be needed?
@@ -117,7 +117,7 @@ class TeamMemberPage extends React.Component {
       });
     }
 
-    console.log("team member", this.props.teamMember);
+    console.log('team member', this.props.teamMember);
   }
 
   handleChange = name => event => {
@@ -171,31 +171,29 @@ class TeamMemberPage extends React.Component {
       disabledTrainingSeries = (
         <>
           <div className={classes.trainingSeriesHeader}>
-            <Typography variant="title">Training Series</Typography>
+            <Typography variant='title'>Training Series</Typography>
             <Button
               className={classes.assignBtn}
-              variant="outlined"
+              variant='outlined'
               onClick={this.routeToAssigning}
             >
               Assign to Training Series
             </Button>
           </div>
-          <Typography variant="subheading" className={classes.messageText}>
-            This team member currently does not have any assignments.
-          </Typography>
-          <Typography variant="subheading" className={classes.messageText}>
-            Click the button above to assign them to a training series.
-          </Typography>
+          <HolderText>
+            <p>This team member currently does not have any assignments.</p>
+            <p>Click the button above to assign them to a training series.</p>
+          </HolderText>
         </>
       );
     } else if (this.props.trainingSeries.length > 0) {
       disabledTrainingSeries = (
         <>
           <div className={classes.trainingSeriesHeader}>
-            <Typography variant="title">Assigned Training Series</Typography>
+            <Typography variant='title'>Assigned Training Series</Typography>
             <Button
               className={classes.assignBtn}
-              variant="outlined"
+              variant='outlined'
               className={classes.button}
               onClick={this.routeToAssigning}
             >
@@ -209,16 +207,16 @@ class TeamMemberPage extends React.Component {
       disabledTrainingSeries = (
         <>
           <div className={classes.trainingSeriesHeader}>
-            <Typography variant="title">Training Series</Typography>
-            <Button className={classes.assignBtn} variant="outlined" disabled>
+            <Typography variant='title'>Training Series</Typography>
+            <Button className={classes.assignBtn} variant='outlined' disabled>
               Assign to Training Series
             </Button>
           </div>
-          <Typography variant="subheading" className={classes.messageText}>
+          <Typography variant='subheading' className={classes.messageText}>
             You don't have any training series to assign.
           </Typography>
-          <Typography variant="subheading" className={classes.messageText}>
-            <Link to="/home/create-training-series">Click here</Link> to create
+          <Typography variant='subheading' className={classes.messageText}>
+            <Link to='/home/create-training-series'>Click here</Link> to create
             your first training series.
           </Typography>
         </>
@@ -229,64 +227,64 @@ class TeamMemberPage extends React.Component {
       <MainContainer>
         <form className={classes.form}>
           <Paper className={classes.paper}>
-            <Typography variant="title">Team Member Info</Typography>
-            <Divider variant="fullWidth" className={classes.divider} />
+            <Typography variant='title'>Team Member Info</Typography>
+            <Divider variant='fullWidth' className={classes.divider} />
             <MemberInfoContainer>
               <TextField
-                id="standard-name"
-                label="first name"
+                id='standard-name'
+                label='first name'
                 className={classes.textField}
                 value={this.state.teamMember.firstName}
-                onChange={this.handleChange("firstName")}
-                margin="normal"
+                onChange={this.handleChange('firstName')}
+                margin='normal'
               />
               <TextField
-                id="standard-name"
-                label="last name"
+                id='standard-name'
+                label='last name'
                 className={classes.textField}
                 value={this.state.teamMember.lastName}
-                onChange={this.handleChange("lastName")}
-                margin="normal"
+                onChange={this.handleChange('lastName')}
+                margin='normal'
               />
               <TextField
-                id="standard-name"
-                label="job description"
+                id='standard-name'
+                label='job description'
                 className={classes.textField}
                 value={this.state.teamMember.jobDescription}
-                onChange={this.handleChange("jobDescription")}
-                margin="normal"
+                onChange={this.handleChange('jobDescription')}
+                margin='normal'
               />
             </MemberInfoContainer>
             <MemberInfoContainer>
               <TextField
-                id="standard-name"
-                label="email"
+                id='standard-name'
+                label='email'
                 className={classes.textField}
                 value={this.state.teamMember.email}
-                onChange={this.handleChange("email")}
-                margin="normal"
+                onChange={this.handleChange('email')}
+                margin='normal'
               />
               <TextField
-                id="standard-name"
-                label="phone"
+                id='standard-name'
+                label='phone'
                 className={classes.textField}
                 value={this.state.teamMember.phoneNumber}
-                onChange={this.handleChange("phoneNumber")}
-                margin="normal"
+                onChange={this.handleChange('phoneNumber')}
+                margin='normal'
               />
             </MemberInfoContainer>
             <ButtonContainer>
               <NotificationWidget
                 teamMember={this.state.teamMember}
                 editTeamMember={this.props.editTeamMember}
-                type="success"
-                submitType="edit"
+                type='success'
+                submitType='edit'
               />
               <DeleteModal
-                deleteType="inTeamMemberPage"
+                deleteType='inTeamMemberPage'
                 teamMemberId={this.state.teamMember.teamMemberID}
                 userId={this.props.userId}
-                displayType="button"
+                displayType='button'
               />
             </ButtonContainer>
           </Paper>
@@ -302,6 +300,14 @@ const MainContainer = styled.div`
   max-width: 768px;
   @media (max-width: 768px) {
     width: 95%;
+  }
+`;
+
+const HolderText = styled.div`
+  margin: 50px 0;
+  p {
+    color: lightgray;
+    text-align: center;
   }
 `;
 
