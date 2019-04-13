@@ -1,18 +1,18 @@
 // displays all posts of a training series
-import React from "react";
+import React from 'react';
 
-import { Link } from "react-router-dom";
-import Fab from "@material-ui/core/Fab";
-import Fuse from "fuse.js";
+import { Link } from 'react-router-dom';
+import Fab from '@material-ui/core/Fab';
+import Fuse from 'fuse.js';
 
 // Components
-import DeleteModal from "../Modals/deleteModal";
-import TrainingSeriesAssignment from "./TrainingSeriesAssignment";
+import DeleteModal from '../Modals/deleteModal';
+import TrainingSeriesAssignment from './TrainingSeriesAssignment';
 
-import styled from "styled-components";
+import styled from 'styled-components';
 
 // Redux
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
 import {
   getTrainingSeriesPosts,
   getTeamMembers,
@@ -21,9 +21,9 @@ import {
   deletePost,
   getMembersAssigned,
   editTrainingSeries
-} from "../../store/actions";
+} from '../../store/actions';
 
-import { withStyles } from "@material-ui/core/styles";
+import { withStyles } from '@material-ui/core/styles';
 
 // Styling
 import {
@@ -36,64 +36,64 @@ import {
   Typography,
   InputAdornment,
   Divider
-} from "@material-ui/core/";
+} from '@material-ui/core/';
 
-import AddMemberSnackbar from "./AddMembersToTrainingSeries/AddMemberSnackbar";
+import AddMemberSnackbar from './AddMembersToTrainingSeries/AddMemberSnackbar';
 
 const styles = theme => ({
   paper: {
     // "max-width": 800,
-    width: "89%",
+    width: '89%',
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
     padding: theme.spacing.unit * 4,
-    outline: "none",
-    margin: "5px auto",
+    outline: 'none',
+    margin: '5px auto',
 
-    "@media (max-width: 768px)": {
-      width: "89%",
+    '@media (max-width: 768px)': {
+      width: '89%',
       // padding: 0,
-      margin: "5px auto"
+      margin: '5px auto'
     },
 
-    "@media (max-width: 480px)": {
-      width: "80%",
+    '@media (max-width: 480px)': {
+      width: '80%',
       // padding: 0,
-      margin: "5px auto"
+      margin: '5px auto'
     }
   },
   paperTitle: {
-    width: "100%",
+    width: '100%',
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
-    padding: "16px 32px",
-    outline: "none",
-    display: "flex",
-    margin: "5px auto",
-    alignItems: "baseline",
-    "@media (max-width: 480px)": {
-      width: "89%",
+    padding: '16px 32px',
+    outline: 'none',
+    display: 'flex',
+    margin: '5px auto',
+    alignItems: 'baseline',
+    '@media (max-width: 480px)': {
+      width: '89%',
       padding: 0,
-      margin: "0 auto"
+      margin: '0 auto'
     }
   },
   secondaryAction: {
-    display: "flex",
-    flexDirection: "row",
-    "align-items": "center"
+    display: 'flex',
+    flexDirection: 'row',
+    'align-items': 'center'
   },
   listStyle: {
     margin: 0
   },
   listItem: {
-    width: "79%",
+    width: '79%',
     height: 80,
     marginBottom: 10,
     paddingBottom: 10,
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    wrap: "flex-wrap"
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    wrap: 'flex-wrap'
 
     // borderBottom: "1px solid #E8E9EB"
     // "list-style": "none"
@@ -102,27 +102,27 @@ const styles = theme => ({
   //   width: "10%"
   // },
   icons: {
-    display: "block",
+    display: 'block',
     width: 20,
     marginBottom: 10,
-    color: "gray",
-    cursor: "pointer",
-    "&:hover": { color: "#2699FB" }
+    color: 'gray',
+    cursor: 'pointer',
+    '&:hover': { color: '#2699FB' }
   },
   hidden: {
-    display: "none"
+    display: 'none'
   },
   button: {
     // margin: 5,
-    "margin-left": theme.spacing.unit,
-    color: "#451476",
-    "&:hover": {
-      background: "#451476",
-      color: "white"
+    'margin-left': theme.spacing.unit,
+    color: '#451476',
+    '&:hover': {
+      background: '#451476',
+      color: 'white'
     },
 
-    "@media (max-width: 768px)": {
-      margin: "10px 5px"
+    '@media (max-width: 768px)': {
+      margin: '10px 5px'
     }
 
     // "@media (max-width: 480px)": {
@@ -132,15 +132,15 @@ const styles = theme => ({
   },
   assignButton: {
     // margin: 5,
-    "margin-left": theme.spacing.unit,
-    color: "#451476",
-    "&:hover": {
-      background: "#451476",
-      color: "white"
+    'margin-left': theme.spacing.unit,
+    color: '#451476',
+    '&:hover': {
+      background: '#451476',
+      color: 'white'
     },
 
-    "@media (max-width: 768px)": {
-      margin: "10px 5px"
+    '@media (max-width: 768px)': {
+      margin: '10px 5px'
     }
 
     // "@media (max-width: 480px)": {
@@ -150,18 +150,18 @@ const styles = theme => ({
     // }
   },
   list: {
-    listStyleType: "none"
+    listStyleType: 'none'
   },
   messageText: {
     marginTop: 20,
     marginBottom: 20,
-    textAlign: "center"
+    textAlign: 'center'
   },
   divider: {
-    margin: "15px 0"
+    margin: '15px 0'
   },
   textField: {
-    width: "60%"
+    width: '60%'
   }
 });
 class TrainingSeriesPosts extends React.Component {
@@ -169,7 +169,7 @@ class TrainingSeriesPosts extends React.Component {
     active: false,
     displaySnackbar: false,
     editingTitle: false,
-    searchInput: "",
+    searchInput: '',
     searchOpen: false
   };
 
@@ -200,7 +200,7 @@ class TrainingSeriesPosts extends React.Component {
 
   routeToPostPage = () => {
     this.props.history.push({
-      pathname: "/home/create-post",
+      pathname: '/home/create-post',
       state: {
         trainingSeriesId: this.props.singleTrainingSeries.trainingSeriesID
       }
@@ -209,7 +209,7 @@ class TrainingSeriesPosts extends React.Component {
 
   routeToEditPostPage = (e, post) => {
     e.preventDefault();
-    console.log("FIRED");
+    console.log('FIRED');
     this.props.history.push({
       pathname: `/home/post/${post.postID}`,
       state: {
@@ -266,7 +266,7 @@ class TrainingSeriesPosts extends React.Component {
       distance: 100,
       maxPatternLength: 32,
       minMatchCharLength: 3,
-      keys: ["postName", "postDetails", "link"]
+      keys: ['postName', 'postDetails', 'link']
     };
 
     const fuse = new Fuse(posts, options);
@@ -280,21 +280,21 @@ class TrainingSeriesPosts extends React.Component {
     let titleEdit;
     if (this.state.editingTitle) {
       titleEdit = (
-        <form onSubmit={e => this.updateTitle(e)} noValidate autoComplete="off">
+        <form onSubmit={e => this.updateTitle(e)} noValidate autoComplete='off'>
           <TrainingSeriesTitle>
             <TextField
-              id="standard-name"
-              label="Title"
+              id='standard-name'
+              label='Title'
               className={classes.textField}
               value={this.state.title}
-              onChange={this.handleChange("title")}
-              margin="normal"
+              onChange={this.handleChange('title')}
+              margin='normal'
             />
             <div>
               <Button
-                type="submit"
-                variant="outlined"
-                color="primary"
+                type='submit'
+                variant='outlined'
+                color='primary'
                 className={classes.button}
               >
                 Save
@@ -306,7 +306,7 @@ class TrainingSeriesPosts extends React.Component {
     } else {
       titleEdit = (
         <TrainingSeriesTitle>
-          <Typography variant="headline">
+          <Typography variant='headline'>
             {`${this.props.singleTrainingSeries.title} \u00A0`}
           </Typography>
           <i
@@ -321,40 +321,43 @@ class TrainingSeriesPosts extends React.Component {
     }
 
     let assignedMembersStatus;
-    if (this.props.teamMembers.length > 0 && this.props.assignments.length === 0) {
-      assignedMembersStatus = (
-        <>
-        <HeaderContainer>
-          <Typography variant="title" className={classes.assignedTitle}>
-            Assigned Team Members
-          </Typography>
-          <Button
-            className={classes.assignButton}
-            variant="outlined"
-            onClick={this.routeToAssigning}
-          >
-            Assign Members
-          </Button>
-        </HeaderContainer>
-        <Typography variant="subheading" className={classes.messageText}>
-            This training series currently does not have any team members assigned to it.
-          </Typography>
-          <Typography variant="subheading" className={classes.messageText}>
-          Click the button above to create assignments.
-          </Typography>
-      </>
-      )
-
-    } else if (this.props.teamMembers.length > 0) {
+    if (
+      this.props.teamMembers.length > 0 &&
+      this.props.assignments.length === 0
+    ) {
       assignedMembersStatus = (
         <>
           <HeaderContainer>
-            <Typography variant="title" className={classes.assignedTitle}>
+            <Typography variant='title' className={classes.assignedTitle}>
               Assigned Team Members
             </Typography>
             <Button
               className={classes.assignButton}
-              variant="outlined"
+              variant='outlined'
+              onClick={this.routeToAssigning}
+            >
+              Assign Members
+            </Button>
+          </HeaderContainer>
+          <Typography variant='subheading' className={classes.messageText}>
+            This training series currently does not have any team members
+            assigned to it.
+          </Typography>
+          <Typography variant='subheading' className={classes.messageText}>
+            Click the button above to create assignments.
+          </Typography>
+        </>
+      );
+    } else if (this.props.teamMembers.length > 0) {
+      assignedMembersStatus = (
+        <>
+          <HeaderContainer>
+            <Typography variant='title' className={classes.assignedTitle}>
+              Assigned Team Members
+            </Typography>
+            <Button
+              className={classes.assignButton}
+              variant='outlined'
               onClick={this.routeToAssigning}
             >
               Assign Members
@@ -372,18 +375,18 @@ class TrainingSeriesPosts extends React.Component {
       assignedMembersStatus = (
         <>
           <HeaderContainer>
-            <Typography variant="title">Assigned Team Members</Typography>
-            <Button className={classes.button} variant="outlined" disabled>
+            <Typography variant='title'>Assigned Team Members</Typography>
+            <Button className={classes.button} variant='outlined' disabled>
               Assign Members
             </Button>
           </HeaderContainer>
-          <Typography variant="subheading" className={classes.messageText}>
-            You don't have any team members to assign.{" "}
-          </Typography>
-          <Typography variant="subheading" className={classes.messageText}>
-            <Link to="/home/create-team-member">Click here</Link> to add a
-            member to your account.
-          </Typography>
+          <HolderText>
+            <p>You don't have any team members to assign.</p>
+            <p>
+              <Link to='/home/create-team-member'>Click here</Link> to add a
+              member to your account.
+            </p>
+          </HolderText>
         </>
       );
     }
@@ -403,8 +406,8 @@ class TrainingSeriesPosts extends React.Component {
         {this.state.displaySnackbar && (
           <>
             <AddMemberSnackbar
-              message="Your team members have been successfully assigned."
-              type="success"
+              message='Your team members have been successfully assigned.'
+              type='success'
             />
           </>
         )}
@@ -412,20 +415,20 @@ class TrainingSeriesPosts extends React.Component {
           {/* <Paper className={classes.paperTitle}>{titleEdit}</Paper> */}
           <Paper className={classes.paper}>
             <>{titleEdit}</>
-            <Divider variant="fullWidth" className={classes.divider} />
+            <Divider variant='fullWidth' className={classes.divider} />
             <HeaderContainer>
-              <Typography variant="title">Messages</Typography>
+              <Typography variant='title'>Messages</Typography>
               <div>
                 <Button
                   className={classes.button}
-                  variant="outlined"
+                  variant='outlined'
                   onClick={e => this.routeToPostPage(e)}
                 >
                   New Message
                 </Button>
                 <Button
                   className={classes.button}
-                  variant="outlined"
+                  variant='outlined'
                   onClick={e => this.openSearch(e)}
                 >
                   Search
@@ -436,54 +439,60 @@ class TrainingSeriesPosts extends React.Component {
             {/* Search Input */}
             {this.state.searchOpen && (
               <TextField
-                id="standard-search"
-                type="search"
+                id='standard-search'
+                type='search'
                 className={classes.textField}
                 onChange={e => this.setState({ searchInput: e.target.value })}
-                margin="normal"
+                margin='normal'
                 InputProps={{
                   startAdornment: (
-                    <InputAdornment position="start">
-                      <i class="material-icons">search</i>
+                    <InputAdornment position='start'>
+                      <i class='material-icons'>search</i>
                     </InputAdornment>
                   )
                 }}
               />
             )}
-            <ListStyles className={classes.listStyle}>
-              {posts.map(post => (
-                <>
-                  <ListItem key={post.postID} className={classes.listItem}>
-                    <ListItemText
-                      primary={post.postName}
-                      secondary={post.postDetails}
-                      className={classes.listItemText}
-                    />
-                    <ListItemSecondaryAction
-                      className={classes.secondaryAction}
-                    >
-                      <div>
-                        <p>{post.daysFromStart} days</p>
-                      </div>
-                      <ListButtonContainer>
-                        <i
-                          className={`material-icons ${classes.icons}`}
-                          onClick={e => this.routeToEditPostPage(e, post)}
-                        >
-                          edit
-                        </i>
-                        <DeleteModal
-                          className={`material-icons ${classes.icons}`}
-                          deleteType="post"
-                          id={post.postID}
-                        />
-                      </ListButtonContainer>
-                    </ListItemSecondaryAction>
-                  </ListItem>
-                  <Divider />
-                </>
-              ))}
-            </ListStyles>
+            {this.props.posts.length === 0 ? (
+              <HolderText>
+                <p>You do not have any messages.</p>
+              </HolderText>
+            ) : (
+              <ListStyles className={classes.listStyle}>
+                {posts.map(post => (
+                  <>
+                    <ListItem key={post.postID} className={classes.listItem}>
+                      <ListItemText
+                        primary={post.postName}
+                        secondary={post.postDetails}
+                        className={classes.listItemText}
+                      />
+                      <ListItemSecondaryAction
+                        className={classes.secondaryAction}
+                      >
+                        <div>
+                          <p>{post.daysFromStart} days</p>
+                        </div>
+                        <ListButtonContainer>
+                          <i
+                            className={`material-icons ${classes.icons}`}
+                            onClick={e => this.routeToEditPostPage(e, post)}
+                          >
+                            edit
+                          </i>
+                          <DeleteModal
+                            className={`material-icons ${classes.icons}`}
+                            deleteType='post'
+                            id={post.postID}
+                          />
+                        </ListButtonContainer>
+                      </ListItemSecondaryAction>
+                    </ListItem>
+                    <Divider />
+                  </>
+                ))}
+              </ListStyles>
+            )}
           </Paper>
           <Paper className={classes.paper}>{assignedMembersStatus}</Paper>
         </PageContainer>
@@ -514,6 +523,14 @@ const HeaderContainer = styled.div`
     padding: 10px 0;
     align-items: center;
     margin: 0 auto;
+    text-align: center;
+  }
+`;
+
+const HolderText = styled.div`
+  margin: 50px 0;
+  p {
+    color: lightgray;
     text-align: center;
   }
 `;
