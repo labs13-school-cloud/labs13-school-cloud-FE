@@ -101,6 +101,12 @@ class CustomizedSnackbars extends React.Component {
     open: false
   };
 
+  componentDidMount(){
+    setTimeout(() => {
+      this.setState({open: false})
+    }, 2000);
+  }
+
   handleClick = e => {
     if (this.props.submitType === "edit") {
       this.props.editTeamMember(e, this.props.teamMember);

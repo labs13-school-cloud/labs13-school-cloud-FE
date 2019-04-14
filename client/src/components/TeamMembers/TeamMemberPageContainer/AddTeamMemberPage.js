@@ -104,14 +104,6 @@ class TeamMemberPage extends React.Component {
     };
     this.props.addTeamMember(newMember);
     this.setState({ isRouting: true });
-    setTimeout(() => {
-      this.props.history.push({
-        pathname: "/home",
-        state: {
-          success: true
-        }
-      });
-    }, 1000);
   };
 
   handleDate = name => event => {
