@@ -79,7 +79,7 @@ class TeamMemberPage extends React.Component {
       jobDescription: "",
       email: "",
       phoneNumber: "",
-      user_ID: ""
+      userID: ""
     },
     assignments: [],
     trainingSeries: [],
@@ -100,7 +100,7 @@ class TeamMemberPage extends React.Component {
     e.preventDefault();
     const newMember = {
       ...this.state.teamMember,
-      user_ID: this.props.userId
+      userID: this.props.userId
     };
     this.props.addTeamMember(newMember);
     this.setState({ isRouting: true });

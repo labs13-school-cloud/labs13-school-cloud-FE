@@ -48,8 +48,8 @@ export const getTeamMembers = id => dispatch => {
 };
 
 export const addTeamMember = teamMember => dispatch => {
+  console.log(teamMember)
   dispatch({ type: ADD_MEMBER_START });
-
   axios
     .post(`${baseUrl}/team-members`, teamMember)
     .then(res => {
@@ -60,12 +60,11 @@ export const addTeamMember = teamMember => dispatch => {
 };
 
 export const editTeamMember = (id, changes) => dispatch => {
+  console.log(changes);
   dispatch({ type: EDIT_MEMBER_START });
-
   axios
     .put(`${baseUrl}/team-members/${id}`, changes)
     .then(res => {
-      console.log("EDIT RESPONSE", res.data);
       dispatch({
         type: EDIT_MEMBER_SUCCESS,
         payload: res.data.updatedTeamMember
@@ -79,7 +78,6 @@ export const deleteTeamMember = (teamMemberID, userID) => dispatch => {
   axios
     .delete(`${baseUrl}/team-members/${teamMemberID}`)
     .then(res => {
-      console.log(res.data);
       dispatch({ type: DELETE_MEMBER_SUCCESS, payload: teamMemberID });
     })
     .then(() => {
@@ -140,12 +138,10 @@ export const deleteTeamMemberFromTrainingSeries = (id, ts_id) => dispatch => {
   axios
     .delete(`${baseUrl}/team-members/${id}/assign/${ts_id}`)
     .then(res => {
-      console.log("DELETE CALL FIRED", res.data);
       axios
         .get(`${baseUrl}/team-members/${id}`)
         .then(res => {
           dispatch({ type: FETCH_SINGLE_MEMBER_START });
-          console.log("PAYLOAD FROM ACTION", res.data);
           dispatch({
             type: FETCH_SINGLE_MEMBER_SUCCESS,
             payload: res.data
