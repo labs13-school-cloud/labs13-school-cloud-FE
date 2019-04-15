@@ -300,6 +300,7 @@ class TeamMemberPage extends React.Component {
 const MainContainer = styled.div`
   margin: 0 auto;
   max-width: 768px;
+
   @media (max-width: 768px) {
     width: 95%;
   }

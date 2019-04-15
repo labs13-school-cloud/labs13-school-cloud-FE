@@ -9,6 +9,7 @@ import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+import Divider from "@material-ui/core/Divider";
 
 // Redux
 import {
@@ -21,11 +22,18 @@ import {
 
 const styles = theme => ({
   root: {
-    ...theme.mixins.gutters(),
-    paddingTop: theme.spacing.unit * 2,
-    paddingBottom: theme.spacing.unit * 2,
-    width: "100%",
-    margin: "20px auto"
+    width: "89%",
+    backgroundColor: theme.palette.background.paper,
+    boxSizing: "border-box",
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing.unit * 4,
+    outline: "none",
+    margin: "5px auto",
+
+    "@media (max-width: 768px)": {
+      textAlign: "center",
+      padding: "30px"
+    }
   },
   form: {
     // width: "100%",
@@ -35,9 +43,9 @@ const styles = theme => ({
     "margin-right": "50px"
   },
   textField: {
-    // marginLeft: theme.spacing.unit,
-    // marginRight: theme.spacing.unit,
-    width: "80%",
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+    width: "100%",
     margin: "15px auto"
   },
   fab: {
@@ -48,8 +56,10 @@ const styles = theme => ({
   },
   createButton: {
     "margin-left": theme.spacing.unit,
+    background: "#451476",
+    color: "white",
     "&:hover": {
-      background: " #451476",
+      background: "#591a99",
       color: "white"
     }
   }
@@ -111,18 +121,18 @@ class CreatePost extends React.Component {
   render() {
     const { classes } = this.props;
     return (
-      <MainContainer>
-        <Typography variant="display1" align="center" gutterBottom>
-          Create A New Message
-        </Typography>
-        <form
-          className={classes.form}
-          id="form1"
-          onSubmit={e => this.handlePostSubmit(e)}
-        >
-          {/* <DeleteModal deleteType='inTeamMemberPage' id={this.props.urlId} /> */}
-
+      <form
+        className={classes.form}
+        id="form1"
+        onSubmit={e => this.handlePostSubmit(e)}
+      >
+        {/* <DeleteModal deleteType='inTeamMemberPage' id={this.props.urlId} /> */}
+        <MainContainer>
           <Paper className={classes.root}>
+            <Typography variant="title" gutterBottom>
+              Create A New Message
+            </Typography>
+            <Divider />
             <PostContainer>
               <TextField
                 id="standard-name"
@@ -164,46 +174,48 @@ class CreatePost extends React.Component {
                 required
               />
             </PostContainer>
-          </Paper>
-          <ButtonContainer>
-            {/* <NotificationWidget
+            <ButtonContainer>
+              {/* <NotificationWidget
               teamMember={this.state.teamMember}
               editTeamMember={this.props.editTeamMember}
               addTeamMember={this.addNewTeamMember}
               type="success"
               submitType="add"
             /> */}
-            <Button
-              variant="outlined"
-              className={classes.createButton}
-              type="submit"
-              form="form1"
-            >
-              Create
-            </Button>
-            <Button
-              variant="contained"
-              className={classes.button}
-              onClick={e =>
-                this.props.history.push(
-                  `/home/training-series/${
-                    this.props.location.state.trainingSeriesId
-                  }`
-                )
-              }
-            >
-              Cancel
-            </Button>
-          </ButtonContainer>
-        </form>
-      </MainContainer>
+              <Button
+                variant="outlined"
+                className={classes.createButton}
+                type="submit"
+                form="form1"
+              >
+                Create
+              </Button>
+              <Button
+                className={classes.button}
+                onClick={e =>
+                  this.props.history.push(
+                    `/home/training-series/${
+                      this.props.location.state.trainingSeriesId
+                    }`
+                  )
+                }
+              >
+                Cancel
+              </Button>
+            </ButtonContainer>
+          </Paper>
+        </MainContainer>
+      </form>
     );
   }
 }
 
 const MainContainer = styled.div`
   margin: 0 auto;
-  width: 80%;
+  max-width: 768px;
+  @media (max-width: 768px) {
+    width: 95%;
+  }
 `;
 
 const PostContainer = styled.div`
