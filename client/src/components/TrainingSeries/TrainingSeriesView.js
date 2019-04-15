@@ -26,27 +26,28 @@ class TrainingSeriesView extends Component {
     this.props.deleteTrainingSeries(id);
   };
 
-	render() {
-		return (
-			<>
-				<Route
-					exact
-					path={`${this.props.match.path}`}
-					render={props => (
-						<TrainingSeriesSubView
-							{...props}
-							getMembersAssigned={this.props.getMembersAssigned}
-							trainingSeries={this.props.trainingSeries}
-							deleteTrainingSeries={this.deleteTrainingSeries}
-							getTrainingSeries={this.props.getTrainingSeries}
-							toggleFreakinSnackBar={this.props.toggleFreakinSnackBar}
-							userId={this.props.userId}
-						/>
-					)}
-				/>
-			</>
-		);
-	}
+  render() {
+    return (
+      <>
+        <Route
+          exact
+          path={`${this.props.match.path}`}
+          render={props => (
+            <TrainingSeriesSubView
+              {...props}
+              incrementTour={this.props.incrementTour}
+              getMembersAssigned={this.props.getMembersAssigned}
+              trainingSeries={this.props.trainingSeries}
+              deleteTrainingSeries={this.deleteTrainingSeries}
+              getTrainingSeries={this.props.getTrainingSeries}
+              toggleFreakinSnackBar={this.props.toggleFreakinSnackBar}
+              userId={this.props.userId}
+            />
+          )}
+        />
+      </>
+    );
+  }
 }
 
 const mapStateToProps = state => {

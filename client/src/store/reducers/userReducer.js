@@ -25,6 +25,7 @@ const initialState = {
 	isEditing: false,
 	doneLoading: false,
 	paymentLoading: false,
+	newUser: true
 };
 
 const userReducer = (state = initialState, action) => {
@@ -40,11 +41,11 @@ const userReducer = (state = initialState, action) => {
 			if (action.payload.newUser) {
 				return {
 					...state,
-
 					userProfile: {
 						...action.payload,
 						user: action.payload.newUser,
 					},
+					newUser: true,
 					isLoading: false,
 					doneLoading: true,
 					error: '',
@@ -56,6 +57,7 @@ const userReducer = (state = initialState, action) => {
 					isLoading: false,
 					doneLoading: true,
 					error: '',
+					newUser: false
 				};
 			}
 		case GET_USER_FAIL:

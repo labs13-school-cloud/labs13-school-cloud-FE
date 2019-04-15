@@ -24,7 +24,7 @@ import CreatePost from "../TrainingSeries/CreatePost";
 import PostPage from "../TrainingSeries/PostPage";
 import NotificationsView from "../Notifications/NotificationsView";
 import AssignMemberPage from "../TeamMembers/TeamMemberPageContainer/AssignMemberPage";
-import Snackbar from '../Snackbar/Snackbar';
+import Snackbar from "../Snackbar/Snackbar";
 
 //Auth
 import Authenticate from "../authenticate/authenticate";
@@ -32,6 +32,9 @@ import Authenticate from "../authenticate/authenticate";
 //State Management
 import { connect } from "react-redux";
 import { getUser } from "../../store/actions/userActions";
+
+//Tour component
+import GuidedTour from "../Tour/GuidedTour";
 
 const styles = theme => ({
   router: {
@@ -41,16 +44,25 @@ const styles = theme => ({
 class Dashboard extends React.Component {
   state = {
     tabValue: 0,
-    displaySnackbar: false
+    displaySnackbar: false,
+    isTourOpen: false,
+    tourValue: 0
   };
 
   componentDidMount() {
     this.props.getUser();
+    if (this.props.newUser) {
+      console.log(this.props.newUser);
+      this.setState({ isTourOpen: true });
+    }
   }
 
   componentDidUpdate(prevProps) {
     if (this.props.location.state) {
-      if (this.props.location.state !== prevProps.location.state && this.props.location.state.success) {
+      if (
+        this.props.location.state !== prevProps.location.state &&
+        this.props.location.state.success
+      ) {
         this.setState({
           displaySnackbar: true
         });
@@ -61,8 +73,8 @@ class Dashboard extends React.Component {
   toggleFreakinSnackBar = e => {
     this.setState({
       displaySnackbar: false
-    })
-  }
+    });
+  };
 
   renderDashboard = () => {
     const user = this.props.userProfile.user;
@@ -70,8 +82,16 @@ class Dashboard extends React.Component {
       <>
         <TripleColumn>
           <SmallColumns>
-            <TeamMembersView toggleFreakinSnackBar={this.toggleFreakinSnackBar} userId={user.userID} />
-            <TrainingSeriesView toggleFreakinSnackBar={this.toggleFreakinSnackBar} userId={user.userID} match={this.props.match} />
+            <TeamMembersView
+              toggleFreakinSnackBar={this.toggleFreakinSnackBar}
+              userId={user.userID}
+              incrementTour={this.incrementTour}
+            />
+            <TrainingSeriesView
+              toggleFreakinSnackBar={this.toggleFreakinSnackBar}
+              userId={user.userID}
+              match={this.props.match}
+            />
           </SmallColumns>
           <NotificationsView userId={user.userID} />
         </TripleColumn>
@@ -101,7 +121,15 @@ class Dashboard extends React.Component {
             <DashboardContainer>
               <Router history={history}>
                 <Route exact path="/home" component={this.renderDashboard} />
-                <Route path="/home/profile" render={props => <ProfileView {...props} toggleFreakinSnackBar={this.toggleFreakinSnackBar} />} />
+                <Route
+                  path="/home/profile"
+                  render={props => (
+                    <ProfileView
+                      {...props}
+                      toggleFreakinSnackBar={this.toggleFreakinSnackBar}
+                    />
+                  )}
+                />
                 <Route
                   path="/home/team-member/:id"
                   render={props => (
@@ -163,6 +191,11 @@ class Dashboard extends React.Component {
                 <Route path="/home/post/:id" component={PostPage} />
               </Router>
             </DashboardContainer>
+
+            <GuidedTour
+              isTourOpen={this.state.isTourOpen}
+              closeTour={this.closeTour}
+            />
           </>
         ) : (
           <ProgressCircle />
@@ -177,12 +210,20 @@ class Dashboard extends React.Component {
       tabValue: value
     });
   };
+  //Tour methods
+  closeTour = () => {
+    this.setState({ isTourOpen: false });
+  };
+  incrementTour = tourToGoTo => {
+    this.setState({ tourValue: tourToGoTo });
+  };
 }
 
 const mapStateToProps = state => {
   return {
     userProfile: state.userReducer.userProfile,
-    doneLoading: state.userReducer.doneLoading
+    doneLoading: state.userReducer.doneLoading,
+    newUser: state.userReducer.newUser
   };
 };
 

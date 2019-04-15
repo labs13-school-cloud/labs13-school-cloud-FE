@@ -97,7 +97,7 @@ class CreateTrainingSeries extends React.Component {
     return this.state.isRouting ? (
       <ProgressCircle />
     ) : (
-      <MainContainer>
+      <MainContainer data-tour="5">
         <div className={classes.paper}>
           <Typography variant="h6" id="modal-title">
             Create A New Training Series

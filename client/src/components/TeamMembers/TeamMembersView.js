@@ -1,7 +1,7 @@
 // component to contain all the components related to team members
 
 import React from "react";
-import styled from 'styled-components';
+import styled from "styled-components";
 import Fuse from "fuse.js";
 
 //Components
@@ -119,7 +119,7 @@ class TeamMembersView extends React.Component {
 
   routeToCreateMemberPage = () => {
     this.props.toggleFreakinSnackBar();
-    this.props.history.push('/home/create-team-member');
+    this.props.history.push("/home/create-team-member");
   };
 
   // function to set fuse option and return a response
@@ -159,9 +159,9 @@ class TeamMembersView extends React.Component {
     if (this.props.teamMembers.length === 0) {
       teamMembersDisplay = (
         <MessageContainer>
-        <p>You do not have any team members.</p>
-      </MessageContainer>
-      )
+          <p>You do not have any team members.</p>
+        </MessageContainer>
+      );
     } else {
       teamMembersDisplay = (
         <TeamMembersList
@@ -171,11 +171,11 @@ class TeamMembersView extends React.Component {
           offset={this.state.offset}
           userId={this.props.userId}
         />
-      )
+      );
     }
 
     return (
-      <Paper className={classes.root} elevation={2}>
+      <Paper data-tour="1" className={classes.root} elevation={2}>
         <div className={classes.columnHeader}>
           <Typography variant="h5">Team Members</Typography>
           <div className={classes.icons}>

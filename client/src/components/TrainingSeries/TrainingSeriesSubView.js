@@ -1,68 +1,68 @@
-import React, { Component } from 'react';
-import styled from 'styled-components';
-import Fuse from 'fuse.js';
+import React, { Component } from "react";
+import styled from "styled-components";
+import Fuse from "fuse.js";
 
 //Components
-import TrainingSeriesList from './TrainingSeriesList';
+import TrainingSeriesList from "./TrainingSeriesList";
 
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from "@material-ui/core/styles";
 import {
   Paper,
   Typography,
   Fab,
   TextField,
   InputAdornment
-} from '@material-ui/core/';
-import Pagination from 'material-ui-flat-pagination';
+} from "@material-ui/core/";
+import Pagination from "material-ui-flat-pagination";
 
 const styles = theme => ({
   root: {
     ...theme.mixins.gutters(),
     paddingTop: theme.spacing.unit * 2,
     paddingBottom: theme.spacing.unit * 2,
-    display: 'flex',
-    flexDirection: 'column',
-    maxWidth: '500px',
-    boxSizing: 'border-box',
-    width: '100%',
-    minHeight: '533px',
-    height: '100%',
+    display: "flex",
+    flexDirection: "column",
+    maxWidth: "500px",
+    boxSizing: "border-box",
+    width: "100%",
+    minHeight: "533px",
+    height: "100%",
     margin: 5,
 
-    '@media (max-width:768px)': {
-      width: '92%',
+    "@media (max-width:768px)": {
+      width: "92%",
       marginBottom: 10,
-      maxWidth: 'none',
-      height: '533px'
+      maxWidth: "none",
+      height: "533px"
     }
   },
   columnHeader: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center'
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center"
   },
   icons: {
-    display: 'flex',
-    alignItems: 'center'
+    display: "flex",
+    alignItems: "center"
   },
   fab: {
     margin: 5,
-    background: '#451476',
-    color: 'white',
-    '&:hover': {
-      background: '#591a99'
+    background: "#451476",
+    color: "white",
+    "&:hover": {
+      background: "#591a99"
     }
   },
   footer: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    position: 'sticky',
-    top: '100%'
+    display: "flex",
+    justifyContent: "space-between",
+    position: "sticky",
+    top: "100%"
   },
   textField: {
-    width: '100%'
+    width: "100%"
   },
-  pagination: { width: '90%' }
+  pagination: { width: "90%" }
 });
 
 class TrainingSeriesSubView extends Component {
@@ -71,7 +71,7 @@ class TrainingSeriesSubView extends Component {
     this.state = {
       offset: 0,
       limit: 5,
-      searchInput: '',
+      searchInput: "",
       searchOpen: false
     };
   }
@@ -89,8 +89,9 @@ class TrainingSeriesSubView extends Component {
 
   routeToCreateTrainingSeries = e => {
     e.preventDefault();
+    this.props.incrementTour(5);
     this.props.toggleFreakinSnackBar();
-    this.props.history.push('/home/create-training-series');
+    this.props.history.push("/home/create-training-series");
   };
 
   // function to set fuse option and return a response
@@ -102,7 +103,7 @@ class TrainingSeriesSubView extends Component {
       distance: 100,
       maxPatternLength: 32,
       minMatchCharLength: 3,
-      keys: ['title']
+      keys: ["title"]
     };
 
     const fuse = new Fuse(series, options);
@@ -148,41 +149,43 @@ class TrainingSeriesSubView extends Component {
       );
     }
     return (
-      <Paper className={classes.root} elevation={2}>
+      <Paper data-tour="2" className={classes.root} elevation={2}>
         <div className={classes.columnHeader}>
-          <Typography variant='h5'>Training Series</Typography>
+          <Typography variant="h5">Training Series</Typography>
           <div className={classes.icons}>
             <Fab
-              size='small'
-              aria-label='Add'
+              size="small"
+              aria-label="Add"
               className={classes.fab}
               onClick={e => this.openSearch(e)}
             >
-              <i className='material-icons'>search</i>
+              <i className="material-icons">search</i>
             </Fab>
 
             <Fab
-              size='small'
-              aria-label='Add'
+              size="small"
+              aria-label="Add"
               className={classes.fab}
               onClick={e => this.routeToCreateTrainingSeries(e)}
             >
-              <i className='material-icons'>add</i>
+              <i data-tour="4" className="material-icons">
+                add
+              </i>
             </Fab>
           </div>
         </div>
         <div>
           {this.state.searchOpen && (
             <TextField
-              id='standard-search'
-              type='search'
+              id="standard-search"
+              type="search"
               className={classes.textField}
               onChange={e => this.setState({ searchInput: e.target.value })}
-              margin='normal'
+              margin="normal"
               InputProps={{
                 startAdornment: (
-                  <InputAdornment position='start'>
-                    <i class='material-icons'>search</i>
+                  <InputAdornment position="start">
+                    <i class="material-icons">search</i>
                   </InputAdornment>
                 )
               }}
