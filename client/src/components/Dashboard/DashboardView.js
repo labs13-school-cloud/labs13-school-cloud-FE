@@ -46,19 +46,17 @@ class Dashboard extends React.Component {
   state = {
     tabValue: 0,
     displaySnackbar: false,
-    isTourOpen: false,
-    tourValue: 4,
+    isTourOpen: true,
   };
 
   componentDidMount() {
     this.props.getUser();
-    if (this.props.newUser) {
-      console.log(this.props.newUser);
-      this.setState({isTourOpen: true});
-    }
   }
 
   componentDidUpdate(prevProps) {
+    if (this.props.newUser !== prevProps.newUser) {
+      this.setState({isTourOpen: false});
+    }
     if (this.props.location.state) {
       if (
         this.props.location.state !== prevProps.location.state &&
@@ -191,13 +189,13 @@ class Dashboard extends React.Component {
                 />
                 <Route path="/home/post/:id" component={PostPage} />
               </Router>
-            </DashboardContainer>
 
-            <DashboardTour
-              isTourOpen={this.state.isTourOpen}
-              closeTour={this.closeTour}
-              tourValue={this.state.tourValue}
-            />
+              <DashboardTour
+                isTourOpen={this.state.isTourOpen}
+                closeTour={this.closeTour}
+                newUser={this.props.newUser}
+              />
+            </DashboardContainer>
           </>
         ) : (
           <ProgressCircle />
@@ -215,9 +213,6 @@ class Dashboard extends React.Component {
   //Tour methods
   closeTour = () => {
     this.setState({isTourOpen: false});
-  };
-  incrementTour = tourToGoTo => {
-    this.setState({tourValue: tourToGoTo});
   };
 }
 

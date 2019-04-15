@@ -110,6 +110,7 @@ class CreateTrainingSeries extends React.Component {
             autoComplete="off"
           >
             <TextField
+              data-tour="6"
               id="standard-name"
               label="Title"
               className={classes.textField}

@@ -148,7 +148,7 @@ class TrainingSeriesSubView extends Component {
       );
     }
     return (
-      <Paper data-tour="2" className={classes.root} elevation={2}>
+      <Paper data-tour="4" className={classes.root} elevation={2}>
         <div className={classes.columnHeader}>
           <Typography variant="h5">Training Series</Typography>
           <div className={classes.icons}>
