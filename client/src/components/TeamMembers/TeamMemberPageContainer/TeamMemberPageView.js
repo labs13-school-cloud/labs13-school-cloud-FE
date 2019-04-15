@@ -1,39 +1,39 @@
-import React from 'react';
+import React from "react";
 
 //Components
-import TeamMemberPage from './TeamMemberPage';
-import Snackbar from '../../Snackbar/Snackbar';
+import TeamMemberPage from "./TeamMemberPage";
+import Snackbar from "../../Snackbar/Snackbar";
 
 //Redux
-import {connect} from 'react-redux';
+import { connect } from "react-redux";
 import {
   editTeamMember,
   getTrainingSeries,
   getTeamMemberByID,
-  deleteTeamMember,
-} from '../../../store/actions';
+  deleteTeamMember
+} from "../../../store/actions";
 
 class TeamMemberPageView extends React.Component {
   state = {
-    displaySnackbar: false,
+    displaySnackbar: false
   };
   componentDidMount() {
     this.props.getTeamMemberByID(this.props.match.params.id);
     this.props.getTrainingSeries(this.props.userId);
     if (this.props.location.state) {
       this.setState({
-        displaySnackbar: this.props.location.state.success,
+        displaySnackbar: this.props.location.state.success
       });
     }
     this.resetHistory();
   }
   resetHistory = () => {
     this.props.history.replace({
-      state: null,
+      state: null
     });
   };
 
-  editTeamMember = (e, changes) => {
+  editTeamMemberSubmit = (e, changes) => {
     e.preventDefault();
     this.props.editTeamMember(this.props.match.params.id, changes);
   };
@@ -43,7 +43,7 @@ class TeamMemberPageView extends React.Component {
     this.props.deleteTeamMember(this.props.match.params.id);
 
     setTimeout(() => {
-      this.props.history.push('/home');
+      this.props.history.push("/home");
     }, 400);
   };
 
@@ -56,7 +56,7 @@ class TeamMemberPageView extends React.Component {
         <TeamMemberPage
           teamMember={this.props.teamMember}
           urlId={this.props.match.params.id}
-          editTeamMember={this.editTeamMember}
+          editTeamMemberSubmit={this.editTeamMemberSubmit}
           deleteTeamMember={this.deleteTeamMember}
           userId={this.props.userId}
           history={this.props.history}
@@ -92,11 +92,11 @@ const mapStateToProps = state => {
     isDeleting: state.teamMembersReducer.status.isDeleting,
     isAssigning: state.teamMembersReducer.status.isAssigning,
     trainingSeries: state.trainingSeriesReducer.trainingSeries,
-    teamMember: state.teamMembersReducer.teamMember,
+    teamMember: state.teamMembersReducer.teamMember
   };
 };
 
 export default connect(
   mapStateToProps,
-  {getTeamMemberByID, editTeamMember, getTrainingSeries, deleteTeamMember}
+  { getTeamMemberByID, editTeamMember, getTrainingSeries, deleteTeamMember }
 )(TeamMemberPageView);

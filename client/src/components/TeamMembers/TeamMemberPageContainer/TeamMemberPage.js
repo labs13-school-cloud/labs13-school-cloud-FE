@@ -11,7 +11,9 @@ import {
   Typography,
   TextField,
   Button,
-  Divider
+  Divider,
+  Switch,
+  FormControlLabel
 } from "@material-ui/core/";
 import NotificationWidget from "./SnackBarTeamMember";
 //Components
@@ -20,7 +22,7 @@ import DeleteModal from "../../Modals/deleteModal";
 
 //Redux
 import { connect } from "react-redux";
-import { getTrainingSeries } from "../../../store/actions";
+import { getTrainingSeries, editTeamMember } from "../../../store/actions";
 
 const styles = theme => ({
   // these styles fixes the off-centering
@@ -102,7 +104,9 @@ class TeamMemberPage extends React.Component {
       phoneNumber: "",
       user_ID: "",
       TeamMemberCol: "",
-      teamMemberID: ""
+      teamMemberID: "",
+      textOn: false,
+      emailOn: false
     },
     assignments: [],
     trainingSeries: [] //Leigh-Ann: this may not be needed?
@@ -129,6 +133,21 @@ class TeamMemberPage extends React.Component {
     });
   };
 
+  handleToggleChange = name => event => {
+    this.setState({
+      teamMember: {
+        ...this.state.teamMember,
+        [name]: event.target.checked
+      }
+    });
+
+    // PUT request on toggle
+    this.props.editTeamMember(
+      this.state.teamMember.teamMemberID,
+      this.state.teamMember
+    );
+  };
+
   handleDate = name => event => {
     this.setState({
       [name]: event.target.value
@@ -137,6 +156,7 @@ class TeamMemberPage extends React.Component {
 
   routeToAssigning = e => {
     e.preventDefault();
+
     this.props.history.push({
       pathname: `/home/assign-series/${this.state.teamMember.teamMemberID}`,
       state: {
@@ -150,6 +170,8 @@ class TeamMemberPage extends React.Component {
 
   render() {
     const { classes } = this.props;
+    console.log("EMAIL", this.state.teamMember.emailOn);
+    console.log("TextON", this.state.teamMember.textOn);
 
     const trainingAssigments =
       this.props.teamMember.assignments &&
@@ -173,7 +195,7 @@ class TeamMemberPage extends React.Component {
           <div className={classes.trainingSeriesHeader}>
             <Typography variant="title">Training Series</Typography>
             <Button
-              className={classes.assignBtn}
+              className={classes.button}
               variant="outlined"
               onClick={this.routeToAssigning}
             >
@@ -274,9 +296,33 @@ class TeamMemberPage extends React.Component {
               />
             </MemberInfoContainer>
             <ButtonContainer>
+              <FormControlLabel
+                control={
+                  <Switch
+                    checked={this.state.teamMember.textOn}
+                    onChange={this.handleToggleChange("textOn")}
+                    value="textOn"
+                    color="primary"
+                  />
+                }
+                label="Send Text"
+              />
+              <FormControlLabel
+                control={
+                  <Switch
+                    checked={this.state.teamMember.emailOn}
+                    onChange={this.handleToggleChange("emailOn")}
+                    value="emailOn"
+                    color="primary"
+                  />
+                }
+                label="Send Email"
+              />
+            </ButtonContainer>
+            <ButtonContainer>
               <NotificationWidget
                 teamMember={this.state.teamMember}
-                editTeamMember={this.props.editTeamMember}
+                editTeamMemberSubmit={this.props.editTeamMemberSubmit}
                 type="success"
                 submitType="edit"
               />
@@ -335,5 +381,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getTrainingSeries }
+  { getTrainingSeries, editTeamMember }
 )(withStyles(styles)(TeamMemberPage));

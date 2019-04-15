@@ -103,7 +103,7 @@ class CustomizedSnackbars extends React.Component {
 
   handleClick = e => {
     if (this.props.submitType === "edit") {
-      this.props.editTeamMember(e, this.props.teamMember);
+      this.props.editTeamMemberSubmit(e, this.props.teamMember);
       this.setState({ open: true });
     } else if (this.props.submitType === "add") {
       this.props.addTeamMember(e);
