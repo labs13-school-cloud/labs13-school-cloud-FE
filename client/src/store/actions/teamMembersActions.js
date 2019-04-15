@@ -81,12 +81,12 @@ export const deleteTeamMember = (teamMemberID, userID) => dispatch => {
       dispatch({ type: DELETE_MEMBER_SUCCESS, payload: teamMemberID });
     })
     .then(() => {
-      if(history.location !== '/home'){
-        history.push('/home');
-      }
-      else{
+      if(history.location.pathname === '/home'){
         dispatch(getEmailNotifications(userID))
         dispatch(getTextNotifications(userID))
+      }
+      else{
+        history.push('/home');
       }
     })
     .catch(err => dispatch({ type: DELETE_MEMBER_FAIL, payload: err }));
