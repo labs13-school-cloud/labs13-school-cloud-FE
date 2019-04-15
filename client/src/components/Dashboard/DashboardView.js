@@ -46,7 +46,7 @@ class Dashboard extends React.Component {
     tabValue: 0,
     displaySnackbar: false,
     isTourOpen: false,
-    tourValue: 0
+    tourValue: 4
   };
 
   componentDidMount() {
@@ -85,12 +85,12 @@ class Dashboard extends React.Component {
             <TeamMembersView
               toggleFreakinSnackBar={this.toggleFreakinSnackBar}
               userId={user.userID}
-              incrementTour={this.incrementTour}
             />
             <TrainingSeriesView
               toggleFreakinSnackBar={this.toggleFreakinSnackBar}
               userId={user.userID}
               match={this.props.match}
+              incrementTour={this.incrementTour}
             />
           </SmallColumns>
           <NotificationsView userId={user.userID} />
@@ -195,6 +195,7 @@ class Dashboard extends React.Component {
             <GuidedTour
               isTourOpen={this.state.isTourOpen}
               closeTour={this.closeTour}
+              tourValue={this.state.tourValue}
             />
           </>
         ) : (
