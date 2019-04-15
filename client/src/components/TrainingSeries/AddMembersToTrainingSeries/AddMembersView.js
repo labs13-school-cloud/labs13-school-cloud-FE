@@ -112,14 +112,6 @@ class AddMembersView extends Component {
 			};
 			this.props.addTeamMemberToTrainingSeries(data);
 			this.setState({ isRouting: true });
-			setTimeout(() => {
-				this.props.history.push({
-					pathname: `/home/training-series/${this.state.trainingSeriesID}`,
-					state: {
-						success: true,
-					},
-				});
-			}, 1000);
 		},
 		handleChecked: id => {
 			if (!this.state.selectedTeamMembers.includes(id)) {

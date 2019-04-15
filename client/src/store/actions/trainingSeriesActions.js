@@ -1,5 +1,5 @@
 import axios from "axios";
-
+import {getTextNotifications, getEmailNotifications} from './notificationsActions';
 //GET TRAINING SERIES
 export const GET_TRAINING_SERIES_START = "GET_TRAINING_SERIES_START";
 export const GET_TRAINING_SERIES_SUCCESS = "GET_TRAINING_SERIES_COMPLETE";
@@ -71,13 +71,17 @@ export const editTrainingSeries = (id, trainingSeriesData) => dispatch => {
     .catch(err => dispatch({ type: EDIT_TRIANING_SERIES_FAIL, error: err }));
 };
 
-export const deleteTrainingSeries = id => dispatch => {
+export const deleteTrainingSeries = (trainingSeriesID, userID) => dispatch => {
   dispatch({ type: DELETE_TRIANING_SERIES_START });
   axios
-    .delete(`${process.env.REACT_APP_API}/api/training-series/${id}`)
-    .then(res =>
-      dispatch({ type: DELETE_TRIANING_SERIES_SUCCESS, payload: id })
+    .delete(`${process.env.REACT_APP_API}/api/training-series/${trainingSeriesID}`)
+    .then(() =>
+      dispatch({ type: DELETE_TRIANING_SERIES_SUCCESS, payload: trainingSeriesID })
     )
+    .then(() => {
+      dispatch(getEmailNotifications(userID))
+      dispatch(getTextNotifications(userID))
+    })
     .catch(err => dispatch({ type: DELETE_TRIANING_SERIES_FAIL, error: err }));
 };
 

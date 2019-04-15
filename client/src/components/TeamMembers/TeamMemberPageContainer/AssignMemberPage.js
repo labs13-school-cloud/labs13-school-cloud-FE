@@ -108,14 +108,6 @@ class AssignMemberPage extends React.Component {
       assignments: [this.props.location.state.urlId]
     };
     this.props.addTeamMemberToTrainingSeries(data);
-    setTimeout(() => {
-      this.props.history.push({
-        pathname: "/home",
-        state: {
-          success: true
-        }
-      })
-    }, 1000)
   };
 
   routeBack = e => {
