@@ -321,30 +321,33 @@ class TrainingSeriesPosts extends React.Component {
     }
 
     let assignedMembersStatus;
-    if (this.props.teamMembers.length > 0 && this.props.assignments.length === 0) {
+    if (
+      this.props.teamMembers.length > 0 &&
+      this.props.assignments.length === 0
+    ) {
       assignedMembersStatus = (
         <>
-        <HeaderContainer>
-          <Typography variant="title" className={classes.assignedTitle}>
-            Assigned Team Members
-          </Typography>
-          <Button
-            className={classes.assignButton}
-            variant="outlined"
-            onClick={this.routeToAssigning}
-          >
-            Assign Members
-          </Button>
-        </HeaderContainer>
-        <Typography variant="subheading" className={classes.messageText}>
-            This training series currently does not have any team members assigned to it.
+          <HeaderContainer>
+            <Typography variant="title" className={classes.assignedTitle}>
+              Assigned Team Members
+            </Typography>
+            <Button
+              className={classes.assignButton}
+              variant="outlined"
+              onClick={this.routeToAssigning}
+            >
+              Assign Members
+            </Button>
+          </HeaderContainer>
+          <Typography variant="subheading" className={classes.messageText}>
+            This training series currently does not have any team members
+            assigned to it.
           </Typography>
           <Typography variant="subheading" className={classes.messageText}>
-          Click the button above to create assignments.
+            Click the button above to create assignments.
           </Typography>
-      </>
-      )
-
+        </>
+      );
     } else if (this.props.teamMembers.length > 0) {
       assignedMembersStatus = (
         <>
@@ -377,13 +380,13 @@ class TrainingSeriesPosts extends React.Component {
               Assign Members
             </Button>
           </HeaderContainer>
-          <Typography variant="subheading" className={classes.messageText}>
-            You don't have any team members to assign.{" "}
-          </Typography>
-          <Typography variant="subheading" className={classes.messageText}>
-            <Link to="/home/create-team-member">Click here</Link> to add a
-            member to your account.
-          </Typography>
+          <HolderText>
+            <p>You don't have any team members to assign.</p>
+            <p>
+              <Link to="/home/create-team-member">Click here</Link> to add a
+              member to your account.
+            </p>
+          </HolderText>
         </>
       );
     }
@@ -450,40 +453,46 @@ class TrainingSeriesPosts extends React.Component {
                 }}
               />
             )}
-            <ListStyles className={classes.listStyle}>
-              {posts.map(post => (
-                <>
-                  <ListItem key={post.postID} className={classes.listItem}>
-                    <ListItemText
-                      primary={post.postName}
-                      secondary={post.postDetails}
-                      className={classes.listItemText}
-                    />
-                    <ListItemSecondaryAction
-                      className={classes.secondaryAction}
-                    >
-                      <div>
-                        <p>{post.daysFromStart} days</p>
-                      </div>
-                      <ListButtonContainer>
-                        <i
-                          className={`material-icons ${classes.icons}`}
-                          onClick={e => this.routeToEditPostPage(e, post)}
-                        >
-                          edit
-                        </i>
-                        <DeleteModal
-                          className={`material-icons ${classes.icons}`}
-                          deleteType="post"
-                          id={post.postID}
-                        />
-                      </ListButtonContainer>
-                    </ListItemSecondaryAction>
-                  </ListItem>
-                  <Divider />
-                </>
-              ))}
-            </ListStyles>
+            {this.props.posts.length === 0 ? (
+              <HolderText>
+                <p>You do not have any messages.</p>
+              </HolderText>
+            ) : (
+              <ListStyles className={classes.listStyle}>
+                {posts.map(post => (
+                  <>
+                    <ListItem key={post.postID} className={classes.listItem}>
+                      <ListItemText
+                        primary={post.postName}
+                        secondary={post.postDetails}
+                        className={classes.listItemText}
+                      />
+                      <ListItemSecondaryAction
+                        className={classes.secondaryAction}
+                      >
+                        <div>
+                          <p>{post.daysFromStart} days</p>
+                        </div>
+                        <ListButtonContainer>
+                          <i
+                            className={`material-icons ${classes.icons}`}
+                            onClick={e => this.routeToEditPostPage(e, post)}
+                          >
+                            edit
+                          </i>
+                          <DeleteModal
+                            className={`material-icons ${classes.icons}`}
+                            deleteType="post"
+                            id={post.postID}
+                          />
+                        </ListButtonContainer>
+                      </ListItemSecondaryAction>
+                    </ListItem>
+                    <Divider />
+                  </>
+                ))}
+              </ListStyles>
+            )}
           </Paper>
           <Paper className={classes.paper}>{assignedMembersStatus}</Paper>
         </PageContainer>
@@ -514,6 +523,14 @@ const HeaderContainer = styled.div`
     padding: 10px 0;
     align-items: center;
     margin: 0 auto;
+    text-align: center;
+  }
+`;
+
+const HolderText = styled.div`
+  margin: 50px 0;
+  p {
+    color: lightgray;
     text-align: center;
   }
 `;
