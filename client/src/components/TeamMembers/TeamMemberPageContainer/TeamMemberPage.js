@@ -170,8 +170,24 @@ class TeamMemberPage extends React.Component {
 
   render() {
     const { classes } = this.props;
-    console.log("EMAIL", this.state.teamMember.emailOn);
-    console.log("TextON", this.state.teamMember.textOn);
+
+    const { textOn, emailOn } = this.state.teamMember;
+
+    let textDisabled;
+    let emailDisabled;
+
+    if (textOn && !emailOn) {
+      textDisabled = true;
+    }
+
+    if (emailOn && !textOn) {
+      emailDisabled = true;
+    }
+
+    if (emailOn && textOn) {
+      textDisabled = false;
+      emailDisabled = false;
+    }
 
     const trainingAssigments =
       this.props.teamMember.assignments &&
@@ -300,7 +316,9 @@ class TeamMemberPage extends React.Component {
                 control={
                   <Switch
                     checked={this.state.teamMember.textOn}
-                    onChange={this.handleToggleChange("textOn")}
+                    onChange={
+                      textDisabled ? null : this.handleToggleChange("textOn")
+                    }
                     value="textOn"
                     color="primary"
                   />
@@ -311,7 +329,9 @@ class TeamMemberPage extends React.Component {
                 control={
                   <Switch
                     checked={this.state.teamMember.emailOn}
-                    onChange={this.handleToggleChange("emailOn")}
+                    onChange={
+                      emailDisabled ? null : this.handleToggleChange("emailOn")
+                    }
                     value="emailOn"
                     color="primary"
                   />
