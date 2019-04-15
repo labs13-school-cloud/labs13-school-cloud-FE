@@ -1,3 +1,4 @@
+
 import React from "react";
 //Prop Types
 import PropTypes from "prop-types";
@@ -172,7 +173,9 @@ class TrainingSeriesModal extends React.Component {
           onClose={this.handleClose}
         >
           <Paper style={getModalStyle()} className={classes.paper}>
-            <Typography variant="subheading">Are you sure you want to delete this?</Typography>
+            <Typography variant="subheading">
+              Are you sure you want to delete this?
+            </Typography>
             <Button
               onClick={() => this.handleDelete()}
               type="submit"

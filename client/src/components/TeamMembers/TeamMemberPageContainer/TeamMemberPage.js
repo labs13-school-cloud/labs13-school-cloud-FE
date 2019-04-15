@@ -180,12 +180,10 @@ class TeamMemberPage extends React.Component {
               Assign to Training Series
             </Button>
           </div>
-          <Typography variant="subheading" className={classes.messageText}>
-            This team member currently does not have any assignments.
-          </Typography>
-          <Typography variant="subheading" className={classes.messageText}>
-            Click the button above to assign them to a training series.
-          </Typography>
+          <HolderText>
+            <p>This team member currently does not have any assignments.</p>
+            <p>Click the button above to assign them to a training series.</p>
+          </HolderText>
         </>
       );
     } else if (this.props.trainingSeries.length > 0) {
@@ -302,6 +300,14 @@ const MainContainer = styled.div`
   max-width: 768px;
   @media (max-width: 768px) {
     width: 95%;
+  }
+`;
+
+const HolderText = styled.div`
+  margin: 50px 0;
+  p {
+    color: lightgray;
+    text-align: center;
   }
 `;
 
