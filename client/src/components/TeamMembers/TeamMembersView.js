@@ -1,29 +1,29 @@
 // component to contain all the components related to team members
 
 import React from "react";
-import styled from 'styled-components';
+import styled from "styled-components";
 import Fuse from "fuse.js";
 
 //Components
 import TeamMembersList from "./TeamMembersList";
 import Pagination from "material-ui-flat-pagination";
 
-import { connect } from "react-redux";
-import { withRouter } from "react-router";
+import {connect} from "react-redux";
+import {withRouter} from "react-router";
 
-import { withStyles } from "@material-ui/core/styles";
+import {withStyles} from "@material-ui/core/styles";
 import {
   Paper,
   Typography,
   Fab,
   TextField,
-  InputAdornment
+  InputAdornment,
 } from "@material-ui/core/";
 
 import {
   getTeamMembers,
   addTeamMember,
-  deleteTeamMember
+  deleteTeamMember,
 } from "../../store/actions";
 
 const styles = theme => ({
@@ -44,43 +44,43 @@ const styles = theme => ({
       width: "92%",
       marginBottom: 10,
       maxWidth: "none",
-      height: "533px"
-    }
+      height: "533px",
+    },
   },
   textField: {
-    width: "100%"
+    width: "100%",
   },
 
   columnHeader: {
     display: "flex",
     justifyContent: "space-between",
-    alignItems: "center"
+    alignItems: "center",
   },
   icons: {
     display: "flex",
-    alignItems: "center"
+    alignItems: "center",
   },
   fab: {
     margin: 5,
     background: "#451476",
     color: "white",
     "&:hover": {
-      background: "#591a99"
-    }
+      background: "#591a99",
+    },
   },
   formControl: {
-    margin: theme.spacing.unit
+    margin: theme.spacing.unit,
     // minWidth: 120,
   },
   selectEmpty: {
-    marginTop: theme.spacing.unit * 2
+    marginTop: theme.spacing.unit * 2,
   },
   footer: {
     display: "flex",
     justifyContent: "space-between",
     position: "sticky",
-    top: "100%"
-  }
+    top: "100%",
+  },
   // pagination: { width: '90%' },
 });
 
@@ -92,24 +92,24 @@ class TeamMembersView extends React.Component {
     offset: 0,
     limit: 5,
     searchInput: "",
-    searchOpen: false
+    searchOpen: false,
   };
 
   componentDidMount() {
     this.props.getTeamMembers(this.props.userId);
     this.setState({
-      teamMembers: this.props.teamMembers
+      teamMembers: this.props.teamMembers,
     });
   }
   openSearch = e => {
     e.preventDefault();
-    this.setState({ searchOpen: !this.state.searchOpen });
+    this.setState({searchOpen: !this.state.searchOpen});
   };
   handleClick(offset) {
-    this.setState({ offset });
+    this.setState({offset});
   }
   handleChange = e => {
-    this.setState({ limit: parseInt(e.target.value, 10) });
+    this.setState({limit: parseInt(e.target.value, 10)});
   };
 
   deleteMember = (e, id) => {
@@ -119,7 +119,7 @@ class TeamMembersView extends React.Component {
 
   routeToCreateMemberPage = () => {
     this.props.toggleFreakinSnackBar();
-    this.props.history.push('/home/create-team-member');
+    this.props.history.push("/home/create-team-member");
   };
 
   // function to set fuse option and return a response
@@ -131,7 +131,7 @@ class TeamMembersView extends React.Component {
       distance: 100,
       maxPatternLength: 32,
       minMatchCharLength: 3,
-      keys: ["firstName", "lastName", "jobDescripton"]
+      keys: ["firstName", "lastName", "jobDescripton"],
     };
 
     const fuse = new Fuse(team, options);
@@ -140,7 +140,7 @@ class TeamMembersView extends React.Component {
   };
 
   render() {
-    const { classes } = this.props;
+    const {classes} = this.props;
 
     // boolean for if the search input is active
     const searchOn = this.state.searchInput.length > 0;
@@ -159,9 +159,9 @@ class TeamMembersView extends React.Component {
     if (this.props.teamMembers.length === 0) {
       teamMembersDisplay = (
         <MessageContainer>
-        <p>You do not have any team members.</p>
-      </MessageContainer>
-      )
+          <p>You do not have any team members.</p>
+        </MessageContainer>
+      );
     } else {
       teamMembersDisplay = (
         <TeamMembersList
@@ -171,11 +171,11 @@ class TeamMembersView extends React.Component {
           offset={this.state.offset}
           userId={this.props.userId}
         />
-      )
+      );
     }
 
     return (
-      <Paper className={classes.root} elevation={2}>
+      <Paper data-tour="1" className={classes.root} elevation={2}>
         <div className={classes.columnHeader}>
           <Typography variant="h5">Team Members</Typography>
           <div className={classes.icons}>
@@ -185,7 +185,9 @@ class TeamMembersView extends React.Component {
               className={classes.fab}
               onClick={e => this.openSearch(e)}
             >
-              <i className="material-icons">search</i>
+              <i data-tour="2" className="material-icons">
+                search
+              </i>
             </Fab>
             <Fab
               size="small"
@@ -193,7 +195,9 @@ class TeamMembersView extends React.Component {
               className={classes.fab}
               onClick={this.routeToCreateMemberPage}
             >
-              <i className="material-icons">add</i>
+              <i data-tour="3" className="material-icons">
+                add
+              </i>
             </Fab>
           </div>
         </div>
@@ -204,14 +208,14 @@ class TeamMembersView extends React.Component {
               // label="Search Team Members"
               type="search"
               className={classes.textField}
-              onChange={e => this.setState({ searchInput: e.target.value })}
+              onChange={e => this.setState({searchInput: e.target.value})}
               margin="normal"
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
                     <i class="material-icons">search</i>
                   </InputAdornment>
-                )
+                ),
               }}
             />
           )}
@@ -239,13 +243,13 @@ const mapStateToProps = state => {
     isAdding: state.teamMembersReducer.status.isAdding,
     addSuccess: state.teamMembersReducer.status.addSuccess,
     addFailed: state.teamMembersReducer.status.addFailed,
-    teamMembers: state.teamMembersReducer.teamMembers
+    teamMembers: state.teamMembersReducer.teamMembers,
   };
 };
 
 export default connect(
   mapStateToProps,
-  { getTeamMembers, addTeamMember, deleteTeamMember }
+  {getTeamMembers, addTeamMember, deleteTeamMember}
 )(withStyles(styles)(withRouter(TeamMembersView)));
 
 const MessageContainer = styled.div`
