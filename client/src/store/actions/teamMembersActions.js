@@ -1,4 +1,7 @@
 import axios from "axios";
+import history from '../../history.js'
+
+import {getTextNotifications, getEmailNotifications} from './notificationsActions';
 
 export const FETCH_TEAM_START = "FETCH_TEAM_START";
 export const FETCH_TEAM_SUCCESS = "FETCH_TEAM_SUCCESS";
@@ -31,6 +34,7 @@ export const REMOVE_MEMBER_FROM_TS_START = "REMOVE_MEMBER_FROM_TS_START";
 export const REMOVE_MEMBER_FROM_TS_SUCCESS = "REMOVE_MEMBER_FROM_TS_SUCCESS";
 export const REMOVE_MEMBER_FROM_TS_FAIL = "REMOVE_MEMBER_FROM_TS_FAIL";
 
+
 const baseUrl = `${process.env.REACT_APP_API}/api`;
 
 export const getTeamMembers = id => dispatch => {
@@ -44,24 +48,23 @@ export const getTeamMembers = id => dispatch => {
 };
 
 export const addTeamMember = teamMember => dispatch => {
+  console.log(teamMember)
   dispatch({ type: ADD_MEMBER_START });
-
   axios
     .post(`${baseUrl}/team-members`, teamMember)
     .then(res => {
       dispatch({ type: ADD_MEMBER_SUCCESS, payload: res.data.newTeamMember });
     })
-
+    .then(() => history.push({pathname:'/home', state: {success: true}}))
     .catch(err => dispatch({ type: ADD_MEMBER_FAIL, payload: err }));
 };
 
 export const editTeamMember = (id, changes) => dispatch => {
+  console.log(changes);
   dispatch({ type: EDIT_MEMBER_START });
-
   axios
     .put(`${baseUrl}/team-members/${id}`, changes)
     .then(res => {
-      console.log("EDIT RESPONSE", res.data);
       dispatch({
         type: EDIT_MEMBER_SUCCESS,
         payload: res.data.updatedTeamMember
@@ -70,14 +73,21 @@ export const editTeamMember = (id, changes) => dispatch => {
     .catch(err => dispatch({ type: EDIT_MEMBER_FAIL, payload: err }));
 };
 
-export const deleteTeamMember = id => dispatch => {
+export const deleteTeamMember = (teamMemberID, userID) => dispatch => {
   dispatch({ type: DELETE_MEMBER_START });
-
   axios
-    .delete(`${baseUrl}/team-members/${id}`)
+    .delete(`${baseUrl}/team-members/${teamMemberID}`)
     .then(res => {
-      console.log(res.data);
-      dispatch({ type: DELETE_MEMBER_SUCCESS, payload: id });
+      dispatch({ type: DELETE_MEMBER_SUCCESS, payload: teamMemberID });
+    })
+    .then(() => {
+      if(history.location.pathname === '/home'){
+        dispatch(getEmailNotifications(userID))
+        dispatch(getTextNotifications(userID))
+      }
+      else{
+        history.push('/home');
+      }
     })
     .catch(err => dispatch({ type: DELETE_MEMBER_FAIL, payload: err }));
 };
@@ -97,19 +107,23 @@ export const getTeamMemberByID = id => dispatch => {
 
 export const addTeamMemberToTrainingSeries = data => dispatch => {
   dispatch({ type: ADD_MEMBER_TO_TRAININGSERIES_START });
-  console.log("data from action", data);
   axios
     .post(`${baseUrl}/team-members/assign`, data)
     .then(res => {
-      console.log("ADD TEAM MEMBER DATA", res.data);
       axios
         .get(`${baseUrl}/team-members/${data.assignments[0]}`)
         .then(res => {
-          console.log("PAYLOAD FROM ACTION", res.data);
           dispatch({
             type: ADD_MEMBER_TO_TRAININGSERIES_SUCCESS,
             payload: res.data
           });
+        })
+        .then(() => {
+          if(history.location.pathname === `/home/assign-members/${data.trainingSeriesID}`){
+            history.push({pathname:`/home/training-series/${data.trainingSeriesID}`, state:{success: true}})
+          }else{
+            history.push({pathname:'/home', state: {success: true}})
+          }
         })
         .catch(err => console.log(err));
     })
@@ -124,12 +138,10 @@ export const deleteTeamMemberFromTrainingSeries = (id, ts_id) => dispatch => {
   axios
     .delete(`${baseUrl}/team-members/${id}/assign/${ts_id}`)
     .then(res => {
-      console.log("DELETE CALL FIRED", res.data);
       axios
         .get(`${baseUrl}/team-members/${id}`)
         .then(res => {
           dispatch({ type: FETCH_SINGLE_MEMBER_START });
-          console.log("PAYLOAD FROM ACTION", res.data);
           dispatch({
             type: FETCH_SINGLE_MEMBER_SUCCESS,
             payload: res.data

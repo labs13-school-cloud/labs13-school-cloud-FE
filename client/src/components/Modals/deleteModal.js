@@ -1,3 +1,4 @@
+
 import React from "react";
 //Prop Types
 import PropTypes from "prop-types";
@@ -93,19 +94,10 @@ class TrainingSeriesModal extends React.Component {
         this.props.deletePost(this.props.id);
         break;
       case "teamMember":
-        this.props.deleteTeamMember(this.props.teamMemberId);
-        setTimeout(() => {
-          this.props.getEmailNotifications(this.props.userId);
-          this.props.getTextNotifications(this.props.userId);
-        }, 500);
+        this.props.deleteTeamMember(this.props.teamMemberId, this.props.userId);
         break;
       case "inTeamMemberPage":
         this.props.deleteTeamMember(this.props.teamMemberId);
-        setTimeout(() => {
-          this.props.getEmailNotifications(this.props.userId);
-          this.props.getTextNotifications(this.props.userId);
-        }, 800);
-        this.props.history.push("/home");
         break;
       case "removeMemberFromTS":
         this.props.deleteTeamMemberFromTrainingSeries(
@@ -114,12 +106,7 @@ class TrainingSeriesModal extends React.Component {
         );
         break;
       case "trainingSeries":
-        this.props.deleteTrainingSeries(this.props.trainingSeriesId);
-        setTimeout(() => {
-          this.props.getEmailNotifications(this.props.userId);
-          this.props.getTextNotifications(this.props.userId);
-        }, 500);
-
+        this.props.deleteTrainingSeries(this.props.trainingSeriesId, this.props.userId);
         break;
       case "user":
         this.props.deleteUser(this.props.id);
@@ -172,7 +159,9 @@ class TrainingSeriesModal extends React.Component {
           onClose={this.handleClose}
         >
           <Paper style={getModalStyle()} className={classes.paper}>
-            <Typography variant="subheading">Are you sure you want to delete this?</Typography>
+            <Typography variant="subheading">
+              Are you sure you want to delete this?
+            </Typography>
             <Button
               onClick={() => this.handleDelete()}
               type="submit"

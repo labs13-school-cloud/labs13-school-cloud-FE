@@ -33,6 +33,9 @@ import Authenticate from "../authenticate/authenticate";
 import { connect } from "react-redux";
 import { getUser } from "../../store/actions/userActions";
 
+//Tour
+import Tour from 'reactour';
+
 const styles = theme => ({
   router: {
     // width: 900

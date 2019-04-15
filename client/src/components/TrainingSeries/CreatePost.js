@@ -111,11 +111,7 @@ class CreatePost extends React.Component {
 
   handlePostSubmit = e => {
     e.preventDefault();
-
-    this.props.createAPost(this.state.post);
-    this.props.history.push(
-      `/home/training-series/${this.props.location.state.trainingSeriesId}`
-    );
+    this.props.createAPost(this.state.post, this.state.post.trainingSeriesID);
   };
 
   render() {
@@ -175,13 +171,6 @@ class CreatePost extends React.Component {
               />
             </PostContainer>
             <ButtonContainer>
-              {/* <NotificationWidget
-              teamMember={this.state.teamMember}
-              editTeamMember={this.props.editTeamMember}
-              addTeamMember={this.addNewTeamMember}
-              type="success"
-              submitType="add"
-            /> */}
               <Button
                 variant="outlined"
                 className={classes.createButton}
@@ -206,6 +195,7 @@ class CreatePost extends React.Component {
           </Paper>
         </MainContainer>
       </form>
+
     );
   }
 }
