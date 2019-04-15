@@ -106,9 +106,11 @@ const userReducer = (state = initialState, action) => {
 
 		case POST_SUBSCRIBE_SUCCESS:
 			let accountTypeID;
-			if (action.payload.plan.id === 'plan_EmJallrSdkqpPS') {
+			// if (action.payload.plan.id === 'plan_EmJallrSdkqpPS') { // TEST - Premium Plan
+			if (action.payload.plan.id === 'plan_EtJQBX3qzlXOiS') { // LIVE - Premium Plan
 				accountTypeID = 2;
-			} else if (action.payload.plan.id === 'plan_EmJaXZor4Ef3co') {
+			// } else if (action.payload.plan.id === 'plan_EmJaXZor4Ef3co') { // TEST - Pro Plan
+			} else if (action.payload.plan.id === 'plan_EtJQifGGbeQWq2') { // LIVE - Pro Plan
 				accountTypeID = 3;
 			}
 			let update = {
@@ -147,9 +149,11 @@ const userReducer = (state = initialState, action) => {
 		case POST_REGISTERSTRIPE_SUCCESS:
 			console.log('action.payload', action.payload);
 			let accountTypeID2;
-			if (action.payload.subscriptions.data[0].plan.id === 'plan_EmJallrSdkqpPS') {
+			// if (action.payload.subscriptions.data[0].plan.id === 'plan_EmJallrSdkqpPS') { // TEST - Premium Plan
+			if (action.payload.subscriptions.data[0].plan.id === 'plan_EtJQBX3qzlXOiS') { // LIVE - Premium Plan
 				accountTypeID2 = 2;
-			} else if (action.payload.subscriptions.data[0].plan.id === 'plan_EmJaXZor4Ef3co') {
+			// } else if (action.payload.subscriptions.data[0].plan.id === 'plan_EmJaXZor4Ef3co') { // TEST - Pro Plan
+			} else if (action.payload.subscriptions.data[0].plan.id === 'plan_EtJQifGGbeQWq2') { // LIVE - Pro Plan
 				accountTypeID2 = 3;
 			}
 

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import styled from "styled-components";
+// import styled from "styled-components";
 import { CardElement, injectStripe } from "react-stripe-elements";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
@@ -54,17 +54,19 @@ const styles = theme => ({
   },
   paymentForm: {
     display: "flex",
-    margin: "30px 90px 0 90px"
+    margin: "30px 90px 0 90px",
+    ['@media (max-width: 480px)']: { // eslint-disable-line no-useless-computed-key 
+      margin: "30px 10px 0 10px"
+    }
   },
   buttonLayout: {
     display: "flex",
     justifyContent: "space-around",
     margin: "0 auto",
-    ["@media (max-width: 1000px)"]: {
-      // eslint-disable-line no-useless-computed-key
+    ["@media (max-width: 1000px)"]: {  // eslint-disable-line no-useless-computed-key
+
     },
-    ["@media (max-width: 720px)"]: {
-      // eslint-disable-line no-useless-computed-key
+    ["@media (max-width: 720px)"]: {  // eslint-disable-line no-useless-computed-key
       // flexDirection:'column',
       justifyContent: "center",
       flexWrap: "wrap"
@@ -284,43 +286,7 @@ class CheckoutForm extends Component {
 
               {this.props.plans.map(plan => {
                 return plan.nickname === accountType ? (
-                  <div className={classes.subCard}>
-                    <Typography className={classes.title}>
-                      {plan.nickname}
-                    </Typography>
-                    <Typography className={classes.price}>
-                      ${plan.amount / 100}
-                      <span className={classes.subPrice}> / mo</span>
-                    </Typography>
-                    <div className={classes.content}>
-                      <Typography className={classes.feature}>
-                        Automated Text/Email
-                      </Typography>
-                      <Typography className={classes.feature}>
-                        Unlimited Training Series
-                      </Typography>
-                      <Typography className={classes.feature}>
-                        Unlimited Team Members
-                      </Typography>
-                      <div className={classes.spread}>
-                        <Typography className={classes.feature}>
-                          Message Limit
-                        </Typography>
-                        <Typography className={classes.feature}>
-                          1000 / mo
-                        </Typography>
-                      </div>
-                    </div>
-                    <Button
-                      key={plan.created}
-                      className={classes.button}
-                      disabled
-                    >
-                      Current Plan
-                    </Button>
-                  </div>
-                ) : (
-                  <div className={classes.subCard}>
+                  <div key={plan.id} className={classes.subCard}>
                     <Typography className={classes.title}>
                       {plan.nickname}
                     </Typography>
@@ -344,6 +310,42 @@ class CheckoutForm extends Component {
                         </Typography>
                         <Typography className={classes.feature}>
                           200 / mo
+                        </Typography>
+                      </div>
+                    </div>
+                    <Button
+                      key={plan.created}
+                      className={classes.button}
+                      disabled
+                    >
+                      Current Plan
+                    </Button>
+                  </div>
+                ) : (
+                  <div key={plan.id} className={classes.subCard}>
+                    <Typography className={classes.title}>
+                      {plan.nickname}
+                    </Typography>
+                    <Typography className={classes.price}>
+                      ${plan.amount / 100}
+                      <span className={classes.subPrice}> / mo</span>
+                    </Typography>
+                    <div className={classes.content}>
+                      <Typography className={classes.feature}>
+                        Automated Text/Email
+                      </Typography>
+                      <Typography className={classes.feature}>
+                        Unlimited Training Series
+                      </Typography>
+                      <Typography className={classes.feature}>
+                        Unlimited Team Members
+                      </Typography>
+                      <div className={classes.spread}>
+                        <Typography className={classes.feature}>
+                          Message Limit
+                        </Typography>
+                        <Typography className={classes.feature}>
+                          1000 / mo
                         </Typography>
                       </div>
                     </div>
