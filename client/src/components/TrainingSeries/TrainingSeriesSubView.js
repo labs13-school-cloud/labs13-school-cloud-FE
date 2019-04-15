@@ -5,6 +5,7 @@ import Fuse from "fuse.js";
 //Components
 import TrainingSeriesList from "./TrainingSeriesList";
 
+
 import {withStyles} from "@material-ui/core/styles";
 import {
   Paper,

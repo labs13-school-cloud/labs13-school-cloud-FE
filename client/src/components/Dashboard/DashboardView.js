@@ -37,6 +37,9 @@ import {getUser} from "../../store/actions/userActions";
 import DashboardTutor from "../Tour/DashboardTour";
 import DashboardTour from "../Tour/DashboardTour";
 
+//Tour
+import Tour from 'reactour';
+
 const styles = theme => ({
   router: {
     // width: 900
