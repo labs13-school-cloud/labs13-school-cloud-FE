@@ -1,7 +1,7 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React from "react";
+import { connect } from "react-redux";
 
-import { withStyles, Button, Typography } from '@material-ui/core/';
+import { withStyles, Button, Typography } from "@material-ui/core/";
 function rand() {
   return Math.round(Math.random() * 20) - 10;
 }
@@ -19,23 +19,23 @@ function getModalStyle() {
 
 const styles = theme => ({
   paper: {
-    position: 'absolute',
-    maxWidth: '300px',
-    width: '100%',
+    position: "absolute",
+    maxWidth: "300px",
+    width: "100%",
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
-    padding: '40px 20px',
-    outline: 'none',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center'
+    padding: "40px 20px",
+    outline: "none",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center"
   },
   buttonContainer: {
-    margin: '0 auto'
+    margin: "0 auto"
   },
   button: {
-    marginTop: '20px'
+    marginTop: "20px"
   }
 });
 class UnsubscribeModal extends React.Component {
@@ -43,16 +43,16 @@ class UnsubscribeModal extends React.Component {
     const { classes } = this.props;
     return (
       <div style={getModalStyle()} className={classes.paper}>
-        <Typography variant='subheading'>
+        <Typography variant="subheading">
           Are you sure you want to unsubscribe?
         </Typography>
 
         <div className={classes.buttonContainer}>
           <Button
             className={classes.button}
-            variant='contained'
-            color='default'
-            type='submit'
+            variant="contained"
+            color="default"
+            type="submit"
             onClick={() => {
               this.props.unsub(
                 this.props.userProfile.userID,

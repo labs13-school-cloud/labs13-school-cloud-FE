@@ -1,15 +1,15 @@
-import React, { Component } from 'react';
-import styled from 'styled-components';
-import { CardElement, injectStripe } from 'react-stripe-elements';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import React, { Component } from "react";
+import styled from "styled-components";
+import { CardElement, injectStripe } from "react-stripe-elements";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 import {
   getPlans,
   getCustomersPlan,
   unsubscribe,
   submit
-} from '../../store/actions/';
-import { getUser } from '../../store/actions/userActions';
+} from "../../store/actions/";
+import { getUser } from "../../store/actions/userActions";
 
 import {
   withStyles,
@@ -17,57 +17,57 @@ import {
   Button,
   Typography,
   Modal
-} from '@material-ui/core/';
-import UnsubscribeModal from './unsubscribeModal';
-import TrainingBotGIF from '../../img/trainingBot.gif';
+} from "@material-ui/core/";
+import UnsubscribeModal from "./unsubscribeModal";
+import TrainingBotGIF from "../../img/trainingBot.gif";
 
 const styles = theme => ({
   paper: {
-    position: 'absolute',
+    position: "absolute",
     width: theme.spacing.unit * 50,
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
     padding: theme.spacing.unit * 4,
-    outline: 'none'
+    outline: "none"
   },
   submitBtn: {
     maxWidth: 150,
-    width: '100%',
-    background: '#451476',
-    color: 'white',
-    margin: '20px auto',
-    '&:hover': {
-      background: '#591a99',
-      color: 'white'
+    width: "100%",
+    background: "#451476",
+    color: "white",
+    margin: "20px auto",
+    "&:hover": {
+      background: "#591a99",
+      color: "white"
     }
   },
   root: {
-    margin: '20 auto',
-    width: '100%',
+    margin: "20 auto",
+    width: "100%",
     maxWidth: 800,
-    display: 'flex',
-    flexDirection: 'column'
+    display: "flex",
+    flexDirection: "column"
   },
   formControl: {
-    display: 'flex',
-    margin: '15px 5px'
+    display: "flex",
+    margin: "15px 5px"
   },
   paymentForm: {
-    display: 'flex',
-    margin: '30px 90px 0 90px'
+    display: "flex",
+    margin: "30px 90px 0 90px"
   },
   buttonLayout: {
-    display: 'flex',
-    justifyContent: 'space-around',
-    margin: '0 auto',
-    ['@media (max-width: 1000px)']: {
+    display: "flex",
+    justifyContent: "space-around",
+    margin: "0 auto",
+    ["@media (max-width: 1000px)"]: {
       // eslint-disable-line no-useless-computed-key
     },
-    ['@media (max-width: 720px)']: {
+    ["@media (max-width: 720px)"]: {
       // eslint-disable-line no-useless-computed-key
       // flexDirection:'column',
-      justifyContent: 'center',
-      flexWrap: 'wrap'
+      justifyContent: "center",
+      flexWrap: "wrap"
       // width: '94%'
     }
   },
@@ -77,77 +77,77 @@ const styles = theme => ({
   },
 
   container: {
-    display: 'flex',
-    flexWrap: 'wrap'
+    display: "flex",
+    flexWrap: "wrap"
   },
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
     width: 200
   },
-  progress: { margin: '50px auto', maxWidth: 100, width: 100 },
+  progress: { margin: "50px auto", maxWidth: 100, width: 100 },
   subCard: {
-    border: '1px solid #EBEBEB',
-    borderRadiusTopLeft: '3px',
-    borderRadiusTopRight: '3px',
-    width: '31%',
+    border: "1px solid #EBEBEB",
+    borderRadiusTopLeft: "3px",
+    borderRadiusTopRight: "3px",
+    width: "31%",
     minWidth: 201,
     margin: 5,
-    textAlign: 'center'
+    textAlign: "center"
   },
   title: {
-    textTransform: 'uppercase',
+    textTransform: "uppercase",
     fontWeight: 700,
     margin: 10
   },
   price: {
     fontSize: 20,
-    margin: '10px 0'
+    margin: "10px 0"
   },
   subPrice: {
     fontSize: 12,
-    color: 'grey'
+    color: "grey"
   },
   content: {
-    margin: '15px auto',
-    width: '80%'
+    margin: "15px auto",
+    width: "80%"
   },
   feature: {
-    padding: '5px 0'
+    padding: "5px 0"
   },
   spread: {
-    display: 'flex',
-    justifyContent: 'space-between'
+    display: "flex",
+    justifyContent: "space-between"
   },
   button: {
-    position: 'sticky',
-    top: '100%',
-    width: '100%',
+    position: "sticky",
+    top: "100%",
+    width: "100%",
     marginTop: 10,
-    background: '#441476',
-    color: 'white',
+    background: "#441476",
+    color: "white",
     borderRadius: 0,
-    '&:hover': {
-      background: '#591a99'
+    "&:hover": {
+      background: "#591a99"
     },
-    '&:disabled': {
-      color: 'grey',
-      background: '#EBEBEB'
+    "&:disabled": {
+      color: "grey",
+      background: "#EBEBEB"
     }
   },
   LoadingImg: {
-    height: 'auto',
-    overflow: 'hidden',
-    cursor: 'not-allowed',
-    pointerEvents: 'none',
-    position: 'relative',
+    height: "auto",
+    overflow: "hidden",
+    cursor: "not-allowed",
+    pointerEvents: "none",
+    position: "relative",
     padding: 0,
-    margin: '20px auto'
+    margin: "20px auto"
   },
   gifWrapper: {
-    width: '100%',
-    display: 'flex',
-    justifyContent: 'center'
+    width: "100%",
+    display: "flex",
+    justifyContent: "center"
   }
 });
 
@@ -156,16 +156,16 @@ class CheckoutForm extends Component {
     super(props);
     this.state = {
       complete: false,
-      plans: '',
-      billingName: '',
-      billingEmail: '',
-      plan: '',
+      plans: "",
+      billingName: "",
+      billingEmail: "",
+      plan: "",
       paymentToggle: false,
       pro: false,
       premium: false,
       open: false,
-      buttonState: '',
-      error: ''
+      buttonState: "",
+      error: ""
     };
   }
   handleOpen = () => {
@@ -181,7 +181,7 @@ class CheckoutForm extends Component {
   };
   handleChange = (e, nickname) => {
     e.preventDefault();
-    if (e.currentTarget.name === 'plan') {
+    if (e.currentTarget.name === "plan") {
       this.setState({
         paymentToggle: true,
         buttonState: nickname
@@ -196,7 +196,7 @@ class CheckoutForm extends Component {
       let { token } = await this.props.stripe.createToken({ email: email });
       return token.id;
     } catch (err) {
-      this.setState({ error: 'Please enter payment information' });
+      this.setState({ error: "Please enter payment information" });
     }
   };
   submit = async () => {
@@ -209,7 +209,7 @@ class CheckoutForm extends Component {
         paymentToggle: false
       });
     } else {
-      this.setState({ error: 'Please enter payment information' });
+      this.setState({ error: "Please enter payment information" });
     }
   };
   unsub = (userID, stripe) => {
@@ -221,9 +221,9 @@ class CheckoutForm extends Component {
     const { classes } = this.props;
     let accountType;
     if (this.props.userProfile.accountTypeID === 2) {
-      accountType = 'Premium';
+      accountType = "Premium";
     } else if (this.props.userProfile.accountTypeID === 3) {
-      accountType = 'Pro';
+      accountType = "Pro";
     }
 
     let freeButton;
@@ -231,7 +231,7 @@ class CheckoutForm extends Component {
     if (this.props.userProfile.accountTypeID > 1) {
       freeButton = (
         <Button
-          color='primary'
+          color="primary"
           className={classes.button}
           onClick={this.handleOpen}
         >
@@ -240,7 +240,7 @@ class CheckoutForm extends Component {
       );
     } else {
       freeButton = (
-        <Button color='default' className={classes.button} disabled>
+        <Button color="default" className={classes.button} disabled>
           Current Plan
         </Button>
       );
@@ -257,7 +257,7 @@ class CheckoutForm extends Component {
           {this.props.userError}
           {this.props.stripeError}
           {/* <Pricing /> */}
-          <FormControl component='fieldset' className={classes.formControl}>
+          <FormControl component="fieldset" className={classes.formControl}>
             <div className={classes.buttonLayout}>
               <div className={classes.subCard}>
                 <Typography className={classes.title}>Basic</Typography>
@@ -349,8 +349,8 @@ class CheckoutForm extends Component {
                     </div>
                     <Button
                       key={plan.created}
-                      color='primary'
-                      name='plan'
+                      color="primary"
+                      name="plan"
                       className={classes.button}
                       value={plan.id}
                       onClick={e => this.handleChange(e, plan.nickname)}
@@ -367,15 +367,15 @@ class CheckoutForm extends Component {
             <div className={classes.gifWrapper}>
               <img
                 src={TrainingBotGIF}
-                alt='Loading Icon'
+                alt="Loading Icon"
                 className={classes.LoadingImg}
               />
             </div>
           ) : this.state.paymentToggle ? (
-            <FormControl component='fieldset' className={classes.paymentForm}>
-              <CardElement style={{ base: { fontSize: '18px' } }} />
+            <FormControl component="fieldset" className={classes.paymentForm}>
+              <CardElement style={{ base: { fontSize: "18px" } }} />
               <Button
-                variant='contained'
+                variant="contained"
                 className={classes.submitBtn}
                 onClick={this.submit}
               >
@@ -389,8 +389,8 @@ class CheckoutForm extends Component {
 
         {/* Unsubscribe Modal */}
         <Modal
-          aria-labelledby='simple-modal-title'
-          aria-describedby='simple-modal-description'
+          aria-labelledby="simple-modal-title"
+          aria-describedby="simple-modal-description"
           open={this.state.open}
           onClose={this.handleClose}
         >
