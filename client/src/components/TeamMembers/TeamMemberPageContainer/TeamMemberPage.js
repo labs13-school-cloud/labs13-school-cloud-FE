@@ -133,8 +133,8 @@ class TeamMemberPage extends React.Component {
     });
   };
 
-  handleToggleChange = name => event => {
-    this.setState({
+  handleToggleChange = name => async event => {
+    await this.setState({
       teamMember: {
         ...this.state.teamMember,
         [name]: event.target.checked
