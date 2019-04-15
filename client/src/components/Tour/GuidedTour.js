@@ -25,15 +25,16 @@ export default class GuidedTour extends Component {
         stepInteraction: false
       },
       {
-        selector: () => {
-          if (this.props.tourValue === 4) {
-            return `[data-tour="4"]`;
-          } else if (this.props.tourValue === 5) {
-            return `[data-tour="5"]`;
-          }
-        },
-        content:
-          "I'll now walk you through getting started. Let's create our first Training Series"
+        selector: '[data-tour="4"]',
+        content: ({ goTo, inDOM }) => (
+          <div>
+            <button onClick={() => goTo(5)}>Go to next step</button>
+            "I'll now walk you through getting started. Let's create our first
+            Training Series"
+          </div>
+        ),
+
+        action: node => console.log(node)
       },
       {
         selector: `[data-tour="5"]`,
@@ -54,9 +55,12 @@ export default class GuidedTour extends Component {
         steps={this.state.steps}
         isOpen={this.props.isTourOpen}
         onRequestClose={this.props.closeTour}
+        // customHelper={MyCustomHelper}
       />
     );
   }
 }
 
-//Tour steps
+// function MyCustomHelper(goToStep) {
+
+// }
