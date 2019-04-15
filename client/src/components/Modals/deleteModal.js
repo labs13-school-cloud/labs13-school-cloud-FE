@@ -19,7 +19,7 @@ import {
   getEmailNotifications
 } from "../../store/actions/";
 
-import { FormLabel } from "@material-ui/core";
+import { Typography, Paper } from "@material-ui/core";
 
 function getModalStyle() {
   const top = 50;
@@ -35,15 +35,16 @@ function getModalStyle() {
 const styles = theme => ({
   paper: {
     position: "absolute",
-    width: theme.spacing.unit * 25,
+    maxWidth: "300px",
+    width: "100%",
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
-    padding: theme.spacing.unit * 4,
-    outline: "none"
-  },
-  container: {
+    padding: "40px 20px",
+    outline: "none",
     display: "flex",
-    flexWrap: "wrap"
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center"
   },
   textField: {
     marginLeft: theme.spacing.unit,
@@ -57,7 +58,7 @@ const styles = theme => ({
     width: 200
   },
   button: {
-    "margin-left": theme.spacing.unit
+    marginTop: "20px"
   },
   icons: {
     display: "block",
@@ -170,8 +171,8 @@ class TrainingSeriesModal extends React.Component {
           open={this.state.open}
           onClose={this.handleClose}
         >
-          <div style={getModalStyle()} className={classes.paper}>
-            <FormLabel>Are you sure you want to delete this?</FormLabel>
+          <Paper style={getModalStyle()} className={classes.paper}>
+            <Typography variant="subheading">Are you sure you want to delete this?</Typography>
             <Button
               onClick={() => this.handleDelete()}
               type="submit"
@@ -180,7 +181,7 @@ class TrainingSeriesModal extends React.Component {
             >
               Delete Item
             </Button>
-          </div>
+          </Paper>
         </Modal>
       </div>
     );
