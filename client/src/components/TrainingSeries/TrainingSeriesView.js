@@ -61,6 +61,7 @@ export default connect(
   mapStateToProps,
   {
     getTrainingSeries,
-    deleteTrainingSeries
+	deleteTrainingSeries,
+	getMembersAssigned
   }
 )(TrainingSeriesView);
