@@ -11,7 +11,8 @@ const Stripe = styled.div`
 
 function StripeView(props) {
 	return (
-		<StripeProvider apiKey="pk_test_L76yOnUDjq2cNP8heEH9MkpA00Ktyd3MYn">
+		// <StripeProvider apiKey="pk_test_L76yOnUDjq2cNP8heEH9MkpA00Ktyd3MYn"> {/* TEST */}
+		<StripeProvider apiKey="pk_live_rT507CtR4I4vTsTDTp4YroFc00lFrmSMgJ"> {/* LIVE */}
 			<Stripe>
 				<Elements>
 					<CheckoutForm />
