@@ -199,7 +199,7 @@ class ProfileView extends React.Component {
             <Card className={classes.profileContainer}>
               <div>
                 <Avatar
-                  alt='Remy Sharp'
+                  alt={user.name}
                   src={JSON.parse(localStorage.getItem('Profile')).picture}
                   className={classes.bigAvatar}
                 />
