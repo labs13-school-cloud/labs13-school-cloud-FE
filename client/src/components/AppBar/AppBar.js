@@ -59,7 +59,7 @@ const NavigationContainer = styled.div`
 	align-items: center;
 `;
 const NavigationTop = styled.div`
-	background-color: #3ebd93;
+	background-color: #451477;
 	width: 100%;
 	padding: 8px 0;
 `;

@@ -1,13 +1,13 @@
 // component to contain all the components related to training series
-import React, { Component } from "react";
-import { Route } from "react-router-dom";
+import React, {Component} from "react";
+import {Route} from "react-router-dom";
 
 //REDUX
-import { connect } from "react-redux";
+import {connect} from "react-redux";
 import {
   getTrainingSeries,
   deleteTrainingSeries,
-  getMembersAssigned
+  getMembersAssigned,
 } from "../../store/actions/";
 
 //Components
@@ -35,7 +35,6 @@ class TrainingSeriesView extends Component {
           render={props => (
             <TrainingSeriesSubView
               {...props}
-              incrementTour={this.props.incrementTour}
               getMembersAssigned={this.props.getMembersAssigned}
               trainingSeries={this.props.trainingSeries}
               deleteTrainingSeries={this.deleteTrainingSeries}
@@ -54,7 +53,7 @@ const mapStateToProps = state => {
   return {
     trainingSeries: state.trainingSeriesReducer.trainingSeries,
     isLoading: state.trainingSeriesReducer.isLoading,
-    isDoneAdding: state.trainingSeriesReducer.isDoneAdding
+    isDoneAdding: state.trainingSeriesReducer.isDoneAdding,
   };
 };
 
@@ -62,6 +61,6 @@ export default connect(
   mapStateToProps,
   {
     getTrainingSeries,
-    deleteTrainingSeries
+    deleteTrainingSeries,
   }
 )(TrainingSeriesView);

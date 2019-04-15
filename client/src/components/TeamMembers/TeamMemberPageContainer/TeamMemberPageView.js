@@ -1,17 +1,17 @@
-import React from 'react';
+import React from "react";
 
 //Components
-import TeamMemberPage from './TeamMemberPage';
-import Snackbar from '../../Snackbar/Snackbar';
+import TeamMemberPage from "./TeamMemberPage";
+import Snackbar from "../../Snackbar/Snackbar";
 
 //Redux
-import {connect} from 'react-redux';
+import {connect} from "react-redux";
 import {
   editTeamMember,
   getTrainingSeries,
   getTeamMemberByID,
   deleteTeamMember,
-} from '../../../store/actions';
+} from "../../../store/actions";
 
 class TeamMemberPageView extends React.Component {
   state = {
@@ -43,7 +43,7 @@ class TeamMemberPageView extends React.Component {
     this.props.deleteTeamMember(this.props.match.params.id);
 
     setTimeout(() => {
-      this.props.history.push('/home');
+      this.props.history.push("/home");
     }, 400);
   };
 

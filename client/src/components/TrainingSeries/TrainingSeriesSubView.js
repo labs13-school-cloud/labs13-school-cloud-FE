@@ -1,17 +1,17 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 import styled from "styled-components";
 import Fuse from "fuse.js";
 
 //Components
 import TrainingSeriesList from "./TrainingSeriesList";
 
-import { withStyles } from "@material-ui/core/styles";
+import {withStyles} from "@material-ui/core/styles";
 import {
   Paper,
   Typography,
   Fab,
   TextField,
-  InputAdornment
+  InputAdornment,
 } from "@material-ui/core/";
 import Pagination from "material-ui-flat-pagination";
 
@@ -33,36 +33,36 @@ const styles = theme => ({
       width: "92%",
       marginBottom: 10,
       maxWidth: "none",
-      height: "533px"
-    }
+      height: "533px",
+    },
   },
   columnHeader: {
     display: "flex",
     justifyContent: "space-between",
-    alignItems: "center"
+    alignItems: "center",
   },
   icons: {
     display: "flex",
-    alignItems: "center"
+    alignItems: "center",
   },
   fab: {
     margin: 5,
     background: "#451476",
     color: "white",
     "&:hover": {
-      background: "#591a99"
-    }
+      background: "#591a99",
+    },
   },
   footer: {
     display: "flex",
     justifyContent: "space-between",
     position: "sticky",
-    top: "100%"
+    top: "100%",
   },
   textField: {
-    width: "100%"
+    width: "100%",
   },
-  pagination: { width: "90%" }
+  pagination: {width: "90%"},
 });
 
 class TrainingSeriesSubView extends Component {
@@ -72,24 +72,23 @@ class TrainingSeriesSubView extends Component {
       offset: 0,
       limit: 5,
       searchInput: "",
-      searchOpen: false
+      searchOpen: false,
     };
   }
 
   openSearch = e => {
     e.preventDefault();
-    this.setState({ searchOpen: !this.state.searchOpen });
+    this.setState({searchOpen: !this.state.searchOpen});
   };
   handleClick(offset) {
-    this.setState({ offset });
+    this.setState({offset});
   }
   handleChange = e => {
-    this.setState({ limit: parseInt(e.target.value, 10) });
+    this.setState({limit: parseInt(e.target.value, 10)});
   };
 
   routeToCreateTrainingSeries = e => {
     e.preventDefault();
-    this.props.incrementTour(5);
     this.props.toggleFreakinSnackBar();
     this.props.history.push("/home/create-training-series");
   };
@@ -103,7 +102,7 @@ class TrainingSeriesSubView extends Component {
       distance: 100,
       maxPatternLength: 32,
       minMatchCharLength: 3,
-      keys: ["title"]
+      keys: ["title"],
     };
 
     const fuse = new Fuse(series, options);
@@ -112,7 +111,7 @@ class TrainingSeriesSubView extends Component {
   };
 
   render() {
-    const { classes } = this.props;
+    const {classes} = this.props;
 
     const searchOn = this.state.searchInput.length > 0;
 
@@ -180,14 +179,14 @@ class TrainingSeriesSubView extends Component {
               id="standard-search"
               type="search"
               className={classes.textField}
-              onChange={e => this.setState({ searchInput: e.target.value })}
+              onChange={e => this.setState({searchInput: e.target.value})}
               margin="normal"
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
                     <i class="material-icons">search</i>
                   </InputAdornment>
-                )
+                ),
               }}
             />
           )}

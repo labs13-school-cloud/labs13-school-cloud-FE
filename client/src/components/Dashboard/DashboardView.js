@@ -1,12 +1,12 @@
 // parent component for app once logged in
 import React from "react";
-import { Router, Route } from "react-router-dom";
+import {Router, Route} from "react-router-dom";
 
 import history from "../../history";
 
 //Styling
 import styled from "styled-components";
-import { withStyles } from "@material-ui/core/styles";
+import {withStyles} from "@material-ui/core/styles";
 
 //Components
 import TeamMembersView from "../TeamMembers/TeamMembersView";
@@ -30,30 +30,31 @@ import Snackbar from "../Snackbar/Snackbar";
 import Authenticate from "../authenticate/authenticate";
 
 //State Management
-import { connect } from "react-redux";
-import { getUser } from "../../store/actions/userActions";
+import {connect} from "react-redux";
+import {getUser} from "../../store/actions/userActions";
 
 //Tour component
-import GuidedTour from "../Tour/GuidedTour";
+import DashboardTutor from "../Tour/DashboardTour";
+import DashboardTour from "../Tour/DashboardTour";
 
 const styles = theme => ({
   router: {
     // width: 900
-  }
+  },
 });
 class Dashboard extends React.Component {
   state = {
     tabValue: 0,
     displaySnackbar: false,
     isTourOpen: false,
-    tourValue: 4
+    tourValue: 4,
   };
 
   componentDidMount() {
     this.props.getUser();
     if (this.props.newUser) {
       console.log(this.props.newUser);
-      this.setState({ isTourOpen: true });
+      this.setState({isTourOpen: true});
     }
   }
 
@@ -64,7 +65,7 @@ class Dashboard extends React.Component {
         this.props.location.state.success
       ) {
         this.setState({
-          displaySnackbar: true
+          displaySnackbar: true,
         });
       }
     }
@@ -72,7 +73,7 @@ class Dashboard extends React.Component {
 
   toggleFreakinSnackBar = e => {
     this.setState({
-      displaySnackbar: false
+      displaySnackbar: false,
     });
   };
 
@@ -100,7 +101,7 @@ class Dashboard extends React.Component {
   };
 
   render() {
-    const { classes } = this.props;
+    const {classes} = this.props;
     return (
       <>
         {this.props.doneLoading ? (
@@ -192,7 +193,7 @@ class Dashboard extends React.Component {
               </Router>
             </DashboardContainer>
 
-            <GuidedTour
+            <DashboardTour
               isTourOpen={this.state.isTourOpen}
               closeTour={this.closeTour}
               tourValue={this.state.tourValue}
@@ -208,15 +209,15 @@ class Dashboard extends React.Component {
   // tracking the tab value in navigation.js
   changeTabValue = value => {
     this.setState({
-      tabValue: value
+      tabValue: value,
     });
   };
   //Tour methods
   closeTour = () => {
-    this.setState({ isTourOpen: false });
+    this.setState({isTourOpen: false});
   };
   incrementTour = tourToGoTo => {
-    this.setState({ tourValue: tourToGoTo });
+    this.setState({tourValue: tourToGoTo});
   };
 }
 
@@ -224,14 +225,14 @@ const mapStateToProps = state => {
   return {
     userProfile: state.userReducer.userProfile,
     doneLoading: state.userReducer.doneLoading,
-    newUser: state.userReducer.newUser
+    newUser: state.userReducer.newUser,
   };
 };
 
 export default connect(
   mapStateToProps,
   {
-    getUser
+    getUser,
   }
 )(withStyles(styles)(Authenticate(Dashboard)));
 
