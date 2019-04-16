@@ -14,13 +14,8 @@ import {
 } from '../../../store/actions/';
 import AddMember from './AddMember';
 
-// I need to bring in the user ID and the training series ID
 const styles = theme => ({
 	root: {
-		// ...theme.mixins.gutters(),
-		// paddingTop: theme.spacing.unit * 2,
-		// paddingBottom: theme.spacing.unit * 2,
-		// margin: '0 auto',
 		width: "100%",
 		maxWidth: 768,
 		margin: "20px auto",
@@ -92,17 +87,6 @@ class AddMembersView extends Component {
 					limit={this.state.limit}
 					offset={this.state.offset}
 				/>
-				{/****** Following used for pagination ******/}
-				{/* 
-				<div className={classes.footer}>
-					<Pagination
-						limit={this.state.limit}
-						offset={this.state.offset}
-						total={this.props.teamMembers.length}
-						centerRipple={true}
-						onClick={(e, offset) => this.handleClick(offset)}
-					/>
-				</div> */}
 			</Paper>
 		);
 	}

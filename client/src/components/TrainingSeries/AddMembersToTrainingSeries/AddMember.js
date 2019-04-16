@@ -132,7 +132,7 @@ function AddMember(props) {
           </TeamMemberContainer>
         </>
       ) : (
-        <h2> You need to create Team members! </h2>
+        <h2>Please create at least one team member to allow assignment functionality. </h2>
       )}
     </AddMemberContainer>
     </>
@@ -159,6 +159,7 @@ align-items: center;
 const TeamMemberContainer = styled.div`
   display: flex;
   justify-content: center;
+  width: 100%;
 
   @media (max-width: 580px) {
     padding-top: 35px;
@@ -171,6 +172,7 @@ const MemberListContainer = styled.div`
     flex-wrap: wrap;
     justify-content: flex-start;
     padding: 0 25px;
+    width: 100%;
 
     @media (max-width: 580px) {
       width: 240px;
@@ -180,7 +182,9 @@ const MemberListContainer = styled.div`
 
 `;
 const ButtonContainer = styled.div`
-display: block;
+display: flex;
+top: 100%;
+position: sticky;
 `;
 
 const LoadingImage = styled.img`
