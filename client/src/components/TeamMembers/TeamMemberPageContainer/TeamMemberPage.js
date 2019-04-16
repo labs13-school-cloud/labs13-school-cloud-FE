@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
+import NumberFormat from 'react-number-format';
 import styled from "styled-components";
 
 // Material UI
@@ -297,19 +297,29 @@ class TeamMemberPage extends React.Component {
               <TextField
                 id="standard-name"
                 label="email"
+                type="email"
                 className={classes.textField}
                 value={this.state.teamMember.email}
                 onChange={this.handleChange("email")}
                 margin="normal"
               />
-              <TextField
+              <NumberFormat format="+1 (###) ###-####" mask="_" id="standard-name"
+                label="Phone Number"
+                customInput={TextField}
+                className={classes.textField}
+                value={this.state.teamMember.phoneNumber}
+                onChange={this.handleChange("phoneNumber")}
+                margin="normal"
+                />
+
+              {/* <TextField
                 id="standard-name"
                 label="phone"
                 className={classes.textField}
                 value={this.state.teamMember.phoneNumber}
                 onChange={this.handleChange("phoneNumber")}
                 margin="normal"
-              />
+              /> */}
             </MemberInfoContainer>
             <ButtonContainer>
               <FormControlLabel
