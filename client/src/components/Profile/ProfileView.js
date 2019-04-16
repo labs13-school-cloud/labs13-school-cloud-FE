@@ -49,7 +49,13 @@ const styles = theme => ({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    textAlign: 'center'
+    textAlign: 'center',
+       ['@media (max-width: 768px)']: { // eslint-disable-line no-useless-computed-key 
+      width: '81%'
+    },
+    ['@media (max-width: 480px)']: { // eslint-disable-line no-useless-computed-key 
+      width: '81%'
+    }
   },
   profileContainer: {
     display: 'flex',
