@@ -38,7 +38,7 @@ const styles = {
 
     "&:hover": {
       cursor: "pointer",
-      backgroundColor: "lightgrey"
+      backgroundColor: "whitesmoke"
       // "box-shadow": "0px 6px 15px -4px rgba(0,0,0,0.84)"
     }
   },
@@ -79,8 +79,6 @@ function TeamMember(props) {
   };
 
   return (
-    // console.log('TEAM MEMBER LIST IDS', this.props.team)
-
     <ListItem className={classes.listItem}>
       <ListItemText
         primary={firstName + " " + lastName}
