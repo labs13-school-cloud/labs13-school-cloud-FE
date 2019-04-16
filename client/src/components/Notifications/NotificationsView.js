@@ -1,74 +1,74 @@
-import React, { Component } from 'react';
-import moment from 'moment';
+import React, { Component } from "react";
+import moment from "moment";
 
 //Components
-import NotificationsList from './NotificationsList';
+import NotificationsList from "./NotificationsList";
 
 //Styling
-import { withStyles } from '@material-ui/core/styles';
-import { Paper, Typography } from '@material-ui/core/';
-import Pagination from 'material-ui-flat-pagination';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
+import { withStyles } from "@material-ui/core/styles";
+import { Paper, Typography } from "@material-ui/core/";
+import Pagination from "material-ui-flat-pagination";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
 
 //State Management
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 import {
   getTextNotifications,
   getEmailNotifications
-} from '../../store/actions/notificationsActions';
+} from "../../store/actions/notificationsActions";
 
 const styles = theme => ({
   root: {
     ...theme.mixins.gutters(),
     paddingTop: theme.spacing.unit * 2,
     paddingBottom: theme.spacing.unit * 2,
-    display: 'flex',
-    flexDirection: 'column',
-    width: '50%',
-    boxSizing: 'border-box',
-    minHeight: '533px',
-    height: '100%',
+    display: "flex",
+    flexDirection: "column",
+    width: "50%",
+    boxSizing: "border-box",
+    minHeight: "533px",
+    height: "100%",
     margin: 5,
-    '@media (max-width: 1400px)': {
-      width: '100%',
-      height: '533px'
+    "@media (max-width: 1400px)": {
+      width: "100%",
+      height: "533px"
     },
-    '@media (max-width: 1000px)': {
-      width: '100%'
+    "@media (max-width: 1000px)": {
+      width: "100%"
     },
 
-    '@media (max-width: 768px)': {
-      width: '92%'
+    "@media (max-width: 768px)": {
+      width: "92%"
     }
   },
   columnHeader: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
     marginBottom: 15
   },
   icons: {
-    display: 'flex',
-    alignItems: 'center'
+    display: "flex",
+    alignItems: "center"
   },
   fab: { margin: 5 },
   footer: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    position: 'sticky',
-    top: '100%'
+    display: "flex",
+    justifyContent: "space-between",
+    position: "sticky",
+    top: "100%"
   },
-  pagination: { width: '90%' },
-  selection: { margin: '0 10px' }
+  pagination: { width: "90%" },
+  selection: { margin: "0 10px" }
 });
 
 class NotificationsView extends Component {
   state = {
     offset: 0,
     limit: 5,
-    filterType: 'all',
-    filterSent: 'pending'
+    filterType: "all",
+    filterSent: "pending"
   };
 
   componentDidMount() {
@@ -96,21 +96,31 @@ class NotificationsView extends Component {
       ...this.props.emailNotifications
     ];
 
-    const filteredNotifications = allNotifications.filter(notification => {
-      // check if first key included email or text
-      if (notification.hasOwnProperty(this.state.filterType)) {
-        return notification;
-      } else if (this.state.filterType === 'all') {
-        return notification;
+    // this is a quick fix to filter out empty values from the notification table.
+    // ideally we would filter out empty contact values on the back end
+    // we ran out of time and had to deliver
+    const nonNullContactInformation = allNotifications.filter(
+      notification =>
+        notification.email !== "" && notification.phoneNumber !== ""
+    );
+
+    const filteredNotifications = nonNullContactInformation.filter(
+      notification => {
+        // check if first key included email or text
+        if (notification.hasOwnProperty(this.state.filterType)) {
+          return notification;
+        } else if (this.state.filterType === "all") {
+          return notification;
+        }
       }
-    });
+    );
 
     filteredNotifications.sort((a, b) =>
       a.sendDate > b.sendDate ? 1 : b.sendDate > a.sendDate ? -1 : 0
     );
 
     const filteredReturn =
-      this.state.filterSent === 'pending'
+      this.state.filterSent === "pending"
         ? filteredNotifications.filter(
             notification =>
               notification.textSent === 0 || notification.emailSent === 0
@@ -125,10 +135,10 @@ class NotificationsView extends Component {
     return (
       <Paper className={classes.root} elevation={2}>
         <div className={classes.columnHeader}>
-          <Typography variant='h5'>
-            {this.state.filterSent === 'pending'
+          <Typography variant="h5">
+            {this.state.filterSent === "pending"
               ? `${notificationCount} Pending Messages`
-              : 'Sent Messages'}
+              : "Sent Messages"}
           </Typography>
           <div>
             <FormControl className={classes.formControl}>
@@ -138,12 +148,12 @@ class NotificationsView extends Component {
                 value={this.state.filterType}
                 onChange={e => this.handleFilter(e)}
                 inputProps={{
-                  id: 'pagination-selector'
+                  id: "pagination-selector"
                 }}
               >
-                <option value={'all'}>All</option>
-                <option value={'phoneNumber'}>Text</option>
-                <option value={'email'}>Email</option>
+                <option value={"all"}>All</option>
+                <option value={"phoneNumber"}>Text</option>
+                <option value={"email"}>Email</option>
               </Select>
             </FormControl>
             <FormControl className={classes.formControl}>
@@ -153,11 +163,11 @@ class NotificationsView extends Component {
                 value={this.state.filterSent}
                 onChange={e => this.handleFilterSent(e)}
                 inputProps={{
-                  id: 'pagination-selector'
+                  id: "pagination-selector"
                 }}
               >
-                <option value={'pending'}>Pending</option>
-                <option value={'sent'}>Sent</option>
+                <option value={"pending"}>Pending</option>
+                <option value={"sent"}>Sent</option>
               </Select>
             </FormControl>
           </div>
