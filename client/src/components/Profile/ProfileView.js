@@ -62,17 +62,20 @@ const styles = theme => ({
     width: '30%',
     padding: 10,
     textAlign: 'center',
-    ['@media (max-width: 1000px)']: { // eslint-disable-line no-useless-computed-key
+    ['@media (max-width: 1000px)']: {
+      // eslint-disable-line no-useless-computed-key
       justifyContent: 'space-around',
       flexDirection: 'row',
       maxWidth: '768px',
       width: '94%',
       marginBottom: 10
     },
-    ['@media (max-width: 768px)']: { // eslint-disable-line no-useless-computed-key
+    ['@media (max-width: 768px)']: {
+      // eslint-disable-line no-useless-computed-key
       width: '94%'
     },
-    ['@media (max-width: 480px)']: { // eslint-disable-line no-useless-computed-key 
+    ['@media (max-width: 480px)']: {
+      // eslint-disable-line no-useless-computed-key
       flexDirection: 'column'
     }
   },
@@ -81,12 +84,14 @@ const styles = theme => ({
     margin: '0px 0px 0px 10px',
     padding: 10,
     // height: 350,
-    ['@media (max-width: 1000px)']: { // eslint-disable-line no-useless-computed-key
+    ['@media (max-width: 1000px)']: {
+      // eslint-disable-line no-useless-computed-key
       maxWidth: '768px',
       width: '94%',
       margin: 0
     },
-    ['@media (max-width: 768px)']: { // eslint-disable-line no-useless-computed-key
+    ['@media (max-width: 768px)']: {
+      // eslint-disable-line no-useless-computed-key
       width: '94%'
     }
   },
@@ -194,7 +199,7 @@ class ProfileView extends React.Component {
             <Card className={classes.profileContainer}>
               <div>
                 <Avatar
-                  alt={user.name}
+                  alt='Remy Sharp'
                   src={JSON.parse(localStorage.getItem('Profile')).picture}
                   className={classes.bigAvatar}
                 />

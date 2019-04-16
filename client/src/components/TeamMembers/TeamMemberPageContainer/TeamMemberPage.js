@@ -11,7 +11,9 @@ import {
   Typography,
   TextField,
   Button,
-  Divider
+  Divider,
+  Switch,
+  FormControlLabel
 } from "@material-ui/core/";
 import NotificationWidget from "./SnackBarTeamMember";
 //Components
@@ -20,7 +22,7 @@ import DeleteModal from "../../Modals/deleteModal";
 
 //Redux
 import { connect } from "react-redux";
-import { getTrainingSeries } from "../../../store/actions";
+import { getTrainingSeries, editTeamMember } from "../../../store/actions";
 
 const styles = theme => ({
   // these styles fixes the off-centering
@@ -89,9 +91,6 @@ const styles = theme => ({
     "@media (max-width: 768px)": {
       margin: "20px 0 15px"
     }
-  },
-  list: {
-
   }
 });
 
@@ -105,7 +104,9 @@ class TeamMemberPage extends React.Component {
       phoneNumber: "",
       user_ID: "",
       TeamMemberCol: "",
-      teamMemberID: ""
+      teamMemberID: "",
+      textOn: false,
+      emailOn: false
     },
     assignments: [],
     trainingSeries: [] //Leigh-Ann: this may not be needed?
@@ -132,6 +133,21 @@ class TeamMemberPage extends React.Component {
     });
   };
 
+  handleToggleChange = name => async event => {
+    await this.setState({
+      teamMember: {
+        ...this.state.teamMember,
+        [name]: event.target.checked
+      }
+    });
+
+    // PUT request on toggle
+    this.props.editTeamMember(
+      this.state.teamMember.teamMemberID,
+      this.state.teamMember
+    );
+  };
+
   handleDate = name => event => {
     this.setState({
       [name]: event.target.value
@@ -140,6 +156,7 @@ class TeamMemberPage extends React.Component {
 
   routeToAssigning = e => {
     e.preventDefault();
+
     this.props.history.push({
       pathname: `/home/assign-series/${this.state.teamMember.teamMemberID}`,
       state: {
@@ -153,6 +170,24 @@ class TeamMemberPage extends React.Component {
 
   render() {
     const { classes } = this.props;
+
+    const { textOn, emailOn } = this.state.teamMember;
+
+    let textDisabled;
+    let emailDisabled;
+
+    if (textOn && !emailOn) {
+      textDisabled = true;
+    }
+
+    if (emailOn && !textOn) {
+      emailDisabled = true;
+    }
+
+    if (emailOn && textOn) {
+      textDisabled = false;
+      emailDisabled = false;
+    }
 
     const trainingAssigments =
       this.props.teamMember.assignments &&
@@ -176,7 +211,7 @@ class TeamMemberPage extends React.Component {
           <div className={classes.trainingSeriesHeader}>
             <Typography variant="title">Training Series</Typography>
             <Button
-              className={classes.assignBtn}
+              className={classes.button}
               variant="outlined"
               onClick={this.routeToAssigning}
             >
@@ -277,9 +312,37 @@ class TeamMemberPage extends React.Component {
               />
             </MemberInfoContainer>
             <ButtonContainer>
+              <FormControlLabel
+                control={
+                  <Switch
+                    checked={this.state.teamMember.textOn}
+                    onChange={
+                      textDisabled ? null : this.handleToggleChange("textOn")
+                    }
+                    value="textOn"
+                    color="primary"
+                  />
+                }
+                label="Send Text"
+              />
+              <FormControlLabel
+                control={
+                  <Switch
+                    checked={this.state.teamMember.emailOn}
+                    onChange={
+                      emailDisabled ? null : this.handleToggleChange("emailOn")
+                    }
+                    value="emailOn"
+                    color="primary"
+                  />
+                }
+                label="Send Email"
+              />
+            </ButtonContainer>
+            <ButtonContainer>
               <NotificationWidget
                 teamMember={this.state.teamMember}
-                editTeamMember={this.props.editTeamMember}
+                editTeamMemberSubmit={this.props.editTeamMemberSubmit}
                 type="success"
                 submitType="edit"
               />
@@ -332,22 +395,11 @@ const ButtonContainer = styled.div`
   justify-content: center;
 `;
 
-const ListStyles = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
-  border: 1px solid orange;
-  width: 100%;
-  border-bottom: 1px solid #e8e9eb;
-  list-style-type: none;
-`;
-
 const mapStateToProps = state => ({
   trainingSeries: state.trainingSeriesReducer.trainingSeries
 });
 
 export default connect(
   mapStateToProps,
-  { getTrainingSeries }
+  { getTrainingSeries, editTeamMember }
 )(withStyles(styles)(TeamMemberPage));
