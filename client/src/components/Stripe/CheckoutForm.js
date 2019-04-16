@@ -309,7 +309,7 @@ class CheckoutForm extends Component {
                           Message Limit
                         </Typography>
                         <Typography className={classes.feature}>
-                          200 / mo
+                          {plan.nickname === "Premium" ? "200 / mo" : "1000 / mo"}
                         </Typography>
                       </div>
                     </div>
@@ -345,7 +345,7 @@ class CheckoutForm extends Component {
                           Message Limit
                         </Typography>
                         <Typography className={classes.feature}>
-                          1000 / mo
+                        {plan.nickname === "Premium" ? "200 / mo" : "1000 / mo"}
                         </Typography>
                       </div>
                     </div>
