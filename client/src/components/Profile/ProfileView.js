@@ -25,13 +25,9 @@ import {
 
 import styled from 'styled-components';
 
-function rand() {
-  return Math.round(Math.random() * 20) - 10;
-}
-
 function getModalStyle() {
-  const top = 50 + rand();
-  const left = 50 + rand();
+  const top = 50;
+  const left = 50;
 
   return {
     top: `${top}%`,
@@ -53,7 +49,13 @@ const styles = theme => ({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    textAlign: 'center'
+    textAlign: 'center',
+       ['@media (max-width: 768px)']: { // eslint-disable-line no-useless-computed-key 
+      width: '81%'
+    },
+    ['@media (max-width: 480px)']: { // eslint-disable-line no-useless-computed-key 
+      width: '81%'
+    }
   },
   profileContainer: {
     display: 'flex',
