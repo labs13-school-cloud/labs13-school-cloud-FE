@@ -1,13 +1,25 @@
 // HOC for client-side authorization, protecting routes that require authentication
-
 import React from "react";
+import axios from "axios";
 
 //Styling
 import styled from "styled-components";
 import Logo from "../../img/training-bot.png";
 
 //Authentication
-import { login } from "../../Auth/Auth";
+import {login} from "../../Auth/Auth";
+
+//axios defaults and interceptors.
+axios.defaults.baseURL = `${process.env.REACT_APP_API}`;
+axios.interceptors.request.use(
+  function(options) {
+    options.headers.authorization = localStorage.getItem("id_token");
+    return options;
+  },
+  function(error) {
+    return Promise.reject(error);
+  }
+);
 
 export default function(Component) {
   return class Authenticate extends Component {
