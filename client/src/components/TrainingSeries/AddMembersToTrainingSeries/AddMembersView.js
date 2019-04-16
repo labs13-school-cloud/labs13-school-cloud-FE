@@ -17,10 +17,21 @@ import AddMember from './AddMember';
 // I need to bring in the user ID and the training series ID
 const styles = theme => ({
 	root: {
-		...theme.mixins.gutters(),
-		paddingTop: theme.spacing.unit * 2,
-		paddingBottom: theme.spacing.unit * 2,
-		margin: '0 auto',
+		// ...theme.mixins.gutters(),
+		// paddingTop: theme.spacing.unit * 2,
+		// paddingBottom: theme.spacing.unit * 2,
+		// margin: '0 auto',
+		width: "100%",
+		maxWidth: 768,
+		margin: "20px auto",
+		boxSizing: 'border-box',
+		backgroundColor: theme.palette.background.paper,
+		boxShadow: theme.shadows[5],
+		padding: '20px 30px 40px',
+		outline: "none",
+		"@media (max-width:768px)": {
+			width: "95%"
+		}
 	},
 	footer: {
 		display: 'flex',
