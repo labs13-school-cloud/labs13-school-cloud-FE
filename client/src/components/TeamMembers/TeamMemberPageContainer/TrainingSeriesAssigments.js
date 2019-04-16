@@ -26,6 +26,9 @@ const styles = theme => ({
 		display: 'flex',
 		flexDirections: 'column',
 		width: '90%',
+		justifyContent:'space-between',
+		alignItems:'center',
+		borderBottom:'1px solid #e8e9eb'
 	},
 	bullet: {
 		display: 'inline-block',
@@ -41,10 +44,15 @@ const styles = theme => ({
 	margin: {
 		margin: theme.spacing.unit,
 	},
+	secondaryAction: {	
+		display: "flex",	
+		flexDirection: "row",	
+		"align-items": "center",	
+	  }
 });
 
 const TrainingSeriesAssignments = props => {
-	// const { classes } = props;
+	const { classes } = props;
 
 	const { teamMemberId } = props;
 	const { trainingSeries_ID } = props.trainingSeries;
@@ -60,22 +68,25 @@ const TrainingSeriesAssignments = props => {
 	console.log('***ASSIGNMENTS***', teamMemberId, trainingSeries_ID);
 
 	return (
-		<ListStyles>
-			<ListItem>
+		// <ListStyles>
+			<ListItem className={classes.listItem}>
 				<ListItemText
-					classname
+					className ={classes.listItemText}
 					primary={`Title: ${props.trainingSeries.title}`}
 					secondary={`Start Date: ${startDate}`}
 				/>
-			</ListItem>
-			<ListItemSecondaryAction>
+			<ListItemSecondaryAction className={classes.secondaryAction}>
+			<ListButtonContainer>
+
 				<DeleteModal
 					teamMemberId={teamMemberId}
 					trainingSeries_Id={trainingSeries_ID}
 					deleteType="removeMemberFromTS"
-				/>
+					/>
+					</ListButtonContainer>
 			</ListItemSecondaryAction>
-		</ListStyles>
+					</ListItem>
+		// </ListStyles>
 	);
 };
 
@@ -88,9 +99,16 @@ export default connect(
 	{ deleteTeamMemberFromTrainingSeries }
 )(withStyles(styles)(TrainingSeriesAssignments));
 
-const ListStyles = styled.div`
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	border-bottom: 1px solid #E8E9EB;
+// const ListStyles = styled.div`
+// 	display: flex;
+// 	flex-direction: column;
+// 	align-items: center;
+// 	border-bottom: 1px solid #E8E9EB;
+//    width: 100%;	
+//    border-bottom: 1px solid #e8e9eb;
+// `;
+const ListButtonContainer = styled.div`	
+  display: flex;	
+  align-items: center;	
+  justify-content: space-between;	
 `;
