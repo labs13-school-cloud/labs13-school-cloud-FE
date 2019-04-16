@@ -198,7 +198,23 @@ const userReducer = (state = initialState, action) => {
 			} else if (action.payload.subscriptions.data[0].plan.id === 'plan_EtJQifGGbeQWq2') { // LIVE - Pro Plan
 				accountTypeID2 = 3;
 			}
-
+      let update3 = {
+        message: state.userProfile.message,
+        user: {
+          userID: state.userProfile.user.userID,
+          accountTypeID: accountTypeID2,
+          email: state.userProfile.user.email,
+          name: state.userProfile.user.name,
+          stripe: action.payload.id,
+          notificationCount: state.userProfile.user.notificationCount,
+        },
+        trainingSeries: [...state.userProfile.trainingSeries],
+      };
+      return {
+        ...state,
+        isLoading: false,
+        userProfile: update3,
+      };
     // UNSUBSCRIPE
     case POST_UNSUBSCRIBE_START:
       return {
