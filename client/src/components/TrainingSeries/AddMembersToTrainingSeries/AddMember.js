@@ -6,6 +6,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
 import Checkbox from "@material-ui/core/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import styled from "styled-components";
@@ -47,7 +48,8 @@ const styles = theme => ({
     display: "flex",
     flexDirection: "row",
     flexWrap: "wrap",
-    justifyContent: "center",
+    justifyContent: "space-between",
+    height: "90%",
     "@media (max-width:580px)": {
       flexDirection: "column",
       alignItems: "center",
@@ -55,6 +57,9 @@ const styles = theme => ({
   },
   box: {
     padding: "0 12px"
+  },
+  heading: {
+    marginBottom: 20,
   }
 });
 
@@ -89,11 +94,14 @@ function AddMember(props) {
   console.log(props.selectedTeamMembers);
   return (
     <>
-    <h3>Assign Team Members </h3>
+    <Typography className={classes.heading} variant="h6">Assign Team Members </Typography>
     <AddMemberContainer>
       {props.teamMembers.length ? (
         <>
           <DatePickerContainer>
+            <DirectionsDiv>
+            <Typography>Choose the start date for the training series.</Typography>
+            </DirectionsDiv>
           <DatePicker
             inline
             minDate={new Date()}
@@ -102,6 +110,9 @@ function AddMember(props) {
           />
           </DatePickerContainer>
           <TeamMemberContainer>
+            <DirectionsDiv>
+            <Typography>Select your team members.</Typography>
+            </DirectionsDiv>
             <form
               variant="body1"
               id="modal-title"
@@ -150,16 +161,24 @@ const AddMemberContainer = styled.div`
   }
 `;
 
+const DirectionsDiv = styled.div`
+margin-bottom: 20px;
+`;
 const DatePickerContainer = styled.div`
 display: flex;
+flex-direction: column;
 justify-content: center;
 align-items: center;
+text-align: center;
+width: 40%;
 `;
 
 const TeamMemberContainer = styled.div`
   display: flex;
-  justify-content: center;
-  width: 100%;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 60%;
 
   @media (max-width: 580px) {
     padding-top: 35px;
@@ -183,8 +202,8 @@ const MemberListContainer = styled.div`
 `;
 const ButtonContainer = styled.div`
 display: flex;
-top: 100%;
-position: sticky;
+align-self: center;
+margin: 0 auto;
 `;
 
 const LoadingImage = styled.img`

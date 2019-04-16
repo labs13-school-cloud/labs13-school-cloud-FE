@@ -155,7 +155,8 @@ const styles = theme => ({
   messageText: {
     marginTop: 20,
     marginBottom: 20,
-    textAlign: "center"
+    textAlign: "center",
+    color: "lightgray"
   },
   divider: {
     margin: "15px 0"
