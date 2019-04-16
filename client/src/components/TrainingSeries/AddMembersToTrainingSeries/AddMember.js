@@ -59,7 +59,7 @@ const styles = theme => ({
     padding: "0 12px"
   },
   heading: {
-    marginBottom: 20,
+    marginBottom: 40,
   }
 });
 
@@ -100,7 +100,7 @@ function AddMember(props) {
         <>
           <DatePickerContainer>
             <DirectionsDiv>
-            <Typography>Choose the start date for the training series.</Typography>
+            <Typography variant="subheading">Choose the start date for the training series.</Typography>
             </DirectionsDiv>
           <DatePicker
             inline
@@ -111,7 +111,7 @@ function AddMember(props) {
           </DatePickerContainer>
           <TeamMemberContainer>
             <DirectionsDiv>
-            <Typography>Select your team members.</Typography>
+            <Typography variant="subheading">Select your team members.</Typography>
             </DirectionsDiv>
             <form
               variant="body1"
@@ -158,11 +158,13 @@ const AddMemberContainer = styled.div`
   
   @media (max-width: 580px) {
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
 `;
 
 const DirectionsDiv = styled.div`
-margin-bottom: 20px;
+margin-bottom: 40px;
 `;
 const DatePickerContainer = styled.div`
 display: flex;
@@ -171,6 +173,12 @@ justify-content: center;
 align-items: center;
 text-align: center;
 width: 40%;
+padding-left: 12px;
+
+@media (max-width: 580px) {
+  margin-bottom: 15px;
+  width: 100%;
+}
 `;
 
 const TeamMemberContainer = styled.div`
@@ -178,10 +186,11 @@ const TeamMemberContainer = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  width: 60%;
+  width: 55%;
 
   @media (max-width: 580px) {
     padding-top: 35px;
+    width: 100%;
   }
 `;
 
@@ -195,7 +204,7 @@ const MemberListContainer = styled.div`
 
     @media (max-width: 580px) {
       width: 240px;
-      padding: 0;
+      padding: 0 0 20px;
 
     }
 
