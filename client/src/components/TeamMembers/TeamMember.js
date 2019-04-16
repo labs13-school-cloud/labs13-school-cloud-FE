@@ -5,6 +5,8 @@ import { connect } from "react-redux";
 
 import { deleteTeamMember } from "../../store/actions";
 
+import styled from "styled-components";
+
 //Styles
 import { withStyles } from "@material-ui/core/styles";
 import { ListItem, ListItemText } from "@material-ui/core/";
@@ -66,6 +68,7 @@ function TeamMember(props) {
   } = props.teamMember;
 
   const routeToMemberPage = (e, id) => {
+    e.nativeEvent.stopPropagation();
     e.preventDefault();
     props.history.push(`/home/team-member/${id}`);
   };
@@ -78,13 +81,11 @@ function TeamMember(props) {
   return (
     // console.log('TEAM MEMBER LIST IDS', this.props.team)
 
-    <ListItem
-      className={classes.listItem}
-      onClick={e => routeToMemberPage(e, teamMemberID)}
-    >
+    <ListItem className={classes.listItem}>
       <ListItemText
         primary={firstName + " " + lastName}
         secondary={`Job: ${jobDescription}`}
+        onClick={e => routeToMemberPage(e, teamMemberID)}
       />
       <div>
         <TeamMemberOptions
@@ -101,6 +102,10 @@ function TeamMember(props) {
 TeamMember.propTypes = {
   classes: PropTypes.object.isRequired
 };
+
+const ModalContainer = styled.div`
+  z-index: 1;
+`;
 
 export default connect(
   null,
