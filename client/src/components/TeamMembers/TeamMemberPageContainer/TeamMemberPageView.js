@@ -6,11 +6,12 @@ import Snackbar from "../../Snackbar/Snackbar";
 
 //Redux
 import { connect } from "react-redux";
+
 import {
   editTeamMember,
   getTrainingSeries,
   getTeamMemberByID,
-  deleteTeamMember
+  deleteTeamMember,
 } from "../../../store/actions";
 
 class TeamMemberPageView extends React.Component {

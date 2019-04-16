@@ -5,13 +5,13 @@ import styled from "styled-components";
 //Prop Types
 import PropTypes from "prop-types";
 
-import { connect } from "react-redux";
-import { addTrainingSeries } from "../../store/actions/trainingSeriesActions";
+import {connect} from "react-redux";
+import {addTrainingSeries} from "../../store/actions/trainingSeriesActions";
 import ProgressCircle from "../Progress/ProgressCircle";
 
 //Styles
-import { withStyles } from "@material-ui/core/styles";
-import { Typography, Button, TextField, Divider } from "@material-ui/core/";
+import {withStyles} from "@material-ui/core/styles";
+import {Typography, Button, TextField, Divider} from "@material-ui/core/";
 
 const styles = theme => ({
   paper: {
@@ -24,30 +24,30 @@ const styles = theme => ({
     boxSizing: "border-box",
 
     "@media (max-width: 768px)": {
-      textAlign: "center"
+      textAlign: "center",
       // padding: "30px"
-    }
+    },
   },
   container: {
     display: "flex",
     // flexWrap: "wrap",
     "flex-direction": "column",
-    "align-items": "center"
+    "align-items": "center",
     // "align-items": "baseline"
   },
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
-    width: "100%"
+    width: "100%",
   },
   dense: {
-    marginTop: 19
+    marginTop: 19,
   },
   menu: {
-    width: 200
+    width: 200,
   },
   button: {
-    margin: theme.spacing.unit
+    margin: theme.spacing.unit,
   },
   createButton: {
     "margin-left": theme.spacing.unit,
@@ -55,36 +55,29 @@ const styles = theme => ({
     color: "white",
     "&:hover": {
       background: "#591a99",
-      color: "white"
-    }
+      color: "white",
+    },
   },
   divider: {
-    margin: "15px 0"
-  }
+    margin: "15px 0",
+  },
 });
 
 class CreateTrainingSeries extends React.Component {
   state = {
     title: "",
-    isRouting: false
+    isRouting: false,
   };
 
   handleChange = name => event => {
-    this.setState({ [name]: event.target.value });
+    this.setState({[name]: event.target.value});
   };
 
   handleTrainingSeriesSubmit = e => {
     e.preventDefault();
-    const data = { title: this.state.title, userID: this.props.userId };
+    const data = {title: this.state.title, userID: this.props.userId};
     this.props.addTrainingSeries(data);
-
-    this.setState({ isRouting: true });
-
-    setTimeout(() => {
-      this.props.history.push(
-        `/home/training-series/${this.props.trainingSeriesID}`
-      );
-    }, 1000);
+    this.setState({isRouting: true});
   };
 
   handleCancel = e => {
@@ -93,11 +86,11 @@ class CreateTrainingSeries extends React.Component {
   };
 
   render() {
-    const { classes } = this.props;
+    const {classes} = this.props;
     return this.state.isRouting ? (
       <ProgressCircle />
     ) : (
-      <MainContainer>
+      <MainContainer data-tour="5">
         <div className={classes.paper}>
           <Typography variant="h6" id="modal-title">
             Create A New Training Series
@@ -110,6 +103,7 @@ class CreateTrainingSeries extends React.Component {
             autoComplete="off"
           >
             <TextField
+              data-tour="6"
               id="standard-name"
               label="Title"
               className={classes.textField}
@@ -141,7 +135,7 @@ class CreateTrainingSeries extends React.Component {
 }
 
 CreateTrainingSeries.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
 };
 
 const MainContainer = styled.div`
@@ -160,11 +154,11 @@ const mapStateToProps = state => {
   return {
     isAdding: state.trainingSeriesReducer.isAdding,
     addSuccess: state.trainingSeriesReducer.addSuccess,
-    trainingSeriesID: state.trainingSeriesReducer.trainingSeriesID
+    trainingSeriesID: state.trainingSeriesReducer.trainingSeriesID,
   };
 };
 
 export default connect(
   mapStateToProps,
-  { addTrainingSeries }
+  {addTrainingSeries}
 )(CreateTrainingSeriesWrapped);

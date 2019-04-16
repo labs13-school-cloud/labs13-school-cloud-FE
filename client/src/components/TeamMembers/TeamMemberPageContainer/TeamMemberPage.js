@@ -91,6 +91,9 @@ const styles = theme => ({
     "@media (max-width: 768px)": {
       margin: "20px 0 15px"
     }
+  },
+  list: {
+
   }
 });
 
@@ -393,6 +396,17 @@ const ButtonContainer = styled.div`
   display: flex;
   margin-top: 10px;
   justify-content: center;
+`;
+
+const ListStyles = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  border: 1px solid orange;
+  width: 100%;
+  border-bottom: 1px solid #e8e9eb;
+  list-style-type: none;
 `;
 
 const mapStateToProps = state => ({
