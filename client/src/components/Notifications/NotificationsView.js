@@ -5,17 +5,17 @@ import moment from "moment";
 import NotificationsList from "./NotificationsList";
 
 //Styling
-import { withStyles } from "@material-ui/core/styles";
-import { Paper, Typography } from "@material-ui/core/";
+import {withStyles} from "@material-ui/core/styles";
+import {Paper, Typography} from "@material-ui/core/";
 import Pagination from "material-ui-flat-pagination";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 
 //State Management
-import { connect } from "react-redux";
+import {connect} from "react-redux";
 import {
   getTextNotifications,
-  getEmailNotifications
+  getEmailNotifications,
 } from "../../store/actions/notificationsActions";
 
 const styles = theme => ({
@@ -32,35 +32,35 @@ const styles = theme => ({
     margin: 5,
     "@media (max-width: 1400px)": {
       width: "100%",
-      height: "533px"
+      height: "533px",
     },
     "@media (max-width: 1000px)": {
-      width: "100%"
+      width: "100%",
     },
 
     "@media (max-width: 768px)": {
-      width: "92%"
-    }
+      width: "92%",
+    },
   },
   columnHeader: {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    marginBottom: 15
+    marginBottom: 15,
   },
   icons: {
     display: "flex",
-    alignItems: "center"
+    alignItems: "center",
   },
-  fab: { margin: 5 },
+  fab: {margin: 5},
   footer: {
     display: "flex",
     justifyContent: "space-between",
     position: "sticky",
-    top: "100%"
+    top: "100%",
   },
-  pagination: { width: "90%" },
-  selection: { margin: "0 10px" }
+  pagination: {width: "90%"},
+  selection: {margin: "0 10px"},
 });
 
 class NotificationsView extends Component {
@@ -68,7 +68,7 @@ class NotificationsView extends Component {
     offset: 0,
     limit: 5,
     filterType: "all",
-    filterSent: "pending"
+    filterSent: "pending",
   };
 
   componentDidMount() {
@@ -77,41 +77,31 @@ class NotificationsView extends Component {
   }
 
   handleClick(offset) {
-    this.setState({ offset });
+    this.setState({offset});
   }
   handleChange = e => {
-    this.setState({ limit: parseInt(e.target.value, 10) });
+    this.setState({limit: parseInt(e.target.value, 10)});
   };
   handleFilter = e => {
-    this.setState({ filterType: e.target.value });
+    this.setState({filterType: e.target.value});
   };
   handleFilterSent = e => {
-    this.setState({ filterSent: e.target.value });
+    this.setState({filterSent: e.target.value});
   };
 
   render() {
-    const { classes } = this.props;
+    const {classes} = this.props;
     const allNotifications = [
       ...this.props.textNotifications,
-      ...this.props.emailNotifications
+      ...this.props.emailNotifications,
     ];
 
-    // this is a quick fix to filter out empty values from the notification table.
-    // ideally we would filter out empty contact values on the back end
-    // we ran out of time and had to deliver
-    const nonNullContactInformation = allNotifications.filter(
-      notification =>
-        notification.email !== "" && notification.phoneNumber !== ""
-    );
-
-    const filteredNotifications = nonNullContactInformation.filter(
-      notification => {
-        // check if first key included email or text
-        if (notification.hasOwnProperty(this.state.filterType)) {
-          return notification;
-        } else if (this.state.filterType === "all") {
-          return notification;
-        }
+    const filteredNotifications = allNotifications.filter(notification => {
+      // check if first key included email or text
+      if (notification.hasOwnProperty(this.state.filterType)) {
+        return notification;
+      } else if (this.state.filterType === "all") {
+        return notification;
       }
     );
 
@@ -133,7 +123,7 @@ class NotificationsView extends Component {
     const notificationCount = filteredReturn.length;
 
     return (
-      <Paper className={classes.root} elevation={2}>
+      <Paper data-tour="5" className={classes.root} elevation={2}>
         <div className={classes.columnHeader}>
           <Typography variant="h5">
             {this.state.filterSent === "pending"
@@ -148,7 +138,7 @@ class NotificationsView extends Component {
                 value={this.state.filterType}
                 onChange={e => this.handleFilter(e)}
                 inputProps={{
-                  id: "pagination-selector"
+                  id: "pagination-selector",
                 }}
               >
                 <option value={"all"}>All</option>
@@ -163,7 +153,7 @@ class NotificationsView extends Component {
                 value={this.state.filterSent}
                 onChange={e => this.handleFilterSent(e)}
                 inputProps={{
-                  id: "pagination-selector"
+                  id: "pagination-selector",
                 }}
               >
                 <option value={"pending"}>Pending</option>
@@ -199,7 +189,7 @@ const mapStateToProps = state => {
   return {
     textNotifications: state.notificationsReducer.textNotifications,
     emailNotifications: state.notificationsReducer.emailNotifications,
-    isLoading: state.notificationsReducer.isLoading
+    isLoading: state.notificationsReducer.isLoading,
   };
 };
 
@@ -207,6 +197,6 @@ export default connect(
   mapStateToProps,
   {
     getTextNotifications,
-    getEmailNotifications
+    getEmailNotifications,
   }
 )(withStyles(styles)(NotificationsView));
