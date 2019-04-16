@@ -45,7 +45,16 @@ const styles = theme => ({
   },
   memberList: {
     display: "flex",
-    flexDirection: "column"
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "center",
+    "@media (max-width:580px)": {
+      flexDirection: "column",
+      alignItems: "center",
+    }
+  },
+  box: {
+    padding: "0 12px"
   }
 });
 
@@ -62,17 +71,12 @@ function AddMember(props) {
     let filteredMembers = props.teamMembers.filter(member => {
       return !assignments.includes(member.teamMemberID);
     });
-    /***** Following used for pagination *****/
-    // let arr = [];
-    // let offset = props.offset;
-    // let x = offset;
-    // let y = offset + props.limit;
-    // arr = filteredMembers.slice(x, y);
     return filteredMembers.map(member => (
       <>
-        <FormControlLabel
+        <FormListItem
           control={
             <Checkbox
+              className={classes.box}
               name={member.teamMemberID}
               onChange={() => props.handler.handleChecked(member.teamMemberID)}
             />
@@ -84,24 +88,29 @@ function AddMember(props) {
   };
   console.log(props.selectedTeamMembers);
   return (
+    <>
+    <h3>Assign Team Members </h3>
     <AddMemberContainer>
       {props.teamMembers.length ? (
         <>
-          <h3>Assign Team Members </h3>
+          <DatePickerContainer>
           <DatePicker
             inline
             minDate={new Date()}
             selected={props.startDate}
             onChange={props.handler.handleDateChange}
           />
+          </DatePickerContainer>
           <TeamMemberContainer>
             <form
               variant="body1"
               id="modal-title"
               className={classes.memberList}
               onSubmit={e => props.handler.handleSubmit(e)}
-            >
+            ><MemberListContainer>
               {renderMembers()}
+              </MemberListContainer>
+              <ButtonContainer>
               <Button
                 disabled={
                   props.selectedTeamMembers < 1 || props.isRouting === true
@@ -118,6 +127,7 @@ function AddMember(props) {
                 )}
               </Button>
               <Button onClick={props.handler.routeToPostPage}>Cancel</Button>
+              </ButtonContainer>
             </form>
           </TeamMemberContainer>
         </>
@@ -125,6 +135,7 @@ function AddMember(props) {
         <h2> You need to create Team members! </h2>
       )}
     </AddMemberContainer>
+    </>
   );
 }
 
@@ -132,16 +143,58 @@ export default withStyles(styles)(AddMember);
 
 const AddMemberContainer = styled.div`
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
+  
+  @media (max-width: 580px) {
+    flex-direction: column;
+  }
 `;
+
+const DatePickerContainer = styled.div`
+display: flex;
+justify-content: center;
+align-items: center;
+`;
+
 const TeamMemberContainer = styled.div`
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+
+  @media (max-width: 580px) {
+    padding-top: 35px;
+  }
+`;
+
+const MemberListContainer = styled.div`
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    padding: 0 25px;
+
+    @media (max-width: 580px) {
+      width: 240px;
+      padding: 0;
+
+    }
+
+`;
+const ButtonContainer = styled.div`
+display: block;
 `;
 
 const LoadingImage = styled.img`
   width: 40px;
   overflow: hidden;
-  pointerevents: none;
+  pointer-events: none;
   cursor: not-allowed;
+`;
+
+const FormListItem = styled(FormControlLabel)`
+  flex-basis: 48%;
+
+  @media (max-width: 768px) {
+    flex-basis: 100%;
+  }
+
 `;

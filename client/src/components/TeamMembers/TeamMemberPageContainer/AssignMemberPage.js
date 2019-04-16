@@ -21,11 +21,11 @@ const styles = theme => ({
   paper: {
     width: "100%",
     margin: "20px auto",
-    boxSizing: 'border-box',
+    boxSizing: "border-box",
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
-    padding: '20px 30px',
-    outline: "none",
+    padding: "20px 30px",
+    outline: "none"
   },
   heading: {
     textAlign: "center"
@@ -113,7 +113,7 @@ class AssignMemberPage extends React.Component {
   routeBack = e => {
     e.preventDefault();
     this.props.history.goBack();
-  }
+  };
 
   renderTrainingSeriesInDropDown = () => {
     //Map Through the current assignments for the team member, returns an array of ID's
@@ -141,6 +141,7 @@ class AssignMemberPage extends React.Component {
   };
   render() {
     const { classes } = this.props;
+    console.log(this.props);
     return (
       <AssignMemberContainer>
         <Paper className={classes.paper}>
@@ -182,7 +183,11 @@ class AssignMemberPage extends React.Component {
               >
                 Assign
               </Button>
-              <Button onClick={this.routeBack} className={classes.button} variant="primary">
+              <Button
+                onClick={this.routeBack}
+                className={classes.button}
+                variant="primary"
+              >
                 Cancel
               </Button>
             </ButtonContainer>
@@ -196,8 +201,8 @@ class AssignMemberPage extends React.Component {
 const mapStateToProps = state => {
   return {
     trainingSeries: state.trainingSeriesReducer.trainingSeries,
-    isLoading: state.userReducer.isLoading,
-    teamMembers: state.teamMembersReducer.teamMembers
+    isLoading: state.userReducer.isLoading
+    // teamMembers: state.teamMembersReducer.teamMembers
   };
 };
 
@@ -210,7 +215,7 @@ const AssignMemberContainer = styled.div`
   margin: 0 auto;
   max-width: 768px;
   width: 100%;
-  @media (max-width:768px) {
+  @media (max-width: 768px) {
     width: 95%;
   }
 `;

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-// import styled from "styled-components";
+import styled from "styled-components";
 import { CardElement, injectStripe } from "react-stripe-elements";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
@@ -54,19 +54,17 @@ const styles = theme => ({
   },
   paymentForm: {
     display: "flex",
-    margin: "30px 90px 0 90px",
-    ['@media (max-width: 480px)']: { // eslint-disable-line no-useless-computed-key 
-      margin: "30px 10px 0 10px"
-    }
+    margin: "30px 90px 0 90px"
   },
   buttonLayout: {
     display: "flex",
     justifyContent: "space-around",
     margin: "0 auto",
-    ["@media (max-width: 1000px)"]: {  // eslint-disable-line no-useless-computed-key
-
+    ["@media (max-width: 1000px)"]: {
+      // eslint-disable-line no-useless-computed-key
     },
-    ["@media (max-width: 720px)"]: {  // eslint-disable-line no-useless-computed-key
+    ["@media (max-width: 720px)"]: {
+      // eslint-disable-line no-useless-computed-key
       // flexDirection:'column',
       justifyContent: "center",
       flexWrap: "wrap"
@@ -286,7 +284,7 @@ class CheckoutForm extends Component {
 
               {this.props.plans.map(plan => {
                 return plan.nickname === accountType ? (
-                  <div key={plan.id} className={classes.subCard}>
+                  <div className={classes.subCard}>
                     <Typography className={classes.title}>
                       {plan.nickname}
                     </Typography>
@@ -309,7 +307,9 @@ class CheckoutForm extends Component {
                           Message Limit
                         </Typography>
                         <Typography className={classes.feature}>
+
                           {plan.nickname === "Premium" ? "200 / mo" : "1000 / mo"}
+
                         </Typography>
                       </div>
                     </div>
@@ -322,7 +322,7 @@ class CheckoutForm extends Component {
                     </Button>
                   </div>
                 ) : (
-                  <div key={plan.id} className={classes.subCard}>
+                  <div className={classes.subCard}>
                     <Typography className={classes.title}>
                       {plan.nickname}
                     </Typography>
@@ -345,7 +345,9 @@ class CheckoutForm extends Component {
                           Message Limit
                         </Typography>
                         <Typography className={classes.feature}>
+
                         {plan.nickname === "Premium" ? "200 / mo" : "1000 / mo"}
+
                         </Typography>
                       </div>
                     </div>

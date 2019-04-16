@@ -10,6 +10,8 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
 import TrainingBotGIF from "../../../img/trainingBot.gif";
+import Switch from "@material-ui/core/Switch";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
 
 //State Management
 import { addTeamMember } from "../../../store/actions";
@@ -79,7 +81,9 @@ class TeamMemberPage extends React.Component {
       jobDescription: "",
       email: "",
       phoneNumber: "",
-      userID: ""
+      userID: "",
+      textOn: true,
+      emailOn: false
     },
     assignments: [],
     trainingSeries: [],
@@ -102,6 +106,7 @@ class TeamMemberPage extends React.Component {
       ...this.state.teamMember,
       userID: this.props.userId
     };
+
     this.props.addTeamMember(newMember);
     this.setState({ isRouting: true });
   };
@@ -112,6 +117,17 @@ class TeamMemberPage extends React.Component {
     });
   };
 
+  handleToggleChange = name => event => {
+    const { textOn, emailOn } = this.state.teamMember;
+
+    this.setState({
+      teamMember: {
+        ...this.state.teamMember,
+        [name]: event.target.checked
+      }
+    });
+  };
+
   handleCancel = e => {
     e.preventDefault();
     this.props.history.push("/home");
@@ -119,6 +135,29 @@ class TeamMemberPage extends React.Component {
 
   render() {
     const { classes } = this.props;
+    console.log(
+      "TOGGLES",
+      this.state.teamMember.textOn,
+      this.state.teamMember.emailOn
+    );
+
+    const { textOn, emailOn } = this.state.teamMember;
+
+    let textDisabled;
+    let emailDisabled;
+
+    if (textOn && !emailOn) {
+      textDisabled = true;
+    }
+
+    if (emailOn && !textOn) {
+      emailDisabled = true;
+    }
+
+    if (emailOn && textOn) {
+      textDisabled = false;
+      emailDisabled = false;
+    }
 
     return (
       <MainContainer>
@@ -181,6 +220,34 @@ class TeamMemberPage extends React.Component {
                 required
               />
             </MemberInfoContainer>
+            <ButtonContainer>
+              <FormControlLabel
+                control={
+                  <Switch
+                    checked={this.state.teamMember.textOn}
+                    onChange={
+                      textDisabled ? null : this.handleToggleChange("textOn")
+                    }
+                    value="textOn"
+                    color="primary"
+                  />
+                }
+                label="Send Text"
+              />
+              <FormControlLabel
+                control={
+                  <Switch
+                    checked={this.state.teamMember.emailOn}
+                    onChange={
+                      emailDisabled ? null : this.handleToggleChange("emailOn")
+                    }
+                    value="emailOn"
+                    color="primary"
+                  />
+                }
+                label="Send Email"
+              />
+            </ButtonContainer>
             <ButtonContainer>
               <Button
                 disabled={this.state.isRouting === true ? "true" : null}

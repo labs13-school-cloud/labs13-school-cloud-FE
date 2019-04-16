@@ -11,7 +11,7 @@ const Stripe = styled.div`
 
 function StripeView(props) {
 	return (
-		<StripeProvider apiKey={process.env.REACT_APP_STRIPE_API}>
+		<StripeProvider apiKey="pk_test_L76yOnUDjq2cNP8heEH9MkpA00Ktyd3MYn">
 			<Stripe>
 				<Elements>
 					<CheckoutForm />
