@@ -2,9 +2,6 @@ import React from "react";
 import { connect } from "react-redux";
 
 import { withStyles, Button, Typography } from "@material-ui/core/";
-function rand() {
-  return Math.round(Math.random() * 20) - 10;
-}
 
 function getModalStyle() {
   const top = 50;
