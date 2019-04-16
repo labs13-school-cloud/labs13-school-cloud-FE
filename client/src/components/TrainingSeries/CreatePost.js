@@ -90,15 +90,6 @@ class CreatePost extends React.Component {
     }
   }
 
-  //   componentDidUpdate(prevProps) {
-  //     if (prevProps.addSuccess !== this.props.addSuccess) {
-  //       setTimeout(() => {
-  //         const { teamMemberID } = this.props.teamMember && this.props.teamMember;
-  //         this.props.history.push(`/home/team-member/${teamMemberID}`);
-  //       }, 400);
-  //     }
-  //   }
-
   handleChange = name => e => {
     this.setState({
       ...this.state,
@@ -150,16 +141,15 @@ class CreatePost extends React.Component {
               />
               <TextField
                 id="standard-name"
-                label="Link"
+                label="Optional Link"
                 className={classes.textField}
                 value={this.state.post.link}
                 onChange={this.handleChange("link")}
                 margin="normal"
-                required
               />
               <TextField
                 id="outlined-number"
-                label="Days from Start"
+                label="Number of days after training series start date to send message"
                 margin="normal"
                 className={classes.textField}
                 onChange={this.handleChange("daysFromStart")}
