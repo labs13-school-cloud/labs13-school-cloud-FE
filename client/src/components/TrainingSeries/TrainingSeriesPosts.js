@@ -566,6 +566,7 @@ const ListButtonContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   margin-left: 40px;
+  padding-right: 5px;
 `;
 
 const TrainingSeriesTitle = styled.div`
