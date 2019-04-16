@@ -42,10 +42,7 @@ export const getTrainingSeries = id => dispatch => {
     .catch(err => dispatch({type: GET_TRAINING_SERIES_FAIL, error: err}));
 };
 
-export const addTrainingSeries = (
-  trainingSeriesData,
-  trainingSeriesID
-) => dispatch => {
+export const addTrainingSeries = trainingSeriesData => dispatch => {
   dispatch({
     type: ADD_TRIANING_SERIES_START,
   });
@@ -54,14 +51,14 @@ export const addTrainingSeries = (
       `${process.env.REACT_APP_API}/api/training-series`,
       trainingSeriesData
     )
-    .then(res =>
+    .then(res => {
       dispatch({
         type: ADD_TRIANING_SERIES_SUCCESS,
         payload: res.data.newTrainingSeries,
-      })
-    )
-    .then(() => {
-      history.push(`/home/training-series/${trainingSeriesID}`);
+      });
+      history.push(
+        `/home/training-series/${res.data.newTrainingSeries.trainingSeriesID}`
+      );
     })
     .catch(err => dispatch({type: ADD_TRIANING_SERIES_FAIL, error: err}));
 };

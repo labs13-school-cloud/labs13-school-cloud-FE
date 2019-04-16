@@ -29,6 +29,7 @@ class DashboardTour extends Component {
         selector: '[data-tour="1"]',
         content: "This is where you will see all of your team members.",
         stepInteraction: false,
+        position: "top",
       },
       {
         selector: '[data-tour="2"]',
