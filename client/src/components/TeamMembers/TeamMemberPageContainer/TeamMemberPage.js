@@ -323,7 +323,7 @@ class TeamMemberPage extends React.Component {
                     color="primary"
                   />
                 }
-                label="Send Text"
+                label="Texts Active"
               />
               <FormControlLabel
                 control={
@@ -336,7 +336,7 @@ class TeamMemberPage extends React.Component {
                     color="primary"
                   />
                 }
-                label="Send Email"
+                label="Email Active"
               />
             </ButtonContainer>
             <ButtonContainer>
