@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import moment from "moment";
 
 import styled from "styled-components";
 
@@ -10,6 +11,11 @@ import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
+import ExpansionPanel from '@material-ui/core/ExpansionPanel';
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+
 
 // Redux
 import {
@@ -107,6 +113,7 @@ class CreatePost extends React.Component {
 
   render() {
     const { classes } = this.props;
+    const sendDay = moment().add(3, "days").format("MMM Do");
     return (
       <form
         className={classes.form}
@@ -149,7 +156,7 @@ class CreatePost extends React.Component {
               />
               <TextField
                 id="outlined-number"
-                label="Number of days after training series start date to send message"
+                label="Days From Start"
                 margin="normal"
                 className={classes.textField}
                 onChange={this.handleChange("daysFromStart")}
@@ -159,6 +166,16 @@ class CreatePost extends React.Component {
                 inputProps={{ min: 1 }}
                 required
               />
+              <ExpansionPanel>
+        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+          <Typography className={classes.heading}>What is "Days From Start"?</Typography>
+        </ExpansionPanelSummary>
+        <ExpansionPanelDetails>
+          <Typography>
+            This is the number of days after a training series starts that a message will be sent. For example, if you assign a team member to this training series with a start date of today, and you set this message's "days from start" number to 3, it will send out on {sendDay}.
+          </Typography>
+        </ExpansionPanelDetails>
+      </ExpansionPanel>
             </PostContainer>
             <ButtonContainer>
               <Button
