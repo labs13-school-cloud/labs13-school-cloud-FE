@@ -1,26 +1,26 @@
 // contains all components for landing page
 import React from "react";
-import {scroller, animateScroll as scroll} from "react-scroll";
+import { scroller, animateScroll as scroll } from "react-scroll";
 //Styling
 import styled from "styled-components";
 import Button from "@material-ui/core/Button";
 //Icons & Images
 import FaceIcon from "@material-ui/icons/Face";
-import {ArrowUpward} from "@material-ui/icons";
+import { ArrowUpward } from "@material-ui/icons";
 import Logo from "../../img/training-bot.png";
 
-import undrawFolder from "../../img/undraw_folder_39kl.svg";
+import undrawCoworker from "../../img/undraw_co-workers_ujs6.svg";
 import undrawNotify from "../../img/undraw_notify_88a4.svg";
-import undrawTask from "../../img/undraw_task_31wc (1).svg";
+import undrawTask from "../../img/undraw_personal_text_vkd8.svg";
 //Auth
-import {login} from "../../Auth/Auth";
+import { login } from "../../Auth/Auth";
 
 class LandingPageView extends React.Component {
   scrollTo() {
     scroller.scrollTo("MarketingContent", {
       duration: 800,
       delay: 0,
-      smooth: "easeInOutQuart",
+      smooth: "easeInOutQuart"
     });
   }
   scrollToTop() {
@@ -59,7 +59,7 @@ class LandingPageView extends React.Component {
             <VideoContainer>
               <iframe
                 width="100%"
-                height="400"
+                height="350"
                 src="https://www.youtube.com/embed/CQ85sUNBK7w"
                 frameborder="0"
                 allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
@@ -73,7 +73,7 @@ class LandingPageView extends React.Component {
             <MarketingSection>
               <MarketingImage>
                 <img
-                  src={undrawFolder}
+                  src={undrawCoworker}
                   alt="A drawing of an employee standing next to a folder"
                 />
               </MarketingImage>
@@ -178,9 +178,9 @@ class LandingPageView extends React.Component {
                 reminders. Get started for FREE now!
               </p>
               <LogoImage src={Logo} alt="A cute, personable robot" />
-              <LandingPageButtonContainer>
+              <GetStartedButton>
                 <Button onClick={login}>Get Started</Button>
-              </LandingPageButtonContainer>
+              </GetStartedButton>
             </LandingPageContentContainer>
           </FirstSection>
           <FooterContainer>
@@ -258,12 +258,16 @@ const NavbarItemsContainer = styled.div`
 const FirstSection = styled.div`
   background-color: #fafafa;
   width: 95%;
-  margin: 0px auto 20px;
-  padding: 50px 10px;
+  margin: 40px auto 20px;
+  padding: 75px 10px;
   display: flex;
+  border-radius: 5px;
   @media (max-width: 700px) {
     width: 100%;
     margin: 0;
+  }
+  p {
+    text-align: center;
   }
 `;
 
@@ -273,7 +277,7 @@ const MarketingContentContainer = styled.div`
   justify-content: center;
   align-items: center;
   margin: 0 auto 100px;
-  padding: 0 20px;
+  padding: 0px 30px;
 `;
 
 const MarketingSection = styled.div`
@@ -310,12 +314,13 @@ const MarketingContent = styled.div`
   padding: 0 25px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   h3 {
+    width: 100%;
     font-size: 32px;
     color: #451476;
     margin-bottom: 0;
+    text-align: left;
   }
   p {
     font-size: 20px;
@@ -361,6 +366,7 @@ const LandingPageButtonContainer = styled.div`
     margin: 0 10px;
     background-color: #451476;
     color: white;
+    padding: 0 16px;
   }
   button:nth-child(2) {
     border: 1px solid #451476;
@@ -512,11 +518,11 @@ const FooterItemsContainer = styled.div`
 
 const GetStartedButton = styled.div`
   button {
-    margin: 0 10px;
+    margin: 10px 10px 0;
     background-color: #451476;
     color: white;
     &:hover {
-      margin: 0 10px;
+      margin: 0 15px;
       background-color: #451476;
       color: white;
     }
