@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import styled from "styled-components";
 import { CardElement, injectStripe } from "react-stripe-elements";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
