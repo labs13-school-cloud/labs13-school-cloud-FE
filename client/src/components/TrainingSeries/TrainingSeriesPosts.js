@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import Fab from "@material-ui/core/Fab";
 import Fuse from "fuse.js";
 
+import ProgressCircle from "../Progress/ProgressCircle";
+
 // Components
 import DeleteModal from "../Modals/deleteModal";
 import TrainingSeriesAssignment from "./TrainingSeriesAssignment";
@@ -122,9 +124,10 @@ const styles = theme => ({
   button: {
     // margin: 5,
     "margin-left": theme.spacing.unit,
-    color: "#451476",
+    background: "#451476",
+    color: "white",
     "&:hover": {
-      background: "#451476",
+      background: "#591a99",
       color: "white"
     },
 
@@ -140,14 +143,19 @@ const styles = theme => ({
   assignButton: {
     // margin: 5,
     "margin-left": theme.spacing.unit,
-    color: "#451476",
+    background: "#451476",
+    color: "white",
     "&:hover": {
-      background: "#451476",
+      background: "#591a99",
       color: "white"
     },
 
     "@media (max-width: 768px)": {
       margin: "10px 5px"
+    },
+
+    "&:disabled": {
+      background: "white"
     }
 
     // "@media (max-width: 480px)": {
@@ -161,6 +169,12 @@ const styles = theme => ({
   },
   messageText: {
     marginTop: 20,
+    marginBottom: 20,
+    textAlign: "center",
+    color: "lightgray"
+  },
+  messageTextTop: {
+    marginTop: 50,
     marginBottom: 20,
     textAlign: "center",
     color: "lightgray"
@@ -229,7 +243,7 @@ class TrainingSeriesPosts extends React.Component {
     this.props.history.push({
       pathname: `/home/assign-members/${
         this.props.singleTrainingSeries.trainingSeriesID
-        }`
+      }`
     });
   };
 
@@ -345,7 +359,7 @@ class TrainingSeriesPosts extends React.Component {
               Assign Members
             </Button>
           </HeaderContainer>
-          <Typography variant="subheading" className={classes.messageText}>
+          <Typography variant="subheading" className={classes.messageTextTop}>
             This training series currently does not have any team members
             assigned to it.
           </Typography>
@@ -382,7 +396,11 @@ class TrainingSeriesPosts extends React.Component {
         <>
           <HeaderContainer>
             <Typography variant="title">Assigned Team Members</Typography>
-            <Button className={classes.button} variant="outlined" disabled>
+            <Button
+              className={classes.assignButton}
+              variant="outlined"
+              disabled
+            >
               Assign Members
             </Button>
           </HeaderContainer>
@@ -409,10 +427,16 @@ class TrainingSeriesPosts extends React.Component {
 
     /* sort posts by days from start */
     const sortedPosts = posts.sort((a, b) =>
-      a.daysFromStart > b.daysFromStart ? 1 : b.daysFromStart > a.daysFromStart ? -1 : 0
-    )
+      a.daysFromStart > b.daysFromStart
+        ? 1
+        : b.daysFromStart > a.daysFromStart
+        ? -1
+        : 0
+    );
 
-    return (
+    return this.props.isLoading ? (
+      <ProgressCircle />
+    ) : (
       <>
         {this.state.displaySnackbar && (
           <>
@@ -469,42 +493,42 @@ class TrainingSeriesPosts extends React.Component {
                 <p>You do not have any messages.</p>
               </HolderText>
             ) : (
-                <ListStyles className={classes.listStyle}>
-                  {sortedPosts.map(post => (
-                    <ListItemContainer>
-                      <ListItem key={post.postID} className={classes.listItem}>
-                        <ListItemText
-                          primary={post.postName}
-                          secondary={post.postDetails}
-                          className={classes.listItemText}
-                          onClick={e => this.routeToEditPostPage(e, post)}
-                        />
-                        <ListItemSecondaryAction
-                          className={classes.secondaryAction}
-                        >
-                          <div>
-                            <p>{post.daysFromStart} days</p>
-                          </div>
-                          <ListButtonContainer>
-                            <i
-                              className={`material-icons ${classes.icons}`}
-                              onClick={e => this.routeToEditPostPage(e, post)}
-                            >
-                              edit
+              <ListStyles className={classes.listStyle}>
+                {sortedPosts.map(post => (
+                  <ListItemContainer>
+                    <ListItem key={post.postID} className={classes.listItem}>
+                      <ListItemText
+                        primary={post.postName}
+                        secondary={post.postDetails}
+                        className={classes.listItemText}
+                        onClick={e => this.routeToEditPostPage(e, post)}
+                      />
+                      <ListItemSecondaryAction
+                        className={classes.secondaryAction}
+                      >
+                        <div>
+                          <p>{post.daysFromStart} days</p>
+                        </div>
+                        <ListButtonContainer>
+                          <i
+                            className={`material-icons ${classes.icons}`}
+                            onClick={e => this.routeToEditPostPage(e, post)}
+                          >
+                            edit
                           </i>
-                            <DeleteModal
-                              className={`material-icons ${classes.icons}`}
-                              deleteType="post"
-                              id={post.postID}
-                            />
-                          </ListButtonContainer>
-                        </ListItemSecondaryAction>
-                      </ListItem>
-                      <Divider />
-                    </ListItemContainer>
-                  ))}
-                </ListStyles>
-              )}
+                          <DeleteModal
+                            className={`material-icons ${classes.icons}`}
+                            deleteType="post"
+                            id={post.postID}
+                          />
+                        </ListButtonContainer>
+                      </ListItemSecondaryAction>
+                    </ListItem>
+                    <Divider />
+                  </ListItemContainer>
+                ))}
+              </ListStyles>
+            )}
           </Paper>
           <Paper className={classes.paper}>{assignedMembersStatus}</Paper>
         </PageContainer>
