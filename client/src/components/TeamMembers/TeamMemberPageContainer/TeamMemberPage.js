@@ -96,6 +96,14 @@ const styles = theme => ({
     margin: "15px 0"
   },
   assignBtn: {
+    "margin-left": theme.spacing.unit,
+    background: "#451476",
+    color: "white",
+    "&:hover": {
+      background: "#591a99",
+      color: "white"
+    },
+
     "@media (max-width: 768px)": {
       margin: "20px 0 15px"
     }
