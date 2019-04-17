@@ -123,6 +123,7 @@ class Dashboard extends React.Component {
                   render={props => (
                     <ProfileView
                       {...props}
+                      activateTutorial={this.activateTutorial}
                       toggleFreakinSnackBar={this.toggleFreakinSnackBar}
                     />
                   )}
@@ -211,6 +212,10 @@ class Dashboard extends React.Component {
   //Tour methods
   closeTour = () => {
     this.setState({isTourOpen: false});
+  };
+  activateTutorial = () => {
+    this.props.history.push("/home");
+    this.setState({isTourOpen: true});
   };
 }
 
