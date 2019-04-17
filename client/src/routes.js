@@ -5,6 +5,7 @@ import {Route, Router} from "react-router-dom";
 
 //Components
 import App from "./App";
+import Pricing from "./components/LandingPage/Pricing";
 import DashboardView from "./components/Dashboard/DashboardView";
 
 //Callback
@@ -38,6 +39,7 @@ export const makeMainRoutes = () => {
         <>
           <div>
             <Route exact path="/" component={App} />
+            <Route path="/pricing" component={Pricing} />
             <Route path="/home" component={Authenticate(DashboardView)} />
             <Route path="/callback" component={Callback} />
           </div>

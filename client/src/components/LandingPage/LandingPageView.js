@@ -526,3 +526,4 @@ const GetStartedButton = styled.div`
 const LogoImage = styled.img`
   width: 50px;
 `;
+
