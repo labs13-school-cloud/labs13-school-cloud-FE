@@ -95,12 +95,19 @@ const styles = theme => ({
     alignItems: "center",
     wrap: "flex-wrap"
 
-    // borderBottom: "1px solid #E8E9EB"
-    // "list-style": "none"
+    // transition: "background-color 0.3s",
+    // "&:hover": {
+    //   width: "100%",
+    //   cursor: "pointer",
+    //   backgroundColor: "whitesmoke"
+    //   // "box-shadow": "0px 6px 15px -4px rgba(0,0,0,0.84)"
+    // }
   },
+
   // listItemText: {
-  //   width: "10%"
+  //   width: "79%"
   // },
+
   icons: {
     display: "block",
     width: 20,
@@ -194,7 +201,6 @@ class TrainingSeriesPosts extends React.Component {
 
   deletePost = (e, id) => {
     e.preventDefault();
-    console.log(id);
     this.props.deletePost(id);
   };
 
@@ -209,7 +215,6 @@ class TrainingSeriesPosts extends React.Component {
 
   routeToEditPostPage = (e, post) => {
     e.preventDefault();
-    console.log("FIRED");
     this.props.history.push({
       pathname: `/home/post/${post.postID}`,
       state: {
@@ -460,12 +465,13 @@ class TrainingSeriesPosts extends React.Component {
             ) : (
               <ListStyles className={classes.listStyle}>
                 {posts.map(post => (
-                  <>
+                  <ListItemContainer>
                     <ListItem key={post.postID} className={classes.listItem}>
                       <ListItemText
                         primary={post.postName}
                         secondary={post.postDetails}
                         className={classes.listItemText}
+                        onClick={e => this.routeToEditPostPage(e, post)}
                       />
                       <ListItemSecondaryAction
                         className={classes.secondaryAction}
@@ -489,7 +495,7 @@ class TrainingSeriesPosts extends React.Component {
                       </ListItemSecondaryAction>
                     </ListItem>
                     <Divider />
-                  </>
+                  </ListItemContainer>
                 ))}
               </ListStyles>
             )}
@@ -514,6 +520,7 @@ const HeaderContainer = styled.div`
   justify-content: space-between;
   display: flex;
   align-items: baseline;
+  margin-bottom: 10px;
 
   @media (max-width: 768px) {
     max-width: 768px;
@@ -535,6 +542,15 @@ const HolderText = styled.div`
   }
 `;
 
+const ListItemContainer = styled.div`
+  transition: background-color 0.3s;
+  &:hover {
+    width: 100%;
+    cursor: pointer;
+    background-color: whitesmoke;
+  }
+`;
+
 const ListStyles = styled.div`
   display: flex;
   flex-direction: column;
@@ -550,6 +566,7 @@ const ListButtonContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   margin-left: 40px;
+  padding-right: 5px;
 `;
 
 const TrainingSeriesTitle = styled.div`
