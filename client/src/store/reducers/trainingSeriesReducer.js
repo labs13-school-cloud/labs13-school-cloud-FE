@@ -74,7 +74,7 @@ const trainingSeriesReducer = (state = initialState, action) => {
     case EDIT_TRIANING_SERIES_START:
       return {
         ...state,
-        isLoading: true,
+        // isLoading: true,
         error: '',
         isEditing: true
       };
@@ -90,7 +90,7 @@ const trainingSeriesReducer = (state = initialState, action) => {
       return {
         ...state,
         isEditing: false,
-        isLoading: false,
+        // isLoading: false,
         error: '',
         trainingSeries: updatedItem
       };
@@ -99,7 +99,7 @@ const trainingSeriesReducer = (state = initialState, action) => {
       return {
         ...state,
         isEditing: false,
-        isLoading: false,
+        // isLoading: false,
         error: action.payload
       };
     // ---DELETE TRAINING SERIES---

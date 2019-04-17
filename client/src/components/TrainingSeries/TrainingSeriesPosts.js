@@ -434,9 +434,7 @@ class TrainingSeriesPosts extends React.Component {
         : 0
     );
 
-    return this.props.isLoading ? (
-      <ProgressCircle />
-    ) : (
+    return (
       <>
         {this.state.displaySnackbar && (
           <>
@@ -533,7 +531,7 @@ class TrainingSeriesPosts extends React.Component {
           <Paper className={classes.paper}>{assignedMembersStatus}</Paper>
         </PageContainer>
       </>
-    );
+    )
   }
 }
 
