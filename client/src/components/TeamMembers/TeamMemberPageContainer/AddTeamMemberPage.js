@@ -142,7 +142,7 @@ class TeamMemberPage extends React.Component {
 		let textDisabled;
 		let emailDisabled;
 		let addDisabled = false;
-		console.log(addDisabled);
+		// console.log(addDisabled);
 
 		if (textOn && !emailOn) {
 			textDisabled = true;
@@ -160,7 +160,7 @@ class TeamMemberPage extends React.Component {
 		//Checks to see if one number has been entered and if the full number matches
 		if (
 			/\+1 \(\d{1}/gm.test(this.state.teamMember.phoneNumber) === true &&
-			/^\s*(?:\+?(\d{1,3}))?([-. (]*(\d{3})[-. )]*)?((\d{3})[-. ]*(\d{4})?)\s*$/gm.test(
+			/^\s*(?:\+?(\d{1,3}))?([-. (]*(\d{3})[-. )]*)?((\d{3})[-. ]*(\d{4})(?:[-.x ]*(\d+))?)\S*$/gm.test(
 				this.state.teamMember.phoneNumber
 			) === false
 		) {
