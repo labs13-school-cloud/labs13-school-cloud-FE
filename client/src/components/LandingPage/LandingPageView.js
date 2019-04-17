@@ -277,7 +277,7 @@ const MarketingContentContainer = styled.div`
   justify-content: center;
   align-items: center;
   margin: 0 auto 100px;
-  padding: 0 20px;
+  padding: 0px 30px;
 `;
 
 const MarketingSection = styled.div`
