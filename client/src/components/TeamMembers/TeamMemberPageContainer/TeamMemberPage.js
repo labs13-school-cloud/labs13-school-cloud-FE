@@ -104,6 +104,10 @@ const styles = theme => ({
       color: "white"
     },
 
+    "&:disabled": {
+      background: "white"
+    },
+
     "@media (max-width: 768px)": {
       margin: "20px 0 15px"
     }
