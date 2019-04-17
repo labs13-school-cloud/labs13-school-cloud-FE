@@ -54,21 +54,18 @@ const styles = theme => ({
   },
   paymentForm: {
     display: "flex",
-    margin: "30px 90px 0 90px"
+    margin: "30px 90px 0 90px",
+    "@media (max-width: 720px)": {
+      margin: "30px 40px 0 40px"
+    }
   },
   buttonLayout: {
     display: "flex",
     justifyContent: "space-around",
     margin: "0 auto",
-    ["@media (max-width: 1000px)"]: {
-      // eslint-disable-line no-useless-computed-key
-    },
-    ["@media (max-width: 720px)"]: {
-      // eslint-disable-line no-useless-computed-key
-      // flexDirection:'column',
+    "@media (max-width: 720px)": {
       justifyContent: "center",
       flexWrap: "wrap"
-      // width: '94%'
     }
   },
   submitButton: {
@@ -170,7 +167,7 @@ class CheckoutForm extends Component {
     };
   }
   handleOpen = () => {
-    this.setState({ open: true });
+    this.setState({ open: true, activeSelect: "Basic" });
   };
 
   handleClose = () => {
@@ -212,7 +209,8 @@ class CheckoutForm extends Component {
     if (token !== undefined) {
       await this.props.submit(token, name, email, userID, stripe, plan);
       this.setState({
-        paymentToggle: false
+        paymentToggle: false,
+        activeSelect: ""
       });
     } else {
       this.setState({ error: "Please enter payment information" });
@@ -241,6 +239,7 @@ class CheckoutForm extends Component {
           color="primary"
           className={classes.button}
           onClick={this.handleOpen}
+          style={this.state.activeSelect === "Basic" ? { background: '#3DBC93' } : null}
         >
           Basic
         </Button>
