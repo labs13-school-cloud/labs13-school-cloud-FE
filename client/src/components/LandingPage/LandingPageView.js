@@ -314,9 +314,9 @@ const MarketingContent = styled.div`
   padding: 0 25px;
   display: flex;
   flex-direction: column;
-  
   align-items: center;
   h3 {
+    width: 100%;
     font-size: 32px;
     color: #451476;
     margin-bottom: 0;
