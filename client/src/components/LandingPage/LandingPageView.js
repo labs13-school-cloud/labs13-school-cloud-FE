@@ -81,7 +81,7 @@ class LandingPageView extends React.Component {
                 />
               </MarketingImage>
               <MarketingContent>
-                <h3>Keep your engagement high. Sky high.</h3>
+                <h3>Keep Your Engagement High.</h3>
                 <p>
                   Your employees will no longer forget if they have a task to
                   accomplish. Training Bot handles that for you.
@@ -96,15 +96,18 @@ class LandingPageView extends React.Component {
                 />
               </MarketingImage>
               <MarketingContent>
-                <h3>Notifications. Your way.</h3>
+                <h3>Notifications, Your Way.</h3>
                 <p>
                   Send text messages or email notifications to your employees.
                   Modern communication for the mordern workplace.
                 </p>
               </MarketingContent>
             </MarketingSection>
+            <GetStartedButton>
+              <Button onClick={login}>Get Started</Button>
+            </GetStartedButton>
           </MarketingContentContainer>
-          {/* TESTIMONY SECTION */}
+          {/* TESTIMONY SECTION
           <TrainingBotTestimonyContainer>
             <TestimonyContainer>
               <TestimonyPerson>
@@ -126,7 +129,7 @@ class LandingPageView extends React.Component {
               </p>
             </TestimonyContainer>
           </TrainingBotTestimonyContainer>
-          {/* STORY SECTION */}
+          {/* STORY SECTION 
           <TrainingBotStoryContainer>
             <h3>The Training Bot Story</h3>
             <StorySection>
@@ -148,7 +151,7 @@ class LandingPageView extends React.Component {
               </StoryContent>
             </StorySection>
           </TrainingBotStoryContainer>
-          {/* GET STARTED CONTAINER */}
+          {/* GET STARTED CONTAINER
           <GetStartedContainer>
             <IconBox>
               <img src={Logo} alt="This robot loves showing up" />
@@ -157,7 +160,7 @@ class LandingPageView extends React.Component {
               <h4>Use Training Bot for FREE</h4>
               <Button>Try Now</Button>
             </GetStartedBox>
-          </GetStartedContainer>
+          </GetStartedContainer> */}
           <FooterContainer>
             <FooterItemsContainer>
               <h3>Team</h3>
@@ -255,6 +258,7 @@ const MarketingSection = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin: 40px 0;
   &:nth-child(even) {
     flex-direction: row-reverse;
@@ -481,5 +485,18 @@ const FooterItemsContainer = styled.div`
     font-weight: 500;
     padding: 0 20px;
     cursor: pointer;
+  }
+`;
+
+const GetStartedButton = styled.div`
+  button {
+    margin: 0 10px;
+    background-color: #451476;
+    color: white;
+    &:hover {
+      margin: 0 10px;
+      background-color: #451476;
+      color: white;
+    }
   }
 `;
