@@ -106,7 +106,6 @@ class CreateTrainingSeries extends React.Component {
           <form
             onSubmit={e => this.handleTrainingSeriesSubmit(e)}
             className={classes.container}
-            noValidate
             autoComplete="off"
           >
             <TextField

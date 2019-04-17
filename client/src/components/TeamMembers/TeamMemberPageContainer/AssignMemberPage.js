@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 import DatePicker from "react-datepicker";
+import TrainingBotGIF from "../../../img/trainingBot.gif";
 
 //Styles
 import "react-datepicker/dist/react-datepicker.css";
@@ -62,8 +63,14 @@ const styles = theme => ({
     justifyContent: "center",
     margin: "30px auto"
   },
-  button: {
-    alignSelf: "center"
+  assignButton: {
+    alignSelf: "center",
+    background: "#451476",
+    color: "white",
+    "&:hover": {
+      background: "#591a99",
+      color: "white"
+    }
   }
 });
 
@@ -72,7 +79,8 @@ class AssignMemberPage extends React.Component {
     open: false,
     trainingSeriesID: "",
     startDate: "",
-    value: ""
+    value: "",
+    isRouting: false
   };
 
   componentDidMount() {
@@ -108,6 +116,9 @@ class AssignMemberPage extends React.Component {
       assignments: [this.props.location.state.urlId]
     };
     this.props.addTeamMemberToTrainingSeries(data);
+    this.setState({
+      isRouting: true
+    });
   };
 
   routeBack = e => {
@@ -177,11 +188,16 @@ class AssignMemberPage extends React.Component {
             </FormControl>
             <ButtonContainer>
               <Button
-                className={classes.button}
+                disabled={this.state.isRouting === true ? "true" : null}
+                className={classes.assignButton}
                 variant="contained"
                 type="submit"
               >
-                Assign
+                {this.state.isRouting ? (
+                  <LoadingImage src={TrainingBotGIF} alt="Loading Icon" />
+                ) : (
+                  "Assign"
+                )}
               </Button>
               <Button
                 onClick={this.routeBack}
@@ -224,4 +240,15 @@ const ButtonContainer = styled.div`
   display: flex;
   margin-top: 25px;
   justify-content: center;
+`;
+
+const LoadingImage = styled.img`
+  width: 32px;
+  height: auto;
+  overflow: hidden;
+  cursor: not-allowed;
+  pointer-events: none;
+  position: relative;
+  padding: 0;
+  margin: 0;
 `;

@@ -26,9 +26,9 @@ const styles = theme => ({
 		display: 'flex',
 		flexDirections: 'column',
 		width: '90%',
-		justifyContent:'space-between',
-		alignItems:'center',
-		borderBottom:'1px solid #e8e9eb'
+		justifyContent: 'space-between',
+		alignItems: 'center',
+		borderBottom: '1px solid #e8e9eb'
 	},
 	bullet: {
 		display: 'inline-block',
@@ -44,21 +44,21 @@ const styles = theme => ({
 	margin: {
 		margin: theme.spacing.unit,
 	},
-	secondaryAction: {	
-		display: "flex",	
-		flexDirection: "row",	
-		"align-items": "center",	
-	  }
+	secondaryAction: {
+		display: "flex",
+		flexDirection: "row",
+		"align-items": "center",
+	}
 });
 
 const TrainingSeriesAssignments = props => {
 	const { classes } = props;
 
+
 	const { teamMemberId } = props;
 	const { trainingSeries_ID } = props.trainingSeries;
-	const startDate = moment(props.trainingSeries.startDate)
-		.add(1, 'days')
-		.format('MMMM Do, YYYY ');
+	// add hours to sendDate, formatting with moment ensures it displays properly on the FE
+	const formattedStartDate = moment(props.trainingSeries.startDate).add(1, "hours").format('MMMM Do, YYYY')
 
 	// const handleDelete = e => {
 	// 	e.preventDefault();
@@ -69,23 +69,23 @@ const TrainingSeriesAssignments = props => {
 
 	return (
 		// <ListStyles>
-			<ListItem className={classes.listItem}>
-				<ListItemText
-					className ={classes.listItemText}
-					primary={`Title: ${props.trainingSeries.title}`}
-					secondary={`Start Date: ${startDate}`}
-				/>
+		<ListItem className={classes.listItem}>
+			<ListItemText
+				className={classes.listItemText}
+				primary={`Title: ${props.trainingSeries.title}`}
+				secondary={`Start Date: ${formattedStartDate}`}
+			/>
 			<ListItemSecondaryAction className={classes.secondaryAction}>
-			<ListButtonContainer>
+				<ListButtonContainer>
 
-				<DeleteModal
-					teamMemberId={teamMemberId}
-					trainingSeries_Id={trainingSeries_ID}
-					deleteType="removeMemberFromTS"
+					<DeleteModal
+						teamMemberId={teamMemberId}
+						trainingSeries_Id={trainingSeries_ID}
+						deleteType="removeMemberFromTS"
 					/>
-					</ListButtonContainer>
+				</ListButtonContainer>
 			</ListItemSecondaryAction>
-					</ListItem>
+		</ListItem>
 		// </ListStyles>
 	);
 };

@@ -6,6 +6,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
 import Checkbox from "@material-ui/core/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import styled from "styled-components";
@@ -47,7 +48,8 @@ const styles = theme => ({
     display: "flex",
     flexDirection: "row",
     flexWrap: "wrap",
-    justifyContent: "center",
+    justifyContent: "space-between",
+    height: "90%",
     "@media (max-width:580px)": {
       flexDirection: "column",
       alignItems: "center",
@@ -55,6 +57,9 @@ const styles = theme => ({
   },
   box: {
     padding: "0 12px"
+  },
+  heading: {
+    marginBottom: 40,
   }
 });
 
@@ -89,11 +94,14 @@ function AddMember(props) {
   console.log(props.selectedTeamMembers);
   return (
     <>
-    <h3>Assign Team Members </h3>
+    <Typography className={classes.heading} variant="h6">Assign Team Members </Typography>
     <AddMemberContainer>
       {props.teamMembers.length ? (
         <>
           <DatePickerContainer>
+            <DirectionsDiv>
+            <Typography variant="subheading">Choose the start date for the training series.</Typography>
+            </DirectionsDiv>
           <DatePicker
             inline
             minDate={new Date()}
@@ -102,6 +110,9 @@ function AddMember(props) {
           />
           </DatePickerContainer>
           <TeamMemberContainer>
+            <DirectionsDiv>
+            <Typography variant="subheading">Select your team members.</Typography>
+            </DirectionsDiv>
             <form
               variant="body1"
               id="modal-title"
@@ -132,7 +143,7 @@ function AddMember(props) {
           </TeamMemberContainer>
         </>
       ) : (
-        <h2> You need to create Team members! </h2>
+        <h2>Please create at least one team member to allow assignment functionality. </h2>
       )}
     </AddMemberContainer>
     </>
@@ -147,21 +158,39 @@ const AddMemberContainer = styled.div`
   
   @media (max-width: 580px) {
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
 `;
 
+const DirectionsDiv = styled.div`
+margin-bottom: 40px;
+`;
 const DatePickerContainer = styled.div`
 display: flex;
+flex-direction: column;
 justify-content: center;
 align-items: center;
+text-align: center;
+width: 40%;
+padding-left: 12px;
+
+@media (max-width: 580px) {
+  margin-bottom: 15px;
+  width: 100%;
+}
 `;
 
 const TeamMemberContainer = styled.div`
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 55%;
 
   @media (max-width: 580px) {
     padding-top: 35px;
+    width: 100%;
   }
 `;
 
@@ -171,16 +200,19 @@ const MemberListContainer = styled.div`
     flex-wrap: wrap;
     justify-content: flex-start;
     padding: 0 25px;
+    width: 100%;
 
     @media (max-width: 580px) {
       width: 240px;
-      padding: 0;
+      padding: 0 0 20px;
 
     }
 
 `;
 const ButtonContainer = styled.div`
-display: block;
+display: flex;
+align-self: center;
+margin: 0 auto;
 `;
 
 const LoadingImage = styled.img`

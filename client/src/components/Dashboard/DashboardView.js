@@ -201,7 +201,7 @@ const TripleColumn = styled.div`
   max-width: 1400px;
   display: flex;
   justify-content: space-between;
-  margin: 10px auto;
+  margin: 48px auto;
   /* height: 500px; */
   @media (max-width: 1400px) {
     flex-wrap: wrap;
@@ -213,7 +213,9 @@ const TripleColumn = styled.div`
     height: 100%;
     flex-direction: column;
     padding: 10px;
-    /* margin: 0 auto 5px; */
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
   }
 `;
 const SmallColumns = styled.div`
@@ -225,8 +227,10 @@ const SmallColumns = styled.div`
   }
   @media (max-width: 768px) {
     flex-direction: column;
-    /* margin: 0 auto 5px; */
-    margin-bottom: 5px;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    /* margin-bottom: 5px; */
   }
 `;
 const DashboardContainer = styled.div`

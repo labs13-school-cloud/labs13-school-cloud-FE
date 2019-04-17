@@ -39,7 +39,8 @@ const styles = theme => ({
     },
 
     "@media (max-width: 768px)": {
-      width: "92%"
+      width: "92%",
+      height: "100%"
     }
   },
   columnHeader: {

@@ -1,4 +1,5 @@
 import React from "react";
+import NumberFormat from 'react-number-format';
 
 import styled from "styled-components";
 
@@ -70,7 +71,11 @@ const styles = theme => ({
   },
   divider: {
     margin: "15px 0"
-  }
+  },
+  color: {
+    color: "red"
+  },
+
 });
 
 class TeamMemberPage extends React.Component {
@@ -118,7 +123,6 @@ class TeamMemberPage extends React.Component {
   };
 
   handleToggleChange = name => event => {
-    const { textOn, emailOn } = this.state.teamMember;
 
     this.setState({
       teamMember: {
@@ -135,12 +139,6 @@ class TeamMemberPage extends React.Component {
 
   render() {
     const { classes } = this.props;
-    console.log(
-      "TOGGLES",
-      this.state.teamMember.textOn,
-      this.state.teamMember.emailOn
-    );
-
     const { textOn, emailOn } = this.state.teamMember;
 
     let textDisabled;
@@ -161,12 +159,9 @@ class TeamMemberPage extends React.Component {
 
     return (
       <MainContainer>
-        {/* <Typography variant="display1" align="center">
-          Add A New Team Member
-        </Typography> */}
         <form className={classes.form} onSubmit={e => this.addNewTeamMember(e)}>
           <Paper className={classes.paper}>
-            <Typography variant="title" className>
+            <Typography variant="title">
               Add A New Team Member
             </Typography>
             <Divider className={classes.divider} />
@@ -204,22 +199,23 @@ class TeamMemberPage extends React.Component {
               <TextField
                 id="standard-name"
                 label="Email"
+                type="email"
                 className={classes.textField}
                 value={this.state.teamMember.email}
                 onChange={this.handleChange("email")}
                 margin="normal"
                 required
               />
-              <TextField
-                id="standard-name"
+              <NumberFormat format="+1 (###) ###-####" mask="_" id="standard-name"
                 label="Phone Number"
+                customInput={TextField}
                 className={classes.textField}
                 value={this.state.teamMember.phoneNumber}
                 onChange={this.handleChange("phoneNumber")}
                 margin="normal"
-                required
-              />
+                required/>
             </MemberInfoContainer>
+
             <ButtonContainer>
               <FormControlLabel
                 control={
@@ -232,7 +228,7 @@ class TeamMemberPage extends React.Component {
                     color="primary"
                   />
                 }
-                label="Send Text"
+                label="Texts Active"
               />
               <FormControlLabel
                 control={
@@ -245,7 +241,7 @@ class TeamMemberPage extends React.Component {
                     color="primary"
                   />
                 }
-                label="Send Email"
+                label="Email Active"
               />
             </ButtonContainer>
             <ButtonContainer>
@@ -258,8 +254,8 @@ class TeamMemberPage extends React.Component {
                 {this.state.isRouting ? (
                   <LoadingImage src={TrainingBotGIF} alt="Loading Icon" />
                 ) : (
-                  "Add Member"
-                )}
+                    "Add Member"
+                  )}
               </Button>
               <Button
                 className={classes.button}
