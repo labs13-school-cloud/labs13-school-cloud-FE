@@ -10,7 +10,6 @@ import FaceIcon from "@material-ui/icons/Face";
 import { ArrowUpward } from "@material-ui/icons";
 import Logo from "../../img/training-bot.png";
 
-
 import undrawCoworker from "../../img/undraw_co-workers_ujs6.svg";
 import undrawNotify from "../../img/undraw_notify_88a4.svg";
 import undrawTask from "../../img/undraw_personal_text_vkd8.svg";
@@ -18,7 +17,6 @@ import undrawTask from "../../img/undraw_personal_text_vkd8.svg";
 import { login } from "../../Auth/Auth";
 
 class LandingPageView extends React.Component {
-
   scrollTo() {
     scroller.scrollTo("MarketingContent", {
       duration: 800,
@@ -187,8 +185,8 @@ class LandingPageView extends React.Component {
           </FirstSection>
           <FooterContainer>
             <FooterItemsContainer>
-              <Link to="/team">Team</Link>
-              <Link to="/pricing">Pricing</Link>
+              <a href="/team">Team</a>
+              <a href="/pricing">Pricing</a>
             </FooterItemsContainer>
             <ArrowUpward onClick={() => this.scrollToTop()} />
           </FooterContainer>
@@ -201,7 +199,7 @@ export default LandingPageView;
 
 const LandingPageContainer = styled.div`
   margin: 0 auto;
-  padding: 0 25px;
+
   width: 100%;
   max-width: 1280px;
   background-color: white;
@@ -257,7 +255,6 @@ const NavbarContainer = styled.nav`
 const NavbarItemsContainer = styled.div`
   display: flex;
   align-items: center;
-
 `;
 const NavbarItem = styled(Link)`
   margin-left: 30px;
@@ -512,6 +509,8 @@ const FooterContainer = styled.div`
   display: flex;
   align-items: center;
   margin-top: 100px;
+  position: sticky;
+  top: 100%;
   svg {
     margin: 0 auto;
     font-size: 30px;
@@ -525,11 +524,17 @@ const FooterItemsContainer = styled.div`
   color: white;
   justify-content: center;
   width: 90%;
-  h3 {
+
+  a {
     font-size: 16px;
     font-weight: 500;
-    padding: 0 20px;
+    padding: 16px 20px;
     cursor: pointer;
+    text-decoration: none;
+  }
+
+  a:visited {
+    color: white;
   }
 `;
 
@@ -549,4 +554,3 @@ const GetStartedButton = styled.div`
 const LogoImage = styled.img`
   width: 50px;
 `;
-
