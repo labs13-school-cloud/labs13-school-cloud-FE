@@ -72,9 +72,8 @@ class Pricing extends React.Component {
 							<img src={Logo} alt='A cute, personable robot' />
 						</Link>
 						<NavbarItemsContainer>
-							<NavbarItem>Team</NavbarItem>
+							<NavbarItem to='/team'>Team</NavbarItem>
 							<NavbarItem to='/pricing'>Pricing</NavbarItem>
-							<NavbarItem>Blog</NavbarItem>
 							<h2 onClick={login}>Sign In</h2>
 						</NavbarItemsContainer>
 					</NavbarContainer>
@@ -130,9 +129,8 @@ class Pricing extends React.Component {
 					</Paper>
 					<FooterContainer>
 						<FooterItemsContainer>
-							<h3>Team</h3>
-							<h3>Pricing</h3>
-							<h3>Blog</h3>
+						<Link to="/team">Team</Link>
+          <Link to="/pricing">Pricing</Link>
 						</FooterItemsContainer>
 						<ArrowUpward onClick={() => window.scrollTo(0, 0)} />
 					</FooterContainer>
@@ -144,12 +142,12 @@ class Pricing extends React.Component {
 export default withStyles(styles)(Pricing);
 
 const Container = styled.div`
-    display:flex
+    display:flex;
     justify-content: space-between;
     width:100%;
 `;
 const Column = styled.div`
-    width:33%
+    width:33%;
     height:100%;
     /* padding:5px */
     border: 1px solid #451476;
@@ -187,7 +185,7 @@ const NavbarContainer = styled.nav`
 		width: 50px;
 	}
 	h2,
-	h3 {
+	a {
 		margin-left: 30px;
 		font-size: 16px;
 		font-weight: 500;
@@ -443,10 +441,16 @@ const FooterItemsContainer = styled.div`
 	color: white;
 	justify-content: center;
 	width: 90%;
-	h3 {
+	a {
 		font-size: 16px;
 		font-weight: 500;
-		padding: 0 20px;
+		padding: 16px 20px;
 		cursor: pointer;
+		text-decoration: none;
 	}
+
+	a:visited {
+		color: white;
+	}
+
 `;
