@@ -1,26 +1,26 @@
 // contains all components for landing page
 import React from "react";
-import {scroller, animateScroll as scroll} from "react-scroll";
+import { scroller, animateScroll as scroll } from "react-scroll";
 //Styling
 import styled from "styled-components";
 import Button from "@material-ui/core/Button";
 //Icons & Images
 import FaceIcon from "@material-ui/icons/Face";
-import {ArrowUpward} from "@material-ui/icons";
+import { ArrowUpward } from "@material-ui/icons";
 import Logo from "../../img/training-bot.png";
 
-import undrawFolder from "../../img/undraw_folder_39kl.svg";
+import undrawCoworker from "../../img/undraw_co-workers_ujs6.svg";
 import undrawNotify from "../../img/undraw_notify_88a4.svg";
-import undrawTask from "../../img/undraw_task_31wc (1).svg";
+import undrawTask from "../../img/undraw_personal_text_vkd8.svg";
 //Auth
-import {login} from "../../Auth/Auth";
+import { login } from "../../Auth/Auth";
 
 class LandingPageView extends React.Component {
   scrollTo() {
     scroller.scrollTo("MarketingContent", {
       duration: 800,
       delay: 0,
-      smooth: "easeInOutQuart",
+      smooth: "easeInOutQuart"
     });
   }
   scrollToTop() {
@@ -73,7 +73,7 @@ class LandingPageView extends React.Component {
             <MarketingSection>
               <MarketingImage>
                 <img
-                  src={undrawFolder}
+                  src={undrawCoworker}
                   alt="A drawing of an employee standing next to a folder"
                 />
               </MarketingImage>
