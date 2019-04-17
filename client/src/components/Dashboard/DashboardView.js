@@ -1,12 +1,12 @@
 // parent component for app once logged in
 import React from "react";
-import { Router, Route } from "react-router-dom";
+import {Router, Route} from "react-router-dom";
 
 import history from "../../history";
 
 //Styling
 import styled from "styled-components";
-import { withStyles } from "@material-ui/core/styles";
+import {withStyles} from "@material-ui/core/styles";
 
 //Components
 import TeamMembersView from "../TeamMembers/TeamMembersView";
@@ -24,27 +24,28 @@ import CreatePost from "../TrainingSeries/CreatePost";
 import PostPage from "../TrainingSeries/PostPage";
 import NotificationsView from "../Notifications/NotificationsView";
 import AssignMemberPage from "../TeamMembers/TeamMemberPageContainer/AssignMemberPage";
-import Snackbar from '../Snackbar/Snackbar';
-
+import Snackbar from "../Snackbar/Snackbar";
+import DashboardTour from "../Tour/Tour";
 //Auth
 import Authenticate from "../authenticate/authenticate";
 
 //State Management
-import { connect } from "react-redux";
-import { getUser } from "../../store/actions/userActions";
+import {connect} from "react-redux";
+import {getUser} from "../../store/actions/userActions";
 
 //Tour
-import Tour from 'reactour';
+import Tour from "reactour";
 
 const styles = theme => ({
   router: {
     // width: 900
-  }
+  },
 });
 class Dashboard extends React.Component {
   state = {
     tabValue: 0,
-    displaySnackbar: false
+    displaySnackbar: false,
+    isTourOpen: true,
   };
 
   componentDidMount() {
@@ -52,10 +53,17 @@ class Dashboard extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
+    //Checks if an already existing user, if so disable tour.
+    if (this.props.newUser !== prevProps.newUser) {
+      this.setState({isTourOpen: false});
+    }
     if (this.props.location.state) {
-      if (this.props.location.state !== prevProps.location.state && this.props.location.state.success) {
+      if (
+        this.props.location.state !== prevProps.location.state &&
+        this.props.location.state.success
+      ) {
         this.setState({
-          displaySnackbar: true
+          displaySnackbar: true,
         });
       }
     }
@@ -63,9 +71,9 @@ class Dashboard extends React.Component {
 
   toggleFreakinSnackBar = e => {
     this.setState({
-      displaySnackbar: false
-    })
-  }
+      displaySnackbar: false,
+    });
+  };
 
   renderDashboard = () => {
     const user = this.props.userProfile.user;
@@ -73,8 +81,15 @@ class Dashboard extends React.Component {
       <>
         <TripleColumn>
           <SmallColumns>
-            <TeamMembersView toggleFreakinSnackBar={this.toggleFreakinSnackBar} userId={user.userID} />
-            <TrainingSeriesView toggleFreakinSnackBar={this.toggleFreakinSnackBar} userId={user.userID} match={this.props.match} />
+            <TeamMembersView
+              toggleFreakinSnackBar={this.toggleFreakinSnackBar}
+              userId={user.userID}
+            />
+            <TrainingSeriesView
+              toggleFreakinSnackBar={this.toggleFreakinSnackBar}
+              userId={user.userID}
+              match={this.props.match}
+            />
           </SmallColumns>
           <NotificationsView userId={user.userID} />
         </TripleColumn>
@@ -83,7 +98,7 @@ class Dashboard extends React.Component {
   };
 
   render() {
-    const { classes } = this.props;
+    const {classes} = this.props;
     return (
       <>
         {this.props.doneLoading ? (
@@ -96,7 +111,6 @@ class Dashboard extends React.Component {
                 />
               </>
             )}
-            {this.props.getUser}
             <AppBar />
             {this.props.location.pathname !== "/home" && (
               <ReturnToDashboardButton />
@@ -104,7 +118,15 @@ class Dashboard extends React.Component {
             <DashboardContainer>
               <Router history={history}>
                 <Route exact path="/home" component={this.renderDashboard} />
-                <Route path="/home/profile" render={props => <ProfileView {...props} toggleFreakinSnackBar={this.toggleFreakinSnackBar} />} />
+                <Route
+                  path="/home/profile"
+                  render={props => (
+                    <ProfileView
+                      {...props}
+                      toggleFreakinSnackBar={this.toggleFreakinSnackBar}
+                    />
+                  )}
+                />
                 <Route
                   path="/home/team-member/:id"
                   render={props => (
@@ -165,6 +187,11 @@ class Dashboard extends React.Component {
                 />
                 <Route path="/home/post/:id" component={PostPage} />
               </Router>
+              <DashboardTour
+                isTourOpen={this.state.isTourOpen}
+                closeTour={this.closeTour}
+                newUser={this.props.newUser}
+              />
             </DashboardContainer>
           </>
         ) : (
@@ -177,22 +204,28 @@ class Dashboard extends React.Component {
   // tracking the tab value in navigation.js
   changeTabValue = value => {
     this.setState({
-      tabValue: value
+      tabValue: value,
     });
+  };
+
+  //Tour methods
+  closeTour = () => {
+    this.setState({isTourOpen: false});
   };
 }
 
 const mapStateToProps = state => {
   return {
     userProfile: state.userReducer.userProfile,
-    doneLoading: state.userReducer.doneLoading
+    doneLoading: state.userReducer.doneLoading,
+    newUser: state.userReducer.newUser,
   };
 };
 
 export default connect(
   mapStateToProps,
   {
-    getUser
+    getUser,
   }
 )(withStyles(styles)(Authenticate(Dashboard)));
 
