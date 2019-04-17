@@ -1,14 +1,14 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React from "react";
+import {connect} from "react-redux";
 
 //Components
 // import UserModal from '../Modals/userModal';
-import StripeView from '../Stripe/StripeView';
-import { logout } from '../../Auth/Auth';
-import Authentication from '../authenticate/authenticate';
+import StripeView from "../Stripe/StripeView";
+import {logout} from "../../Auth/Auth";
+import Authentication from "../authenticate/authenticate";
 
 //State Management
-import { getUser, editUser, deleteUser } from '../../store/actions/userActions';
+import {getUser, editUser, deleteUser} from "../../store/actions/userActions";
 
 //Styling
 import {
@@ -20,10 +20,10 @@ import {
   Modal,
   Avatar,
   Divider,
-  Paper
-} from '@material-ui/core';
+  Paper,
+} from "@material-ui/core";
 
-import styled from 'styled-components';
+import styled from "styled-components";
 
 function getModalStyle() {
   const top = 50;
@@ -32,94 +32,96 @@ function getModalStyle() {
   return {
     top: `${top}%`,
     left: `${left}%`,
-    transform: `translate(-${top}%, -${left}%)`
+    transform: `translate(-${top}%, -${left}%)`,
   };
 }
 
 const styles = theme => ({
   paper: {
-    position: 'absolute',
-    maxWidth: '500px',
-    width: '100%',
+    position: "absolute",
+    maxWidth: "500px",
+    width: "100%",
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
-    padding: '40px 20px',
-    outline: 'none',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    textAlign: 'center',
-       ['@media (max-width: 768px)']: { // eslint-disable-line no-useless-computed-key 
-      width: '81%'
+    padding: "40px 20px",
+    outline: "none",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    textAlign: "center",
+    "@media (max-width: 768px)": {
+      // eslint-disable-line no-useless-computed-key
+      width: "81%",
     },
-    ['@media (max-width: 480px)']: { // eslint-disable-line no-useless-computed-key 
-      width: '81%'
-    }
+    "@media (max-width: 480px)": {
+      // eslint-disable-line no-useless-computed-key
+      width: "81%",
+    },
   },
   profileContainer: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    width: '30%',
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    width: "30%",
     padding: 10,
-    textAlign: 'center',
-    ['@media (max-width: 1000px)']: {
+    textAlign: "center",
+    "@media (max-width: 1000px)": {
       // eslint-disable-line no-useless-computed-key
-      justifyContent: 'space-around',
-      flexDirection: 'row',
-      maxWidth: '768px',
-      width: '94%',
-      marginBottom: 10
+      justifyContent: "space-around",
+      flexDirection: "row",
+      maxWidth: "768px",
+      width: "94%",
+      marginBottom: 10,
     },
-    ['@media (max-width: 768px)']: {
+    "@media (max-width: 768px)": {
       // eslint-disable-line no-useless-computed-key
-      width: '94%'
+      width: "94%",
     },
-    ['@media (max-width: 480px)']: {
+    "@media (max-width: 480px)": {
       // eslint-disable-line no-useless-computed-key
-      flexDirection: 'column'
-    }
+      flexDirection: "column",
+    },
   },
   pricing: {
-    width: '70%',
-    margin: '0px 0px 0px 10px',
+    width: "70%",
+    margin: "0px 0px 0px 10px",
     padding: 10,
     // height: 350,
-    ['@media (max-width: 1000px)']: {
+    "@media (max-width: 1000px)": {
       // eslint-disable-line no-useless-computed-key
-      maxWidth: '768px',
-      width: '94%',
-      margin: 0
+      maxWidth: "768px",
+      width: "94%",
+      margin: 0,
     },
-    ['@media (max-width: 768px)']: {
+    "@media (max-width: 768px)": {
       // eslint-disable-line no-useless-computed-key
-      width: '94%'
-    }
+      width: "94%",
+    },
   },
   cardContent: {
-    backgroundColor: '#E8E9EB'
+    backgroundColor: "#E8E9EB",
   },
   media: {
     height: 200,
-    width: 200
+    width: 200,
   },
   bigAvatar: {
     margin: 10,
     width: 150,
-    height: 150
+    height: 150,
   },
   divider: {
-    width: '70%',
-    backgroundColor: '#E7E8EB',
-    margin: '5px 0 10px 0'
+    width: "70%",
+    backgroundColor: "#E7E8EB",
+    margin: "5px 0 10px 0",
   },
   bold: {
-    fontWeight: 700
+    fontWeight: 700,
   },
   bottomSpace: {
-    marginBottom: 30
-  }
+    marginBottom: 30,
+  },
 });
 
 const Container = styled.div`
@@ -129,7 +131,7 @@ const Container = styled.div`
   display: flex;
   max-width: 1000px;
   width: 100%;
-  height: 430px;
+  height: 480px;
   align-items: stretch;
   @media (max-width: 1000px) {
     flex-direction: column;
@@ -143,7 +145,7 @@ class ProfileView extends React.Component {
     super(props);
     this.state = {
       googleProfile: [],
-      open: false
+      open: false,
     };
   }
 
@@ -151,28 +153,28 @@ class ProfileView extends React.Component {
     this.props.toggleFreakinSnackBar();
   }
   handleOpen = () => {
-    this.setState({ open: true });
+    this.setState({open: true});
   };
 
   handleClose = () => {
-    this.setState({ open: false });
+    this.setState({open: false});
   };
 
   handleLogout = e => {
     e.preventDefault();
     logout();
-    this.props.history.push('/');
+    this.props.history.push("/");
   };
 
   handleDelete = id => {
     this.props.deleteUser(id);
-    this.props.history.push('/');
+    this.props.history.push("/");
   };
 
   render() {
     //Destructure user from userProfile
-    const { user } = this.props.userProfile;
-    const { classes } = this.props;
+    const {user} = this.props.userProfile;
+    const {classes} = this.props;
 
     let accountType;
     let account;
@@ -201,51 +203,61 @@ class ProfileView extends React.Component {
             <Card className={classes.profileContainer}>
               <div>
                 <Avatar
-                  alt='Remy Sharp'
-                  src={JSON.parse(localStorage.getItem('Profile')).picture}
+                  alt="Remy Sharp"
+                  src={JSON.parse(localStorage.getItem("Profile")).picture}
                   className={classes.bigAvatar}
                 />
-                <Typography gutterBottom variant='h5' component='h1'>
+                <Typography gutterBottom variant="h5" component="h1">
                   {user.name}
                 </Typography>
-                <Typography variant='subtitle1' gutterBottom>
+                <Typography variant="subtitle1" gutterBottom>
                   {user.email}
                 </Typography>
                 <Typography
                   gutterBottom
-                  variant='subtitle1'
-                  component='subtitle1'
+                  variant="subtitle1"
+                  component="subtitle1"
                 >
                   <div>Account Type: {accountType}</div>
                 </Typography>
               </div>
               <div>
-                <Divider variant='middle' className={classes.divider} />
+                <Divider variant="middle" className={classes.divider} />
                 <Typography
                   gutterBottom
-                  variant='subtitle1'
-                  component='subtitle1'
+                  variant="subtitle1"
+                  component="subtitle1"
                   className={classes.bold}
                 >
                   Messages Sent
                 </Typography>
                 <Typography
                   gutterBottom
-                  variant='subtitle1'
-                  component='subtitle1'
+                  variant="subtitle1"
+                  component="subtitle1"
                 >
                   {/* quick fix for minor bug, newUser object doesn't have notification count */}
-                  {user.notificationCount ? user.notificationCount : 0} out of{' '}
+                  {user.notificationCount ? user.notificationCount : 0} out of{" "}
                   {maxCount}
                 </Typography>
                 <CardActions>
-                  <Button
-                    variant='contained'
-                    onClick={this.handleOpen}
-                    className={classes.button}
-                  >
-                    Delete Account
-                  </Button>
+                  <ButtonContainer>
+                    <Button
+                      variant="contained"
+                      onClick={this.handleOpen}
+                      className={classes.button}
+                    >
+                      Delete Account
+                    </Button>
+                    <Button
+                      variant="contained"
+                      onClick={() => {
+                        this.props.activateTutorial();
+                      }}
+                    >
+                      Re-activate Tutorial
+                    </Button>
+                  </ButtonContainer>
                 </CardActions>
               </div>
             </Card>
@@ -257,8 +269,8 @@ class ProfileView extends React.Component {
           </>
         )}
         <Modal
-          aria-labelledby='simple-modal-title'
-          aria-describedby='simple-modal-description'
+          aria-labelledby="simple-modal-title"
+          aria-describedby="simple-modal-description"
           open={this.state.open}
           onClose={this.handleClose}
         >
@@ -266,9 +278,9 @@ class ProfileView extends React.Component {
             {account ? (
               <>
                 <Typography
-                  variant='h6'
-                  id='modal-title'
-                  style={{ marginBottom: 10 }}
+                  variant="h6"
+                  id="modal-title"
+                  style={{marginBottom: 10}}
                 >
                   Active subscription
                 </Typography>
@@ -279,17 +291,17 @@ class ProfileView extends React.Component {
               </>
             ) : (
               <>
-                <Typography variant='h6' id='modal-title'>
+                <Typography variant="h6" id="modal-title">
                   Are you sure you want to delete your account?
                 </Typography>
-                <Typography variant='subtitle' className={classes.bottomSpace}>
+                <Typography variant="subtitle" className={classes.bottomSpace}>
                   All data associated with this account will be permanently
                   deleted.
                 </Typography>
                 <Button
-                  type='submit'
-                  variant='contained'
-                  color='secondary'
+                  type="submit"
+                  variant="contained"
+                  color="secondary"
                   onClick={() => {
                     this.handleDelete(user.userID);
                   }}
@@ -309,7 +321,7 @@ const mapStateToProps = state => {
   return {
     userProfile: state.userReducer.userProfile,
     doneLoading: state.userReducer.doneLoading,
-    isEditing: state.userReducer.isEditing
+    isEditing: state.userReducer.isEditing,
   };
 };
 
@@ -318,6 +330,14 @@ export default connect(
   {
     getUser,
     editUser,
-    deleteUser
+    deleteUser,
   }
 )(withStyles(styles)(Authentication(ProfileView)));
+
+const ButtonContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  button {
+    margin-bottom: 10px;
+  }
+`;
