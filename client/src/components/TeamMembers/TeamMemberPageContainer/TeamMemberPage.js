@@ -214,10 +214,11 @@ class TeamMemberPage extends React.Component {
     //Checks to see if one number has been entered and if the full number matches
     let addDisabled = false;
     if (
-      /\+1 \(\d{1}/gm.test(this.state.teamMember.phoneNumber) === true &&
-      /^\s*(?:\+?(\d{1,3}))?([-. (]*(\d{3})[-. )]*)?((\d{3})[-. ]*(\d{4})(?:[-.x ]*(\d+))?)\S*$/gm.test(
-        this.state.teamMember.phoneNumber
-      ) === false
+      /^$/gm.test(this.state.teamMember.phoneNumber) === true ||
+      (/\+1 \(\d{0}/gm.test(this.state.teamMember.phoneNumber) === true &&
+        /^\s*(?:\+?(\d{1,3}))?([-. (]*(\d{3})[-. )]*)?((\d{3})[-. ]*(\d{4})(?:[-.x ]*(\d+))?)\S*$/gm.test(
+          this.state.teamMember.phoneNumber
+        ) === false)
     ) {
       addDisabled = true;
     }
@@ -362,10 +363,18 @@ class TeamMemberPage extends React.Component {
                     }
                     value="textOn"
                     color="default"
-                    style={this.state.teamMember.textOn ? { color: '#451476' } : { color: "#edeaea" }}
+                    style={
+                      this.state.teamMember.textOn
+                        ? { color: "#451476" }
+                        : { color: "#edeaea" }
+                    }
                   />
                 }
-                label={this.state.teamMember.textOn ? 'Texts Active' : 'Texts Inactive'}
+                label={
+                  this.state.teamMember.textOn
+                    ? "Texts Active"
+                    : "Texts Inactive"
+                }
               />
               <FormControlLabel
                 control={
@@ -376,10 +385,18 @@ class TeamMemberPage extends React.Component {
                     }
                     value="emailOn"
                     color="default"
-                    style={this.state.teamMember.emailOn ? { color: '#451476' } : { color: "#edeaea" }}
+                    style={
+                      this.state.teamMember.emailOn
+                        ? { color: "#451476" }
+                        : { color: "#edeaea" }
+                    }
                   />
                 }
-                label={this.state.teamMember.emailOn ? 'Email Active' : 'Email Inactive'}
+                label={
+                  this.state.teamMember.emailOn
+                    ? "Email Active"
+                    : "Email Inactive"
+                }
               />
             </ButtonContainer>
             <ButtonContainer>
