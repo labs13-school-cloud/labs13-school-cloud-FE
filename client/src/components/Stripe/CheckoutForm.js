@@ -167,7 +167,7 @@ class CheckoutForm extends Component {
     };
   }
   handleOpen = () => {
-    this.setState({ open: true, activeSelect: "Basic" });
+    this.setState({ open: true });
   };
 
   handleClose = () => {
@@ -239,7 +239,6 @@ class CheckoutForm extends Component {
           color="primary"
           className={classes.button}
           onClick={this.handleOpen}
-          style={this.state.activeSelect === "Basic" ? { background: '#3DBC93' } : null}
         >
           Basic
         </Button>
