@@ -57,11 +57,15 @@ const NavigationContainer = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	background: white;
+	padding-bottom: 10px;
+	border-bottom: 1px solid #eeeeee;
 `;
 const NavigationTop = styled.div`
 	background-color: #3ebd93;
 	width: 100%;
 	padding: 8px 0;
+	margin-bottom: 10px;
 `;
 const NavItemsContainer = styled.div`
 	display: flex;
@@ -79,7 +83,7 @@ const NavItemsContainer = styled.div`
 		margin: 0 10px;
 		text-decoration: none;
 		color: #690cb0;
-		&: hover {
+		&:hover {
 			cursor: pointer;
 		}
 	}
