@@ -327,15 +327,6 @@ class TeamMemberPage extends React.Component {
               />
             </MemberInfoContainer>
             <MemberInfoContainer>
-              <TextField
-                id="standard-name"
-                label="email"
-                type="email"
-                className={classes.textField}
-                value={this.state.teamMember.email}
-                onChange={this.handleChange("email")}
-                margin="normal"
-              />
               <NumberFormat
                 format="+1 (###) ###-####"
                 mask="_"
@@ -347,15 +338,15 @@ class TeamMemberPage extends React.Component {
                 onChange={this.handleChange("phoneNumber")}
                 margin="normal"
               />
-
-              {/* <TextField
+              <TextField
                 id="standard-name"
-                label="phone"
+                label="email"
+                type="email"
                 className={classes.textField}
-                value={this.state.teamMember.phoneNumber}
-                onChange={this.handleChange("phoneNumber")}
+                value={this.state.teamMember.email}
+                onChange={this.handleChange("email")}
                 margin="normal"
-              /> */}
+              />
             </MemberInfoContainer>
             <ButtonContainer>
               <FormControlLabel
