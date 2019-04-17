@@ -19,28 +19,28 @@ import Nate from "../../img/tb-nboyette.jpeg";
 import { login } from "../../Auth/Auth";
 
 const styles = theme => ({
-    form: {
-        width: "75%",
-        margin: "0 auto",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-    },
-    textField: {
-        marginLeft: theme.spacing.unit,
-        marginRight: theme.spacing.unit,
-        width: "100%",
-        margin: "15px auto"
-      },
-      button: {
-        background: "#451476",
-        color: "white",
-        margin: "0 auto",
-        "&:hover": {
-            background: "#591a99",
-            color: "white"
-          }
-      }
+  form: {
+    width: "75%",
+    margin: "0 auto",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center"
+  },
+  textField: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+    width: "100%",
+    margin: "15px auto"
+  },
+  button: {
+    background: "#451476",
+    color: "white",
+    margin: "0 auto",
+    "&:hover": {
+      background: "#591a99",
+      color: "white"
+    }
+  }
 });
 
 class Team extends React.Component {
@@ -132,30 +132,41 @@ class Team extends React.Component {
           </TeamContainer>
           <ContactContainer>
             <h3>Contact Us</h3>
-            <form className={classes.form} name="contact" method="POST" data-netlify="true">
-            <TextField
+            <form
+              className={classes.form}
+              name="contact"
+              method="POST"
+              data-netlify="true"
+            >
+              <TextField
                 label="Name"
                 className={classes.textField}
                 margin="normal"
                 required
               />
-            <TextField
+              <TextField
                 label="Email"
                 className={classes.textField}
                 margin="normal"
                 required
               />
-            <TextField
+              <TextField
                 label="Message"
                 className={classes.textField}
                 margin="normal"
                 multiline
                 rows="8"
-                defaultValue="Type your message here"
+                placeholder="Type your message here"
                 variant="outlined"
                 required
               />
-                <Button className={classes.button} type="submit" variant="outlined">Send</Button>
+              <Button
+                className={classes.button}
+                type="submit"
+                variant="outlined"
+              >
+                Send
+              </Button>
             </form>
           </ContactContainer>
           <FooterContainer>
