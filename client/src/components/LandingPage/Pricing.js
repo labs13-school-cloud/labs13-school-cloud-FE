@@ -299,8 +299,8 @@ class Pricing extends React.Component {
         </FirstSection>
         <FooterContainer>
           <FooterItemsContainer>
-            <a>Team</a>
-            <a>Pricing</a>
+            <Link to="/team">Team</Link>
+            <Link to="/pricing">Pricing</Link>
           </FooterItemsContainer>
           <ArrowUpward onClick={() => this.scrollToTop()} />
         </FooterContainer>

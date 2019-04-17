@@ -185,8 +185,8 @@ class LandingPageView extends React.Component {
           </FirstSection>
           <FooterContainer>
             <FooterItemsContainer>
-              <a href="/team">Team</a>
-              <a href="/pricing">Pricing</a>
+              <Link to="/team">Team</Link>
+              <Link to="/pricing">Pricing</Link>
             </FooterItemsContainer>
             <ArrowUpward onClick={() => this.scrollToTop()} />
           </FooterContainer>
