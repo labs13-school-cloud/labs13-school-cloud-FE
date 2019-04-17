@@ -59,7 +59,7 @@ class LandingPageView extends React.Component {
             <VideoContainer>
               <iframe
                 width="100%"
-                height="400"
+                height="350"
                 src="https://www.youtube.com/embed/CQ85sUNBK7w"
                 frameborder="0"
                 allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
@@ -258,12 +258,16 @@ const NavbarItemsContainer = styled.div`
 const FirstSection = styled.div`
   background-color: #fafafa;
   width: 95%;
-  margin: 0px auto 20px;
-  padding: 50px 10px;
+  margin: 40px auto 20px;
+  padding: 75px 10px;
   display: flex;
+  border-radius: 5px;
   @media (max-width: 700px) {
     width: 100%;
     margin: 0;
+  }
+  p {
+    text-align: center;
   }
 `;
 
@@ -310,12 +314,13 @@ const MarketingContent = styled.div`
   padding: 0 25px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  
   align-items: center;
   h3 {
     font-size: 32px;
     color: #451476;
     margin-bottom: 0;
+    text-align: left;
   }
   p {
     font-size: 20px;
@@ -361,6 +366,7 @@ const LandingPageButtonContainer = styled.div`
     margin: 0 10px;
     background-color: #451476;
     color: white;
+    padding: 0 16px;
   }
   button:nth-child(2) {
     border: 1px solid #451476;
