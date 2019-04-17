@@ -47,7 +47,7 @@ const styles = theme => ({
 const TrainingSeriesAssignment = props => {
   const { classes } = props;
   // add hours to sendDate, formatting with moment ensures it displays properly on the FE
-  const formattedStartDate = moment(props.member.startDate).add(8, "hours").format('MMMM Do, YYYY')
+  const formattedStartDate = moment(props.member.startDate).add(1, "hours").format('MMMM Do, YYYY')
   return (
     <ListStyles>
       <ListItem className={classes.listItem}>

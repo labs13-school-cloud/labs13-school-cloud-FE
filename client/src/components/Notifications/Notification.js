@@ -41,7 +41,7 @@ function Notification(props) {
 	} = props.notification;
 
 	// add hours to sendDate, formatting with moment ensures it displays properly on the FE
-	const formattedSendDate = moment(sendDate).add(8, "hours").format('MMMM Do')
+	const formattedSendDate = moment(sendDate).add(1, "hours").format('MMMM Do')
 
 	return (
 		<ListItem className={classes.listItem}>
