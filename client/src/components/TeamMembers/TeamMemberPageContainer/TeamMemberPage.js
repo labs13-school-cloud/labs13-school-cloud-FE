@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
+import NumberFormat from 'react-number-format';
 import styled from "styled-components";
 
 // Material UI
@@ -27,25 +27,34 @@ import { getTrainingSeries, editTeamMember } from "../../../store/actions";
 const styles = theme => ({
   // these styles fixes the off-centering
   paper: {
-    width: "89%",
-    backgroundColor: theme.palette.background.paper,
-    boxSizing: "border-box",
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing.unit * 4,
-    outline: "none",
-    margin: "5px auto",
-
-    "@media (max-width: 768px)": {
-      textAlign: "center",
-      padding: "30px"
-    }
+      // "max-width": 800,
+      width: "89%",
+      backgroundColor: theme.palette.background.paper,
+      boxShadow: theme.shadows[5],
+      padding: theme.spacing.unit * 4,
+      outline: "none",
+      margin: "5px auto",
+  
+      "@media (max-width: 768px)": {
+        width: "89%",
+        // padding: 0,
+        margin: "5px auto"
+      },
+  
+      "@media (max-width: 480px)": {
+        width: "80%",
+        // padding: 0,
+        margin: "5px auto"
+      }
+    
   },
   form: {
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
-    margin: "0 auto"
+    margin: "0 auto",
+    width:'100%'
   },
   info: {
     "margin-right": "50px"
@@ -297,19 +306,29 @@ class TeamMemberPage extends React.Component {
               <TextField
                 id="standard-name"
                 label="email"
+                type="email"
                 className={classes.textField}
                 value={this.state.teamMember.email}
                 onChange={this.handleChange("email")}
                 margin="normal"
               />
-              <TextField
+              <NumberFormat format="+1 (###) ###-####" mask="_" id="standard-name"
+                label="phone number"
+                customInput={TextField}
+                className={classes.textField}
+                value={this.state.teamMember.phoneNumber}
+                onChange={this.handleChange("phoneNumber")}
+                margin="normal"
+                />
+
+              {/* <TextField
                 id="standard-name"
                 label="phone"
                 className={classes.textField}
                 value={this.state.teamMember.phoneNumber}
                 onChange={this.handleChange("phoneNumber")}
                 margin="normal"
-              />
+              /> */}
             </MemberInfoContainer>
             <ButtonContainer>
               <FormControlLabel
@@ -363,7 +382,10 @@ class TeamMemberPage extends React.Component {
 
 const MainContainer = styled.div`
   margin: 0 auto;
-  max-width: 768px;
+  max-width: 800px;
+  width:100%;
+  display:flex;
+  flex-direction:column;
 
   @media (max-width: 768px) {
     width: 95%;

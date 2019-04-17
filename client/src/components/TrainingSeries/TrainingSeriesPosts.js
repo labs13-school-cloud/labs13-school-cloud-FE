@@ -280,7 +280,7 @@ class TrainingSeriesPosts extends React.Component {
     let titleEdit;
     if (this.state.editingTitle) {
       titleEdit = (
-        <form onSubmit={e => this.updateTitle(e)} noValidate autoComplete="off">
+        <form onSubmit={e => this.updateTitle(e)}  autoComplete="off">
           <TrainingSeriesTitle>
             <TextField
               id="standard-name"

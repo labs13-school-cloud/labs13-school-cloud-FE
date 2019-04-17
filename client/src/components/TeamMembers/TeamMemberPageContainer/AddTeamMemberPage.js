@@ -1,4 +1,5 @@
 import React from "react";
+import NumberFormat from 'react-number-format';
 
 import styled from "styled-components";
 
@@ -204,21 +205,21 @@ class TeamMemberPage extends React.Component {
               <TextField
                 id="standard-name"
                 label="Email"
+                type="email"
                 className={classes.textField}
                 value={this.state.teamMember.email}
                 onChange={this.handleChange("email")}
                 margin="normal"
                 required
               />
-              <TextField
-                id="standard-name"
+              <NumberFormat format="+1 (###) ###-####" mask="_" id="standard-name"
                 label="Phone Number"
+                customInput={TextField}
                 className={classes.textField}
                 value={this.state.teamMember.phoneNumber}
                 onChange={this.handleChange("phoneNumber")}
                 margin="normal"
-                required
-              />
+                required/>
             </MemberInfoContainer>
             <ButtonContainer>
               <FormControlLabel
