@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import styled from "styled-components";
 import { CardElement, injectStripe } from "react-stripe-elements";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
@@ -60,11 +59,9 @@ const styles = theme => ({
     display: "flex",
     justifyContent: "space-around",
     margin: "0 auto",
-    ["@media (max-width: 1000px)"]: {
-      // eslint-disable-line no-useless-computed-key
+    ["@media (max-width: 1000px)"]: { // eslint-disable-line no-useless-computed-key
     },
-    ["@media (max-width: 720px)"]: {
-      // eslint-disable-line no-useless-computed-key
+    ["@media (max-width: 720px)"]: { // eslint-disable-line no-useless-computed-key
       // flexDirection:'column',
       justifyContent: "center",
       flexWrap: "wrap"

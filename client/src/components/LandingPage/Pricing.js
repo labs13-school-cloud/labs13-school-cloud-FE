@@ -14,7 +14,6 @@ import {
   TableHead,
   TableRow,
   Typography,
-  Paper
 } from "@material-ui/core/";
 
 import Logo from "../../img/training-bot.png";
@@ -370,56 +369,6 @@ const FirstSection = styled.div`
   padding: 50px 10px;
   display: flex;
   flex-direction: column;
-`;
-
-const LandingPageContentContainer = styled.div`
-  width: 50%;
-  margin: 0 auto;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 0 80px;
-  h1 {
-    margin-top: 0;
-    color: #451476;
-    font-size: 42px;
-  }
-
-  @media (max-width: 1000px) {
-    width: 100%;
-    padding: 0;
-    text-align: center;
-    p {
-      padding: 0 50px;
-    }
-  }
-`;
-
-const LandingPageButtonContainer = styled.div`
-  display: flex;
-  margin-top: 30px;
-  button:first-child {
-    margin: 0 10px;
-    background-color: #451476;
-    color: white;
-  }
-  button:nth-child(2) {
-    border: 1px solid #451476;
-    color: #451476;
-    &:hover {
-      background-color: #451476;
-      color: white;
-    }
-  }
-`;
-
-const VideoContainer = styled.div`
-  width: 50%;
-  @media (max-width: 1000px) {
-    display: none;
-  }
 `;
 
 const FooterContainer = styled.div`
