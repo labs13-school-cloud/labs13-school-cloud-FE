@@ -38,6 +38,7 @@ const styles = theme => ({
   },
   button: {
     margin: theme.spacing.unit,
+    padding: "5px 16px",
     background: "#451476",
     color: "white",
     "&:hover": {
@@ -48,6 +49,10 @@ const styles = theme => ({
       color: "grey",
       backgroundColor: "lightgrey"
     }
+  },
+  cancelButton: {
+    margin: theme.spacing.unit,
+    padding: "5px 16px"
   },
 
   memberList: {
@@ -148,7 +153,10 @@ function AddMember(props) {
                       `Assign`
                     )}
                   </Button>
-                  <Button onClick={props.handler.routeToPostPage}>
+                  <Button
+                    onClick={props.handler.routeToPostPage}
+                    className={classes.cancelButton}
+                  >
                     Cancel
                   </Button>
                 </ButtonContainer>
@@ -225,6 +233,8 @@ const MemberListContainer = styled.div`
 `;
 const ButtonContainer = styled.div`
   display: flex;
+  width: 100%;
+  justify-content: center;
   align-self: center;
   margin: 0 auto;
 `;
