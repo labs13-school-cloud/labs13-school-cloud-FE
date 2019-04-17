@@ -3,8 +3,6 @@ import { Link } from "react-router-dom";
 import NumberFormat from "react-number-format";
 import styled from "styled-components";
 
-import ProgressCircle from "../../Progress/ProgressCircle";
-
 // Material UI
 import { withStyles } from "@material-ui/core/styles";
 import {
@@ -123,7 +121,7 @@ class TeamMemberPage extends React.Component {
   };
 
   componentDidMount() {
-    this.props.getTrainingSeries(this.props.userId);
+    // this.props.getTrainingSeries(this.props.userId);
     if (Object.keys(this.props.teamMember).length !== 0) {
       this.setState({
         teamMember: this.props.teamMember.teamMember,
@@ -181,6 +179,8 @@ class TeamMemberPage extends React.Component {
   render() {
     const { classes } = this.props;
 
+    console.log("IS LOADING TMP", this.props.isLoading);
+
     const { textOn, emailOn } = this.state.teamMember;
 
     let textDisabled;
@@ -197,6 +197,17 @@ class TeamMemberPage extends React.Component {
     if (emailOn && textOn) {
       textDisabled = false;
       emailDisabled = false;
+    }
+
+    //Checks to see if one number has been entered and if the full number matches
+    let addDisabled = false;
+    if (
+      /\+1 \(\d{1}/gm.test(this.state.teamMember.phoneNumber) === true &&
+      /^\s*(?:\+?(\d{1,3}))?([-. (]*(\d{3})[-. )]*)?((\d{3})[-. ]*(\d{4})(?:[-.x ]*(\d+))?)\S*$/gm.test(
+        this.state.teamMember.phoneNumber
+      ) === false
+    ) {
+      addDisabled = true;
     }
 
     const trainingAssigments =
@@ -242,7 +253,7 @@ class TeamMemberPage extends React.Component {
             <Button
               className={classes.assignBtn}
               variant="outlined"
-              className={classes.button}
+              // className={classes.button}
               onClick={this.routeToAssigning}
             >
               Assign to Training Series
@@ -271,9 +282,7 @@ class TeamMemberPage extends React.Component {
       );
     }
 
-    return this.props.isLoading ? (
-      <ProgressCircle />
-    ) : (
+    return (
       <MainContainer>
         <form className={classes.form}>
           <Paper className={classes.paper}>
@@ -366,6 +375,7 @@ class TeamMemberPage extends React.Component {
             </ButtonContainer>
             <ButtonContainer>
               <NotificationWidget
+                disabled={addDisabled ? true : false}
                 teamMember={this.state.teamMember}
                 editTeamMemberSubmit={this.props.editTeamMemberSubmit}
                 type="success"
@@ -424,8 +434,7 @@ const ButtonContainer = styled.div`
 `;
 
 const mapStateToProps = state => ({
-  trainingSeries: state.trainingSeriesReducer.trainingSeries,
-  isLoading: state.trainingSeriesReducer.isLoading
+  trainingSeries: state.trainingSeriesReducer.trainingSeries
 });
 
 export default connect(
