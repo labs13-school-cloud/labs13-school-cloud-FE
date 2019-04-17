@@ -152,6 +152,10 @@ const styles = theme => ({
 
     "@media (max-width: 768px)": {
       margin: "10px 5px"
+    },
+
+    "&:disabled": {
+      background: "white"
     }
 
     // "@media (max-width: 480px)": {
@@ -392,7 +396,11 @@ class TrainingSeriesPosts extends React.Component {
         <>
           <HeaderContainer>
             <Typography variant="title">Assigned Team Members</Typography>
-            <Button className={classes.button} variant="outlined" disabled>
+            <Button
+              className={classes.assignButton}
+              variant="outlined"
+              disabled
+            >
               Assign Members
             </Button>
           </HeaderContainer>
