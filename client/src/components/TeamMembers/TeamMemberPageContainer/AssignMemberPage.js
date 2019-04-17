@@ -152,7 +152,7 @@ class AssignMemberPage extends React.Component {
   };
   render() {
     const { classes } = this.props;
-    console.log(this.props);
+
     return (
       <AssignMemberContainer>
         <Paper className={classes.paper}>
@@ -188,7 +188,12 @@ class AssignMemberPage extends React.Component {
             </FormControl>
             <ButtonContainer>
               <Button
-                disabled={this.state.isRouting === true ? "true" : null}
+                disabled={
+                  this.state.isRouting === true ||
+                  this.state.trainingSeriesID === undefined
+                    ? "true"
+                    : null
+                }
                 className={classes.assignButton}
                 variant="contained"
                 type="submit"

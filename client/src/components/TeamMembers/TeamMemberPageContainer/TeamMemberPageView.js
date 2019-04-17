@@ -3,6 +3,7 @@ import React from "react";
 //Components
 import TeamMemberPage from "./TeamMemberPage";
 import Snackbar from "../../Snackbar/Snackbar";
+import ProgressCircle from "../../Progress/ProgressCircle";
 
 //Redux
 import { connect } from "react-redux";
@@ -50,7 +51,8 @@ class TeamMemberPageView extends React.Component {
   renderTeamMemberPage = () => {
     if (
       this.props.loadSuccess &&
-      Object.keys(this.props.teamMember).length !== 0
+      Object.keys(this.props.teamMember).length !== 0 &&
+      !this.props.isLoading
     ) {
       return (
         <TeamMemberPage
@@ -62,6 +64,8 @@ class TeamMemberPageView extends React.Component {
           history={this.props.history}
         />
       );
+    } else {
+      return <ProgressCircle />;
     }
   };
 
