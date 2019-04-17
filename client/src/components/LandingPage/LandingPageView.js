@@ -178,9 +178,9 @@ class LandingPageView extends React.Component {
                 reminders. Get started for FREE now!
               </p>
               <LogoImage src={Logo} alt="A cute, personable robot" />
-              <LandingPageButtonContainer>
+              <GetStartedButton>
                 <Button onClick={login}>Get Started</Button>
-              </LandingPageButtonContainer>
+              </GetStartedButton>
             </LandingPageContentContainer>
           </FirstSection>
           <FooterContainer>
@@ -518,11 +518,11 @@ const FooterItemsContainer = styled.div`
 
 const GetStartedButton = styled.div`
   button {
-    margin: 0 10px;
+    margin: 10px 10px 0;
     background-color: #451476;
     color: white;
     &:hover {
-      margin: 0 10px;
+      margin: 0 15px;
       background-color: #451476;
       color: white;
     }
