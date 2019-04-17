@@ -165,7 +165,8 @@ class CheckoutForm extends Component {
       premium: false,
       open: false,
       buttonState: "",
-      error: ""
+      error: "",
+      activeSelect: ""
     };
   }
   handleOpen = () => {
@@ -179,18 +180,22 @@ class CheckoutForm extends Component {
   componentDidMount = () => {
     this.props.getPlans();
   };
+
   handleChange = (e, nickname) => {
     e.preventDefault();
     if (e.currentTarget.name === "plan") {
       this.setState({
         paymentToggle: true,
-        buttonState: nickname
+        buttonState: nickname,
+        activeSelect: nickname
       });
     }
     this.setState({
       [e.currentTarget.name]: e.currentTarget.value
     });
   };
+
+
   createToken = async email => {
     try {
       let { token } = await this.props.stripe.createToken({ email: email });
@@ -199,6 +204,7 @@ class CheckoutForm extends Component {
       this.setState({ error: "Please enter payment information" });
     }
   };
+
   submit = async () => {
     const { name, email, userID, stripe } = this.props.userProfile;
     const { plan } = this.state;
@@ -212,6 +218,7 @@ class CheckoutForm extends Component {
       this.setState({ error: "Please enter payment information" });
     }
   };
+
   unsub = (userID, stripe) => {
     this.props.unsubscribe(userID, stripe);
     this.setState({ open: false });
@@ -322,47 +329,48 @@ class CheckoutForm extends Component {
                     </Button>
                   </div>
                 ) : (
-                  <div className={classes.subCard}>
-                    <Typography className={classes.title}>
-                      {plan.nickname}
-                    </Typography>
-                    <Typography className={classes.price}>
-                      ${plan.amount / 100}
-                      <span className={classes.subPrice}> / mo</span>
-                    </Typography>
-                    <div className={classes.content}>
-                      <Typography className={classes.feature}>
-                        Automated Text/Email
+                    <div className={classes.subCard}>
+                      <Typography className={classes.title}>
+                        {plan.nickname}
                       </Typography>
-                      <Typography className={classes.feature}>
-                        Unlimited Training Series
+                      <Typography className={classes.price}>
+                        ${plan.amount / 100}
+                        <span className={classes.subPrice}> / mo</span>
                       </Typography>
-                      <Typography className={classes.feature}>
-                        Unlimited Team Members
-                      </Typography>
-                      <div className={classes.spread}>
+                      <div className={classes.content}>
                         <Typography className={classes.feature}>
-                          Message Limit
-                        </Typography>
+                          Automated Text/Email
+                      </Typography>
                         <Typography className={classes.feature}>
-
-                        {plan.nickname === "Premium" ? "200 / mo" : "1000 / mo"}
-
+                          Unlimited Training Series
+                      </Typography>
+                        <Typography className={classes.feature}>
+                          Unlimited Team Members
+                      </Typography>
+                        <div className={classes.spread}>
+                          <Typography className={classes.feature}>
+                            Message Limit
                         </Typography>
+                          <Typography className={classes.feature}>
+
+                            {plan.nickname === "Premium" ? "200 / mo" : "1000 / mo"}
+
+                          </Typography>
+                        </div>
                       </div>
+                      <Button
+                        key={plan.created}
+                        color="primary"
+                        name="plan"
+                        className={classes.button}
+                        value={plan.id}
+                        onClick={e => this.handleChange(e, plan.nickname)}
+                        style={this.state.activeSelect === plan.nickname ? { background: '#3DBC93' } : null}
+                      >
+                        {plan.nickname}
+                      </Button>
                     </div>
-                    <Button
-                      key={plan.created}
-                      color="primary"
-                      name="plan"
-                      className={classes.button}
-                      value={plan.id}
-                      onClick={e => this.handleChange(e, plan.nickname)}
-                    >
-                      {plan.nickname}
-                    </Button>
-                  </div>
-                );
+                  );
               })}
             </div>
           </FormControl>
@@ -387,8 +395,8 @@ class CheckoutForm extends Component {
               </Button>
             </FormControl>
           ) : (
-            <span />
-          )}
+                <span />
+              )}
         </div>
 
         {/* Unsubscribe Modal */}
