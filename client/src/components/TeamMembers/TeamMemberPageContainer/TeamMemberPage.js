@@ -283,13 +283,13 @@ class TeamMemberPage extends React.Component {
               Assign to Training Series
             </Button>
           </div>
-          <Typography variant="subheading" className={classes.messageText}>
-            You don't have any training series to assign.
-          </Typography>
-          <Typography variant="subheading" className={classes.messageText}>
-            <Link to="/home/create-training-series">Click here</Link> to create
-            your first training series.
-          </Typography>
+          <HolderText>
+            <p>You don't have any training series to assign.</p>
+            <p variant="subheading" className={classes.messageText}>
+              <Link to="/home/create-training-series">Click here</Link> to
+              create your first training series.
+            </p>
+          </HolderText>
         </>
       );
     }
