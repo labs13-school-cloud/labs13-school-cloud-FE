@@ -40,6 +40,9 @@ function Notification(props) {
 		title,
 	} = props.notification;
 
+	// add hours to sendDate, formatting with moment ensures it displays properly on the FE
+	const formattedSendDate = moment(sendDate).add(1, "hours").format('MMMM Do')
+
 	return (
 		<ListItem className={classes.listItem}>
 			<ListItemText
@@ -49,9 +52,7 @@ function Notification(props) {
 			<Typography className={classes.sendDate}>
 				{props.filterSent === 'pending' ? 'Send Date' : 'Sent on'}
 				<br />
-				{moment(sendDate)
-					.add(1, 'days')
-					.format('MMMM Do')}
+				{formattedSendDate}
 			</Typography>
 		</ListItem>
 	);

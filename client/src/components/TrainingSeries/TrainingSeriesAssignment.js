@@ -2,7 +2,7 @@ import React from "react";
 
 import styled from "styled-components";
 import { withStyles } from "@material-ui/core/styles";
-import { ListItem, ListItemText, Divider } from "@material-ui/core/";
+import { ListItem, ListItemText } from "@material-ui/core/";
 
 import moment from "moment";
 
@@ -46,14 +46,14 @@ const styles = theme => ({
 
 const TrainingSeriesAssignment = props => {
   const { classes } = props;
-  const startDate = moment(props.member.startDate).format("MMMM Do, YYYY ");
+  // add hours to sendDate, formatting with moment ensures it displays properly on the FE
+  const formattedStartDate = moment(props.member.startDate).add(1, "hours").format('MMMM Do, YYYY')
   return (
     <ListStyles>
       <ListItem className={classes.listItem}>
         <ListItemText
-          classname
           primary={`Member: ${props.member.firstName} ${props.member.lastName}`}
-          secondary={`Start Date: ${startDate}`}
+          secondary={`Start Date: ${formattedStartDate}`}
         />
       </ListItem>
     </ListStyles>
