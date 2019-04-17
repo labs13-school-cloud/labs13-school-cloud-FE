@@ -201,7 +201,7 @@ class TeamMemberPage extends React.Component {
 		let addDisabled = false;
 		if (
 			/\+1 \(\d{1}/gm.test(this.state.teamMember.phoneNumber) === true &&
-			/^\s*(?:\+?(\d{1,3}))?([-. (]*(\d{3})[-. )]*)?((\d{3})[-. ]*(\d{2,4})(?:[-.x ]*(\d+))?)\s*$/gm.test(
+			/^\s*(?:\+?(\d{1,3}))?([-. (]*(\d{3})[-. )]*)?((\d{3})[-. ]*(\d{4})?)\s*$/gm.test(
 				this.state.teamMember.phoneNumber
 			) === false
 		) {
