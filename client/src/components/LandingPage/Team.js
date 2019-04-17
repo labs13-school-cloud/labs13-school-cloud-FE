@@ -68,17 +68,17 @@ class Team extends React.Component {
             </NavbarItemsContainer>
           </NavbarContainer>
           <TeamContainer>
-            <h3>The Team</h3>
+            <Typography variant="h3">The Team</Typography>
             <TeamInfoContainer>
               <TeamMember>
                 <img src={Alex} alt="Alex King" />
                 <Typography variant="title">Alex King</Typography>
                 <p>Full-Stack Developer</p>
                 <TeamMemberLinks>
-                  <a href="https://github.com/Alex-AK">
+                  <a target="blank" href="https://github.com/Alex-AK">
                     <FontAwesomeIcon className="fa-2x" icon={faGithubSquare} />
                   </a>
-                  <a href="https://www.linkedin.com/in/alex-ak/">
+                  <a target="blank" href="https://www.linkedin.com/in/alex-ak/">
                     <FontAwesomeIcon className="fa-2x" icon={faLinkedin} />
                   </a>
                 </TeamMemberLinks>
@@ -88,10 +88,13 @@ class Team extends React.Component {
                 <Typography variant="title">Brandon Lent</Typography>
                 <p>Full-Stack Developer</p>
                 <TeamMemberLinks>
-                  <a href="https://github.com/Blent1050">
+                  <a target="blank" href="https://github.com/Blent1050">
                     <FontAwesomeIcon className="fa-2x" icon={faGithubSquare} />
                   </a>
-                  <a href="https://www.linkedin.com/in/brandon-lent/">
+                  <a
+                    target="blank"
+                    href="https://www.linkedin.com/in/brandon-lent/"
+                  >
                     <FontAwesomeIcon className="fa-2x" icon={faLinkedin} />
                   </a>
                 </TeamMemberLinks>
@@ -101,10 +104,13 @@ class Team extends React.Component {
                 <Typography variant="title">Leigh-Ann Friedel</Typography>
                 <p>Full-Stack Developer</p>
                 <TeamMemberLinks>
-                  <a href="https://github.com/lafriedel">
+                  <a target="blank" href="https://github.com/lafriedel">
                     <FontAwesomeIcon className="fa-2x" icon={faGithubSquare} />
                   </a>
-                  <a href="https://www.linkedin.com/in/leigh-ann-friedel/">
+                  <a
+                    target="blank"
+                    href="https://www.linkedin.com/in/leigh-ann-friedel/"
+                  >
                     <FontAwesomeIcon className="fa-2x" icon={faLinkedin} />
                   </a>
                 </TeamMemberLinks>
@@ -114,10 +120,13 @@ class Team extends React.Component {
                 <Typography variant="title">Mike Landers</Typography>
                 <p>Full-Stack Developer</p>
                 <TeamMemberLinks>
-                  <a href="https://github.com/mlanders">
+                  <a target="blank" href="https://github.com/mlanders">
                     <FontAwesomeIcon className="fa-2x" icon={faGithubSquare} />
                   </a>
-                  <a href="https://www.linkedin.com/in/mikelanders/">
+                  <a
+                    target="blank"
+                    href="https://www.linkedin.com/in/mikelanders/"
+                  >
                     <FontAwesomeIcon className="fa-2x" icon={faLinkedin} />
                   </a>
                 </TeamMemberLinks>
@@ -127,10 +136,13 @@ class Team extends React.Component {
                 <Typography variant="title">Nate Boyette</Typography>
                 <p>Full-Stack Developer</p>
                 <TeamMemberLinks>
-                  <a href="https://github.com/nateboyette">
+                  <a target="blank" href="https://github.com/nateboyette">
                     <FontAwesomeIcon className="fa-2x" icon={faGithubSquare} />
                   </a>
-                  <a href="https://www.linkedin.com/in/nateboyette/">
+                  <a
+                    target="blank"
+                    href="https://www.linkedin.com/in/nateboyette/"
+                  >
                     <FontAwesomeIcon className="fa-2x" icon={faLinkedin} />
                   </a>
                 </TeamMemberLinks>
@@ -138,7 +150,7 @@ class Team extends React.Component {
             </TeamInfoContainer>
           </TeamContainer>
           <ContactContainer>
-            <h3>Contact Us</h3>
+            <Typography variant="h3">Contact Us</Typography>
             <form
               className={classes.form}
               name="contact"
