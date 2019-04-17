@@ -1,19 +1,19 @@
 // contains all components for landing page
-import React from 'react';
+import React from "react";
 
 //Styling
-import styled from 'styled-components';
-import Button from '@material-ui/core/Button';
+import styled from "styled-components";
+import Button from "@material-ui/core/Button";
 //Icons & Images
-import FaceIcon from '@material-ui/icons/Face';
-import {ArrowUpward} from '@material-ui/icons';
-import Logo from '../../img/training-bot.png';
+import FaceIcon from "@material-ui/icons/Face";
+import {ArrowUpward} from "@material-ui/icons";
+import Logo from "../../img/training-bot.png";
 
-import undrawFolder from '../../img/undraw_folder_39kl.svg';
-import undrawNotify from '../../img/undraw_notify_88a4.svg';
-import undrawTask from '../../img/undraw_task_31wc (1).svg';
+import undrawFolder from "../../img/undraw_folder_39kl.svg";
+import undrawNotify from "../../img/undraw_notify_88a4.svg";
+import undrawTask from "../../img/undraw_task_31wc (1).svg";
 //Auth
-import {login} from '../../Auth/Auth';
+import {login} from "../../Auth/Auth";
 
 class LandingPageView extends React.Component {
   render() {
@@ -175,9 +175,13 @@ export default LandingPageView;
 
 const LandingPageContainer = styled.div`
   margin: 0 auto;
+  padding: 0 25px;
   width: 100%;
   max-width: 1280px;
   background-color: white;
+  @media (max-width: 700px) {
+    padding: 0;
+  }
 `;
 
 const NavbarContainer = styled.nav`
@@ -189,6 +193,9 @@ const NavbarContainer = styled.nav`
   justify-content: space-between;
   border-bottom: 1px solid #f0f4f8;
   padding: 0 25px;
+  @media (max-width: 700px) {
+    padding: 0 5px;
+  }
   img {
     width: 50px;
   }
@@ -203,11 +210,14 @@ const NavbarContainer = styled.nav`
     color: #451476;
     border: 1px solid #451476;
     background-color: white;
-    padding: 8px;
+    padding: 4px 10px;
     border-radius: 7%;
     &:hover {
       background-color: #451476;
       color: white;
+    }
+    @media (max-width: 700px) {
+      width: 75px;
     }
   }
   h3 {
@@ -226,6 +236,10 @@ const FirstSection = styled.div`
   margin: 0px auto 20px;
   padding: 50px 10px;
   display: flex;
+  @media (max-width: 700px) {
+    width: 100%;
+    margin: 0;
+  }
 `;
 
 const MarketingContentContainer = styled.div`
@@ -240,17 +254,29 @@ const MarketingContentContainer = styled.div`
 const MarketingSection = styled.div`
   width: 100%;
   display: flex;
-  margin-bottom: 40px;
+  justify-content: space-between;
+  margin: 40px 0;
   &:nth-child(even) {
     flex-direction: row-reverse;
   }
   img {
     width: 100%;
   }
+  @media (max-width: 700px) {
+    flex-direction: column;
+    justify-content: center;
+    &:nth-child(even) {
+      flex-direction: column;
+    }
+  }
 `;
 
 const MarketingImage = styled.div`
-  width: 50%;
+  width: 40%;
+  @media (max-width: 700px) {
+    width: 80%;
+    margin: 0 auto;
+  }
 `;
 
 const MarketingContent = styled.div`
@@ -267,6 +293,13 @@ const MarketingContent = styled.div`
   }
   p {
     font-size: 20px;
+  }
+  @media (max-width: 700px) {
+    width: 80%;
+    margin: 0 auto;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0;
   }
 `;
 
