@@ -46,8 +46,8 @@ const styles = theme => ({
 
 const TrainingSeriesAssignment = props => {
   const { classes } = props;
-  // add twelve hours to sendDate, formatting with moment ensures it displays properly on the dashboard 
-  const formattedStartDate = moment(props.member.startDate).add(12, "hours").format('MMMM Do, YYYY')
+  // add hours to sendDate, formatting with moment ensures it displays properly on the FE
+  const formattedStartDate = moment(props.member.startDate).add(8, "hours").format('MMMM Do, YYYY')
   return (
     <ListStyles>
       <ListItem className={classes.listItem}>

@@ -40,8 +40,8 @@ function Notification(props) {
 		title,
 	} = props.notification;
 
-	// add twelve hours to sendDate, formatting with moment ensures it displays properly on the dashboard 
-	const formattedSendDate = moment(sendDate).add(12, "hours").format('MMMM Do')
+	// add hours to sendDate, formatting with moment ensures it displays properly on the FE
+	const formattedSendDate = moment(sendDate).add(8, "hours").format('MMMM Do')
 
 	return (
 		<ListItem className={classes.listItem}>
