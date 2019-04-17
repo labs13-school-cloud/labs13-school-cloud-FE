@@ -1,6 +1,6 @@
 // contains all components for landing page
 import React from "react";
-
+import {scroller, animateScroll as scroll} from "react-scroll";
 //Styling
 import styled from "styled-components";
 import Button from "@material-ui/core/Button";
@@ -16,6 +16,16 @@ import undrawTask from "../../img/undraw_task_31wc (1).svg";
 import {login} from "../../Auth/Auth";
 
 class LandingPageView extends React.Component {
+  scrollTo() {
+    scroller.scrollTo("MarketingContent", {
+      duration: 800,
+      delay: 0,
+      smooth: "easeInOutQuart",
+    });
+  }
+  scrollToTop() {
+    scroll.scrollToTop();
+  }
   render() {
     return (
       <>
@@ -41,7 +51,9 @@ class LandingPageView extends React.Component {
               </p>
               <LandingPageButtonContainer>
                 <Button onClick={login}>Get Started</Button>
-                <Button variant="outlined">Learn More</Button>
+                <Button variant="outlined" onClick={() => this.scrollTo(500)}>
+                  Learn More
+                </Button>
               </LandingPageButtonContainer>
             </LandingPageContentContainer>
             <VideoContainer>
@@ -57,7 +69,7 @@ class LandingPageView extends React.Component {
             </VideoContainer>
           </FirstSection>
           {/* MARKETING CONTAINER / UNDRAW PHOTO SECTION */}
-          <MarketingContentContainer>
+          <MarketingContentContainer name="MarketingContent">
             <MarketingSection>
               <MarketingImage>
                 <img
@@ -103,9 +115,6 @@ class LandingPageView extends React.Component {
                 </p>
               </MarketingContent>
             </MarketingSection>
-            <GetStartedButton>
-              <Button onClick={login}>Get Started</Button>
-            </GetStartedButton>
           </MarketingContentContainer>
           {/* TESTIMONY SECTION
           <TrainingBotTestimonyContainer>
@@ -161,13 +170,26 @@ class LandingPageView extends React.Component {
               <Button>Try Now</Button>
             </GetStartedBox>
           </GetStartedContainer> */}
+          <FirstSection>
+            <LandingPageContentContainer>
+              <h1>Get Started For Free!</h1>
+              <p>
+                Let Training Bot take the stress out of managing your team's
+                reminders. Get started for FREE now!
+              </p>
+              <LogoImage src={Logo} alt="A cute, personable robot" />
+              <LandingPageButtonContainer>
+                <Button onClick={login}>Get Started</Button>
+              </LandingPageButtonContainer>
+            </LandingPageContentContainer>
+          </FirstSection>
           <FooterContainer>
             <FooterItemsContainer>
               <h3>Team</h3>
               <h3>Pricing</h3>
               <h3>Blog</h3>
             </FooterItemsContainer>
-            <ArrowUpward />
+            <ArrowUpward onClick={() => this.scrollToTop()} />
           </FooterContainer>
         </LandingPageContainer>
       </>
@@ -499,4 +521,8 @@ const GetStartedButton = styled.div`
       color: white;
     }
   }
+`;
+
+const LogoImage = styled.img`
+  width: 50px;
 `;
