@@ -417,6 +417,15 @@ class TrainingSeriesPosts extends React.Component {
       posts = this.props.posts;
     }
 
+    /* sort posts by days from start */
+    const sortedPosts = posts.sort((a, b) =>
+      a.daysFromStart > b.daysFromStart
+        ? 1
+        : b.daysFromStart > a.daysFromStart
+        ? -1
+        : 0
+    );
+
     return this.props.isLoading ? (
       <ProgressCircle />
     ) : (
@@ -477,7 +486,7 @@ class TrainingSeriesPosts extends React.Component {
               </HolderText>
             ) : (
               <ListStyles className={classes.listStyle}>
-                {posts.map(post => (
+                {sortedPosts.map(post => (
                   <ListItemContainer>
                     <ListItem key={post.postID} className={classes.listItem}>
                       <ListItemText
