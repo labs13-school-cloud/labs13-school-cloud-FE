@@ -4,6 +4,8 @@ import { ArrowUpward } from "@material-ui/icons";
 import { withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faLinkedin, faGithubSquare } from '@fortawesome/free-brands-svg-icons';
 
 import Logo from "../../img/training-bot.png";
 import Alex from "../../img/tb-aking.jpeg";
@@ -40,8 +42,8 @@ const Team = props => {
             <Typography variant="title">Alex King</Typography>
             <p>Full-Stack Developer</p>
             <TeamMemberLinks>
-              <a href="https://github.com/Alex-AK">GitHub</a>
-              <a href="https://www.linkedin.com/in/alex-ak/">LinkedIn</a>
+              <a href="https://github.com/Alex-AK"><FontAwesomeIcon className="fa-2x" icon={faGithubSquare}></FontAwesomeIcon></a>
+              <a href="https://www.linkedin.com/in/alex-ak/"><FontAwesomeIcon className="fa-2x" icon={faLinkedin}></FontAwesomeIcon></a>
             </TeamMemberLinks>
           </TeamMember>
           <TeamMember>
@@ -49,8 +51,8 @@ const Team = props => {
             <Typography variant="title">Brandon Lent</Typography>
             <p>Full-Stack Developer</p>
             <TeamMemberLinks>
-              <a href="https://github.com/Blent1050">GitHub</a>
-              <a href="https://www.linkedin.com/in/brandon-lent/">LinkedIn</a>
+              <a href="https://github.com/Blent1050"><FontAwesomeIcon className="fa-2x" icon={faGithubSquare}></FontAwesomeIcon></a>
+              <a href="https://www.linkedin.com/in/brandon-lent/"><FontAwesomeIcon className="fa-2x" icon={faLinkedin}></FontAwesomeIcon></a>
             </TeamMemberLinks>
           </TeamMember>
           <TeamMember>
@@ -58,9 +60,9 @@ const Team = props => {
             <Typography variant="title">Leigh-Ann Friedel</Typography>
             <p>Full-Stack Developer</p>
             <TeamMemberLinks>
-              <a href="https://github.com/lafriedel">GitHub</a>
+              <a href="https://github.com/lafriedel"><FontAwesomeIcon className="fa-2x" icon={faGithubSquare}></FontAwesomeIcon></a>
               <a href="https://www.linkedin.com/in/leigh-ann-friedel/">
-                LinkedIn
+              <FontAwesomeIcon className="fa-2x" icon={faLinkedin}></FontAwesomeIcon>
               </a>
             </TeamMemberLinks>
           </TeamMember>
@@ -69,8 +71,8 @@ const Team = props => {
             <Typography variant="title">Mike Landers</Typography>
             <p>Full-Stack Developer</p>
             <TeamMemberLinks>
-              <a href="https://github.com/mlanders">GitHub</a>
-              <a href="https://www.linkedin.com/in/mikelanders/">LinkedIn</a>
+              <a href="https://github.com/mlanders"><FontAwesomeIcon className="fa-2x" icon={faGithubSquare}></FontAwesomeIcon></a>
+              <a href="https://www.linkedin.com/in/mikelanders/"><FontAwesomeIcon className="fa-2x" icon={faLinkedin}></FontAwesomeIcon></a>
             </TeamMemberLinks>
           </TeamMember>
           <TeamMember>
@@ -78,8 +80,8 @@ const Team = props => {
             <Typography variant="title">Nate Boyette</Typography>
             <p>Full-Stack Developer</p>
             <TeamMemberLinks>
-              <a href="https://github.com/nateboyette">GitHub</a>
-              <a href="https://www.linkedin.com/in/nateboyette/">LinkedIn</a>
+              <a href="https://github.com/nateboyette"><FontAwesomeIcon className="fa-2x" icon={faGithubSquare}></FontAwesomeIcon></a>
+              <a href="https://www.linkedin.com/in/nateboyette/"><FontAwesomeIcon className="fa-2x" icon={faLinkedin}></FontAwesomeIcon></a>
             </TeamMemberLinks>
           </TeamMember>
         </TeamInfoContainer>
@@ -184,7 +186,6 @@ const TeamMember = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border: 1px solid red;
   flex-basis: 32%;
   margin-top: 40px;
   img {
@@ -199,14 +200,22 @@ const TeamMember = styled.div`
   @media (max-width: 768px) {
     flex-basis: 49%;
   }
+
+  @media (max-width:580px) {
+      flex-basis: 100%;
+  }
 `;
 
 const TeamMemberLinks = styled.div`
   display: flex;
-  border: 1px solid blue;
-  width: 70%;
   justify-content: space-evenly;
+
+  a, a:visited {
+      color: #451476;
+      margin: 0 7px;
+  }
 `;
+
 const FooterContainer = styled.div`
   width: 100%;
   display: flex;
