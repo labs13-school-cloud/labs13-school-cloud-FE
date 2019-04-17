@@ -3,9 +3,11 @@ import styled from "styled-components";
 import { ArrowUpward } from "@material-ui/icons";
 import { withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLinkedin, faGithubSquare } from '@fortawesome/free-brands-svg-icons';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faLinkedin, faGithubSquare } from "@fortawesome/free-brands-svg-icons";
 
 import Logo from "../../img/training-bot.png";
 import Alex from "../../img/tb-aking.jpeg";
@@ -16,89 +18,160 @@ import Nate from "../../img/tb-nboyette.jpeg";
 //Auth
 import { login } from "../../Auth/Auth";
 
-const styles = theme => ({});
+const styles = theme => ({
+    form: {
+        width: "75%",
+        margin: "0 auto",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+    },
+    textField: {
+        marginLeft: theme.spacing.unit,
+        marginRight: theme.spacing.unit,
+        width: "100%",
+        margin: "15px auto"
+      },
+      button: {
+        background: "#451476",
+        color: "white",
+        margin: "0 auto",
+        "&:hover": {
+            background: "#591a99",
+            color: "white"
+          }
+      }
+});
 
-const Team = props => {
-  const { classes } = props;
-  return (
+class Team extends React.Component {
+  render() {
+    const { classes } = this.props;
+    return (
       <>
-    <LandingPageContainer>
-      {/* NAVIGATION */}
-      <NavbarContainer>
-        <Link to="/">
-          <img src={Logo} alt="A cute, personable robot" />
-        </Link>
-        <NavbarItemsContainer>
-          <NavbarItem to="/team">Team</NavbarItem>
-          <NavbarItem to="/pricing">Pricing</NavbarItem>
-          <h2 onClick={login}>Sign In</h2>
-        </NavbarItemsContainer>
-      </NavbarContainer>
-      <TeamContainer>
-        <h3>The Team</h3>
-        <TeamInfoContainer>
-          <TeamMember>
-            <img src={Alex} alt="Alex King" />
-            <Typography variant="title">Alex King</Typography>
-            <p>Full-Stack Developer</p>
-            <TeamMemberLinks>
-              <a href="https://github.com/Alex-AK"><FontAwesomeIcon className="fa-2x" icon={faGithubSquare}></FontAwesomeIcon></a>
-              <a href="https://www.linkedin.com/in/alex-ak/"><FontAwesomeIcon className="fa-2x" icon={faLinkedin}></FontAwesomeIcon></a>
-            </TeamMemberLinks>
-          </TeamMember>
-          <TeamMember>
-            <img src={Brandon} alt="Brandon Lent" />
-            <Typography variant="title">Brandon Lent</Typography>
-            <p>Full-Stack Developer</p>
-            <TeamMemberLinks>
-              <a href="https://github.com/Blent1050"><FontAwesomeIcon className="fa-2x" icon={faGithubSquare}></FontAwesomeIcon></a>
-              <a href="https://www.linkedin.com/in/brandon-lent/"><FontAwesomeIcon className="fa-2x" icon={faLinkedin}></FontAwesomeIcon></a>
-            </TeamMemberLinks>
-          </TeamMember>
-          <TeamMember>
-            <img src={LeighAnn} alt="Leigh-Ann Friedel" />
-            <Typography variant="title">Leigh-Ann Friedel</Typography>
-            <p>Full-Stack Developer</p>
-            <TeamMemberLinks>
-              <a href="https://github.com/lafriedel"><FontAwesomeIcon className="fa-2x" icon={faGithubSquare}></FontAwesomeIcon></a>
-              <a href="https://www.linkedin.com/in/leigh-ann-friedel/">
-              <FontAwesomeIcon className="fa-2x" icon={faLinkedin}></FontAwesomeIcon>
-              </a>
-            </TeamMemberLinks>
-          </TeamMember>
-          <TeamMember>
-            <img src={Mike} alt="Mike Landers" />
-            <Typography variant="title">Mike Landers</Typography>
-            <p>Full-Stack Developer</p>
-            <TeamMemberLinks>
-              <a href="https://github.com/mlanders"><FontAwesomeIcon className="fa-2x" icon={faGithubSquare}></FontAwesomeIcon></a>
-              <a href="https://www.linkedin.com/in/mikelanders/"><FontAwesomeIcon className="fa-2x" icon={faLinkedin}></FontAwesomeIcon></a>
-            </TeamMemberLinks>
-          </TeamMember>
-          <TeamMember>
-            <img src={Nate} alt="Nate Boyette" />
-            <Typography variant="title">Nate Boyette</Typography>
-            <p>Full-Stack Developer</p>
-            <TeamMemberLinks>
-              <a href="https://github.com/nateboyette"><FontAwesomeIcon className="fa-2x" icon={faGithubSquare}></FontAwesomeIcon></a>
-              <a href="https://www.linkedin.com/in/nateboyette/"><FontAwesomeIcon className="fa-2x" icon={faLinkedin}></FontAwesomeIcon></a>
-            </TeamMemberLinks>
-          </TeamMember>
-        </TeamInfoContainer>
-      </TeamContainer>
-      <FooterContainer>
-        <FooterItemsContainer>
-          <Link to="/team">Team</Link>
-          <Link to="/pricing">Pricing</Link>
-        </FooterItemsContainer>
-        <ArrowUpward onClick={() => window.scrollTo(0, 0)} />
-      </FooterContainer>
-    </LandingPageContainer>
-    </>
-  );
-};
+        <LandingPageContainer>
+          {/* NAVIGATION */}
+          <NavbarContainer>
+            <Link to="/">
+              <img src={Logo} alt="A cute, personable robot" />
+            </Link>
+            <NavbarItemsContainer>
+              <NavbarItem to="/team">Team</NavbarItem>
+              <NavbarItem to="/pricing">Pricing</NavbarItem>
+              <h2 onClick={login}>Sign In</h2>
+            </NavbarItemsContainer>
+          </NavbarContainer>
+          <TeamContainer>
+            <h3>The Team</h3>
+            <TeamInfoContainer>
+              <TeamMember>
+                <img src={Alex} alt="Alex King" />
+                <Typography variant="title">Alex King</Typography>
+                <p>Full-Stack Developer</p>
+                <TeamMemberLinks>
+                  <a href="https://github.com/Alex-AK">
+                    <FontAwesomeIcon className="fa-2x" icon={faGithubSquare} />
+                  </a>
+                  <a href="https://www.linkedin.com/in/alex-ak/">
+                    <FontAwesomeIcon className="fa-2x" icon={faLinkedin} />
+                  </a>
+                </TeamMemberLinks>
+              </TeamMember>
+              <TeamMember>
+                <img src={Brandon} alt="Brandon Lent" />
+                <Typography variant="title">Brandon Lent</Typography>
+                <p>Full-Stack Developer</p>
+                <TeamMemberLinks>
+                  <a href="https://github.com/Blent1050">
+                    <FontAwesomeIcon className="fa-2x" icon={faGithubSquare} />
+                  </a>
+                  <a href="https://www.linkedin.com/in/brandon-lent/">
+                    <FontAwesomeIcon className="fa-2x" icon={faLinkedin} />
+                  </a>
+                </TeamMemberLinks>
+              </TeamMember>
+              <TeamMember>
+                <img src={LeighAnn} alt="Leigh-Ann Friedel" />
+                <Typography variant="title">Leigh-Ann Friedel</Typography>
+                <p>Full-Stack Developer</p>
+                <TeamMemberLinks>
+                  <a href="https://github.com/lafriedel">
+                    <FontAwesomeIcon className="fa-2x" icon={faGithubSquare} />
+                  </a>
+                  <a href="https://www.linkedin.com/in/leigh-ann-friedel/">
+                    <FontAwesomeIcon className="fa-2x" icon={faLinkedin} />
+                  </a>
+                </TeamMemberLinks>
+              </TeamMember>
+              <TeamMember>
+                <img src={Mike} alt="Mike Landers" />
+                <Typography variant="title">Mike Landers</Typography>
+                <p>Full-Stack Developer</p>
+                <TeamMemberLinks>
+                  <a href="https://github.com/mlanders">
+                    <FontAwesomeIcon className="fa-2x" icon={faGithubSquare} />
+                  </a>
+                  <a href="https://www.linkedin.com/in/mikelanders/">
+                    <FontAwesomeIcon className="fa-2x" icon={faLinkedin} />
+                  </a>
+                </TeamMemberLinks>
+              </TeamMember>
+              <TeamMember>
+                <img src={Nate} alt="Nate Boyette" />
+                <Typography variant="title">Nate Boyette</Typography>
+                <p>Full-Stack Developer</p>
+                <TeamMemberLinks>
+                  <a href="https://github.com/nateboyette">
+                    <FontAwesomeIcon className="fa-2x" icon={faGithubSquare} />
+                  </a>
+                  <a href="https://www.linkedin.com/in/nateboyette/">
+                    <FontAwesomeIcon className="fa-2x" icon={faLinkedin} />
+                  </a>
+                </TeamMemberLinks>
+              </TeamMember>
+            </TeamInfoContainer>
+          </TeamContainer>
+          <ContactContainer>
+            <h3>Contact Us</h3>
+            <form className={classes.form} name="contact" method="POST" data-netlify="true">
+            <TextField
+                label="Name"
+                className={classes.textField}
+                margin="normal"
+                required
+              />
+            <TextField
+                label="Email"
+                className={classes.textField}
+                margin="normal"
+                required
+              />
+            <TextField
+                label="Message"
+                className={classes.textField}
+                margin="normal"
+                multiline
+                rows="8"
+                defaultValue="Type your message here"
+                variant="outlined"
+                required
+              />
+                <Button className={classes.button} type="submit" variant="outlined">Send</Button>
+            </form>
+          </ContactContainer>
+          <FooterContainer>
+            <FooterItemsContainer>
+              <Link to="/team">Team</Link>
+              <Link to="/pricing">Pricing</Link>
+            </FooterItemsContainer>
+            <ArrowUpward onClick={() => window.scrollTo(0, 0)} />
+          </FooterContainer>
+        </LandingPageContainer>
+      </>
+    );
+  }
+}
 
-export default Team;
+export default withStyles(styles)(Team);
 
 const LandingPageContainer = styled.div`
   margin: 0 auto;
@@ -201,8 +274,8 @@ const TeamMember = styled.div`
     flex-basis: 49%;
   }
 
-  @media (max-width:580px) {
-      flex-basis: 100%;
+  @media (max-width: 580px) {
+    flex-basis: 100%;
   }
 `;
 
@@ -210,9 +283,31 @@ const TeamMemberLinks = styled.div`
   display: flex;
   justify-content: space-evenly;
 
-  a, a:visited {
-      color: #451476;
-      margin: 0 7px;
+  a,
+  a:visited {
+    color: #451476;
+    margin: 0 7px;
+  }
+`;
+
+const ContactContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 95%;
+  margin: 40px auto;
+  background-color: #fafafa;
+  padding: 30px 20px;
+  box-sizing: border-box;
+  h3 {
+    color: #451476;
+    font-size: 32px;
+    text-align: center;
+    margin: 0;
+    margin-bottom: 5px;
+  }
+  @media (max-width: 1000px) {
+    width: 100%;
   }
 `;
 
