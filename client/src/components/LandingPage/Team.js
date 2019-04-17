@@ -15,6 +15,9 @@ import Brandon from "../../img/tb-blent.jpeg";
 import LeighAnn from "../../img/tb-lfriedel.jpeg";
 import Mike from "../../img/tb-mlanders.jpeg";
 import Nate from "../../img/tb-nboyette.jpeg";
+
+import { scroller, animateScroll as scroll } from "react-scroll";
+
 //Auth
 import { login } from "../../Auth/Auth";
 
@@ -44,6 +47,10 @@ const styles = theme => ({
 });
 
 class Team extends React.Component {
+  scrollToTop() {
+    scroll.scrollToTop();
+  }
+
   render() {
     const { classes } = this.props;
     return (
@@ -174,7 +181,7 @@ class Team extends React.Component {
               <Link to="/team">Team</Link>
               <Link to="/pricing">Pricing</Link>
             </FooterItemsContainer>
-            <ArrowUpward onClick={() => window.scrollTo(0, 0)} />
+            <ArrowUpward onClick={() => this.scrollToTop()} />
           </FooterContainer>
         </LandingPageContainer>
       </>
