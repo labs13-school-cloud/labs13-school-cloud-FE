@@ -1,7 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import NumberFormat from 'react-number-format';
+import NumberFormat from "react-number-format";
 import styled from "styled-components";
+
+import ProgressCircle from "../../Progress/ProgressCircle";
 
 // Material UI
 import { withStyles } from "@material-ui/core/styles";
@@ -27,26 +29,25 @@ import { getTrainingSeries, editTeamMember } from "../../../store/actions";
 const styles = theme => ({
   // these styles fixes the off-centering
   paper: {
-      // "max-width": 800,
+    // "max-width": 800,
+    width: "89%",
+    backgroundColor: theme.palette.background.paper,
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing.unit * 4,
+    outline: "none",
+    margin: "5px auto",
+
+    "@media (max-width: 768px)": {
       width: "89%",
-      backgroundColor: theme.palette.background.paper,
-      boxShadow: theme.shadows[5],
-      padding: theme.spacing.unit * 4,
-      outline: "none",
-      margin: "5px auto",
-  
-      "@media (max-width: 768px)": {
-        width: "89%",
-        // padding: 0,
-        margin: "5px auto"
-      },
-  
-      "@media (max-width: 480px)": {
-        width: "80%",
-        // padding: 0,
-        margin: "5px auto"
-      }
-    
+      // padding: 0,
+      margin: "5px auto"
+    },
+
+    "@media (max-width: 480px)": {
+      width: "80%",
+      // padding: 0,
+      margin: "5px auto"
+    }
   },
   form: {
     display: "flex",
@@ -54,7 +55,7 @@ const styles = theme => ({
     justifyContent: "center",
     alignItems: "center",
     margin: "0 auto",
-    width:'100%'
+    width: "100%"
   },
   info: {
     "margin-right": "50px"
@@ -270,7 +271,9 @@ class TeamMemberPage extends React.Component {
       );
     }
 
-    return (
+    return this.props.isLoading ? (
+      <ProgressCircle />
+    ) : (
       <MainContainer>
         <form className={classes.form}>
           <Paper className={classes.paper}>
@@ -312,14 +315,17 @@ class TeamMemberPage extends React.Component {
                 onChange={this.handleChange("email")}
                 margin="normal"
               />
-              <NumberFormat format="+1 (###) ###-####" mask="_" id="standard-name"
+              <NumberFormat
+                format="+1 (###) ###-####"
+                mask="_"
+                id="standard-name"
                 label="phone number"
                 customInput={TextField}
                 className={classes.textField}
                 value={this.state.teamMember.phoneNumber}
                 onChange={this.handleChange("phoneNumber")}
                 margin="normal"
-                />
+              />
 
               {/* <TextField
                 id="standard-name"
@@ -383,9 +389,9 @@ class TeamMemberPage extends React.Component {
 const MainContainer = styled.div`
   margin: 0 auto;
   max-width: 800px;
-  width:100%;
-  display:flex;
-  flex-direction:column;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 
   @media (max-width: 768px) {
     width: 95%;
@@ -418,7 +424,8 @@ const ButtonContainer = styled.div`
 `;
 
 const mapStateToProps = state => ({
-  trainingSeries: state.trainingSeriesReducer.trainingSeries
+  trainingSeries: state.trainingSeriesReducer.trainingSeries,
+  isLoading: state.trainingSeriesReducer.isLoading
 });
 
 export default connect(
