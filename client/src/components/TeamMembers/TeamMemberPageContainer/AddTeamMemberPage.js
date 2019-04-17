@@ -240,12 +240,12 @@ class TeamMemberPage extends React.Component {
 										color='primary'
 									/>
 								}
-								label='Texts Active'
+								label={this.state.teamMember.textOn ? 'Texts Active' : 'Texts Inactive'}
 							/>
 							<FormControlLabel
 								control={
 									<Switch
-									disabled={this.state.teamMember.email===''}
+										disabled={this.state.teamMember.email === ''}
 										checked={this.state.teamMember.emailOn}
 										onChange={
 											emailDisabled ? null : this.handleToggleChange("emailOn")
@@ -254,7 +254,7 @@ class TeamMemberPage extends React.Component {
 										color='primary'
 									/>
 								}
-								label='Email Active'
+								label={this.state.teamMember.emailOn ? 'Email Active' : 'Email Inactive'}
 							/>
 						</ButtonContainer>
 						<ButtonContainer>
@@ -269,8 +269,8 @@ class TeamMemberPage extends React.Component {
 								{this.state.isRouting ? (
 									<LoadingImage src={TrainingBotGIF} alt='Loading Icon' />
 								) : (
-									"Add Member"
-								)}
+										"Add Member"
+									)}
 							</Button>
 							<Button
 								className={classes.button}

@@ -308,6 +308,7 @@ class TeamMemberPage extends React.Component {
                 value={this.state.teamMember.firstName}
                 onChange={this.handleChange("firstName")}
                 margin="normal"
+                required
               />
               <TextField
                 id="standard-name"
@@ -316,6 +317,7 @@ class TeamMemberPage extends React.Component {
                 value={this.state.teamMember.lastName}
                 onChange={this.handleChange("lastName")}
                 margin="normal"
+                required
               />
               <TextField
                 id="standard-name"
@@ -324,6 +326,7 @@ class TeamMemberPage extends React.Component {
                 value={this.state.teamMember.jobDescription}
                 onChange={this.handleChange("jobDescription")}
                 margin="normal"
+                required
               />
             </MemberInfoContainer>
             <MemberInfoContainer>
@@ -337,6 +340,7 @@ class TeamMemberPage extends React.Component {
                 value={this.state.teamMember.phoneNumber}
                 onChange={this.handleChange("phoneNumber")}
                 margin="normal"
+                required
               />
               <TextField
                 id="standard-name"
@@ -357,10 +361,11 @@ class TeamMemberPage extends React.Component {
                       textDisabled ? null : this.handleToggleChange("textOn")
                     }
                     value="textOn"
-                    color="primary"
+                    color="default"
+                    style={this.state.teamMember.textOn ? { color: '#451476' } : { color: "#edeaea" }}
                   />
                 }
-                label="Texts Active"
+                label={this.state.teamMember.textOn ? 'Texts Active' : 'Texts Inactive'}
               />
               <FormControlLabel
                 control={
@@ -370,10 +375,11 @@ class TeamMemberPage extends React.Component {
                       emailDisabled ? null : this.handleToggleChange("emailOn")
                     }
                     value="emailOn"
-                    color="primary"
+                    color="default"
+                    style={this.state.teamMember.emailOn ? { color: '#451476' } : { color: "#edeaea" }}
                   />
                 }
-                label="Email Active"
+                label={this.state.teamMember.emailOn ? 'Email Active' : 'Email Inactive'}
               />
             </ButtonContainer>
             <ButtonContainer>
