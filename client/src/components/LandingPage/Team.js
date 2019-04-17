@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { ArrowUpward } from "@material-ui/icons";
 import { withStyles } from "@material-ui/core/styles";
+import Typography from "@material-ui/core/Typography";
 import { Link } from "react-router-dom";
 
 import Logo from "../../img/training-bot.png";
@@ -13,23 +14,14 @@ import Nate from "../../img/tb-nboyette.jpeg";
 //Auth
 import { login } from "../../Auth/Auth";
 
-const styles = theme => ({
-  root: {
-    width: "75%",
-    // marginTop: theme.spacing.unit * 3,
-    overflowX: "auto",
-    margin: "0 auto",
-    fontSize: "1rem"
-  },
-  table: {
-    minWidth: 400
-  }
-});
+const styles = theme => ({});
 
 const Team = props => {
-    const { classes } = props;
+  const { classes } = props;
   return (
+      <>
     <LandingPageContainer>
+      {/* NAVIGATION */}
       <NavbarContainer>
         <Link to="/">
           <img src={Logo} alt="A cute, personable robot" />
@@ -41,14 +33,56 @@ const Team = props => {
         </NavbarItemsContainer>
       </NavbarContainer>
       <TeamContainer>
-<h3>The Team</h3>
-<TeamInfoContainer>
-<img src={Alex} alt="Alex King" />
-<img src={Brandon} alt="Brandon Lent" />
-<img src={LeighAnn} alt="Leigh-Ann Friedel" />
-<img src={Mike} alt="Mike Landers" />
-<img src={Nate} alt="Nate Boyette" />
-</TeamInfoContainer>
+        <h3>The Team</h3>
+        <TeamInfoContainer>
+          <TeamMember>
+            <img src={Alex} alt="Alex King" />
+            <Typography variant="title">Alex King</Typography>
+            <p>Full-Stack Developer</p>
+            <TeamMemberLinks>
+              <a href="https://github.com/Alex-AK">GitHub</a>
+              <a href="https://www.linkedin.com/in/alex-ak/">LinkedIn</a>
+            </TeamMemberLinks>
+          </TeamMember>
+          <TeamMember>
+            <img src={Brandon} alt="Brandon Lent" />
+            <Typography variant="title">Brandon Lent</Typography>
+            <p>Full-Stack Developer</p>
+            <TeamMemberLinks>
+              <a href="https://github.com/Blent1050">GitHub</a>
+              <a href="https://www.linkedin.com/in/brandon-lent/">LinkedIn</a>
+            </TeamMemberLinks>
+          </TeamMember>
+          <TeamMember>
+            <img src={LeighAnn} alt="Leigh-Ann Friedel" />
+            <Typography variant="title">Leigh-Ann Friedel</Typography>
+            <p>Full-Stack Developer</p>
+            <TeamMemberLinks>
+              <a href="https://github.com/lafriedel">GitHub</a>
+              <a href="https://www.linkedin.com/in/leigh-ann-friedel/">
+                LinkedIn
+              </a>
+            </TeamMemberLinks>
+          </TeamMember>
+          <TeamMember>
+            <img src={Mike} alt="Mike Landers" />
+            <Typography variant="title">Mike Landers</Typography>
+            <p>Full-Stack Developer</p>
+            <TeamMemberLinks>
+              <a href="https://github.com/mlanders">GitHub</a>
+              <a href="https://www.linkedin.com/in/mikelanders/">LinkedIn</a>
+            </TeamMemberLinks>
+          </TeamMember>
+          <TeamMember>
+            <img src={Nate} alt="Nate Boyette" />
+            <Typography variant="title">Nate Boyette</Typography>
+            <p>Full-Stack Developer</p>
+            <TeamMemberLinks>
+              <a href="https://github.com/nateboyette">GitHub</a>
+              <a href="https://www.linkedin.com/in/nateboyette/">LinkedIn</a>
+            </TeamMemberLinks>
+          </TeamMember>
+        </TeamInfoContainer>
       </TeamContainer>
       <FooterContainer>
         <FooterItemsContainer>
@@ -58,16 +92,18 @@ const Team = props => {
         <ArrowUpward onClick={() => window.scrollTo(0, 0)} />
       </FooterContainer>
     </LandingPageContainer>
+    </>
   );
 };
 
-export default withStyles(styles)(Team);
+export default Team;
 
 const LandingPageContainer = styled.div`
   margin: 0 auto;
   width: 100%;
   max-width: 1280px;
   background-color: white;
+  box-sizing: border-box;
 `;
 
 const NavbarContainer = styled.nav`
@@ -79,11 +115,11 @@ const NavbarContainer = styled.nav`
   justify-content: space-between;
   border-bottom: 1px solid #f0f4f8;
   padding: 0 25px;
+  box-sizing: border-box;
   img {
     width: 50px;
   }
-  h2,
-  a {
+  h2 {
     margin-left: 30px;
     font-size: 16px;
     font-weight: 500;
@@ -117,13 +153,14 @@ const NavbarItem = styled(Link)`
 `;
 
 const TeamContainer = styled.div`
-display: flex;
+  display: flex;
   justify-content: center;
   flex-direction: column;
-  width: 85%;
+  width: 95%;
   margin: 40px auto;
   background-color: #fafafa;
   padding: 30px 20px;
+  box-sizing: border-box;
   h3 {
     color: #451476;
     font-size: 32px;
@@ -137,18 +174,39 @@ display: flex;
 `;
 
 const TeamInfoContainer = styled.div`
-display: flex;
-flex-wrap: wrap;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+`;
 
-img {
+const TeamMember = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid red;
+  flex-basis: 32%;
+  margin-top: 40px;
+  img {
     max-width: 200px;
     width: 100%;
     max-height: 200px;
     height: 100%;
     border-radius: 5px;
-}
+    margin-bottom: 15px;
+  }
+
+  @media (max-width: 768px) {
+    flex-basis: 49%;
+  }
 `;
 
+const TeamMemberLinks = styled.div`
+  display: flex;
+  border: 1px solid blue;
+  width: 70%;
+  justify-content: space-evenly;
+`;
 const FooterContainer = styled.div`
   width: 100%;
   display: flex;
