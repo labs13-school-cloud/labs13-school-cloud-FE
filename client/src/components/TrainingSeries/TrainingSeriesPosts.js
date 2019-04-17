@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import Fab from "@material-ui/core/Fab";
 import Fuse from "fuse.js";
 
+import ProgressCircle from "../Progress/ProgressCircle";
+
 // Components
 import DeleteModal from "../Modals/deleteModal";
 import TrainingSeriesAssignment from "./TrainingSeriesAssignment";
@@ -286,7 +288,7 @@ class TrainingSeriesPosts extends React.Component {
     let titleEdit;
     if (this.state.editingTitle) {
       titleEdit = (
-        <form onSubmit={e => this.updateTitle(e)}  autoComplete="off">
+        <form onSubmit={e => this.updateTitle(e)} autoComplete="off">
           <TrainingSeriesTitle>
             <TextField
               id="standard-name"
@@ -407,7 +409,9 @@ class TrainingSeriesPosts extends React.Component {
       posts = this.props.posts;
     }
 
-    return (
+    return this.props.isLoading ? (
+      <ProgressCircle />
+    ) : (
       <>
         {this.state.displaySnackbar && (
           <>
