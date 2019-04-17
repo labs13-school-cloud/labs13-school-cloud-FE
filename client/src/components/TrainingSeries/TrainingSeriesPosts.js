@@ -124,9 +124,10 @@ const styles = theme => ({
   button: {
     // margin: 5,
     "margin-left": theme.spacing.unit,
-    color: "#451476",
+    background: "#451476",
+    color: "white",
     "&:hover": {
-      background: "#451476",
+      background: "#591a99",
       color: "white"
     },
 
@@ -142,9 +143,10 @@ const styles = theme => ({
   assignButton: {
     // margin: 5,
     "margin-left": theme.spacing.unit,
-    color: "#451476",
+    background: "#451476",
+    color: "white",
     "&:hover": {
-      background: "#451476",
+      background: "#591a99",
       color: "white"
     },
 
@@ -163,6 +165,12 @@ const styles = theme => ({
   },
   messageText: {
     marginTop: 20,
+    marginBottom: 20,
+    textAlign: "center",
+    color: "lightgray"
+  },
+  messageTextTop: {
+    marginTop: 50,
     marginBottom: 20,
     textAlign: "center",
     color: "lightgray"
@@ -347,7 +355,7 @@ class TrainingSeriesPosts extends React.Component {
               Assign Members
             </Button>
           </HeaderContainer>
-          <Typography variant="subheading" className={classes.messageText}>
+          <Typography variant="subheading" className={classes.messageTextTop}>
             This training series currently does not have any team members
             assigned to it.
           </Typography>
