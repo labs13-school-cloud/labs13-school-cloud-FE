@@ -1,5 +1,6 @@
 // contains all components for landing page
 import React from 'react';
+import {Link} from 'react-router-dom'
 
 //Styling
 import styled from 'styled-components';
@@ -24,9 +25,9 @@ class LandingPageView extends React.Component {
           <NavbarContainer>
             <img src={Logo} alt="A cute, personable robot" />
             <NavbarItemsContainer>
-              <h3>Team</h3>
-              <h3>Pricing</h3>
-              <h3>Blog</h3>
+              <NavbarItem>Team</NavbarItem>
+              <NavbarItem to='/pricing'>Pricing</NavbarItem>
+              <NavbarItem>Blog</NavbarItem>
               <h2 onClick={login}>Sign In</h2>
             </NavbarItemsContainer>
           </NavbarContainer>
@@ -214,10 +215,16 @@ const NavbarContainer = styled.nav`
     color: #451476;
   }
 `;
-
 const NavbarItemsContainer = styled.div`
   display: flex;
   align-items: center;
+`;
+const NavbarItem =styled(Link)`
+    margin-left: 30px;
+    font-size: 16px;
+    font-weight: 500;
+    text-decoration:none;
+    cursor: pointer;
 `;
 
 const FirstSection = styled.div`
@@ -306,7 +313,7 @@ const LandingPageButtonContainer = styled.div`
   button:nth-child(2) {
     border: 1px solid #451476;
     color: #451476;
-    &: hover {
+    &:hover {
       background-color: #451476;
       color: white;
     }
@@ -418,7 +425,7 @@ const GetStartedBox = styled.div`
     background-color: #7fc4fd;
     color: white;
     width: 100px;
-    &: hover {
+    &:hover {
       background-color: #451476;
       color: white;
     }
