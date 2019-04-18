@@ -1,26 +1,26 @@
-import React from "react";
+import React from 'react';
 
-import DatePicker from "react-datepicker";
+import DatePicker from 'react-datepicker';
 //Prop Types
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 
 //Styles
-import "react-datepicker/dist/react-datepicker.css";
-import { withStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
-import Modal from "@material-ui/core/Modal";
-import Button from "@material-ui/core/Button";
-import AddIcon from "@material-ui/icons/Add";
-import Fab from "@material-ui/core/Fab";
-import Checkbox from "@material-ui/core/Checkbox";
-import FormLabel from "@material-ui/core/FormLabel";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import MenuItem from "@material-ui/core/MenuItem";
+import 'react-datepicker/dist/react-datepicker.css';
+import { withStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+import Modal from '@material-ui/core/Modal';
+import Button from '@material-ui/core/Button';
+import AddIcon from '@material-ui/icons/Add';
+import Fab from '@material-ui/core/Fab';
+import Checkbox from '@material-ui/core/Checkbox';
+import FormLabel from '@material-ui/core/FormLabel';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import MenuItem from '@material-ui/core/MenuItem';
 
-//REDUX
-import { connect } from "react-redux";
-import { addTeamMemberToTrainingSeries } from "../../store/actions/";
-import { TransitionGroup } from "react-transition-group";
+//Redux
+import { connect } from 'react-redux';
+import { addTeamMemberToTrainingSeries } from '../../store/actions/';
+import { TransitionGroup } from 'react-transition-group';
 
 function getModalStyle() {
   const top = 50;
@@ -35,16 +35,16 @@ function getModalStyle() {
 
 const styles = theme => ({
   paper: {
-    position: "absolute",
+    position: 'absolute',
     width: 400,
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
     padding: theme.spacing.unit * 4,
-    outline: "none"
+    outline: 'none'
   },
   container: {
-    display: "flex",
-    flexWrap: "wrap"
+    display: 'flex',
+    flexWrap: 'wrap'
   },
   textField: {
     marginLeft: theme.spacing.unit,
@@ -61,21 +61,21 @@ const styles = theme => ({
     margin: theme.spacing.unit
   },
   memberList: {
-    display: "flex",
-    flexDirection: "column"
+    display: 'flex',
+    flexDirection: 'column'
   }
 });
 
 class UserModal extends React.Component {
   state = {
     open: false,
-    trainingSeriesID: "",
-    startDate: "",
+    trainingSeriesID: '',
+    startDate: '',
     selectedTeamMembers: []
   };
 
   componentDidMount() {
-    if (this.props.modalType === "assignMultiple") {
+    if (this.props.modalType === 'assignMultiple') {
       let d = new Date();
       let formattedDate = d.toISOString();
       this.setState({
@@ -144,7 +144,7 @@ class UserModal extends React.Component {
 
     let modalMap;
     let modalTitle;
-    if (this.props.modalType === "assignMultiple") {
+    if (this.props.modalType === 'assignMultiple') {
       modalMap = this.props.teamMembers.map(member => (
         <>
           <FormControlLabel
@@ -163,7 +163,7 @@ class UserModal extends React.Component {
       );
     } else {
       modalMap = this.props.trainingSeries.map(t => <>{t.title}</>);
-      modalTitle = "Assign Training Series";
+      modalTitle = 'Assign Training Series';
     }
 
     return (
@@ -177,8 +177,7 @@ class UserModal extends React.Component {
           aria-labelledby="simple-modal-title"
           aria-describedby="simple-modal-description"
           open={this.state.open}
-          onClose={this.handleClose}
-        >
+          onClose={this.handleClose}>
           <div style={getModalStyle()} className={classes.paper}>
             <Typography variant="h6" id="modal-title">
               Assign Training Series
@@ -198,8 +197,7 @@ class UserModal extends React.Component {
               variant="body1"
               id="modal-title"
               className={classes.memberList}
-              onSubmit={e => this.handleSubmit(e)}
-            >
+              onSubmit={e => this.handleSubmit(e)}>
               {modalMap}
               <Button type="submit">Submit</Button>
             </form>

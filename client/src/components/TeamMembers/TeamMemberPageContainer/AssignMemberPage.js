@@ -1,39 +1,39 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
-import DatePicker from "react-datepicker";
-import TrainingBotGIF from "../../../img/trainingBot.gif";
+import DatePicker from 'react-datepicker';
+import TrainingBotGIF from '../../../img/trainingBot.gif';
 
 //Styles
-import "react-datepicker/dist/react-datepicker.css";
-import { withStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
-import Select from "@material-ui/core/Select";
-import FormControl from "@material-ui/core/FormControl";
-import { MenuItem, Paper } from "@material-ui/core";
-import InputLabel from "@material-ui/core/InputLabel";
+import 'react-datepicker/dist/react-datepicker.css';
+import { withStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+import Select from '@material-ui/core/Select';
+import FormControl from '@material-ui/core/FormControl';
+import { MenuItem, Paper } from '@material-ui/core';
+import InputLabel from '@material-ui/core/InputLabel';
 
-//REDUX
-import { connect } from "react-redux";
-import { addTeamMemberToTrainingSeries } from "../../../store/actions/";
+//Redux
+import { connect } from 'react-redux';
+import { addTeamMemberToTrainingSeries } from '../../../store/actions/';
 
 const styles = theme => ({
   paper: {
-    width: "100%",
-    margin: "20px auto",
-    boxSizing: "border-box",
+    width: '100%',
+    margin: '20px auto',
+    boxSizing: 'border-box',
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
-    padding: "20px 30px",
-    outline: "none"
+    padding: '20px 30px',
+    outline: 'none'
   },
   heading: {
-    textAlign: "center"
+    textAlign: 'center'
   },
   container: {
-    display: "flex",
-    flexWrap: "wrap"
+    display: 'flex',
+    flexWrap: 'wrap'
   },
   textField: {
     marginLeft: theme.spacing.unit,
@@ -50,26 +50,26 @@ const styles = theme => ({
     margin: theme.spacing.unit
   },
   memberList: {
-    display: "flex",
-    flexDirection: "column",
-    width: "70%",
-    margin: "0 auto"
+    display: 'flex',
+    flexDirection: 'column',
+    width: '70%',
+    margin: '0 auto'
   },
   selectEmpty: {
     marginTop: theme.spacing.unit * 2
   },
   datePicker: {
-    display: "flex",
-    justifyContent: "center",
-    margin: "30px auto"
+    display: 'flex',
+    justifyContent: 'center',
+    margin: '30px auto'
   },
   assignButton: {
-    alignSelf: "center",
-    background: "#451476",
-    color: "white",
-    "&:hover": {
-      background: "#591a99",
-      color: "white"
+    alignSelf: 'center',
+    background: '#451476',
+    color: 'white',
+    '&:hover': {
+      background: '#591a99',
+      color: 'white'
     }
   }
 });
@@ -77,9 +77,9 @@ const styles = theme => ({
 class AssignMemberPage extends React.Component {
   state = {
     open: false,
-    trainingSeriesID: "",
-    startDate: "",
-    value: "",
+    trainingSeriesID: '',
+    startDate: '',
+    value: '',
     isRouting: false
   };
 
@@ -143,8 +143,7 @@ class AssignMemberPage extends React.Component {
         <MenuItem
           name="trainingSeriesID"
           label={`${series.title}`}
-          value={series.trainingSeriesID}
-        >
+          value={series.trainingSeriesID}>
           {series.title}
         </MenuItem>
       );
@@ -171,17 +170,15 @@ class AssignMemberPage extends React.Component {
             variant="body1"
             id="modal-title"
             className={classes.memberList}
-            onSubmit={e => this.handleSubmit(e)}
-          >
-            <FormControl className={""}>
+            onSubmit={e => this.handleSubmit(e)}>
+            <FormControl className={''}>
               <InputLabel htmlFor="trainingSeriesID">
                 Training Series
               </InputLabel>
               <Select
                 value={this.state.trainingSeriesID}
                 onChange={this.handleChange}
-                name="trainingSeriesID"
-              >
+                name="trainingSeriesID">
                 {this.props.location.state.assignments &&
                   this.renderTrainingSeriesInDropDown()}
               </Select>
@@ -191,24 +188,22 @@ class AssignMemberPage extends React.Component {
                 disabled={
                   this.state.isRouting === true ||
                   this.state.trainingSeriesID === undefined
-                    ? "true"
+                    ? 'true'
                     : null
                 }
                 className={classes.assignButton}
                 variant="contained"
-                type="submit"
-              >
+                type="submit">
                 {this.state.isRouting ? (
                   <LoadingImage src={TrainingBotGIF} alt="Loading Icon" />
                 ) : (
-                  "Assign"
+                  'Assign'
                 )}
               </Button>
               <Button
                 onClick={this.routeBack}
                 className={classes.button}
-                variant="primary"
-              >
+                variant="primary">
                 Cancel
               </Button>
             </ButtonContainer>

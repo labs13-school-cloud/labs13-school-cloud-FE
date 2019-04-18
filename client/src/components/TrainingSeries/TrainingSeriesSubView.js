@@ -4,8 +4,8 @@ import Fuse from "fuse.js";
 
 //Components
 import TrainingSeriesList from "./TrainingSeriesList";
-import Tour from "reactour";
 
+//Styles
 import {withStyles} from "@material-ui/core/styles";
 import {
   Paper,

@@ -16,7 +16,7 @@ import LeighAnn from "../../img/tb-lfriedel.jpeg";
 import Mike from "../../img/tb-mlanders.jpeg";
 import Nate from "../../img/tb-nboyette.jpeg";
 
-import { scroller, animateScroll as scroll } from "react-scroll";
+import { animateScroll as scroll } from "react-scroll";
 
 //Auth
 import { login } from "../../Auth/Auth";
