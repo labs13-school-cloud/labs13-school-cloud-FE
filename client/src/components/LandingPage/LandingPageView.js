@@ -57,17 +57,6 @@ class LandingPageView extends React.Component {
                 </Button>
               </LandingPageButtonContainer>
             </LandingPageContentContainer>
-            {/* <VideoContainer>
-              <iframe
-                width="100%"
-                height="400"
-                src="https://www.youtube.com/embed/CQ85sUNBK7w"
-                frameBorder="0"
-                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                title="Marketing Video"
-              />
-            </VideoContainer> */}
           </FirstSection>
           {/* MARKETING CONTAINER / UNDRAW PHOTO SECTION */}
           <MarketingContentContainer name="MarketingContent">
@@ -342,13 +331,6 @@ const LandingPageButtonContainer = styled.div`
       background-color: #451476;
       color: white;
     }
-  }
-`;
-
-const VideoContainer = styled.div`
-  width: 50%;
-  @media (max-width: 1000px) {
-    display: none;
   }
 `;
 
