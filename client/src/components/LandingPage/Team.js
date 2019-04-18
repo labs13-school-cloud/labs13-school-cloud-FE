@@ -1,13 +1,13 @@
 import React from "react";
 import styled from "styled-components";
-import { ArrowUpward } from "@material-ui/icons";
-import { withStyles } from "@material-ui/core/styles";
+import {ArrowUpward} from "@material-ui/icons";
+import {withStyles} from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import { Link } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLinkedin, faGithubSquare } from "@fortawesome/free-brands-svg-icons";
+import {Link} from "react-router-dom";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faLinkedin, faGithubSquare} from "@fortawesome/free-brands-svg-icons";
 
 import Logo from "../../img/training-bot.png";
 import Alex from "../../img/tb-aking.jpeg";
@@ -16,10 +16,10 @@ import LeighAnn from "../../img/tb-lfriedel.jpeg";
 import Mike from "../../img/tb-mlanders.jpeg";
 import Nate from "../../img/tb-nboyette.jpeg";
 
-import { scroller, animateScroll as scroll } from "react-scroll";
+import {scroller, animateScroll as scroll} from "react-scroll";
 
 //Auth
-import { login } from "../../Auth/Auth";
+import {login} from "../../Auth/Auth";
 
 const styles = theme => ({
   form: {
@@ -27,13 +27,13 @@ const styles = theme => ({
     margin: "0 auto",
     display: "flex",
     flexDirection: "column",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
     width: "100%",
-    margin: "15px auto"
+    margin: "15px auto",
   },
   button: {
     background: "#451476",
@@ -41,9 +41,9 @@ const styles = theme => ({
     margin: "0 auto",
     "&:hover": {
       background: "#591a99",
-      color: "white"
-    }
-  }
+      color: "white",
+    },
+  },
 });
 
 class Team extends React.Component {
@@ -52,7 +52,7 @@ class Team extends React.Component {
   }
 
   render() {
-    const { classes } = this.props;
+    const {classes} = this.props;
     return (
       <>
         <LandingPageContainer>
@@ -259,6 +259,10 @@ const NavbarItem = styled(Link)`
   font-weight: 500;
   text-decoration: none;
   cursor: pointer;
+  color: #441476;
+  &:visited{
+    color: #441476;
+  }
 `;
 
 const TeamContainer = styled.div`
@@ -369,6 +373,7 @@ const FooterItemsContainer = styled.div`
     padding: 16px 20px;
     cursor: pointer;
     text-decoration: none;
+    color: white;
   }
 
   a:visited {

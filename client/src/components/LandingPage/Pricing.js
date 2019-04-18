@@ -1,13 +1,13 @@
 // contains all components for landing page
 import React from "react";
-import { Link } from "react-router-dom";
-import { withStyles } from "@material-ui/core/styles";
+import {Link} from "react-router-dom";
+import {withStyles} from "@material-ui/core/styles";
 
-import { scroller, animateScroll as scroll } from "react-scroll";
+import {scroller, animateScroll as scroll} from "react-scroll";
 
 //Styling
 import styled from "styled-components";
-import { ArrowUpward } from "@material-ui/icons";
+import {ArrowUpward} from "@material-ui/icons";
 import Button from "@material-ui/core/Button";
 import {
   Table,
@@ -15,12 +15,12 @@ import {
   TableCell,
   TableHead,
   TableRow,
-  Typography
+  Typography,
 } from "@material-ui/core/";
 
 import Logo from "../../img/training-bot.png";
 //Auth
-import { login } from "../../Auth/Auth";
+import {login} from "../../Auth/Auth";
 
 const styles = theme => ({
   root: {
@@ -30,22 +30,22 @@ const styles = theme => ({
     margin: "0 auto",
     fontSize: "1rem",
     "@media (max-width:800px)": {
-      display: "none"
-    }
+      display: "none",
+    },
   },
   table: {
     minWidth: 400,
     border: "none",
-    fontSize: "20px"
+    fontSize: "20px",
   },
   tableRow: {
-    fontSize: "18px"
+    fontSize: "18px",
   },
   tableCell: {
-    fontSize: "18px"
+    fontSize: "18px",
   },
   noBorder: {
-    borderBottom: "none"
+    borderBottom: "none",
   },
   selectButton: {
     color: "white",
@@ -53,8 +53,8 @@ const styles = theme => ({
     margin: "10px auto 0px",
     "&:hover": {
       backgroundColor: "#451476",
-      color: "white"
-    }
+      color: "white",
+    },
   },
   subCard: {
     border: "1px solid #EBEBEB",
@@ -67,28 +67,28 @@ const styles = theme => ({
     padding: 10,
     textAlign: "center",
     "@media (min-width:800px)": {
-      display: "none"
-    }
+      display: "none",
+    },
   },
   title: {
     textTransform: "uppercase",
     fontWeight: 700,
-    margin: 10
+    margin: 10,
   },
   price: {
     fontSize: 20,
-    margin: "10px 0"
+    margin: "10px 0",
   },
   subPrice: {
     fontSize: 12,
-    color: "grey"
-  }
+    color: "grey",
+  },
 });
 
 let id = 0;
 function createData(name, basic, premium, pro) {
   id += 1;
-  return { id, name, basic, premium, pro };
+  return {id, name, basic, premium, pro};
 }
 
 const rows = [
@@ -110,14 +110,14 @@ const rows = [
     <span>&#10004;</span>,
     <span>&#10004;</span>
   ),
-  createData("Message Limit", "50/mo", "200/mo", "1000/mo")
+  createData("Message Limit", "50/mo", "200/mo", "1000/mo"),
 ];
 class Pricing extends React.Component {
   scrollToTop() {
     scroll.scrollToTop();
   }
   render() {
-    const { classes } = this.props;
+    const {classes} = this.props;
     return (
       <LandingPageContainer>
         {/* NAVIGATION */}
@@ -133,7 +133,7 @@ class Pricing extends React.Component {
         </NavbarContainer>
         {/* JUMBOTRON STYLED SECTION */}
         <FirstSection>
-          <Typography variant="h3" style={{ paddingLeft: "10%" }}>
+          <Typography variant="h3" style={{paddingLeft: "10%"}}>
             Pricing
           </Typography>
           <div className={classes.root}>
@@ -365,6 +365,10 @@ const NavbarItem = styled(Link)`
   font-weight: 500;
   text-decoration: none;
   cursor: pointer;
+  color: #441476;
+  &:visited {
+    color: #441476;
+  }
 `;
 
 const FirstSection = styled.div`
@@ -403,6 +407,7 @@ const FooterItemsContainer = styled.div`
     padding: 16px 20px;
     cursor: pointer;
     text-decoration: none;
+    color: white;
   }
 
   a:visited {
