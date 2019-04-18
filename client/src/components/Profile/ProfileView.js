@@ -255,7 +255,7 @@ class ProfileView extends React.Component {
                         this.props.activateTutorial();
                       }}
                     >
-                      Re-activate Tutorial
+                      Show Tutorial
                     </Button>
                   </ButtonContainer>
                 </CardActions>

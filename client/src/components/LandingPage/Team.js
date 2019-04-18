@@ -1,47 +1,47 @@
-import React from "react";
-import styled from "styled-components";
-import { ArrowUpward } from "@material-ui/icons";
-import { withStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
-import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
-import { Link } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLinkedin, faGithubSquare } from "@fortawesome/free-brands-svg-icons";
+import React from 'react';
+import styled from 'styled-components';
+import { ArrowUpward } from '@material-ui/icons';
+import { withStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faLinkedin, faGithubSquare } from '@fortawesome/free-brands-svg-icons';
 
-import Logo from "../../img/training-bot.png";
-import Alex from "../../img/tb-aking.jpeg";
-import Brandon from "../../img/tb-blent.jpeg";
-import LeighAnn from "../../img/tb-lfriedel.jpeg";
-import Mike from "../../img/tb-mlanders.jpeg";
-import Nate from "../../img/tb-nboyette.jpeg";
+import Logo from '../../img/training-bot.png';
+import Alex from '../../img/tb-aking.jpeg';
+import Brandon from '../../img/tb-blent.jpeg';
+import LeighAnn from '../../img/tb-lfriedel.jpeg';
+import Mike from '../../img/tb-mlanders.jpeg';
+import Nate from '../../img/tb-nboyette.jpeg';
 
-import { animateScroll as scroll } from "react-scroll";
+import { animateScroll as scroll } from 'react-scroll';
 
 //Auth
-import { login } from "../../Auth/Auth";
+import { login } from '../../Auth/Auth';
 
 const styles = theme => ({
   form: {
-    width: "75%",
-    margin: "0 auto",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center"
+    width: '75%',
+    margin: '0 auto',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center'
   },
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
-    width: "100%",
-    margin: "15px auto"
+    width: '100%',
+    margin: '15px auto'
   },
   button: {
-    background: "#451476",
-    color: "white",
-    margin: "0 auto",
-    "&:hover": {
-      background: "#591a99",
-      color: "white"
+    background: '#451476',
+    color: 'white',
+    margin: '0 auto',
+    '&:hover': {
+      background: '#591a99',
+      color: 'white'
     }
   }
 });
@@ -93,8 +93,7 @@ class Team extends React.Component {
                   </a>
                   <a
                     target="blank"
-                    href="https://www.linkedin.com/in/brandon-lent/"
-                  >
+                    href="https://www.linkedin.com/in/brandon-lent/">
                     <FontAwesomeIcon className="fa-2x" icon={faLinkedin} />
                   </a>
                 </TeamMemberLinks>
@@ -109,8 +108,7 @@ class Team extends React.Component {
                   </a>
                   <a
                     target="blank"
-                    href="https://www.linkedin.com/in/leigh-ann-friedel/"
-                  >
+                    href="https://www.linkedin.com/in/leigh-ann-friedel/">
                     <FontAwesomeIcon className="fa-2x" icon={faLinkedin} />
                   </a>
                 </TeamMemberLinks>
@@ -125,8 +123,7 @@ class Team extends React.Component {
                   </a>
                   <a
                     target="blank"
-                    href="https://www.linkedin.com/in/mikelanders/"
-                  >
+                    href="https://www.linkedin.com/in/mikelanders/">
                     <FontAwesomeIcon className="fa-2x" icon={faLinkedin} />
                   </a>
                 </TeamMemberLinks>
@@ -141,8 +138,7 @@ class Team extends React.Component {
                   </a>
                   <a
                     target="blank"
-                    href="https://www.linkedin.com/in/nateboyette/"
-                  >
+                    href="https://www.linkedin.com/in/nateboyette/">
                     <FontAwesomeIcon className="fa-2x" icon={faLinkedin} />
                   </a>
                 </TeamMemberLinks>
@@ -155,8 +151,7 @@ class Team extends React.Component {
               action="/success"
               className={classes.form}
               name="contact"
-              method="POST"
-            >
+              method="POST">
               <input type="hidden" name="form-name" value="contact" />
               <TextField
                 label="Name"
@@ -186,8 +181,7 @@ class Team extends React.Component {
               <Button
                 className={classes.button}
                 type="submit"
-                variant="outlined"
-              >
+                variant="outlined">
                 Send
               </Button>
             </form>
@@ -259,6 +253,10 @@ const NavbarItem = styled(Link)`
   font-weight: 500;
   text-decoration: none;
   cursor: pointer;
+  color: #441476;
+  &:visited {
+    color: #441476;
+  }
 `;
 
 const TeamContainer = styled.div`
@@ -369,6 +367,7 @@ const FooterItemsContainer = styled.div`
     padding: 16px 20px;
     cursor: pointer;
     text-decoration: none;
+    color: white;
   }
 
   a:visited {

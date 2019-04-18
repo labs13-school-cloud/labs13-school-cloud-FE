@@ -46,9 +46,9 @@ class LandingPageView extends React.Component {
             <LandingPageContentContainer>
               <h1>Training Bot</h1>
               <p>
-                "Empowers team leaders with tools to assist with their team’s
-                continual learning by sending automated Text messages/emails on
-                a scheduled interval to team members”.
+                Training Bot empowers team leaders with tools to assist with
+                their team’s continual learning by sending automated text
+                messages and emails on scheduled intervals.
               </p>
               <LandingPageButtonContainer>
                 <Button onClick={login}>Get Started</Button>
@@ -57,7 +57,7 @@ class LandingPageView extends React.Component {
                 </Button>
               </LandingPageButtonContainer>
             </LandingPageContentContainer>
-            <VideoContainer>
+            {/* <VideoContainer>
               <iframe
                 width="100%"
                 height="400"
@@ -67,7 +67,7 @@ class LandingPageView extends React.Component {
                 allowFullScreen
                 title="Marketing Video"
               />
-            </VideoContainer>
+            </VideoContainer> */}
           </FirstSection>
           {/* MARKETING CONTAINER / UNDRAW PHOTO SECTION */}
           <MarketingContentContainer name="MarketingContent">
@@ -79,10 +79,10 @@ class LandingPageView extends React.Component {
                 />
               </MarketingImage>
               <MarketingContent>
-                <h3>Manage Your team. Stress Free.</h3>
+                <h3>Manage Your Team. Stress Free.</h3>
                 <p>
                   With Training Bot, we take the stress out of managing your
-                  employees recurring training modules.
+                  employees' recurring training modules.
                 </p>
               </MarketingContent>
             </MarketingSection>
@@ -112,7 +112,7 @@ class LandingPageView extends React.Component {
                 <h3>Notifications, Your Way.</h3>
                 <p>
                   Send text messages or email notifications to your employees.
-                  Modern communication for the mordern workplace.
+                  Modern communication for the modern workplace.
                 </p>
               </MarketingContent>
             </MarketingSection>
@@ -209,6 +209,10 @@ const NavbarItem = styled(Link)`
   font-weight: 500;
   text-decoration: none;
   cursor: pointer;
+  color: #441476;
+  &:visited {
+    color: #441476;
+  }
 `;
 
 const FirstSection = styled.div`
@@ -218,6 +222,9 @@ const FirstSection = styled.div`
   padding: 75px 10px;
   display: flex;
   border-radius: 5px;
+  h3 {
+    width: 100%;
+  }
   @media (max-width: 700px) {
     width: 100%;
     margin: 0;
@@ -372,6 +379,7 @@ const FooterItemsContainer = styled.div`
     padding: 16px 20px;
     cursor: pointer;
     text-decoration: none;
+    color: white;
   }
 
   a:visited {
@@ -385,7 +393,7 @@ const GetStartedButton = styled.div`
     background-color: #451476;
     color: white;
     &:hover {
-      margin: 0 15px;
+      /* margin: 0 15px; */
       background-color: #451476;
       color: white;
     }

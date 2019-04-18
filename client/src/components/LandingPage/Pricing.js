@@ -24,7 +24,7 @@ import { login } from '../../Auth/Auth';
 
 const styles = theme => ({
   root: {
-    // width: '75%',
+    // width: "75%",
     // marginTop: theme.spacing.unit * 3,
     overflowX: 'auto',
     margin: '0 auto',
@@ -359,6 +359,10 @@ const NavbarItem = styled(Link)`
   font-weight: 500;
   text-decoration: none;
   cursor: pointer;
+  color: #441476;
+  &:visited {
+    color: #441476;
+  }
 `;
 
 const FirstSection = styled.div`
@@ -397,6 +401,7 @@ const FooterItemsContainer = styled.div`
     padding: 16px 20px;
     cursor: pointer;
     text-decoration: none;
+    color: white;
   }
 
   a:visited {
