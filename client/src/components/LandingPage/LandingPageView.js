@@ -531,6 +531,7 @@ const FooterItemsContainer = styled.div`
     padding: 16px 20px;
     cursor: pointer;
     text-decoration: none;
+    color: white;
   }
 
   a:visited {
