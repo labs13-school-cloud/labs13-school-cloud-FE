@@ -33,7 +33,7 @@ const styles = {
 };
 
 function SeriesCard(props) {
-  console.log("TRAINING SERIES LIST", props);
+  //console.log("TRAINING SERIES LIST", props);
 
   const { classes } = props;
   const [postLength, setPostLength] = useState(0);
@@ -50,7 +50,7 @@ function SeriesCard(props) {
         setPostLength(res.data.posts.length);
       })
       .catch(err => {
-        console.log(err);
+        //console.log(err);
       });
   }
   async function getMemberCount() {
@@ -61,11 +61,11 @@ function SeriesCard(props) {
         }/assignments`
       )
       .then(res => {
-        // console.log('getMemberCount', res.data.assignments.length);
+        //console.log('getMemberCount', res.data.assignments.length);
         setAssignedLength(res.data.assignments.length);
       })
       .catch(err => {
-        console.log(err);
+        //console.log(err);
       });
   }
 

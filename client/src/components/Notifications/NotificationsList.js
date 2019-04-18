@@ -39,7 +39,7 @@ const NotificationsList = props => {
     </ListStyles>
     )
   }
-  console.log("NOTIFICATION COUNT", props.notificationCount)
+  //console.log("NOTIFICATION COUNT", props.notificationCount)
   return (
     <>
      {notificationDisplay}

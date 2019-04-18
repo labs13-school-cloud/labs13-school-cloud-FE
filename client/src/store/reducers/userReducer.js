@@ -75,7 +75,7 @@ const userReducer = (state = initialState, action) => {
         error: "",
       };
     case EDIT_USER_SUCCESS:
-      console.log(state.userProfile);
+      //console.log(state.userProfile);
       return {
         ...state,
         userProfile: {
@@ -147,7 +147,7 @@ const userReducer = (state = initialState, action) => {
       };
 
     case POST_REGISTERSTRIPE_SUCCESS:
-      console.log("action.payload", action.payload);
+      //console.log("action.payload", action.payload);
       let accountTypeID2;
       if (
         action.payload.subscriptions.data[0].plan.id === "plan_EmJallrSdkqpPS"

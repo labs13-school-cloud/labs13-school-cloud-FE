@@ -75,7 +75,7 @@ const styles = theme => ({
 });
 
 function AddMember(props) {
-  console.log(props);
+  //console.log(props);
   const { classes } = props;
 
   const renderMembers = () => {
@@ -102,7 +102,7 @@ function AddMember(props) {
       </>
     ));
   };
-  console.log(props.selectedTeamMembers);
+  //console.log(props.selectedTeamMembers);
   return (
     <>
       <Typography className={classes.heading} variant="h6">

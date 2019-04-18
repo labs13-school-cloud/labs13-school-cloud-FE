@@ -142,7 +142,7 @@ class TeamMemberPage extends React.Component {
     let textDisabled;
     let emailDisabled;
     let addDisabled = false;
-    // console.log(addDisabled);
+    //console.log(addDisabled);
 
     if (textOn && !emailOn) {
       textDisabled = true;

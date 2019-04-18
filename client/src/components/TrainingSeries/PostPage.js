@@ -117,8 +117,8 @@ class PostPage extends React.Component {
   render() {
     const { classes } = this.props;
 
-    console.log("EDIT POST PAGE PROPS", this.props);
-    console.log("EDIT POST PAGE STATE", this.state);
+    //console.log("EDIT POST PAGE PROPS", this.props);
+    //console.log("EDIT POST PAGE STATE", this.state);
     return (
       <MainContainer>
         <Typography variant="display1" align="center" gutterBottom>

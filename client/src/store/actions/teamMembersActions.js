@@ -48,7 +48,7 @@ export const getTeamMembers = id => dispatch => {
 };
 
 export const addTeamMember = teamMember => dispatch => {
-  console.log(teamMember)
+  //console.log(teamMember)
   dispatch({ type: ADD_MEMBER_START });
   axios
     .post(`${baseUrl}/team-members`, teamMember)
@@ -60,7 +60,7 @@ export const addTeamMember = teamMember => dispatch => {
 };
 
 export const editTeamMember = (id, changes) => dispatch => {
-  console.log(changes);
+  //console.log(changes);
   dispatch({ type: EDIT_MEMBER_START });
   axios
     .put(`${baseUrl}/team-members/${id}`, changes)
@@ -125,7 +125,9 @@ export const addTeamMemberToTrainingSeries = data => dispatch => {
             history.push({pathname:'/home', state: {success: true}})
           }
         })
-        .catch(err => console.log(err));
+        .catch(err => {}
+        //console.log(err)
+        );
     })
     .catch(err =>
       dispatch({ type: ADD_MEMBER_TO_TRAININGSERIES_FAIL, error: err })
