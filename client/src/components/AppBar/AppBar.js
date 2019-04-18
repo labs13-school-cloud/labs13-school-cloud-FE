@@ -1,16 +1,16 @@
-import React, {Component} from "react";
-import {Link} from "react-router-dom";
-import {withRouter} from "react-router";
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router';
 
 //Styling
-import styled from "styled-components";
-import Avatar from "@material-ui/core/Avatar";
+import styled from 'styled-components';
+import Avatar from '@material-ui/core/Avatar';
 
 //Logo
-import Logo from "../../img/training-bot.png";
+import Logo from '../../img/training-bot.png';
 
 //AUTH
-import {login, logout} from "../../Auth/Auth";
+import { login, logout } from '../../Auth/Auth';
 
 class AppBar extends Component {
   render() {
@@ -18,9 +18,11 @@ class AppBar extends Component {
       <NavigationContainer>
         <NavigationTop />
         <NavItemsContainer>
-          {this.props.history.location.pathname === "/" ? (
+          {this.props.history.location.pathname === '/' ? (
             <>
-              <NavigationLogo src={Logo}>Link</NavigationLogo>
+              <NavigationLogo src={Logo} alt="A cute, personable robot">
+                Link
+              </NavigationLogo>
               <NavLinkItems>
                 <Link to="/home">Dashboard</Link>
                 <Link to="/pricing">Pricing</Link>
@@ -34,10 +36,11 @@ class AppBar extends Component {
               </Link>
               <RightItemsContainer>
                 <Link to="/home/profile">
-                  {" "}
+                  {' '}
                   <Avatar
                     data-tour="6"
-                    src={JSON.parse(localStorage.getItem("Profile")).picture}
+                    src={JSON.parse(localStorage.getItem('Profile')).picture}
+                    alt={JSON.parse(localStorage.getItem('Profile')).name}
                   />
                 </Link>
                 <LogoutStyling onClick={() => logout()}>Logout</LogoutStyling>
