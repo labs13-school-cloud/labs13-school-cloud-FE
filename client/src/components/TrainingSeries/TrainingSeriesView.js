@@ -1,5 +1,5 @@
 // component to contain all the components related to training series
-import React, { Component } from 'react';
+import React, { Component, Suspense } from 'react';
 import { Route } from 'react-router-dom';
 
 //Redux
@@ -7,7 +7,13 @@ import { connect } from 'react-redux';
 import { getTrainingSeries, deleteTrainingSeries } from '../../store/actions/';
 
 //Components
-import TrainingSeriesSubView from './TrainingSeriesSubView';
+// import TrainingSeriesSubView from './TrainingSeriesSubView';
+
+const TrainingSeriesSubView = React.lazy(() =>
+  import('./TrainingSeriesSubView')
+);
+
+// <Suspense fallback={<div>Loading...</div>}></Suspense>
 
 class TrainingSeriesView extends Component {
   componentDidMount() {
@@ -29,15 +35,17 @@ class TrainingSeriesView extends Component {
           exact
           path={`${this.props.match.path}`}
           render={props => (
-            <TrainingSeriesSubView
-              {...props}
-              getMembersAssigned={this.props.getMembersAssigned}
-              trainingSeries={this.props.trainingSeries}
-              deleteTrainingSeries={this.deleteTrainingSeries}
-              getTrainingSeries={this.props.getTrainingSeries}
-              toggleFreakinSnackBar={this.props.toggleFreakinSnackBar}
-              userId={this.props.userId}
-            />
+            <Suspense fallback={<div>Loading...</div>}>
+              <TrainingSeriesSubView
+                {...props}
+                getMembersAssigned={this.props.getMembersAssigned}
+                trainingSeries={this.props.trainingSeries}
+                deleteTrainingSeries={this.deleteTrainingSeries}
+                getTrainingSeries={this.props.getTrainingSeries}
+                toggleFreakinSnackBar={this.props.toggleFreakinSnackBar}
+                userId={this.props.userId}
+              />
+            </Suspense>
           )}
         />
       </>

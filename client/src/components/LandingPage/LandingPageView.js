@@ -1,28 +1,28 @@
 // contains all components for landing page
-import React from "react";
-import { Link } from "react-router-dom";
-import { scroller, animateScroll as scroll } from "react-scroll";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { scroller, animateScroll as scroll } from 'react-scroll';
 
 //Styling
-import styled from "styled-components";
-import Button from "@material-ui/core/Button";
+import styled from 'styled-components';
+import Button from '@material-ui/core/Button';
 
 //Icons & Images
-import { ArrowUpward } from "@material-ui/icons";
-import Logo from "../../img/training-bot.png";
-import undrawCoworker from "../../img/undraw_co-workers_ujs6.svg";
-import undrawNotify from "../../img/undraw_notify_88a4.svg";
-import undrawTask from "../../img/undraw_personal_text_vkd8.svg";
+import { ArrowUpward } from '@material-ui/icons';
+import Logo from '../../img/training-bot.png';
+import undrawCoworker from '../../img/undraw_co-workers_ujs6.svg';
+import undrawNotify from '../../img/undraw_notify_88a4.svg';
+import undrawTask from '../../img/undraw_personal_text_vkd8.svg';
 
 //Auth
-import { login } from "../../Auth/Auth";
+import { login } from '../../Auth/Auth';
 
 class LandingPageView extends React.Component {
   scrollTo() {
-    scroller.scrollTo("MarketingContent", {
+    scroller.scrollTo('MarketingContent', {
       duration: 800,
       delay: 0,
-      smooth: "easeInOutQuart"
+      smooth: 'easeInOutQuart'
     });
   }
   scrollToTop() {

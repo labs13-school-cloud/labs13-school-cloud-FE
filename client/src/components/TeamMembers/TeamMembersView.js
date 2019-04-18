@@ -1,11 +1,12 @@
 // component to contain all the components related to team members
 
-import React from 'react';
+import React, { Suspense } from 'react';
 import styled from 'styled-components';
 import Fuse from 'fuse.js';
 
 //Components
-import TeamMembersList from './TeamMembersList';
+// import TeamMembersList from './TeamMembersList';
+
 import Pagination from 'material-ui-flat-pagination';
 
 import { connect } from 'react-redux';
@@ -25,6 +26,8 @@ import {
   addTeamMember,
   deleteTeamMember
 } from '../../store/actions';
+
+const TeamMembersList = React.lazy(() => import('./TeamMembersList'));
 
 const styles = theme => ({
   root: {
@@ -164,13 +167,15 @@ class TeamMembersView extends React.Component {
       );
     } else {
       teamMembersDisplay = (
-        <TeamMembersList
-          teamMembers={teamMembers}
-          deleteTeamMember={this.deleteMember}
-          limit={this.state.limit}
-          offset={this.state.offset}
-          userId={this.props.userId}
-        />
+        <Suspense fallback={<div>Loading...</div>}>
+          <TeamMembersList
+            teamMembers={teamMembers}
+            deleteTeamMember={this.deleteMember}
+            limit={this.state.limit}
+            offset={this.state.offset}
+            userId={this.props.userId}
+          />
+        </Suspense>
       );
     }
 

@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component, Suspense } from 'react';
 
 //Components
-import NotificationsList from './NotificationsList';
+// import NotificationsList from './NotificationsList';
 
 //Styling
 import { withStyles } from '@material-ui/core/styles';
@@ -16,6 +16,8 @@ import {
   getTextNotifications,
   getEmailNotifications
 } from '../../store/actions/notificationsActions';
+
+const NotificationsList = React.lazy(() => import('./NotificationsList'));
 
 const styles = theme => ({
   root: {
@@ -172,15 +174,17 @@ class NotificationsView extends Component {
             </FormControl>
           </div>
         </div>
-        <NotificationsList
-          notifications={filteredReturn}
-          notificationCount={notificationCount}
-          filterSent={this.state.filterSent}
-          offset={this.state.offset}
-          match={this.props.match}
-          userID={this.props.userID}
-          limit={this.state.limit}
-        />
+        <Suspense fallback={<div>Loading...</div>}>
+          <NotificationsList
+            notifications={filteredReturn}
+            notificationCount={notificationCount}
+            filterSent={this.state.filterSent}
+            offset={this.state.offset}
+            match={this.props.match}
+            userID={this.props.userID}
+            limit={this.state.limit}
+          />
+        </Suspense>
         <div className={classes.footer}>
           <Pagination
             limit={this.state.limit}

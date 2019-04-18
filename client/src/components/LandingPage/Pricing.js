@@ -113,7 +113,8 @@ const rows = [
   createData('Message Limit', '50/mo', '200/mo', '1000/mo')
 ];
 class Pricing extends React.Component {
-  scrollToTop() {
+  scrollToTop(e) {
+    e.preventDefault();
     scroll.scrollToTop();
   }
   render() {
@@ -176,7 +177,7 @@ class Pricing extends React.Component {
                   <TableCell className={classes.noBorder} align="center" />
                   <TableCell className={classes.noBorder} align="center">
                     <Button
-                      variant="container"
+                      variant="contained"
                       className={classes.selectButton}
                       onClick={login}>
                       Sign Up
@@ -184,7 +185,7 @@ class Pricing extends React.Component {
                   </TableCell>
                   <TableCell className={classes.noBorder} align="center">
                     <Button
-                      variant="container"
+                      variant="contained"
                       className={classes.selectButton}
                       onClick={login}>
                       Sign Up
@@ -192,7 +193,7 @@ class Pricing extends React.Component {
                   </TableCell>
                   <TableCell className={classes.noBorder} align="center">
                     <Button
-                      variant="container"
+                      variant="contained"
                       className={classes.selectButton}
                       onClick={login}>
                       Sign Up
@@ -223,7 +224,7 @@ class Pricing extends React.Component {
               </div>
             </div>
             <Button
-              variant="container"
+              variant="contained"
               className={classes.selectButton}
               onClick={login}>
               Sign Up
@@ -253,7 +254,7 @@ class Pricing extends React.Component {
               </div>
             </div>
             <Button
-              variant="container"
+              variant="contained"
               className={classes.selectButton}
               onClick={login}>
               Sign Up
@@ -283,7 +284,7 @@ class Pricing extends React.Component {
               </div>
             </div>
             <Button
-              variant="container"
+              variant="contained"
               className={classes.selectButton}
               onClick={login}>
               Sign Up
@@ -295,7 +296,7 @@ class Pricing extends React.Component {
             <Link to="/team">Team</Link>
             <Link to="/pricing">Pricing</Link>
           </FooterItemsContainer>
-          <ArrowUpward onClick={() => this.scrollToTop()} />
+          <ArrowUpward onClick={e => this.scrollToTop(e)} />
         </FooterContainer>
       </LandingPageContainer>
     );
