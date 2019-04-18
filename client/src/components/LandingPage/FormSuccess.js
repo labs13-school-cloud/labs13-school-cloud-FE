@@ -103,6 +103,7 @@ class FormSuccess extends React.Component {
       justify-content: center;
       align-items: center;
       flex-direction: column;
+      text-align: center;
       width: 95%;
       height: 70%;
       margin: 40px auto;
