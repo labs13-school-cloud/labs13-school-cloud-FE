@@ -1,5 +1,6 @@
 // contains all components for landing page
 import React from "react";
+import { Link } from "react-router-dom";
 import { scroller, animateScroll as scroll } from "react-scroll";
 //Styling
 import styled from "styled-components";
@@ -34,9 +35,8 @@ class LandingPageView extends React.Component {
           <NavbarContainer>
             <img src={Logo} alt="A cute, personable robot" />
             <NavbarItemsContainer>
-              <h3>Team</h3>
-              <h3>Pricing</h3>
-              <h3>Blog</h3>
+              <NavbarItem to="/team">Team</NavbarItem>
+              <NavbarItem to="/pricing">Pricing</NavbarItem>
               <h2 onClick={login}>Sign In</h2>
             </NavbarItemsContainer>
           </NavbarContainer>
@@ -59,11 +59,11 @@ class LandingPageView extends React.Component {
             <VideoContainer>
               <iframe
                 width="100%"
-                height="350"
+                height="400"
                 src="https://www.youtube.com/embed/CQ85sUNBK7w"
-                frameborder="0"
+                frameBorder="0"
                 allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen
+                allowFullScreen
                 title="Marketing Video"
               />
             </VideoContainer>
@@ -185,9 +185,8 @@ class LandingPageView extends React.Component {
           </FirstSection>
           <FooterContainer>
             <FooterItemsContainer>
-              <h3>Team</h3>
-              <h3>Pricing</h3>
-              <h3>Blog</h3>
+              <Link to="/team">Team</Link>
+              <Link to="/pricing">Pricing</Link>
             </FooterItemsContainer>
             <ArrowUpward onClick={() => this.scrollToTop()} />
           </FooterContainer>
@@ -200,7 +199,7 @@ export default LandingPageView;
 
 const LandingPageContainer = styled.div`
   margin: 0 auto;
-  padding: 0 25px;
+
   width: 100%;
   max-width: 1280px;
   background-color: white;
@@ -218,14 +217,16 @@ const NavbarContainer = styled.nav`
   justify-content: space-between;
   border-bottom: 1px solid #f0f4f8;
   padding: 0 25px;
+
   @media (max-width: 700px) {
     padding: 0 5px;
   }
+
   img {
     width: 50px;
   }
   h2,
-  h3 {
+  a {
     margin-left: 30px;
     font-size: 16px;
     font-weight: 500;
@@ -241,6 +242,7 @@ const NavbarContainer = styled.nav`
       background-color: #451476;
       color: white;
     }
+
     @media (max-width: 700px) {
       width: 75px;
     }
@@ -253,6 +255,13 @@ const NavbarContainer = styled.nav`
 const NavbarItemsContainer = styled.div`
   display: flex;
   align-items: center;
+`;
+const NavbarItem = styled(Link)`
+  margin-left: 30px;
+  font-size: 16px;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
 `;
 
 const FirstSection = styled.div`
@@ -286,12 +295,14 @@ const MarketingSection = styled.div`
   justify-content: space-between;
   align-items: center;
   margin: 40px 0;
+
   &:nth-child(even) {
     flex-direction: row-reverse;
   }
   img {
     width: 100%;
   }
+
   @media (max-width: 700px) {
     flex-direction: column;
     justify-content: center;
@@ -325,6 +336,7 @@ const MarketingContent = styled.div`
   p {
     font-size: 20px;
   }
+
   @media (max-width: 700px) {
     width: 80%;
     margin: 0 auto;
@@ -371,7 +383,8 @@ const LandingPageButtonContainer = styled.div`
   button:nth-child(2) {
     border: 1px solid #451476;
     color: #451476;
-    &: hover {
+
+    &:hover {
       background-color: #451476;
       color: white;
     }
@@ -483,7 +496,8 @@ const GetStartedBox = styled.div`
     background-color: #7fc4fd;
     color: white;
     width: 100px;
-    &: hover {
+
+    &:hover {
       background-color: #451476;
       color: white;
     }
@@ -495,6 +509,8 @@ const FooterContainer = styled.div`
   display: flex;
   align-items: center;
   margin-top: 100px;
+  position: sticky;
+  top: 100%;
   svg {
     margin: 0 auto;
     font-size: 30px;
@@ -508,11 +524,17 @@ const FooterItemsContainer = styled.div`
   color: white;
   justify-content: center;
   width: 90%;
-  h3 {
+
+  a {
     font-size: 16px;
     font-weight: 500;
-    padding: 0 20px;
+    padding: 16px 20px;
     cursor: pointer;
+    text-decoration: none;
+  }
+
+  a:visited {
+    color: white;
   }
 `;
 
@@ -532,4 +554,3 @@ const GetStartedButton = styled.div`
 const LogoImage = styled.img`
   width: 50px;
 `;
-

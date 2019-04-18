@@ -3,6 +3,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
 
+import { scroller, animateScroll as scroll } from "react-scroll";
+
 //Styling
 import styled from "styled-components";
 import { ArrowUpward } from "@material-ui/icons";
@@ -13,7 +15,7 @@ import {
   TableCell,
   TableHead,
   TableRow,
-  Typography,
+  Typography
 } from "@material-ui/core/";
 
 import Logo from "../../img/training-bot.png";
@@ -48,22 +50,22 @@ const styles = theme => ({
   selectButton: {
     color: "white",
     backgroundColor: "#451476",
-	margin: '10px auto 0px',
+    margin: "10px auto 0px",
     "&:hover": {
       backgroundColor: "#451476",
       color: "white"
-	},
+    }
   },
   subCard: {
-	border: "1px solid #EBEBEB",
-	backgroundColor:'white',
+    border: "1px solid #EBEBEB",
+    backgroundColor: "white",
     borderRadiusTopLeft: "3px",
-	borderRadiusTopRight: "3px",
+    borderRadiusTopRight: "3px",
     width: "94%",
     minWidth: 201,
-    margin: '15px auto',
-	padding:10,
-	textAlign: "center",
+    margin: "15px auto",
+    padding: 10,
+    textAlign: "center",
     "@media (min-width:800px)": {
       display: "none"
     }
@@ -111,6 +113,9 @@ const rows = [
   createData("Message Limit", "50/mo", "200/mo", "1000/mo")
 ];
 class Pricing extends React.Component {
+  scrollToTop() {
+    scroll.scrollToTop();
+  }
   render() {
     const { classes } = this.props;
     return (
@@ -121,9 +126,8 @@ class Pricing extends React.Component {
             <img src={Logo} alt="A cute, personable robot" />
           </Link>
           <NavbarItemsContainer>
-            <NavbarItem>Team</NavbarItem>
+            <NavbarItem to="/team">Team</NavbarItem>
             <NavbarItem to="/pricing">Pricing</NavbarItem>
-            <NavbarItem>Blog</NavbarItem>
             <h2 onClick={login}>Sign In</h2>
           </NavbarItemsContainer>
         </NavbarContainer>
@@ -295,11 +299,10 @@ class Pricing extends React.Component {
         </FirstSection>
         <FooterContainer>
           <FooterItemsContainer>
-            <h3>Team</h3>
-            <h3>Pricing</h3>
-            <h3>Blog</h3>
+            <Link to="/team">Team</Link>
+            <Link to="/pricing">Pricing</Link>
           </FooterItemsContainer>
-          <ArrowUpward onClick={() => window.scrollTo(0, 0)} />
+          <ArrowUpward onClick={() => this.scrollToTop()} />
         </FooterContainer>
       </LandingPageContainer>
     );
@@ -329,7 +332,7 @@ const NavbarContainer = styled.nav`
     width: 50px;
   }
   h2,
-  h3 {
+  a {
     margin-left: 30px;
     font-size: 16px;
     font-weight: 500;
@@ -350,10 +353,12 @@ const NavbarContainer = styled.nav`
     color: #451476;
   }
 `;
+
 const NavbarItemsContainer = styled.div`
   display: flex;
   align-items: center;
 `;
+
 const NavbarItem = styled(Link)`
   margin-left: 30px;
   font-size: 16px;
@@ -365,7 +370,7 @@ const NavbarItem = styled(Link)`
 const FirstSection = styled.div`
   background-color: #fafafa;
   width: 95%;
-  margin: 5% auto 20px;
+  margin: 40px auto;
   padding: 50px 10px;
   display: flex;
   flex-direction: column;
@@ -391,10 +396,16 @@ const FooterItemsContainer = styled.div`
   color: white;
   justify-content: center;
   width: 90%;
-  h3 {
+
+  a {
     font-size: 16px;
     font-weight: 500;
-    padding: 0 20px;
+    padding: 16px 20px;
     cursor: pointer;
+    text-decoration: none;
+  }
+
+  a:visited {
+    color: white;
   }
 `;
