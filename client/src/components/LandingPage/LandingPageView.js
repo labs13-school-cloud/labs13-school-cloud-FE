@@ -275,6 +275,9 @@ const FirstSection = styled.div`
   padding: 75px 10px;
   display: flex;
   border-radius: 5px;
+  h3 {
+    width: 100%;
+  }
   @media (max-width: 700px) {
     width: 100%;
     margin: 0;
