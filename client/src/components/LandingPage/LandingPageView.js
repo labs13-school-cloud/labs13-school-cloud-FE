@@ -45,9 +45,9 @@ class LandingPageView extends React.Component {
             <LandingPageContentContainer>
               <h1>Training Bot</h1>
               <p>
-                "Empowers team leaders with tools to assist with their team’s
-                continual learning by sending automated Text messages/emails on
-                a scheduled interval to team members”.
+                Training Bot empowers team leaders with tools to assist with their team’s
+                continual learning by sending automated text messages and emails on
+                scheduled intervals.
               </p>
               <LandingPageButtonContainer>
                 <Button onClick={login}>Get Started</Button>
@@ -78,10 +78,10 @@ class LandingPageView extends React.Component {
                 />
               </MarketingImage>
               <MarketingContent>
-                <h3>Manage Your team. Stress Free.</h3>
+                <h3>Manage Your Team. Stress Free.</h3>
                 <p>
                   With Training Bot, we take the stress out of managing your
-                  employees recurring training modules.
+                  employees' recurring training modules.
                 </p>
               </MarketingContent>
             </MarketingSection>
@@ -111,7 +111,7 @@ class LandingPageView extends React.Component {
                 <h3>Notifications, Your Way.</h3>
                 <p>
                   Send text messages or email notifications to your employees.
-                  Modern communication for the mordern workplace.
+                  Modern communication for the modern workplace.
                 </p>
               </MarketingContent>
             </MarketingSection>
@@ -552,7 +552,7 @@ const GetStartedButton = styled.div`
     background-color: #451476;
     color: white;
     &:hover {
-      margin: 0 15px;
+      /* margin: 0 15px; */
       background-color: #451476;
       color: white;
     }
