@@ -155,24 +155,28 @@ class Team extends React.Component {
               className={classes.form}
               name="contact"
               method="POST"
-              data-netlify="true"
+              netlify
+              enctype="application/x-www-form-urlencoded"
             >
               <TextField
                 label="Name"
                 className={classes.textField}
                 margin="normal"
+                name="contact-name"
                 required
               />
               <TextField
                 label="Email"
                 className={classes.textField}
                 margin="normal"
+                name="contact-email"
                 required
               />
               <TextField
                 label="Message"
                 className={classes.textField}
                 margin="normal"
+                name="contact-message"
                 multiline
                 rows="8"
                 placeholder="Type your message here"
