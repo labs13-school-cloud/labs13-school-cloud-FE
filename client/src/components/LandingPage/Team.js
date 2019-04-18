@@ -151,7 +151,12 @@ class Team extends React.Component {
           </TeamContainer>
           <ContactContainer>
             <Typography variant="h3">Contact Us</Typography>
-            <form className={classes.form} name="contact" method="POST">
+            <form
+              action="/success"
+              className={classes.form}
+              name="contact"
+              method="POST"
+            >
               <input type="hidden" name="form-name" value="contact" />
               <TextField
                 label="Name"
