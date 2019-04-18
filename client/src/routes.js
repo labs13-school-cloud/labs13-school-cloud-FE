@@ -7,6 +7,7 @@ import {Route, Router} from "react-router-dom";
 import App from "./App";
 import Pricing from "./components/LandingPage/Pricing";
 import Team from './components/LandingPage/Team';
+import FormSuccess from './components/LandingPage/FormSuccess';
 import DashboardView from "./components/Dashboard/DashboardView";
 
 //Callback
@@ -42,6 +43,7 @@ export const makeMainRoutes = () => {
             <Route exact path="/" component={App} />
             <Route path="/pricing" component={Pricing} />
             <Route path="/team" component={Team} />
+            <Route path="/success" component={FormSuccess} />
             <Route path="/home" component={Authenticate(DashboardView)} />
             <Route path="/callback" component={Callback} />
           </div>

@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import { Link } from "react-router-dom";
 import Tour from "reactour";
 import Progress from "../Progress/ProgressCircle";
 import styled from "styled-components";
@@ -61,8 +62,7 @@ class DashboardTour extends Component {
         content: (
           <Container>
             <p>
-              We're super glad to have you apart of Training Bot. Please reach
-              out to us if you have any questions or concerns.
+              We're super glad to have you as a part of Training Bot. Please <Link to="/team">contact us</Link> if you have any questions or concerns.
             </p>
             <ImageContainer>
               <Progress />
