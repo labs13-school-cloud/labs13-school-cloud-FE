@@ -365,6 +365,10 @@ const NavbarItem = styled(Link)`
   font-weight: 500;
   text-decoration: none;
   cursor: pointer;
+  color: #441476;
+  &:visited {
+    color: #441476;
+  }
 `;
 
 const FirstSection = styled.div`

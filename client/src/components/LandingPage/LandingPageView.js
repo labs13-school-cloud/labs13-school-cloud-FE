@@ -1,27 +1,27 @@
 // contains all components for landing page
 import React from "react";
-import { Link } from "react-router-dom";
-import { scroller, animateScroll as scroll } from "react-scroll";
+import {Link} from "react-router-dom";
+import {scroller, animateScroll as scroll} from "react-scroll";
 //Styling
 import styled from "styled-components";
 import Button from "@material-ui/core/Button";
 //Icons & Images
 import FaceIcon from "@material-ui/icons/Face";
-import { ArrowUpward } from "@material-ui/icons";
+import {ArrowUpward} from "@material-ui/icons";
 import Logo from "../../img/training-bot.png";
 
 import undrawCoworker from "../../img/undraw_co-workers_ujs6.svg";
 import undrawNotify from "../../img/undraw_notify_88a4.svg";
 import undrawTask from "../../img/undraw_personal_text_vkd8.svg";
 //Auth
-import { login } from "../../Auth/Auth";
+import {login} from "../../Auth/Auth";
 
 class LandingPageView extends React.Component {
   scrollTo() {
     scroller.scrollTo("MarketingContent", {
       duration: 800,
       delay: 0,
-      smooth: "easeInOutQuart"
+      smooth: "easeInOutQuart",
     });
   }
   scrollToTop() {
@@ -56,7 +56,7 @@ class LandingPageView extends React.Component {
                 </Button>
               </LandingPageButtonContainer>
             </LandingPageContentContainer>
-            <VideoContainer>
+            {/* <VideoContainer>
               <iframe
                 width="100%"
                 height="400"
@@ -66,7 +66,7 @@ class LandingPageView extends React.Component {
                 allowFullScreen
                 title="Marketing Video"
               />
-            </VideoContainer>
+            </VideoContainer> */}
           </FirstSection>
           {/* MARKETING CONTAINER / UNDRAW PHOTO SECTION */}
           <MarketingContentContainer name="MarketingContent">
@@ -262,6 +262,10 @@ const NavbarItem = styled(Link)`
   font-weight: 500;
   text-decoration: none;
   cursor: pointer;
+  color: #441476;
+  &:visited {
+    color: #441476;
+  }
 `;
 
 const FirstSection = styled.div`
