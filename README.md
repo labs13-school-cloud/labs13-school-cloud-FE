@@ -3,7 +3,7 @@
 <table>
 <tr>
 <td>
-  A Progressive Web app using the Twilio API to send automated text and email notifications. Training Bot assists team leaders by sending automated notifications with custom content to their team. 
+  A single page application using the Twilio API to send automated text and email notifications. Training Bot assists team leaders by sending automated notifications with custom content to their team. 
 </td>
 </tr>
 </table>
@@ -31,7 +31,7 @@ The profile section is where you can view/delete your account as well as upgrade
 ![](Assets/Screenshot6.png)
 
 ## Mobile support
-The WebApp is compatible with devices of all sizes and all OS's.
+Training Bot is compatible with devices of all sizes and all OS's.
 ![](Assets/Screenshot3.png)
 
 
