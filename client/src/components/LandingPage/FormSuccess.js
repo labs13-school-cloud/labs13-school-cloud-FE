@@ -47,6 +47,7 @@ class FormSuccess extends React.Component {
       margin: 0 auto;
       width: 100%;
       max-width: 1280px;
+      height: 100vh;
       background-color: white;
       box-sizing: border-box;
     `;
@@ -100,8 +101,10 @@ class FormSuccess extends React.Component {
     const ContentContainer = styled.div`
       display: flex;
       justify-content: center;
+      align-items: center;
       flex-direction: column;
       width: 95%;
+      height: 70%;
       margin: 40px auto;
       background-color: #fafafa;
       padding: 30px 20px;
@@ -123,6 +126,8 @@ class FormSuccess extends React.Component {
       display: flex;
       align-items: center;
       margin-top: 100px;
+      position: sticky;
+        top: 100%;
       svg {
         margin: 0 auto;
         font-size: 30px;
