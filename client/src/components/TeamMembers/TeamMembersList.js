@@ -32,8 +32,10 @@ const TeamMembersList = props => {
 
 export default TeamMembersList;
 
-const ListStyles = styled.div`
+const ListStyles = styled.ul`
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-left: 0px;
+  margin: 0px;
 `;

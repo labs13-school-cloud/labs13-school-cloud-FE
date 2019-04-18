@@ -20,7 +20,7 @@ class AppBar extends Component {
         <NavItemsContainer>
           {this.props.history.location.pathname === '/' ? (
             <>
-              <NavigationLogo src={Logo} alt="A cute, personable robot">
+              <NavigationLogo alt="A cute, personable robot" src={Logo}>
                 Link
               </NavigationLogo>
               <NavLinkItems>
@@ -32,7 +32,7 @@ class AppBar extends Component {
           ) : (
             <>
               <Link to="/home">
-                <NavigationLogo src={Logo} />
+                <NavigationLogo alt="A cute, personable robot" src={Logo} />
               </Link>
               <RightItemsContainer>
                 <Link to="/home/profile">

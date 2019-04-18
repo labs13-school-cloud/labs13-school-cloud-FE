@@ -45,10 +45,12 @@ const NotificationsList = props => {
 
 export default NotificationsList;
 //Styled Components
-const ListStyles = styled.div`
+const ListStyles = styled.ul`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+  padding-left: 0px;
+  margin: 0px;
 `;
 
 const MessageContainer = styled.div`

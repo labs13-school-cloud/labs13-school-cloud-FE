@@ -36,9 +36,11 @@ const TrainingSeriesList = props => {
 
 export default TrainingSeriesList;
 //Styled Components
-const ListStyles = styled.div`
+const ListStyles = styled.ul`
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-left: 0px;
+  margin: 0px;
 `;

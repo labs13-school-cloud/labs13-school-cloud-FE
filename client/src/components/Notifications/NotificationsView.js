@@ -147,12 +147,12 @@ class NotificationsView extends Component {
           <div>
             <FormControl className={classes.formControl}>
               <Select
-                native
                 className={classes.selection}
                 value={this.state.filterType}
                 onChange={e => this.handleFilter(e)}
                 inputProps={{
-                  id: 'pagination-selector'
+                  id: 'kind-selector',
+                  label: 'Filter Selector'
                 }}>
                 <option value={'all'}>All</option>
                 <option value={'phoneNumber'}>Text</option>
@@ -161,12 +161,12 @@ class NotificationsView extends Component {
             </FormControl>
             <FormControl className={classes.formControl}>
               <Select
-                native
                 className={classes.selection}
                 value={this.state.filterSent}
                 onChange={e => this.handleFilterSent(e)}
                 inputProps={{
-                  id: 'pagination-selector'
+                  id: 'status-selector',
+                  label: 'Filter Selector'
                 }}>
                 <option value={'pending'}>Pending</option>
                 <option value={'sent'}>Sent</option>
