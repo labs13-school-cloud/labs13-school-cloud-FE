@@ -26,10 +26,10 @@ const NotificationsList = props => {
   } else {
     notificationDisplay = (
       <ListStyles>
-        {arr.map(notification => {
+        {arr.map((notification, index) => {
           return (
             <Notification
-              key={notification.sendDate}
+              key={index}
               notification={notification}
               filterSent={props.filterSent}
               match={props.match}
