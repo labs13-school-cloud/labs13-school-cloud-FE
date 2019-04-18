@@ -14,13 +14,19 @@ import {
 } from '../../../store/actions/';
 import AddMember from './AddMember';
 
-// I need to bring in the user ID and the training series ID
 const styles = theme => ({
 	root: {
-		...theme.mixins.gutters(),
-		paddingTop: theme.spacing.unit * 2,
-		paddingBottom: theme.spacing.unit * 2,
-		margin: '0 auto',
+		width: "100%",
+		maxWidth: 768,
+		margin: "20px auto",
+		boxSizing: 'border-box',
+		backgroundColor: theme.palette.background.paper,
+		boxShadow: theme.shadows[5],
+		padding: '20px 30px 40px',
+		outline: "none",
+		"@media (max-width:768px)": {
+			width: "95%"
+		}
 	},
 	footer: {
 		display: 'flex',
@@ -81,17 +87,6 @@ class AddMembersView extends Component {
 					limit={this.state.limit}
 					offset={this.state.offset}
 				/>
-				{/****** Following used for pagination ******/}
-				{/* 
-				<div className={classes.footer}>
-					<Pagination
-						limit={this.state.limit}
-						offset={this.state.offset}
-						total={this.props.teamMembers.length}
-						centerRipple={true}
-						onClick={(e, offset) => this.handleClick(offset)}
-					/>
-				</div> */}
 			</Paper>
 		);
 	}
@@ -112,14 +107,6 @@ class AddMembersView extends Component {
 			};
 			this.props.addTeamMemberToTrainingSeries(data);
 			this.setState({ isRouting: true });
-			setTimeout(() => {
-				this.props.history.push({
-					pathname: `/home/training-series/${this.state.trainingSeriesID}`,
-					state: {
-						success: true,
-					},
-				});
-			}, 1000);
 		},
 		handleChecked: id => {
 			if (!this.state.selectedTeamMembers.includes(id)) {

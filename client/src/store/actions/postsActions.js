@@ -1,5 +1,5 @@
 import axios from "axios";
-
+import history from '../../history.js'
 // GET POSTS
 export const GET_POSTS_START = "GET_POSTS_START";
 export const GET_POSTS_SUCCESS = "GET_POSTS_SUCCESS";
@@ -53,7 +53,7 @@ export const getPostById = id => dispatch => {
 };
 
 // POST a new post
-export const createAPost = post => dispatch => {
+export const createAPost = (post, trainingSeriesID) => dispatch => {
   dispatch({ type: ADD_POST_START });
   console.log("post in createAPost", post);
   axios
@@ -61,11 +61,16 @@ export const createAPost = post => dispatch => {
     .then(res =>
       dispatch({ type: ADD_POST_SUCCESS, payload: res.data.newPost })
     )
+    .then(() => {
+      // dispatch(getTrainingSeriesPosts(trainingSeriesID))
+      history.push(`/home/training-series/${trainingSeriesID}`);
+    })
     .catch(err => dispatch({ type: ADD_POST_FAIL, error: err }));
 };
 
 // PUT a post
 export const editPost = (id, updates) => dispatch => {
+  console.log(updates)
   dispatch({ type: EDIT_POST_START });
   axios
     .put(`${process.env.REACT_APP_API}/api/posts/${id}`, updates)

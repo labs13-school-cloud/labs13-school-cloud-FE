@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import moment from "moment";
 
 import styled from "styled-components";
 
@@ -9,6 +10,12 @@ import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+import Divider from "@material-ui/core/Divider";
+import ExpansionPanel from '@material-ui/core/ExpansionPanel';
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+
 
 // Redux
 import {
@@ -21,23 +28,30 @@ import {
 
 const styles = theme => ({
   root: {
-    ...theme.mixins.gutters(),
-    paddingTop: theme.spacing.unit * 2,
-    paddingBottom: theme.spacing.unit * 2,
-    width: "100%",
-    margin: "20px auto"
+    width: "89%",
+    backgroundColor: theme.palette.background.paper,
+    boxSizing: "border-box",
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing.unit * 4,
+    outline: "none",
+    margin: "5px auto",
+
+    "@media (max-width: 768px)": {
+      textAlign: "center",
+      padding: "30px"
+    }
   },
   form: {
-    // width: "100%",
+    width: "100%",
     margin: "0 auto"
   },
   info: {
     "margin-right": "50px"
   },
   textField: {
-    // marginLeft: theme.spacing.unit,
-    // marginRight: theme.spacing.unit,
-    width: "80%",
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+    width: "100%",
     margin: "15px auto"
   },
   fab: {
@@ -45,6 +59,15 @@ const styles = theme => ({
   },
   button: {
     "margin-left": theme.spacing.unit
+  },
+  createButton: {
+    "margin-left": theme.spacing.unit,
+    background: "#451476",
+    color: "white",
+    "&:hover": {
+      background: "#591a99",
+      color: "white"
+    }
   }
 });
 
@@ -73,15 +96,6 @@ class CreatePost extends React.Component {
     }
   }
 
-  //   componentDidUpdate(prevProps) {
-  //     if (prevProps.addSuccess !== this.props.addSuccess) {
-  //       setTimeout(() => {
-  //         const { teamMemberID } = this.props.teamMember && this.props.teamMember;
-  //         this.props.history.push(`/home/team-member/${teamMemberID}`);
-  //       }, 400);
-  //     }
-  //   }
-
   handleChange = name => e => {
     this.setState({
       ...this.state,
@@ -94,28 +108,25 @@ class CreatePost extends React.Component {
 
   handlePostSubmit = e => {
     e.preventDefault();
-
-    this.props.createAPost(this.state.post);
-    this.props.history.push(
-      `/home/training-series/${this.props.location.state.trainingSeriesId}`
-    );
+    this.props.createAPost(this.state.post, this.state.post.trainingSeriesID);
   };
 
   render() {
     const { classes } = this.props;
+    const sendDay = moment().add(3, "days").format("MMM Do");
     return (
-      <MainContainer>
-        <Typography variant="display1" align="center" gutterBottom>
-          Create A New Message
-        </Typography>
-        <form
-          className={classes.form}
-          id="form1"
-          onSubmit={e => this.handlePostSubmit(e)}
-        >
-          {/* <DeleteModal deleteType='inTeamMemberPage' id={this.props.urlId} /> */}
-
+      <form
+        className={classes.form}
+        id="form1"
+        onSubmit={e => this.handlePostSubmit(e)}
+      >
+        {/* <DeleteModal deleteType='inTeamMemberPage' id={this.props.urlId} /> */}
+        <MainContainer>
           <Paper className={classes.root}>
+            <Typography variant="title" gutterBottom>
+              Create A New Message
+            </Typography>
+            <Divider />
             <PostContainer>
               <TextField
                 id="standard-name"
@@ -137,16 +148,15 @@ class CreatePost extends React.Component {
               />
               <TextField
                 id="standard-name"
-                label="Link"
+                label="Optional Link"
                 className={classes.textField}
                 value={this.state.post.link}
                 onChange={this.handleChange("link")}
                 margin="normal"
-                required
               />
               <TextField
                 id="outlined-number"
-                label="Days from Start"
+                label="Days From Start"
                 margin="normal"
                 className={classes.textField}
                 onChange={this.handleChange("daysFromStart")}
@@ -156,48 +166,53 @@ class CreatePost extends React.Component {
                 inputProps={{ min: 1 }}
                 required
               />
+              <ExpansionPanel>
+        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+          <Typography className={classes.heading}>What is "Days From Start"?</Typography>
+        </ExpansionPanelSummary>
+        <ExpansionPanelDetails>
+          <Typography>
+            This is the number of days after a training series starts that a message will be sent. For example, if you assign a team member to this training series with a start date of today, and you set this message's "days from start" number to 3, it will send out on {sendDay}.
+          </Typography>
+        </ExpansionPanelDetails>
+      </ExpansionPanel>
             </PostContainer>
+            <ButtonContainer>
+              <Button
+                variant="outlined"
+                className={classes.createButton}
+                type="submit"
+                form="form1"
+              >
+                Create
+              </Button>
+              <Button
+                className={classes.button}
+                onClick={e =>
+                  this.props.history.push(
+                    `/home/training-series/${
+                      this.props.location.state.trainingSeriesId
+                    }`
+                  )
+                }
+              >
+                Cancel
+              </Button>
+            </ButtonContainer>
           </Paper>
-          <ButtonContainer>
-            {/* <NotificationWidget
-              teamMember={this.state.teamMember}
-              editTeamMember={this.props.editTeamMember}
-              addTeamMember={this.addNewTeamMember}
-              type="success"
-              submitType="add"
-            /> */}
-            <Button
-              variant="contained"
-              color="primary"
-              className={classes.button}
-              type="submit"
-              form="form1"
-            >
-              Save
-            </Button>
-            <Button
-              variant="contained"
-              className={classes.button}
-              onClick={e =>
-                this.props.history.push(
-                  `/home/training-series/${
-                    this.props.location.state.trainingSeriesId
-                  }`
-                )
-              }
-            >
-              Cancel
-            </Button>
-          </ButtonContainer>
-        </form>
-      </MainContainer>
+        </MainContainer>
+      </form>
+
     );
   }
 }
 
 const MainContainer = styled.div`
   margin: 0 auto;
-  width: 80%;
+  max-width: 768px;
+  @media (max-width: 768px) {
+    width: 95%;
+  }
 `;
 
 const PostContainer = styled.div`

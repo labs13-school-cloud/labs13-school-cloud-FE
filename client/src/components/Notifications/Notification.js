@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 //Styling
 import { withStyles } from '@material-ui/core/styles';
 import { ListItem, ListItemText, Typography } from '@material-ui/core/';
+var phoneFormatter = require('phone-formatter');
 
 //Customized Styling
 const styles = {
@@ -17,15 +18,15 @@ const styles = {
 		display: 'flex',
 		justifyContent: 'space-between',
 		alignItems: 'center',
-		borderBottom: '1px solid #E8E9EB',
+		borderBottom: '1px solid #E8E9EB'
 	},
 	title: {
-		fontSize: 16,
+		fontSize: 16
 	},
 	sendDate: {
 		fontSize: 13,
-		textAlign: 'right',
-	},
+		textAlign: 'right'
+	}
 };
 
 function Notification(props) {
@@ -37,28 +38,31 @@ function Notification(props) {
 		postName,
 		email,
 		phoneNumber,
-		title,
+		title
 	} = props.notification;
+
+	// add hours to sendDate, formatting with moment ensures it displays properly on the FE
+	const formattedSendDate = moment(sendDate).add(1, "hours").format('MMMM Do')
 
 	return (
 		<ListItem className={classes.listItem}>
 			<ListItemText
 				primary={`${postName} | ${title}`}
-				secondary={`${firstName} ${lastName} | ${email ? email : phoneNumber}`}
+				secondary={`${firstName} ${lastName} | ${
+					email ? email : phoneFormatter.format(phoneNumber, '(NNN) NNN-NNNN')
+				}`}
 			/>
 			<Typography className={classes.sendDate}>
 				{props.filterSent === 'pending' ? 'Send Date' : 'Sent on'}
 				<br />
-				{moment(sendDate)
-					.add(1, 'days')
-					.format('MMMM Do')}
+				{formattedSendDate}
 			</Typography>
 		</ListItem>
 	);
 }
 
 Notification.propTypes = {
-	classes: PropTypes.object.isRequired,
+	classes: PropTypes.object.isRequired
 };
 
 export default withStyles(styles)(Notification);

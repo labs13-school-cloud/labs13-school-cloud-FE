@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 import DatePicker from "react-datepicker";
+import TrainingBotGIF from "../../../img/trainingBot.gif";
 
 //Styles
 import "react-datepicker/dist/react-datepicker.css";
@@ -10,7 +11,7 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import Select from "@material-ui/core/Select";
 import FormControl from "@material-ui/core/FormControl";
-import { MenuItem } from "@material-ui/core";
+import { MenuItem, Paper } from "@material-ui/core";
 import InputLabel from "@material-ui/core/InputLabel";
 
 //REDUX
@@ -19,15 +20,13 @@ import { addTeamMemberToTrainingSeries } from "../../../store/actions/";
 
 const styles = theme => ({
   paper: {
-    margin: "0 auto",
-    width: theme.spacing.unit * 70,
+    width: "100%",
+    margin: "20px auto",
+    boxSizing: "border-box",
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
-    padding: theme.spacing.unit * 4,
-    outline: "none",
-    "@media (max-width: 768px)": {
-      width: "65%"
-    }
+    padding: "20px 30px",
+    outline: "none"
   },
   heading: {
     textAlign: "center"
@@ -64,8 +63,14 @@ const styles = theme => ({
     justifyContent: "center",
     margin: "30px auto"
   },
-  button: {
-    alignSelf: "center"
+  assignButton: {
+    alignSelf: "center",
+    background: "#451476",
+    color: "white",
+    "&:hover": {
+      background: "#591a99",
+      color: "white"
+    }
   }
 });
 
@@ -74,7 +79,8 @@ class AssignMemberPage extends React.Component {
     open: false,
     trainingSeriesID: "",
     startDate: "",
-    value: ""
+    value: "",
+    isRouting: false
   };
 
   componentDidMount() {
@@ -110,9 +116,14 @@ class AssignMemberPage extends React.Component {
       assignments: [this.props.location.state.urlId]
     };
     this.props.addTeamMemberToTrainingSeries(data);
-    this.props.history.push({
-      pathname: "/home"
-    })
+    this.setState({
+      isRouting: true
+    });
+  };
+
+  routeBack = e => {
+    e.preventDefault();
+    this.props.history.goBack();
   };
 
   renderTrainingSeriesInDropDown = () => {
@@ -141,9 +152,10 @@ class AssignMemberPage extends React.Component {
   };
   render() {
     const { classes } = this.props;
+
     return (
-      <>
-        <div className={classes.paper}>
+      <AssignMemberContainer>
+        <Paper className={classes.paper}>
           <Typography variant="h6" className={classes.heading}>
             Assign Training Series
           </Typography>
@@ -176,19 +188,33 @@ class AssignMemberPage extends React.Component {
             </FormControl>
             <ButtonContainer>
               <Button
-                className={classes.button}
+                disabled={
+                  this.state.isRouting === true ||
+                  this.state.trainingSeriesID === undefined
+                    ? "true"
+                    : null
+                }
+                className={classes.assignButton}
                 variant="contained"
                 type="submit"
               >
-                Assign
+                {this.state.isRouting ? (
+                  <LoadingImage src={TrainingBotGIF} alt="Loading Icon" />
+                ) : (
+                  "Assign"
+                )}
               </Button>
-              <Button className={classes.button} variant="primary">
+              <Button
+                onClick={this.routeBack}
+                className={classes.button}
+                variant="primary"
+              >
                 Cancel
               </Button>
             </ButtonContainer>
           </form>
-        </div>
-      </>
+        </Paper>
+      </AssignMemberContainer>
     );
   }
 }
@@ -196,8 +222,8 @@ class AssignMemberPage extends React.Component {
 const mapStateToProps = state => {
   return {
     trainingSeries: state.trainingSeriesReducer.trainingSeries,
-    isLoading: state.userReducer.isLoading,
-    teamMembers: state.teamMembersReducer.teamMembers
+    isLoading: state.userReducer.isLoading
+    // teamMembers: state.teamMembersReducer.teamMembers
   };
 };
 
@@ -206,8 +232,28 @@ export default connect(
   { addTeamMemberToTrainingSeries }
 )(withStyles(styles)(AssignMemberPage));
 
+const AssignMemberContainer = styled.div`
+  margin: 0 auto;
+  max-width: 768px;
+  width: 100%;
+  @media (max-width: 768px) {
+    width: 95%;
+  }
+`;
+
 const ButtonContainer = styled.div`
   display: flex;
   margin-top: 25px;
   justify-content: center;
+`;
+
+const LoadingImage = styled.img`
+  width: 32px;
+  height: auto;
+  overflow: hidden;
+  cursor: not-allowed;
+  pointer-events: none;
+  position: relative;
+  padding: 0;
+  margin: 0;
 `;

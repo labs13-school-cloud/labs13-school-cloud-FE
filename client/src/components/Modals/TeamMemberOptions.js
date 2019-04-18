@@ -1,15 +1,15 @@
-import React from 'react';
-import { withRouter } from 'react-router';
+import React from "react";
+import { withRouter } from "react-router";
 
 // styles
-import { withStyles } from '@material-ui/core/styles';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
-import { IconButton, Menu, MenuItem } from '@material-ui/core/';
+import { withStyles } from "@material-ui/core/styles";
+import MoreVertIcon from "@material-ui/icons/MoreVert";
+import { IconButton, Menu, MenuItem } from "@material-ui/core/";
 
 // components
-import DeleteModal from '../Modals/deleteModal';
+import DeleteModal from "../Modals/deleteModal";
 
-const styles = theme => ({});
+const styles = {};
 
 class TeamMemberOptions extends React.Component {
   constructor(props) {
@@ -32,7 +32,7 @@ class TeamMemberOptions extends React.Component {
   };
 
   render() {
-    // const { classes } = this.props;
+    const { classes } = this.props;
 
     return (
       <div>
@@ -40,9 +40,10 @@ class TeamMemberOptions extends React.Component {
           aria-label="More"
           aria-haspopup="true"
           onClick={this.handleClick}
+          class={classes.root}
         >
           <MoreVertIcon
-            aria-owns={this.state.anchorEl ? 'simple-menu' : undefined}
+            aria-owns={this.state.anchorEl ? "simple-menu" : undefined}
             aria-haspopup="true"
           />
         </IconButton>

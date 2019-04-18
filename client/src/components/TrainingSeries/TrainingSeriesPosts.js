@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import Fab from "@material-ui/core/Fab";
 import Fuse from "fuse.js";
 
+import ProgressCircle from "../Progress/ProgressCircle";
+
 // Components
 import DeleteModal from "../Modals/deleteModal";
 import TrainingSeriesAssignment from "./TrainingSeriesAssignment";
@@ -42,16 +44,24 @@ import AddMemberSnackbar from "./AddMembersToTrainingSeries/AddMemberSnackbar";
 
 const styles = theme => ({
   paper: {
-    width: "100%",
+    // "max-width": 800,
+    width: "89%",
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
     padding: theme.spacing.unit * 4,
     outline: "none",
     margin: "5px auto",
-    "@media (max-width: 480px)": {
+
+    "@media (max-width: 768px)": {
       width: "89%",
-      padding: 0,
-      margin: "0 auto"
+      // padding: 0,
+      margin: "5px auto"
+    },
+
+    "@media (max-width: 480px)": {
+      width: "80%",
+      // padding: 0,
+      margin: "5px auto"
     }
   },
   paperTitle: {
@@ -79,15 +89,27 @@ const styles = theme => ({
   },
   listItem: {
     width: "79%",
-    height: 95,
-    marginBottom: 20,
+    height: 80,
+    marginBottom: 10,
     paddingBottom: 10,
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    borderBottom: "1px solid #E8E9EB"
-    // "list-style": "none"
+    wrap: "flex-wrap"
+
+    // transition: "background-color 0.3s",
+    // "&:hover": {
+    //   width: "100%",
+    //   cursor: "pointer",
+    //   backgroundColor: "whitesmoke"
+    //   // "box-shadow": "0px 6px 15px -4px rgba(0,0,0,0.84)"
+    // }
   },
+
+  // listItemText: {
+  //   width: "79%"
+  // },
+
   icons: {
     display: "block",
     width: 20,
@@ -100,23 +122,62 @@ const styles = theme => ({
     display: "none"
   },
   button: {
-    // position: 'relative',
-    // top: '5px',
-    // right: '5px',
-    // width: '160px',
-    // position: 'relative',
-    // left: '70%',
-    // top: '-40px',
-    margin: 5
+    // margin: 5,
+    "margin-left": theme.spacing.unit,
+    background: "#451476",
+    color: "white",
+    "&:hover": {
+      background: "#591a99",
+      color: "white"
+    },
+
+    "@media (max-width: 768px)": {
+      margin: "10px 5px"
+    }
+
+    // "@media (max-width: 480px)": {
+    //   fontSize: 11,
+    //   padding: 7
+    // }
+  },
+  assignButton: {
+    // margin: 5,
+    "margin-left": theme.spacing.unit,
+    background: "#451476",
+    color: "white",
+    "&:hover": {
+      background: "#591a99",
+      color: "white"
+    },
+
+    "@media (max-width: 768px)": {
+      margin: "10px 5px"
+    },
+
+    "&:disabled": {
+      background: "white"
+    }
+
+    // "@media (max-width: 480px)": {
+    //   fontSize: 11,
+    //   width: "45%",
+    //   padding: "7px 12px"
+    // }
   },
   list: {
     listStyleType: "none"
   },
-  AssignBtn: {},
   messageText: {
     marginTop: 20,
     marginBottom: 20,
-    textAlign: "center"
+    textAlign: "center",
+    color: "lightgray"
+  },
+  messageTextTop: {
+    marginTop: 50,
+    marginBottom: 20,
+    textAlign: "center",
+    color: "lightgray"
   },
   divider: {
     margin: "15px 0"
@@ -155,7 +216,6 @@ class TrainingSeriesPosts extends React.Component {
 
   deletePost = (e, id) => {
     e.preventDefault();
-    console.log(id);
     this.props.deletePost(id);
   };
 
@@ -170,7 +230,6 @@ class TrainingSeriesPosts extends React.Component {
 
   routeToEditPostPage = (e, post) => {
     e.preventDefault();
-    console.log("FIRED");
     this.props.history.push({
       pathname: `/home/post/${post.postID}`,
       state: {
@@ -237,12 +296,11 @@ class TrainingSeriesPosts extends React.Component {
 
   render() {
     const { classes } = this.props;
-    console.log("POSTS", this.props.posts);
-    console.log("SEARCHED POSTS", this.searchedPosts(this.props.posts));
+
     let titleEdit;
     if (this.state.editingTitle) {
       titleEdit = (
-        <form onSubmit={e => this.updateTitle(e)} noValidate autoComplete="off">
+        <form onSubmit={e => this.updateTitle(e)} autoComplete="off">
           <TrainingSeriesTitle>
             <TextField
               id="standard-name"
@@ -255,10 +313,11 @@ class TrainingSeriesPosts extends React.Component {
             <div>
               <Button
                 type="submit"
-                variant="contained"
+                variant="outlined"
+                color="primary"
                 className={classes.button}
               >
-                Submit
+                Save
               </Button>
             </div>
           </TrainingSeriesTitle>
@@ -282,13 +341,42 @@ class TrainingSeriesPosts extends React.Component {
     }
 
     let assignedMembersStatus;
-    if (this.props.teamMembers.length) {
+    if (
+      this.props.teamMembers.length > 0 &&
+      this.props.assignments.length === 0
+    ) {
       assignedMembersStatus = (
         <>
           <HeaderContainer>
-            <Typography variant="title">Assigned Team Members</Typography>
+            <Typography variant="title" className={classes.assignedTitle}>
+              Assigned Team Members
+            </Typography>
             <Button
-              className={classes.button}
+              className={classes.assignButton}
+              variant="outlined"
+              onClick={this.routeToAssigning}
+            >
+              Assign Members
+            </Button>
+          </HeaderContainer>
+          <Typography variant="subheading" className={classes.messageTextTop}>
+            This training series currently does not have any team members
+            assigned to it.
+          </Typography>
+          <Typography variant="subheading" className={classes.messageText}>
+            Click the button above to create assignments.
+          </Typography>
+        </>
+      );
+    } else if (this.props.teamMembers.length > 0) {
+      assignedMembersStatus = (
+        <>
+          <HeaderContainer>
+            <Typography variant="title" className={classes.assignedTitle}>
+              Assigned Team Members
+            </Typography>
+            <Button
+              className={classes.assignButton}
               variant="outlined"
               onClick={this.routeToAssigning}
             >
@@ -296,7 +384,10 @@ class TrainingSeriesPosts extends React.Component {
             </Button>
           </HeaderContainer>
           {this.props.assignments.map(member => (
-            <TrainingSeriesAssignment member={member} />
+            <>
+              <TrainingSeriesAssignment member={member} />
+              <Divider />
+            </>
           ))}
         </>
       );
@@ -305,17 +396,21 @@ class TrainingSeriesPosts extends React.Component {
         <>
           <HeaderContainer>
             <Typography variant="title">Assigned Team Members</Typography>
-            <Button className={classes.button} variant="outlined" disabled>
+            <Button
+              className={classes.assignButton}
+              variant="outlined"
+              disabled
+            >
               Assign Members
             </Button>
           </HeaderContainer>
-          <Typography variant="subheading" className={classes.messageText}>
-            You don't have any team members to assign.{" "}
-          </Typography>
-          <Typography variant="subheading" className={classes.messageText}>
-            <Link to="/home/create-team-member">Click here</Link> to add a
-            member to your account.
-          </Typography>
+          <HolderText>
+            <p>You don't have any team members to assign.</p>
+            <p>
+              <Link to="/home/create-team-member">Click here</Link> to add a
+              member to your account.
+            </p>
+          </HolderText>
         </>
       );
     }
@@ -330,12 +425,21 @@ class TrainingSeriesPosts extends React.Component {
       posts = this.props.posts;
     }
 
+    /* sort posts by days from start */
+    const sortedPosts = posts.sort((a, b) =>
+      a.daysFromStart > b.daysFromStart
+        ? 1
+        : b.daysFromStart > a.daysFromStart
+        ? -1
+        : 0
+    );
+
     return (
       <>
         {this.state.displaySnackbar && (
           <>
             <AddMemberSnackbar
-              message="Your team members have be successfully added."
+              message="Your team members have been successfully assigned."
               type="success"
             />
           </>
@@ -382,39 +486,52 @@ class TrainingSeriesPosts extends React.Component {
                 }}
               />
             )}
-            <ListStyles className={classes.listStyle}>
-              {posts.map(post => (
-                <ListItem key={post.postID} className={classes.listItem}>
-                  <ListItemText
-                    primary={post.postName}
-                    secondary={post.postDetails}
-                  />
-                  <ListItemSecondaryAction className={classes.secondaryAction}>
-                    <div>
-                      <p>{post.daysFromStart} days</p>
-                    </div>
-                    <ListButtonContainer>
-                      <i
-                        className={`material-icons ${classes.icons}`}
+            {this.props.posts.length === 0 ? (
+              <HolderText>
+                <p>You do not have any messages.</p>
+              </HolderText>
+            ) : (
+              <ListStyles className={classes.listStyle}>
+                {sortedPosts.map(post => (
+                  <ListItemContainer>
+                    <ListItem key={post.postID} className={classes.listItem}>
+                      <ListItemText
+                        primary={post.postName}
+                        secondary={post.postDetails}
+                        className={classes.listItemText}
                         onClick={e => this.routeToEditPostPage(e, post)}
-                      >
-                        edit
-                      </i>
-                      <DeleteModal
-                        className={`material-icons ${classes.icons}`}
-                        deleteType="post"
-                        id={post.postID}
                       />
-                    </ListButtonContainer>
-                  </ListItemSecondaryAction>
-                </ListItem>
-              ))}
-            </ListStyles>
+                      <ListItemSecondaryAction
+                        className={classes.secondaryAction}
+                      >
+                        <div>
+                          <p>{post.daysFromStart} days</p>
+                        </div>
+                        <ListButtonContainer>
+                          <i
+                            className={`material-icons ${classes.icons}`}
+                            onClick={e => this.routeToEditPostPage(e, post)}
+                          >
+                            edit
+                          </i>
+                          <DeleteModal
+                            className={`material-icons ${classes.icons}`}
+                            deleteType="post"
+                            id={post.postID}
+                          />
+                        </ListButtonContainer>
+                      </ListItemSecondaryAction>
+                    </ListItem>
+                    <Divider />
+                  </ListItemContainer>
+                ))}
+              </ListStyles>
+            )}
           </Paper>
           <Paper className={classes.paper}>{assignedMembersStatus}</Paper>
         </PageContainer>
       </>
-    );
+    )
   }
 }
 
@@ -431,6 +548,35 @@ const HeaderContainer = styled.div`
   justify-content: space-between;
   display: flex;
   align-items: baseline;
+  margin-bottom: 10px;
+
+  @media (max-width: 768px) {
+    max-width: 768px;
+    height: 100%;
+    flex-direction: column;
+
+    padding: 10px 0;
+    align-items: center;
+    margin: 0 auto;
+    text-align: center;
+  }
+`;
+
+const HolderText = styled.div`
+  margin: 50px 0;
+  p {
+    color: lightgray;
+    text-align: center;
+  }
+`;
+
+const ListItemContainer = styled.div`
+  transition: background-color 0.3s;
+  &:hover {
+    width: 100%;
+    cursor: pointer;
+    background-color: whitesmoke;
+  }
 `;
 
 const ListStyles = styled.div`
@@ -448,6 +594,7 @@ const ListButtonContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   margin-left: 40px;
+  padding-right: 5px;
 `;
 
 const TrainingSeriesTitle = styled.div`

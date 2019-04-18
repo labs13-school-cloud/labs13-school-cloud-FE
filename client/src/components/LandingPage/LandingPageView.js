@@ -1,21 +1,32 @@
 // contains all components for landing page
-import React from 'react';
-
+import React from "react";
+import { Link } from "react-router-dom";
+import { scroller, animateScroll as scroll } from "react-scroll";
 //Styling
-import styled from 'styled-components';
-import Button from '@material-ui/core/Button';
+import styled from "styled-components";
+import Button from "@material-ui/core/Button";
 //Icons & Images
-import FaceIcon from '@material-ui/icons/Face';
-import {ArrowUpward} from '@material-ui/icons';
-import Logo from '../../img/training-bot.png';
+import FaceIcon from "@material-ui/icons/Face";
+import { ArrowUpward } from "@material-ui/icons";
+import Logo from "../../img/training-bot.png";
 
-import undrawFolder from '../../img/undraw_folder_39kl.svg';
-import undrawNotify from '../../img/undraw_notify_88a4.svg';
-import undrawTask from '../../img/undraw_task_31wc (1).svg';
+import undrawCoworker from "../../img/undraw_co-workers_ujs6.svg";
+import undrawNotify from "../../img/undraw_notify_88a4.svg";
+import undrawTask from "../../img/undraw_personal_text_vkd8.svg";
 //Auth
-import {login} from '../../Auth/Auth';
+import { login } from "../../Auth/Auth";
 
 class LandingPageView extends React.Component {
+  scrollTo() {
+    scroller.scrollTo("MarketingContent", {
+      duration: 800,
+      delay: 0,
+      smooth: "easeInOutQuart"
+    });
+  }
+  scrollToTop() {
+    scroll.scrollToTop();
+  }
   render() {
     return (
       <>
@@ -24,9 +35,8 @@ class LandingPageView extends React.Component {
           <NavbarContainer>
             <img src={Logo} alt="A cute, personable robot" />
             <NavbarItemsContainer>
-              <h3>Team</h3>
-              <h3>Pricing</h3>
-              <h3>Blog</h3>
+              <NavbarItem to="/team">Team</NavbarItem>
+              <NavbarItem to="/pricing">Pricing</NavbarItem>
               <h2 onClick={login}>Sign In</h2>
             </NavbarItemsContainer>
           </NavbarContainer>
@@ -41,7 +51,9 @@ class LandingPageView extends React.Component {
               </p>
               <LandingPageButtonContainer>
                 <Button onClick={login}>Get Started</Button>
-                <Button variant="outlined">Learn More</Button>
+                <Button variant="outlined" onClick={() => this.scrollTo(500)}>
+                  Learn More
+                </Button>
               </LandingPageButtonContainer>
             </LandingPageContentContainer>
             <VideoContainer>
@@ -49,19 +61,19 @@ class LandingPageView extends React.Component {
                 width="100%"
                 height="400"
                 src="https://www.youtube.com/embed/CQ85sUNBK7w"
-                frameborder="0"
+                frameBorder="0"
                 allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen
+                allowFullScreen
                 title="Marketing Video"
               />
             </VideoContainer>
           </FirstSection>
           {/* MARKETING CONTAINER / UNDRAW PHOTO SECTION */}
-          <MarketingContentContainer>
+          <MarketingContentContainer name="MarketingContent">
             <MarketingSection>
               <MarketingImage>
                 <img
-                  src={undrawFolder}
+                  src={undrawCoworker}
                   alt="A drawing of an employee standing next to a folder"
                 />
               </MarketingImage>
@@ -81,7 +93,7 @@ class LandingPageView extends React.Component {
                 />
               </MarketingImage>
               <MarketingContent>
-                <h3>Keep your engagement high. Sky high.</h3>
+                <h3>Keep Your Engagement High.</h3>
                 <p>
                   Your employees will no longer forget if they have a task to
                   accomplish. Training Bot handles that for you.
@@ -96,7 +108,7 @@ class LandingPageView extends React.Component {
                 />
               </MarketingImage>
               <MarketingContent>
-                <h3>Notifications. Your way.</h3>
+                <h3>Notifications, Your Way.</h3>
                 <p>
                   Send text messages or email notifications to your employees.
                   Modern communication for the mordern workplace.
@@ -104,7 +116,7 @@ class LandingPageView extends React.Component {
               </MarketingContent>
             </MarketingSection>
           </MarketingContentContainer>
-          {/* TESTIMONY SECTION */}
+          {/* TESTIMONY SECTION
           <TrainingBotTestimonyContainer>
             <TestimonyContainer>
               <TestimonyPerson>
@@ -126,7 +138,7 @@ class LandingPageView extends React.Component {
               </p>
             </TestimonyContainer>
           </TrainingBotTestimonyContainer>
-          {/* STORY SECTION */}
+          {/* STORY SECTION 
           <TrainingBotStoryContainer>
             <h3>The Training Bot Story</h3>
             <StorySection>
@@ -148,7 +160,7 @@ class LandingPageView extends React.Component {
               </StoryContent>
             </StorySection>
           </TrainingBotStoryContainer>
-          {/* GET STARTED CONTAINER */}
+          {/* GET STARTED CONTAINER
           <GetStartedContainer>
             <IconBox>
               <img src={Logo} alt="This robot loves showing up" />
@@ -157,14 +169,26 @@ class LandingPageView extends React.Component {
               <h4>Use Training Bot for FREE</h4>
               <Button>Try Now</Button>
             </GetStartedBox>
-          </GetStartedContainer>
+          </GetStartedContainer> */}
+          <FirstSection>
+            <LandingPageContentContainer>
+              <h1>Get Started For Free!</h1>
+              <p>
+                Let Training Bot take the stress out of managing your team's
+                reminders. Get started for FREE now!
+              </p>
+              <LogoImage src={Logo} alt="A cute, personable robot" />
+              <GetStartedButton>
+                <Button onClick={login}>Get Started</Button>
+              </GetStartedButton>
+            </LandingPageContentContainer>
+          </FirstSection>
           <FooterContainer>
             <FooterItemsContainer>
-              <h3>Team</h3>
-              <h3>Pricing</h3>
-              <h3>Blog</h3>
+              <Link to="/team">Team</Link>
+              <Link to="/pricing">Pricing</Link>
             </FooterItemsContainer>
-            <ArrowUpward />
+            <ArrowUpward onClick={() => this.scrollToTop()} />
           </FooterContainer>
         </LandingPageContainer>
       </>
@@ -175,9 +199,13 @@ export default LandingPageView;
 
 const LandingPageContainer = styled.div`
   margin: 0 auto;
+
   width: 100%;
   max-width: 1280px;
   background-color: white;
+  @media (max-width: 700px) {
+    padding: 0;
+  }
 `;
 
 const NavbarContainer = styled.nav`
@@ -189,11 +217,16 @@ const NavbarContainer = styled.nav`
   justify-content: space-between;
   border-bottom: 1px solid #f0f4f8;
   padding: 0 25px;
+
+  @media (max-width: 700px) {
+    padding: 0 5px;
+  }
+
   img {
     width: 50px;
   }
   h2,
-  h3 {
+  a {
     margin-left: 30px;
     font-size: 16px;
     font-weight: 500;
@@ -203,11 +236,15 @@ const NavbarContainer = styled.nav`
     color: #451476;
     border: 1px solid #451476;
     background-color: white;
-    padding: 8px;
+    padding: 4px 10px;
     border-radius: 7%;
     &:hover {
       background-color: #451476;
       color: white;
+    }
+
+    @media (max-width: 700px) {
+      width: 75px;
     }
   }
   h3 {
@@ -219,13 +256,28 @@ const NavbarItemsContainer = styled.div`
   display: flex;
   align-items: center;
 `;
+const NavbarItem = styled(Link)`
+  margin-left: 30px;
+  font-size: 16px;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+`;
 
 const FirstSection = styled.div`
   background-color: #fafafa;
   width: 95%;
-  margin: 0px auto 20px;
-  padding: 50px 10px;
+  margin: 40px auto 20px;
+  padding: 75px 10px;
   display: flex;
+  border-radius: 5px;
+  @media (max-width: 700px) {
+    width: 100%;
+    margin: 0;
+  }
+  p {
+    text-align: center;
+  }
 `;
 
 const MarketingContentContainer = styled.div`
@@ -234,23 +286,38 @@ const MarketingContentContainer = styled.div`
   justify-content: center;
   align-items: center;
   margin: 0 auto 100px;
-  padding: 0 20px;
+  padding: 0px 30px;
 `;
 
 const MarketingSection = styled.div`
   width: 100%;
   display: flex;
-  margin-bottom: 40px;
+  justify-content: space-between;
+  align-items: center;
+  margin: 40px 0;
+
   &:nth-child(even) {
     flex-direction: row-reverse;
   }
   img {
     width: 100%;
   }
+
+  @media (max-width: 700px) {
+    flex-direction: column;
+    justify-content: center;
+    &:nth-child(even) {
+      flex-direction: column;
+    }
+  }
 `;
 
 const MarketingImage = styled.div`
-  width: 50%;
+  width: 40%;
+  @media (max-width: 700px) {
+    width: 80%;
+    margin: 0 auto;
+  }
 `;
 
 const MarketingContent = styled.div`
@@ -258,15 +325,24 @@ const MarketingContent = styled.div`
   padding: 0 25px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   h3 {
+    width: 100%;
     font-size: 32px;
     color: #451476;
     margin-bottom: 0;
+    text-align: left;
   }
   p {
     font-size: 20px;
+  }
+
+  @media (max-width: 700px) {
+    width: 80%;
+    margin: 0 auto;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0;
   }
 `;
 
@@ -302,11 +378,13 @@ const LandingPageButtonContainer = styled.div`
     margin: 0 10px;
     background-color: #451476;
     color: white;
+    padding: 0 16px;
   }
   button:nth-child(2) {
     border: 1px solid #451476;
     color: #451476;
-    &: hover {
+
+    &:hover {
       background-color: #451476;
       color: white;
     }
@@ -418,7 +496,8 @@ const GetStartedBox = styled.div`
     background-color: #7fc4fd;
     color: white;
     width: 100px;
-    &: hover {
+
+    &:hover {
       background-color: #451476;
       color: white;
     }
@@ -430,6 +509,8 @@ const FooterContainer = styled.div`
   display: flex;
   align-items: center;
   margin-top: 100px;
+  position: sticky;
+  top: 100%;
   svg {
     margin: 0 auto;
     font-size: 30px;
@@ -443,10 +524,33 @@ const FooterItemsContainer = styled.div`
   color: white;
   justify-content: center;
   width: 90%;
-  h3 {
+
+  a {
     font-size: 16px;
     font-weight: 500;
-    padding: 0 20px;
+    padding: 16px 20px;
     cursor: pointer;
+    text-decoration: none;
   }
+
+  a:visited {
+    color: white;
+  }
+`;
+
+const GetStartedButton = styled.div`
+  button {
+    margin: 10px 10px 0;
+    background-color: #451476;
+    color: white;
+    &:hover {
+      margin: 0 15px;
+      background-color: #451476;
+      color: white;
+    }
+  }
+`;
+
+const LogoImage = styled.img`
+  width: 50px;
 `;

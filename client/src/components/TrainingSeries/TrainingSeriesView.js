@@ -1,26 +1,30 @@
 // component to contain all the components related to training series
-import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
+import React, { Component } from "react";
+import { Route } from "react-router-dom";
 
 //REDUX
-import { connect } from 'react-redux';
-import { getTrainingSeries, deleteTrainingSeries, getMembersAssigned } from '../../store/actions/';
+import { connect } from "react-redux";
+import {
+  getTrainingSeries,
+  deleteTrainingSeries,
+  getMembersAssigned
+} from "../../store/actions/";
 
 //Components
-import TrainingSeriesSubView from './TrainingSeriesSubView';
+import TrainingSeriesSubView from "./TrainingSeriesSubView";
 
 class TrainingSeriesView extends Component {
-	componentDidMount() {
-		this.getTrainingSeries();
-	}
+  componentDidMount() {
+    this.getTrainingSeries();
+  }
 
-	getTrainingSeries = () => {
-		this.props.getTrainingSeries(this.props.userId);
-	};
+  getTrainingSeries = () => {
+    this.props.getTrainingSeries(this.props.userId);
+  };
 
-	deleteTrainingSeries = id => {
-		this.props.deleteTrainingSeries(id);
-	};
+  deleteTrainingSeries = id => {
+    this.props.deleteTrainingSeries(id);
+  };
 
 	render() {
 		return (
@@ -35,6 +39,7 @@ class TrainingSeriesView extends Component {
 							trainingSeries={this.props.trainingSeries}
 							deleteTrainingSeries={this.deleteTrainingSeries}
 							getTrainingSeries={this.props.getTrainingSeries}
+							toggleFreakinSnackBar={this.props.toggleFreakinSnackBar}
 							userId={this.props.userId}
 						/>
 					)}
@@ -45,17 +50,17 @@ class TrainingSeriesView extends Component {
 }
 
 const mapStateToProps = state => {
-	return {
-		trainingSeries: state.trainingSeriesReducer.trainingSeries,
-		isLoading: state.trainingSeriesReducer.isLoading,
-		isDoneAdding: state.trainingSeriesReducer.isDoneAdding,
-	};
+  return {
+    trainingSeries: state.trainingSeriesReducer.trainingSeries,
+    isLoading: state.trainingSeriesReducer.isLoading,
+    isDoneAdding: state.trainingSeriesReducer.isDoneAdding
+  };
 };
 
 export default connect(
-	mapStateToProps,
-	{
-		getTrainingSeries,
-		deleteTrainingSeries,
-	}
+  mapStateToProps,
+  {
+    getTrainingSeries,
+    deleteTrainingSeries
+  }
 )(TrainingSeriesView);
