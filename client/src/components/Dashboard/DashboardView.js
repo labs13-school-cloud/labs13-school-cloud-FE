@@ -1,51 +1,43 @@
 // parent component for app once logged in
-import React from "react";
-import {Router, Route} from "react-router-dom";
+import React from 'react';
+import { Router, Route } from 'react-router-dom';
 
-import history from "../../history";
+import history from '../../history';
 
 //Styling
-import styled from "styled-components";
-import {withStyles} from "@material-ui/core/styles";
+import styled from 'styled-components';
 
 //Components
-import TeamMembersView from "../TeamMembers/TeamMembersView";
-import TrainingSeriesView from "../TrainingSeries/TrainingSeriesView";
-import ProgressCircle from "../Progress/ProgressCircle";
-import ProfileView from "../Profile/ProfileView";
-import AppBar from "../AppBar/AppBar";
-import TeamMemberPageView from "../TeamMembers/TeamMemberPageContainer/TeamMemberPageView";
-import AddTrainingSeriesView from "../TrainingSeries/AddMembersToTrainingSeries/AddMembersView.js";
-import CreateTrainingSeries from "../TrainingSeries/CreateTrainingSeries";
-import ReturnToDashboardButton from "../Navigation/ReturnToDashboard";
-import TrainingSeriesPosts from "../TrainingSeries/TrainingSeriesPosts";
-import AddTeamMemberPage from "../TeamMembers/TeamMemberPageContainer/AddTeamMemberPage";
-import CreatePost from "../TrainingSeries/CreatePost";
-import PostPage from "../TrainingSeries/PostPage";
-import NotificationsView from "../Notifications/NotificationsView";
-import AssignMemberPage from "../TeamMembers/TeamMemberPageContainer/AssignMemberPage";
-import Snackbar from "../Snackbar/Snackbar";
-import DashboardTour from "../Tour/Tour";
+import TeamMembersView from '../TeamMembers/TeamMembersView';
+import TrainingSeriesView from '../TrainingSeries/TrainingSeriesView';
+import ProgressCircle from '../Progress/ProgressCircle';
+import ProfileView from '../Profile/ProfileView';
+import AppBar from '../AppBar/AppBar';
+import TeamMemberPageView from '../TeamMembers/TeamMemberPageContainer/TeamMemberPageView';
+import AddTrainingSeriesView from '../TrainingSeries/AddMembersToTrainingSeries/AddMembersView.js';
+import CreateTrainingSeries from '../TrainingSeries/CreateTrainingSeries';
+import ReturnToDashboardButton from '../Navigation/ReturnToDashboard';
+import TrainingSeriesPosts from '../TrainingSeries/TrainingSeriesPosts';
+import AddTeamMemberPage from '../TeamMembers/TeamMemberPageContainer/AddTeamMemberPage';
+import CreatePost from '../TrainingSeries/CreatePost';
+import PostPage from '../TrainingSeries/PostPage';
+import NotificationsView from '../Notifications/NotificationsView';
+import AssignMemberPage from '../TeamMembers/TeamMemberPageContainer/AssignMemberPage';
+import Snackbar from '../Snackbar/Snackbar';
+import DashboardTour from '../Tour/Tour';
+
 //Auth
-import Authenticate from "../authenticate/authenticate";
+import Authenticate from '../authenticate/authenticate';
 
 //State Management
-import {connect} from "react-redux";
-import {getUser} from "../../store/actions/userActions";
+import { connect } from 'react-redux';
+import { getUser } from '../../store/actions/userActions';
 
-//Tour
-import Tour from "reactour";
-
-const styles = theme => ({
-  router: {
-    // width: 900
-  },
-});
 class Dashboard extends React.Component {
   state = {
     tabValue: 0,
     displaySnackbar: false,
-    isTourOpen: true,
+    isTourOpen: true
   };
 
   componentDidMount() {
@@ -55,7 +47,7 @@ class Dashboard extends React.Component {
   componentDidUpdate(prevProps) {
     //Checks if an already existing user, if so disable tour.
     if (this.props.newUser !== prevProps.newUser) {
-      this.setState({isTourOpen: false});
+      this.setState({ isTourOpen: false });
     }
     if (this.props.location.state) {
       if (
@@ -63,7 +55,7 @@ class Dashboard extends React.Component {
         this.props.location.state.success
       ) {
         this.setState({
-          displaySnackbar: true,
+          displaySnackbar: true
         });
       }
     }
@@ -71,7 +63,7 @@ class Dashboard extends React.Component {
 
   toggleFreakinSnackBar = e => {
     this.setState({
-      displaySnackbar: false,
+      displaySnackbar: false
     });
   };
 
@@ -98,7 +90,6 @@ class Dashboard extends React.Component {
   };
 
   render() {
-    const {classes} = this.props;
     return (
       <>
         {this.props.doneLoading ? (
@@ -112,7 +103,7 @@ class Dashboard extends React.Component {
               </>
             )}
             <AppBar />
-            {this.props.location.pathname !== "/home" && (
+            {this.props.location.pathname !== '/home' && (
               <ReturnToDashboardButton />
             )}
             <DashboardContainer>
@@ -205,17 +196,17 @@ class Dashboard extends React.Component {
   // tracking the tab value in navigation.js
   changeTabValue = value => {
     this.setState({
-      tabValue: value,
+      tabValue: value
     });
   };
 
   //Tour methods
   closeTour = () => {
-    this.setState({isTourOpen: false});
+    this.setState({ isTourOpen: false });
   };
   activateTutorial = () => {
-    this.props.history.push("/home");
-    this.setState({isTourOpen: true});
+    this.props.history.push('/home');
+    this.setState({ isTourOpen: true });
   };
 }
 
@@ -223,16 +214,16 @@ const mapStateToProps = state => {
   return {
     userProfile: state.userReducer.userProfile,
     doneLoading: state.userReducer.doneLoading,
-    newUser: state.userReducer.newUser,
+    newUser: state.userReducer.newUser
   };
 };
 
 export default connect(
   mapStateToProps,
   {
-    getUser,
+    getUser
   }
-)(withStyles(styles)(Authenticate(Dashboard)));
+)(Authenticate(Dashboard));
 
 //Styled Components
 const TripleColumn = styled.div`

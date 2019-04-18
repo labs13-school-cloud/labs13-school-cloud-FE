@@ -1,8 +1,9 @@
-// main page for displaying all tyarn eam members
+// main page for displaying all team members
 
-import React from 'react';
-import TeamMember from './TeamMember';
+import React, { Suspense } from 'react';
+// import TeamMember from './TeamMember';
 import styled from 'styled-components';
+const TeamMember = React.lazy(() => import('./TeamMember'));
 
 const TeamMembersList = props => {
   let arr = [];
@@ -15,12 +16,14 @@ const TeamMembersList = props => {
     <>
       <ListStyles>
         {arr.map(member => (
-          <TeamMember
-            key={member.teamMemberID}
-            teamMember={member}
-            deleteTeamMember={props.deleteTeamMember}
-            userId={props.userId}
-          />
+          <Suspense key={member.teamMemberID} fallback={<span />}>
+            <TeamMember
+              key={member.teamMemberID}
+              teamMember={member}
+              deleteTeamMember={props.deleteTeamMember}
+              userId={props.userId}
+            />
+          </Suspense>
         ))}
       </ListStyles>
     </>
@@ -29,8 +32,10 @@ const TeamMembersList = props => {
 
 export default TeamMembersList;
 
-const ListStyles = styled.div`
+const ListStyles = styled.ul`
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-left: 0px;
+  margin: 0px;
 `;

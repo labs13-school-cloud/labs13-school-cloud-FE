@@ -141,7 +141,7 @@ class TeamMemberPage extends React.Component {
       });
     }
 
-    console.log("team member", this.props.teamMember);
+    //console.log("team member", this.props.teamMember);
   }
 
   handleChange = name => event => {
@@ -191,7 +191,7 @@ class TeamMemberPage extends React.Component {
   render() {
     const { classes } = this.props;
 
-    console.log("IS LOADING TMP", this.props.isLoading);
+    //console.log("IS LOADING TMP", this.props.isLoading);
 
     const { textOn, emailOn } = this.state.teamMember;
 

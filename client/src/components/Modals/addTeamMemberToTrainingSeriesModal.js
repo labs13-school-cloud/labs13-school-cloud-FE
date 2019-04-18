@@ -15,7 +15,7 @@ import FormControl from '@material-ui/core/FormControl';
 import { MenuItem } from '@material-ui/core';
 import InputLabel from '@material-ui/core/InputLabel';
 
-//REDUX
+//Redux
 import { connect } from 'react-redux';
 import { addTeamMemberToTrainingSeries } from '../../store/actions/';
 
@@ -136,8 +136,7 @@ class UserModal extends React.Component {
         <MenuItem
           name="trainingSeriesID"
           label={`${series.title}`}
-          value={series.trainingSeriesID}
-        >
+          value={series.trainingSeriesID}>
           {series.title}
         </MenuItem>
       );
@@ -152,8 +151,7 @@ class UserModal extends React.Component {
           aria-label="Add"
           className={classes.fab}
           onClick={this.handleOpen}
-          disabled={this.props.disabledBool ? 'true' : null}
-        >
+          disabled={this.props.disabledBool ? 'true' : null}>
           <AddIcon />
         </Fab>
 
@@ -161,8 +159,7 @@ class UserModal extends React.Component {
           aria-labelledby="simple-modal-title"
           aria-describedby="simple-modal-description"
           open={this.state.open}
-          onClose={this.handleClose}
-        >
+          onClose={this.handleClose}>
           <div style={getModalStyle()} className={classes.paper}>
             <Typography variant="h6" id="modal-title">
               Assign Training Series
@@ -176,8 +173,7 @@ class UserModal extends React.Component {
               variant="body1"
               id="modal-title"
               className={classes.memberList}
-              onSubmit={e => this.handleSubmit(e)}
-            >
+              onSubmit={e => this.handleSubmit(e)}>
               <FormControl className={''}>
                 <InputLabel htmlFor="trainingSeriesID">
                   Training Series
@@ -185,8 +181,7 @@ class UserModal extends React.Component {
                 <Select
                   value={this.state.trainingSeriesID}
                   onChange={this.handleChange}
-                  name="trainingSeriesID"
-                >
+                  name="trainingSeriesID">
                   {this.props.assignments &&
                     this.renderTrainingSeriesInDropDown()}
                 </Select>

@@ -1,27 +1,28 @@
 // contains all components for landing page
-import React from "react";
-import { Link } from "react-router-dom";
-import { scroller, animateScroll as scroll } from "react-scroll";
-//Styling
-import styled from "styled-components";
-import Button from "@material-ui/core/Button";
-//Icons & Images
-import FaceIcon from "@material-ui/icons/Face";
-import { ArrowUpward } from "@material-ui/icons";
-import Logo from "../../img/training-bot.png";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { scroller, animateScroll as scroll } from 'react-scroll';
 
-import undrawCoworker from "../../img/undraw_co-workers_ujs6.svg";
-import undrawNotify from "../../img/undraw_notify_88a4.svg";
-import undrawTask from "../../img/undraw_personal_text_vkd8.svg";
+//Styling
+import styled from 'styled-components';
+import Button from '@material-ui/core/Button';
+
+//Icons & Images
+import { ArrowUpward } from '@material-ui/icons';
+import Logo from '../../img/training-bot.png';
+import undrawCoworker from '../../img/undraw_co-workers_ujs6.svg';
+import undrawNotify from '../../img/undraw_notify_88a4.svg';
+import undrawTask from '../../img/undraw_personal_text_vkd8.svg';
+
 //Auth
-import { login } from "../../Auth/Auth";
+import { login } from '../../Auth/Auth';
 
 class LandingPageView extends React.Component {
   scrollTo() {
-    scroller.scrollTo("MarketingContent", {
+    scroller.scrollTo('MarketingContent', {
       duration: 800,
       delay: 0,
-      smooth: "easeInOutQuart"
+      smooth: 'easeInOutQuart'
     });
   }
   scrollToTop() {
@@ -45,9 +46,9 @@ class LandingPageView extends React.Component {
             <LandingPageContentContainer>
               <h1>Training Bot</h1>
               <p>
-                "Empowers team leaders with tools to assist with their team’s
-                continual learning by sending automated Text messages/emails on
-                a scheduled interval to team members”.
+                Training Bot empowers team leaders with tools to assist with
+                their team’s continual learning by sending automated text
+                messages and emails on scheduled intervals.
               </p>
               <LandingPageButtonContainer>
                 <Button onClick={login}>Get Started</Button>
@@ -56,17 +57,6 @@ class LandingPageView extends React.Component {
                 </Button>
               </LandingPageButtonContainer>
             </LandingPageContentContainer>
-            <VideoContainer>
-              <iframe
-                width="100%"
-                height="400"
-                src="https://www.youtube.com/embed/CQ85sUNBK7w"
-                frameBorder="0"
-                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                title="Marketing Video"
-              />
-            </VideoContainer>
           </FirstSection>
           {/* MARKETING CONTAINER / UNDRAW PHOTO SECTION */}
           <MarketingContentContainer name="MarketingContent">
@@ -78,10 +68,10 @@ class LandingPageView extends React.Component {
                 />
               </MarketingImage>
               <MarketingContent>
-                <h3>Manage Your team. Stress Free.</h3>
+                <h3>Manage Your Team. Stress Free.</h3>
                 <p>
                   With Training Bot, we take the stress out of managing your
-                  employees recurring training modules.
+                  employees' recurring training modules.
                 </p>
               </MarketingContent>
             </MarketingSection>
@@ -111,65 +101,11 @@ class LandingPageView extends React.Component {
                 <h3>Notifications, Your Way.</h3>
                 <p>
                   Send text messages or email notifications to your employees.
-                  Modern communication for the mordern workplace.
+                  Modern communication for the modern workplace.
                 </p>
               </MarketingContent>
             </MarketingSection>
           </MarketingContentContainer>
-          {/* TESTIMONY SECTION
-          <TrainingBotTestimonyContainer>
-            <TestimonyContainer>
-              <TestimonyPerson>
-                <FaceIcon /> <h4>Random Cat 1</h4>
-              </TestimonyPerson>
-              <p>
-                "Pork sirloin burgdoggen venison strip steak beef brisket kevin
-                tenderloin"
-              </p>
-            </TestimonyContainer>
-            <TestimonyContainer>
-              <TestimonyPerson>
-                <FaceIcon />
-                <h4>Random Tabby cat</h4>
-              </TestimonyPerson>
-              <p>
-                "Pork sirloin burgdoggen venison strip steak beef brisket kevin
-                tenderloin"
-              </p>
-            </TestimonyContainer>
-          </TrainingBotTestimonyContainer>
-          {/* STORY SECTION 
-          <TrainingBotStoryContainer>
-            <h3>The Training Bot Story</h3>
-            <StorySection>
-              <StoryContent>
-                Pork chop prosciutto beef ribs cow, fatback flank t-bone sirloin
-                strip steak cupim pork belly. Boudin shank hamburger, bacon
-                kielbasa pork chop meatloaf short ribs. Pork sirloin burgdoggen
-                venison strip steak beef brisket kevin tenderloin. Chicken
-                buffalo frankfurter porchetta, rump short ribs andouille.
-                Meatloaf short loin rump, beef porchetta filet mignon leberkas.
-              </StoryContent>
-              <StoryContent>
-                Pork chop prosciutto beef ribs cow, fatback flank t-bone sirloin
-                strip steak cupim pork belly. Boudin shank hamburger, bacon
-                kielbasa pork chop meatloaf short ribs. Pork sirloin burgdoggen
-                venison strip steak beef brisket kevin tenderloin. Chicken
-                buffalo frankfurter porchetta, rump short ribs andouille.
-                Meatloaf short loin rump, beef porchetta filet mignon leberkas.
-              </StoryContent>
-            </StorySection>
-          </TrainingBotStoryContainer>
-          {/* GET STARTED CONTAINER
-          <GetStartedContainer>
-            <IconBox>
-              <img src={Logo} alt="This robot loves showing up" />
-            </IconBox>
-            <GetStartedBox>
-              <h4>Use Training Bot for FREE</h4>
-              <Button>Try Now</Button>
-            </GetStartedBox>
-          </GetStartedContainer> */}
           <FirstSection>
             <LandingPageContentContainer>
               <h1>Get Started For Free!</h1>
@@ -262,6 +198,10 @@ const NavbarItem = styled(Link)`
   font-weight: 500;
   text-decoration: none;
   cursor: pointer;
+  color: #441476;
+  &:visited {
+    color: #441476;
+  }
 `;
 
 const FirstSection = styled.div`
@@ -271,6 +211,9 @@ const FirstSection = styled.div`
   padding: 75px 10px;
   display: flex;
   border-radius: 5px;
+  h3 {
+    width: 100%;
+  }
   @media (max-width: 700px) {
     width: 100%;
     margin: 0;
@@ -391,119 +334,6 @@ const LandingPageButtonContainer = styled.div`
   }
 `;
 
-const VideoContainer = styled.div`
-  width: 50%;
-  @media (max-width: 1000px) {
-    display: none;
-  }
-`;
-
-const TrainingBotStoryContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  width: 85%;
-  margin: 40px auto;
-  background-color: #fafafa;
-  padding: 30px 20px;
-  h3 {
-    color: #451476;
-    font-size: 32px;
-    text-align: center;
-    margin: 0;
-    margin-bottom: 5px;
-  }
-  @media (max-width: 1000px) {
-    width: 100%;
-  }
-`;
-
-const StorySection = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: baseline;
-  margin: 0 auto;
-  @media (max-width: 1000px) {
-    flex-direction: column;
-  }
-`;
-const StoryContent = styled.p`
-  padding: 0 10px;
-`;
-
-const TrainingBotTestimonyContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  width: 83%;
-  margin: 0 auto;
-`;
-
-const TestimonyContainer = styled.div`
-  display: flex;
-  padding: 5px;
-  flex-direction: column;
-  margin: 0 20px;
-  h4 {
-    margin: 0;
-    color: #451476;
-  }
-`;
-
-const TestimonyPerson = styled.div`
-  display: flex;
-  align-items: center;
-
-  svg {
-    color: #2699fb;
-    margin-right: 5px;
-  }
-`;
-
-const GetStartedContainer = styled.div`
-  display: flex;
-  width: 50%;
-  margin: 0 auto;
-  justify-content: center;
-  align-items: center;
-
-  @media (max-width: 700px) {
-    width: 70%;
-  }
-`;
-const IconBox = styled.div`
-  background-color: #7fc4fd;
-  width: 25%;
-
-  img {
-    width: 100%;
-    position: relative;
-    left: -50%;
-  }
-`;
-const GetStartedBox = styled.div`
-  background-color: #fafafa;
-  width: 75%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  h4 {
-    color: #451476;
-    font-size: 24px;
-  }
-  button {
-    margin: 0 10px;
-    background-color: #7fc4fd;
-    color: white;
-    width: 100px;
-
-    &:hover {
-      background-color: #451476;
-      color: white;
-    }
-  }
-`;
-
 const FooterContainer = styled.div`
   width: 100%;
   display: flex;
@@ -531,6 +361,7 @@ const FooterItemsContainer = styled.div`
     padding: 16px 20px;
     cursor: pointer;
     text-decoration: none;
+    color: white;
   }
 
   a:visited {
@@ -544,7 +375,7 @@ const GetStartedButton = styled.div`
     background-color: #451476;
     color: white;
     &:hover {
-      margin: 0 15px;
+      /* margin: 0 15px; */
       background-color: #451476;
       color: white;
     }

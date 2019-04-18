@@ -67,7 +67,7 @@ const TrainingSeriesAssignments = props => {
   // 	props.deleteTeamMemberFromTrainingSeries(teamMemberId, trainingSeries_ID);
   // };
 
-  console.log("***ASSIGNMENTS***", teamMemberId, trainingSeries_ID);
+  //console.log("***ASSIGNMENTS***", teamMemberId, trainingSeries_ID);
 
   return (
     <>

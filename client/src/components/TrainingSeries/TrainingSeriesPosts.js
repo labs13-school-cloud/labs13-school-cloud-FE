@@ -1,20 +1,17 @@
 // displays all posts of a training series
-import React from "react";
+import React from 'react';
 
-import { Link } from "react-router-dom";
-import Fab from "@material-ui/core/Fab";
-import Fuse from "fuse.js";
-
-import ProgressCircle from "../Progress/ProgressCircle";
+import { Link } from 'react-router-dom';
+import Fuse from 'fuse.js';
 
 // Components
-import DeleteModal from "../Modals/deleteModal";
-import TrainingSeriesAssignment from "./TrainingSeriesAssignment";
+import DeleteModal from '../Modals/deleteModal';
+import TrainingSeriesAssignment from './TrainingSeriesAssignment';
 
-import styled from "styled-components";
+import styled from 'styled-components';
 
 // Redux
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
 import {
   getTrainingSeriesPosts,
   getTeamMembers,
@@ -23,9 +20,9 @@ import {
   deletePost,
   getMembersAssigned,
   editTrainingSeries
-} from "../../store/actions";
+} from '../../store/actions';
 
-import { withStyles } from "@material-ui/core/styles";
+import { withStyles } from '@material-ui/core/styles';
 
 // Styling
 import {
@@ -38,152 +35,126 @@ import {
   Typography,
   InputAdornment,
   Divider
-} from "@material-ui/core/";
+} from '@material-ui/core/';
 
-import AddMemberSnackbar from "./AddMembersToTrainingSeries/AddMemberSnackbar";
+import AddMemberSnackbar from './AddMembersToTrainingSeries/AddMemberSnackbar';
 
 const styles = theme => ({
   paper: {
-    // "max-width": 800,
-    width: "89%",
+    width: '89%',
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
     padding: theme.spacing.unit * 4,
-    outline: "none",
-    margin: "5px auto",
+    outline: 'none',
+    margin: '5px auto',
 
-    "@media (max-width: 768px)": {
-      width: "89%",
+    '@media (max-width: 768px)': {
+      width: '89%',
       // padding: 0,
-      margin: "5px auto"
+      margin: '5px auto'
     },
 
-    "@media (max-width: 480px)": {
-      width: "80%",
+    '@media (max-width: 480px)': {
+      width: '80%',
       // padding: 0,
-      margin: "5px auto"
+      margin: '5px auto'
     }
   },
   paperTitle: {
-    width: "100%",
+    width: '100%',
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
-    padding: "16px 32px",
-    outline: "none",
-    display: "flex",
-    margin: "5px auto",
-    alignItems: "baseline",
-    "@media (max-width: 480px)": {
-      width: "89%",
+    padding: '16px 32px',
+    outline: 'none',
+    display: 'flex',
+    margin: '5px auto',
+    alignItems: 'baseline',
+    '@media (max-width: 480px)': {
+      width: '89%',
       padding: 0,
-      margin: "0 auto"
+      margin: '0 auto'
     }
   },
   secondaryAction: {
-    display: "flex",
-    flexDirection: "row",
-    "align-items": "center"
+    display: 'flex',
+    flexDirection: 'row',
+    'align-items': 'center'
   },
   listStyle: {
     margin: 0
   },
   listItem: {
-    width: "79%",
+    width: '79%',
     height: 80,
     marginBottom: 10,
     paddingBottom: 10,
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    wrap: "flex-wrap"
-
-    // transition: "background-color 0.3s",
-    // "&:hover": {
-    //   width: "100%",
-    //   cursor: "pointer",
-    //   backgroundColor: "whitesmoke"
-    //   // "box-shadow": "0px 6px 15px -4px rgba(0,0,0,0.84)"
-    // }
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    wrap: 'flex-wrap'
   },
-
-  // listItemText: {
-  //   width: "79%"
-  // },
-
   icons: {
-    display: "block",
+    display: 'block',
     width: 20,
     marginBottom: 10,
-    color: "gray",
-    cursor: "pointer",
-    "&:hover": { color: "#2699FB" }
+    color: 'gray',
+    cursor: 'pointer',
+    '&:hover': { color: '#2699FB' }
   },
   hidden: {
-    display: "none"
+    display: 'none'
   },
   button: {
     // margin: 5,
-    "margin-left": theme.spacing.unit,
-    background: "#451476",
-    color: "white",
-    "&:hover": {
-      background: "#591a99",
-      color: "white"
+    'margin-left': theme.spacing.unit,
+    background: '#451476',
+    color: 'white',
+    '&:hover': {
+      background: '#591a99',
+      color: 'white'
     },
 
-    "@media (max-width: 768px)": {
-      margin: "10px 5px"
+    '@media (max-width: 768px)': {
+      margin: '10px 5px'
     }
-
-    // "@media (max-width: 480px)": {
-    //   fontSize: 11,
-    //   padding: 7
-    // }
   },
   assignButton: {
-    // margin: 5,
-    "margin-left": theme.spacing.unit,
-    background: "#451476",
-    color: "white",
-    "&:hover": {
-      background: "#591a99",
-      color: "white"
+    'margin-left': theme.spacing.unit,
+    background: '#451476',
+    color: 'white',
+    '&:hover': {
+      background: '#591a99',
+      color: 'white'
     },
 
-    "@media (max-width: 768px)": {
-      margin: "10px 5px"
+    '@media (max-width: 768px)': {
+      margin: '10px 5px'
     },
 
-    "&:disabled": {
-      background: "white"
+    '&:disabled': {
+      background: 'white'
     }
-
-    // "@media (max-width: 480px)": {
-    //   fontSize: 11,
-    //   width: "45%",
-    //   padding: "7px 12px"
-    // }
   },
   list: {
-    listStyleType: "none"
+    listStyleType: 'none'
   },
   messageText: {
     marginTop: 20,
     marginBottom: 20,
-    textAlign: "center",
-    color: "lightgray"
+    textAlign: 'center',
+    color: 'lightgray'
   },
   messageTextTop: {
     marginTop: 50,
     marginBottom: 20,
-    textAlign: "center",
-    color: "lightgray"
+    textAlign: 'center',
+    color: 'lightgray'
   },
   divider: {
-    margin: "15px 0"
+    margin: '15px 0'
   },
   textField: {
-    width: "60%"
+    width: '60%'
   }
 });
 class TrainingSeriesPosts extends React.Component {
@@ -191,7 +162,7 @@ class TrainingSeriesPosts extends React.Component {
     active: false,
     displaySnackbar: false,
     editingTitle: false,
-    searchInput: "",
+    searchInput: '',
     searchOpen: false
   };
 
@@ -221,7 +192,7 @@ class TrainingSeriesPosts extends React.Component {
 
   routeToPostPage = () => {
     this.props.history.push({
-      pathname: "/home/create-post",
+      pathname: '/home/create-post',
       state: {
         trainingSeriesId: this.props.singleTrainingSeries.trainingSeriesID
       }
@@ -286,7 +257,7 @@ class TrainingSeriesPosts extends React.Component {
       distance: 100,
       maxPatternLength: 32,
       minMatchCharLength: 3,
-      keys: ["postName", "postDetails", "link"]
+      keys: ['postName', 'postDetails', 'link']
     };
 
     const fuse = new Fuse(posts, options);
@@ -307,7 +278,7 @@ class TrainingSeriesPosts extends React.Component {
               label="Title"
               className={classes.textField}
               value={this.state.title}
-              onChange={this.handleChange("title")}
+              onChange={this.handleChange('title')}
               margin="normal"
             />
             <div>
@@ -315,8 +286,7 @@ class TrainingSeriesPosts extends React.Component {
                 type="submit"
                 variant="outlined"
                 color="primary"
-                className={classes.button}
-              >
+                className={classes.button}>
                 Save
               </Button>
             </div>
@@ -332,8 +302,7 @@ class TrainingSeriesPosts extends React.Component {
           <i
             style={{ fontSize: 25 }}
             className={`material-icons ${classes.icons}`}
-            onClick={e => this.beginTitleEdit(e)}
-          >
+            onClick={e => this.beginTitleEdit(e)}>
             edit
           </i>
         </TrainingSeriesTitle>
@@ -354,8 +323,7 @@ class TrainingSeriesPosts extends React.Component {
             <Button
               className={classes.assignButton}
               variant="outlined"
-              onClick={this.routeToAssigning}
-            >
+              onClick={this.routeToAssigning}>
               Assign Members
             </Button>
           </HeaderContainer>
@@ -378,8 +346,7 @@ class TrainingSeriesPosts extends React.Component {
             <Button
               className={classes.assignButton}
               variant="outlined"
-              onClick={this.routeToAssigning}
-            >
+              onClick={this.routeToAssigning}>
               Assign Members
             </Button>
           </HeaderContainer>
@@ -399,8 +366,7 @@ class TrainingSeriesPosts extends React.Component {
             <Button
               className={classes.assignButton}
               variant="outlined"
-              disabled
-            >
+              disabled>
               Assign Members
             </Button>
           </HeaderContainer>
@@ -455,15 +421,13 @@ class TrainingSeriesPosts extends React.Component {
                 <Button
                   className={classes.button}
                   variant="outlined"
-                  onClick={e => this.routeToPostPage(e)}
-                >
+                  onClick={e => this.routeToPostPage(e)}>
                   New Message
                 </Button>
                 <Button
                   className={classes.button}
                   variant="outlined"
-                  onClick={e => this.openSearch(e)}
-                >
+                  onClick={e => this.openSearch(e)}>
                   Search
                 </Button>
               </div>
@@ -502,16 +466,14 @@ class TrainingSeriesPosts extends React.Component {
                         onClick={e => this.routeToEditPostPage(e, post)}
                       />
                       <ListItemSecondaryAction
-                        className={classes.secondaryAction}
-                      >
+                        className={classes.secondaryAction}>
                         <div>
                           <p>{post.daysFromStart} days</p>
                         </div>
                         <ListButtonContainer>
                           <i
                             className={`material-icons ${classes.icons}`}
-                            onClick={e => this.routeToEditPostPage(e, post)}
-                          >
+                            onClick={e => this.routeToEditPostPage(e, post)}>
                             edit
                           </i>
                           <DeleteModal
@@ -531,7 +493,7 @@ class TrainingSeriesPosts extends React.Component {
           <Paper className={classes.paper}>{assignedMembersStatus}</Paper>
         </PageContainer>
       </>
-    )
+    );
   }
 }
 

@@ -55,7 +55,7 @@ export const getPostById = id => dispatch => {
 // POST a new post
 export const createAPost = (post, trainingSeriesID) => dispatch => {
   dispatch({ type: ADD_POST_START });
-  console.log("post in createAPost", post);
+  //console.log("post in createAPost", post);
   axios
     .post(`${process.env.REACT_APP_API}/api/posts`, post)
     .then(res =>
@@ -70,7 +70,7 @@ export const createAPost = (post, trainingSeriesID) => dispatch => {
 
 // PUT a post
 export const editPost = (id, updates) => dispatch => {
-  console.log(updates)
+  //console.log(updates)
   dispatch({ type: EDIT_POST_START });
   axios
     .put(`${process.env.REACT_APP_API}/api/posts/${id}`, updates)
