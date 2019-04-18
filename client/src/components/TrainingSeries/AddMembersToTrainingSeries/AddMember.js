@@ -2,14 +2,14 @@ import React from "react";
 
 //Date Picker
 import DatePicker from "react-datepicker";
+
 //Styles
 import "react-datepicker/dist/react-datepicker.css";
 import { withStyles } from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
-import Typography from "@material-ui/core/Typography";
-import Checkbox from "@material-ui/core/Checkbox";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
+import {Button,Typography,Checkbox,FormControlLabel} from "@material-ui/core/";
 import styled from "styled-components";
+
+//Icons & Images
 import TrainingBotGIF from "../../../img/trainingBot.gif";
 
 const styles = theme => ({
@@ -75,7 +75,7 @@ const styles = theme => ({
 });
 
 function AddMember(props) {
-  console.log(props);
+  //console.log(props);
   const { classes } = props;
 
   const renderMembers = () => {
@@ -102,7 +102,7 @@ function AddMember(props) {
       </>
     ));
   };
-  console.log(props.selectedTeamMembers);
+  //console.log(props.selectedTeamMembers);
   return (
     <>
       <Typography className={classes.heading} variant="h6">

@@ -1,17 +1,19 @@
 // component to contain all the components related to training series
-import React, { Component } from "react";
-import { Route } from "react-router-dom";
+import React, { Component, Suspense } from 'react';
+import { Route } from 'react-router-dom';
 
-//REDUX
-import { connect } from "react-redux";
-import {
-  getTrainingSeries,
-  deleteTrainingSeries,
-  getMembersAssigned
-} from "../../store/actions/";
+//Redux
+import { connect } from 'react-redux';
+import { getTrainingSeries, deleteTrainingSeries } from '../../store/actions/';
 
 //Components
-import TrainingSeriesSubView from "./TrainingSeriesSubView";
+// import TrainingSeriesSubView from './TrainingSeriesSubView';
+
+const TrainingSeriesSubView = React.lazy(() =>
+  import('./TrainingSeriesSubView')
+);
+
+// <Suspense fallback={<div>Loading...</div>}></Suspense>
 
 class TrainingSeriesView extends Component {
   componentDidMount() {
@@ -26,27 +28,29 @@ class TrainingSeriesView extends Component {
     this.props.deleteTrainingSeries(id);
   };
 
-	render() {
-		return (
-			<>
-				<Route
-					exact
-					path={`${this.props.match.path}`}
-					render={props => (
-						<TrainingSeriesSubView
-							{...props}
-							getMembersAssigned={this.props.getMembersAssigned}
-							trainingSeries={this.props.trainingSeries}
-							deleteTrainingSeries={this.deleteTrainingSeries}
-							getTrainingSeries={this.props.getTrainingSeries}
-							toggleFreakinSnackBar={this.props.toggleFreakinSnackBar}
-							userId={this.props.userId}
-						/>
-					)}
-				/>
-			</>
-		);
-	}
+  render() {
+    return (
+      <>
+        <Route
+          exact
+          path={`${this.props.match.path}`}
+          render={props => (
+            <Suspense fallback={<span />}>
+              <TrainingSeriesSubView
+                {...props}
+                getMembersAssigned={this.props.getMembersAssigned}
+                trainingSeries={this.props.trainingSeries}
+                deleteTrainingSeries={this.deleteTrainingSeries}
+                getTrainingSeries={this.props.getTrainingSeries}
+                toggleFreakinSnackBar={this.props.toggleFreakinSnackBar}
+                userId={this.props.userId}
+              />
+            </Suspense>
+          )}
+        />
+      </>
+    );
+  }
 }
 
 const mapStateToProps = state => {

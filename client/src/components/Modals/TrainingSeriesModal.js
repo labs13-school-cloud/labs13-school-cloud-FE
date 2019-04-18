@@ -1,12 +1,12 @@
-import React from "react";
+import React from 'react';
 
 //Styles
-import { withStyles } from "@material-ui/core/styles";
-import { Typography, Fab, Modal, Button, TextField } from "@material-ui/core/";
+import { withStyles } from '@material-ui/core/styles';
+import { Typography, Fab, Modal, Button, TextField } from '@material-ui/core/';
 
-//REDUX
-import { connect } from "react-redux";
-import { addTrainingSeries, editTrainingSeries } from "../../store/actions/";
+//Redux
+import { connect } from 'react-redux';
+import { addTrainingSeries, editTrainingSeries } from '../../store/actions/';
 
 function getModalStyle() {
   const top = 50;
@@ -21,16 +21,16 @@ function getModalStyle() {
 
 const styles = theme => ({
   paper: {
-    position: "absolute",
+    position: 'absolute',
     width: theme.spacing.unit * 25,
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
     padding: theme.spacing.unit * 4,
-    outline: "none"
+    outline: 'none'
   },
   container: {
-    display: "flex",
-    flexWrap: "wrap"
+    display: 'flex',
+    flexWrap: 'wrap'
   },
   textField: {
     marginLeft: theme.spacing.unit,
@@ -52,11 +52,11 @@ const styles = theme => ({
 class TrainingSeriesModal extends React.Component {
   state = {
     open: false,
-    title: ""
+    title: ''
   };
 
   componentDidMount() {
-    this.props.modalType === "edit" &&
+    this.props.modalType === 'edit' &&
       this.setState({ title: this.props.title });
   }
   componentDidUpdate(prevProps) {
@@ -77,13 +77,13 @@ class TrainingSeriesModal extends React.Component {
     this.setState({ [name]: event.target.value });
   };
   clearForm = () => {
-    this.setState({ title: "" });
+    this.setState({ title: '' });
   };
 
   handleTrainingSeriesSubmit = e => {
     e.preventDefault();
     const data = { title: this.state.title, userID: this.props.userID };
-    if (this.props.modalType === "edit") {
+    if (this.props.modalType === 'edit') {
       this.setState({ title: this.props.title });
       this.props.editTrainingSeries(this.props.trainingSeriesID, data);
       this.props.handleClose();
@@ -100,7 +100,7 @@ class TrainingSeriesModal extends React.Component {
     return (
       <>
         <div>
-          {this.props.modalType === "edit" ? (
+          {this.props.modalType === 'edit' ? (
             <div onClick={this.handleOpen}>Edit Training Series</div>
           ) : (
             <Fab
@@ -108,8 +108,7 @@ class TrainingSeriesModal extends React.Component {
               size="small"
               aria-label="Add"
               className={classes.fab}
-              onClick={this.handleOpen}
-            >
+              onClick={this.handleOpen}>
               <i className="material-icons">add</i>
             </Fab>
 
@@ -120,32 +119,29 @@ class TrainingSeriesModal extends React.Component {
           aria-labelledby="simple-modal-title"
           aria-describedby="simple-modal-description"
           open={this.state.open}
-          onClose={this.handleClose}
-        >
+          onClose={this.handleClose}>
           <div style={getModalStyle()} className={classes.paper}>
             <Typography variant="h6" id="modal-title">
-              {this.props.modalType === "edit" ? "Edit " : "Create a new "}
+              {this.props.modalType === 'edit' ? 'Edit ' : 'Create a new '}
               Training series
             </Typography>
             <form
               onSubmit={e => this.handleTrainingSeriesSubmit(e)}
               className={classes.container}
               noValidate
-              autoComplete="off"
-            >
+              autoComplete="off">
               <TextField
                 id="standard-name"
                 label="Title"
                 className={classes.textField}
                 value={this.state.title}
-                onChange={this.handleChange("title")}
+                onChange={this.handleChange('title')}
                 margin="normal"
               />
               <Button
                 type="submit"
                 variant="contained"
-                className={classes.button}
-              >
+                className={classes.button}>
                 Submit
               </Button>
             </form>
@@ -155,8 +151,6 @@ class TrainingSeriesModal extends React.Component {
     );
   }
 }
-
-
 
 const mapStateToProps = state => {
   return {

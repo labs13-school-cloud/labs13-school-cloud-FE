@@ -29,7 +29,7 @@ class TeamMemberMenuBtn extends React.Component {
   };
 
   render() {
-    console.log(this.props);
+    //console.log(this.props);
     const { anchorEl } = this.state;
     const open = Boolean(anchorEl);
 
