@@ -370,7 +370,7 @@ const NavbarItem = styled(Link)`
 const FirstSection = styled.div`
   background-color: #fafafa;
   width: 95%;
-  margin: 5% auto 20px;
+  margin: 40px auto;
   padding: 50px 10px;
   display: flex;
   flex-direction: column;
