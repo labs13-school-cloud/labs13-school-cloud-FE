@@ -155,7 +155,7 @@ class Team extends React.Component {
               className={classes.form}
               name="contact"
               method="POST"
-              data-netlify="true"
+              netlify
             >
               <TextField
                 label="Name"
