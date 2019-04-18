@@ -167,7 +167,7 @@ class TeamMembersView extends React.Component {
       );
     } else {
       teamMembersDisplay = (
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<span />}>
           <TeamMembersList
             teamMembers={teamMembers}
             deleteTeamMember={this.deleteMember}

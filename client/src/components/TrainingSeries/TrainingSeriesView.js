@@ -35,7 +35,7 @@ class TrainingSeriesView extends Component {
           exact
           path={`${this.props.match.path}`}
           render={props => (
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense fallback={<span />}>
               <TrainingSeriesSubView
                 {...props}
                 getMembersAssigned={this.props.getMembersAssigned}

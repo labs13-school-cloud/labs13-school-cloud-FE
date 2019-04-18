@@ -33,25 +33,6 @@ import Authenticate from '../authenticate/authenticate';
 import { connect } from 'react-redux';
 import { getUser } from '../../store/actions/userActions';
 
-// const TeamMembersView = React.lazy(() => import('../TeamMembers/TeamMembersView'));
-// const TrainingSeriesView = React.lazy(() => import('../TrainingSeries/TrainingSeriesView'));
-// const ProgressCircle = React.lazy(() => import('../Progress/ProgressCircle'));
-// const ProfileView = React.lazy(() => import('../Profile/ProfileView'));
-// const AppBar = React.lazy(() => import('../AppBar/AppBar'));
-// const TeamMemberPageView = React.lazy(() => import('../TeamMembers/TeamMemberPageContainer/TeamMemberPageView'));
-// const AddTrainingSeriesView = React.lazy(() => import('../TrainingSeries/AddMembersToTrainingSeries/AddMembersView'));
-// const CreateTrainingSeries = React.lazy(() => import('../TrainingSeries/CreateTrainingSeries'));
-// const ReturnToDashboardButton = React.lazy(() => import('../Navigation/ReturnToDashboard'));
-// const TrainingSeriesPosts = React.lazy(() => import('../TrainingSeries/TrainingSeriesPosts'));
-// const AddTeamMemberPage = React.lazy(() => import('../TeamMembers/TeamMemberPageContainer/AddTeamMemberPage'));
-// const CreatePost = React.lazy(() => import('../TrainingSeries/CreatePost'));
-// const PostPage = React.lazy(() => import('../TrainingSeries/PostPage'));
-// const NotificationsView = React.lazy(() => import('../Notifications/NotificationsView'));
-// const AssignMemberPage = React.lazy(() => import('../TeamMembers/TeamMemberPageContainer/AssignMemberPage'));
-// const Snackbar = React.lazy(() => import('../Snackbar/Snackbar'));
-// const DashboardTour = React.lazy(() => import('../Tour/Tour'));
-// <Suspense fallback={<div>Loading...</div>}></Suspense>
-
 class Dashboard extends React.Component {
   state = {
     tabValue: 0,

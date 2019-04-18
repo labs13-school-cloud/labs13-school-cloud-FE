@@ -1,12 +1,12 @@
 // main page for displaying list of all training series
-import React from 'react';
-// import axios from 'axios';
+import React, { Suspense } from 'react';
 
 //Styling
 import styled from 'styled-components';
 
 //Components
-import TrainingSeries from './TrainingSeries';
+// import TrainingSeries from './TrainingSeries';
+const TrainingSeries = React.lazy(() => import('./TrainingSeries'));
 
 const TrainingSeriesList = props => {
   let arr = [];
@@ -16,8 +16,9 @@ const TrainingSeriesList = props => {
   arr = props.trainingSeries.slice(x, y);
 
   return (
-      <ListStyles>
-        {arr.map(series => (
+    <ListStyles>
+      {arr.map(series => (
+        <Suspense key={series.trainingSeriesID} fallback={<span />}>
           <TrainingSeries
             trainingSeriesID={series.trainingSeriesID}
             key={series.trainingSeriesID}
@@ -27,8 +28,9 @@ const TrainingSeriesList = props => {
             userId={props.userId}
             // postCount={postCount}
           />
-        ))}
-      </ListStyles>
+        </Suspense>
+      ))}
+    </ListStyles>
   );
 };
 
