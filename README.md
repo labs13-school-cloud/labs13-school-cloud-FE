@@ -31,7 +31,7 @@ The profile section is where you can view/delete your account as well as upgrade
 ![](Assets/Screenshot6.png)
 
 ## Mobile support
-The WebApp is compatible with devices of all sizes and all OS's.
+Training Bot is compatible with devices of all sizes and all OS's.
 ![](Assets/Screenshot3.png)
 
 
