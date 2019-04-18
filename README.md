@@ -3,7 +3,7 @@
 <table>
 <tr>
 <td>
-  A Progressive Web app using the Twilio API to send automated text and email notifications. Training Bot assists team leaders by sending automated notifications with custom content to their team. 
+  A single page application using the Twilio API to send automated text and email notifications. Training Bot assists team leaders by sending automated notifications with custom content to their team. 
 </td>
 </tr>
 </table>
