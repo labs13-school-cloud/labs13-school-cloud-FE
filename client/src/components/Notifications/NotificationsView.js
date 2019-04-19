@@ -147,6 +147,7 @@ class NotificationsView extends Component {
           <div>
             <FormControl className={classes.formControl}>
               <Select
+                native
                 className={classes.selection}
                 value={this.state.filterType}
                 onChange={e => this.handleFilter(e)}
@@ -161,6 +162,7 @@ class NotificationsView extends Component {
             </FormControl>
             <FormControl className={classes.formControl}>
               <Select
+                native
                 className={classes.selection}
                 value={this.state.filterSent}
                 onChange={e => this.handleFilterSent(e)}
