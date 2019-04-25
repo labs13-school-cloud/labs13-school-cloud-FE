@@ -4,8 +4,8 @@ import {connect} from "react-redux";
 //Components
 // import UserModal from '../Modals/userModal';
 import StripeView from "../Stripe/StripeView";
-import {logout} from "../../Auth/Auth";
-import Authentication from "../authenticate/authenticate";
+import {logout} from "Auth/Auth";
+import Authentication from "components/Misc/authenticate/authenticate";
 
 //State Management
 import {getUser, editUser, deleteUser} from "../../store/actions/userActions";

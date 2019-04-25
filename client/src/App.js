@@ -15,7 +15,7 @@ import React from "react";
 import CssBaseline from "@material-ui/core/CssBaseline";
 
 //Components
-import LandingPageView from "./components/LandingPage/";
+import LandingPageView from "components/LandingPage/LandingPageView/";
 
 function App() {
   return (

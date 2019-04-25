@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import { Link } from "react-router-dom";
 import Tour from "reactour";
-import Progress from "../Progress/ProgressCircle";
+import Progress from "components/Misc/Progress/ProgressCircle";
 import styled from "styled-components";
 
 class DashboardTour extends Component {

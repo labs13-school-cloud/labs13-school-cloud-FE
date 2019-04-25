@@ -2,17 +2,17 @@
 import React from "react";
 import axios from "axios";
 import { Link } from 'react-router-dom';
-import logo from '../../img/training-bot.svg';
+import logo from 'img/training-bot.svg';
 import '../Progress/loading.css';
 import Button from '@material-ui/core/Button';
 
 
 //Styling
 import styled from "styled-components";
-import Logo from "../../img/training-bot.png";
+import Logo from "img/training-bot.png";
 
 //Authentication
-import {login} from "../../Auth/Auth";
+import {login} from "Auth/Auth";
 
 //axios defaults and interceptors.
 axios.defaults.baseURL = `${process.env.REACT_APP_API}`;

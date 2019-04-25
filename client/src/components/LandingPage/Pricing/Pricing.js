@@ -18,9 +18,9 @@ import {
   Typography
 } from '@material-ui/core/';
 
-import Logo from '../../img/training-bot.png';
+import Logo from 'img/training-bot.png';
 //Auth
-import { login } from '../../Auth/Auth';
+import { login } from 'Auth/Auth';
 
 const styles = theme => ({
   root: {
