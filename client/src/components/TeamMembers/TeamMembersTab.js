@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
         //style related imports
@@ -15,29 +15,31 @@ import {
 } from '@material-ui/core/';
 
 
+    //functional related imports
 
-
-        //functional related imports
-
-    //fetches team members
-import getTeamMembers from '../../store/actions';
-    //adds team member
-import addTeamMember from '../../store/actions';
-    //deleteTeamMembers team member by ID
-import deleteTeamMember from '../../store/actions';
+    //fetches team members, likely dont need this here, likely wont need this here but may potentially
+    //adds team member, likely wont need this here but may potentially
+    //deleteTeamMembers team member by ID, propbably going to be the only actual functionallity displayed firectly on this page.
+import {getTeamMembers,addTeamMember, deleteTeamMember } from '../../store/actions/teamMembersActions.js';
 
 
 
+const TeamMembersTab = props => {
+    const [searchValue, setSearchValue] = useState("");
 
+    useEffect(() => {
+        console.log(props);
+    },[])
 
-
-
-const TeamMembersTab = () => {
   return (
     <div>
       <TeamsTabWrapper>
         <TeamsTabHeader>
             <TextField
+                value={searchValue} 
+                onChange={e => {
+                    setSearchValue(e.target.value);
+                }}
                 id="standard-search"
                 type="search"
                 margin="normal"
@@ -53,6 +55,9 @@ const TeamMembersTab = () => {
                 <Fab
                     size="small"
                     aria-label="Add"
+                    onClick={() => {
+                        props.history.push('/home/create-team-member/');
+                    }}
                     style={{margin: "0 10px", background: "#451476", color: "white"}}
                 >
                     <i className="material-icons">add</i>
@@ -62,9 +67,15 @@ const TeamMembersTab = () => {
 
         <hr/>
         <Grid container justify="center">
-            {fakeTeamMembers.map(teamMember => {
-                return(
-                    <Grid item >
+            {fakeTeamMembers.filter(member => `${member.firstName} ${member.lastName}`.toUpperCase().includes(searchValue.toUpperCase())).map(teamMember => { //will actually be mapping over props.teamMembers once were hooked up
+                return( // aware this is throwing an err for not having a key, will use tem members ID's once thats accessible. for now nbd...
+                    <Grid 
+                    item 
+                    style={{cursor: "pointer"}}
+                    onClick={e => {
+                        props.history.push(`/home/team-member/${teamMember.id}`)
+                    }}
+                    >
                         <TeamsMember>
                             <Typography variant="subtitle1">
                                 {teamMember.firstName} {teamMember.lastName}
@@ -99,19 +110,18 @@ const TeamMembersTab = () => {
 }
 
 const mapStateToProps = state => {
-    return state
+    return {
+        teamMembers: state.teamMembers,
+        teamMember: state.teamMember,
+        status: state.status
+    }
 }
 
-export default connect(mapStateToProps, { getTeamMembers, addTeamMember, deleteTeamMember })(TeamMembersTab);
-
-
-
-
-
+export default connect(mapStateToProps, {getTeamMembers, addTeamMember, deleteTeamMember })(TeamMembersTab);
 
 
 const TeamsTabWrapper = styled(Paper)`
-    margin: 10px;
+    margin: 10px auto;
     padding: 10px;
     width: 70%;
 `
@@ -119,6 +129,9 @@ const TeamsMember = styled(Paper)`
     margin: 10px;
     padding: 10px;
     width: 220px;
+    &:hover{
+        background: #F8F8F8;
+    }
 `
 const TeamsTabHeader = styled.div`
     display: flex;
@@ -145,8 +158,8 @@ const fakeTeamMembers = [//not sureh how these will be structured, so obviously 
         mentor: "Nick Cannariato"
     },
     {
-        firstName: "Tom",
-        lastName: "Hessburg",
+        firstName: "Bom",
+        lastName: "Fessburg",
         email: "tom@email.com",
         jobDescription: "does nothing all day, essentially...",
         slackID: "asdfasdfasdfasdf",
@@ -160,8 +173,8 @@ const fakeTeamMembers = [//not sureh how these will be structured, so obviously 
         mentor: "Nick Cannariato"
     },
     {
-        firstName: "Tom",
-        lastName: "Hessburg",
+        firstName: "Crom",
+        lastName: "Shessburg",
         email: "tom@email.com",
         jobDescription: "does nothing all day, essentially...",
         slackID: "asdfasdfasdfasdf",
@@ -175,8 +188,8 @@ const fakeTeamMembers = [//not sureh how these will be structured, so obviously 
         mentor: "Nick Cannariato"
     },
     {
-        firstName: "Tom",
-        lastName: "Hessburg",
+        firstName: "Lom",
+        lastName: "Nessburg",
         email: "tom@email.com",
         jobDescription: "does nothing all day, essentially...",
         slackID: "asdfasdfasdfasdf",

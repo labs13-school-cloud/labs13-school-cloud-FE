@@ -18,6 +18,9 @@ import Authenticate from './components/authenticate/authenticate';
 //History
 import history from './history';
 
+//work
+import TeamMembersTab from './components/TeamMembers/TeamMembersTab.js'
+
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
@@ -43,6 +46,8 @@ export const makeMainRoutes = () => {
             <Route path="/team" component={Team} />
             <Route path="/home" component={Authenticate(DashboardView)} />
             <Route path="/callback" component={Callback} />
+
+            <Route path="/work" component={TeamMembersTab} />
           </div>
         </>
       </Router>
