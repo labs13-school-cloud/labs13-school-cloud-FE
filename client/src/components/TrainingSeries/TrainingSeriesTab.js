@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import { connect } from 'react-redux';
 
         //style related imports
@@ -13,14 +13,21 @@ import {
     InputAdornment
 } from '@material-ui/core/';
 
-
         //functional related imports
-import getTrainingSeries from '../../store/actions';
-import deleteTrainingSeries from '../../store/actions';
-import getMembersAssigned from '../../store/actions';
+import {
+    getTrainingSeries,
+    deleteTrainingSeries,
+    getMembersAssigned
+} from '../../store/actions';
 
+const TrainingSeriesTab = props => {
 
-const TrainingSeriesTab = () => {
+    const [searchValue, setSearchValue] = useState('');
+
+    useEffect(() => {
+        console.log(props)
+    },[])
+
   return (
     <Wrapper>
         <HeaderWrapper>
@@ -31,6 +38,9 @@ const TrainingSeriesTab = () => {
             </Typography>
             <Fab
                 size="small"
+                onClick={e => {
+                    props.history.push('/home/create-training-series');
+                }}
                 aria-label="Add"
                 style={{margin: "0 10px", background: "#451476", color: "white"}}
             >
@@ -39,6 +49,8 @@ const TrainingSeriesTab = () => {
         </HeaderWrapper>
         
         <TextField
+            value={searchValue}
+            onChange={e => setSearchValue(e.target.value)}
             fullWidth
             type="search"
             margin="normal"
@@ -51,9 +63,15 @@ const TrainingSeriesTab = () => {
             }}
         />
         
-        {exampleTrainingSeries.map(series => {
+        {exampleTrainingSeries
+        .filter(series => series.title.toUpperCase().includes(searchValue.toUpperCase()))
+        .map(series => {
             return(
-                <Series>
+                <Series
+                onClick={e => {
+                    props.history.push(`/home/training-series/${series.id}`);
+                }}
+                >
                     <Grid container spacing={24}>
                         <Grid item xs={12}>
                             <Typography variant="h6">{series.title}</Typography>
@@ -80,10 +98,16 @@ const TrainingSeriesTab = () => {
   )
 }
 
+
+const mapStateToProps = state => {
+    return state.trainingSeriesReducer; //just going to leave this as is for now. can cherry pick what we need once im actually putting it together.
+}
+export default connect(mapStateToProps, { getTrainingSeries, deleteTrainingSeries, getMembersAssigned })(TrainingSeriesTab);
+
 const Wrapper = styled(Paper)`
-width: 70%;
-padding: 10px;
-margin: 10px auto;
+    width: 70%;
+    padding: 10px;
+    margin: 10px auto;
 `;
 
 const HeaderWrapper = styled.div`
@@ -92,20 +116,14 @@ const HeaderWrapper = styled.div`
 `;
 
 const Series = styled(Paper)`
-width: 90%;
-margin: 10px auto;
-padding: 20px;
+    width: 90%;
+    margin: 10px auto;
+    padding: 20px;
+    cursor: pointer;
+    &:hover{
+        background: #F8F8F8;
+    }
 `;
-
-
-const mapStateToProps = state => {
-    return state;
-}
-
-export default connect(mapStateToProps, { getTrainingSeries, deleteTrainingSeries, getMembersAssigned })(TrainingSeriesTab);
-
-
-
 
 
             //Just some bs info until we get everything hooked up...
