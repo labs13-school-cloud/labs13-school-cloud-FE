@@ -10,11 +10,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLinkedin, faGithubSquare } from '@fortawesome/free-brands-svg-icons';
 
 import Logo from '../../img/training-bot.png';
-import Alex from '../../img/tb-aking.jpeg';
-import Brandon from '../../img/tb-blent.jpeg';
-import LeighAnn from '../../img/tb-lfriedel.jpeg';
-import Mike from '../../img/tb-mlanders.jpeg';
-import Nate from '../../img/tb-nboyette.jpeg';
+import AJ from '../../img/AJ.png'
+import Gannon from '../../img/Gannon.png'
+import Nick from '../../img/Nick.png'
+import Adam from '../../img/Adam.png'
+import Tom from '../../img/Tom.png'
 
 import { animateScroll as scroll } from 'react-scroll';
 
@@ -71,74 +71,74 @@ class Team extends React.Component {
             <Typography variant="h3">The Team</Typography>
             <TeamInfoContainer>
               <TeamMember>
-                <img src={Alex} alt="Alex King" />
-                <Typography variant="title">Alex King</Typography>
+                <img src={Nick} alt="Nick Cannariato" />
+                <Typography variant="title">Nick Cannariato</Typography>
                 <p>Full-Stack Developer</p>
                 <TeamMemberLinks>
-                  <a target="blank" href="https://github.com/Alex-AK">
+                  <a target="blank" href="https://github.com/nickcannariato">
                     <FontAwesomeIcon className="fa-2x" icon={faGithubSquare} />
                   </a>
-                  <a target="blank" href="https://www.linkedin.com/in/alex-ak/">
+                  <a target="blank" href="https://www.linkedin.com/in/nickcannariato/">
                     <FontAwesomeIcon className="fa-2x" icon={faLinkedin} />
                   </a>
                 </TeamMemberLinks>
               </TeamMember>
               <TeamMember>
-                <img src={Brandon} alt="Brandon Lent" />
-                <Typography variant="title">Brandon Lent</Typography>
+                <img src={Gannon} alt="Gannon Darcy" />
+                <Typography variant="title">Gannon Darcy</Typography>
                 <p>Full-Stack Developer</p>
                 <TeamMemberLinks>
-                  <a target="blank" href="https://github.com/Blent1050">
+                  <a target="blank" href="https://github.com/GannonDetroit">
                     <FontAwesomeIcon className="fa-2x" icon={faGithubSquare} />
                   </a>
                   <a
                     target="blank"
-                    href="https://www.linkedin.com/in/brandon-lent/">
+                    href="https://www.linkedin.com/in/gannon-darcy-b8345073/">
                     <FontAwesomeIcon className="fa-2x" icon={faLinkedin} />
                   </a>
                 </TeamMemberLinks>
               </TeamMember>
               <TeamMember>
-                <img src={LeighAnn} alt="Leigh-Ann Friedel" />
-                <Typography variant="title">Leigh-Ann Friedel</Typography>
+                <img src={AJ} alt="Andrew Brush" />
+                <Typography variant="title">Andrew Brush</Typography>
                 <p>Full-Stack Developer</p>
                 <TeamMemberLinks>
-                  <a target="blank" href="https://github.com/lafriedel">
+                  <a target="blank" href="https://github.com/ajb85">
                     <FontAwesomeIcon className="fa-2x" icon={faGithubSquare} />
                   </a>
                   <a
                     target="blank"
-                    href="https://www.linkedin.com/in/leigh-ann-friedel/">
+                    href="https://www.linkedin.com/in/andrew-brush-58205b122/">
                     <FontAwesomeIcon className="fa-2x" icon={faLinkedin} />
                   </a>
                 </TeamMemberLinks>
               </TeamMember>
               <TeamMember>
-                <img src={Mike} alt="Mike Landers" />
-                <Typography variant="title">Mike Landers</Typography>
+                <img src={Tom} alt="Thomas Hessburg" />
+                <Typography variant="title">Thomas Hessburg</Typography>
                 <p>Full-Stack Developer</p>
                 <TeamMemberLinks>
-                  <a target="blank" href="https://github.com/mlanders">
+                  <a target="blank" href="https://github.com/TomHessburg">
                     <FontAwesomeIcon className="fa-2x" icon={faGithubSquare} />
                   </a>
                   <a
                     target="blank"
-                    href="https://www.linkedin.com/in/mikelanders/">
+                    href="https://www.linkedin.com/in/thomas-hessburg-596948180/">
                     <FontAwesomeIcon className="fa-2x" icon={faLinkedin} />
                   </a>
                 </TeamMemberLinks>
               </TeamMember>
               <TeamMember>
-                <img src={Nate} alt="Nate Boyette" />
-                <Typography variant="title">Nate Boyette</Typography>
+                <img src={Adam} alt="Adam McKenney" />
+                <Typography variant="title">Adam McKenney</Typography>
                 <p>Full-Stack Developer</p>
                 <TeamMemberLinks>
-                  <a target="blank" href="https://github.com/nateboyette">
+                  <a target="blank" href="https://github.com/DaftBeowulf">
                     <FontAwesomeIcon className="fa-2x" icon={faGithubSquare} />
                   </a>
                   <a
                     target="blank"
-                    href="https://www.linkedin.com/in/nateboyette/">
+                    href="https://www.linkedin.com/in/adam-mckenney-04827a35/">
                     <FontAwesomeIcon className="fa-2x" icon={faLinkedin} />
                   </a>
                 </TeamMemberLinks>
