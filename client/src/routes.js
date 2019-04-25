@@ -8,6 +8,8 @@ import App from './App';
 import Pricing from './components/LandingPage/Pricing';
 import Team from './components/LandingPage/Team';
 import DashboardView from './components/Dashboard/DashboardView';
+    //workbench components
+    import TeamMembersTab from './components/TeamMembers/TeamMembersTab.js';
 
 //Callback
 import Callback from './components/Callback/callback';
@@ -43,6 +45,7 @@ export const makeMainRoutes = () => {
             <Route path="/team" component={Team} />
             <Route path="/home" component={Authenticate(DashboardView)} />
             <Route path="/callback" component={Callback} />
+            <Route path="/working" component={TeamMembersTab} />
           </div>
         </>
       </Router>
