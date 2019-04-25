@@ -45,8 +45,6 @@ export const makeMainRoutes = () => {
             <Route path="/team" component={Team} />
             <Route path="/home" component={Authenticate(DashboardView)} />
             <Route path="/callback" component={Callback} />
-
-            <Route path="/work" component={TrainingSeriesTab} />
           </div>
         </>
       </Router>
