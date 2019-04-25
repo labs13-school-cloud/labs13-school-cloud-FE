@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux';
 
-import Pagination from 'material-ui-flat-pagination';
+//simport Pagination from 'material-ui-flat-pagination';
 import Grid from '@material-ui/core/Grid';
 
 import styled from 'styled-components';

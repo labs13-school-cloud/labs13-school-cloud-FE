@@ -1,11 +1,11 @@
-import React from 'react'
+import React from 'react';
 import { connect } from 'react-redux';
 
-import Pagination from 'material-ui-flat-pagination';
+        //style related imports
+
+//import Pagination from 'material-ui-flat-pagination';
 import Grid from '@material-ui/core/Grid';
-
 import styled from 'styled-components';
-
 import {
     Paper,
     Typography,
@@ -13,6 +13,24 @@ import {
     TextField,
     InputAdornment
 } from '@material-ui/core/';
+
+
+
+
+        //functional related imports
+
+    //fetches team members
+import getTeamMembers from '../../store/actions';
+    //adds team member
+import addTeamMember from '../../store/actions';
+    //deleteTeamMembers team member by ID
+import deleteTeamMember from '../../store/actions';
+
+
+
+
+
+
 
 const TeamMembersTab = () => {
   return (
@@ -80,7 +98,12 @@ const TeamMembersTab = () => {
   )
 }
 
-export default connect()(TeamMembersTab);
+export default connect(null, { getTeamMembers, addTeamMember, deleteTeamMember })(TeamMembersTab);
+
+
+
+
+
 
 
 const TeamsTabWrapper = styled(Paper)`
@@ -98,6 +121,9 @@ const TeamsTabHeader = styled.div`
     justify-content: space-between;
 `
  
+
+
+
 const fakeTeamMembers = [//not sureh how these will be structured, so obviously just so we have some kind of data down...
     {
         firstName: "Tom",
