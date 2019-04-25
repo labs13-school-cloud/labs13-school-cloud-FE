@@ -1,1 +1,2 @@
-export { default as LandingPageView } from './LandingPageView';
+import LandingPageView from "./LandingPageView";
+export default LandingPageView;
