@@ -9,7 +9,7 @@ import Pricing from './components/LandingPage/Pricing';
 import Team from './components/LandingPage/Team';
 import DashboardView from './components/Dashboard/DashboardView';
     //workbench components
-    import TeamMembersTab from './components/TeamMembers/TeamMembersTab.js';
+    import TrainingSeriesTab from './components/TrainingSeries/TrainingSeriesTab.js';
 
 //Callback
 import Callback from './components/Callback/callback';
@@ -45,6 +45,8 @@ export const makeMainRoutes = () => {
             <Route path="/team" component={Team} />
             <Route path="/home" component={Authenticate(DashboardView)} />
             <Route path="/callback" component={Callback} />
+
+            <Route path="/work" component={TrainingSeriesTab} />
           </div>
         </>
       </Router>
