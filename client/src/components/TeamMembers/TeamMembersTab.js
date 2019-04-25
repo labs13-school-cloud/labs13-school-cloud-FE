@@ -98,7 +98,11 @@ const TeamMembersTab = () => {
   )
 }
 
-export default connect(null, { getTeamMembers, addTeamMember, deleteTeamMember })(TeamMembersTab);
+const mapStateToProps = state => {
+    return state
+}
+
+export default connect(mapStateToProps, { getTeamMembers, addTeamMember, deleteTeamMember })(TeamMembersTab);
 
 
 

@@ -1,11 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux';
 
+        //style related imports
 //simport Pagination from 'material-ui-flat-pagination';
 import Grid from '@material-ui/core/Grid';
-
 import styled from 'styled-components';
-
 import {
     Paper,
     Typography,
@@ -13,6 +12,13 @@ import {
     TextField,
     InputAdornment
 } from '@material-ui/core/';
+
+
+        //functional related imports
+import getTrainingSeries from '../../store/actions';
+import deleteTrainingSeries from '../../store/actions';
+import getMembersAssigned from '../../store/actions';
+
 
 const TrainingSeriesTab = () => {
   return (
@@ -91,7 +97,12 @@ margin: 10px auto;
 padding: 20px;
 `;
 
-export default connect()(TrainingSeriesTab);
+
+const mapStateToProps = state => {
+    return state;
+}
+
+export default connect(mapStateToProps, { getTrainingSeries, deleteTrainingSeries, getMembersAssigned })(TrainingSeriesTab);
 
 
 
