@@ -74,7 +74,12 @@ class Team extends React.Component {
                 <img src={Nick} alt="Nick Cannariato" />
                 <Typography variant="title">Nick Cannariato</Typography>
                 <p>Full-Stack Developer</p>
-                <PortfolioLink target="blank" href="https://github.com/nickcannariato">Portfolio Site</PortfolioLink>
+                <PortfolioLink
+                  target="blank"
+                  href="https://github.com/nickcannariato"
+                >
+                  Portfolio Site
+                </PortfolioLink>
                 <TeamMemberLinks>
                   <a target="blank" href="https://github.com/nickcannariato">
                     <FontAwesomeIcon className="fa-2x" icon={faGithubSquare} />
@@ -91,7 +96,9 @@ class Team extends React.Component {
                 <img src={Gannon} alt="Gannon Darcy" />
                 <Typography variant="title">Gannon Darcy</Typography>
                 <p>Full-Stack Developer</p>
-                <PortfolioLink target="blank" href="http://gannon.dev">Portfolio Site</PortfolioLink>
+                <PortfolioLink target="blank" href="http://gannon.dev">
+                  Portfolio Site
+                </PortfolioLink>
                 <TeamMemberLinks>
                   <a target="blank" href="https://github.com/GannonDetroit">
                     <FontAwesomeIcon className="fa-2x" icon={faGithubSquare} />
@@ -108,7 +115,9 @@ class Team extends React.Component {
                 <img src={AJ} alt="Andrew Brush" />
                 <Typography variant="title">Andrew Brush</Typography>
                 <p>Full-Stack Developer</p>
-                <PortfolioLink target="blank" href="http://ajbrush.com/">Portfolio Site</PortfolioLink>
+                <PortfolioLink target="blank" href="http://ajbrush.com/">
+                  Portfolio Site
+                </PortfolioLink>
                 <TeamMemberLinks>
                   <a target="blank" href="https://github.com/ajb85">
                     <FontAwesomeIcon className="fa-2x" icon={faGithubSquare} />
@@ -125,7 +134,12 @@ class Team extends React.Component {
                 <img src={Tom} alt="Thomas Hessburg" />
                 <Typography variant="title">Thomas Hessburg</Typography>
                 <p>Full-Stack Developer</p>
-                <PortfolioLink target="blank" href="https://github.com/TomHessburg">Portfolio Site</PortfolioLink>
+                <PortfolioLink
+                  target="blank"
+                  href="https://github.com/TomHessburg"
+                >
+                  Portfolio Site
+                </PortfolioLink>
                 <TeamMemberLinks>
                   <a target="blank" href="https://github.com/TomHessburg">
                     <FontAwesomeIcon className="fa-2x" icon={faGithubSquare} />
@@ -139,10 +153,15 @@ class Team extends React.Component {
                 </TeamMemberLinks>
               </TeamMember>
               <TeamMember>
-                <AdamsIMG  src={Adam} alt="Adam McKenney" />
+                <img src={Adam} alt="Adam McKenney" />
                 <Typography variant="title">Adam McKenney</Typography>
                 <p>Full-Stack Developer</p>
-                <PortfolioLink target="blank" href="https://github.com/DaftBeowulf">Portfolio Site</PortfolioLink>
+                <PortfolioLink
+                  target="blank"
+                  href="https://github.com/DaftBeowulf"
+                >
+                  Portfolio Site
+                </PortfolioLink>
                 <TeamMemberLinks>
                   <a target="blank" href="https://github.com/DaftBeowulf">
                     <FontAwesomeIcon className="fa-2x" icon={faGithubSquare} />
@@ -396,5 +415,5 @@ const PortfolioLink = styled.a`
 `;
 
 const AdamsIMG = styled.img`
-object-fit: cover;
+  object-fit: cover;
 `;
