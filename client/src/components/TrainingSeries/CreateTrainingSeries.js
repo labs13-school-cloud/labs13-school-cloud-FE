@@ -7,7 +7,7 @@ import PropTypes from "prop-types";
 
 import { connect } from "react-redux";
 import { addTrainingSeries } from "../../store/actions/trainingSeriesActions";
-import ProgressCircle from "components/Misc/Progress/ProgressCircle";
+import ProgressCircle from "../Misc/Progress/ProgressCircle";
 
 //Styles
 import { withStyles } from "@material-ui/core/styles";

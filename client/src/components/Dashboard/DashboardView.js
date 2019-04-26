@@ -2,7 +2,7 @@
 import React from "react";
 import { Router, Route } from "react-router-dom";
 
-import history from "history.js";
+import history from "../../history.js";
 
 //Styling
 import { TripleColumn, SmallColumns, DashboardContainer } from "./styles.js";
@@ -10,7 +10,7 @@ import { TripleColumn, SmallColumns, DashboardContainer } from "./styles.js";
 //Components
 import TeamMembersView from "../TeamMembers/TeamMembersView";
 import TrainingSeriesView from "../TrainingSeries/TrainingSeriesView";
-import ProgressCircle from "components/Misc/Progress/ProgressCircle";
+import ProgressCircle from "../Misc/Progress/ProgressCircle";
 import ProfileView from "../Profile/ProfileView";
 import AppBar from "../AppBar/AppBar";
 import TeamMemberPageView from "../TeamMembers/TeamMemberPageContainer/TeamMemberPageView";
@@ -27,11 +27,11 @@ import Snackbar from "../Snackbar/Snackbar";
 import DashboardTour from "../Tour/Tour";
 
 //Auth
-import Authenticate from "components/Misc/authenticate/authenticate";
+import Authenticate from "../Misc/authenticate/authenticate";
 
 //State Management
 import { connect } from "react-redux";
-import { getUser } from "store/actions/userActions";
+import { getUser } from "../../store/actions/userActions";
 
 class Dashboard extends React.Component {
   state = {
