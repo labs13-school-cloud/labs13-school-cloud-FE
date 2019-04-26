@@ -1,18 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import { connect } from 'react-redux';
+import React from "react";
+import { connect } from "react-redux";
 
-        //style related imports
+import Pagination from "material-ui-flat-pagination";
+import Grid from "@material-ui/core/Grid";
 
-//import Pagination from 'material-ui-flat-pagination';
-import Grid from '@material-ui/core/Grid';
-import styled from 'styled-components';
+import styled from "styled-components";
+
 import {
-    Paper,
-    Typography,
-    Fab,
-    TextField,
-    InputAdornment
-} from '@material-ui/core/';
+  Paper,
+  Typography,
+  Fab,
+  TextField,
+  InputAdornment
+} from "@material-ui/core/";
 
 
     //functional related imports
@@ -65,7 +65,7 @@ const TeamMembersTab = props => {
             </div>
         </TeamsTabHeader>
 
-        <hr/>
+        <hr />
         <Grid container justify="center">
             {fakeTeamMembers.filter(member => `${member.firstName} ${member.lastName}`.toUpperCase().includes(searchValue.toUpperCase())).map(teamMember => { //will actually be mapping over props.teamMembers once were hooked up
                 return( // aware this is throwing an err for not having a key, will use tem members ID's once thats accessible. for now nbd...
@@ -103,11 +103,10 @@ const TeamMembersTab = props => {
                 );
             })}
         </Grid>
-
       </TeamsTabWrapper>
     </div>
-  )
-}
+  );
+};
 
 const mapStateToProps = state => {
     return {
@@ -118,7 +117,6 @@ const mapStateToProps = state => {
 }
 
 export default connect(mapStateToProps, {getTeamMembers, addTeamMember, deleteTeamMember })(TeamMembersTab);
-
 
 const TeamsTabWrapper = styled(Paper)`
     margin: 10px auto;
