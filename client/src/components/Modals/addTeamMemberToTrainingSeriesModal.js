@@ -1,23 +1,23 @@
-import React from 'react';
+import React from "react";
 
-import DatePicker from 'react-datepicker';
+import DatePicker from "react-datepicker";
 
 //Styles
-import 'react-datepicker/dist/react-datepicker.css';
-import { withStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import Modal from '@material-ui/core/Modal';
-import Button from '@material-ui/core/Button';
-import AddIcon from '@material-ui/icons/Add';
-import Fab from '@material-ui/core/Fab';
-import Select from '@material-ui/core/Select';
-import FormControl from '@material-ui/core/FormControl';
-import { MenuItem } from '@material-ui/core';
-import InputLabel from '@material-ui/core/InputLabel';
+import "react-datepicker/dist/react-datepicker.css";
+import { withStyles } from "@material-ui/core/styles";
+import Typography from "@material-ui/core/Typography";
+import Modal from "@material-ui/core/Modal";
+import Button from "@material-ui/core/Button";
+import AddIcon from "@material-ui/icons/Add";
+import Fab from "@material-ui/core/Fab";
+import Select from "@material-ui/core/Select";
+import FormControl from "@material-ui/core/FormControl";
+import { MenuItem } from "@material-ui/core";
+import InputLabel from "@material-ui/core/InputLabel";
 
 //Redux
-import { connect } from 'react-redux';
-import { addTeamMemberToTrainingSeries } from '../../store/actions/';
+import { connect } from "react-redux";
+import { addTeamMemberToTrainingSeries } from "../../store/actions/";
 
 function getModalStyle() {
   const top = 50;
@@ -32,19 +32,19 @@ function getModalStyle() {
 
 const styles = theme => ({
   paper: {
-    position: 'absolute',
+    position: "absolute",
     width: theme.spacing.unit * 50,
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
     padding: theme.spacing.unit * 4,
-    outline: 'none',
-    '@media (max-width: 768px)': {
-      width: '65%'
+    outline: "none",
+    "@media (max-width: 768px)": {
+      width: "65%"
     }
   },
   container: {
-    display: 'flex',
-    flexWrap: 'wrap'
+    display: "flex",
+    flexWrap: "wrap"
   },
   textField: {
     marginLeft: theme.spacing.unit,
@@ -61,8 +61,8 @@ const styles = theme => ({
     margin: theme.spacing.unit
   },
   memberList: {
-    display: 'flex',
-    flexDirection: 'column'
+    display: "flex",
+    flexDirection: "column"
   },
   selectEmpty: {
     marginTop: theme.spacing.unit * 2
@@ -72,9 +72,9 @@ const styles = theme => ({
 class UserModal extends React.Component {
   state = {
     open: false,
-    trainingSeriesID: '',
-    startDate: '',
-    value: ''
+    trainingSeriesID: "",
+    startDate: "",
+    value: ""
   };
 
   componentDidMount() {
@@ -113,8 +113,8 @@ class UserModal extends React.Component {
   handleSubmit = e => {
     e.preventDefault();
     const data = {
-      startDate: this.state.startDate,
-      trainingSeriesID: this.state.trainingSeriesID,
+      start_date: this.state.startDate,
+      training_series_id: this.state.trainingSeriesID,
       assignments: [this.props.urlId]
     };
     this.props.addTeamMemberToTrainingSeries(data);
@@ -128,7 +128,7 @@ class UserModal extends React.Component {
     );
     //Filters the trainingSeries based on assignments
     let filteredSeries = this.props.trainingSeries.filter(series => {
-      return !assignments.includes(series.trainingSeriesID);
+      return !assignments.includes(series.id);
     });
 
     return filteredSeries.map(series => {
@@ -136,7 +136,8 @@ class UserModal extends React.Component {
         <MenuItem
           name="trainingSeriesID"
           label={`${series.title}`}
-          value={series.trainingSeriesID}>
+          value={series.id}
+        >
           {series.title}
         </MenuItem>
       );
@@ -151,7 +152,8 @@ class UserModal extends React.Component {
           aria-label="Add"
           className={classes.fab}
           onClick={this.handleOpen}
-          disabled={this.props.disabledBool ? 'true' : null}>
+          disabled={this.props.disabledBool ? "true" : null}
+        >
           <AddIcon />
         </Fab>
 
@@ -159,7 +161,8 @@ class UserModal extends React.Component {
           aria-labelledby="simple-modal-title"
           aria-describedby="simple-modal-description"
           open={this.state.open}
-          onClose={this.handleClose}>
+          onClose={this.handleClose}
+        >
           <div style={getModalStyle()} className={classes.paper}>
             <Typography variant="h6" id="modal-title">
               Assign Training Series
@@ -173,15 +176,17 @@ class UserModal extends React.Component {
               variant="body1"
               id="modal-title"
               className={classes.memberList}
-              onSubmit={e => this.handleSubmit(e)}>
-              <FormControl className={''}>
+              onSubmit={e => this.handleSubmit(e)}
+            >
+              <FormControl className={""}>
                 <InputLabel htmlFor="trainingSeriesID">
                   Training Series
                 </InputLabel>
                 <Select
                   value={this.state.trainingSeriesID}
                   onChange={this.handleChange}
-                  name="trainingSeriesID">
+                  name="trainingSeriesID"
+                >
                   {this.props.assignments &&
                     this.renderTrainingSeriesInDropDown()}
                 </Select>

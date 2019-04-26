@@ -3,7 +3,7 @@ import React from "react";
 //Components
 import TeamMemberPage from "./TeamMemberPage";
 import Snackbar from "../../Snackbar/Snackbar";
-import ProgressCircle from "../../Progress/ProgressCircle";
+import ProgressCircle from "../../Misc/Progress/ProgressCircle.js";
 
 //Redux
 import { connect } from "react-redux";

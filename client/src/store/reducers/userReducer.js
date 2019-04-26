@@ -108,20 +108,20 @@ const userReducer = (state = initialState, action) => {
 
 		case POST_SUBSCRIBE_SUCCESS:
 			let accountTypeID;
-			if (action.payload.plan.id === 'plan_Ex95NK1FuaNiWb') {
+			if (action.payload.plan.id === 'plan_EmJallrSdkqpPS') {
 				accountTypeID = 2;
-			} else if (action.payload.plan.id === 'plan_Ex955Zz8JE0ZuW') {
+			} else if (action.payload.plan.id === 'plan_EmJaXZor4Ef3co') {
 				accountTypeID = 3;
 			}
 			let update = {
 				message: state.userProfile.message,
 				user: {
-					userID: state.userProfile.user.userID,
-					accountTypeID: accountTypeID,
+					id: state.userProfile.user.id,
+					account_type_id: accountTypeID,
 					email: state.userProfile.user.email,
 					name: state.userProfile.user.name,
 					stripe: state.userProfile.user.stripe,
-					notificationCount: state.userProfile.user.notificationCount
+					notification_count: state.userProfile.user.notification_count
 				},
 				trainingSeries: [ ...state.userProfile.trainingSeries ]
 			};
@@ -158,12 +158,12 @@ const userReducer = (state = initialState, action) => {
 			let update3 = {
 				message: state.userProfile.message,
 				user: {
-					userID: state.userProfile.user.userID,
-					accountTypeID: accountTypeID2,
+					id: state.userProfile.user.id,
+					account_type_id: accountTypeID2,
 					email: state.userProfile.user.email,
 					name: state.userProfile.user.name,
 					stripe: action.payload.id,
-					notificationCount: state.userProfile.user.notificationCount
+					notification_count: state.userProfile.user.notification_count
 				},
 				trainingSeries: [ ...state.userProfile.trainingSeries ]
 			};
@@ -191,12 +191,12 @@ const userReducer = (state = initialState, action) => {
 			let update2 = {
 				message: state.userProfile.message,
 				user: {
-					userID: state.userProfile.user.userID,
-					accountTypeID: 1,
+					id: state.userProfile.user.is,
+					account_type_id: 1,
 					email: state.userProfile.user.email,
 					name: state.userProfile.user.name,
 					stripe: state.userProfile.user.stripe,
-					notificationCount: state.userProfile.user.notificationCount
+					notification_count: state.userProfile.user.notification_count
 				},
 				trainingSeries: [ ...state.userProfile.trainingSeries ]
 			};

@@ -61,7 +61,7 @@ class PostOptionsModal extends React.Component {
 						/> */}
           </MenuItem>
           <MenuItem>
-            <DeleteModal deleteType="post" id={this.props.post.postID} />
+            <DeleteModal deleteType="post" id={this.props.message.id} />
           </MenuItem>
         </Menu>
       </div>
