@@ -52,7 +52,7 @@ class UnsubscribeModal extends React.Component {
             type="submit"
             onClick={() => {
               this.props.unsub(
-                this.props.userProfile.userID,
+                this.props.userProfile.id,
                 this.props.userProfile.stripe
               );
             }}

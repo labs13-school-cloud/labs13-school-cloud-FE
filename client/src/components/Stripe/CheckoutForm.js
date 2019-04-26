@@ -191,7 +191,6 @@ class CheckoutForm extends Component {
     });
   };
 
-
   createToken = async email => {
     try {
       let { token } = await this.props.stripe.createToken({ email: email });
@@ -224,15 +223,15 @@ class CheckoutForm extends Component {
   render() {
     const { classes } = this.props;
     let accountType;
-    if (this.props.userProfile.accountTypeID === 2) {
+    if (this.props.userProfile.account_type_id === 2) {
       accountType = "Premium";
-    } else if (this.props.userProfile.accountTypeID === 3) {
+    } else if (this.props.userProfile.account_type_id === 3) {
       accountType = "Pro";
     }
 
     let freeButton;
 
-    if (this.props.userProfile.accountTypeID > 1) {
+    if (this.props.userProfile.account_type_id > 1) {
       freeButton = (
         <Button
           color="primary"
@@ -311,9 +310,9 @@ class CheckoutForm extends Component {
                           Message Limit
                         </Typography>
                         <Typography className={classes.feature}>
-
-                          {plan.nickname === "Premium" ? "200 / mo" : "1000 / mo"}
-
+                          {plan.nickname === "Premium"
+                            ? "200 / mo"
+                            : "1000 / mo"}
                         </Typography>
                       </div>
                     </div>
@@ -326,48 +325,52 @@ class CheckoutForm extends Component {
                     </Button>
                   </div>
                 ) : (
-                    <div className={classes.subCard}>
-                      <Typography className={classes.title}>
-                        {plan.nickname}
+                  <div className={classes.subCard}>
+                    <Typography className={classes.title}>
+                      {plan.nickname}
+                    </Typography>
+                    <Typography className={classes.price}>
+                      ${plan.amount / 100}
+                      <span className={classes.subPrice}> / mo</span>
+                    </Typography>
+                    <div className={classes.content}>
+                      <Typography className={classes.feature}>
+                        Automated Text/Email
                       </Typography>
-                      <Typography className={classes.price}>
-                        ${plan.amount / 100}
-                        <span className={classes.subPrice}> / mo</span>
+                      <Typography className={classes.feature}>
+                        Unlimited Training Series
                       </Typography>
-                      <div className={classes.content}>
+                      <Typography className={classes.feature}>
+                        Unlimited Team Members
+                      </Typography>
+                      <div className={classes.spread}>
                         <Typography className={classes.feature}>
-                          Automated Text/Email
-                      </Typography>
-                        <Typography className={classes.feature}>
-                          Unlimited Training Series
-                      </Typography>
-                        <Typography className={classes.feature}>
-                          Unlimited Team Members
-                      </Typography>
-                        <div className={classes.spread}>
-                          <Typography className={classes.feature}>
-                            Message Limit
+                          Message Limit
                         </Typography>
-                          <Typography className={classes.feature}>
-
-                            {plan.nickname === "Premium" ? "200 / mo" : "1000 / mo"}
-
-                          </Typography>
-                        </div>
+                        <Typography className={classes.feature}>
+                          {plan.nickname === "Premium"
+                            ? "200 / mo"
+                            : "1000 / mo"}
+                        </Typography>
                       </div>
-                      <Button
-                        key={plan.created}
-                        color="primary"
-                        name="plan"
-                        className={classes.button}
-                        value={plan.id}
-                        onClick={e => this.handleChange(e, plan.nickname)}
-                        style={this.state.activeSelect === plan.nickname ? { background: '#3DBC93' } : null}
-                      >
-                        {plan.nickname}
-                      </Button>
                     </div>
-                  );
+                    <Button
+                      key={plan.created}
+                      color="primary"
+                      name="plan"
+                      className={classes.button}
+                      value={plan.id}
+                      onClick={e => this.handleChange(e, plan.nickname)}
+                      style={
+                        this.state.activeSelect === plan.nickname
+                          ? { background: "#3DBC93" }
+                          : null
+                      }
+                    >
+                      {plan.nickname}
+                    </Button>
+                  </div>
+                );
               })}
             </div>
           </FormControl>
@@ -392,8 +395,8 @@ class CheckoutForm extends Component {
               </Button>
             </FormControl>
           ) : (
-                <span />
-              )}
+            <span />
+          )}
         </div>
 
         {/* Unsubscribe Modal */}

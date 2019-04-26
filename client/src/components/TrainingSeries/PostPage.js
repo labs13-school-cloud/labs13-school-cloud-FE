@@ -15,11 +15,11 @@ import Button from "@material-ui/core/Button";
 //Components
 
 import {
-  getTrainingSeriesPosts,
-  createAPost,
-  editPost,
-  deletePost,
-  getPostById
+  getTrainingSeriesMessages,
+  createAMessage,
+  editMessage,
+  deleteMessage,
+  getMessageById
 } from "../../store/actions";
 
 const styles = theme => ({
@@ -64,21 +64,21 @@ class PostPage extends React.Component {
   state = {
     open: false,
     isUpdating: false,
-    post: {
-      postName: "",
-      postDetails: "",
+    message: {
+      message_name: "",
+      message_details: "",
       link: "",
-      daysFromStart: "",
-      trainingSeriesID: "",
-      postID: ""
+      days_from_start: "",
+      training_series_id: "",
+      id: ""
     }
   };
 
   componentDidMount() {
-    if (this.props.location.state.post) {
+    if (this.props.location.state.message) {
       this.setState({
         ...this.state,
-        post: this.props.location.state.post
+        message: this.props.location.state.message
       });
     }
   }
@@ -95,21 +95,21 @@ class PostPage extends React.Component {
   handleChange = name => e => {
     this.setState({
       ...this.state,
-      post: {
-        ...this.state.post,
+      message: {
+        ...this.state.message,
         [name]: e.target.value
       }
     });
   };
 
-  handlePostSubmit = e => {
+  handleMessageSubmit = e => {
     e.preventDefault();
 
-    this.props.editPost(this.state.post.postID, this.state.post);
+    this.props.editMessage(this.state.message.id, this.state.message);
 
     setTimeout(() => {
       this.props.history.push(
-        `/home/training-series/${this.state.post.trainingSeriesID}`
+        `/home/training-series/${this.state.message.training_series_id}`
       );
     }, 1000);
   };
@@ -127,7 +127,7 @@ class PostPage extends React.Component {
         <form
           className={classes.form}
           id="form1"
-          onSubmit={e => this.handlePostSubmit(e)}
+          onSubmit={e => this.handleMessageSubmit(e)}
         >
           {/* <DeleteModal deleteType='inTeamMemberPage' id={this.props.urlId} /> */}
 
@@ -137,8 +137,8 @@ class PostPage extends React.Component {
                 id="standard-name"
                 label="Message Title"
                 className={classes.textField}
-                value={this.state.post.postName}
-                onChange={this.handleChange("postName")}
+                value={this.state.message.message_name}
+                onChange={this.handleChange("message_name")}
                 margin="normal"
                 required
               />
@@ -146,8 +146,8 @@ class PostPage extends React.Component {
                 id="standard-name"
                 label="Message Content"
                 className={classes.textField}
-                value={this.state.post.postDetails}
-                onChange={this.handleChange("postDetails")}
+                value={this.state.message.message_details}
+                onChange={this.handleChange("message_details")}
                 margin="normal"
                 required
               />
@@ -155,7 +155,7 @@ class PostPage extends React.Component {
                 id="standard-name"
                 label="Link"
                 className={classes.textField}
-                value={this.state.post.link}
+                value={this.state.message.link}
                 onChange={this.handleChange("link")}
                 margin="normal"
                 required
@@ -165,9 +165,9 @@ class PostPage extends React.Component {
                 label="Days from Start"
                 margin="normal"
                 className={classes.textField}
-                onChange={this.handleChange("daysFromStart")}
+                onChange={this.handleChange("days_from_start")}
                 type="number"
-                value={this.state.post.daysFromStart}
+                value={this.state.message.days_from_start}
                 step="1"
                 inputProps={{ min: 1 }}
                 required
@@ -188,7 +188,9 @@ class PostPage extends React.Component {
               className={classes.button}
               onClick={e =>
                 this.props.history.push(
-                  `/home/training-series/${this.state.post.trainingSeriesID}`
+                  `/home/training-series/${
+                    this.state.message.training_series_id
+                  }`
                 )
               }
             >
@@ -229,10 +231,10 @@ const mapStateToProps = state => {
 export default connect(
   mapStateToProps,
   {
-    getTrainingSeriesPosts,
-    createAPost,
-    editPost,
-    deletePost,
-    getPostById
+    getTrainingSeriesMessages,
+    createAMessage,
+    editMessage,
+    deleteMessage,
+    getMessageById
   }
 )(withStyles(styles)(withRouter(PostPage)));

@@ -1,50 +1,50 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { withStyles } from "@material-ui/core/styles";
+import Paper from "@material-ui/core/Paper";
 
 //State Management
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 
 //Components
-import AddMember from './AddMember';
+import AddMember from "./AddMember";
 
 //Styles
 import {
   addTeamMemberToTrainingSeries,
   getTeamMembers,
   getMembersAssigned
-} from '../../../store/actions/';
+} from "../../../store/actions/";
 
 const styles = theme => ({
   root: {
-    width: '100%',
+    width: "100%",
     maxWidth: 768,
-    margin: '20px auto',
-    boxSizing: 'border-box',
+    margin: "20px auto",
+    boxSizing: "border-box",
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
-    padding: '20px 30px 40px',
-    outline: 'none',
-    '@media (max-width:768px)': {
-      width: '95%'
+    padding: "20px 30px 40px",
+    outline: "none",
+    "@media (max-width:768px)": {
+      width: "95%"
     }
   },
   footer: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    position: 'sticky',
-    top: '100%'
+    display: "flex",
+    justifyContent: "space-between",
+    position: "sticky",
+    top: "100%"
   },
-  pagination: { width: '90%' }
+  pagination: { width: "90%" }
 });
 
 class AddMembersView extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      trainingSeriesID: '',
-      startDate: '',
+      trainingSeriesID: "",
+      startDate: "",
       selectedTeamMembers: [],
       isRouting: false,
       offset: 0,
@@ -103,8 +103,8 @@ class AddMembersView extends Component {
     handleSubmit: e => {
       e.preventDefault();
       const data = {
-        startDate: this.state.startDate,
-        trainingSeriesID: this.state.trainingSeriesID,
+        start_date: this.state.startDate,
+        training_series_id: this.state.trainingSeriesID,
         assignments: this.state.selectedTeamMembers
       };
       this.props.addTeamMemberToTrainingSeries(data);
