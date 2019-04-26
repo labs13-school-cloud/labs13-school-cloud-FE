@@ -103,7 +103,7 @@ class NotificationsView extends Component {
     // we ran out of time and had to deliver
     const nonNullContactInformation = allNotifications.filter(
       notification =>
-        notification.email !== "" && notification.phoneNumber !== ""
+        notification.email !== "" && notification.phone_number !== ""
     );
 
     const filteredNotifications = nonNullContactInformation.filter(
@@ -120,18 +120,18 @@ class NotificationsView extends Component {
     );
 
     filteredNotifications.sort((a, b) =>
-      a.sendDate > b.sendDate ? 1 : b.sendDate > a.sendDate ? -1 : 0
+      a.send_date > b.send_date ? 1 : b.send_date > a.send_date ? -1 : 0
     );
 
     const filteredReturn =
       this.state.filterSent === "pending"
         ? filteredNotifications.filter(
             notification =>
-              notification.textSent === 0 || notification.emailSent === 0
+              notification.text_sent === 0 || notification.email_sent === 0
           )
         : filteredNotifications.filter(
             notification =>
-              notification.textSent === 1 || notification.emailSent === 1
+              notification.text_sent === 1 || notification.email_sent === 1
           );
 
     const notificationCount = filteredReturn.length;
