@@ -12,7 +12,6 @@ function Callback(props) {
     setAccessToken();
     setIdToken();
     getUserProfile(() => {
-      console.log("Callback History CDM");
       props.history.push("/home");
     });
   }, []);
