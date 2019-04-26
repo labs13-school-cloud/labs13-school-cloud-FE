@@ -11,19 +11,18 @@ import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
-import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-
+import ExpansionPanel from "@material-ui/core/ExpansionPanel";
+import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
+import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 // Redux
 import {
-  getTrainingSeriesPosts,
-  createAPost,
-  editPost,
-  deletePost,
-  getPostById
+  getTrainingSeriesMessages,
+  createAMessage,
+  editMessage,
+  deleteMessage,
+  getMessageById
 } from "../../store/actions";
 
 const styles = theme => ({
@@ -75,22 +74,22 @@ class CreatePost extends React.Component {
   state = {
     open: false,
     isUpdating: false,
-    post: {
-      postName: "",
-      postDetails: "",
+    message: {
+      message_name: "",
+      message_details: "",
       link: "",
-      daysFromStart: 1,
-      trainingSeriesID: ""
+      days_from_start: 1,
+      training_series_id: ""
     }
   };
 
   componentDidMount() {
-    if (this.props.location.state.trainingSeriesId) {
+    if (this.props.location.state.training_series_id) {
       this.setState({
         ...this.state,
-        post: {
-          ...this.state.post,
-          trainingSeriesID: this.props.location.state.trainingSeriesId
+        message: {
+          ...this.state.message,
+          training_series_id: this.props.location.state.training_series_id
         }
       });
     }
@@ -99,26 +98,31 @@ class CreatePost extends React.Component {
   handleChange = name => e => {
     this.setState({
       ...this.state,
-      post: {
-        ...this.state.post,
+      message: {
+        ...this.state.message,
         [name]: e.target.value
       }
     });
   };
 
-  handlePostSubmit = e => {
+  handleMessageSubmit = e => {
     e.preventDefault();
-    this.props.createAPost(this.state.post, this.state.post.trainingSeriesID);
+    this.props.createAMessage(
+      this.state.message,
+      this.state.message.training_series_id
+    );
   };
 
   render() {
     const { classes } = this.props;
-    const sendDay = moment().add(3, "days").format("MMM Do");
+    const sendDay = moment()
+      .add(3, "days")
+      .format("MMM Do");
     return (
       <form
         className={classes.form}
         id="form1"
-        onSubmit={e => this.handlePostSubmit(e)}
+        onSubmit={e => this.handleMessageSubmit(e)}
       >
         {/* <DeleteModal deleteType='inTeamMemberPage' id={this.props.urlId} /> */}
         <MainContainer>
@@ -132,8 +136,8 @@ class CreatePost extends React.Component {
                 id="standard-name"
                 label="Message Title"
                 className={classes.textField}
-                value={this.state.post.postName}
-                onChange={this.handleChange("postName")}
+                value={this.state.message.message_name}
+                onChange={this.handleChange("message_name")}
                 margin="normal"
                 required
               />
@@ -141,8 +145,8 @@ class CreatePost extends React.Component {
                 id="standard-name"
                 label="Message Content"
                 className={classes.textField}
-                value={this.state.post.postDetails}
-                onChange={this.handleChange("postDetails")}
+                value={this.state.message.message_details}
+                onChange={this.handleChange("message_details")}
                 margin="normal"
                 required
               />
@@ -150,7 +154,7 @@ class CreatePost extends React.Component {
                 id="standard-name"
                 label="Optional Link"
                 className={classes.textField}
-                value={this.state.post.link}
+                value={this.state.message.link}
                 onChange={this.handleChange("link")}
                 margin="normal"
               />
@@ -159,23 +163,29 @@ class CreatePost extends React.Component {
                 label="Days From Start"
                 margin="normal"
                 className={classes.textField}
-                onChange={this.handleChange("daysFromStart")}
+                onChange={this.handleChange("days_from_start")}
                 type="number"
-                value={this.state.post.daysFromStart}
+                value={this.state.message.days_from_start}
                 step="1"
                 inputProps={{ min: 1 }}
                 required
               />
               <ExpansionPanel>
-        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-          <Typography className={classes.heading}>What is "Days From Start"?</Typography>
-        </ExpansionPanelSummary>
-        <ExpansionPanelDetails>
-          <Typography>
-            This is the number of days after a training series starts that a message will be sent. For example, if you assign a team member to this training series with a start date of today, and you set this message's "days from start" number to 3, it will send out on {sendDay}.
-          </Typography>
-        </ExpansionPanelDetails>
-      </ExpansionPanel>
+                <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+                  <Typography className={classes.heading}>
+                    What is "Days From Start"?
+                  </Typography>
+                </ExpansionPanelSummary>
+                <ExpansionPanelDetails>
+                  <Typography>
+                    This is the number of days after a training series starts
+                    that a message will be sent. For example, if you assign a
+                    team member to this training series with a start date of
+                    today, and you set this message's "days from start" number
+                    to 3, it will send out on {sendDay}.
+                  </Typography>
+                </ExpansionPanelDetails>
+              </ExpansionPanel>
             </PostContainer>
             <ButtonContainer>
               <Button
@@ -191,7 +201,7 @@ class CreatePost extends React.Component {
                 onClick={e =>
                   this.props.history.push(
                     `/home/training-series/${
-                      this.props.location.state.trainingSeriesId
+                      this.props.location.state.training_series_id
                     }`
                   )
                 }
@@ -202,7 +212,6 @@ class CreatePost extends React.Component {
           </Paper>
         </MainContainer>
       </form>
-
     );
   }
 }
@@ -238,10 +247,10 @@ const mapStateToProps = state => {
 export default connect(
   mapStateToProps,
   {
-    getTrainingSeriesPosts,
-    createAPost,
-    editPost,
-    deletePost,
-    getPostById
+    getTrainingSeriesMessages,
+    createAPMessage,
+    editMessage,
+    deleteMessage,
+    getMessageById
   }
 )(withStyles(styles)(CreatePost));
