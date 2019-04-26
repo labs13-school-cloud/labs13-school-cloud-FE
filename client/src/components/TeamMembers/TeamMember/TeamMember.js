@@ -54,10 +54,10 @@ const styles = {
 function TeamMember(props) {
   const { classes } = props;
   const {
-    firstName,
-    lastName,
-    jobDescription,
-    teamMemberID
+    first_name,
+    last_name,
+    job_description,
+    team_member_id
   } = props.teamMember;
 
   const routeToMemberPage = (e, id) => {
@@ -74,15 +74,15 @@ function TeamMember(props) {
   return (
     <ListItem className={classes.listItem}>
       <ListItemText
-        primary={firstName + " " + lastName}
-        secondary={`Job: ${jobDescription}`}
-        onClick={e => routeToMemberPage(e, teamMemberID)}
+        primary={first_name + " " + last_name}
+        secondary={`Job: ${job_description}`}
+        onClick={e => routeToMemberPage(e, team_member_id)}
       />
       <div>
         <TeamMemberOptions
           routeToMemberPage={routeToMemberPage}
           handleDelete={handleDelete}
-          teamMemberID={teamMemberID}
+          teamMemberID={team_member_id}
           userId={props.userId}
         />
       </div>

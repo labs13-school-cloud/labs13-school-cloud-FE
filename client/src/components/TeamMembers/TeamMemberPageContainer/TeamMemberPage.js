@@ -117,16 +117,16 @@ const styles = theme => ({
 class TeamMemberPage extends React.Component {
   state = {
     teamMember: {
-      firstName: "",
-      lastName: "",
-      jobDescription: "",
+      first_name: "",
+      last_name: "",
+      job_description: "",
       email: "",
-      phoneNumber: "",
-      user_ID: "",
-      TeamMemberCol: "",
-      teamMemberID: "",
-      textOn: false,
-      emailOn: false
+      phone_number: "",
+      user_id: "",
+      team_member_col: "",
+      team_member_id: "",
+      text_on: false,
+      email_on: false
     },
     assignments: [],
     trainingSeries: [] //Leigh-Ann: this may not be needed?
@@ -163,7 +163,7 @@ class TeamMemberPage extends React.Component {
 
     // PUT request on toggle
     this.props.editTeamMember(
-      this.state.teamMember.teamMemberID,
+      this.state.teamMember.team_member_id,
       this.state.teamMember
     );
   };
@@ -193,20 +193,20 @@ class TeamMemberPage extends React.Component {
 
     //console.log("IS LOADING TMP", this.props.isLoading);
 
-    const { textOn, emailOn } = this.state.teamMember;
+    const { text_on, email_on } = this.state.teamMember;
 
     let textDisabled;
     let emailDisabled;
 
-    if (textOn && !emailOn) {
+    if (text_on && !email_on) {
       textDisabled = true;
     }
 
-    if (emailOn && !textOn) {
+    if (email_on && !text_on) {
       emailDisabled = true;
     }
 
-    if (emailOn && textOn) {
+    if (email_on && text_on) {
       textDisabled = false;
       emailDisabled = false;
     }
@@ -214,10 +214,10 @@ class TeamMemberPage extends React.Component {
     //Checks to see if one number has been entered and if the full number matches
     let addDisabled = false;
     if (
-      /^$/gm.test(this.state.teamMember.phoneNumber) === true ||
-      (/\+1 \(\d{0}/gm.test(this.state.teamMember.phoneNumber) === true &&
+      /^$/gm.test(this.state.teamMember.phone_number) === true ||
+      (/\+1 \(\d{0}/gm.test(this.state.teamMember.phone_number) === true &&
         /^\s*(?:\+?(\d{1,3}))?([-. (]*(\d{3})[-. )]*)?((\d{3})[-. ]*(\d{4})(?:[-.x ]*(\d+))?)\S*$/gm.test(
-          this.state.teamMember.phoneNumber
+          this.state.teamMember.phone_number
         ) === false)
     ) {
       addDisabled = true;
@@ -324,7 +324,7 @@ class TeamMemberPage extends React.Component {
                 id="standard-name"
                 label="job description"
                 className={classes.textField}
-                value={this.state.teamMember.jobDescription}
+                value={this.state.teamMember.job_description}
                 onChange={this.handleChange("jobDescription")}
                 margin="normal"
                 required
@@ -338,8 +338,8 @@ class TeamMemberPage extends React.Component {
                 label="phone number"
                 customInput={TextField}
                 className={classes.textField}
-                value={this.state.teamMember.phoneNumber}
-                onChange={this.handleChange("phoneNumber")}
+                value={this.state.teamMember.phone_number}
+                onChange={this.handleChange("phone_number")}
                 margin="normal"
                 required
               />
@@ -357,21 +357,21 @@ class TeamMemberPage extends React.Component {
               <FormControlLabel
                 control={
                   <Switch
-                    checked={this.state.teamMember.textOn}
+                    checked={this.state.teamMember.text_on}
                     onChange={
-                      textDisabled ? null : this.handleToggleChange("textOn")
+                      textDisabled ? null : this.handleToggleChange("text_on")
                     }
-                    value="textOn"
+                    value="text_on"
                     color="default"
                     style={
-                      this.state.teamMember.textOn
+                      this.state.teamMember.text_on
                         ? { color: "#451476" }
                         : { color: "#edeaea" }
                     }
                   />
                 }
                 label={
-                  this.state.teamMember.textOn
+                  this.state.teamMember.text_on
                     ? "Texts Active"
                     : "Texts Inactive"
                 }
@@ -379,21 +379,21 @@ class TeamMemberPage extends React.Component {
               <FormControlLabel
                 control={
                   <Switch
-                    checked={this.state.teamMember.emailOn}
+                    checked={this.state.teamMember.email_on}
                     onChange={
-                      emailDisabled ? null : this.handleToggleChange("emailOn")
+                      emailDisabled ? null : this.handleToggleChange("email_on")
                     }
-                    value="emailOn"
+                    value="email_on"
                     color="default"
                     style={
-                      this.state.teamMember.emailOn
+                      this.state.teamMember.email_on
                         ? { color: "#451476" }
                         : { color: "#edeaea" }
                     }
                   />
                 }
                 label={
-                  this.state.teamMember.emailOn
+                  this.state.teamMember.email_on
                     ? "Email Active"
                     : "Email Inactive"
                 }
@@ -402,14 +402,14 @@ class TeamMemberPage extends React.Component {
             <ButtonContainer>
               <NotificationWidget
                 disabled={addDisabled ? true : false}
-                teamMember={this.state.teamMember}
+                teamMember={this.state.team_member}
                 editTeamMemberSubmit={this.props.editTeamMemberSubmit}
                 type="success"
                 submitType="edit"
               />
               <DeleteModal
                 deleteType="inTeamMemberPage"
-                teamMemberId={this.state.teamMember.teamMemberID}
+                teamMemberId={this.state.teamMember.team_member_id}
                 userId={this.props.userId}
                 displayType="button"
               />

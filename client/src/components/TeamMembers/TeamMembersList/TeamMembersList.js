@@ -16,12 +16,12 @@ const TeamMembersList = props => {
     <>
       <ListStyles>
         {arr.map(member => (
-          <Suspense key={member.teamMemberID} fallback={<span />}>
+          <Suspense key={member.team_memberid} fallback={<span />}>
             <TeamMember
-              key={member.teamMemberID}
+              key={member.team_memberid}
               teamMember={member}
               deleteTeamMember={props.deleteTeamMember}
-              userId={props.userId}
+              userId={props.user_id}
             />
           </Suspense>
         ))}

@@ -77,8 +77,8 @@ const styles = theme => ({
 class AssignMemberPage extends React.Component {
   state = {
     open: false,
-    trainingSeriesID: '',
-    startDate: '',
+    training_series_id: '',
+    start_date: '',
     value: '',
     isRouting: false
   };
@@ -87,8 +87,8 @@ class AssignMemberPage extends React.Component {
     let d = new Date();
     let formattedDate = d.toISOString();
     this.setState({
-      trainingSeriesID: this.props.trainingSeriesID,
-      startDate: formattedDate
+      training_series_id: this.props.training_series_id,
+      start_date: formattedDate
     });
   }
   componentDidUpdate(prevProps) {
@@ -104,15 +104,15 @@ class AssignMemberPage extends React.Component {
   handleDateChange = date => {
     let d = date;
     this.setState({
-      startDate: d.toISOString()
+      start_date: d.toISOString()
     });
   };
 
   handleSubmit = e => {
     e.preventDefault();
     const data = {
-      startDate: this.state.startDate,
-      trainingSeriesID: this.state.trainingSeriesID,
+      start_date: this.state.start_date,
+      training_series_id: this.state.training_series_id,
       assignments: [this.props.location.state.urlId]
     };
     this.props.addTeamMemberToTrainingSeries(data);
@@ -134,7 +134,7 @@ class AssignMemberPage extends React.Component {
     //Filters the trainingSeries based on assignments
     let filteredSeries = this.props.location.state.trainingSeries.filter(
       series => {
-        return !assignments.includes(series.trainingSeriesID);
+        return !assignments.includes(series.training_series_id);
       }
     );
 
@@ -143,7 +143,7 @@ class AssignMemberPage extends React.Component {
         <MenuItem
           name="trainingSeriesID"
           label={`${series.title}`}
-          value={series.trainingSeriesID}>
+          value={series.training_series_id}>
           {series.title}
         </MenuItem>
       );
@@ -162,7 +162,7 @@ class AssignMemberPage extends React.Component {
             <DatePicker
               inline
               minDate={new Date()}
-              selected={this.state.startDate}
+              selected={this.state.start_date}
               onChange={this.handleDateChange}
             />
           </div>
@@ -176,7 +176,7 @@ class AssignMemberPage extends React.Component {
                 Training Series
               </InputLabel>
               <Select
-                value={this.state.trainingSeriesID}
+                value={this.state.training_series_id}
                 onChange={this.handleChange}
                 name="trainingSeriesID">
                 {this.props.location.state.assignments &&
@@ -187,7 +187,7 @@ class AssignMemberPage extends React.Component {
               <Button
                 disabled={
                   this.state.isRouting === true ||
-                  this.state.trainingSeriesID === undefined
+                  this.state.training_series_id === undefined
                     ? 'true'
                     : null
                 }
