@@ -1,11 +1,11 @@
 // main page for displaying list of all training series
-import React from 'react';
+import React from "react";
 
 //Styling
-import styled from 'styled-components';
+import styled from "styled-components";
 
 //Components
-import Notification from './Notification';
+import Notification from "../Notification";
 
 const NotificationsList = props => {
   //Pagination code
