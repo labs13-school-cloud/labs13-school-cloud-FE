@@ -56,9 +56,9 @@ const TrainingSeriesAssignments = props => {
   const { classes } = props;
 
   const { teamMemberId } = props;
-  const { trainingSeries_ID } = props.trainingSeries;
+  const { training_series_id } = props.trainingSeries;
   // add hours to sendDate, formatting with moment ensures it displays properly on the FE
-  const formattedStartDate = moment(props.trainingSeries.startDate)
+  const formattedStartDate = moment(props.trainingSeries.start_date)
     .add(1, "hours")
     .format("MMMM Do, YYYY");
 
