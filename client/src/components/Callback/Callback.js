@@ -12,7 +12,7 @@ function Callback(props) {
     setAccessToken();
     setIdToken();
     getUserProfile(() => {
-      this.props.history.push("/home");
+      props.history.push("/home");
     });
   }, []);
 
