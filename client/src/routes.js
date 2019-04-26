@@ -1,30 +1,29 @@
-import React from 'react';
+import React from "react";
+import { Provider } from "react-redux";
+import { createStore, applyMiddleware, compose } from "redux";
+import thunk from "redux-thunk";
 
 //Routing
-import { Route, Router } from 'react-router-dom';
+import { Route, Router } from "react-router-dom";
 
 //Components
-import App from './App';
-import Pricing from './components/LandingPage/Pricing';
-import Team from './components/LandingPage/Team';
-import DashboardView from './components/Dashboard/DashboardView';
-    //workbench components
-    import TrainingSeriesTab from './components/TrainingSeries/TrainingSeriesTab.js';
+import App from "./App";
+import Pricing from "./components/LandingPage/Pricing";
+import Team from "./components/LandingPage/Team";
+import DashboardView from "./components/Dashboard/DashboardView";
+//workbench components
+import TrainingSeriesTab from "./components/TrainingSeries/TrainingSeriesTab.js";
 
 //Callback
-import Callback from './components/Callback/callback';
+import Callback from "./components/Callback/Callback.js";
 
 //Auth
-import Authenticate from './components/authenticate/authenticate';
+import Authenticate from "./components/Misc/authenticate/authenticate.js";
 
 //History
-import history from './history';
+import history from "./history.js";
 
-import { Provider } from 'react-redux';
-import { createStore, applyMiddleware, compose } from 'redux';
-import thunk from 'redux-thunk';
-
-import rootReducer from './store/reducers';
+import rootReducer from "./store/reducers";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 

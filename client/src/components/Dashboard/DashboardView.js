@@ -1,37 +1,37 @@
 // parent component for app once logged in
-import React from 'react';
-import { Router, Route } from 'react-router-dom';
+import React from "react";
+import { Router, Route } from "react-router-dom";
 
-import history from '../../history';
+import history from "../../history.js";
 
 //Styling
-import styled from 'styled-components';
+import { TripleColumn, SmallColumns, DashboardContainer } from "./styles.js";
 
 //Components
-import TeamMembersView from '../TeamMembers/TeamMembersView';
-import TrainingSeriesView from '../TrainingSeries/TrainingSeriesView';
-import ProgressCircle from '../Progress/ProgressCircle';
-import ProfileView from '../Profile/ProfileView';
-import AppBar from '../AppBar/AppBar';
-import TeamMemberPageView from '../TeamMembers/TeamMemberPageContainer/TeamMemberPageView';
-import AddTrainingSeriesView from '../TrainingSeries/AddMembersToTrainingSeries/AddMembersView.js';
-import CreateTrainingSeries from '../TrainingSeries/CreateTrainingSeries';
-import ReturnToDashboardButton from '../Navigation/ReturnToDashboard';
-import TrainingSeriesPosts from '../TrainingSeries/TrainingSeriesPosts';
-import AddTeamMemberPage from '../TeamMembers/TeamMemberPageContainer/AddTeamMemberPage';
-import CreatePost from '../TrainingSeries/CreatePost';
-import PostPage from '../TrainingSeries/PostPage';
-import NotificationsView from '../Notifications/NotificationsView';
-import AssignMemberPage from '../TeamMembers/TeamMemberPageContainer/AssignMemberPage';
-import Snackbar from '../Snackbar/Snackbar';
-import DashboardTour from '../Tour/Tour';
+import TeamMembersView from "../TeamMembers/TeamMembersView";
+import TrainingSeriesView from "../TrainingSeries/TrainingSeriesView";
+import ProgressCircle from "../Misc/Progress/ProgressCircle";
+import ProfileView from "../Profile/ProfileView";
+import AppBar from "../AppBar/AppBar";
+import TeamMemberPageView from "../TeamMembers/TeamMemberPageContainer/TeamMemberPageView";
+import AddTrainingSeriesView from "../TrainingSeries/AddMembersToTrainingSeries/AddMembersView.js";
+import CreateTrainingSeries from "../TrainingSeries/CreateTrainingSeries";
+import ReturnToDashboardButton from "../Navigation/ReturnToDashboard";
+import TrainingSeriesPosts from "../TrainingSeries/TrainingSeriesPosts";
+import AddTeamMemberPage from "../TeamMembers/TeamMemberPageContainer/AddTeamMemberPage";
+import CreatePost from "../TrainingSeries/CreatePost";
+import PostPage from "../TrainingSeries/PostPage";
+import NotificationsView from "../Notifications/NotificationsView";
+import AssignMemberPage from "../TeamMembers/TeamMemberPageContainer/AssignMemberPage";
+import Snackbar from "../Snackbar/Snackbar";
+import DashboardTour from "../Tour/Tour";
 
 //Auth
-import Authenticate from '../authenticate/authenticate';
+import Authenticate from "../Misc/authenticate/authenticate";
 
 //State Management
-import { connect } from 'react-redux';
-import { getUser } from '../../store/actions/userActions';
+import { connect } from "react-redux";
+import { getUser } from "../../store/actions/userActions";
 
 class Dashboard extends React.Component {
   state = {
@@ -103,7 +103,7 @@ class Dashboard extends React.Component {
               </>
             )}
             <AppBar />
-            {this.props.location.pathname !== '/home' && (
+            {this.props.location.pathname !== "/home" && (
               <ReturnToDashboardButton />
             )}
             <DashboardContainer>
@@ -205,7 +205,7 @@ class Dashboard extends React.Component {
     this.setState({ isTourOpen: false });
   };
   activateTutorial = () => {
-    this.props.history.push('/home');
+    this.props.history.push("/home");
     this.setState({ isTourOpen: true });
   };
 }
@@ -224,52 +224,3 @@ export default connect(
     getUser
   }
 )(Authenticate(Dashboard));
-
-//Styled Components
-const TripleColumn = styled.div`
-  max-width: 1400px;
-  display: flex;
-  justify-content: space-between;
-  margin: 48px auto;
-  /* height: 500px; */
-  @media (max-width: 1400px) {
-    flex-wrap: wrap;
-    max-width: 1000px;
-    padding: 10px;
-  }
-  @media (max-width: 768px) {
-    max-width: 768px;
-    height: 100%;
-    flex-direction: column;
-    padding: 10px;
-    justify-content: center;
-    align-items: center;
-    margin: 0 auto;
-  }
-`;
-const SmallColumns = styled.div`
-  display: flex;
-  width: 800px;
-  @media (max-width: 1400px) {
-    width: 100%;
-    margin-bottom: 50px;
-  }
-  @media (max-width: 768px) {
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: 0 auto;
-    /* margin-bottom: 5px; */
-  }
-`;
-const DashboardContainer = styled.div`
-  display: flex;
-  /* background-color: #fafafa; */
-
-  @media (max-width: 768px) {
-    max-width: 768px;
-    height: 100%;
-    flex-direction: column;
-    padding: 10px;
-  }
-`;
