@@ -34,6 +34,8 @@ const store = createStore(
 
 //Use this for rendering all of our components
 export const makeMainRoutes = () => {
+  console.log("Routes Mounted");
+
   return (
     <Provider store={store}>
       <Router history={history}>

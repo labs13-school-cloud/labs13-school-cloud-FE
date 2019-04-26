@@ -1,9 +1,9 @@
 // main page for displaying all team members
 
-import React, { Suspense } from 'react';
+import React, { Suspense } from "react";
 // import TeamMember from './TeamMember';
-import styled from 'styled-components';
-const TeamMember = React.lazy(() => import('./TeamMember'));
+import styled from "styled-components";
+const TeamMember = React.lazy(() => import("../TeamMember"));
 
 const TeamMembersList = props => {
   let arr = [];
