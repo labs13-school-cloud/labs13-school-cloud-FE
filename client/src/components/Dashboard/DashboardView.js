@@ -75,15 +75,15 @@ class Dashboard extends React.Component {
           <SmallColumns>
             <TeamMembersView
               toggleFreakinSnackBar={this.toggleFreakinSnackBar}
-              userId={user.userID}
+              userId={user.id}
             />
             <TrainingSeriesView
               toggleFreakinSnackBar={this.toggleFreakinSnackBar}
-              userId={user.userID}
+              userId={user.id}
               match={this.props.match}
             />
           </SmallColumns>
-          <NotificationsView userId={user.userID} />
+          <NotificationsView userId={user.id} />
         </TripleColumn>
       </>
     );
@@ -124,7 +124,7 @@ class Dashboard extends React.Component {
                   render={props => (
                     <TeamMemberPageView
                       {...props}
-                      userId={this.props.userProfile.user.userID}
+                      userId={this.props.userProfile.user.id}
                     />
                   )}
                 />
@@ -133,7 +133,7 @@ class Dashboard extends React.Component {
                   render={props => (
                     <AddTeamMemberPage
                       {...props}
-                      userId={this.props.userProfile.user.userID}
+                      userId={this.props.userProfile.user.id}
                     />
                   )}
                 />
@@ -142,7 +142,7 @@ class Dashboard extends React.Component {
                   render={props => (
                     <CreateTrainingSeries
                       {...props}
-                      userId={this.props.userProfile.user.userID}
+                      userId={this.props.userProfile.user.id}
                     />
                   )}
                 />
@@ -151,7 +151,7 @@ class Dashboard extends React.Component {
                   render={props => (
                     <TrainingSeriesPosts
                       {...props}
-                      userId={this.props.userProfile.user.userID}
+                      userId={this.props.userProfile.user.id}
                     />
                   )}
                 />
@@ -164,7 +164,7 @@ class Dashboard extends React.Component {
                   render={props => (
                     <AddTrainingSeriesView
                       {...props}
-                      userId={this.props.userProfile.user.userID}
+                      userId={this.props.userProfile.user.id}
                     />
                   )}
                 />
@@ -173,7 +173,7 @@ class Dashboard extends React.Component {
                   render={props => (
                     <AssignMemberPage
                       {...props}
-                      userId={this.props.userProfile.user.userID}
+                      userId={this.props.userProfile.user.id}
                     />
                   )}
                 />
