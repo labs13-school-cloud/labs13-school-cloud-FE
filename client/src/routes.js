@@ -8,15 +8,15 @@ import { Route, Router } from "react-router-dom";
 
 //Components
 import App from "./App";
-import Pricing from "./components/LandingPage/Pricing/Pricing.js";
-import Team from "./components/LandingPage/Team/";
-import DashboardView from "./components/Dashboard/DashboardView";
+import Pricing from "components/LandingPage/Pricing/Pricing.js";
+import Team from "components/LandingPage/Team/";
+import DashboardView from "components/Dashboard/DashboardView";
 
 //Callback
-import Callback from "./components/Callback/Callback.js";
+import Callback from "components/Callback/Callback.js";
 
 //Auth
-import Authenticate from "./components/Misc/authenticate/authenticate.js";
+import Authenticate from "components/Misc/authenticate/authenticate.js";
 
 //History
 import history from "./history.js";
