@@ -194,7 +194,7 @@ class TrainingSeriesPosts extends React.Component {
     this.props.history.push({
       pathname: '/home/create-post',
       state: {
-        trainingSeriesId: this.props.singleTrainingSeries.trainingSeriesID
+        training_series_id: this.props.singleTrainingSeries.training_series_id
       }
     });
   };
@@ -213,7 +213,7 @@ class TrainingSeriesPosts extends React.Component {
     e.preventDefault();
     this.props.history.push({
       pathname: `/home/assign-members/${
-        this.props.singleTrainingSeries.trainingSeriesID
+        this.props.singleTrainingSeries.training_series_id
       }`
     });
   };
@@ -239,7 +239,7 @@ class TrainingSeriesPosts extends React.Component {
     e.preventDefault();
     const data = { title: this.state.title };
     await this.props.editTrainingSeries(
-      this.props.singleTrainingSeries.trainingSeriesID,
+      this.props.singleTrainingSeries.training_series_id,
       data
     );
     await this.getTrainingSeriesWithPosts(this.props.match.params.id);
