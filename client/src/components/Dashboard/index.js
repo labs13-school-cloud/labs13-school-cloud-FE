@@ -1,1 +1,2 @@
-export { default as Dashboard } from './Dashboard';
+import DashboardView from "./DashboardView.js";
+export default DashboardView;
