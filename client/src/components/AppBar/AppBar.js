@@ -15,10 +15,10 @@ import {
 import Avatar from "@material-ui/core/Avatar";
 
 //Logo
-import Logo from "img/training-bot.png";
+import Logo from "../../img/training-bot.png";
 
 //AUTH
-import { login, logout } from "Auth/Auth";
+import { login, logout } from "../../Auth/Auth";
 
 class AppBar extends Component {
   render() {
