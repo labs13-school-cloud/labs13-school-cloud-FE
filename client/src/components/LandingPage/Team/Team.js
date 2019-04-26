@@ -10,7 +10,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLinkedin, faGithubSquare } from "@fortawesome/free-brands-svg-icons";
 
 import Logo from "../../../img/training-bot.png";
-import AJ from "../../../img/AJ.png";
+import AJ from "img/AJ.png";
 import Gannon from "../../../img/Gannon.png";
 import Nick from "../../../img/Nick.png";
 import Adam from "../../../img/Adam.png";
