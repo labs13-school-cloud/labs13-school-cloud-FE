@@ -5,12 +5,12 @@ import {
   GET_EMAIL_NOTIFICATIONS_START,
   GET_EMAIL_NOTIFICATIONS_SUCCESS,
   GET_EMAIL_NOTIFICATIONS_FAIL
-} from '../actions';
+} from "../actions";
 
 const initialState = {
   textNotifications: [],
   emailNotifications: [],
-  error: '',
+  error: "",
   isLoading: false,
   isEditing: false
 };
@@ -19,13 +19,13 @@ const notificationsReducer = (state = initialState, action) => {
   switch (action.type) {
     // ---GET NOTIFICATIONS--
     case GET_TEXT_NOTIFICATIONS_START:
-      return { ...state, isLoading: true, error: '' };
+      return { ...state, isLoading: true, error: "" };
     case GET_TEXT_NOTIFICATIONS_SUCCESS:
       return {
         ...state,
         textNotifications: action.payload,
         isLoading: false,
-        error: ''
+        error: ""
       };
     case GET_TEXT_NOTIFICATIONS_FAIL:
       return {
@@ -34,13 +34,13 @@ const notificationsReducer = (state = initialState, action) => {
         error: action.payload
       };
     case GET_EMAIL_NOTIFICATIONS_START:
-      return { ...state, isLoading: true, error: '' };
+      return { ...state, isLoading: true, error: "" };
     case GET_EMAIL_NOTIFICATIONS_SUCCESS:
       return {
         ...state,
         emailNotifications: action.payload,
         isLoading: false,
-        error: ''
+        error: ""
       };
     case GET_EMAIL_NOTIFICATIONS_FAIL:
       return {

@@ -19,8 +19,8 @@ import {
   FETCH_SINGLE_MEMBER_FAIL,
   REMOVE_MEMBER_FROM_TS_START,
   REMOVE_MEMBER_FROM_TS_SUCCESS,
-  REMOVE_MEMBER_FROM_TS_FAIL,
-} from '../actions';
+  REMOVE_MEMBER_FROM_TS_FAIL
+} from "../actions";
 
 const initialState = {
   teamMembers: [],
@@ -153,7 +153,7 @@ const teamMembersReducer = (state = initialState, action) => {
       };
     case EDIT_MEMBER_SUCCESS:
       const updatedMember = state.teamMembers.map(member => {
-        if (member.teamMemberID === action.payload.teamMemberID) {
+        if (member.id === action.payload.id) {
           return {
             ...member,
             ...action.payload
@@ -197,9 +197,7 @@ const teamMembersReducer = (state = initialState, action) => {
       return {
         ...state,
         teamMembers: [
-          ...state.teamMembers.filter(
-            member => member.teamMemberID !== action.payload
-          )
+          ...state.teamMembers.filter(member => member.id !== action.payload)
         ],
         status: {
           ...state.status,

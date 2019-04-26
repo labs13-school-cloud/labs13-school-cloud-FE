@@ -4,7 +4,7 @@ import {
   GET_USER_FAIL,
   EDIT_USER_START,
   EDIT_USER_SUCCESS,
-  EDIT_USER_FAIL,
+  EDIT_USER_FAIL
 } from "../actions/userActions";
 import {
   POST_SUBSCRIBE_START,
@@ -15,7 +15,7 @@ import {
   POST_UNSUBSCRIBE_FAIL,
   POST_REGISTERSTRIPE_START,
   POST_REGISTERSTRIPE_SUCCESS,
-  POST_REGISTERSTRIPE_FAIL,
+  POST_REGISTERSTRIPE_FAIL
 } from "../actions/stripeActions";
 
 const initialState = {
@@ -25,7 +25,7 @@ const initialState = {
   isEditing: false,
   doneLoading: false,
   paymentLoading: false,
-  newUser: true,
+  newUser: true
 };
 
 const userReducer = (state = initialState, action) => {
@@ -35,7 +35,7 @@ const userReducer = (state = initialState, action) => {
         ...state,
         isLoading: true,
         doneLoading: false,
-        error: "",
+        error: ""
       };
     case GET_USER_SUCCESS:
       if (action.payload.newUser) {
@@ -43,12 +43,12 @@ const userReducer = (state = initialState, action) => {
           ...state,
           userProfile: {
             ...action.payload,
-            user: action.payload.newUser,
+            user: action.payload.newUser
           },
           isLoading: false,
           doneLoading: true,
           newUser: true,
-          error: "",
+          error: ""
         };
       } else {
         return {
@@ -57,7 +57,7 @@ const userReducer = (state = initialState, action) => {
           isLoading: false,
           doneLoading: true,
           newUser: false,
-          error: "",
+          error: ""
         };
       }
     case GET_USER_FAIL:
@@ -65,14 +65,14 @@ const userReducer = (state = initialState, action) => {
         ...state,
         isLoading: false,
         doneLoading: false,
-        error: action.payload,
+        error: action.payload
       };
     case EDIT_USER_START:
       return {
         ...state,
         isLoading: true,
         isEditing: true,
-        error: "",
+        error: ""
       };
     case EDIT_USER_SUCCESS:
       //console.log(state.userProfile);
@@ -82,19 +82,19 @@ const userReducer = (state = initialState, action) => {
           ...state.userProfile,
           user: {
             email: action.payload.email,
-            name: action.payload.name,
-          },
+            name: action.payload.name
+          }
         },
         isLoading: false,
         isEditing: false,
-        error: "",
+        error: ""
       };
     case EDIT_USER_FAIL:
       return {
         ...state,
         isLoading: false,
         isEditing: false,
-        error: action.payload,
+        error: action.payload
       };
 
     // STRIPE SUBSCRIPTION REDUCERS
@@ -103,7 +103,7 @@ const userReducer = (state = initialState, action) => {
         ...state,
         // isLoading: true,
         paymentLoading: true,
-        error: "",
+        error: ""
       };
 
     case POST_SUBSCRIBE_SUCCESS:
@@ -116,34 +116,34 @@ const userReducer = (state = initialState, action) => {
       let update = {
         message: state.userProfile.message,
         user: {
-          userID: state.userProfile.user.userID,
-          accountTypeID: accountTypeID,
+          id: state.userProfile.user.id,
+          account_type_id: accountTypeID,
           email: state.userProfile.user.email,
           name: state.userProfile.user.name,
           stripe: state.userProfile.user.stripe,
-          notificationCount: state.userProfile.user.notificationCount,
+          notification_count: state.userProfile.user.notification_count
         },
-        trainingSeries: [...state.userProfile.trainingSeries],
+        trainingSeries: [...state.userProfile.trainingSeries]
       };
       return {
         ...state,
         // isLoading: false,
         paymentLoading: false,
-        userProfile: update,
+        userProfile: update
       };
     case POST_SUBSCRIBE_FAIL:
       return {
         ...state,
         // isLoading: false,
         paymentLoading: false,
-        error: action.payload,
+        error: action.payload
       };
     //REGISTER&SUBSCRIBE
     case POST_REGISTERSTRIPE_START:
       return {
         ...state,
         isLoading: true,
-        error: "",
+        error: ""
       };
 
     case POST_REGISTERSTRIPE_SUCCESS:
@@ -162,25 +162,25 @@ const userReducer = (state = initialState, action) => {
       let update3 = {
         message: state.userProfile.message,
         user: {
-          userID: state.userProfile.user.userID,
-          accountTypeID: accountTypeID2,
+          id: state.userProfile.user.id,
+          account_type_id: accountTypeID2,
           email: state.userProfile.user.email,
           name: state.userProfile.user.name,
           stripe: action.payload.id,
-          notificationCount: state.userProfile.user.notificationCount,
+          notification_count: state.userProfile.user.notification_count
         },
-        trainingSeries: [...state.userProfile.trainingSeries],
+        trainingSeries: [...state.userProfile.trainingSeries]
       };
       return {
         ...state,
         isLoading: false,
-        userProfile: update3,
+        userProfile: update3
       };
     case POST_REGISTERSTRIPE_FAIL:
       return {
         ...state,
         isLoading: false,
-        error: action.payload,
+        error: action.payload
       };
 
     // UNSUBSCRIPE
@@ -188,32 +188,32 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: true,
-        error: "",
+        error: ""
       };
 
     case POST_UNSUBSCRIBE_SUCCESS:
       let update2 = {
         message: state.userProfile.message,
         user: {
-          userID: state.userProfile.user.userID,
-          accountTypeID: 1,
+          id: state.userProfile.user.is,
+          account_type_id: 1,
           email: state.userProfile.user.email,
           name: state.userProfile.user.name,
           stripe: state.userProfile.user.stripe,
-          notificationCount: state.userProfile.user.notificationCount,
+          notification_count: state.userProfile.user.notification_count
         },
-        trainingSeries: [...state.userProfile.trainingSeries],
+        trainingSeries: [...state.userProfile.trainingSeries]
       };
       return {
         ...state,
         isLoading: false,
-        userProfile: update2,
+        userProfile: update2
       };
     case POST_UNSUBSCRIBE_FAIL:
       return {
         ...state,
         isLoading: false,
-        error: action.payload,
+        error: action.payload
       };
 
     default:
