@@ -9,12 +9,12 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLinkedin, faGithubSquare } from "@fortawesome/free-brands-svg-icons";
 
-import Logo from "../../../img/training-bot.png";
+import Logo from "img/training-bot.png";
 import AJ from "img/AJ.png";
-import Gannon from "../../../img/Gannon.png";
-import Nick from "../../../img/Nick.png";
-import Adam from "../../../img/Adam.png";
-import Tom from "../../../img/Tom.png";
+import Gannon from "img/Gannon.png";
+import Nick from "img/Nick.png";
+import Adam from "img/Adam.png";
+import Tom from "img/Tom.png";
 
 import { animateScroll as scroll } from "react-scroll";
 
