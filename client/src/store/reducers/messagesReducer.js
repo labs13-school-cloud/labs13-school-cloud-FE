@@ -20,7 +20,7 @@ import {
 } from "../actions";
 
 const initialState = {
-  message: [],
+  messages: [],
   newMessage: [],
   singleTrainingSeries: {},
   isLoading: false,
@@ -66,7 +66,7 @@ const messagesReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
-        message: action.payload
+        messages: action.payload
       };
     case GET_SINGLE_MESSAGE_FAIL:
       return {
@@ -103,7 +103,7 @@ const messagesReducer = (state = initialState, action) => {
       };
     case EDIT_MESSAGE_SUCCESS:
       const updatedMessages = state.messages.map(msg => {
-        if (message.id === action.payload.id) {
+        if (msg.id === action.payload.id) {
           return {
             ...msg,
             message_name: action.payload.message_name,

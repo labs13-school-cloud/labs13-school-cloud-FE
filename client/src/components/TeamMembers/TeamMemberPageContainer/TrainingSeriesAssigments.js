@@ -56,7 +56,7 @@ const TrainingSeriesAssignments = props => {
   const { classes } = props;
 
   const { teamMemberId } = props;
-  const { training_series_id } = props.trainingSeries;
+  const { id } = props.trainingSeries;
   // add hours to sendDate, formatting with moment ensures it displays properly on the FE
   const formattedStartDate = moment(props.trainingSeries.start_date)
     .add(1, "hours")
@@ -64,10 +64,10 @@ const TrainingSeriesAssignments = props => {
 
   // const handleDelete = e => {
   // 	e.preventDefault();
-  // 	props.deleteTeamMemberFromTrainingSeries(teamMemberId, trainingSeries_ID);
+  // 	props.deleteTeamMemberFromTrainingSeries(teamMemberId, id);
   // };
 
-  //console.log("***ASSIGNMENTS***", teamMemberId, trainingSeries_ID);
+  //console.log("***ASSIGNMENTS***", teamMemberId, id);
 
   return (
     <>
@@ -81,7 +81,7 @@ const TrainingSeriesAssignments = props => {
           <ListButtonContainer>
             <DeleteModal
               teamMemberId={teamMemberId}
-              trainingSeries_Id={trainingSeries_ID}
+              id={id}
               deleteType="removeMemberFromTS"
             />
           </ListButtonContainer>

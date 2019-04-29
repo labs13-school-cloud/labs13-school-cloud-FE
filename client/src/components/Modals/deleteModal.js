@@ -12,7 +12,7 @@ import { connect } from "react-redux";
 import {
   deleteTrainingSeries,
   deleteTeamMember,
-  deletePost,
+  deleteMessage,
   deleteUser,
   deleteTeamMemberFromTrainingSeries,
   getTextNotifications,
@@ -90,7 +90,7 @@ class TrainingSeriesModal extends React.Component {
   handleDelete = () => {
     switch (this.props.deleteType) {
       case "post":
-        this.props.deletePost(this.props.id);
+        this.props.deleteMessage(this.props.id);
         break;
       case "teamMember":
         this.props.deleteTeamMember(this.props.id, this.props.user_id);
@@ -101,7 +101,7 @@ class TrainingSeriesModal extends React.Component {
       case "removeMemberFromTS":
         this.props.deleteTeamMemberFromTrainingSeries(
           this.props.id,
-          this.props.training_series_id
+          this.props.id
         );
         break;
       case "trainingSeries":
@@ -191,7 +191,7 @@ const TrainingSeriesModalWrapped = withStyles(styles)(TrainingSeriesModal);
 export default connect(
   mapStateToProps,
   {
-    deletePost,
+    deleteMessage,
     deleteTeamMember,
     deleteUser,
     deleteTrainingSeries,

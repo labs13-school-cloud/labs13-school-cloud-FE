@@ -45,7 +45,7 @@ export const getTrainingSeriesMessages = id => dispatch => {
 export const getMessageById = id => dispatch => {
   dispatch({ type: GET_SINGLE_MESSAGE_START });
   axios
-    .get(`${process.env.REACT_APP_API}/api/posts/${id}`)
+    .get(`${process.env.REACT_APP_API}/api/messages/${id}`)
     .then(res =>
       dispatch({ type: GET_SINGLE_MESSAGE_SUCCESS, payload: res.data.message })
     )
@@ -55,9 +55,10 @@ export const getMessageById = id => dispatch => {
 // POST a new message
 export const createAMessage = (message, trainingSeriesID) => dispatch => {
   dispatch({ type: ADD_MESSAGE_START });
-  //console.log("post in createAPost", post);
+  console.log("new message: ", message);
+  console.log("tid: ", trainingSeriesID);
   axios
-    .post(`${process.env.REACT_APP_API}/api/posts`, message)
+    .post(`${process.env.REACT_APP_API}/api/messages`, message)
     .then(res =>
       dispatch({ type: ADD_MESSAGE_SUCCESS, payload: res.data.newMessage })
     )
@@ -73,7 +74,7 @@ export const editMessage = (id, updates) => dispatch => {
   //console.log(updates)
   dispatch({ type: EDIT_MESSAGE_START });
   axios
-    .put(`${process.env.REACT_APP_API}/api/posts/${id}`, updates)
+    .put(`${process.env.REACT_APP_API}/api/messages/${id}`, updates)
     .then(res =>
       dispatch({ type: EDIT_MESSAGE_SUCCESS, payload: res.data.updatedMessage })
     )
@@ -83,7 +84,7 @@ export const editMessage = (id, updates) => dispatch => {
 export const deleteMessage = id => dispatch => {
   dispatch({ type: DELETE_MESSAGE_START });
   axios
-    .delete(`${process.env.REACT_APP_API}/api/posts/${id}`)
+    .delete(`${process.env.REACT_APP_API}/api/messages/${id}`)
     .then(res => dispatch({ type: DELETE_MESSAGE_SUCCESS, payload: id }))
     .catch(err => dispatch({ type: DELETE_MESSAGE_FAIL, error: err }));
 };

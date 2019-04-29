@@ -84,6 +84,7 @@ class CreatePost extends React.Component {
   };
 
   componentDidMount() {
+    console.log(this.props.location.state);
     if (this.props.location.state.training_series_id) {
       this.setState({
         ...this.state,
@@ -248,7 +249,7 @@ export default connect(
   mapStateToProps,
   {
     getTrainingSeriesMessages,
-    createAPMessage,
+    createAMessage,
     editMessage,
     deleteMessage,
     getMessageById
