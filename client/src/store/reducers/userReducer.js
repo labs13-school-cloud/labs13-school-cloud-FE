@@ -108,20 +108,25 @@ const userReducer = (state = initialState, action) => {
 
 		case POST_SUBSCRIBE_SUCCESS:
 			let accountTypeID;
-			if (action.payload.plan.id === 'plan_EmJallrSdkqpPS') {
+			if (action.payload.plan.id === 'plan_EyjXqiSYXoKEXf') {
+				//Live = plan_Ex95NK1FuaNiWb
+				//Test = plan_EyjXqiSYXoKEXf
+
 				accountTypeID = 2;
-			} else if (action.payload.plan.id === 'plan_EmJaXZor4Ef3co') {
+			} else if (action.payload.plan.id === 'plan_EyjXEzjQkZf78d') {
+				//Live = plan_Ex955Zz8JE0ZuW
+				//Test = plan_EyjXEzjQkZf78d
 				accountTypeID = 3;
 			}
 			let update = {
 				message: state.userProfile.message,
 				user: {
-					id: state.userProfile.user.id,
-					account_type_id: accountTypeID,
+					userID: state.userProfile.user.userID,
+					accountTypeID: accountTypeID,
 					email: state.userProfile.user.email,
 					name: state.userProfile.user.name,
 					stripe: state.userProfile.user.stripe,
-					notification_count: state.userProfile.user.notification_count
+					notificationCount: state.userProfile.user.notificationCount
 				},
 				trainingSeries: [ ...state.userProfile.trainingSeries ]
 			};
@@ -147,23 +152,26 @@ const userReducer = (state = initialState, action) => {
 			};
 
 		case POST_REGISTERSTRIPE_SUCCESS:
-			//console.log("action.payload", action.payload);
 			let accountTypeID2;
-			if (action.payload.subscriptions.data[0].plan.id === 'plan_Ex95NK1FuaNiWb') {
+			if (action.payload.subscriptions.data[0].plan.id === 'plan_Ex955Zz8JE0ZuW') {
+				//Live = plan_Ex95NK1FuaNiWb
+				//Test = plan_EyjXqiSYXoKEXf
 				accountTypeID2 = 2;
-			} else if (action.payload.subscriptions.data[0].plan.id === 'plan_Ex955Zz8JE0ZuW') {
+			} else if (action.payload.subscriptions.data[0].plan.id === 'plan_EyjXEzjQkZf78d') {
+				//Live = plan_Ex955Zz8JE0ZuW
+				//Test = plan_EyjXEzjQkZf78d
 				accountTypeID2 = 3;
 			}
 
 			let update3 = {
 				message: state.userProfile.message,
 				user: {
-					id: state.userProfile.user.id,
-					account_type_id: accountTypeID2,
+					userID: state.userProfile.user.userID,
+					accountTypeID: accountTypeID2,
 					email: state.userProfile.user.email,
 					name: state.userProfile.user.name,
 					stripe: action.payload.id,
-					notification_count: state.userProfile.user.notification_count
+					notificationCount: state.userProfile.user.notificationCount
 				},
 				trainingSeries: [ ...state.userProfile.trainingSeries ]
 			};
@@ -191,12 +199,12 @@ const userReducer = (state = initialState, action) => {
 			let update2 = {
 				message: state.userProfile.message,
 				user: {
-					id: state.userProfile.user.is,
-					account_type_id: 1,
+					userID: state.userProfile.user.userID,
+					accountTypeID: 1,
 					email: state.userProfile.user.email,
 					name: state.userProfile.user.name,
 					stripe: state.userProfile.user.stripe,
-					notification_count: state.userProfile.user.notification_count
+					notificationCount: state.userProfile.user.notificationCount
 				},
 				trainingSeries: [ ...state.userProfile.trainingSeries ]
 			};

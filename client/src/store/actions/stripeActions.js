@@ -37,7 +37,6 @@ export const getPlans = () => (dispatch) => {
 		.catch((err) => dispatch({ type: GET_PLANS_FAIL, error: err }));
 };
 
-// not currently working
 export const getCustomersPlan = (stripe) => (dispatch) => {
 	dispatch({
 		type: GET_CUSTOMER_PLAN_START
@@ -100,6 +99,7 @@ export const submit = (token, name, email, userID, stripe, plan) => (dispatch) =
 	}
 };
 
+//Notes on what everything equals out to for debugging purposes.
 // const { name, email, userID, stripe } = this.props.user;
 // const { plan } = this.state;
 
