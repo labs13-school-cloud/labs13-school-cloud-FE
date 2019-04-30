@@ -31,7 +31,7 @@ import Authenticate from "../Misc/authenticate/authenticate";
 
 //State Management
 import { connect } from "react-redux";
-import { getUser } from "../../store/actions/userActions";
+import { getUser } from "store/actions/userActions";
 
 class Dashboard extends React.Component {
   state = {

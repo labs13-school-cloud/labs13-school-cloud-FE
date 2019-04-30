@@ -8,7 +8,7 @@ import { logout } from "../../Auth/Auth";
 import Authentication from "../Misc/authenticate/";
 
 //State Management
-import { getUser, editUser, deleteUser } from "../../store/actions/userActions";
+import { getUser, editUser, deleteUser } from "store/actions/userActions";
 
 //Styling
 import {
