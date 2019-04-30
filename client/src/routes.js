@@ -7,12 +7,10 @@ import thunk from "redux-thunk";
 import { Route, Router } from "react-router-dom";
 
 //Components
-import App from "./App";
-import Pricing from "./components/LandingPage/Pricing";
-import Team from "./components/LandingPage/Team";
-import DashboardView from "./components/Dashboard/DashboardView";
-//workbench components
-import TrainingSeriesTab from "./components/TrainingSeries/TrainingSeriesTab.js";
+import App from './App';
+import Pricing from './components/LandingPage/Pricing';
+import Team from './components/LandingPage/Team';
+import DashboardView from './components/Dashboard/DashboardView';
 
 //Callback
 import Callback from "./components/Callback/Callback.js";
