@@ -41,16 +41,18 @@ const baseUrl = `${process.env.REACT_APP_API}/api`;
 
 export const getTeamMembers = id => dispatch => {
   dispatch({ type: FETCH_TEAM_START });
+
   axios
     .get(`${baseUrl}/users/${id}/team-members`)
-    .then(res =>
-      dispatch({ type: FETCH_TEAM_SUCCESS, payload: res.data.members })
-    )
+    .then(res => {
+      console.log("team members being fethced: ", res.data);
+      dispatch({ type: FETCH_TEAM_SUCCESS, payload: res.data.members });
+    })
     .catch(err => dispatch({ type: FETCH_TEAM_FAIL, payload: err }));
 };
 
 export const addTeamMember = teamMember => dispatch => {
-  //console.log(teamMember)
+  console.log("member to be added: ", teamMember);
   dispatch({ type: ADD_MEMBER_START });
   axios
     .post(`${baseUrl}/team-members`, teamMember)
@@ -95,6 +97,8 @@ export const deleteTeamMember = (teamMemberID, userID) => dispatch => {
 
 export const getTeamMemberByID = id => dispatch => {
   dispatch({ type: FETCH_SINGLE_MEMBER_START });
+  console.log("ID of individual team member being fetched: ", id);
+
   axios
     .get(`${baseUrl}/team-members/${id}`)
     .then(res => {
