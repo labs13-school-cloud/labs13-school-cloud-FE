@@ -1,29 +1,29 @@
 // displays training series card
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { withRouter } from 'react-router';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { withRouter } from "react-router";
 //PropTypes
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
 //Styling
-import { withStyles } from '@material-ui/core/styles';
-import { ListItem, ListItemText } from '@material-ui/core/';
+import { withStyles } from "@material-ui/core/styles";
+import { ListItem, ListItemText } from "@material-ui/core/";
 
-import SlideDownModal from '../Modals/SlideDownModal';
+import SlideDownModal from "../Modals/SlideDownModal";
 
 //Customized Styling
 const styles = {
   listItem: {
-    width: '100%',
+    width: "100%",
     // marginTop: 10,
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    borderBottom: '1px solid #E8E9EB',
-    transition: 'background-color 0.3s',
-    '&:hover': {
-      cursor: 'pointer',
-      backgroundColor: 'whitesmoke'
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    borderBottom: "1px solid #E8E9EB",
+    transition: "background-color 0.3s",
+    "&:hover": {
+      cursor: "pointer",
+      backgroundColor: "whitesmoke"
       // "box-shadow": "0px 6px 15px -4px rgba(0,0,0,0.84)"
     }
   },
@@ -41,11 +41,7 @@ function SeriesCard(props) {
 
   async function getPostCount() {
     await axios
-      .get(
-        `${process.env.REACT_APP_API}/api/training-series/${
-          props.trainingSeriesID
-        }/posts`
-      )
+      .get(`${process.env.REACT_APP_API}/api/training-series/${props.id}/posts`)
       .then(res => {
         setPostLength(res.data.posts.length);
       })
@@ -57,7 +53,7 @@ function SeriesCard(props) {
     await axios
       .get(
         `${process.env.REACT_APP_API}/api/training-series/${
-          props.trainingSeriesID
+          props.id
         }/assignments`
       )
       .then(res => {
@@ -77,7 +73,7 @@ function SeriesCard(props) {
   const routeToTrainingSeriesPage = e => {
     e.preventDefault();
 
-    props.history.push(`home/training-series/${props.trainingSeriesID}`);
+    props.history.push(`home/training-series/${props.id}`);
   };
 
   return (

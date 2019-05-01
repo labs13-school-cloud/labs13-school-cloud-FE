@@ -75,7 +75,7 @@ class TeamMemberMenuBtn extends React.Component {
         >
           <MenuItem
             onClick={e =>
-              this.routeToMemberPage(e, this.props.teamMember.teamMemberID)
+              this.routeToMemberPage(e, this.props.teamMember.team_member_id)
             }
           >
             Manage
@@ -83,7 +83,7 @@ class TeamMemberMenuBtn extends React.Component {
           <MenuItem>
             <DeleteModal
               deleteType="teamMember"
-              id={this.props.teamMember.teamMemberID}
+              id={this.props.teamMember.team_member_id}
             />
           </MenuItem>
         </Menu>

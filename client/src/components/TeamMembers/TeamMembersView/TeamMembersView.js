@@ -130,7 +130,7 @@ class TeamMembersView extends React.Component {
       distance: 100,
       maxPatternLength: 32,
       minMatchCharLength: 3,
-      keys: ["firstName", "lastName", "jobDescripton"]
+      keys: ["first_name", "last_name", "job_descripton"]
     };
 
     const fuse = new Fuse(team, options);
@@ -169,7 +169,7 @@ class TeamMembersView extends React.Component {
             deleteTeamMember={this.deleteMember}
             limit={this.state.limit}
             offset={this.state.offset}
-            userId={this.props.userId}
+            userId={this.props.user_id}
           />
         </Suspense>
       );

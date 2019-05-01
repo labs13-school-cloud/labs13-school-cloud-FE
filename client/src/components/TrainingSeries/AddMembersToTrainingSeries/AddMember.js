@@ -6,7 +6,12 @@ import DatePicker from "react-datepicker";
 //Styles
 import "react-datepicker/dist/react-datepicker.css";
 import { withStyles } from "@material-ui/core/styles";
-import {Button,Typography,Checkbox,FormControlLabel} from "@material-ui/core/";
+import {
+  Button,
+  Typography,
+  Checkbox,
+  FormControlLabel
+} from "@material-ui/core/";
 import styled from "styled-components";
 
 //Icons & Images
@@ -81,11 +86,11 @@ function AddMember(props) {
   const renderMembers = () => {
     //Map Through the current assignments for the team member, returns an array of ID's
     let assignments = props.assignments.map(
-      assignment => assignment.teamMember_ID
+      assignment => assignment.team_member_id
     );
     //Filters the trainingSeries based on assignments
     let filteredMembers = props.teamMembers.filter(member => {
-      return !assignments.includes(member.teamMemberID);
+      return !assignments.includes(member.team_member_id);
     });
     return filteredMembers.map(member => (
       <>
@@ -93,11 +98,13 @@ function AddMember(props) {
           control={
             <Checkbox
               className={classes.box}
-              name={member.teamMemberID}
-              onChange={() => props.handler.handleChecked(member.teamMemberID)}
+              name={member.team_member_id}
+              onChange={() =>
+                props.handler.handleChecked(member.team_member_id)
+              }
             />
           }
-          label={`${member.firstName} ${member.lastName}`}
+          label={`${member.first_name} ${member.last_name}`}
         />
       </>
     ));

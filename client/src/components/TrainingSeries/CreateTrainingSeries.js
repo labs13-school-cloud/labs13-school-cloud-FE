@@ -75,7 +75,7 @@ class CreateTrainingSeries extends React.Component {
 
   handleTrainingSeriesSubmit = e => {
     e.preventDefault();
-    const data = { title: this.state.title, userID: this.props.userId };
+    const data = { title: this.state.title, user_id: this.props.userId };
     this.props.addTrainingSeries(data);
 
     this.setState({ isRouting: true });

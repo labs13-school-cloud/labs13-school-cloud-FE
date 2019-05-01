@@ -1,10 +1,10 @@
-import React from 'react';
+import React from "react";
 //Prop Types
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
 //Styles
 
-import EditIcon from '@material-ui/icons/Edit';
+import EditIcon from "@material-ui/icons/Edit";
 import {
   Button,
   Typography,
@@ -12,11 +12,11 @@ import {
   Modal,
   TextField,
   IconButton
-} from '@material-ui/core';
+} from "@material-ui/core";
 
 //Redux
-import { connect } from 'react-redux';
-import { editUser } from 'store/actions/';
+import { connect } from "react-redux";
+import { editUser } from "store/actions/";
 
 function getModalStyle() {
   const top = 50;
@@ -31,16 +31,16 @@ function getModalStyle() {
 
 const styles = theme => ({
   paper: {
-    position: 'absolute',
+    position: "absolute",
     width: theme.spacing.unit * 25,
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
     padding: theme.spacing.unit * 4,
-    outline: 'none'
+    outline: "none"
   },
   container: {
-    display: 'flex',
-    flexWrap: 'wrap'
+    display: "flex",
+    flexWrap: "wrap"
   },
   textField: {
     marginLeft: theme.spacing.unit,
@@ -61,8 +61,8 @@ const styles = theme => ({
 class UserModal extends React.Component {
   state = {
     open: false,
-    email: '',
-    name: ''
+    email: "",
+    name: ""
   };
 
   componentDidMount() {
@@ -108,7 +108,8 @@ class UserModal extends React.Component {
           aria-labelledby="simple-modal-title"
           aria-describedby="simple-modal-description"
           open={this.state.open}
-          onClose={this.handleClose}>
+          onClose={this.handleClose}
+        >
           <div style={getModalStyle()} className={classes.paper}>
             <Typography variant="h6" id="modal-title">
               Edit your Information
@@ -117,13 +118,14 @@ class UserModal extends React.Component {
               onSubmit={e => this.handleUserInformationSubmit(e)}
               className={classes.container}
               noValidate
-              autoComplete="off">
+              autoComplete="off"
+            >
               <TextField
                 id="standard-name"
                 label="Email"
                 className={classes.textField}
                 value={this.state.email}
-                onChange={this.handleChange('email')}
+                onChange={this.handleChange("email")}
                 margin="normal"
               />
               <TextField
@@ -131,14 +133,15 @@ class UserModal extends React.Component {
                 label="Name"
                 className={classes.textField}
                 value={this.state.name}
-                onChange={this.handleChange('name')}
+                onChange={this.handleChange("name")}
                 margin="normal"
               />
 
               <Button
                 type="submit"
                 variant="contained"
-                className={classes.button}>
+                className={classes.button}
+              >
                 Submit
               </Button>
             </form>

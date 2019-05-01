@@ -62,41 +62,36 @@ const TrainingSeriesTab = props => {
                 )
             }}
         />
-        
-        {exampleTrainingSeries
-        .filter(series => series.title.toUpperCase().includes(searchValue.toUpperCase()))
-        .map(series => {
-            return(
-                <Series
-                onClick={e => {
-                    props.history.push(`/home/training-series/${series.id}`);
-                }}
-                >
-                    <Grid container spacing={24}>
-                        <Grid item xs={12}>
-                            <Typography variant="h6">{series.title}</Typography>
-                            <hr/>
-                        </Grid>
-                        <Grid item xs={6}>
-                            <Typography style={{color: "gray"}} variant="caption">{series.description}</Typography>
-                        </Grid>
+			{exampleTrainingSeries.map((series) => {
+				return (
+					<Series>
+						<Grid container spacing={24}>
+							<Grid item xs={12}>
+								<Typography variant="h6">{series.title}</Typography>
+								<hr />
+							</Grid>
+							<Grid item xs={6}>
+								<Typography style={{ color: 'gray' }} variant="caption">
+									{series.description}
+								</Typography>
+							</Grid>
 
-                        <Grid item xs={6} align="center">
-                            <Grid item>
-                                <Typography variant="overline">messages: {series.posts.length}</Typography>
-                            </Grid>
-                            <Grid item>
-                                <Typography variant="overline">assigned: {series.teamMembers.length}</Typography>
-                            </Grid>
-                        </Grid>
-
-                    </Grid>
-                </Series>
-            );
-        })}
-    </Wrapper>
-  )
-}
+							<Grid item xs={6} align="center">
+								<Grid item>
+									<Typography variant="overline">messages: {series.posts.length}</Typography>
+								</Grid>
+								<Grid item>
+									<Typography variant="overline">assigned: {series.teamMembers.length}</Typography>
+								</Grid>
+							</Grid>
+						</Grid>
+					</Series>
+				);
+			})}
+			
+		</Wrapper>
+	);
+};
 
 
 const mapStateToProps = state => {
@@ -111,8 +106,8 @@ const Wrapper = styled(Paper)`
 `;
 
 const HeaderWrapper = styled.div`
-    display: flex;
-    align-items: center;
+	display: flex;
+	align-items: center;
 `;
 
 const Series = styled(Paper)`
@@ -125,187 +120,176 @@ const Series = styled(Paper)`
     }
 `;
 
+export default connect()(TrainingSeriesTab);
 
-            //Just some bs info until we get everything hooked up...
+//Just some bs info until we get everything hooked up...
 const exampleTrainingSeries = [
-    {
-        title: "example series 1",
-        description: "random description of the training series that explains in short what it is and such....",
-        posts: [
-            {
-                postName: "example post 1",
-                postDetails: "some random details about the post...",
-                link: "aasdf",
-                daysFromStart: 1,
-                postimage: null
-            },
-            {
-                postName: "example post 2",
-                postDetails: "some random details about the post thats super long some random details about the post thats super long some random details about the post thats super long some random details about the post thats super long some random details about the post thats super long some random details about the post thats super long some random details about the post thats super long some random details about the post thats super long...",
-                link: "aasdf",
-                daysFromStart: 2,
-                postimage: null
-            },
-            {
-                postName: "example post 3",
-                postDetails: "asdfsadf",
-                link: "aasdf",
-                daysFromStart: 2,
-                postimage: null
-            }
-        ],
-        teamMembers: [ //could realistically grab them by 
-                        //ID from state or whatever but just for save of seeing what it looks like...
-            {
-                firstName: "Tom",
-                lastName: "Hessburg",
-                email: "tom@email.com",
-                jobDescription: "does nothing all day, essentially...",
-                slackID: "asdfasdfasdfasdf",
-                teamsID: "asdfadsfsadf",
-                phoneNumber: "352-636-5809",
-                trainingSeries: [
-                    "series1",
-                    "series2"
-                ],
-                manager: "Adam McKenney",
-                mentor: "Nick Cannariato"
-            },
-            {
-                firstName: "Tom",
-                lastName: "Hessburg",
-                email: "tom@email.com",
-                jobDescription: "does nothing all day, essentially...",
-                slackID: "asdfasdfasdfasdf",
-                teamsID: "asdfadsfsadf",
-                phoneNumber: "352-636-5809",
-                trainingSeries: [
-                    "series1",
-                    "series2"
-                ],
-                manager: "Adam McKenney",
-                mentor: "Nick Cannariato"
-            }
-        ]
-    },
-    {
-        title: "example series 2",
-        description: "random description of the training series that explains in short what it is and such....",
-        posts: [
-            {
-                postName: "example post 1",
-                postDetails: "some random details about the post...",
-                link: "aasdf",
-                daysFromStart: 1,
-                postimage: null
-            },
-            {
-                postName: "example post 2",
-                postDetails: "some random details about the post thats super long some random details about the post thats super long some random details about the post thats super long some random details about the post thats super long some random details about the post thats super long some random details about the post thats super long some random details about the post thats super long some random details about the post thats super long...",
-                link: "aasdf",
-                daysFromStart: 2,
-                postimage: null
-            },
-            {
-                postName: "example post 3",
-                postDetails: "asdfsadf",
-                link: "aasdf",
-                daysFromStart: 2,
-                postimage: null
-            }
-        ],
-        teamMembers: [ //could realistically grab them by 
-                        //ID from state or whatever but just for save of seeing what it looks like...
-            {
-                firstName: "Tom",
-                lastName: "Hessburg",
-                email: "tom@email.com",
-                jobDescription: "does nothing all day, essentially...",
-                slackID: "asdfasdfasdfasdf",
-                teamsID: "asdfadsfsadf",
-                phoneNumber: "352-636-5809",
-                trainingSeries: [
-                    "series1",
-                    "series2"
-                ],
-                manager: "Adam McKenney",
-                mentor: "Nick Cannariato"
-            },
-            {
-                firstName: "Tom",
-                lastName: "Hessburg",
-                email: "tom@email.com",
-                jobDescription: "does nothing all day, essentially...",
-                slackID: "asdfasdfasdfasdf",
-                teamsID: "asdfadsfsadf",
-                phoneNumber: "352-636-5809",
-                trainingSeries: [
-                    "series1",
-                    "series2"
-                ],
-                manager: "Adam McKenney",
-                mentor: "Nick Cannariato"
-            }
-        ]
-    },
-    {
-        title: "example series 3",
-        description: "random description of the training series that explains in short what it is and such....",
-        posts: [
-            {
-                postName: "example post 1",
-                postDetails: "some random details about the post...",
-                link: "aasdf",
-                daysFromStart: 1,
-                postimage: null
-            },
-            {
-                postName: "example post 2",
-                postDetails: "some random details about the post thats super long some random details about the post thats super long some random details about the post thats super long some random details about the post thats super long some random details about the post thats super long some random details about the post thats super long some random details about the post thats super long some random details about the post thats super long...",
-                link: "aasdf",
-                daysFromStart: 2,
-                postimage: null
-            },
-            {
-                postName: "example post 3",
-                postDetails: "asdfsadf",
-                link: "aasdf",
-                daysFromStart: 2,
-                postimage: null
-            }
-        ],
-        teamMembers: [ //could realistically grab them by 
-                        //ID from state or whatever but just for save of seeing what it looks like...
-            {
-                firstName: "Tom",
-                lastName: "Hessburg",
-                email: "tom@email.com",
-                jobDescription: "does nothing all day, essentially...",
-                slackID: "asdfasdfasdfasdf",
-                teamsID: "asdfadsfsadf",
-                phoneNumber: "352-636-5809",
-                trainingSeries: [
-                    "series1",
-                    "series2"
-                ],
-                manager: "Adam McKenney",
-                mentor: "Nick Cannariato"
-            },
-            {
-                firstName: "Tom",
-                lastName: "Hessburg",
-                email: "tom@email.com",
-                jobDescription: "does nothing all day, essentially...",
-                slackID: "asdfasdfasdfasdf",
-                teamsID: "asdfadsfsadf",
-                phoneNumber: "352-636-5809",
-                trainingSeries: [
-                    "series1",
-                    "series2"
-                ],
-                manager: "Adam McKenney",
-                mentor: "Nick Cannariato"
-            }
-        ]
-    }
-]
+	{
+		title: 'example series 1',
+		description: 'random description of the training series that explains in short what it is and such....',
+		posts: [
+			{
+				postName: 'example post 1',
+				postDetails: 'some random details about the post...',
+				link: 'aasdf',
+				daysFromStart: 1,
+				postimage: null
+			},
+			{
+				postName: 'example post 2',
+				postDetails:
+					'some random details about the post thats super long some random details about the post thats super long some random details about the post thats super long some random details about the post thats super long some random details about the post thats super long some random details about the post thats super long some random details about the post thats super long some random details about the post thats super long...',
+				link: 'aasdf',
+				daysFromStart: 2,
+				postimage: null
+			},
+			{
+				postName: 'example post 3',
+				postDetails: 'asdfsadf',
+				link: 'aasdf',
+				daysFromStart: 2,
+				postimage: null
+			}
+		],
+		teamMembers: [
+			//could realistically grab them by
+			//ID from state or whatever but just for save of seeing what it looks like...
+			{
+				firstName: 'Tom',
+				lastName: 'Hessburg',
+				email: 'tom@email.com',
+				jobDescription: 'does nothing all day, essentially...',
+				slackID: 'asdfasdfasdfasdf',
+				teamsID: 'asdfadsfsadf',
+				phoneNumber: '352-636-5809',
+				trainingSeries: [ 'series1', 'series2' ],
+				manager: 'Adam McKenney',
+				mentor: 'Nick Cannariato'
+			},
+			{
+				firstName: 'Tom',
+				lastName: 'Hessburg',
+				email: 'tom@email.com',
+				jobDescription: 'does nothing all day, essentially...',
+				slackID: 'asdfasdfasdfasdf',
+				teamsID: 'asdfadsfsadf',
+				phoneNumber: '352-636-5809',
+				trainingSeries: [ 'series1', 'series2' ],
+				manager: 'Adam McKenney',
+				mentor: 'Nick Cannariato'
+			}
+		]
+	},
+	{
+		title: 'example series 2',
+		description: 'random description of the training series that explains in short what it is and such....',
+		posts: [
+			{
+				postName: 'example post 1',
+				postDetails: 'some random details about the post...',
+				link: 'aasdf',
+				daysFromStart: 1,
+				postimage: null
+			},
+			{
+				postName: 'example post 2',
+				postDetails:
+					'some random details about the post thats super long some random details about the post thats super long some random details about the post thats super long some random details about the post thats super long some random details about the post thats super long some random details about the post thats super long some random details about the post thats super long some random details about the post thats super long...',
+				link: 'aasdf',
+				daysFromStart: 2,
+				postimage: null
+			},
+			{
+				postName: 'example post 3',
+				postDetails: 'asdfsadf',
+				link: 'aasdf',
+				daysFromStart: 2,
+				postimage: null
+			}
+		],
+		teamMembers: [
+			//could realistically grab them by
+			//ID from state or whatever but just for save of seeing what it looks like...
+			{
+				firstName: 'Tom',
+				lastName: 'Hessburg',
+				email: 'tom@email.com',
+				jobDescription: 'does nothing all day, essentially...',
+				slackID: 'asdfasdfasdfasdf',
+				teamsID: 'asdfadsfsadf',
+				phoneNumber: '352-636-5809',
+				trainingSeries: [ 'series1', 'series2' ],
+				manager: 'Adam McKenney',
+				mentor: 'Nick Cannariato'
+			},
+			{
+				firstName: 'Tom',
+				lastName: 'Hessburg',
+				email: 'tom@email.com',
+				jobDescription: 'does nothing all day, essentially...',
+				slackID: 'asdfasdfasdfasdf',
+				teamsID: 'asdfadsfsadf',
+				phoneNumber: '352-636-5809',
+				trainingSeries: [ 'series1', 'series2' ],
+				manager: 'Adam McKenney',
+				mentor: 'Nick Cannariato'
+			}
+		]
+	},
+	{
+		title: 'example series 3',
+		description: 'random description of the training series that explains in short what it is and such....',
+		posts: [
+			{
+				postName: 'example post 1',
+				postDetails: 'some random details about the post...',
+				link: 'aasdf',
+				daysFromStart: 1,
+				postimage: null
+			},
+			{
+				postName: 'example post 2',
+				postDetails:
+					'some random details about the post thats super long some random details about the post thats super long some random details about the post thats super long some random details about the post thats super long some random details about the post thats super long some random details about the post thats super long some random details about the post thats super long some random details about the post thats super long...',
+				link: 'aasdf',
+				daysFromStart: 2,
+				postimage: null
+			},
+			{
+				postName: 'example post 3',
+				postDetails: 'asdfsadf',
+				link: 'aasdf',
+				daysFromStart: 2,
+				postimage: null
+			}
+		],
+		teamMembers: [
+			//could realistically grab them by
+			//ID from state or whatever but just for save of seeing what it looks like...
+			{
+				firstName: 'Tom',
+				lastName: 'Hessburg',
+				email: 'tom@email.com',
+				jobDescription: 'does nothing all day, essentially...',
+				slackID: 'asdfasdfasdfasdf',
+				teamsID: 'asdfadsfsadf',
+				phoneNumber: '352-636-5809',
+				trainingSeries: [ 'series1', 'series2' ],
+				manager: 'Adam McKenney',
+				mentor: 'Nick Cannariato'
+			},
+			{
+				firstName: 'Tom',
+				lastName: 'Hessburg',
+				email: 'tom@email.com',
+				jobDescription: 'does nothing all day, essentially...',
+				slackID: 'asdfasdfasdfasdf',
+				teamsID: 'asdfadsfsadf',
+				phoneNumber: '352-636-5809',
+				trainingSeries: [ 'series1', 'series2' ],
+				manager: 'Adam McKenney',
+				mentor: 'Nick Cannariato'
+			}
+		]
+	}
+];
