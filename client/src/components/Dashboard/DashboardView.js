@@ -6,7 +6,7 @@ import history from "../../history.js";
 
 //Styling
 import { TripleColumn, SmallColumns, DashboardContainer } from "./styles.js";
-
+ 
 //Components
 import TeamMembersView from "../TeamMembers/TeamMembersView";
 import TrainingSeriesView from "../TrainingSeries/TrainingSeriesView";
