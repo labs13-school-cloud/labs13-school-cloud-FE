@@ -10,6 +10,7 @@ import { connect } from "react-redux";
 import AddMember from "./AddMember";
 
 //Styles
+<<<<<<< HEAD
 import {
   addTeamMemberToTrainingSeries,
   getTeamMembers,
@@ -51,47 +52,86 @@ class AddMembersView extends Component {
       limit: 5
     };
   }
+=======
+import { addTeamMemberToTrainingSeries, getTeamMembers, getMembersAssigned } from 'store/actions/';
 
-  componentDidMount() {
-    this.props.getTeamMembers(this.props.userId);
-    this.getAssigned();
-    let d = new Date();
-    let formattedDate = d.toISOString();
-    this.setState({
-      trainingSeriesID: this.props.match.params.id,
-      startDate: formattedDate
-    });
-  }
+const styles = (theme) => ({
+	root: {
+		width: '100%',
+		maxWidth: 768,
+		margin: '20px auto',
+		boxSizing: 'border-box',
+		backgroundColor: theme.palette.background.paper,
+		boxShadow: theme.shadows[5],
+		padding: '20px 30px 40px',
+		outline: 'none',
+		'@media (max-width:768px)': {
+			width: '95%'
+		}
+	},
+	footer: {
+		display: 'flex',
+		justifyContent: 'space-between',
+		position: 'sticky',
+		top: '100%'
+	},
+	pagination: { width: '90%' }
+});
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.isEditing) {
-      this.setState({ email: this.props.email, name: this.props.name });
-    }
-  }
-  handleClick(offset) {
-    this.setState({ offset });
-  }
-  getAssigned = () => {
-    this.props.getMembersAssigned(this.props.match.params.id);
-  };
+class AddMembersView extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			trainingSeriesID: '',
+			startDate: '',
+			selectedTeamMembers: [],
+			isRouting: false,
+			offset: 0,
+			limit: 5
+		};
+	}
+>>>>>>> master
 
-  render() {
-    const { classes } = this.props;
-    return (
-      <Paper className={classes.root} elevation={1}>
-        <AddMember
-          startDate={this.state.startDate}
-          teamMembers={this.props.teamMembers}
-          selectedTeamMembers={this.state.selectedTeamMembers}
-          assignments={this.props.assignments}
-          handler={this.handler}
-          isRouting={this.state.isRouting}
-          limit={this.state.limit}
-          offset={this.state.offset}
-        />
-      </Paper>
-    );
-  }
+	componentDidMount() {
+		this.props.getTeamMembers(this.props.userId);
+		this.getAssigned();
+		let d = new Date();
+		let formattedDate = d.toISOString();
+		this.setState({
+			trainingSeriesID: this.props.match.params.id,
+			startDate: formattedDate
+		});
+	}
+
+	componentDidUpdate(prevProps) {
+		if (prevProps.isEditing) {
+			this.setState({ email: this.props.email, name: this.props.name });
+		}
+	}
+	handleClick(offset) {
+		this.setState({ offset });
+	}
+	getAssigned = () => {
+		this.props.getMembersAssigned(this.props.match.params.id);
+	};
+
+	render() {
+		const { classes } = this.props;
+		return (
+			<Paper className={classes.root} elevation={1}>
+				<AddMember
+					startDate={this.state.startDate}
+					teamMembers={this.props.teamMembers}
+					selectedTeamMembers={this.state.selectedTeamMembers}
+					assignments={this.props.assignments}
+					handler={this.handler}
+					isRouting={this.state.isRouting}
+					limit={this.state.limit}
+					offset={this.state.offset}
+				/>
+			</Paper>
+		);
+	}
 
   handler = {
     handleDateChange: date => {
@@ -139,23 +179,20 @@ class AddMembersView extends Component {
 }
 
 AddMembersView.propTypes = {
-  classes: PropTypes.object.isRequired
+	classes: PropTypes.object.isRequired
 };
 
-const mapStateToProps = state => {
-  return {
-    trainingSeries: state.trainingSeriesReducer.trainingSeries,
-    isLoading: state.userReducer.isLoading,
-    teamMembers: state.teamMembersReducer.teamMembers,
-    assignments: state.trainingSeriesReducer.assignments
-  };
+const mapStateToProps = (state) => {
+	return {
+		trainingSeries: state.trainingSeriesReducer.trainingSeries,
+		isLoading: state.userReducer.isLoading,
+		teamMembers: state.teamMembersReducer.teamMembers,
+		assignments: state.trainingSeriesReducer.assignments
+	};
 };
 
-export default connect(
-  mapStateToProps,
-  {
-    addTeamMemberToTrainingSeries,
-    getTeamMembers,
-    getMembersAssigned
-  }
-)(withStyles(styles)(AddMembersView));
+export default connect(mapStateToProps, {
+	addTeamMemberToTrainingSeries,
+	getTeamMembers,
+	getMembersAssigned
+})(withStyles(styles)(AddMembersView));

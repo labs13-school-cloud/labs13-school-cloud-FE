@@ -1,16 +1,16 @@
-import React from "react";
+import React from 'react';
 
-import { connect } from "react-redux";
-import { withRouter } from "react-router";
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
 
-import styled from "styled-components";
+import styled from 'styled-components';
 
 // Material UI
-import { withStyles } from "@material-ui/core/styles";
-import Paper from "@material-ui/core/Paper";
-import Typography from "@material-ui/core/Typography";
-import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
+import { withStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 
 //Components
 
@@ -20,7 +20,7 @@ import {
   editMessage,
   deleteMessage,
   getMessageById
-} from "../../store/actions";
+} from "store/actions";
 
 const styles = theme => ({
   root: {
@@ -204,30 +204,31 @@ class PostPage extends React.Component {
 }
 
 const MainContainer = styled.div`
-  margin: 0 auto;
-  width: 80%;
+	margin: 0 auto;
+	width: 80%;
 `;
 
 const PostContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: baseline;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: baseline;
 `;
 
 const ButtonContainer = styled.div`
-  display: flex;
-  margin-top: 10px;
-  justify-content: center;
+	display: flex;
+	margin-top: 10px;
+	justify-content: center;
 `;
 
-const mapStateToProps = state => {
-  return {
-    addSuccess: state.teamMembersReducer.status.addSuccess,
-    teamMember: state.teamMembersReducer.teamMember
-  };
+const mapStateToProps = (state) => {
+	return {
+		addSuccess: state.teamMembersReducer.status.addSuccess,
+		teamMember: state.teamMembersReducer.teamMember
+	};
 };
 
+<<<<<<< HEAD
 export default connect(
   mapStateToProps,
   {
@@ -238,3 +239,12 @@ export default connect(
     getMessageById
   }
 )(withStyles(styles)(withRouter(PostPage)));
+=======
+export default connect(mapStateToProps, {
+	getTrainingSeriesMessages,
+	createAMessage,
+	editMessage,
+	deleteMessage,
+	getMessageById
+})(withStyles(styles)(withRouter(PostPage)));
+>>>>>>> master

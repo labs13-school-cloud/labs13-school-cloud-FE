@@ -1,36 +1,67 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react'
 import { connect } from 'react-redux';
 
-import Pagination from 'material-ui-flat-pagination';
+        //style related imports
+//simport Pagination from 'material-ui-flat-pagination';
 import Grid from '@material-ui/core/Grid';
-
 import styled from 'styled-components';
+import {
+    Paper,
+    Typography,
+    Fab,
+    TextField,
+    InputAdornment
+} from '@material-ui/core/';
 
-import { Paper, Typography, Fab, TextField, InputAdornment } from '@material-ui/core/';
+        //functional related imports
+import {
+    getTrainingSeries,
+    deleteTrainingSeries,
+    getMembersAssigned
+} from '../../store/actions';
 
-const TrainingSeriesTab = () => {
-	return (
-		<Wrapper>
-			<HeaderWrapper>
-				<Typography variant="h6">Training Series</Typography>
-				<Fab size="small" aria-label="Add" style={{ margin: '0 10px', background: '#451476', color: 'white' }}>
-					<i className="material-icons">add</i>
-				</Fab>
-			</HeaderWrapper>
+const TrainingSeriesTab = props => {
 
-			<TextField
-				fullWidth
-				type="search"
-				margin="normal"
-				InputProps={{
-					startAdornment: (
-						<InputAdornment position="start">
-							<i className="material-icons">search</i>
-						</InputAdornment>
-					)
-				}}
-			/>
+    const [searchValue, setSearchValue] = useState('');
 
+    useEffect(() => {
+        console.log(props)
+    },[])
+
+  return (
+    <Wrapper>
+        <HeaderWrapper>
+            <Typography
+                variant="h6"
+            >
+                Training Series
+            </Typography>
+            <Fab
+                size="small"
+                onClick={e => {
+                    props.history.push('/home/create-training-series');
+                }}
+                aria-label="Add"
+                style={{margin: "0 10px", background: "#451476", color: "white"}}
+            >
+                <i className="material-icons">add</i>
+            </Fab>
+        </HeaderWrapper>
+        
+        <TextField
+            value={searchValue}
+            onChange={e => setSearchValue(e.target.value)}
+            fullWidth
+            type="search"
+            margin="normal"
+            InputProps={{
+                startAdornment: (
+                <InputAdornment position="start">
+                    <i className="material-icons">search</i>
+                </InputAdornment>
+                )
+            }}
+        />
 			{exampleTrainingSeries.map((series) => {
 				return (
 					<Series>
@@ -57,14 +88,21 @@ const TrainingSeriesTab = () => {
 					</Series>
 				);
 			})}
+			
 		</Wrapper>
 	);
 };
 
+
+const mapStateToProps = state => {
+    return state.trainingSeriesReducer; //just going to leave this as is for now. can cherry pick what we need once im actually putting it together.
+}
+export default connect(mapStateToProps, { getTrainingSeries, deleteTrainingSeries, getMembersAssigned })(TrainingSeriesTab);
+
 const Wrapper = styled(Paper)`
-width: 70%;
-padding: 10px;
-margin: 10px auto;
+    width: 70%;
+    padding: 10px;
+    margin: 10px auto;
 `;
 
 const HeaderWrapper = styled.div`
@@ -73,9 +111,13 @@ const HeaderWrapper = styled.div`
 `;
 
 const Series = styled(Paper)`
-width: 90%;
-margin: 10px auto;
-padding: 20px;
+    width: 90%;
+    margin: 10px auto;
+    padding: 20px;
+    cursor: pointer;
+    &:hover{
+        background: #F8F8F8;
+    }
 `;
 
 export default connect()(TrainingSeriesTab);

@@ -141,9 +141,9 @@ class PostModal extends React.Component {
   handlePostSubmit = e => {
     e.preventDefault();
     if (this.props.modalType === "edit") {
-      this.props.editPost(this.props.message.id, this.state.message);
+      this.props.editMessage(this.props.message.id, this.state.message);
     } else {
-      this.props.createAPost(this.state.message);
+      this.props.createAMessage(this.state.message);
       this.clearForm();
     }
     this.handleClose();

@@ -16,7 +16,7 @@ import InputLabel from "@material-ui/core/InputLabel";
 
 //Redux
 import { connect } from "react-redux";
-import { addTeamMemberToTrainingSeries } from "../../../store/actions/";
+import { addTeamMemberToTrainingSeries } from "store/actions/";
 
 const styles = theme => ({
   paper: {

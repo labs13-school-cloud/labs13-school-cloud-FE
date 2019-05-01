@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 //Prop Types
 import PropTypes from "prop-types";
 
-import { editTeamMember } from "../../store/actions";
+import { editTeamMember } from "store/actions";
 
 //Styles
 import { withStyles } from "@material-ui/core/styles";

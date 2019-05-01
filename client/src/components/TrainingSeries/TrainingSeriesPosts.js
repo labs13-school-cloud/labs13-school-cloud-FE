@@ -20,7 +20,7 @@ import {
   deleteMessage,
   getMembersAssigned,
   editTrainingSeries
-} from "../../store/actions";
+} from "store/actions";
 
 import { withStyles } from "@material-ui/core/styles";
 
@@ -185,7 +185,7 @@ class TrainingSeriesPosts extends React.Component {
     this.props.getTrainingSeriesMessages(id);
   };
 
-  deletePost = (e, id) => {
+  deleteMessage = (e, id) => {
     e.preventDefault();
     this.props.deleteMessage(id);
   };
@@ -199,7 +199,7 @@ class TrainingSeriesPosts extends React.Component {
     });
   };
 
-  routeToEditPostPage = (e, post) => {
+  routeToeditMessagePage = (e, post) => {
     e.preventDefault();
     this.props.history.push({
       pathname: `/home/post/${post.id}`,
@@ -469,7 +469,7 @@ class TrainingSeriesPosts extends React.Component {
                         primary={post.message_name}
                         secondary={post.message_details}
                         className={classes.listItemText}
-                        onClick={e => this.routeToEditPostPage(e, post)}
+                        onClick={e => this.routeToeditMessagePage(e, post)}
                       />
                       <ListItemSecondaryAction
                         className={classes.secondaryAction}
@@ -480,7 +480,7 @@ class TrainingSeriesPosts extends React.Component {
                         <ListButtonContainer>
                           <i
                             className={`material-icons ${classes.icons}`}
-                            onClick={e => this.routeToEditPostPage(e, post)}
+                            onClick={e => this.routeToEditMessagePage(e, post)}
                           >
                             edit
                           </i>

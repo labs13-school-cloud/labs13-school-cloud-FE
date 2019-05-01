@@ -1,4 +1,5 @@
 import axios from 'axios';
+// import { Http2SecureServer } from 'http2';
 
 // GET POSTS
 export const GET_PLANS_START = 'GET_PLANS_START';
@@ -21,54 +22,53 @@ export const POST_REGISTERSTRIPE_START = 'POST_REGISTERSTRIPE_START';
 export const POST_REGISTERSTRIPE_SUCCESS = 'POST_REGISTERSTRIPE_SUCCESS';
 export const POST_REGISTERSTRIPE_FAIL = 'POST_REGISTERSTRIPE_FAIL';
 
-export const getPlans = () => dispatch => {
+export const getPlans = () => (dispatch) => {
 	dispatch({
-		type: GET_PLANS_START,
+		type: GET_PLANS_START
 	});
 	axios
 		.get(`${process.env.REACT_APP_API}/api/stripe/plans`)
-		.then(res =>
+		.then((res) =>
 			dispatch({
 				type: GET_PLANS_SUCCESS,
-				payload: res.data,
+				payload: res.data
 			})
 		)
-		.catch(err => dispatch({ type: GET_PLANS_FAIL, error: err }));
+		.catch((err) => dispatch({ type: GET_PLANS_FAIL, error: err }));
 };
 
-// not currently working
-export const getCustomersPlan = stripe => dispatch => {
+export const getCustomersPlan = (stripe) => (dispatch) => {
 	dispatch({
-		type: GET_CUSTOMER_PLAN_START,
+		type: GET_CUSTOMER_PLAN_START
 	});
 	axios
 		.get(`${process.env.REACT_APP_API}/api/stripe/customer/plan`, { stripe })
-		.then(res =>
+		.then((res) =>
 			dispatch({
 				type: GET_CUSTOMER_PLAN_SUCCESS,
-				payload: res.data,
+				payload: res.data
 			})
 		)
-		.catch(err => dispatch({ type: GET_CUSTOMER_PLAN_FAIL, error: err }));
+		.catch((err) => dispatch({ type: GET_CUSTOMER_PLAN_FAIL, error: err }));
 };
 
-export const unsubscribe = (userID, stripe) => dispatch => {
+export const unsubscribe = (userID, stripe) => (dispatch) => {
 	dispatch({
-		type: POST_UNSUBSCRIBE_START,
+		type: POST_UNSUBSCRIBE_START
 	});
 	axios
 		.post(`${process.env.REACT_APP_API}/api/stripe/unsubscribe`, {
 			userID,
-			stripe,
+			stripe
 		})
-		.then(res => dispatch({ type: POST_UNSUBSCRIBE_SUCCESS, payload: res.data }))
-		.catch(err => dispatch({ type: POST_UNSUBSCRIBE_FAIL, error: err }));
+		.then((res) => dispatch({ type: POST_UNSUBSCRIBE_SUCCESS, payload: res.data }))
+		.catch((err) => dispatch({ type: POST_UNSUBSCRIBE_FAIL, error: err }));
 };
 
-export const submit = (token, name, email, userID, stripe, plan) => dispatch => {
+export const submit = (token, name, email, userID, stripe, plan) => (dispatch) => {
 	if (stripe) {
 		dispatch({
-			type: POST_SUBSCRIBE_START,
+			type: POST_SUBSCRIBE_START
 		});
 		axios
 			.post(`${process.env.REACT_APP_API}/api/stripe`, {
@@ -77,13 +77,13 @@ export const submit = (token, name, email, userID, stripe, plan) => dispatch => 
 				email,
 				userID,
 				stripe,
-				plan,
+				plan
 			})
-			.then(res => dispatch({ type: POST_SUBSCRIBE_SUCCESS, payload: res.data }))
-			.catch(err => dispatch({ type: POST_SUBSCRIBE_FAIL, error: err }));
+			.then((res) => dispatch({ type: POST_SUBSCRIBE_SUCCESS, payload: res.data }))
+			.catch((err) => dispatch({ type: POST_SUBSCRIBE_FAIL, error: err }));
 	} else {
 		dispatch({
-			type: POST_REGISTERSTRIPE_START,
+			type: POST_REGISTERSTRIPE_START
 		});
 		axios
 			.post(`${process.env.REACT_APP_API}/api/stripe/register`, {
@@ -92,13 +92,14 @@ export const submit = (token, name, email, userID, stripe, plan) => dispatch => 
 				email,
 				userID,
 				stripe,
-				plan,
+				plan
 			})
-			.then(res => dispatch({ type: POST_REGISTERSTRIPE_SUCCESS, payload: res.data }))
-			.catch(err => dispatch({ type: POST_REGISTERSTRIPE_FAIL, error: err }));
+			.then((res) => dispatch({ type: POST_REGISTERSTRIPE_SUCCESS, payload: res.data }))
+			.catch((err) => dispatch({ type: POST_REGISTERSTRIPE_FAIL, error: err }));
 	}
 };
 
+//Notes on what everything equals out to for debugging purposes.
 // const { name, email, userID, stripe } = this.props.user;
 // const { plan } = this.state;
 

@@ -17,7 +17,7 @@ import {
   deleteTeamMemberFromTrainingSeries,
   getTextNotifications,
   getEmailNotifications
-} from "../../store/actions/";
+} from "store/actions/";
 
 import { Typography, Paper } from "@material-ui/core";
 

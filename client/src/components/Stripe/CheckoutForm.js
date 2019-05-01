@@ -7,8 +7,8 @@ import {
   getCustomersPlan,
   unsubscribe,
   submit
-} from "../../store/actions/";
-import { getUser } from "../../store/actions/userActions";
+} from "store/actions/";
+import { getUser } from "store/actions/userActions";
 
 import {
   withStyles,
@@ -201,11 +201,11 @@ class CheckoutForm extends Component {
   };
 
   submit = async () => {
-    const { name, email, userID, stripe } = this.props.userProfile;
+    const { name, email, id, stripe } = this.props.userProfile;
     const { plan } = this.state;
     let token = await this.createToken(email);
     if (token !== undefined) {
-      await this.props.submit(token, name, email, userID, stripe, plan);
+      await this.props.submit(token, name, email, id, stripe, plan);
       this.setState({
         paymentToggle: false,
         activeSelect: ""

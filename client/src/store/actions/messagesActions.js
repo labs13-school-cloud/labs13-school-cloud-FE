@@ -55,8 +55,7 @@ export const getMessageById = id => dispatch => {
 // POST a new message
 export const createAMessage = (message, trainingSeriesID) => dispatch => {
   dispatch({ type: ADD_MESSAGE_START });
-  console.log("new message: ", message);
-  console.log("tid: ", trainingSeriesID);
+  //console.log("post in createAMessage", post);
   axios
     .post(`${process.env.REACT_APP_API}/api/messages`, message)
     .then(res =>

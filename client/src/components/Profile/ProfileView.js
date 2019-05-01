@@ -8,7 +8,7 @@ import { logout } from "../../Auth/Auth";
 import Authentication from "../Misc/authenticate/";
 
 //State Management
-import { getUser, editUser, deleteUser } from "../../store/actions/userActions";
+import { getUser, editUser, deleteUser } from "store/actions/userActions";
 
 //Styling
 import {
@@ -75,7 +75,7 @@ class ProfileView extends React.Component {
     let account;
     let maxCount;
     if (this.props.doneLoading) {
-      let type = user.accountTypeID;
+      let type = user.account_type_id;
       if (type === 3) {
         accountType = <span>Pro</span>;
         account = true;
@@ -132,7 +132,7 @@ class ProfileView extends React.Component {
                   component="subtitle1"
                 >
                   {/* quick fix for minor bug, newUser object doesn't have notification count */}
-                  {user.notificationCount ? user.notificationCount : 0} out of{" "}
+                  {user.notification_count ? user.notification_count : 0} out of{" "}
                   {maxCount}
                 </Typography>
                 <CardActions>

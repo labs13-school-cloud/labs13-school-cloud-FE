@@ -12,7 +12,7 @@ import {
   getTrainingSeries,
   getTeamMemberByID,
   deleteTeamMember
-} from "../../../store/actions";
+} from "store/actions";
 
 class TeamMemberPageView extends React.Component {
   state = {

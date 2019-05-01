@@ -15,7 +15,7 @@ import Switch from "@material-ui/core/Switch";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 
 //State Management
-import { addTeamMember } from "../../../store/actions";
+import { addTeamMember } from "store/actions";
 import { connect } from "react-redux";
 
 const styles = theme => ({
@@ -238,12 +238,12 @@ class TeamMemberPage extends React.Component {
                       textDisabled ? null : this.handleToggleChange("text_on")
                     }
                     value="text_on"
-					color="default"
-					style={
-						this.state.teamMember.text_on
-						  ? { color: "#451476" }
-						  : { color: "#edeaea" }
-					  }
+                    color="default"
+                    style={
+                      this.state.teamMember.text_on
+                        ? { color: "#451476" }
+                        : { color: "#edeaea" }
+                    }
                   />
                 }
                 label={
@@ -261,12 +261,12 @@ class TeamMemberPage extends React.Component {
                       emailDisabled ? null : this.handleToggleChange("email_on")
                     }
                     value="email_on"
-					color="default"
-					style={
-						this.state.teamMember.email_on
-						  ? { color: "#451476" }
-						  : { color: "#edeaea" }
-					  }
+                    color="default"
+                    style={
+                      this.state.teamMember.email_on
+                        ? { color: "#451476" }
+                        : { color: "#edeaea" }
+                    }
                   />
                 }
                 label={

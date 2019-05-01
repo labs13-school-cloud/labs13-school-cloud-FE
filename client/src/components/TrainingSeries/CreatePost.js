@@ -1,8 +1,8 @@
-import React from "react";
-import { connect } from "react-redux";
-import moment from "moment";
+import React from 'react';
+import { connect } from 'react-redux';
+import moment from 'moment';
 
-import styled from "styled-components";
+import styled from 'styled-components';
 
 // Material UI
 import { withStyles } from "@material-ui/core/styles";
@@ -23,7 +23,7 @@ import {
   editMessage,
   deleteMessage,
   getMessageById
-} from "../../store/actions";
+} from "store/actions";
 
 const styles = theme => ({
   root: {
@@ -218,33 +218,34 @@ class CreatePost extends React.Component {
 }
 
 const MainContainer = styled.div`
-  margin: 0 auto;
-  max-width: 768px;
-  @media (max-width: 768px) {
-    width: 95%;
-  }
+	margin: 0 auto;
+	max-width: 768px;
+	@media (max-width: 768px) {
+		width: 95%;
+	}
 `;
 
 const PostContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: baseline;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: baseline;
 `;
 
 const ButtonContainer = styled.div`
-  display: flex;
-  margin-top: 10px;
-  justify-content: center;
+	display: flex;
+	margin-top: 10px;
+	justify-content: center;
 `;
 
-const mapStateToProps = state => {
-  return {
-    addSuccess: state.teamMembersReducer.status.addSuccess,
-    teamMember: state.teamMembersReducer.teamMember
-  };
+const mapStateToProps = (state) => {
+	return {
+		addSuccess: state.teamMembersReducer.status.addSuccess,
+		teamMember: state.teamMembersReducer.teamMember
+	};
 };
 
+<<<<<<< HEAD
 export default connect(
   mapStateToProps,
   {
@@ -255,3 +256,12 @@ export default connect(
     getMessageById
   }
 )(withStyles(styles)(CreatePost));
+=======
+export default connect(mapStateToProps, {
+	getTrainingSeriesMessages,
+	createAMessage,
+	editMessage,
+	deleteMessage,
+	getMessageById
+})(withStyles(styles)(CreatePost));
+>>>>>>> master

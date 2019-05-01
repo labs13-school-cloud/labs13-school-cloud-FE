@@ -16,7 +16,7 @@ import {
 
 //Redux
 import { connect } from "react-redux";
-import { editUser } from "../../store/actions/";
+import { editUser } from "store/actions/";
 
 function getModalStyle() {
   const top = 50;

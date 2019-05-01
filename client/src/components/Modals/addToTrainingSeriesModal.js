@@ -19,7 +19,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 
 //Redux
 import { connect } from "react-redux";
-import { addTeamMemberToTrainingSeries } from "../../store/actions/";
+import { addTeamMemberToTrainingSeries } from "store/actions/";
 import { TransitionGroup } from "react-transition-group";
 
 function getModalStyle() {
