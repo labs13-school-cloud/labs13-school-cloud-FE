@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { connect } from "react-redux";
 
 import Pagination from "material-ui-flat-pagination";
@@ -19,11 +19,12 @@ import {
 //fetches team members, likely dont need this here, likely wont need this here but may potentially
 //adds team member, likely wont need this here but may potentially
 //deleteTeamMembers team member by ID, propbably going to be the only actual functionallity displayed firectly on this page.
-import {
-  getTeamMembers,
-  addTeamMember,
-  deleteTeamMember
-} from "../../store/actions/teamMembersActions.js";
+
+// import {
+//   getTeamMembers,
+//   addTeamMember,
+//   deleteTeamMember
+// } from "../../store/actions/teamMembersActions.js";
 
 const TeamMembersTab = props => {
   const [searchValue, setSearchValue] = useState("");
@@ -131,13 +132,14 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { getTeamMembers, addTeamMember, deleteTeamMember }
+  {  }
 )(TeamMembersTab);
 
 const TeamsTabWrapper = styled(Paper)`
-  margin: 10px auto;
+  margin: 48px auto;
   padding: 10px;
-  width: 70%;
+  width: 90%;
+  
 `;
 const TeamsMember = styled(Paper)`
   margin: 10px;

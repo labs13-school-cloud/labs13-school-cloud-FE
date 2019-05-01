@@ -5,11 +5,21 @@ import { Router, Route } from "react-router-dom";
 import history from "../../history.js";
 
 //Styling
-import { TripleColumn, SmallColumns, DashboardContainer } from "./styles.js";
+import { TripleColumn, SmallColumns, DashboardContainer, DashWrapper } from "./styles.js";
+
+import BottomNavigation from '@material-ui/core/BottomNavigation';
+import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
+import PermIdentity from '@material-ui/icons/PermIdentityOutlined';
+import Home from '@material-ui/icons/HomeOutlined';
+import QuestionAnswer from '@material-ui/icons/QuestionAnswerOutlined';
+import Timeline from '@material-ui/icons/TimelineOutlined';
+
  
 //Components
 import TeamMembersView from "../TeamMembers/TeamMembersView";
+import TeamMembersTab from "../TeamMembers/TeamMembersTab";
 import TrainingSeriesView from "../TrainingSeries/TrainingSeriesView";
+import TrainingSeriesTab from "../TrainingSeries/TrainingSeriesTab.js";
 import ProgressCircle from "../Misc/Progress/ProgressCircle";
 import ProfileView from "../Profile/ProfileView";
 import AppBar from "../AppBar/AppBar";
@@ -37,7 +47,8 @@ class Dashboard extends React.Component {
   state = {
     tabValue: 0,
     displaySnackbar: false,
-    isTourOpen: true
+    isTourOpen: true,
+    topTabValue: "overview"
   };
 
   componentDidMount() {
@@ -67,11 +78,26 @@ class Dashboard extends React.Component {
     });
   };
 
+  handleDashChange = (e, value) => {
+    console.log(this.state.tabValue)
+    this.setState({ topTabValue: value });
+  };
+
+
+
   renderDashboard = () => {
+    const { topTabValue } = this.state;
     const user = this.props.userProfile.user;
     return (
-      <>
-        <TripleColumn>
+      <DashWrapper>
+        <BottomNavigation value={topTabValue} onChange={this.handleDashChange} style={{width: "80%"}}>
+          <BottomNavigationAction label="Overview" value="overview" icon={<Home />} color="primary" />
+          <BottomNavigationAction label="Team Members" value="team members" icon={<PermIdentity />} />
+          <BottomNavigationAction label="Training Series" value="training series" icon={<Timeline />} />
+          <BottomNavigationAction label="Messages" value="messages" icon={<QuestionAnswer/>} />
+        </BottomNavigation>
+
+        {topTabValue === "overview" && <TripleColumn>
           <SmallColumns>
             <TeamMembersView
               toggleFreakinSnackBar={this.toggleFreakinSnackBar}
@@ -84,8 +110,11 @@ class Dashboard extends React.Component {
             />
           </SmallColumns>
           <NotificationsView userId={user.id} />
-        </TripleColumn>
-      </>
+        </TripleColumn>}
+
+        {topTabValue === "team members" && <TeamMembersTab />}
+        {topTabValue === "training series" && <TrainingSeriesTab />}
+      </DashWrapper>
     );
   };
 
