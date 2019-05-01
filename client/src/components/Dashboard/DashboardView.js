@@ -112,8 +112,8 @@ class Dashboard extends React.Component {
           <NotificationsView userId={user.id} />
         </TripleColumn>}
 
-        {topTabValue === "team members" && <TeamMembersTab />}
-        {topTabValue === "training series" && <TrainingSeriesTab />}
+        {topTabValue === "team members" && <TeamMembersTab userId={user.id} />}
+        {topTabValue === "training series" && <TrainingSeriesTab userId={user.id} />}
       </DashWrapper>
     );
   };

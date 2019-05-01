@@ -24,9 +24,13 @@ import { getTeamMembers, addTeamMember, deleteTeamMember } from "store/actions";
 
 const TeamMembersTab = props => {
   const [searchValue, setSearchValue] = useState("");
+  const [teamMembers, setTeamMembers] = useState([]);
 
   useEffect(() => {
-    console.log(props);
+    // props.getTeamMembers(props.userId);
+    // setTeamMembers(props.teamMembers);
+    // console.log(props.teamMembers);
+    console.log(props.teamMembers);
   }, []);
 
   return (
@@ -69,17 +73,16 @@ const TeamMembersTab = props => {
 
         <hr />
         <Grid container justify="center">
-          {fakeTeamMembers
+          {props.teamMembers
             .filter(member =>
-              `${member.firstName} ${member.lastName}`
+              `${member.first_name} ${member.last_name}`
                 .toUpperCase()
                 .includes(searchValue.toUpperCase())
             )
             .map(teamMember => {
-              //will actually be mapping over props.teamMembers once were hooked up
               return (
-                // aware this is throwing an err for not having a key, will use tem members ID's once thats accessible. for now nbd...
                 <Grid
+                  key={teamMember.id}
                   item
                   style={{ cursor: "pointer" }}
                   onClick={e => {
@@ -88,26 +91,26 @@ const TeamMembersTab = props => {
                 >
                   <TeamsMember>
                     <Typography variant="subtitle1">
-                      {teamMember.firstName} {teamMember.lastName}
+                      {teamMember.first_name} {teamMember.last_name}
                     </Typography>
                     <hr />
                     <Typography variant="subtitle2">
                       {teamMember.email}
                     </Typography>
                     <Typography variant="overline">
-                      {teamMember.phoneNumber}
+                      {teamMember.phone_number}
                     </Typography>
                     <Typography variant="overline">
-                      mentor: {teamMember.mentor}
+                      mentor: {teamMember.mentor || 'not assigned'}
                     </Typography>
                     <Typography variant="overline">
-                      manager: {teamMember.manager}
+                      manager: {teamMember.manager || 'not assigned'}
                     </Typography>
-                    <ul>
+                    {/* <ul>
                       {teamMember.trainingSeries.map(series => {
                         return <div>{series}</div>;
                       })}
-                    </ul>
+                    </ul> */}
                   </TeamsMember>
                 </Grid>
               );
@@ -120,15 +123,15 @@ const TeamMembersTab = props => {
 
 const mapStateToProps = state => {
   return {
-    teamMembers: state.teamMembers,
-    teamMember: state.teamMember,
+    teamMembers: state.teamMembersReducer.teamMembers,
+    teamMember: state.teamMembersReducer.teamMember,
     status: state.status
   };
 };
 
 export default connect(
   mapStateToProps,
-  {  getTeamMembers, addTeamMember, deleteTeamMember }
+  { getTeamMembers, addTeamMember, deleteTeamMember }
 )(TeamMembersTab);
 
 const TeamsTabWrapper = styled(Paper)`
