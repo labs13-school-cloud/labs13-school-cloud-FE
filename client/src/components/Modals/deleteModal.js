@@ -93,10 +93,10 @@ class TrainingSeriesModal extends React.Component {
         this.props.deleteMessage(this.props.id);
         break;
       case "teamMember":
-        this.props.deleteTeamMember(this.props.id, this.props.user_id);
+        this.props.deleteTeamMember(this.props.teamMemberId, this.props.userId);
         break;
       case "inTeamMemberPage":
-        this.props.deleteTeamMember(this.props.id);
+        this.props.deleteTeamMember(this.props.teamMemberId);
         break;
       case "removeMemberFromTS":
         this.props.deleteTeamMemberFromTrainingSeries(

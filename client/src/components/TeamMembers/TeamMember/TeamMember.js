@@ -53,12 +53,7 @@ const styles = {
 
 function TeamMember(props) {
   const { classes } = props;
-  const {
-    first_name,
-    last_name,
-    job_description,
-    team_member_id
-  } = props.teamMember;
+  const { first_name, last_name, job_description, id } = props.teamMember;
 
   const routeToMemberPage = (e, id) => {
     e.nativeEvent.stopPropagation();
@@ -76,13 +71,13 @@ function TeamMember(props) {
       <ListItemText
         primary={first_name + " " + last_name}
         secondary={`Job: ${job_description}`}
-        onClick={e => routeToMemberPage(e, team_member_id)}
+        onClick={e => routeToMemberPage(e, id)}
       />
       <div>
         <TeamMemberOptions
           routeToMemberPage={routeToMemberPage}
           handleDelete={handleDelete}
-          teamMemberID={team_member_id}
+          teamMemberID={id}
           userId={props.userId}
         />
       </div>
