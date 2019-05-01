@@ -20,11 +20,7 @@ import {
 //adds team member, likely wont need this here but may potentially
 //deleteTeamMembers team member by ID, propbably going to be the only actual functionallity displayed firectly on this page.
 
-// import {
-//   getTeamMembers,
-//   addTeamMember,
-//   deleteTeamMember
-// } from "../../store/actions/teamMembersActions.js";
+import { getTeamMembers, addTeamMember, deleteTeamMember } from "store/actions";
 
 const TeamMembersTab = props => {
   const [searchValue, setSearchValue] = useState("");
@@ -132,7 +128,7 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  {  }
+  {  getTeamMembers, addTeamMember, deleteTeamMember }
 )(TeamMembersTab);
 
 const TeamsTabWrapper = styled(Paper)`
