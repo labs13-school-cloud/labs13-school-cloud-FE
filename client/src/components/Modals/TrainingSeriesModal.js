@@ -6,7 +6,7 @@ import { Typography, Fab, Modal, Button, TextField } from '@material-ui/core/';
 
 //Redux
 import { connect } from 'react-redux';
-import { addTrainingSeries, editTrainingSeries } from '../../store/actions/';
+import { addTrainingSeries, editTrainingSeries } from 'store/actions/';
 
 function getModalStyle() {
   const top = 50;

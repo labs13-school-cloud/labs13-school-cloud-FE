@@ -2,15 +2,15 @@ import {
   GET_TRAINING_SERIES_START,
   GET_TRAINING_SERIES_SUCCESS,
   GET_TRAINING_SERIES_FAIL,
-  ADD_TRIANING_SERIES_START,
-  ADD_TRIANING_SERIES_SUCCESS,
-  ADD_TRIANING_SERIES_FAIL,
-  EDIT_TRIANING_SERIES_START,
-  EDIT_TRIANING_SERIES_SUCCESS,
-  EDIT_TRIANING_SERIES_FAIL,
-  DELETE_TRIANING_SERIES_START,
-  DELETE_TRIANING_SERIES_SUCCESS,
-  DELETE_TRIANING_SERIES_FAIL,
+  ADD_TRAINING_SERIES_START,
+  ADD_TRAINING_SERIES_SUCCESS,
+  ADD_TRAINING_SERIES_FAIL,
+  EDIT_TRAINING_SERIES_START,
+  EDIT_TRAINING_SERIES_SUCCESS,
+  EDIT_TRAINING_SERIES_FAIL,
+  DELETE_TRAINING_SERIES_START,
+  DELETE_TRAINING_SERIES_SUCCESS,
+  DELETE_TRAINING_SERIES_FAIL,
   GET_MEMBERS_ASSIGNED_START,
   GET_MEMBERS_ASSIGNED_SUCCESS,
   GET_MEMBERS_ASSIGNED_FAIL
@@ -18,8 +18,8 @@ import {
 
 const initialState = {
   trainingSeries: [],
-  trainingSeriesID: '',
-  error: '',
+  trainingSeriesID: "",
+  error: "",
   isLoading: false,
   isEditing: false,
   isGettingAssignments: false,
@@ -32,13 +32,13 @@ const trainingSeriesReducer = (state = initialState, action) => {
   switch (action.type) {
     // ---GET TRAINING SERIES---
     case GET_TRAINING_SERIES_START:
-      return { ...state, isLoading: true, error: '' };
+      return { ...state, isLoading: true, error: "" };
     case GET_TRAINING_SERIES_SUCCESS:
       return {
         ...state,
         trainingSeries: action.payload.reverse(),
         isLoading: false,
-        error: ''
+        error: ""
       };
     case GET_TRAINING_SERIES_FAIL:
       return {
@@ -47,40 +47,40 @@ const trainingSeriesReducer = (state = initialState, action) => {
         error: action.payload
       };
     // ---ADD TRAINING SERIES---
-    case ADD_TRIANING_SERIES_START:
+    case ADD_TRAINING_SERIES_START:
       return {
         ...state,
         isLoading: true,
         isAdding: true,
-        error: ''
+        error: ""
       };
-    case ADD_TRIANING_SERIES_SUCCESS:
+    case ADD_TRAINING_SERIES_SUCCESS:
       return {
         ...state,
         trainingSeries: [...state.trainingSeries, action.payload],
-        trainingSeriesID: action.payload.trainingSeriesID,
+        trainingSeriesID: action.payload.id,
         isLoading: false,
         isAdding: false,
         addSuccess: true,
-        error: ''
+        error: ""
       };
-    case ADD_TRIANING_SERIES_FAIL:
+    case ADD_TRAINING_SERIES_FAIL:
       return {
         ...state,
         isLoading: false,
         error: action.payload
       };
-    // ---EDIT TRIANING SERIES---
-    case EDIT_TRIANING_SERIES_START:
+    // ---EDIT TRAINING SERIES---
+    case EDIT_TRAINING_SERIES_START:
       return {
         ...state,
         // isLoading: true,
-        error: '',
+        error: "",
         isEditing: true
       };
-    case EDIT_TRIANING_SERIES_SUCCESS:
+    case EDIT_TRAINING_SERIES_SUCCESS:
       const updatedItem = state.trainingSeries.map(series => {
-        if (series.trainingSeriesID === action.payload.trainingSeriesID) {
+        if (series.trainingSeriesID === action.payload.id) {
           return {
             ...series,
             title: action.payload.title
@@ -91,11 +91,11 @@ const trainingSeriesReducer = (state = initialState, action) => {
         ...state,
         isEditing: false,
         // isLoading: false,
-        error: '',
+        error: "",
         trainingSeries: updatedItem
       };
 
-    case EDIT_TRIANING_SERIES_FAIL:
+    case EDIT_TRAINING_SERIES_FAIL:
       return {
         ...state,
         isEditing: false,
@@ -103,9 +103,9 @@ const trainingSeriesReducer = (state = initialState, action) => {
         error: action.payload
       };
     // ---DELETE TRAINING SERIES---
-    case DELETE_TRIANING_SERIES_START:
+    case DELETE_TRAINING_SERIES_START:
       return { ...state, isLoading: false, error: action.payload };
-    case DELETE_TRIANING_SERIES_SUCCESS:
+    case DELETE_TRAINING_SERIES_SUCCESS:
       return {
         ...state,
         trainingSeries: [
@@ -114,28 +114,28 @@ const trainingSeriesReducer = (state = initialState, action) => {
           )
         ],
         isLoading: false,
-        error: ''
+        error: ""
       };
-    case DELETE_TRIANING_SERIES_FAIL:
+    case DELETE_TRAINING_SERIES_FAIL:
       return { ...state, isLoading: false, error: action.payload };
     case GET_MEMBERS_ASSIGNED_START:
-    return {
-      ...state,
-      isGettingAssignments: true,
-      error: ""
-    };
+      return {
+        ...state,
+        isGettingAssignments: true,
+        error: ""
+      };
     case GET_MEMBERS_ASSIGNED_SUCCESS:
-    return {
-      ...state,
-      isGettingAssignments: false,
-      assignments: action.payload
-    };
+      return {
+        ...state,
+        isGettingAssignments: false,
+        assignments: action.payload
+      };
     case GET_MEMBERS_ASSIGNED_FAIL:
-    return {
-      ...state,
-      isGettingAssignments: false,
-      error: action.error
-    }
+      return {
+        ...state,
+        isGettingAssignments: false,
+        error: action.error
+      };
     default:
       return state;
   }

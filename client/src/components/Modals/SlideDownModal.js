@@ -1,13 +1,13 @@
-import React from 'react';
-import { withRouter } from 'react-router';
+import React from "react";
+import { withRouter } from "react-router";
 
-import { withStyles } from '@material-ui/core/styles';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
-import IconButton from '@material-ui/core/IconButton';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
+import { withStyles } from "@material-ui/core/styles";
+import MoreVertIcon from "@material-ui/icons/MoreVert";
+import IconButton from "@material-ui/core/IconButton";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
 
-import DeleteModal from '../Modals/deleteModal';
+import DeleteModal from "../Modals/deleteModal";
 
 const styles = theme => ({});
 
@@ -31,9 +31,7 @@ class SlideDownModal extends React.Component {
   routeToTrainingSeriesPage = e => {
     e.preventDefault();
     this.handleClose();
-    this.props.history.push(
-      `home/training-series/${this.props.data.trainingSeriesID}`
-    );
+    this.props.history.push(`home/training-series/${this.props.data.id}`);
   };
 
   render() {
@@ -53,7 +51,7 @@ class SlideDownModal extends React.Component {
 						edit
 					</i> */}
           <MoreVertIcon
-            aria-owns={this.state.anchorEl ? 'simple-menu' : undefined}
+            aria-owns={this.state.anchorEl ? "simple-menu" : undefined}
             aria-haspopup="true"
           />
         </IconButton>
@@ -92,7 +90,7 @@ class SlideDownModal extends React.Component {
           <MenuItem>
             <DeleteModal
               deleteType="trainingSeries"
-              trainingSeriesId={this.props.data.trainingSeriesID}
+              trainingSeriesId={this.props.data.id}
               displayType="text"
               userId={this.props.userId}
             />

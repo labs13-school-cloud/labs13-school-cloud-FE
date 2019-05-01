@@ -13,14 +13,14 @@ import styled from 'styled-components';
 // Redux
 import { connect } from 'react-redux';
 import {
-  getTrainingSeriesPosts,
+  getTrainingSeriesMessages,
   getTeamMembers,
-  createAPost,
-  editPost,
-  deletePost,
+  createAMessage,
+  editMessage,
+  deleteMessage,
   getMembersAssigned,
   editTrainingSeries
-} from '../../store/actions';
+} from 'store/actions';
 
 import { withStyles } from '@material-ui/core/styles';
 
@@ -182,12 +182,12 @@ class TrainingSeriesPosts extends React.Component {
     this.setState({ searchOpen: !this.state.searchOpen });
   };
   getTrainingSeriesWithPosts = id => {
-    this.props.getTrainingSeriesPosts(id);
+    this.props.getTrainingSeriesMessages(id);
   };
 
-  deletePost = (e, id) => {
+  deleteMessage = (e, id) => {
     e.preventDefault();
-    this.props.deletePost(id);
+    this.props.deleteMessage(id);
   };
 
   routeToPostPage = () => {
@@ -199,7 +199,7 @@ class TrainingSeriesPosts extends React.Component {
     });
   };
 
-  routeToEditPostPage = (e, post) => {
+  routeToeditMessagePage = (e, post) => {
     e.preventDefault();
     this.props.history.push({
       pathname: `/home/post/${post.postID}`,
@@ -463,7 +463,7 @@ class TrainingSeriesPosts extends React.Component {
                         primary={post.postName}
                         secondary={post.postDetails}
                         className={classes.listItemText}
-                        onClick={e => this.routeToEditPostPage(e, post)}
+                        onClick={e => this.routeToeditMessagePage(e, post)}
                       />
                       <ListItemSecondaryAction
                         className={classes.secondaryAction}>
@@ -473,7 +473,7 @@ class TrainingSeriesPosts extends React.Component {
                         <ListButtonContainer>
                           <i
                             className={`material-icons ${classes.icons}`}
-                            onClick={e => this.routeToEditPostPage(e, post)}>
+                            onClick={e => this.routeToeditMessagePage(e, post)}>
                             edit
                           </i>
                           <DeleteModal
@@ -579,11 +579,11 @@ TrainingSeriesPosts.propTypes = {};
 export default connect(
   mapStateToProps,
   {
-    getTrainingSeriesPosts,
+    getTrainingSeriesMessages,
     getTeamMembers,
-    createAPost,
-    editPost,
-    deletePost,
+    createAMessage,
+    editMessage,
+    deleteMessage,
     getMembersAssigned,
     editTrainingSeries
   }

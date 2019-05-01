@@ -6,7 +6,7 @@ import styled from "styled-components";
 import PropTypes from "prop-types";
 
 import { connect } from "react-redux";
-import { addTrainingSeries } from "../../store/actions/trainingSeriesActions";
+import { addTrainingSeries } from "store/actions/trainingSeriesActions";
 import ProgressCircle from "../Misc/Progress/ProgressCircle";
 
 //Styles

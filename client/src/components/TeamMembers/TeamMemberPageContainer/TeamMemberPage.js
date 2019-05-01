@@ -22,7 +22,7 @@ import DeleteModal from "../../Modals/deleteModal";
 
 //Redux
 import { connect } from "react-redux";
-import { getTrainingSeries, editTeamMember } from "../../../store/actions";
+import { getTrainingSeries, editTeamMember } from "store/actions";
 
 const styles = theme => ({
   // these styles fixes the off-centering

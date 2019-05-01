@@ -4,7 +4,7 @@ import { Route } from 'react-router-dom';
 
 //Redux
 import { connect } from 'react-redux';
-import { getTrainingSeries, deleteTrainingSeries } from '../../store/actions/';
+import { getTrainingSeries, deleteTrainingSeries } from 'store/actions/';
 
 //Components
 // import TrainingSeriesSubView from './TrainingSeriesSubView';
