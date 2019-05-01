@@ -1,10 +1,13 @@
 import React, {useState, useEffect} from "react";
 import { connect } from "react-redux";
 
+import TeamMemberOptions from "../../Modals/TeamMemberOptions";
+
 import Pagination from "material-ui-flat-pagination";
 import Grid from "@material-ui/core/Grid";
 
 import styled from "styled-components";
+import DeleteIcon from '@material-ui/icons/Delete';
 
 import {
   Paper,
@@ -24,11 +27,11 @@ import { getTeamMembers, addTeamMember, deleteTeamMember } from "store/actions";
 
 const TeamMembersTab = props => {
   const [searchValue, setSearchValue] = useState("");
-  const [teamMembers, setTeamMembers] = useState([]);
+  const [localTeamMembers, setLocalTeamMembers] = useState([]);
 
   useEffect(() => {
-    // props.getTeamMembers(props.userId);
-    // setTeamMembers(props.teamMembers);
+    props.getTeamMembers(props.userId);
+    setLocalTeamMembers(props.teamMembers);
     // console.log(props.teamMembers);
     console.log(props.teamMembers);
   }, []);
@@ -58,7 +61,8 @@ const TeamMembersTab = props => {
               size="small"
               aria-label="Add"
               onClick={() => {
-                props.history.push("/home/create-team-member/");
+                props.history.push("/home/create-team-member");
+                console.log(props);
               }}
               style={{
                 margin: "0 10px",
@@ -73,7 +77,10 @@ const TeamMembersTab = props => {
 
         <hr />
         <Grid container justify="center">
-          {props.teamMembers
+          {localTeamMembers.length === 0 ?
+            <div>add some members</div>
+            :
+            props.teamMembers
             .filter(member =>
               `${member.first_name} ${member.last_name}`
                 .toUpperCase()
@@ -106,6 +113,12 @@ const TeamMembersTab = props => {
                     <Typography variant="overline">
                       manager: {teamMember.manager || 'not assigned'}
                     </Typography>
+                    <DeleteIcon
+                    onClick={e => {
+                      e.stopPropagation();
+                      props.deleteTeamMember(teamMember.id);
+                    }}
+                    />
                     {/* <ul>
                       {teamMember.trainingSeries.map(series => {
                         return <div>{series}</div>;
@@ -152,55 +165,3 @@ const TeamsTabHeader = styled.div`
   display: flex;
   justify-content: space-between;
 `;
-
-const fakeTeamMembers = [
-  //not sureh how these will be structured, so obviously just so we have some kind of data down...
-  {
-    firstName: "Tom",
-    lastName: "Hessburg",
-    email: "tom@email.com",
-    jobDescription: "does nothing all day, essentially...",
-    slackID: "asdfasdfasdfasdf",
-    teamsID: "asdfadsfsadf",
-    phoneNumber: "352-636-5809",
-    trainingSeries: ["series1", "series2"],
-    manager: "Adam McKenney",
-    mentor: "Nick Cannariato"
-  },
-  {
-    firstName: "Bom",
-    lastName: "Fessburg",
-    email: "tom@email.com",
-    jobDescription: "does nothing all day, essentially...",
-    slackID: "asdfasdfasdfasdf",
-    teamsID: "asdfadsfsadf",
-    phoneNumber: "352-636-5809",
-    trainingSeries: ["series1", "series2"],
-    manager: "Adam McKenney",
-    mentor: "Nick Cannariato"
-  },
-  {
-    firstName: "Crom",
-    lastName: "Shessburg",
-    email: "tom@email.com",
-    jobDescription: "does nothing all day, essentially...",
-    slackID: "asdfasdfasdfasdf",
-    teamsID: "asdfadsfsadf",
-    phoneNumber: "352-636-5809",
-    trainingSeries: ["series1", "series2"],
-    manager: "Adam McKenney",
-    mentor: "Nick Cannariato"
-  },
-  {
-    firstName: "Lom",
-    lastName: "Nessburg",
-    email: "tom@email.com",
-    jobDescription: "does nothing all day, essentially...",
-    slackID: "asdfasdfasdfasdf",
-    teamsID: "asdfadsfsadf",
-    phoneNumber: "352-636-5809",
-    trainingSeries: ["series1", "series2"],
-    manager: "Adam McKenney",
-    mentor: "Nick Cannariato"
-  }
-];
