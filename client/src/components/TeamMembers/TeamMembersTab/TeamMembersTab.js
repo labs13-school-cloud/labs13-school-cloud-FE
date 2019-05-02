@@ -100,6 +100,7 @@ const TeamMembersTab = props => {
                   .includes(searchValue.toUpperCase())
               )
               .map(teamMember => {
+                console.log(teamMember);
                 return (
                   <Grid
                     key={teamMember.id}
