@@ -41,23 +41,19 @@ const baseUrl = `${process.env.REACT_APP_API}/api`;
 
 export const getTeamMembers = id => dispatch => {
   dispatch({ type: FETCH_TEAM_START });
-  console.log("user id to pull team members with: ", id);
   axios
     .get(`${baseUrl}/users/${id}/team-members`)
     .then(res => {
-      console.log("team members being fetched: ", res.data);
       dispatch({ type: FETCH_TEAM_SUCCESS, payload: res.data.members });
     })
     .catch(err => dispatch({ type: FETCH_TEAM_FAIL, payload: err }));
 };
 
 export const addTeamMember = teamMember => dispatch => {
-  console.log("member to be added: ", teamMember);
   dispatch({ type: ADD_MEMBER_START });
   axios
     .post(`${baseUrl}/team-members`, teamMember)
     .then(res => {
-      console.log("added team member:", res.data);
       dispatch({ type: ADD_MEMBER_SUCCESS, payload: res.data.newTeamMember });
     })
     .then(() => history.push({ pathname: "/home", state: { success: true } }))
@@ -65,7 +61,6 @@ export const addTeamMember = teamMember => dispatch => {
 };
 
 export const editTeamMember = (id, changes) => dispatch => {
-  //console.log(changes);
   dispatch({ type: EDIT_MEMBER_START });
   axios
     .put(`${baseUrl}/team-members/${id}`, changes)
@@ -80,7 +75,6 @@ export const editTeamMember = (id, changes) => dispatch => {
 
 export const deleteTeamMember = (teamMemberID, userID) => dispatch => {
   dispatch({ type: DELETE_MEMBER_START });
-  console.log("tID and uID to be deleted: ", teamMemberID, userID);
   axios
     .delete(`${baseUrl}/team-members/${teamMemberID}`)
     .then(res => {
@@ -98,13 +92,11 @@ export const deleteTeamMember = (teamMemberID, userID) => dispatch => {
 };
 
 export const getTeamMemberByID = id => dispatch => {
-  console.log("ID of individual team member being fetched: ", id);
   dispatch({ type: FETCH_SINGLE_MEMBER_START });
 
   axios
     .get(`${baseUrl}/team-members/${id}`)
     .then(res => {
-      console.log("team member that was fetched: ", res.data);
       dispatch({
         type: FETCH_SINGLE_MEMBER_SUCCESS,
         payload: res.data

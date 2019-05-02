@@ -31,13 +31,13 @@ export const getTrainingSeriesMessages = id => dispatch => {
     type: GET_MESSAGES_START
   });
   axios
-    .get(`${process.env.REACT_APP_API}/api/training-series/${id}/posts`)
-    .then(res =>
+    .get(`${process.env.REACT_APP_API}/api/training-series/${id}/messages`)
+    .then(res => {
       dispatch({
         type: GET_MESSAGES_SUCCESS,
         payload: res.data
-      })
-    )
+      });
+    })
     .catch(err => dispatch({ type: GET_MESSAGES_FAIL, error: err }));
 };
 
@@ -55,7 +55,6 @@ export const getMessageById = id => dispatch => {
 // POST a new message
 export const createAMessage = (message, trainingSeriesID) => dispatch => {
   dispatch({ type: ADD_MESSAGE_START });
-  //console.log("post in createAMessage", post);
   axios
     .post(`${process.env.REACT_APP_API}/api/messages`, message)
     .then(res =>
