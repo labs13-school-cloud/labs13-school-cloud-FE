@@ -28,6 +28,8 @@ import { getTeamMembers, addTeamMember, deleteTeamMember } from "store/actions";
 const TeamMembersTab = props => {
   const [searchValue, setSearchValue] = useState("");
   const [localTeamMembers, setLocalTeamMembers] = useState([]);
+  const [limit, setLimit] = useState(8);
+  const [offset, setOffset] = useState(0);
 
   useEffect(() => {
     props.getTeamMembers(props.userId);
@@ -35,6 +37,10 @@ const TeamMembersTab = props => {
     // console.log(props.teamMembers);
     console.log(props.teamMembers);
   }, []);
+
+  const handleClick = offset => {
+    setOffset(offset);
+  }
 
   return (
     <div>
@@ -81,6 +87,7 @@ const TeamMembersTab = props => {
             <div>add some members</div>
             :
             props.teamMembers
+            .slice(offset, offset+limit)
             .filter(member =>
               `${member.first_name} ${member.last_name}`
                 .toUpperCase()
@@ -129,6 +136,14 @@ const TeamMembersTab = props => {
               );
             })}
         </Grid>
+        <Pagination
+            limit={limit}
+            reduced={true}
+            offset={offset}
+            total={props.teamMembers.length}
+            centerRipple={true}
+            onClick={(e, offset) => handleClick(offset)}
+          />
       </TeamsTabWrapper>
     </div>
   );
