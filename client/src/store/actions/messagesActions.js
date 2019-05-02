@@ -32,12 +32,13 @@ export const getTrainingSeriesMessages = id => dispatch => {
   });
   axios
     .get(`${process.env.REACT_APP_API}/api/training-series/${id}/posts`)
-    .then(res =>
+    .then(res => {
+      console.log("LOOK AT ME: ", res.data);
       dispatch({
         type: GET_MESSAGES_SUCCESS,
         payload: res.data
-      })
-    )
+      });
+    })
     .catch(err => dispatch({ type: GET_MESSAGES_FAIL, error: err }));
 };
 
