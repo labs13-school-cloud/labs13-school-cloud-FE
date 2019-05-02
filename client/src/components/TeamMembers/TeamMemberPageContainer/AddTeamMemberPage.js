@@ -1,5 +1,6 @@
 import React from "react";
 import NumberFormat from "react-number-format";
+import axios from 'axios';
 
 import styled from "styled-components";
 
@@ -86,6 +87,7 @@ class TeamMemberPage extends React.Component {
       email: "",
       phone_number: "",
       user_id: "",
+      slack_id: "",
       text_on: true,
       email_on: false,
       slack_on: false,
@@ -98,11 +100,16 @@ class TeamMemberPage extends React.Component {
     snackState: false,
     memberManager: null,
     memberMentor: null,
-    otherTeamMembers: []
+    otherTeamMembers: [],
+    slackUsers: []
   };
 
-  componentDidMount() {
-    this.setState({ otherTeamMembers: this.props.teamMembers });
+  componentDidMount = async () => {
+    const { data } = await axios.get(`${process.env.REACT_APP_API}/api/slack/`)
+    this.setState({ 
+      otherTeamMembers: this.props.teamMembers,
+      slackUsers: data
+    });
   }
 
   handleChange = name => event => {
@@ -260,8 +267,8 @@ class TeamMemberPage extends React.Component {
               Mentor
               {this.state.memberMentor !== null
                 ? `: ${this.state.memberMentor.first_name} ${
-                    this.state.memberMentor.last_name
-                  }`
+                this.state.memberMentor.last_name
+                }`
                 : ": none"}
             </div>
             <form className="mentor select">
@@ -290,8 +297,8 @@ class TeamMemberPage extends React.Component {
               Manager
               {this.state.memberManager !== null
                 ? `: ${this.state.memberManager.first_name} ${
-                    this.state.memberManager.last_name
-                  }`
+                this.state.memberManager.last_name
+                }`
                 : ": none"}
             </div>
             <form className="manager select">
@@ -315,6 +322,13 @@ class TeamMemberPage extends React.Component {
                   ))}
               </select>
             </form>
+            <MemberInfoContainer>
+              <select value={this.state.teamMember.slack_id} onChange={this.handleChange("slack_id")}>
+                {this.state.slackUsers && this.state.slackUsers.map(user => (
+                  <option key={user.id} value={user.id}>{user.real_name}</option>
+                ))}
+              </select>
+            </MemberInfoContainer>
 
             <ButtonContainer>
               <FormControlLabel
@@ -397,8 +411,8 @@ class TeamMemberPage extends React.Component {
                 {this.state.isRouting ? (
                   <LoadingImage src={TrainingBotGIF} alt="Loading Icon" />
                 ) : (
-                  "Add Member"
-                )}
+                    "Add Member"
+                  )}
               </Button>
               <Button
                 className={classes.button}
