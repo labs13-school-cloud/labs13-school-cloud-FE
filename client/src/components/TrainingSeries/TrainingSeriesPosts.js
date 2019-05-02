@@ -391,7 +391,7 @@ class TrainingSeriesPosts extends React.Component {
 
     let posts;
 
-    console.log(this.props); // checks if the search field is active and there are results from the fuse search
+    //console.log(this.props); // checks if the search field is active and there are results from the fuse search
     if (searchOn && this.searchedPosts(this.props.posts).length > 0) {
       posts = this.searchedPosts(this.props.posts);
     } else {
