@@ -1,5 +1,6 @@
 import React from "react";
 import NumberFormat from "react-number-format";
+import axios from 'axios';
 
 import styled from "styled-components";
 
@@ -87,13 +88,20 @@ class TeamMemberPage extends React.Component {
       phone_number: "",
       user_id: "",
       text_on: true,
-      email_on: false
+      email_on: false,
+      slack_id: ""
     },
     assignments: [],
     training_series: [],
     isRouting: false,
-    snackState: false
+    snackState: false,
+    slackUsers: null,
   };
+
+  componentDidMount = async () => {
+    const { data } = await axios.get(`${process.env.REACT_APP_API}/api/slack/`)
+    this.setState(() => ({ slackUsers: data }))
+  }
 
   handleChange = name => event => {
     this.setState({
@@ -138,6 +146,7 @@ class TeamMemberPage extends React.Component {
   render() {
     const { classes } = this.props;
     const { text_on, email_on } = this.state.teamMember;
+    console.log(this.state.slackUsers);
 
     let textDisabled;
     let emailDisabled;
@@ -227,6 +236,13 @@ class TeamMemberPage extends React.Component {
                 onChange={this.handleChange("email")}
                 margin="normal"
               />
+            </MemberInfoContainer>
+            <MemberInfoContainer>
+              <select value={this.state.teamMember.slack_id} onChange={this.handleChange("slack_id")}>
+                {this.state.slackUsers && this.state.slackUsers.map(user => (
+                  <option key={user.id} value={user.id}>{user.real_name}</option>
+                ))}
+              </select>
             </MemberInfoContainer>
 
             <ButtonContainer>
