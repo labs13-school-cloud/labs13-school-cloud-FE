@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { connect } from "react-redux";
+
+import TrainingSeriesTabSingle from "./TrainingSeriesTabSingle.js";
 
 //style related imports
 //simport Pagination from 'material-ui-flat-pagination';
@@ -24,45 +25,11 @@ import {
 const TrainingSeriesTab = props => {
   const [searchValue, setSearchValue] = useState("");
 
-  useEffect(() => {
-    console.log(props.trainingSeries);
-  }, []);
-
   const { classes } = props;
-  const [postLength, setPostLength] = useState(0);
-  const [assignedLength, setAssignedLength] = useState(0);
 
-  async function getPostCount() {
-    //should break this into a helper function, its also being used in TrainingSeries.js, just wanted to get this up and running.
-    await axios
-      .get(
-        `${process.env.REACT_APP_API}/api/training-series/${
-          props.data.id
-        }/posts`
-      )
-      .then(res => {
-        setPostLength(res.data.posts.length);
-      })
-      .catch(err => {
-        //console.log(err);
-      });
-  }
-  async function getMemberCount() {
-    //same with this one lol
-    await axios
-      .get(
-        `${process.env.REACT_APP_API}/api/training-series/${
-          props.data.id
-        }/assignments`
-      )
-      .then(res => {
-        //console.log('getMemberCount', res.data.assignments.length);
-        setAssignedLength(res.data.assignments.length);
-      })
-      .catch(err => {
-        //console.log(err);
-      });
-  }
+  const routeToSeries = id => {
+    props.history.push(`/home/training-series/${id}`);
+  };
 
   return (
     <Wrapper>
@@ -94,10 +61,16 @@ const TrainingSeriesTab = props => {
           )
         }}
       />
-      {exampleTrainingSeries.map(series => {
-        return (
-          <Series>
-            <Grid container spacing={24}>
+      {props.trainingSeries
+        .filter(series => series.title.includes(searchValue))
+        .map(series => {
+          return (
+            <Series
+              onClick={e => {
+                routeToSeries(series.id);
+              }}
+            >
+              {/* <Grid container spacing={24}>
               <Grid item xs={12}>
                 <Typography variant="h6">{series.title}</Typography>
                 <hr />
@@ -120,10 +93,11 @@ const TrainingSeriesTab = props => {
                   </Typography>
                 </Grid>
               </Grid>
-            </Grid>
-          </Series>
-        );
-      })}
+			</Grid> */}
+              <TrainingSeriesTabSingle series={series} />
+            </Series>
+          );
+        })}
     </Wrapper>
   );
 };
@@ -156,178 +130,3 @@ const Series = styled(Paper)`
     background: #f8f8f8;
   }
 `;
-
-//Just some bs info until we get everything hooked up...
-const exampleTrainingSeries = [
-  {
-    title: "example series 1",
-    description:
-      "random description of the training series that explains in short what it is and such....",
-    posts: [
-      {
-        postName: "example post 1",
-        postDetails: "some random details about the post...",
-        link: "aasdf",
-        daysFromStart: 1,
-        postimage: null
-      },
-      {
-        postName: "example post 2",
-        postDetails:
-          "some random details about the post thats super long some random details about the post thats super long some random details about the post thats super long some random details about the post thats super long some random details about the post thats super long some random details about the post thats super long some random details about the post thats super long some random details about the post thats super long...",
-        link: "aasdf",
-        daysFromStart: 2,
-        postimage: null
-      },
-      {
-        postName: "example post 3",
-        postDetails: "asdfsadf",
-        link: "aasdf",
-        daysFromStart: 2,
-        postimage: null
-      }
-    ],
-    teamMembers: [
-      //could realistically grab them by
-      //ID from state or whatever but just for save of seeing what it looks like...
-      {
-        firstName: "Tom",
-        lastName: "Hessburg",
-        email: "tom@email.com",
-        jobDescription: "does nothing all day, essentially...",
-        slackID: "asdfasdfasdfasdf",
-        teamsID: "asdfadsfsadf",
-        phoneNumber: "352-636-5809",
-        trainingSeries: ["series1", "series2"],
-        manager: "Adam McKenney",
-        mentor: "Nick Cannariato"
-      },
-      {
-        firstName: "Tom",
-        lastName: "Hessburg",
-        email: "tom@email.com",
-        jobDescription: "does nothing all day, essentially...",
-        slackID: "asdfasdfasdfasdf",
-        teamsID: "asdfadsfsadf",
-        phoneNumber: "352-636-5809",
-        trainingSeries: ["series1", "series2"],
-        manager: "Adam McKenney",
-        mentor: "Nick Cannariato"
-      }
-    ]
-  },
-  {
-    title: "example series 2",
-    description:
-      "random description of the training series that explains in short what it is and such....",
-    posts: [
-      {
-        postName: "example post 1",
-        postDetails: "some random details about the post...",
-        link: "aasdf",
-        daysFromStart: 1,
-        postimage: null
-      },
-      {
-        postName: "example post 2",
-        postDetails:
-          "some random details about the post thats super long some random details about the post thats super long some random details about the post thats super long some random details about the post thats super long some random details about the post thats super long some random details about the post thats super long some random details about the post thats super long some random details about the post thats super long...",
-        link: "aasdf",
-        daysFromStart: 2,
-        postimage: null
-      },
-      {
-        postName: "example post 3",
-        postDetails: "asdfsadf",
-        link: "aasdf",
-        daysFromStart: 2,
-        postimage: null
-      }
-    ],
-    teamMembers: [
-      //could realistically grab them by
-      //ID from state or whatever but just for save of seeing what it looks like...
-      {
-        firstName: "Tom",
-        lastName: "Hessburg",
-        email: "tom@email.com",
-        jobDescription: "does nothing all day, essentially...",
-        slackID: "asdfasdfasdfasdf",
-        teamsID: "asdfadsfsadf",
-        phoneNumber: "352-636-5809",
-        trainingSeries: ["series1", "series2"],
-        manager: "Adam McKenney",
-        mentor: "Nick Cannariato"
-      },
-      {
-        firstName: "Tom",
-        lastName: "Hessburg",
-        email: "tom@email.com",
-        jobDescription: "does nothing all day, essentially...",
-        slackID: "asdfasdfasdfasdf",
-        teamsID: "asdfadsfsadf",
-        phoneNumber: "352-636-5809",
-        trainingSeries: ["series1", "series2"],
-        manager: "Adam McKenney",
-        mentor: "Nick Cannariato"
-      }
-    ]
-  },
-  {
-    title: "example series 3",
-    description:
-      "random description of the training series that explains in short what it is and such....",
-    posts: [
-      {
-        postName: "example post 1",
-        postDetails: "some random details about the post...",
-        link: "aasdf",
-        daysFromStart: 1,
-        postimage: null
-      },
-      {
-        postName: "example post 2",
-        postDetails:
-          "some random details about the post thats super long some random details about the post thats super long some random details about the post thats super long some random details about the post thats super long some random details about the post thats super long some random details about the post thats super long some random details about the post thats super long some random details about the post thats super long...",
-        link: "aasdf",
-        daysFromStart: 2,
-        postimage: null
-      },
-      {
-        postName: "example post 3",
-        postDetails: "asdfsadf",
-        link: "aasdf",
-        daysFromStart: 2,
-        postimage: null
-      }
-    ],
-    teamMembers: [
-      //could realistically grab them by
-      //ID from state or whatever but just for save of seeing what it looks like...
-      {
-        firstName: "Tom",
-        lastName: "Hessburg",
-        email: "tom@email.com",
-        jobDescription: "does nothing all day, essentially...",
-        slackID: "asdfasdfasdfasdf",
-        teamsID: "asdfadsfsadf",
-        phoneNumber: "352-636-5809",
-        trainingSeries: ["series1", "series2"],
-        manager: "Adam McKenney",
-        mentor: "Nick Cannariato"
-      },
-      {
-        firstName: "Tom",
-        lastName: "Hessburg",
-        email: "tom@email.com",
-        jobDescription: "does nothing all day, essentially...",
-        slackID: "asdfasdfasdfasdf",
-        teamsID: "asdfadsfsadf",
-        phoneNumber: "352-636-5809",
-        trainingSeries: ["series1", "series2"],
-        manager: "Adam McKenney",
-        mentor: "Nick Cannariato"
-      }
-    ]
-  }
-];
