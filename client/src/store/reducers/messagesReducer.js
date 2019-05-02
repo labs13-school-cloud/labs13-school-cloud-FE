@@ -86,7 +86,7 @@ const messagesReducer = (state = initialState, action) => {
         ...state,
         isAdding: false,
         addedSuccessfully: true,
-        singleMessage: action.payload
+        singleMessage: action.payload //should probably be newMessage??
       };
     case ADD_MESSAGE_FAIL:
       return {
