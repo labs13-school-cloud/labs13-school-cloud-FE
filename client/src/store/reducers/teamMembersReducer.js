@@ -152,7 +152,7 @@ const teamMembersReducer = (state = initialState, action) => {
         }
       };
     case EDIT_MEMBER_SUCCESS:
-      const updatedMember = state.teamMembers.map(member => {
+      const updatedMembers = state.teamMembers.map(member => {
         if (member.id === action.payload.id) {
           return {
             ...member,
@@ -164,7 +164,7 @@ const teamMembersReducer = (state = initialState, action) => {
       });
       return {
         ...state,
-        teamMembers: updatedMember,
+        teamMembers: updatedMembers,
         status: {
           ...state.status,
           isEditing: false,
