@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 
 import TrainingSeriesTabSingle from "./TrainingSeriesTabSingle.js";
 
-//style related imports
-//simport Pagination from 'material-ui-flat-pagination';
-import Grid from "@material-ui/core/Grid";
+import Pagination from "material-ui-flat-pagination";
+
 import styled from "styled-components";
 import {
   Paper,
@@ -24,11 +23,15 @@ import {
 
 const TrainingSeriesTab = props => {
   const [searchValue, setSearchValue] = useState("");
-
-  const { classes } = props;
+  const [limit, setLimit] = useState(4);
+  const [offset, setOffset] = useState(0);
 
   const routeToSeries = id => {
     props.history.push(`/home/training-series/${id}`);
+  };
+
+  const handleClick = offset => {
+    setOffset(offset);
   };
 
   return (
@@ -61,39 +64,24 @@ const TrainingSeriesTab = props => {
           )
         }}
       />
+      <Pagination
+        limit={limit}
+        offset={offset}
+        total={props.trainingSeries.length}
+        centerRipple={true}
+        onClick={(e, offset) => handleClick(offset)}
+      />
       {props.trainingSeries
+        .slice(offset, limit + offset)
         .filter(series => series.title.includes(searchValue))
         .map(series => {
           return (
             <Series
+              key={series.id}
               onClick={e => {
                 routeToSeries(series.id);
               }}
             >
-              {/* <Grid container spacing={24}>
-              <Grid item xs={12}>
-                <Typography variant="h6">{series.title}</Typography>
-                <hr />
-              </Grid>
-              <Grid item xs={6}>
-                <Typography style={{ color: "gray" }} variant="caption">
-                  {series.description}
-                </Typography>
-              </Grid>
-
-              <Grid item xs={6} align="center">
-                <Grid item>
-                  <Typography variant="overline">
-                    messages: {series.posts.length}
-                  </Typography>
-                </Grid>
-                <Grid item>
-                  <Typography variant="overline">
-                    assigned: {series.teamMembers.length}
-                  </Typography>
-                </Grid>
-              </Grid>
-			</Grid> */}
               <TrainingSeriesTabSingle series={series} />
             </Series>
           );

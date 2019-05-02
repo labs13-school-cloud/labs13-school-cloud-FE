@@ -41,7 +41,11 @@ function SeriesCard(props) {
 
   async function getPostCount() {
     await axios
-      .get(`${process.env.REACT_APP_API}/api/training-series/${props.data.id}/posts`)
+      .get(
+        `${process.env.REACT_APP_API}/api/training-series/${
+          props.data.id
+        }/messages`
+      )
       .then(res => {
         setPostLength(res.data.posts.length);
       })
