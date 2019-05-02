@@ -55,7 +55,7 @@ function SeriesCard(props) {
     await axios
       .get(
         `${process.env.REACT_APP_API}/api/training-series/${
-          props.id
+          props.data.id
         }/assignments`
       )
       .then(res => {

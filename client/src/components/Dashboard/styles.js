@@ -47,3 +47,11 @@ export const DashboardContainer = styled.div`
     padding: 10px;
   }
 `;
+export const DashWrapper = styled.div`
+  width: 100%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
