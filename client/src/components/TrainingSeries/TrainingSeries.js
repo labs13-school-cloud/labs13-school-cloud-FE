@@ -41,7 +41,7 @@ function SeriesCard(props) {
 
   async function getPostCount() {
     await axios
-      .get(`${process.env.REACT_APP_API}/api/training-series/${props.id}/posts`)
+      .get(`${process.env.REACT_APP_API}/api/training-series/${props.data.id}/posts`)
       .then(res => {
         setPostLength(res.data.posts.length);
       })
@@ -53,7 +53,7 @@ function SeriesCard(props) {
     await axios
       .get(
         `${process.env.REACT_APP_API}/api/training-series/${
-          props.id
+          props.data.id
         }/assignments`
       )
       .then(res => {
@@ -73,7 +73,7 @@ function SeriesCard(props) {
   const routeToTrainingSeriesPage = e => {
     e.preventDefault();
 
-    props.history.push(`home/training-series/${props.id}`);
+    props.history.push(`home/training-series/${props.data.id}`);
   };
 
   return (
