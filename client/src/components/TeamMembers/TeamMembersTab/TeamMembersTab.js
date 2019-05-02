@@ -1,10 +1,13 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { connect } from "react-redux";
+
+import TeamMemberOptions from "../../Modals/TeamMemberOptions";
 
 import Pagination from "material-ui-flat-pagination";
 import Grid from "@material-ui/core/Grid";
 
 import styled from "styled-components";
+import DeleteIcon from '@material-ui/icons/Delete';
 
 import {
   Paper,
@@ -19,18 +22,25 @@ import {
 //fetches team members, likely dont need this here, likely wont need this here but may potentially
 //adds team member, likely wont need this here but may potentially
 //deleteTeamMembers team member by ID, propbably going to be the only actual functionallity displayed firectly on this page.
-import {
-  getTeamMembers,
-  addTeamMember,
-  deleteTeamMember
-} from "../../store/actions/teamMembersActions.js";
+
+import { getTeamMembers, addTeamMember, deleteTeamMember } from "store/actions";
 
 const TeamMembersTab = props => {
   const [searchValue, setSearchValue] = useState("");
+  const [localTeamMembers, setLocalTeamMembers] = useState([]);
+  const [limit, setLimit] = useState(8);
+  const [offset, setOffset] = useState(0);
 
   useEffect(() => {
-    console.log(props);
+    props.getTeamMembers(props.userId);
+    setLocalTeamMembers(props.teamMembers);
+    // console.log(props.teamMembers);
+    console.log(props.teamMembers);
   }, []);
+
+  const handleClick = offset => {
+    setOffset(offset);
+  }
 
   return (
     <div>
@@ -57,7 +67,8 @@ const TeamMembersTab = props => {
               size="small"
               aria-label="Add"
               onClick={() => {
-                props.history.push("/home/create-team-member/");
+                props.history.push("/home/create-team-member");
+                console.log(props);
               }}
               style={{
                 margin: "0 10px",
@@ -72,17 +83,20 @@ const TeamMembersTab = props => {
 
         <hr />
         <Grid container justify="center">
-          {fakeTeamMembers
+          {localTeamMembers.length === 0 ?
+            <div>add some members</div>
+            :
+            props.teamMembers
+            .slice(offset, offset+limit)
             .filter(member =>
-              `${member.firstName} ${member.lastName}`
+              `${member.first_name} ${member.last_name}`
                 .toUpperCase()
                 .includes(searchValue.toUpperCase())
             )
             .map(teamMember => {
-              //will actually be mapping over props.teamMembers once were hooked up
               return (
-                // aware this is throwing an err for not having a key, will use tem members ID's once thats accessible. for now nbd...
                 <Grid
+                  key={teamMember.id}
                   item
                   style={{ cursor: "pointer" }}
                   onClick={e => {
@@ -91,31 +105,45 @@ const TeamMembersTab = props => {
                 >
                   <TeamsMember>
                     <Typography variant="subtitle1">
-                      {teamMember.firstName} {teamMember.lastName}
+                      {teamMember.first_name} {teamMember.last_name}
                     </Typography>
                     <hr />
                     <Typography variant="subtitle2">
                       {teamMember.email}
                     </Typography>
                     <Typography variant="overline">
-                      {teamMember.phoneNumber}
+                      {teamMember.phone_number}
                     </Typography>
                     <Typography variant="overline">
-                      mentor: {teamMember.mentor}
+                      mentor: {teamMember.mentor || 'not assigned'}
                     </Typography>
                     <Typography variant="overline">
-                      manager: {teamMember.manager}
+                      manager: {teamMember.manager || 'not assigned'}
                     </Typography>
-                    <ul>
+                    <DeleteIcon
+                    onClick={e => {
+                      e.stopPropagation();
+                      props.deleteTeamMember(teamMember.id);
+                    }}
+                    />
+                    {/* <ul>
                       {teamMember.trainingSeries.map(series => {
                         return <div>{series}</div>;
                       })}
-                    </ul>
+                    </ul> */}
                   </TeamsMember>
                 </Grid>
               );
             })}
         </Grid>
+        <Pagination
+            limit={limit}
+            reduced={true}
+            offset={offset}
+            total={props.teamMembers.length}
+            centerRipple={true}
+            onClick={(e, offset) => handleClick(offset)}
+          />
       </TeamsTabWrapper>
     </div>
   );
@@ -123,8 +151,8 @@ const TeamMembersTab = props => {
 
 const mapStateToProps = state => {
   return {
-    teamMembers: state.teamMembers,
-    teamMember: state.teamMember,
+    teamMembers: state.teamMembersReducer.teamMembers,
+    teamMember: state.teamMembersReducer.teamMember,
     status: state.status
   };
 };
@@ -135,9 +163,10 @@ export default connect(
 )(TeamMembersTab);
 
 const TeamsTabWrapper = styled(Paper)`
-  margin: 10px auto;
+  margin: 48px auto;
   padding: 10px;
-  width: 70%;
+  width: 90%;
+  
 `;
 const TeamsMember = styled(Paper)`
   margin: 10px;
@@ -151,55 +180,3 @@ const TeamsTabHeader = styled.div`
   display: flex;
   justify-content: space-between;
 `;
-
-const fakeTeamMembers = [
-  //not sureh how these will be structured, so obviously just so we have some kind of data down...
-  {
-    firstName: "Tom",
-    lastName: "Hessburg",
-    email: "tom@email.com",
-    jobDescription: "does nothing all day, essentially...",
-    slackID: "asdfasdfasdfasdf",
-    teamsID: "asdfadsfsadf",
-    phoneNumber: "352-636-5809",
-    trainingSeries: ["series1", "series2"],
-    manager: "Adam McKenney",
-    mentor: "Nick Cannariato"
-  },
-  {
-    firstName: "Bom",
-    lastName: "Fessburg",
-    email: "tom@email.com",
-    jobDescription: "does nothing all day, essentially...",
-    slackID: "asdfasdfasdfasdf",
-    teamsID: "asdfadsfsadf",
-    phoneNumber: "352-636-5809",
-    trainingSeries: ["series1", "series2"],
-    manager: "Adam McKenney",
-    mentor: "Nick Cannariato"
-  },
-  {
-    firstName: "Crom",
-    lastName: "Shessburg",
-    email: "tom@email.com",
-    jobDescription: "does nothing all day, essentially...",
-    slackID: "asdfasdfasdfasdf",
-    teamsID: "asdfadsfsadf",
-    phoneNumber: "352-636-5809",
-    trainingSeries: ["series1", "series2"],
-    manager: "Adam McKenney",
-    mentor: "Nick Cannariato"
-  },
-  {
-    firstName: "Lom",
-    lastName: "Nessburg",
-    email: "tom@email.com",
-    jobDescription: "does nothing all day, essentially...",
-    slackID: "asdfasdfasdfasdf",
-    teamsID: "asdfadsfsadf",
-    phoneNumber: "352-636-5809",
-    trainingSeries: ["series1", "series2"],
-    manager: "Adam McKenney",
-    mentor: "Nick Cannariato"
-  }
-];

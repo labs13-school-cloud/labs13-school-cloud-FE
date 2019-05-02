@@ -100,9 +100,9 @@ const mapStateToProps = state => {
 export default connect(mapStateToProps, { getTrainingSeries, deleteTrainingSeries, getMembersAssigned })(TrainingSeriesTab);
 
 const Wrapper = styled(Paper)`
-    width: 70%;
+    width: 90%;
     padding: 10px;
-    margin: 10px auto;
+    margin: 48px auto;
 `;
 
 const HeaderWrapper = styled.div`
@@ -111,7 +111,7 @@ const HeaderWrapper = styled.div`
 `;
 
 const Series = styled(Paper)`
-    width: 90%;
+    width: 70%;
     margin: 10px auto;
     padding: 20px;
     cursor: pointer;
@@ -119,8 +119,6 @@ const Series = styled(Paper)`
         background: #F8F8F8;
     }
 `;
-
-export default connect()(TrainingSeriesTab);
 
 //Just some bs info until we get everything hooked up...
 const exampleTrainingSeries = [
