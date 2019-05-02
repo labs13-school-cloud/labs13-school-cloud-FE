@@ -36,14 +36,16 @@ function SeriesCard(props) {
   //console.log("TRAINING SERIES LIST", props);
 
   const { classes } = props;
-  const [postLength, setPostLength] = useState(0);
+  const [messageLength, setMessageLength] = useState(0);
   const [assignedLength, setAssignedLength] = useState(0);
 
-  async function getPostCount() {
+  async function getMessageCount() {
     await axios
-      .get(`${process.env.REACT_APP_API}/api/training-series/${props.data.id}/posts`)
+      .get(
+        `${process.env.REACT_APP_API}/api/training-series/${props.id}/messages`
+      )
       .then(res => {
-        setPostLength(res.data.posts.length);
+        setMessageLength(res.data.messages.length);
       })
       .catch(err => {
         //console.log(err);
@@ -66,7 +68,7 @@ function SeriesCard(props) {
   }
 
   useEffect(() => {
-    getPostCount();
+    getMessageCount();
     getMemberCount();
   });
 
@@ -80,7 +82,7 @@ function SeriesCard(props) {
     <ListItem component="li" className={classes.listItem}>
       <ListItemText
         primary={props.data.title}
-        secondary={`Messages: ${postLength} | Assigned: ${assignedLength}`}
+        secondary={`Messages: ${messageLength} | Assigned: ${assignedLength}`}
         onClick={e => routeToTrainingSeriesPage(e)}
       />
 
