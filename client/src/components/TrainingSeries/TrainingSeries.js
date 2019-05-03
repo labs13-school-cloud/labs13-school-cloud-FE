@@ -42,7 +42,9 @@ function SeriesCard(props) {
   async function getMessageCount() {
     await axios
       .get(
-        `${process.env.REACT_APP_API}/api/training-series/${props.id}/messages`
+        `${process.env.REACT_APP_API}/api/training-series/${
+          props.data.id
+        }/messages`
       )
       .then(res => {
         setMessageLength(res.data.messages.length);

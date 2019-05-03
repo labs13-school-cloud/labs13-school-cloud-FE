@@ -57,9 +57,9 @@ export const createAMessage = (message, trainingSeriesID) => dispatch => {
   dispatch({ type: ADD_MESSAGE_START });
   axios
     .post(`${process.env.REACT_APP_API}/api/messages`, message)
-    .then(res =>
-      dispatch({ type: ADD_MESSAGE_SUCCESS, payload: res.data.newMessage })
-    )
+    .then(res => {
+      dispatch({ type: ADD_MESSAGE_SUCCESS, payload: res.data.newMessage });
+    })
     .then(() => {
       // dispatch(getTrainingSeriesMessages(trainingSeriesID))
       history.push(`/home/training-series/${trainingSeriesID}`);
