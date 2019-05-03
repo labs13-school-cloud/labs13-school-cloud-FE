@@ -33,7 +33,6 @@ export const getTrainingSeriesMessages = id => dispatch => {
   axios
     .get(`${process.env.REACT_APP_API}/api/training-series/${id}/messages`)
     .then(res => {
-      console.log("getting training series messages:", res.data);
       dispatch({
         type: GET_MESSAGES_SUCCESS,
         payload: res.data

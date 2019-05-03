@@ -466,7 +466,7 @@ class TrainingSeriesPosts extends React.Component {
             ) : (
               <ListStyles className={classes.listStyle}>
                 {sortedPosts.map(post => (
-                  <ListItemContainer>
+                  <ListItemContainer key={post.id}>
                     <ListItem key={post.id} className={classes.listItem}>
                       <ListItemText
                         primary={post.message_name}

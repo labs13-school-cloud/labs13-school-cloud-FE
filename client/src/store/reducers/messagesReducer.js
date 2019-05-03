@@ -44,7 +44,6 @@ const messagesReducer = (state = initialState, action) => {
         error: ""
       };
     case GET_MESSAGES_SUCCESS:
-      console.log("IN REDUCER: ", action.payload);
       return {
         ...state,
         isLoading: false,
