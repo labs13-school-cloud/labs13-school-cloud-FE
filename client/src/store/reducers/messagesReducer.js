@@ -47,8 +47,8 @@ const messagesReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
-        messages: action.payload.messages,
-        singleTrainingSeries: action.payload.training_series
+        messages: action.payload.posts,
+        singleTrainingSeries: action.payload.training_series[0]
       };
     case GET_MESSAGES_FAIL:
       return {
@@ -86,7 +86,7 @@ const messagesReducer = (state = initialState, action) => {
         ...state,
         isAdding: false,
         addedSuccessfully: true,
-        singleMessage: action.payload
+        singleMessage: action.payload //should probably be newMessage??
       };
     case ADD_MESSAGE_FAIL:
       return {

@@ -1,5 +1,6 @@
 import React from "react";
 import NumberFormat from "react-number-format";
+import axios from 'axios';
 
 import styled from "styled-components";
 
@@ -86,14 +87,30 @@ class TeamMemberPage extends React.Component {
       email: "",
       phone_number: "",
       user_id: "",
+      slack_id: "",
       text_on: true,
-      email_on: false
+      email_on: false,
+      slack_on: false,
+      manager: null,
+      mentor: null
     },
     assignments: [],
     training_series: [],
     isRouting: false,
-    snackState: false
+    snackState: false,
+    memberManager: null,
+    memberMentor: null,
+    otherTeamMembers: [],
+    slackUsers: []
   };
+
+  componentDidMount = async () => {
+    const { data } = await axios.get(`${process.env.REACT_APP_API}/api/slack/`)
+    this.setState({ 
+      otherTeamMembers: this.props.teamMembers,
+      slackUsers: data
+    });
+  }
 
   handleChange = name => event => {
     this.setState({
@@ -135,28 +152,46 @@ class TeamMemberPage extends React.Component {
     this.props.history.push("/home");
   };
 
+  selectHandler = (e, relationType) => {
+    let val = e.target.value !== "null" ? parseInt(e.target.value) : null;
+    this.setState({
+      teamMember: {
+        ...this.state.teamMember,
+        [e.target.name]: val
+      },
+      [relationType]: val
+        ? this.state.otherTeamMembers.find(mbr => mbr.id === val)
+        : null
+    });
+  };
+
   render() {
     const { classes } = this.props;
-    const { text_on, email_on } = this.state.teamMember;
+    const { text_on, email_on, slack_on } = this.state.teamMember;
 
-    let textDisabled;
-    let emailDisabled;
+    let textEnabled;
+    let emailEnabled;
+    let slackEnabled;
     let addDisabled = false;
     //console.log(addDisabled);
 
-    if (text_on && !email_on) {
-      textDisabled = true;
+    if (text_on && !email_on && !slack_on) {
+      textEnabled = true;
     }
 
-    if (email_on && !text_on) {
-      emailDisabled = true;
+    if (email_on && !text_on && !slack_on) {
+      emailEnabled = true;
     }
 
-    if (email_on && text_on) {
-      textDisabled = false;
-      emailDisabled = false;
+    if (slack_on && !text_on && !slack_on) {
+      slackEnabled = true;
     }
 
+    if (email_on && text_on && slack_on) {
+      textEnabled = false;
+      emailEnabled = false;
+      slackEnabled = false;
+    }
     //Checks to see if one number has been entered and if the full number matches
     if (
       /^$/gm.test(this.state.teamMember.phone_number) === true ||
@@ -228,6 +263,72 @@ class TeamMemberPage extends React.Component {
                 margin="normal"
               />
             </MemberInfoContainer>
+            <div className="mentor display">
+              Mentor
+              {this.state.memberMentor !== null
+                ? `: ${this.state.memberMentor.first_name} ${
+                this.state.memberMentor.last_name
+                }`
+                : ": none"}
+            </div>
+            <form className="mentor select">
+              <select
+                name="mentor"
+                value={this.state.teamMember.mentor}
+                onChange={e => this.selectHandler(e, "memberMentor")}
+              >
+                <option>select mentor</option>{" "}
+                <option value="null">none</option>
+                {this.state.otherTeamMembers
+                  .filter(
+                    mbr =>
+                      mbr.id !== this.state.teamMember.mentor &&
+                      mbr.id !== this.state.teamMember.manager
+                  )
+                  .map(mbr => (
+                    <option key={mbr.id} value={mbr.id}>
+                      {mbr.first_name} {mbr.last_name}
+                    </option>
+                  ))}
+              </select>
+            </form>
+
+            <div className="manager display">
+              Manager
+              {this.state.memberManager !== null
+                ? `: ${this.state.memberManager.first_name} ${
+                this.state.memberManager.last_name
+                }`
+                : ": none"}
+            </div>
+            <form className="manager select">
+              <select
+                name="manager"
+                value={this.state.teamMember.manager}
+                onChange={e => this.selectHandler(e, "memberManager")}
+              >
+                <option>select manager</option>
+                <option value="null">none</option>
+                {this.state.otherTeamMembers
+                  .filter(
+                    mbr =>
+                      mbr.id !== this.state.teamMember.mentor &&
+                      mbr.id !== this.state.teamMember.manager
+                  )
+                  .map(mbr => (
+                    <option key={mbr.id} value={mbr.id}>
+                      {mbr.first_name} {mbr.last_name}
+                    </option>
+                  ))}
+              </select>
+            </form>
+            <MemberInfoContainer>
+              <select value={this.state.teamMember.slack_id} onChange={this.handleChange("slack_id")}>
+                {this.state.slackUsers && this.state.slackUsers.map(user => (
+                  <option key={user.id} value={user.id}>{user.real_name}</option>
+                ))}
+              </select>
+            </MemberInfoContainer>
 
             <ButtonContainer>
               <FormControlLabel
@@ -235,7 +336,7 @@ class TeamMemberPage extends React.Component {
                   <Switch
                     checked={this.state.teamMember.text_on}
                     onChange={
-                      textDisabled ? null : this.handleToggleChange("text_on")
+                      textEnabled ? null : this.handleToggleChange("text_on")
                     }
                     value="text_on"
                     color="default"
@@ -258,7 +359,7 @@ class TeamMemberPage extends React.Component {
                     disabled={this.state.teamMember.email === ""}
                     checked={this.state.teamMember.email_on}
                     onChange={
-                      emailDisabled ? null : this.handleToggleChange("email_on")
+                      emailEnabled ? null : this.handleToggleChange("email_on")
                     }
                     value="email_on"
                     color="default"
@@ -275,6 +376,28 @@ class TeamMemberPage extends React.Component {
                     : "Email Inactive"
                 }
               />
+              <FormControlLabel
+                control={
+                  <Switch
+                    checked={this.state.teamMember.slack_on}
+                    onChange={
+                      slackEnabled ? null : this.handleToggleChange("slack_on")
+                    }
+                    value="slack_on"
+                    color="default"
+                    style={
+                      this.state.teamMember.slack_on
+                        ? { color: "#451476" }
+                        : { color: "#edeaea" }
+                    }
+                  />
+                }
+                label={
+                  this.state.teamMember.slack_on
+                    ? "Slack Active"
+                    : "Slack Inactive"
+                }
+              />
             </ButtonContainer>
             <ButtonContainer>
               <Button
@@ -288,8 +411,8 @@ class TeamMemberPage extends React.Component {
                 {this.state.isRouting ? (
                   <LoadingImage src={TrainingBotGIF} alt="Loading Icon" />
                 ) : (
-                  "Add Member"
-                )}
+                    "Add Member"
+                  )}
               </Button>
               <Button
                 className={classes.button}
@@ -308,7 +431,8 @@ class TeamMemberPage extends React.Component {
 const mapStateToProps = state => {
   return {
     addSuccess: state.teamMembersReducer.status.addSuccess,
-    teamMember: state.teamMembersReducer.teamMember
+    teamMember: state.teamMembersReducer.teamMember,
+    teamMembers: state.teamMembersReducer.teamMembers
   };
 };
 

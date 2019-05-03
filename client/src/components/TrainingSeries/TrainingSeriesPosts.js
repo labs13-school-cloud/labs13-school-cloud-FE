@@ -163,7 +163,10 @@ class TrainingSeriesPosts extends React.Component {
     displaySnackbar: false,
     editingTitle: false,
     searchInput: "",
-    searchOpen: false
+    searchOpen: false,
+    singleTrainingSeries: this.props.trainingSeries.filter(
+      series => series.id === parseInt(this.props.match.params.id)
+    )[0]
   };
 
   componentDidMount() {
@@ -194,7 +197,7 @@ class TrainingSeriesPosts extends React.Component {
     this.props.history.push({
       pathname: "/home/create-post",
       state: {
-        training_series_id: this.props.singleTrainingSeries.id
+        training_series_id: this.state.singleTrainingSeries.id
       }
     });
   };
@@ -212,7 +215,7 @@ class TrainingSeriesPosts extends React.Component {
   routeToAssigning = e => {
     e.preventDefault();
     this.props.history.push({
-      pathname: `/home/assign-members/${this.props.singleTrainingSeries.id}`
+      pathname: `/home/assign-members/${this.state.singleTrainingSeries.id}`
     });
   };
 
@@ -225,7 +228,7 @@ class TrainingSeriesPosts extends React.Component {
   beginTitleEdit = e => {
     this.setState({
       editingTitle: true,
-      title: this.props.singleTrainingSeries.title
+      title: this.state.singleTrainingSeries.title
     });
   };
 
@@ -237,7 +240,7 @@ class TrainingSeriesPosts extends React.Component {
     e.preventDefault();
     const data = { title: this.state.title };
     await this.props.editTrainingSeries(
-      this.props.singleTrainingSeries.id,
+      this.state.singleTrainingSeries.id,
       data
     );
     await this.getTrainingSeriesWithMessages(this.props.match.params.id);
@@ -296,7 +299,7 @@ class TrainingSeriesPosts extends React.Component {
       titleEdit = (
         <TrainingSeriesTitle>
           <Typography variant="headline">
-            {`${this.props.singleTrainingSeries.title} \u00A0`}
+            {`${this.state.singleTrainingSeries.title} \u00A0`}
           </Typography>
           <i
             style={{ fontSize: 25 }}
@@ -388,7 +391,7 @@ class TrainingSeriesPosts extends React.Component {
 
     let posts;
 
-    console.log(this.props); // checks if the search field is active and there are results from the fuse search
+    //console.log(this.props); // checks if the search field is active and there are results from the fuse search
     if (searchOn && this.searchedPosts(this.props.posts).length > 0) {
       posts = this.searchedPosts(this.props.posts);
     } else {
@@ -575,9 +578,9 @@ const TrainingSeriesTitle = styled.div`
 
 const mapStateToProps = state => ({
   isLoading: state.messagesReducer.isLoading,
-  singleTrainingSeries: state.trainingSeriesReducer.trainingSeries.filter(
-    series => series.id === this.props.match.params.id
-  ),
+  //singleTrainingSeries: state.trainingSeriesReducer.trainingSeries.filter(
+  //   series => series.id === this.props.match.params.id
+  // ),
   posts: state.messagesReducer.messages,
   assignments: state.trainingSeriesReducer.assignments,
   trainingSeries: state.trainingSeriesReducer.trainingSeries,
