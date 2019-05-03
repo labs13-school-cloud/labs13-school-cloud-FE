@@ -108,6 +108,7 @@ class CreatePost extends React.Component {
 
   handleMessageSubmit = e => {
     e.preventDefault();
+    console.log("handeling message submit: ", this.state.message);
     this.props.createAMessage(
       this.state.message,
       this.state.message.training_series_id
