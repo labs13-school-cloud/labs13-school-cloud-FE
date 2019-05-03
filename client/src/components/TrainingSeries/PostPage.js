@@ -75,10 +75,12 @@ class PostPage extends React.Component {
   };
 
   componentDidMount() {
-    if (this.props.location.state.message) {
+    console.log(this.props);
+    if (this.props.location.state.post) {
+      //changed back to to post to fix bug... can change in be later
       this.setState({
         ...this.state,
-        message: this.props.location.state.message
+        message: this.props.location.state.post //changed back to to post to fix bug... can change in be later
       });
     }
   }
