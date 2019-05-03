@@ -575,7 +575,9 @@ const TrainingSeriesTitle = styled.div`
 
 const mapStateToProps = state => ({
   isLoading: state.messagesReducer.isLoading,
-  singleTrainingSeries: state.messagesReducer.singleTrainingSeries,
+  singleTrainingSeries: state.trainingSeriesReducer.trainingSeries.filter(
+    series => series.id === this.props.match.params.id
+  ),
   posts: state.messagesReducer.messages,
   assignments: state.trainingSeriesReducer.assignments,
   trainingSeries: state.trainingSeriesReducer.trainingSeries,
