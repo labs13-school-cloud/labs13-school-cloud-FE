@@ -7,13 +7,14 @@ import thunk from "redux-thunk";
 import { Route, Router } from "react-router-dom";
 
 //Components
-import App from './App';
-import Pricing from './components/LandingPage/Pricing';
-import Team from './components/LandingPage/Team';
-import DashboardView from './components/Dashboard/DashboardView';
+import App from "./App";
+import Pricing from "./components/LandingPage/Pricing";
+import Team from "./components/LandingPage/Team";
+import DashboardView from "./components/Dashboard/DashboardView";
 
 //Callback
 import Callback from "./components/Callback/Callback.js";
+import SlackCallback from "./components/Callback/SlackCallback.js";
 
 //Auth
 import Authenticate from "./components/Misc/authenticate/authenticate.js";
@@ -44,6 +45,7 @@ export const makeMainRoutes = () => {
             <Route path="/team" component={Team} />
             <Route path="/home" component={Authenticate(DashboardView)} />
             <Route path="/callback" component={Callback} />
+            <Route path="/slack-callback" component={SlackCallback} />
           </div>
         </>
       </Router>
