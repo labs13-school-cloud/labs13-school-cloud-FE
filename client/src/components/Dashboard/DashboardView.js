@@ -219,12 +219,15 @@ class Dashboard extends React.Component {
                 />
                 <Route
                   path="/home/assign-members/:id"
-                  render={props => (
-                    <AddTrainingSeriesView
-                      {...props}
-                      userId={this.props.userProfile.user.id}
-                    />
-                  )}
+                  render={props => {
+                    console.log("Route Triggered");
+                    return (
+                      <AddTrainingSeriesView
+                        {...props}
+                        userId={this.props.userProfile.user.id}
+                      />
+                    );
+                  }}
                 />
                 <Route
                   path="/home/assign-series/:id"

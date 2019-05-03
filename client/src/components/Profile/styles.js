@@ -109,3 +109,14 @@ export const ButtonContainer = styled.div`
     margin-bottom: 10px;
   }
 `;
+
+export function getModalStyle() {
+  const top = 50;
+  const left = 50;
+
+  return {
+    top: `${top}%`,
+    left: `${left}%`,
+    transform: `translate(-${top}%, -${left}%)`
+  };
+}
