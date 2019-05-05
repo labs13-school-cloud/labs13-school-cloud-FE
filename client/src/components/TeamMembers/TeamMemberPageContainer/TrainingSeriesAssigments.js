@@ -1,7 +1,7 @@
 import React from "react";
 
 import { connect } from "react-redux";
-import DeleteModal from "../../Modals/deleteModal";
+import DeleteModal from "../../UI/Modals/deleteModal";
 import { deleteTeamMemberFromTrainingSeries } from "store/actions";
 import styled from "styled-components";
 

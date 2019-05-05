@@ -12,7 +12,7 @@ import { ListItem, ListItemText } from "@material-ui/core/";
 
 //Routing
 import { withRouter } from "react-router";
-import TeamMemberOptions from "../../Modals/TeamMemberOptions";
+import TeamMemberOptions from "../../UI/Modals/TeamMemberOptions";
 
 const styles = {
   card: {

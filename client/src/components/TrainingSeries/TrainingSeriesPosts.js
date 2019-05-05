@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import Fuse from "fuse.js";
 
 // Components
-import DeleteModal from "../Modals/deleteModal";
+import DeleteModal from "../UI/Modals/deleteModal";
 import TrainingSeriesAssignment from "./TrainingSeriesAssignment";
 
 import styled from "styled-components";
@@ -403,8 +403,8 @@ class TrainingSeriesPosts extends React.Component {
       a.days_from_start > b.days_from_start
         ? 1
         : b.days_from_start > a.days_from_start
-        ? -1
-        : 0
+          ? -1
+          : 0
     );
 
     return (
@@ -464,42 +464,42 @@ class TrainingSeriesPosts extends React.Component {
                 <p>You do not have any messages.</p>
               </HolderText>
             ) : (
-              <ListStyles className={classes.listStyle}>
-                {sortedPosts.map(post => (
-                  <ListItemContainer>
-                    <ListItem key={post.id} className={classes.listItem}>
-                      <ListItemText
-                        primary={post.message_name}
-                        secondary={post.message_details}
-                        className={classes.listItemText}
-                        onClick={e => this.routeToeditMessagePage(e, post)}
-                      />
-                      <ListItemSecondaryAction
-                        className={classes.secondaryAction}
-                      >
-                        <div>
-                          <p>{post.days_from_start} days</p>
-                        </div>
-                        <ListButtonContainer>
-                          <i
-                            className={`material-icons ${classes.icons}`}
-                            onClick={e => this.routeToEditMessagePage(e, post)}
-                          >
-                            edit
+                <ListStyles className={classes.listStyle}>
+                  {sortedPosts.map(post => (
+                    <ListItemContainer>
+                      <ListItem key={post.id} className={classes.listItem}>
+                        <ListItemText
+                          primary={post.message_name}
+                          secondary={post.message_details}
+                          className={classes.listItemText}
+                          onClick={e => this.routeToeditMessagePage(e, post)}
+                        />
+                        <ListItemSecondaryAction
+                          className={classes.secondaryAction}
+                        >
+                          <div>
+                            <p>{post.days_from_start} days</p>
+                          </div>
+                          <ListButtonContainer>
+                            <i
+                              className={`material-icons ${classes.icons}`}
+                              onClick={e => this.routeToEditMessagePage(e, post)}
+                            >
+                              edit
                           </i>
-                          <DeleteModal
-                            className={`material-icons ${classes.icons}`}
-                            deleteType="post"
-                            id={post.id}
-                          />
-                        </ListButtonContainer>
-                      </ListItemSecondaryAction>
-                    </ListItem>
-                    <Divider />
-                  </ListItemContainer>
-                ))}
-              </ListStyles>
-            )}
+                            <DeleteModal
+                              className={`material-icons ${classes.icons}`}
+                              deleteType="post"
+                              id={post.id}
+                            />
+                          </ListButtonContainer>
+                        </ListItemSecondaryAction>
+                      </ListItem>
+                      <Divider />
+                    </ListItemContainer>
+                  ))}
+                </ListStyles>
+              )}
           </Paper>
           <Paper className={classes.paper}>{assignedMembersStatus}</Paper>
         </PageContainer>

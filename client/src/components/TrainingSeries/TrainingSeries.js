@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import { ListItem, ListItemText } from '@material-ui/core/';
 
-import SlideDownModal from '../Modals/SlideDownModal';
+import SlideDownModal from '../UI/Modals/SlideDownModal';
 
 //Customized Styling
 const styles = {

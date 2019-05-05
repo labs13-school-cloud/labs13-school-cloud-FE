@@ -18,7 +18,7 @@ import {
 import NotificationWidget from "./SnackBarTeamMember";
 //Components
 import TrainingSeriesAssignments from "./TrainingSeriesAssigments";
-import DeleteModal from "../../Modals/deleteModal";
+import DeleteModal from "../../UI/Modals/deleteModal";
 
 //Redux
 import { connect } from "react-redux";

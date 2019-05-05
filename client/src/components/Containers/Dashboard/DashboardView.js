@@ -37,7 +37,7 @@ import CreatePost from "../../TrainingSeries/CreatePost";
 import PostPage from "../../TrainingSeries/PostPage";
 import NotificationsView from "../../Notifications/NotificationsView";
 import AssignMemberPage from "../../TeamMembers/TeamMemberPageContainer/AssignMemberPage";
-import Snackbar from "../../Snackbar/Snackbar";
+import Snackbar from "../../UI/Snackbar/Snackbar";
 import DashboardTour from "../../Misc/Tour/Tour";
 
 //Auth
