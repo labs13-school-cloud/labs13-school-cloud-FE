@@ -19,7 +19,7 @@ import Tom from "img/Tom.png";
 import { animateScroll as scroll } from "react-scroll";
 
 //Auth
-import { login } from "../../../Auth/Auth";
+import { login } from "../../../../Auth/Auth";
 
 import {
   styles,

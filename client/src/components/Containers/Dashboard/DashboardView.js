@@ -2,7 +2,7 @@
 import React from "react";
 import { Router, Route } from "react-router-dom";
 
-import history from "../../history.js";
+import history from "../../../history.js";
 
 //Styling
 import {
@@ -20,28 +20,28 @@ import QuestionAnswer from "@material-ui/icons/QuestionAnswerOutlined";
 import Timeline from "@material-ui/icons/TimelineOutlined";
 
 //Components
-import TeamMembersView from "../TeamMembers/TeamMembersView";
-import TeamMembersTab from "../TeamMembers/TeamMembersTab";
-import TrainingSeriesView from "../TrainingSeries/TrainingSeriesView";
-import TrainingSeriesTab from "../TrainingSeries/TrainingSeriesTab.js";
-import ProgressCircle from "../Misc/Progress/ProgressCircle";
+import TeamMembersView from "../../TeamMembers/TeamMembersView";
+import TeamMembersTab from "../../TeamMembers/TeamMembersTab";
+import TrainingSeriesView from "../../TrainingSeries/TrainingSeriesView";
+import TrainingSeriesTab from "../../TrainingSeries/TrainingSeriesTab.js";
+import ProgressCircle from "../../Misc/Progress/ProgressCircle";
 import ProfileView from "../Profile/ProfileView";
-import AppBar from "../AppBar/AppBar";
-import TeamMemberPageView from "../TeamMembers/TeamMemberPageContainer/TeamMemberPageView";
-import AddTrainingSeriesView from "../TrainingSeries/AddMembersToTrainingSeries/AddMembersView.js";
-import CreateTrainingSeries from "../TrainingSeries/CreateTrainingSeries";
-import ReturnToDashboardButton from "../Navigation/ReturnToDashboard";
-import TrainingSeriesPosts from "../TrainingSeries/TrainingSeriesPosts";
-import AddTeamMemberPage from "../TeamMembers/TeamMemberPageContainer/AddTeamMemberPage";
-import CreatePost from "../TrainingSeries/CreatePost";
-import PostPage from "../TrainingSeries/PostPage";
-import NotificationsView from "../Notifications/NotificationsView";
-import AssignMemberPage from "../TeamMembers/TeamMemberPageContainer/AssignMemberPage";
-import Snackbar from "../Snackbar/Snackbar";
-import DashboardTour from "../Tour/Tour";
+import AppBar from "../../AppBar/AppBar";
+import TeamMemberPageView from "../../TeamMembers/TeamMemberPageContainer/TeamMemberPageView";
+import AddTrainingSeriesView from "../../TrainingSeries/AddMembersToTrainingSeries/AddMembersView.js";
+import CreateTrainingSeries from "../../TrainingSeries/CreateTrainingSeries";
+import ReturnToDashboardButton from "../../Navigation/ReturnToDashboard";
+import TrainingSeriesPosts from "../../TrainingSeries/TrainingSeriesPosts";
+import AddTeamMemberPage from "../../TeamMembers/TeamMemberPageContainer/AddTeamMemberPage";
+import CreatePost from "../../TrainingSeries/CreatePost";
+import PostPage from "../../TrainingSeries/PostPage";
+import NotificationsView from "../../Notifications/NotificationsView";
+import AssignMemberPage from "../../TeamMembers/TeamMemberPageContainer/AssignMemberPage";
+import Snackbar from "../../Snackbar/Snackbar";
+import DashboardTour from "../../Tour/Tour";
 
 //Auth
-import Authenticate from "../Misc/authenticate/authenticate";
+import Authenticate from "../../Misc/authenticate/authenticate";
 
 //State Management
 import { connect } from "react-redux";
@@ -245,8 +245,8 @@ class Dashboard extends React.Component {
             </DashboardContainer>
           </>
         ) : (
-          <ProgressCircle />
-        )}
+            <ProgressCircle />
+          )}
       </>
     );
   }

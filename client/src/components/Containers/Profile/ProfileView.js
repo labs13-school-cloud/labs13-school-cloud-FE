@@ -3,9 +3,9 @@ import { connect } from "react-redux";
 
 //Components
 // import UserModal from '../Modals/userModal';
-import StripeView from "../Stripe/StripeView";
-import { logout } from "../../Auth/Auth";
-import Authentication from "../Misc/authenticate/";
+import StripeView from "../../Stripe/StripeView";
+import { logout } from "../../../Auth/Auth";
+import Authentication from "../../Misc/authenticate/";
 
 //State Management
 import { getUser, editUser, deleteUser } from "store/actions/userActions";
@@ -185,26 +185,26 @@ class ProfileView extends React.Component {
                 </Typography>
               </>
             ) : (
-              <>
-                <Typography variant="h6" id="modal-title">
-                  Are you sure you want to delete your account?
+                <>
+                  <Typography variant="h6" id="modal-title">
+                    Are you sure you want to delete your account?
                 </Typography>
-                <Typography variant="subtitle" className={classes.bottomSpace}>
-                  All data associated with this account will be permanently
-                  deleted.
+                  <Typography variant="subtitle" className={classes.bottomSpace}>
+                    All data associated with this account will be permanently
+                    deleted.
                 </Typography>
-                <Button
-                  type="submit"
-                  variant="contained"
-                  color="secondary"
-                  onClick={() => {
-                    this.handleDelete(user.userID);
-                  }}
-                >
-                  Delete Account
+                  <Button
+                    type="submit"
+                    variant="contained"
+                    color="secondary"
+                    onClick={() => {
+                      this.handleDelete(user.userID);
+                    }}
+                  >
+                    Delete Account
                 </Button>
-              </>
-            )}
+                </>
+              )}
           </Paper>
         </Modal>
       </Container>

@@ -25,13 +25,13 @@ import Button from "@material-ui/core/Button";
 
 //Icons & Images
 import { ArrowUpward } from "@material-ui/icons";
-import Logo from "../../../img/training-bot.png";
-import undrawCoworker from "../../../img/undraw_co-workers_ujs6.svg";
-import undrawNotify from "../../../img/undraw_notify_88a4.svg";
-import undrawTask from "../../../img/undraw_personal_text_vkd8.svg";
+import Logo from "../../../../img/training-bot.png";
+import undrawCoworker from "../../../../img/undraw_co-workers_ujs6.svg";
+import undrawNotify from "../../../../img/undraw_notify_88a4.svg";
+import undrawTask from "../../../../img/undraw_personal_text_vkd8.svg";
 
 //Auth
-import { login } from "../../../Auth/Auth";
+import { login } from "../../../../Auth/Auth";
 
 class LandingPageView extends React.Component {
   scrollTo() {

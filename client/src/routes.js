@@ -8,9 +8,9 @@ import { Route, Router } from "react-router-dom";
 
 //Components
 import App from './App';
-import Pricing from './components/LandingPage/Pricing';
-import Team from './components/LandingPage/Team';
-import DashboardView from './components/Dashboard/DashboardView';
+import Pricing from './components/Containers/LandingPage/Pricing';
+import Team from './components/Containers/LandingPage/Team';
+import DashboardView from './components/Containers/Dashboard/DashboardView';
 
 //Callback
 import Callback from "./components/Callback/Callback.js";
