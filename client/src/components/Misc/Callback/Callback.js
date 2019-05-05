@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 
 //Loading SVG that gets displayed
 import Progress from "../Progress/ProgressCircle";
+import { style } from './styles.js';
 
 //Auth
 import { setAccessToken, setIdToken, getUserProfile } from "../../../Auth/Auth";
@@ -17,18 +18,7 @@ function Callback(props) {
   }, []);
 
   //Customized styling
-  const style = {
-    position: "absolute",
-    display: "flex",
-    justifyContent: "center",
-    height: "100vh",
-    width: "100vw",
-    top: 0,
-    bottom: 0,
-    left: 0,
-    right: 0,
-    backgroundColor: "white"
-  };
+
 
   return (
     <div style={style}>

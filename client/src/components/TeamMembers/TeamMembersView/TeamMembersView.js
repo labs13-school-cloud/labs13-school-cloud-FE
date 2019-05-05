@@ -1,11 +1,12 @@
 // component to contain all the components related to team members
 
 import React, { Suspense } from "react";
-import styled from "styled-components";
 import Fuse from "fuse.js";
 
 //Components
 // import TeamMembersList from './TeamMembersList';
+
+import { MessageContainer } from "./styles.js";
 
 import Pagination from "material-ui-flat-pagination";
 
@@ -251,11 +252,4 @@ export default connect(
   { getTeamMembers, addTeamMember, deleteTeamMember }
 )(withStyles(styles)(withRouter(TeamMembersView)));
 
-const MessageContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: lightgray;
-  height: 100%;
-  text-align: center;
-`;
+

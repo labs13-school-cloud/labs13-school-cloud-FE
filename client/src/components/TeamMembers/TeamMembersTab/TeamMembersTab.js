@@ -3,9 +3,12 @@ import { connect } from "react-redux";
 
 import Pagination from "material-ui-flat-pagination";
 import Grid from "@material-ui/core/Grid";
-
-import styled from "styled-components";
 import DeleteIcon from "@material-ui/icons/Delete";
+import {
+  TeamsTabWrapper,
+  TeamsMember,
+  TeamsTabHeader
+} from "./styles.js";
 
 import {
   Paper,
@@ -92,57 +95,57 @@ const TeamMembersTab = props => {
           {localTeamMembers.length === 0 ? (
             <div>add some members</div>
           ) : (
-            props.teamMembers
-              .slice(offset, offset + limit)
-              .filter(member =>
-                `${member.first_name} ${member.last_name}`
-                  .toUpperCase()
-                  .includes(searchValue.toUpperCase())
-              )
-              .map(teamMember => {
-                console.log(teamMember);
-                return (
-                  <Grid
-                    key={teamMember.id}
-                    item
-                    style={{ cursor: "pointer" }}
-                    onClick={e => {
-                      props.history.push(`/home/team-member/${teamMember.id}`);
-                    }}
-                  >
-                    <TeamsMember>
-                      <Typography variant="subtitle1">
-                        {teamMember.first_name} {teamMember.last_name}
-                      </Typography>
-                      <hr />
-                      <Typography variant="subtitle2">
-                        {teamMember.email}
-                      </Typography>
-                      <Typography variant="overline">
-                        {teamMember.phone_number}
-                      </Typography>
-                      <Typography variant="overline">
-                        mentor: {teamMember.mentor || "not assigned"}
-                      </Typography>
-                      <Typography variant="overline">
-                        manager: {teamMember.manager || "not assigned"}
-                      </Typography>
-                      <DeleteIcon
-                        onClick={e => {
-                          e.stopPropagation();
-                          props.deleteTeamMember(teamMember.id);
-                        }}
-                      />
-                      {/* <ul>
+              props.teamMembers
+                .slice(offset, offset + limit)
+                .filter(member =>
+                  `${member.first_name} ${member.last_name}`
+                    .toUpperCase()
+                    .includes(searchValue.toUpperCase())
+                )
+                .map(teamMember => {
+                  console.log(teamMember);
+                  return (
+                    <Grid
+                      key={teamMember.id}
+                      item
+                      style={{ cursor: "pointer" }}
+                      onClick={e => {
+                        props.history.push(`/home/team-member/${teamMember.id}`);
+                      }}
+                    >
+                      <TeamsMember>
+                        <Typography variant="subtitle1">
+                          {teamMember.first_name} {teamMember.last_name}
+                        </Typography>
+                        <hr />
+                        <Typography variant="subtitle2">
+                          {teamMember.email}
+                        </Typography>
+                        <Typography variant="overline">
+                          {teamMember.phone_number}
+                        </Typography>
+                        <Typography variant="overline">
+                          mentor: {teamMember.mentor || "not assigned"}
+                        </Typography>
+                        <Typography variant="overline">
+                          manager: {teamMember.manager || "not assigned"}
+                        </Typography>
+                        <DeleteIcon
+                          onClick={e => {
+                            e.stopPropagation();
+                            props.deleteTeamMember(teamMember.id);
+                          }}
+                        />
+                        {/* <ul>
                       {teamMember.trainingSeries.map(series => {
                         return <div>{series}</div>;
                       })}
                     </ul> */}
-                    </TeamsMember>
-                  </Grid>
-                );
-              })
-          )}
+                      </TeamsMember>
+                    </Grid>
+                  );
+                })
+            )}
         </Grid>
       </TeamsTabWrapper>
     </div>
@@ -161,21 +164,3 @@ export default connect(
   mapStateToProps,
   { getTeamMembers, addTeamMember, deleteTeamMember }
 )(TeamMembersTab);
-
-const TeamsTabWrapper = styled(Paper)`
-  margin: 48px auto;
-  padding: 10px;
-  width: 90%;
-`;
-const TeamsMember = styled(Paper)`
-  margin: 10px;
-  padding: 10px;
-  width: 220px;
-  &:hover {
-    background: #f8f8f8;
-  }
-`;
-const TeamsTabHeader = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;

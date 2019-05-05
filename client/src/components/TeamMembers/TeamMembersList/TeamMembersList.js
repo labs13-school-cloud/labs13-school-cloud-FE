@@ -2,8 +2,9 @@
 
 import React, { Suspense } from "react";
 // import TeamMember from './TeamMember';
-import styled from "styled-components";
+import { ListStyles } from "./styles.js";
 const TeamMember = React.lazy(() => import("../TeamMember"));
+
 
 const TeamMembersList = props => {
   let arr = [];
@@ -31,11 +32,3 @@ const TeamMembersList = props => {
 };
 
 export default TeamMembersList;
-
-const ListStyles = styled.ul`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-left: 0px;
-  margin: 0px;
-`;
