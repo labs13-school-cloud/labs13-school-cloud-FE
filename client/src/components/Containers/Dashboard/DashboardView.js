@@ -26,7 +26,7 @@ import TrainingSeriesView from "../../TrainingSeries/TrainingSeriesView";
 import TrainingSeriesTab from "../../TrainingSeries/TrainingSeriesTab.js";
 import ProgressCircle from "../../Misc/Progress/ProgressCircle";
 import ProfileView from "../Profile/ProfileView";
-import AppBar from "../../AppBar/AppBar";
+import AppBar from "../../Navigation/AppBar/AppBar";
 import TeamMemberPageView from "../../TeamMembers/TeamMemberPageContainer/TeamMemberPageView";
 import AddTrainingSeriesView from "../../TrainingSeries/AddMembersToTrainingSeries/AddMembersView.js";
 import CreateTrainingSeries from "../../TrainingSeries/CreateTrainingSeries";
