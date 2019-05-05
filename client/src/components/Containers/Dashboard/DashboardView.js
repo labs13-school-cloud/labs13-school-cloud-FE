@@ -38,7 +38,7 @@ import PostPage from "../../TrainingSeries/PostPage";
 import NotificationsView from "../../Notifications/NotificationsView";
 import AssignMemberPage from "../../TeamMembers/TeamMemberPageContainer/AssignMemberPage";
 import Snackbar from "../../Snackbar/Snackbar";
-import DashboardTour from "../../Tour/Tour";
+import DashboardTour from "../../Misc/Tour/Tour";
 
 //Auth
 import Authenticate from "../../Misc/authenticate/authenticate";

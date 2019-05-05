@@ -13,7 +13,7 @@ import Team from './components/Containers/LandingPage/Team';
 import DashboardView from './components/Containers/Dashboard/DashboardView';
 
 //Callback
-import Callback from "./components/Callback/Callback.js";
+import Callback from "./components/Misc/Callback/Callback.js";
 
 //Auth
 import Authenticate from "./components/Misc/authenticate/authenticate.js";

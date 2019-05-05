@@ -18,7 +18,7 @@ import {
   Modal
 } from "@material-ui/core/";
 import UnsubscribeModal from "./unsubscribeModal";
-import TrainingBotGIF from "../../img/trainingBot.gif";
+import TrainingBotGIF from "../../../img/trainingBot.gif";
 
 const styles = theme => ({
   paper: {
