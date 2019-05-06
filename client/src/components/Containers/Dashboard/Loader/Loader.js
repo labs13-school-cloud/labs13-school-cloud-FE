@@ -17,7 +17,6 @@ import { getUser } from "store/actions/userActions";
 import DashboardRoutes from "../Routes";
 
 function Dashboard(props) {
-  console.log("asdfasdfsadf :", props);
   const [displaySnackbar, setDisplaySnackbar] = useState(false);
   const [isTourOpen, setIsTourOpen] = useState(true);
   const { getUser, newUser, location } = props;
