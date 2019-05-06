@@ -2,8 +2,8 @@ import React, { useState } from "react";
 
 import TeamMembersView from "components/Sections/TeamMembers/TeamMembersView";
 import TeamMembersTab from "components/Sections/TeamMembers/TeamMembersTab";
-import TrainingSeriesView from "components/Sections/TrainingSeries/TrainingSeriesView";
-import TrainingSeriesTab from "components/Sections/TrainingSeries/TrainingSeriesTab.js";
+import TrainingSeriesView from "components/Sections/TrainingSeries/DashTSComponents/TrainingSeriesView";
+import TrainingSeriesTab from "components/Sections/TrainingSeries/TabTSComponents/TrainingSeriesTab.js";
 import NotificationsView from "components/Sections/Notifications/NotificationsView";
 
 import BottomNavigation from "@material-ui/core/BottomNavigation";

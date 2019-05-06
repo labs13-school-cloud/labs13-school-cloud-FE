@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import Fuse from "fuse.js";
 
 // Components
-import DeleteModal from "../../UI/Modals/deleteModal";
+import DeleteModal from "../../../UI/Modals/deleteModal";
 import TrainingSeriesAssignment from "./TrainingSeriesAssignment";
 
 import styled from "styled-components";
@@ -37,7 +37,7 @@ import {
   Divider
 } from "@material-ui/core/";
 
-import AddMemberSnackbar from "./AddMembersToTrainingSeries/AddMemberSnackbar";
+import AddMemberSnackbar from "../AddMembersToTrainingSeries/AddMemberSnackbar";
 
 const styles = theme => ({
   paper: {

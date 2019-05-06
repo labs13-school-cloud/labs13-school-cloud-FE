@@ -4,11 +4,11 @@ import { Router, Route } from "react-router-dom";
 import Profile from "components/Containers/Profile";
 import TeamMemberPageView from "components/Sections/TeamMembers/TeamMemberPageContainer/TeamMemberPageView";
 import AddTrainingSeriesView from "components/Sections/TrainingSeries/AddMembersToTrainingSeries/AddMembersView.js";
-import CreateTrainingSeries from "components/Sections/TrainingSeries/CreateTrainingSeries";
-import TrainingSeriesPosts from "components/Sections/TrainingSeries/TrainingSeriesPosts";
+import CreateTrainingSeries from "components/Sections/TrainingSeries/CreateTSComponents/CreateTrainingSeries";
+import TrainingSeriesPosts from "components/Sections/TrainingSeries/DashTSComponents/TrainingSeriesPosts";
 import AddTeamMemberPage from "components/Sections/TeamMembers/TeamMemberPageContainer/AddTeamMemberPage";
-import CreatePost from "components/Sections/TrainingSeries/CreatePost";
-import PostPage from "components/Sections/TrainingSeries/PostPage";
+import CreatePost from "components/Sections/TrainingSeries/CreateTSComponents/CreatePost";
+import PostPage from "components/Sections/TrainingSeries/CreateTSComponents/PostPage";
 import AssignMemberPage from "components/Sections/TeamMembers/TeamMemberPageContainer/AssignMemberPage";
 
 import Dashboard from "../Dashboard";
