@@ -3,8 +3,6 @@ import React from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
 
-import styled from "styled-components";
-
 // Material UI
 import { withStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
@@ -22,43 +20,12 @@ import {
   getMessageById
 } from "store/actions";
 
-const styles = theme => ({
-  root: {
-    ...theme.mixins.gutters(),
-    paddingTop: theme.spacing.unit * 2,
-    paddingBottom: theme.spacing.unit * 2,
-    width: "100%",
-    margin: "20px auto"
-  },
-  form: {
-    // width: "100%",
-    margin: "0 auto"
-  },
-  info: {
-    "margin-right": "50px"
-  },
-  textField: {
-    // marginLeft: theme.spacing.unit,
-    // marginRight: theme.spacing.unit,
-    width: "80%",
-    margin: "15px auto"
-  },
-  fab: {
-    margin: theme.spacing.unit
-  },
-  button: {
-    "margin-left": theme.spacing.unit
-  },
-  saveButton: {
-    // margin: 5,
-    "margin-left": theme.spacing.unit,
-    color: "#451476",
-    "&:hover": {
-      background: "#451476",
-      color: "white"
-    }
-  }
-});
+import {
+  MainContainer,
+  PostContainer,
+  ButtonContainer,
+  styles
+} from "./PostPageStyles.js";
 
 class PostPage extends React.Component {
   state = {
@@ -204,24 +171,6 @@ class PostPage extends React.Component {
     );
   }
 }
-
-const MainContainer = styled.div`
-  margin: 0 auto;
-  width: 80%;
-`;
-
-const PostContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: baseline;
-`;
-
-const ButtonContainer = styled.div`
-  display: flex;
-  margin-top: 10px;
-  justify-content: center;
-`;
 
 const mapStateToProps = state => {
   return {

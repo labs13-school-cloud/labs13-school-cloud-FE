@@ -1,17 +1,12 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import styled from "styled-components";
 
 import TrainingSeriesTabSingle from "./TrainingSeriesTabSingle.js";
 import Pagination from "material-ui-flat-pagination";
 
-import {
-  Paper,
-  Typography,
-  Fab,
-  TextField,
-  InputAdornment
-} from "@material-ui/core/";
+import { Typography, Fab, TextField, InputAdornment } from "@material-ui/core/";
+
+import { Wrapper, HeaderWrapper, Series } from "./TrainingSeriesTabStyles.js";
 
 //functional related imports
 import {
@@ -96,24 +91,3 @@ export default connect(
   mapStateToProps,
   { getTrainingSeries, deleteTrainingSeries, getMembersAssigned }
 )(TrainingSeriesTab);
-
-const Wrapper = styled(Paper)`
-  width: 90%;
-  padding: 10px;
-  margin: 48px auto;
-`;
-
-const HeaderWrapper = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const Series = styled(Paper)`
-  width: 70%;
-  margin: 10px auto;
-  padding: 20px;
-  cursor: pointer;
-  &:hover {
-    background: #f8f8f8;
-  }
-`;
