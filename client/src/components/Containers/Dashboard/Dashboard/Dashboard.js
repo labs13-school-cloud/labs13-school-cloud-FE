@@ -17,7 +17,7 @@ import { TripleColumn, SmallColumns, DashWrapper } from "./styles.js";
 
 function Dashboard(props) {
   const [topTab, setTopTab] = useState("overview");
-  const { user } = props;
+  const { userId } = props;
 
   return (
     <DashWrapper>
@@ -57,23 +57,23 @@ function Dashboard(props) {
           <SmallColumns>
             <TeamMembersView
               disableSnackbar={props.disableSnackbar}
-              user={user.id}
+              userId={userId}
             />
             <TrainingSeriesView
               disableSnackbar={props.disableSnackbar}
-              user={user.id}
+              userId={userId}
               match={props.match}
             />
           </SmallColumns>
-          <NotificationsView user={user.id} />
+          <NotificationsView user={userId} />
         </TripleColumn>
       )}
 
       {topTab === "team members" && (
-        <TeamMembersTab history={props.history} user={user.id} />
+        <TeamMembersTab history={props.history} userId={userId} />
       )}
       {topTab === "training series" && (
-        <TrainingSeriesTab history={props.history} user={user.id} />
+        <TrainingSeriesTab history={props.history} userId={userId} />
       )}
     </DashWrapper>
   );

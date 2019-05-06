@@ -74,9 +74,9 @@ class AddMembersView extends Component {
   getAssigned = () => {
     this.props.getMembersAssigned(this.props.match.params.id);
   };
-
   render() {
     const { classes } = this.props;
+
     return (
       <Paper className={classes.root} elevation={1}>
         <AddMember

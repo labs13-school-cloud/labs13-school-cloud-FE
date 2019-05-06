@@ -91,8 +91,8 @@ class TeamMemberPage extends React.Component {
       text_on: true,
       email_on: false,
       slack_on: false,
-      manager: null,
-      mentor: null
+      manager: "",
+      mentor: ""
     },
     assignments: [],
     training_series: [],
@@ -173,7 +173,6 @@ class TeamMemberPage extends React.Component {
     let emailEnabled;
     let slackEnabled;
     let addDisabled = false;
-    //console.log(addDisabled);
 
     if (text_on && !email_on && !slack_on) {
       textEnabled = true;
@@ -210,7 +209,7 @@ class TeamMemberPage extends React.Component {
             <Divider className={classes.divider} />
             <MemberInfoContainer>
               <TextField
-                autoFocus="true"
+                autoFocus={true}
                 id="standard-name"
                 label="First Name"
                 className={classes.textField}
@@ -271,7 +270,7 @@ class TeamMemberPage extends React.Component {
                   }`
                 : ": none"}
             </div>
-            <form className="mentor select">
+            <div className="mentor select">
               <select
                 name="mentor"
                 value={this.state.teamMember.mentor}
@@ -291,7 +290,7 @@ class TeamMemberPage extends React.Component {
                     </option>
                   ))}
               </select>
-            </form>
+            </div>
 
             <div className="manager display">
               Manager
@@ -301,7 +300,7 @@ class TeamMemberPage extends React.Component {
                   }`
                 : ": none"}
             </div>
-            <form className="manager select">
+            <div className="manager select">
               <select
                 name="manager"
                 value={this.state.teamMember.manager}
@@ -321,7 +320,7 @@ class TeamMemberPage extends React.Component {
                     </option>
                   ))}
               </select>
-            </form>
+            </div>
             <MemberInfoContainer>
               <select
                 value={this.state.teamMember.slack_id}

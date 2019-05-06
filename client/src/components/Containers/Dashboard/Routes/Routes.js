@@ -23,7 +23,6 @@ function Routes(props) {
     props.history.push("/home");
     setIsTourOpen(true);
   };
-
   return (
     <Router history={history}>
       <Route
@@ -34,7 +33,7 @@ function Routes(props) {
             {...renderProps}
             disableSnackbar={disableSnackbar}
             history={props.history}
-            user={props.user}
+            userId={props.user}
           />
         )}
       />
@@ -51,25 +50,25 @@ function Routes(props) {
       <Route
         path="/home/team-member/:id"
         render={renderProps => (
-          <TeamMemberPageView {...renderProps} user={props.user.id} />
+          <TeamMemberPageView {...renderProps} userId={props.user.id} />
         )}
       />
       <Route
         path="/home/create-team-member/"
         render={renderProps => (
-          <AddTeamMemberPage {...renderProps} user={props.user.id} />
+          <AddTeamMemberPage {...renderProps} userId={props.user.id} />
         )}
       />
       <Route
         path="/home/create-training-series"
         render={renderProps => (
-          <CreateTrainingSeries {...renderProps} user={props.user.id} />
+          <CreateTrainingSeries {...renderProps} userId={props.user.id} />
         )}
       />
       <Route
         path="/home/training-series/:id"
         render={renderProps => (
-          <TrainingSeriesPosts {...renderProps} user={props.user.id} />
+          <TrainingSeriesPosts {...renderProps} userId={props.user.id} />
         )}
       />
       <Route
@@ -79,13 +78,13 @@ function Routes(props) {
       <Route
         path="/home/assign-members/:id"
         render={renderProps => (
-          <AddTrainingSeriesView {...renderProps} user={props.user.id} />
+          <AddTrainingSeriesView {...renderProps} userId={props.user.id} />
         )}
       />
       <Route
         path="/home/assign-series/:id"
         render={renderProps => (
-          <AssignMemberPage {...renderProps} user={props.user.id} />
+          <AssignMemberPage {...renderProps} userId={props.user.id} />
         )}
       />
       <Route path="/home/post/:id" component={PostPage} />
