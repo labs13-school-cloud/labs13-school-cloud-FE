@@ -23,7 +23,10 @@ function Dashboard(props) {
     <DashWrapper>
       <BottomNavigation
         value={topTab}
-        onChange={e => setTopTab(e.target.value)}
+        onChange={(e, value) => {
+          console.log(e.target.value);
+          setTopTab(value);
+        }}
         style={{ width: "80%" }}
       >
         <BottomNavigationAction
