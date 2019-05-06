@@ -42,7 +42,6 @@ class PostPage extends React.Component {
   };
 
   componentDidMount() {
-    console.log(this.props);
     if (this.props.location.state.post) {
       //changed back to to post to fix bug... can change in be later
       this.setState({

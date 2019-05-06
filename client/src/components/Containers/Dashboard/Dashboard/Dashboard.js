@@ -24,7 +24,6 @@ function Dashboard(props) {
       <BottomNavigation
         value={topTab}
         onChange={(e, value) => {
-          console.log(e.target.value);
           setTopTab(value);
         }}
         style={{ width: "80%" }}
@@ -65,7 +64,7 @@ function Dashboard(props) {
               match={props.match}
             />
           </SmallColumns>
-          <NotificationsView user={userId} />
+          <NotificationsView userId={userId} />
         </TripleColumn>
       )}
 
