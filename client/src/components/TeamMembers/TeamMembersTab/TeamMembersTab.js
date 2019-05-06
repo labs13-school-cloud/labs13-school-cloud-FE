@@ -5,11 +5,11 @@ import Pagination from "material-ui-flat-pagination";
 import Grid from "@material-ui/core/Grid";
 
 import styled from "styled-components";
-import DeleteIcon from "@material-ui/icons/Delete";
+
+import TeamMembersTabSingle from "./TeamMembersTabSingle.js";
 
 import {
   Paper,
-  Typography,
   Fab,
   TextField,
   InputAdornment
@@ -32,8 +32,6 @@ const TeamMembersTab = props => {
   useEffect(() => {
     props.getTeamMembers(props.userId);
     setLocalTeamMembers(props.teamMembers);
-    // console.log(props.teamMembers);
-    console.log(props.teamMembers);
   }, []);
 
   const handleClick = offset => {
@@ -66,7 +64,6 @@ const TeamMembersTab = props => {
               aria-label="Add"
               onClick={() => {
                 props.history.push("/home/create-team-member");
-                console.log(props);
               }}
               style={{
                 margin: "0 10px",
@@ -92,57 +89,19 @@ const TeamMembersTab = props => {
           {localTeamMembers.length === 0 ? (
             <div>add some members</div>
           ) : (
-            props.teamMembers
-              .slice(offset, offset + limit)
-              .filter(member =>
-                `${member.first_name} ${member.last_name}`
-                  .toUpperCase()
-                  .includes(searchValue.toUpperCase())
-              )
-              .map(teamMember => {
-                console.log(teamMember);
-                return (
-                  <Grid
-                    key={teamMember.id}
-                    item
-                    style={{ cursor: "pointer" }}
-                    onClick={e => {
-                      props.history.push(`/home/team-member/${teamMember.id}`);
-                    }}
-                  >
-                    <TeamsMember>
-                      <Typography variant="subtitle1">
-                        {teamMember.first_name} {teamMember.last_name}
-                      </Typography>
-                      <hr />
-                      <Typography variant="subtitle2">
-                        {teamMember.email}
-                      </Typography>
-                      <Typography variant="overline">
-                        {teamMember.phone_number}
-                      </Typography>
-                      <Typography variant="overline">
-                        mentor: {teamMember.mentor || "not assigned"}
-                      </Typography>
-                      <Typography variant="overline">
-                        manager: {teamMember.manager || "not assigned"}
-                      </Typography>
-                      <DeleteIcon
-                        onClick={e => {
-                          e.stopPropagation();
-                          props.deleteTeamMember(teamMember.id);
-                        }}
-                      />
-                      {/* <ul>
-                      {teamMember.trainingSeries.map(series => {
-                        return <div>{series}</div>;
-                      })}
-                    </ul> */}
-                    </TeamsMember>
-                  </Grid>
-                );
-              })
-          )}
+              props.teamMembers
+                .slice(offset, offset + limit)
+                .filter(member =>
+                  `${member.first_name} ${member.last_name}`
+                    .toUpperCase()
+                    .includes(searchValue.toUpperCase())
+                )
+                .map(teamMember => {
+                  return (
+                    <TeamMembersTabSingle deleteTeamMember={props.deleteTeamMember} teamMember={teamMember} history={props.history} key={teamMember.id} />
+                  );
+                })
+            )}
         </Grid>
       </TeamsTabWrapper>
     </div>
@@ -167,14 +126,7 @@ const TeamsTabWrapper = styled(Paper)`
   padding: 10px;
   width: 90%;
 `;
-const TeamsMember = styled(Paper)`
-  margin: 10px;
-  padding: 10px;
-  width: 220px;
-  &:hover {
-    background: #f8f8f8;
-  }
-`;
+
 const TeamsTabHeader = styled.div`
   display: flex;
   justify-content: space-between;
