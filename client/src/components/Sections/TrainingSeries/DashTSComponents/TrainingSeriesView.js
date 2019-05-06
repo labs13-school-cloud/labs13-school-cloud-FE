@@ -18,6 +18,7 @@ const TrainingSeriesSubView = React.lazy(() =>
 class TrainingSeriesView extends Component {
   componentDidMount() {
     this.getTrainingSeries();
+    console.log("LOOKING FOR THIS : ", this.props);
   }
 
   getTrainingSeries = () => {

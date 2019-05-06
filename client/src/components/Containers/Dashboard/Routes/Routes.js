@@ -33,7 +33,7 @@ function Routes(props) {
             {...renderProps}
             disableSnackbar={disableSnackbar}
             history={props.history}
-            userId={props.user}
+            userId={props.user.id}
           />
         )}
       />
