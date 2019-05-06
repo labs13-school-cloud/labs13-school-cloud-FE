@@ -126,13 +126,13 @@ class Notifications extends Component {
     const filteredReturn =
       this.state.filterSent === "pending"
         ? filteredNotifications.filter(
-            notification =>
-              notification.text_sent === 0 || notification.email_sent === 0
-          )
+          notification =>
+            notification.text_sent === 0 || notification.email_sent === 0
+        )
         : filteredNotifications.filter(
-            notification =>
-              notification.text_sent === 1 || notification.email_sent === 1
-          );
+          notification =>
+            notification.text_sent === 1 || notification.email_sent === 1
+        );
 
     const notificationCount = filteredReturn.length;
 

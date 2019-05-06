@@ -216,7 +216,6 @@ class CreatePost extends React.Component {
     );
   }
 }
-
 const MainContainer = styled.div`
   margin: 0 auto;
   max-width: 768px;
@@ -224,27 +223,23 @@ const MainContainer = styled.div`
     width: 95%;
   }
 `;
-
 const PostContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: baseline;
 `;
-
 const ButtonContainer = styled.div`
   display: flex;
   margin-top: 10px;
   justify-content: center;
 `;
-
 const mapStateToProps = state => {
   return {
     addSuccess: state.teamMembersReducer.status.addSuccess,
     teamMember: state.teamMembersReducer.teamMember
   };
 };
-
 export default connect(
   mapStateToProps,
   {

@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import Fuse from "fuse.js";
 
 // Components
-import DeleteModal from "components/UI/Modals/deleteModal";
+import DeleteModal from "../../UI/Modals/deleteModal";
 import TrainingSeriesAssignment from "./TrainingSeriesAssignment";
 
 import styled from "styled-components";
@@ -386,18 +386,14 @@ class TrainingSeriesPosts extends React.Component {
         </>
       );
     }
-
     const searchOn = this.state.searchInput.length > 0;
-
     let posts;
-
     //console.log(this.props); // checks if the search field is active and there are results from the fuse search
     if (searchOn && this.searchedPosts(this.props.posts).length > 0) {
       posts = this.searchedPosts(this.props.posts);
     } else {
       posts = this.props.posts;
     }
-
     /* sort posts by days from start */
     const sortedPosts = posts.sort((a, b) =>
       a.days_from_start > b.days_from_start
@@ -406,7 +402,6 @@ class TrainingSeriesPosts extends React.Component {
         ? -1
         : 0
     );
-
     return (
       <>
         {this.state.displaySnackbar && (
@@ -441,7 +436,6 @@ class TrainingSeriesPosts extends React.Component {
                 </Button>
               </div>
             </HeaderContainer>
-
             {/* Search Input */}
             {this.state.searchOpen && (
               <TextField
@@ -507,7 +501,6 @@ class TrainingSeriesPosts extends React.Component {
     );
   }
 }
-
 const PageContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -515,26 +508,22 @@ const PageContainer = styled.div`
   width: 100%;
   margin: 0 auto;
 `;
-
 const HeaderContainer = styled.div`
   width: 100%;
   justify-content: space-between;
   display: flex;
   align-items: baseline;
   margin-bottom: 10px;
-
   @media (max-width: 768px) {
     max-width: 768px;
     height: 100%;
     flex-direction: column;
-
     padding: 10px 0;
     align-items: center;
     margin: 0 auto;
     text-align: center;
   }
 `;
-
 const HolderText = styled.div`
   margin: 50px 0;
   p {
@@ -542,7 +531,6 @@ const HolderText = styled.div`
     text-align: center;
   }
 `;
-
 const ListItemContainer = styled.div`
   transition: background-color 0.3s;
   &:hover {
@@ -551,7 +539,6 @@ const ListItemContainer = styled.div`
     background-color: whitesmoke;
   }
 `;
-
 const ListStyles = styled.div`
   display: flex;
   flex-direction: column;
@@ -560,7 +547,6 @@ const ListStyles = styled.div`
   margin: 20px auto;
   list-style: none;
 `;
-
 const ListButtonContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -569,13 +555,11 @@ const ListButtonContainer = styled.div`
   margin-left: 40px;
   padding-right: 5px;
 `;
-
 const TrainingSeriesTitle = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: baseline;
 `;
-
 const mapStateToProps = state => ({
   isLoading: state.messagesReducer.isLoading,
   //singleTrainingSeries: state.trainingSeriesReducer.trainingSeries.filter(
@@ -586,9 +570,7 @@ const mapStateToProps = state => ({
   trainingSeries: state.trainingSeriesReducer.trainingSeries,
   teamMembers: state.teamMembersReducer.teamMembers
 });
-
 TrainingSeriesPosts.propTypes = {};
-
 export default connect(
   mapStateToProps,
   {
