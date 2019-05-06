@@ -15,7 +15,7 @@ import {
 import Avatar from "@material-ui/core/Avatar";
 
 //Logo
-import Logo from "../../../img/training-bot.png";
+import Logo from "img/training-bot.png";
 
 //AUTH
 import { login, logout } from "../../../Auth/Auth";
@@ -38,23 +38,23 @@ class AppBar extends Component {
               <p onClick={() => login()}>Login</p>
             </>
           ) : (
-              <>
-                <Link to="/home">
-                  <NavigationLogo alt="A cute, personable robot" src={Logo} />
+            <>
+              <Link to="/home">
+                <NavigationLogo alt="A cute, personable robot" src={Logo} />
+              </Link>
+              <RightItemsContainer>
+                <Link to="/home/profile">
+                  {" "}
+                  <Avatar
+                    data-tour="6"
+                    src={JSON.parse(localStorage.getItem("Profile")).picture}
+                    alt={JSON.parse(localStorage.getItem("Profile")).name}
+                  />
                 </Link>
-                <RightItemsContainer>
-                  <Link to="/home/profile">
-                    {" "}
-                    <Avatar
-                      data-tour="6"
-                      src={JSON.parse(localStorage.getItem("Profile")).picture}
-                      alt={JSON.parse(localStorage.getItem("Profile")).name}
-                    />
-                  </Link>
-                  <LogoutStyling onClick={() => logout()}>Logout</LogoutStyling>
-                </RightItemsContainer>
-              </>
-            )}
+                <LogoutStyling onClick={() => logout()}>Logout</LogoutStyling>
+              </RightItemsContainer>
+            </>
+          )}
         </NavItemsContainer>
       </NavigationContainer>
     );

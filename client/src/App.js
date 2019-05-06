@@ -15,13 +15,13 @@ import React from "react";
 import CssBaseline from "@material-ui/core/CssBaseline";
 
 //Components
-import LandingPageView from "./components/Containers/LandingPage/LandingPageView/";
+import LandingPage from "./components/Containers/LandingPage/LandingPage/";
 
 function App() {
   return (
     <>
       <CssBaseline />
-      <LandingPageView />
+      <LandingPage />
     </>
   );
 }

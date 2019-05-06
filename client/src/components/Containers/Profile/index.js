@@ -1,2 +1,2 @@
-import ProfileView from "./ProfileView.js";
-export default ProfileView;
+import Profile from "./Profile.js";
+export default Profile;

@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "../../../img/training-bot.svg";
+import logo from "img/training-bot.svg";
 import "./loading.css";
 import styled from "styled-components";
 
