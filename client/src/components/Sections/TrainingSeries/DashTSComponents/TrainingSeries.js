@@ -33,8 +33,6 @@ const styles = {
 };
 
 function SeriesCard(props) {
-  //console.log("TRAINING SERIES LIST", props);
-
   const { classes } = props;
   const [messageLength, setMessageLength] = useState(0);
   const [assignedLength, setAssignedLength] = useState(0);

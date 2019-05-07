@@ -26,7 +26,7 @@ function Dashboard(props) {
         onChange={(e, value) => {
           setTopTab(value);
         }}
-        style={{ width: "80%" }}
+        style={{ width: "80%", whiteSpace: "nowrap" }}
       >
         <BottomNavigationAction
           label="Overview"

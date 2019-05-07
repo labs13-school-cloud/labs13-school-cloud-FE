@@ -23,7 +23,7 @@ const TeamMembersTab = props => {
   const [localTeamMembers, setLocalTeamMembers] = useState([]);
   const [limit] = useState(8);
   const [offset, setOffset] = useState(0);
-  const { getTeamMembers, userId, teamMembers } = props;
+  //const { getTeamMembers, userId, teamMembers } = props;
 
   useEffect(() => {
     getTeamMembers(userId);

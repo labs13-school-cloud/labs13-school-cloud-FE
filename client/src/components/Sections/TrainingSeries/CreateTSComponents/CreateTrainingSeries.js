@@ -106,4 +106,3 @@ const mapStateToProps = state => {
 export default connect(
   mapStateToProps,
   { addTrainingSeries }
-)(CreateTrainingSeriesWrapped);
