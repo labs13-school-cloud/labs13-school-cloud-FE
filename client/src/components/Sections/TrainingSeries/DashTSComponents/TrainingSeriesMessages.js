@@ -46,9 +46,9 @@ import {
   ListStyles,
   ListButtonContainer,
   TrainingSeriesTitle
-} from "./TrainingSeriesPostsStyles.js";
+} from "./TrainingSeriesMessagesStyles.js";
 
-class TrainingSeriesPosts extends React.Component {
+class TrainingSeriesMessages extends React.Component {
   state = {
     active: false,
     displaySnackbar: false,
@@ -84,7 +84,7 @@ class TrainingSeriesPosts extends React.Component {
     this.props.deleteMessage(id);
   };
 
-  routeToPostPage = () => {
+  routeToMessagePage = () => {
     this.props.history.push({
       pathname: "/home/create-post",
       state: {
@@ -314,7 +314,7 @@ class TrainingSeriesPosts extends React.Component {
                 <Button
                   className={classes.button}
                   variant="outlined"
-                  onClick={e => this.routeToPostPage(e)}
+                  onClick={e => this.routeToMessagePage(e)}
                 >
                   New Message
                 </Button>
@@ -403,7 +403,7 @@ const mapStateToProps = state => ({
   trainingSeries: state.trainingSeriesReducer.trainingSeries,
   teamMembers: state.teamMembersReducer.teamMembers
 });
-TrainingSeriesPosts.propTypes = {};
+TrainingSeriesMessages.propTypes = {};
 export default connect(
   mapStateToProps,
   {
@@ -415,4 +415,4 @@ export default connect(
     getMembersAssigned,
     editTrainingSeries
   }
-)(withStyles(styles)(TrainingSeriesPosts));
+)(withStyles(styles)(TrainingSeriesMessages));

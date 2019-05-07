@@ -106,7 +106,7 @@ function AddMember(props) {
                     )}
                   </Button>
                   <Button
-                    onClick={props.handler.routeToPostPage}
+                    onClick={props.handler.routeToMessagePage}
                     className={classes.cancelButton}
                   >
                     Cancel

@@ -5,10 +5,10 @@ import Profile from "components/Containers/Profile";
 import TeamMemberPageView from "components/Sections/TeamMembers/TeamMemberPageContainer/TeamMemberPageView";
 import AddTrainingSeriesView from "components/Sections/TrainingSeries/AddMembersToTrainingSeries/AddMembersView.js";
 import CreateTrainingSeries from "components/Sections/TrainingSeries/CreateTSComponents/CreateTrainingSeries";
-import TrainingSeriesPosts from "components/Sections/TrainingSeries/DashTSComponents/TrainingSeriesPosts";
+import TrainingSeriesMessages from "components/Sections/TrainingSeries/DashTSComponents/TrainingSeriesMessages";
 import AddTeamMemberPage from "components/Sections/TeamMembers/TeamMemberPageContainer/AddTeamMemberPage";
-import CreatePost from "components/Sections/TrainingSeries/CreateTSComponents/CreatePost";
-import PostPage from "components/Sections/TrainingSeries/CreateTSComponents/PostPage";
+import CreateMessage from "components/Sections/TrainingSeries/CreateTSComponents/CreateMessage";
+import MessagePage from "components/Sections/TrainingSeries/CreateTSComponents/MessagePage";
 import AssignMemberPage from "components/Sections/TeamMembers/TeamMemberPageContainer/AssignMemberPage";
 
 import Dashboard from "../Dashboard";
@@ -68,12 +68,12 @@ function Routes(props) {
       <Route
         path="/home/training-series/:id"
         render={renderProps => (
-          <TrainingSeriesPosts {...renderProps} userId={props.user.id} />
+          <TrainingSeriesMessages {...renderProps} userId={props.user.id} />
         )}
       />
       <Route
         path="/home/create-post"
-        render={renderProps => <CreatePost {...renderProps} />}
+        render={renderProps => <CreateMessage {...renderProps} />}
       />
       <Route
         path="/home/assign-members/:id"
@@ -87,7 +87,7 @@ function Routes(props) {
           <AssignMemberPage {...renderProps} userId={props.user.id} />
         )}
       />
-      <Route path="/home/post/:id" component={PostPage} />
+      <Route path="/home/post/:id" component={MessagePage} />
     </Router>
   );
 }

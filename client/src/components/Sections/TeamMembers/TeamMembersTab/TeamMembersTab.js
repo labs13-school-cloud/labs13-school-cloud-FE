@@ -26,9 +26,9 @@ const TeamMembersTab = props => {
   const { getTeamMembers, userId, teamMembers } = props;
 
   useEffect(() => {
-    props.getTeamMembers(props.userId);
-    setLocalTeamMembers(props.teamMembers);
-  }, []);
+    getTeamMembers(userId);
+    setLocalTeamMembers(teamMembers);
+  }, [getTeamMembers, userId, teamMembers]);
 
   const handleClick = offset => {
     setOffset(offset);

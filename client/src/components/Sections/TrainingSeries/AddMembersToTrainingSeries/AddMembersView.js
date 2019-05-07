@@ -109,7 +109,7 @@ class AddMembersView extends Component {
     handleChange: name => event => {
       this.setState({ [name]: event.target.value });
     },
-    routeToPostPage: () => {
+    routeToMessagePage: () => {
       this.props.history.push(
         `/home/training-series/${this.state.trainingSeriesID}`
       );

@@ -4,10 +4,10 @@ import { Route, Router } from "react-router-dom";
 import { createStore, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 
-import App from "App.js";
+import LandingPage from "components/Containers/LandingPage/LandingPage/";
 import Pricing from "components/Containers/LandingPage/Pricing";
 import Team from "components/Containers/LandingPage/Team";
-import Dashboard from "components/Containers/Dashboard/Loader/";
+import LoadDashboard from "components/Containers/Dashboard/Loader/";
 
 import Callback from "components/Misc/Callback/Callback.js";
 import authenticate from "components/Misc/authenticate/authenticate.js";
@@ -26,13 +26,11 @@ function Routes() {
   return (
     <Provider store={store}>
       <Router history={history}>
-        <>
-          <Route exact path="/" component={App} />
-          <Route path="/pricing" component={Pricing} />
-          <Route path="/team" component={Team} />
-          <Route path="/home" component={authenticate(Dashboard)} />
-          <Route path="/callback" component={Callback} />
-        </>
+        <Route exact path="/" component={LandingPage} />
+        <Route path="/pricing" component={Pricing} />
+        <Route path="/team" component={Team} />
+        <Route path="/home" component={authenticate(LoadDashboard)} />
+        <Route path="/callback" component={Callback} />
       </Router>
     </Provider>
   );

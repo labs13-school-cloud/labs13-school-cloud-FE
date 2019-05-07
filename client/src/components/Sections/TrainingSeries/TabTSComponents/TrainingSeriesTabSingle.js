@@ -12,9 +12,7 @@ export default function TrainingSeriesTabSingle(props) {
   } = props;
 
   useEffect(() => {
-    const url = `${process.env.REACT_APP_API}/api/training-series/${
-      props.series.id
-    }`;
+    const url = `${process.env.REACT_APP_API}/api/training-series/${id}`;
 
     axios
       .get(`${url}/messages`)
@@ -28,7 +26,7 @@ export default function TrainingSeriesTabSingle(props) {
         setAssignments(res.data.assignments);
       })
       .catch(err => console.log(err));
-  }, []);
+  }, [id]);
 
   return (
     <div>

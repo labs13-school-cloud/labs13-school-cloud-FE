@@ -2,6 +2,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { scroller, animateScroll as scroll } from "react-scroll";
+import CssBaseline from "@material-ui/core/CssBaseline";
 
 //Styling
 import {
@@ -47,6 +48,7 @@ class LandingPage extends React.Component {
   render() {
     return (
       <>
+        <CssBaseline />
         <LandingPageContainer>
           {/* NAVIGATION */}
           <NavbarContainer>

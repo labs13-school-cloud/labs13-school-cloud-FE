@@ -28,9 +28,9 @@ import {
   MainContainer,
   PostContainer,
   ButtonContainer
-} from "./CreatePostStyles.js";
+} from "./CreateMessageStyles.js";
 
-class CreatePost extends React.Component {
+class CreateMessage extends React.Component {
   state = {
     open: false,
     isUpdating: false,
@@ -191,4 +191,4 @@ export default connect(
     deleteMessage,
     getMessageById
   }
-)(withStyles(styles)(CreatePost));
+)(withStyles(styles)(CreateMessage));

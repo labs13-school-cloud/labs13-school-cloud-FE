@@ -25,9 +25,9 @@ import {
   PostContainer,
   ButtonContainer,
   styles
-} from "./PostPageStyles.js";
+} from "./MessagePageStyles.js";
 
-class PostPage extends React.Component {
+class MessagePage extends React.Component {
   state = {
     open: false,
     isUpdating: false,
@@ -84,9 +84,6 @@ class PostPage extends React.Component {
 
   render() {
     const { classes } = this.props;
-
-    //console.log("EDIT POST PAGE PROPS", this.props);
-    //console.log("EDIT POST PAGE STATE", this.state);
     return (
       <MainContainer>
         <Typography variant="display1" align="center" gutterBottom>
@@ -187,4 +184,4 @@ export default connect(
     deleteMessage,
     getMessageById
   }
-)(withStyles(styles)(withRouter(PostPage)));
+)(withStyles(styles)(withRouter(MessagePage)));

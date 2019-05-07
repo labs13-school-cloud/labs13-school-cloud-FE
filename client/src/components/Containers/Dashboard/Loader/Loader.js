@@ -16,22 +16,24 @@ import { getUser } from "store/actions/userActions";
 
 import DashboardRoutes from "../Routes";
 
-function Dashboard(props) {
+function Loader(props) {
   const [displaySnackbar, setDisplaySnackbar] = useState(false);
   const [isTourOpen, setIsTourOpen] = useState(true);
   const { getUser, newUser, location } = props;
   const { state } = location;
 
   useEffect(() => {
-    //CDM
+    // componentDidMount (CDM) --> getUser should never be different
     getUser();
   }, [getUser]);
 
   useEffect(() => {
+    // componentDidUpdate (CDU) --> update when props.newUser changes
     setIsTourOpen(false);
   }, [newUser]);
 
   useEffect(() => {
+    // componentDidUpdate (CDU) --> update when props.location.state changes
     if (state && state.success) {
       setDisplaySnackbar(true);
     }
@@ -80,4 +82,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { getUser }
-)(authenticate(Dashboard));
+)(authenticate(Loader));
