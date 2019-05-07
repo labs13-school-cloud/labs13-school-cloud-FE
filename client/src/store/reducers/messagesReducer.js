@@ -47,8 +47,8 @@ const messagesReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
-        messages: action.payload.posts,
-        singleTrainingSeries: action.payload.training_series[0]
+        messages: action.payload.messages,
+        singleTrainingSeries: action.payload.training_series
       };
     case GET_MESSAGES_FAIL:
       return {

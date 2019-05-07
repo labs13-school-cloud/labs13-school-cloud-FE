@@ -38,7 +38,9 @@ export const getTrainingSeriesMessages = id => dispatch => {
         payload: res.data
       });
     })
-    .catch(err => dispatch({ type: GET_MESSAGES_FAIL, error: err }));
+    .catch(err => {
+      dispatch({ type: GET_MESSAGES_FAIL, error: err });
+    });
 };
 
 //GET a single message by id

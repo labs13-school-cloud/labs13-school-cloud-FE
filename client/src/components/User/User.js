@@ -1,1 +1,0 @@
-// displays user avatar, links to menu that links to billing

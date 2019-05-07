@@ -1,10 +1,10 @@
+import React from "react";
 import ReactDOM from "react-dom";
-//Routing Import
-import { makeMainRoutes } from "./routes";
+
+import Routes from "./BaseRoutes";
 import "./index.css";
 
-require("dotenv").config();
+import dotenv from "dotenv";
+dotenv.config();
 
-//Assigns import to a variable
-const routes = makeMainRoutes();
-ReactDOM.render(routes, document.getElementById("root"));
+ReactDOM.render(<Routes />, document.getElementById("root"));
