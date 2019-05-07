@@ -8,6 +8,9 @@ export default function TrainingSeriesTabSingle(props) {
   const [assignedLength, setAssignedLength] = useState(0);
   const [assignments, setAssignments] = useState([]);
   const [daysLong, setDaysLong] = useState([]);
+  const {
+    series: { id }
+  } = props;
 
   useEffect(() => {
     const url = `${process.env.REACT_APP_API}/api/training-series/${id}`;
