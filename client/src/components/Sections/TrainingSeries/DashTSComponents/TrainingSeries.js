@@ -39,7 +39,7 @@ function SeriesCard(props) {
   const [messageLength, setMessageLength] = useState(0);
   const [assignedLength, setAssignedLength] = useState(0);
 
-  const { id } = props.data;
+  //const { id } = props.data;
   const url = `${process.env.REACT_APP_API}/api/training-series/${
     props.data.id
   }`;

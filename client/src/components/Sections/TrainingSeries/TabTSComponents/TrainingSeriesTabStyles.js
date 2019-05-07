@@ -22,3 +22,9 @@ export const Series = styled(Paper)`
     background: #f8f8f8;
   }
 `;
+
+export const Select = styled.select`
+  width: 125px;
+  height: 35px;
+  border: 1px solid #441576;
+`;
