@@ -3,7 +3,7 @@ import axios from "axios";
 import { Grid, Typography } from "@material-ui/core/";
 
 export default function TrainingSeriesTabSingle(props) {
-  const [postLength, setPostLength] = useState(0);
+  const [messageLength, setMessageLength] = useState(0);
   const [assignedLength, setAssignedLength] = useState(0);
   const [assignments, setAssignments] = useState([]);
 
@@ -16,8 +16,8 @@ export default function TrainingSeriesTabSingle(props) {
 
     axios
       .get(`${url}/messages`)
-      .then(res => setPostLength(res.data.messages.length))
-      .catch(err => setPostLength(err));
+      .then(res => setMessageLength(res.data.messages.length))
+      .catch(err => setMessageLength(err));
 
     axios
       .get(`${url}/assignments`)
@@ -43,7 +43,9 @@ export default function TrainingSeriesTabSingle(props) {
 
         <Grid item xs={6} align="center">
           <Grid item>
-            <Typography variant="overline">messages: {postLength}</Typography>
+            <Typography variant="overline">
+              messages: {messageLength}
+            </Typography>
           </Grid>
           <Grid item>
             <Typography variant="overline">

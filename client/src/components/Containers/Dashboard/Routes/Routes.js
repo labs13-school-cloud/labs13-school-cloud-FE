@@ -72,7 +72,7 @@ function Routes(props) {
         )}
       />
       <Route
-        path="/home/create-post"
+        path="/home/create-message"
         render={renderProps => <CreateMessage {...renderProps} />}
       />
       <Route
@@ -87,7 +87,7 @@ function Routes(props) {
           <AssignMemberPage {...renderProps} userId={props.user.id} />
         )}
       />
-      <Route path="/home/post/:id" component={MessagePage} />
+      <Route path="/home/message/:id" component={MessagePage} />
     </Router>
   );
 }

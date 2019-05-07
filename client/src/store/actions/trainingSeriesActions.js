@@ -41,7 +41,7 @@ export const addTrainingSeries = trainingSeriesData => dispatch => {
     type: ADD_TRAINING_SERIES_START
   });
   axios
-    .post(
+    .message(
       `${process.env.REACT_APP_API}/api/training-series`,
       trainingSeriesData
     )

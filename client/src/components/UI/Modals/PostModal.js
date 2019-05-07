@@ -1,4 +1,4 @@
-// displays individual post modal
+// displays individual message modal
 import React from "react";
 
 //Prop Types
@@ -52,7 +52,7 @@ const styles = theme => ({
   }
 });
 
-class PostModal extends React.Component {
+class MessageModal extends React.Component {
   state = {
     open: false,
     isUpdating: false,
@@ -138,7 +138,7 @@ class PostModal extends React.Component {
     });
   };
 
-  handlePostSubmit = e => {
+  handleMessageSubmit = e => {
     e.preventDefault();
     if (this.props.modalType === "edit") {
       this.props.editMessage(this.props.message.id, this.state.message);
@@ -154,7 +154,7 @@ class PostModal extends React.Component {
     return (
       <>
         <Button onClick={this.handleOpen}>
-          {this.props.modalType === "edit" ? "Edit " : "Create New "} post{" "}
+          {this.props.modalType === "edit" ? "Edit " : "Create New "} message{" "}
         </Button>
         <Modal
           aria-labelledby="simple-modal-title"
@@ -163,19 +163,21 @@ class PostModal extends React.Component {
           onClose={this.handleClose}
         >
           <div style={getModalStyle()} className={classes.paper}>
-            <p>{this.props.modalType === "edit" ? "Edit Post" : "Add Post"}</p>
-            <form onSubmit={e => this.handlePostSubmit(e)}>
+            <p>
+              {this.props.modalType === "edit" ? "Edit Message" : "Add Message"}
+            </p>
+            <form onSubmit={e => this.handleMessageSubmit(e)}>
               <TextField
-                name="postName"
-                label="Post name"
+                name="messageName"
+                label="Message name"
                 margin="normal"
                 className={classes.textField}
                 onChange={this.handleChange}
                 value={this.state.message.message_name}
               />
               <TextField
-                name="postDetails"
-                label="Post Details"
+                name="messageDetails"
+                label="Message Details"
                 margin="normal"
                 className={classes.textField}
                 onChange={this.handleChange}
@@ -211,8 +213,8 @@ class PostModal extends React.Component {
   }
 }
 
-PostModal.propTypes = {};
+MessageModal.propTypes = {};
 
-const PostModalWrapped = withStyles(styles)(PostModal);
+const MessageModalWrapped = withStyles(styles)(MessageModal);
 
-export default PostModalWrapped;
+export default MessageModalWrapped;

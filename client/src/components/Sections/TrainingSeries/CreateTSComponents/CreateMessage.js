@@ -26,7 +26,7 @@ import {
 import {
   styles,
   MainContainer,
-  PostContainer,
+  MessageContainer,
   ButtonContainer
 } from "./CreateMessageStyles.js";
 
@@ -91,7 +91,7 @@ class CreateMessage extends React.Component {
               Create A New Message
             </Typography>
             <Divider />
-            <PostContainer>
+            <MessageContainer>
               <TextField
                 id="standard-name"
                 label="Message Title"
@@ -146,7 +146,7 @@ class CreateMessage extends React.Component {
                   </Typography>
                 </ExpansionPanelDetails>
               </ExpansionPanel>
-            </PostContainer>
+            </MessageContainer>
             <ButtonContainer>
               <Button
                 variant="outlined"

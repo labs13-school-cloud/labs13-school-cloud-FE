@@ -18,7 +18,7 @@ function Notification(props) {
     first_name,
     last_name,
     send_date,
-    post_name,
+    message_name,
     email,
     phone_number,
     title
@@ -32,7 +32,7 @@ function Notification(props) {
   return (
     <ListItem className={classes.listItem}>
       <ListItemText
-        primary={`${post_name} | ${title}`}
+        primary={`${message_name} | ${title}`}
         secondary={`${first_name} ${last_name} | ${
           email ? email : phoneFormatter.format(phone_number, "(NNN) NNN-NNNN")
         }`}

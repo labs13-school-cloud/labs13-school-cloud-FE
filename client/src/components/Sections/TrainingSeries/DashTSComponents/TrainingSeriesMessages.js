@@ -1,4 +1,4 @@
-// displays all posts of a training series
+// displays all messages of a training series
 import React from "react";
 
 import { Link } from "react-router-dom";
@@ -86,19 +86,19 @@ class TrainingSeriesMessages extends React.Component {
 
   routeToMessagePage = () => {
     this.props.history.push({
-      pathname: "/home/create-post",
+      pathname: "/home/create-message",
       state: {
         training_series_id: this.state.singleTrainingSeries.id
       }
     });
   };
 
-  routeToeditMessagePage = (e, post) => {
+  routeToeditMessagePage = (e, message) => {
     e.preventDefault();
     this.props.history.push({
-      pathname: `/home/post/${post.id}`,
+      pathname: `/home/message/${message.id}`,
       state: {
-        post
+        message
       }
     });
   };
@@ -141,7 +141,7 @@ class TrainingSeriesMessages extends React.Component {
     });
   };
 
-  searchedPosts = posts => {
+  searchedMessages = messages => {
     var options = {
       shouldSort: true,
       threshold: 0.3,
@@ -152,7 +152,7 @@ class TrainingSeriesMessages extends React.Component {
       keys: ["message_name", "message_details", "link"]
     };
 
-    const fuse = new Fuse(posts, options);
+    const fuse = new Fuse(messages, options);
     const res = fuse.search(this.state.searchInput);
     return res;
   };
@@ -278,15 +278,15 @@ class TrainingSeriesMessages extends React.Component {
       );
     }
     const searchOn = this.state.searchInput.length > 0;
-    let posts;
+    let messages;
     //console.log(this.props); // checks if the search field is active and there are results from the fuse search
-    if (searchOn && this.searchedPosts(this.props.posts).length > 0) {
-      posts = this.searchedPosts(this.props.posts);
+    if (searchOn && this.searchedMessages(this.props.messages).length > 0) {
+      messages = this.searchedMessages(this.props.messages);
     } else {
-      posts = this.props.posts;
+      messages = this.props.messages;
     }
-    /* sort posts by days from start */
-    const sortedPosts = posts.sort((a, b) =>
+    /* sort messages by days from start */
+    const sortedMessages = messages.sort((a, b) =>
       a.days_from_start > b.days_from_start
         ? 1
         : b.days_from_start > a.days_from_start
@@ -344,38 +344,40 @@ class TrainingSeriesMessages extends React.Component {
                 }}
               />
             )}
-            {this.props.posts.length === 0 ? (
+            {this.props.messages.length === 0 ? (
               <HolderText>
                 <p>You do not have any messages.</p>
               </HolderText>
             ) : (
               <ListStyles className={classes.listStyle}>
-                {sortedPosts.map(post => (
-                  <ListItemContainer key={post.id}>
-                    <ListItem key={post.id} className={classes.listItem}>
+                {sortedMessages.map(message => (
+                  <ListItemContainer key={message.id}>
+                    <ListItem key={message.id} className={classes.listItem}>
                       <ListItemText
-                        primary={post.message_name}
-                        secondary={post.message_details}
+                        primary={message.message_name}
+                        secondary={message.message_details}
                         className={classes.listItemText}
-                        onClick={e => this.routeToeditMessagePage(e, post)}
+                        onClick={e => this.routeToeditMessagePage(e, message)}
                       />
                       <ListItemSecondaryAction
                         className={classes.secondaryAction}
                       >
                         <div>
-                          <p>{post.days_from_start} days</p>
+                          <p>{message.days_from_start} days</p>
                         </div>
                         <ListButtonContainer>
                           <i
                             className={`material-icons ${classes.icons}`}
-                            onClick={e => this.routeToEditMessagePage(e, post)}
+                            onClick={e =>
+                              this.routeToEditMessagePage(e, message)
+                            }
                           >
                             edit
                           </i>
                           <DeleteModal
                             className={`material-icons ${classes.icons}`}
-                            deleteType="post"
-                            id={post.id}
+                            deleteType="message"
+                            id={message.id}
                           />
                         </ListButtonContainer>
                       </ListItemSecondaryAction>
@@ -398,7 +400,7 @@ const mapStateToProps = state => ({
   //singleTrainingSeries: state.trainingSeriesReducer.trainingSeries.filter(
   //   series => series.id === this.props.match.params.id
   // ),
-  posts: state.messagesReducer.messages,
+  messages: state.messagesReducer.messages,
   assignments: state.trainingSeriesReducer.assignments,
   trainingSeries: state.trainingSeriesReducer.trainingSeries,
   teamMembers: state.teamMembersReducer.teamMembers

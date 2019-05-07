@@ -62,7 +62,7 @@ class SlideDownModal extends React.Component {
           onClose={this.handleClose}
         >
           {/* <Link to={`home/training-series/${this.props.data.trainingSeriesID}`}>
-            <MenuItem onClick={this.handleClose}>Manage Posts</MenuItem>
+            <MenuItem onClick={this.handleClose}>Manage Messages</MenuItem>
           </Link> */}
           <MenuItem onClick={e => this.routeToTrainingSeriesPage(e)}>
             Manage

@@ -22,7 +22,7 @@ import {
 
 import {
   MainContainer,
-  PostContainer,
+  MessageContainer,
   ButtonContainer,
   styles
 } from "./MessagePageStyles.js";
@@ -42,11 +42,11 @@ class MessagePage extends React.Component {
   };
 
   componentDidMount() {
-    if (this.props.location.state.post) {
-      //changed back to to post to fix bug... can change in be later
+    if (this.props.location.state.message) {
+      //changed back to to message to fix bug... can change in be later
       this.setState({
         ...this.state,
-        message: this.props.location.state.post //changed back to to post to fix bug... can change in be later
+        message: this.props.location.state.message //changed back to to message to fix bug... can change in be later
       });
     }
   }
@@ -97,7 +97,7 @@ class MessagePage extends React.Component {
           {/* <DeleteModal deleteType='inTeamMemberPage' id={this.props.urlId} /> */}
 
           <Paper className={classes.root}>
-            <PostContainer>
+            <MessageContainer>
               <TextField
                 id="standard-name"
                 label="Message Title"
@@ -137,7 +137,7 @@ class MessagePage extends React.Component {
                 inputProps={{ min: 1 }}
                 required
               />
-            </PostContainer>
+            </MessageContainer>
           </Paper>
           <ButtonContainer>
             <Button

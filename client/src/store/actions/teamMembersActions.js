@@ -53,7 +53,7 @@ export const addTeamMember = teamMember => dispatch => {
   dispatch({ type: ADD_MEMBER_START });
   console.log(teamMember);
   axios
-    .post(`${baseUrl}/team-members`, teamMember)
+    .message(`${baseUrl}/team-members`, teamMember)
     .then(res => {
       dispatch({ type: ADD_MEMBER_SUCCESS, payload: res.data.newTeamMember });
     })
@@ -109,7 +109,7 @@ export const getTeamMemberByID = id => dispatch => {
 export const addTeamMemberToTrainingSeries = data => dispatch => {
   dispatch({ type: ADD_MEMBER_TO_TRAININGSERIES_START });
   axios
-    .post(`${baseUrl}/team-members/assign`, data)
+    .message(`${baseUrl}/team-members/assign`, data)
     .then(res => {
       axios
         .get(`${baseUrl}/team-members/${data.assignments[0]}`)
