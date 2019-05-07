@@ -5,13 +5,10 @@ import React, { Suspense } from "react";
 import { ListStyles } from "./styles.js";
 const TeamMember = React.lazy(() => import("../TeamMember"));
 
-
 const TeamMembersList = props => {
-  let arr = [];
-  let offset = props.offset;
-  let x = offset;
-  let y = offset + props.limit;
-  arr = props.teamMembers.slice(x, y);
+  const x = props.offset;
+  const y = x + props.limit;
+  const arr = props.teamMembers.slice(x, y);
 
   return (
     <>
