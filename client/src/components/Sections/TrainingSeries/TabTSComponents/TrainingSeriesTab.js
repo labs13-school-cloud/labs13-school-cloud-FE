@@ -67,7 +67,9 @@ const TrainingSeriesTab = props => {
       />
       {props.trainingSeries
         .slice(offset, limit + offset)
-        .filter(series => series.title.includes(searchValue))
+        .filter(series =>
+          series.title.toLowerCase().includes(searchValue.toLowerCase())
+        )
         .map(series => {
           return (
             <Series

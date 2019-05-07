@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Grid, Typography } from "@material-ui/core/";
+import { Select } from "./TrainingSeriesTabStyles.js";
 
 export default function TrainingSeriesTabSingle(props) {
   const [postLength, setPostLength] = useState(0);
   const [assignedLength, setAssignedLength] = useState(0);
   const [assignments, setAssignments] = useState([]);
-
-  const {
-    series: { id }
-  } = props;
+  const [daysLong, setDaysLong] = useState([]);
 
   useEffect(() => {
     const url = `${process.env.REACT_APP_API}/api/training-series/${
@@ -18,7 +16,13 @@ export default function TrainingSeriesTabSingle(props) {
 
     axios
       .get(`${url}/messages`)
-      .then(res => setPostLength(res.data.messages.length))
+      .then(res => {
+        setPostLength(res.data.messages.length);
+        const longestDaysFromStart = res.data.messages.sort(
+          (a, b) => b.days_from_start - a.days_from_start
+        );
+        setDaysLong(longestDaysFromStart[0].days_from_start);
+      })
       .catch(err => setPostLength(err));
 
     axios
@@ -37,13 +41,27 @@ export default function TrainingSeriesTabSingle(props) {
           <Typography variant="h6">{props.series.title}</Typography>
           <hr />
         </Grid>
-        <Grid item xs={6}>
-          <Typography style={{ color: "gray" }} variant="caption">
-            {props.series.description}
-          </Typography>
+        <Grid item xs={8}>
+          <p style={{ marginTop: 0 }}>This training series is assigned to:</p>
+          <Select
+            onClick={e => {
+              e.stopPropagation();
+            }}
+          >
+            <option value="default">default</option>
+            <option value="remove me">
+              once backend is up, finish this!!!
+            </option>
+            {assignments.map(assignment => {
+              console.log(assignment);
+            })}
+          </Select>
+          <p>
+            and is <span style={{ color: "blue" }}>{daysLong}</span> days long.
+          </p>
         </Grid>
 
-        <Grid item xs={6} align="center">
+        <Grid item xs={4} align="center">
           <Grid item>
             <Typography variant="overline">messages: {postLength}</Typography>
           </Grid>
