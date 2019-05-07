@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import axios from "axios";
 
 //Components
 // import UserModal from '../Modals/userModal';
@@ -11,6 +12,8 @@ import Authentication from "../Misc/authenticate/";
 import { getUser, editUser, deleteUser } from "store/actions/userActions";
 
 //Styling
+import Input from "@material-ui/core/Input";
+import InputLabel from "@material-ui/core/InputLabel";
 import {
   Button,
   Card,
@@ -22,18 +25,10 @@ import {
   Divider,
   Paper
 } from "@material-ui/core";
-import { styles, Container, ButtonContainer } from "./styles.js";
+import { styles, Container, ButtonContainer, getModalStyle } from "./styles.js";
 
-function getModalStyle() {
-  const top = 50;
-  const left = 50;
-
-  return {
-    top: `${top}%`,
-    left: `${left}%`,
-    transform: `translate(-${top}%, -${left}%)`
-  };
-}
+const scope =
+  "channels:history channels:read chat:write:bot groups:history im:history im:write mpim:history bot reactions:read users:read";
 
 class ProfileView extends React.Component {
   constructor(props) {
@@ -52,7 +47,7 @@ class ProfileView extends React.Component {
   };
 
   handleClose = () => {
-    this.setState({ open: false });
+    this.setState({ open: false, slack: false });
   };
 
   handleLogout = e => {
@@ -66,14 +61,20 @@ class ProfileView extends React.Component {
     this.props.history.push("/");
   };
 
+  authorizeSlack = async () => {
+    const url = `https://slack.com/oauth/authorize?client_id=604670969987.618830021958&scope=${scope}&redirect_uri=${`${
+      process.env.REACT_APP_URL
+    }/slack-callback`}&state=${"Yes, this is a terrible state to provide but I want to test it for now, that's all"}`;
+
+    window.location = url;
+  };
+
   render() {
     //Destructure user from userProfile
     const { user } = this.props.userProfile;
     const { classes } = this.props;
+    let accountType, account, maxCount;
 
-    let accountType;
-    let account;
-    let maxCount;
     if (this.props.doneLoading) {
       let type = user.account_type_id;
       if (type === 3) {
@@ -97,6 +98,13 @@ class ProfileView extends React.Component {
           <>
             <Card className={classes.profileContainer}>
               <div>
+                <Button
+                  variant="contained"
+                  style={{ width: "30px", padding: "0px" }}
+                  onClick={() => this.authorizeSlack()}
+                >
+                  <i className="fab fa-slack" />
+                </Button>
                 <Avatar
                   alt="Remy Sharp"
                   src={JSON.parse(localStorage.getItem("Profile")).picture}

@@ -95,6 +95,7 @@ function AddMember(props) {
     return filteredMembers.map(member => (
       <>
         <FormListItem
+          key={member.team_member_id}
           control={
             <Checkbox
               className={classes.box}
@@ -109,7 +110,7 @@ function AddMember(props) {
       </>
     ));
   };
-  //console.log(props.selectedTeamMembers);
+  console.log(props.startDate);
   return (
     <>
       <Typography className={classes.heading} variant="h6">
@@ -127,7 +128,7 @@ function AddMember(props) {
               <DatePicker
                 inline
                 minDate={new Date()}
-                selected={props.startDate}
+                selected={props.startDate || new Date()}
                 onChange={props.handler.handleDateChange}
               />
             </DatePickerContainer>
