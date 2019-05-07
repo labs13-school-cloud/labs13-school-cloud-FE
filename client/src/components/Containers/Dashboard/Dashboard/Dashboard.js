@@ -74,6 +74,12 @@ function Dashboard(props) {
       {topTab === "training series" && (
         <TrainingSeriesTab history={props.history} userId={userId} />
       )}
+      {topTab === "messages" && (
+        <div>
+          <h3>this is temporary until we actually build out this component</h3>
+          <NotificationsView history={props.history} userId={userId} />
+        </div>
+      )}
     </DashWrapper>
   );
 }
