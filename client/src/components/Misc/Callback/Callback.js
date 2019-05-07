@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 
 //Loading SVG that gets displayed
-import Progress from "../Progress/ProgressCircle";
+import Progress from "components/UI/Progress/ProgressCircle";
 import { style } from "./styles.js";
 
 //Auth
-import { setAccessToken, setIdToken, getUserProfile } from "../../../Auth/Auth";
+import { setAccessToken, setIdToken, getUserProfile } from "Auth/Auth";
 
 function Callback({ history }) {
   useEffect(() => {

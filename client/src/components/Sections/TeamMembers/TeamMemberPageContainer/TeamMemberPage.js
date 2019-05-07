@@ -131,8 +131,8 @@ class TeamMemberPage extends React.Component {
       manager: null,
       mentor: null
     },
-    memberManager: null,
-    memberMentor: null,
+    memberManager: "",
+    memberMentor: "",
     assignments: [],
     trainingSeries: [], //Leigh-Ann: this may not be needed?
     otherTeamMembers: [],
@@ -153,10 +153,10 @@ class TeamMemberPage extends React.Component {
         ),
         memberManager: data.teamMember.manager
           ? allMembers.find(m => m.id === data.teamMember.manager) //sets manager on state if already has one
-          : null,
+          : "",
         memberMentor: data.teamMember.mentor
           ? allMembers.find(m => m.id === data.teamMember.mentor) //ditto for mentor
-          : null,
+          : "",
         messages: this.props.messages.filter(msg =>
           assignmentIds.includes(msg.training_series_id)
         )

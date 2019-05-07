@@ -3,11 +3,11 @@ import React, { useState, useEffect } from "react";
 
 import { DashboardContainer } from "./styles.js";
 
-import ProgressCircle from "components/Misc/Progress/ProgressCircle";
+import ProgressCircle from "components/UI/Progress/ProgressCircle";
 import AppBar from "components/Navigation/AppBar/AppBar";
 import ReturnToDashboardButton from "components/Navigation/ReturnToDashboard";
 import Snackbar from "components/UI/Snackbar/Snackbar";
-import DashboardTour from "components/Misc/Tour/Tour";
+import DashboardTour from "components/UI/Tour/Tour";
 
 import authenticate from "components/Misc/authenticate/authenticate";
 

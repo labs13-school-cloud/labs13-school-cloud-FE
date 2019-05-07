@@ -3,7 +3,7 @@ import React from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import logo from "img/training-bot.svg";
-import "../Progress/loading.css";
+import "components/UI/Progress/loading.css";
 
 //Styling
 import {

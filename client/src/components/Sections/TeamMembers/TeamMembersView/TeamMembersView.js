@@ -53,19 +53,16 @@ class TeamMembersView extends React.Component {
   handleChange = e => {
     this.setState({ limit: parseInt(e.target.value, 10) });
   };
-
   deleteMember = (e, id) => {
     e.preventDefault();
     this.props.deleteTeamMember(id);
   };
-
   routeToCreateMemberPage = () => {
     this.props.disableSnackbar();
     this.props.history.push("/home/create-team-member");
   };
-
-  // function to set fuse option and return a response
   searchedMembers = team => {
+    // function to set fuse option and return a response
     var options = {
       shouldSort: true,
       threshold: 0.3,
@@ -84,13 +81,13 @@ class TeamMembersView extends React.Component {
   render() {
     const { classes } = this.props;
 
-    // boolean for if the search input is active
-    const searchOn = this.state.searchInput.length > 0;
-
     let teamMembers;
 
     // checks if the search field is active and there are results from the fuse search
-    if (searchOn && this.searchedMembers(this.props.teamMembers).length > 0) {
+    if (
+      this.state.searchInput.length &&
+      this.searchedMembers(this.props.teamMembers).length
+    ) {
       teamMembers = this.searchedMembers(this.props.teamMembers);
     } else {
       teamMembers = this.props.teamMembers;
