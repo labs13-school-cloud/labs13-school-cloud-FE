@@ -79,11 +79,11 @@ class AssignMemberPage extends React.Component {
     open: false,
     training_series_id: "",
     start_date: "",
-    value: "",
     isRouting: false
   };
 
   componentDidMount() {
+    console.log("CDM");
     let d = new Date();
     let formattedDate = d.toISOString();
     this.setState({
@@ -91,8 +91,12 @@ class AssignMemberPage extends React.Component {
       start_date: formattedDate
     });
   }
-  componentDidUpdate(prevProps) {
-    if (prevProps.isEditing) {
+  componentDidUpdate(prevProps, prevState) {
+    if (
+      prevProps.isEditing &&
+      this.state.start_date !== this.prevState.start_date
+    ) {
+      console.log("CDU");
       this.setState({ email: this.props.email, name: this.props.name });
     }
   }
@@ -152,7 +156,7 @@ class AssignMemberPage extends React.Component {
   };
   render() {
     const { classes } = this.props;
-
+    console.log("TEST");
     return (
       <AssignMemberContainer>
         <Paper className={classes.paper}>

@@ -42,7 +42,7 @@ class AddMembersView extends Component {
     });
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps, prevState) {
     if (prevProps.isEditing) {
       this.setState({ email: this.props.email, name: this.props.name });
     }
@@ -75,6 +75,7 @@ class AddMembersView extends Component {
   handler = {
     handleDateChange: date => {
       let d = date;
+      console.log("DATE: ", date);
       this.setState({
         startDate: d.toISOString()
       });
@@ -109,7 +110,6 @@ class AddMembersView extends Component {
       this.setState({ [name]: event.target.value });
     },
     routeToPostPage: () => {
-      // console.log(this.state);
       this.props.history.push(
         `/home/training-series/${this.state.trainingSeriesID}`
       );

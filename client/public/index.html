@@ -1,29 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="Description" content="Empowers team leaders with tools to assist with their team’s continual learning by sending automated Text messages/emails on a scheduled interval to team members.">
-		<script src="https://js.stripe.com/v3/"></script>
-		<link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
-		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" />
-		<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
-		<meta
-			name="viewport"
-			content="width=device-width, minimum-scale=1, initial-scale=1, shrink-to-fit=no"
-		/>
-		<meta name="theme-color" content="#000000" />
-		<link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-		<title>Training Bot</title>
-	</head>
-	<body>
-		<!-- A little help for the Netlify bots to process Contact form -->
-		<form name="contact" action="/success" netlify netlify-honeypot="bot-field" hidden>
-			<input type="text" name="contact-name" />
-			<input type="text" name="contact-email" />
-			<input type="text" name="contact-message" />
-		</form>
-		<noscript>You need to enable JavaScript to run this app.</noscript>
-		<div id="root"></div>
-	</body>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="Description"
+      content="Empowers team leaders with tools to assist with their team’s continual learning by sending automated Text messages/emails on a scheduled interval to team members."
+    />
+    <script src="https://js.stripe.com/v3/"></script>
+    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <meta
+      name="viewport"
+      content="width=device-width, minimum-scale=1, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="theme-color" content="#000000" />
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <title>Training Bot</title>
+  </head>
+  <body>
+    <!-- A little help for the Netlify bots to process Contact form -->
+    <form
+      name="contact"
+      action="/success"
+      netlify
+      netlify-honeypot="bot-field"
+      hidden
+    >
+      <input type="text" name="contact-name" />
+      <input type="text" name="contact-email" />
+      <input type="text" name="contact-message" />
+    </form>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+  </body>
 </html>

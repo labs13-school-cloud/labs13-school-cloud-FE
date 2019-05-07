@@ -195,6 +195,7 @@ class TeamMemberPage extends React.Component {
   };
 
   routeToAssigning = e => {
+    console.log("ROUTETOASSIGNING");
     e.preventDefault();
 
     this.props.history.push({
