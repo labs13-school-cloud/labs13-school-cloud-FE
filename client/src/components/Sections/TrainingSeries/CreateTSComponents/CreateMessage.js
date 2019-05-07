@@ -1,3 +1,4 @@
+// Form to create a new message for a training series
 import React from "react";
 import { connect } from "react-redux";
 import moment from "moment";

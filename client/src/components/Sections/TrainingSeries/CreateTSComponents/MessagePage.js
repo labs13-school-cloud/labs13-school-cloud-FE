@@ -1,3 +1,4 @@
+// Editable form for an existing message
 import React from "react";
 
 import { connect } from "react-redux";
@@ -9,8 +10,6 @@ import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-
-//Components
 
 import {
   getTrainingSeriesMessages,
