@@ -27,10 +27,10 @@ function Routes() {
   return (
     <Provider store={store}>
       <Router history={history}>
-        <Route exact path="/" component={App} />
+        <Route exact path="/" component={LandingPage} />
         <Route path="/pricing" component={Pricing} />
         <Route path="/team" component={Team} />
-        <Route path="/home" component={authenticate(Dashboard)} />
+        <Route path="/home" component={authenticate(LoadDashboard)} />
         <Route path="/callback" component={Callback} />
         <Route path="/slack-callback" component={SlackCallback} />
       </Router>

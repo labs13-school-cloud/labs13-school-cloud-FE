@@ -12,10 +12,6 @@ export default function TrainingSeriesTabSingle(props) {
     series: { id }
   } = props;
 
-  const {
-    series: { id }
-  } = props;
-
   useEffect(() => {
     const url = `${process.env.REACT_APP_API}/api/training-series/${id}`;
 

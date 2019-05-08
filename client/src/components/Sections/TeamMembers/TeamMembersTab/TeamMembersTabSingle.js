@@ -13,8 +13,6 @@ function TeamMembersTabSingle(props) {
   const [manager, setManager] = useState("");
   const { teamMember } = props;
 
-  const { teamMember } = props;
-
   useEffect(() => {
     axios
       .get(`${process.env.REACT_APP_API}/api/team-members/${teamMember.mentor}`)
