@@ -33,16 +33,12 @@ const styles = {
 };
 
 function SeriesCard(props) {
-  //console.log("TRAINING SERIES LIST", props);
-
   const { classes } = props;
   const [messageLength, setMessageLength] = useState(0);
   const [assignedLength, setAssignedLength] = useState(0);
 
-  //const { id } = props.data;
-  const url = `${process.env.REACT_APP_API}/api/training-series/${
-    props.data.id
-  }`;
+  const { id } = props.data;
+  const url = `${process.env.REACT_APP_API}/api/training-series/${id}`;
 
   async function getMessageCount() {
     try {
@@ -69,7 +65,7 @@ function SeriesCard(props) {
   const routeToTrainingSeriesPage = e => {
     e.preventDefault();
 
-    props.history.push(`home/training-series/${props.data.id}`);
+    props.history.push(`home/training-series/${id}`);
   };
 
   return (

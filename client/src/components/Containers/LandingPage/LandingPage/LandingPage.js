@@ -2,6 +2,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { scroller, animateScroll as scroll } from "react-scroll";
+import CssBaseline from "@material-ui/core/CssBaseline";
 
 //Styling
 import {
@@ -31,7 +32,7 @@ import undrawNotify from "img/undraw_notify_88a4.svg";
 import undrawTask from "img/undraw_personal_text_vkd8.svg";
 
 //Auth
-import { login } from "../../../../Auth/Auth";
+import { login } from "Auth/Auth";
 
 class LandingPage extends React.Component {
   scrollTo() {
@@ -47,6 +48,7 @@ class LandingPage extends React.Component {
   render() {
     return (
       <>
+        <CssBaseline />
         <LandingPageContainer>
           {/* NAVIGATION */}
           <NavbarContainer>

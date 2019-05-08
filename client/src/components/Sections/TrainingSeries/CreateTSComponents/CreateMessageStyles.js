@@ -52,7 +52,7 @@ export const MainContainer = styled.div`
     width: 95%;
   }
 `;
-export const PostContainer = styled.div`
+export const MessageContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;

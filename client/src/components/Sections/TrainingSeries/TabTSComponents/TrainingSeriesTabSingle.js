@@ -4,11 +4,10 @@ import { Grid, Typography } from "@material-ui/core/";
 import { Select } from "./TrainingSeriesTabStyles.js";
 
 export default function TrainingSeriesTabSingle(props) {
-  const [postLength, setPostLength] = useState(0);
+  const [messageLength, setMessageLength] = useState(0);
   const [assignedLength, setAssignedLength] = useState(0);
   const [assignments, setAssignments] = useState([]);
   const [daysLong, setDaysLong] = useState([]);
-
   const {
     series: { id }
   } = props;
@@ -19,13 +18,13 @@ export default function TrainingSeriesTabSingle(props) {
     axios
       .get(`${url}/messages`)
       .then(res => {
-        setPostLength(res.data.messages.length);
+        setMessageLength(res.data.messages.length);
         const longestDaysFromStart = res.data.messages.sort(
           (a, b) => b.days_from_start - a.days_from_start
         );
         setDaysLong(longestDaysFromStart[0].days_from_start);
       })
-      .catch(err => setPostLength(err));
+      .catch(err => setMessageLength(err));
 
     axios
       .get(`${url}/assignments`)
@@ -65,7 +64,9 @@ export default function TrainingSeriesTabSingle(props) {
 
         <Grid item xs={4} align="center">
           <Grid item>
-            <Typography variant="overline">messages: {postLength}</Typography>
+            <Typography variant="overline">
+              messages: {messageLength}
+            </Typography>
           </Grid>
           <Grid item>
             <Typography variant="overline">

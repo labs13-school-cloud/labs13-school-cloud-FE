@@ -30,7 +30,7 @@ import {
 
 import Logo from "img/training-bot.png";
 //Auth
-import { login } from "../../../../Auth/Auth";
+import { login } from "Auth/Auth";
 
 let id = 0;
 function createData(name, basic, premium, pro) {

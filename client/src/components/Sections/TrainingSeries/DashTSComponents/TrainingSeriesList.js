@@ -26,7 +26,7 @@ const TrainingSeriesList = props => {
             data={series}
             match={props.match}
             userId={props.user_id}
-            // postCount={postCount}
+            // messageCount={messageCount}
           />
         </Suspense>
       ))}

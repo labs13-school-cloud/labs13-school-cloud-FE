@@ -6,7 +6,7 @@ import decode from "jwt-decode";
 import { AUTH_CONFIG } from "./auth0-variables";
 
 //History
-import history from "../history";
+import history from "history.js";
 
 //Token Variables
 const ID_TOKEN_KEY = "id_token";

@@ -1,3 +1,4 @@
+// Editable form for an existing message
 import React from "react";
 
 import { connect } from "react-redux";
@@ -10,8 +11,6 @@ import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 
-//Components
-
 import {
   getTrainingSeriesMessages,
   createAMessage,
@@ -22,12 +21,12 @@ import {
 
 import {
   MainContainer,
-  PostContainer,
+  MessageContainer,
   ButtonContainer,
   styles
-} from "./PostPageStyles.js";
+} from "./MessagePageStyles.js";
 
-class PostPage extends React.Component {
+class MessagePage extends React.Component {
   state = {
     open: false,
     isUpdating: false,
@@ -42,11 +41,11 @@ class PostPage extends React.Component {
   };
 
   componentDidMount() {
-    if (this.props.location.state.post) {
-      //changed back to to post to fix bug... can change in be later
+    if (this.props.location.state.message) {
+      //changed back to to message to fix bug... can change in be later
       this.setState({
         ...this.state,
-        message: this.props.location.state.post //changed back to to post to fix bug... can change in be later
+        message: this.props.location.state.message //changed back to to message to fix bug... can change in be later
       });
     }
   }
@@ -84,9 +83,6 @@ class PostPage extends React.Component {
 
   render() {
     const { classes } = this.props;
-
-    //console.log("EDIT POST PAGE PROPS", this.props);
-    //console.log("EDIT POST PAGE STATE", this.state);
     return (
       <MainContainer>
         <Typography variant="display1" align="center" gutterBottom>
@@ -100,7 +96,7 @@ class PostPage extends React.Component {
           {/* <DeleteModal deleteType='inTeamMemberPage' id={this.props.urlId} /> */}
 
           <Paper className={classes.root}>
-            <PostContainer>
+            <MessageContainer>
               <TextField
                 id="standard-name"
                 label="Message Title"
@@ -140,7 +136,7 @@ class PostPage extends React.Component {
                 inputProps={{ min: 1 }}
                 required
               />
-            </PostContainer>
+            </MessageContainer>
           </Paper>
           <ButtonContainer>
             <Button
@@ -187,4 +183,4 @@ export default connect(
     deleteMessage,
     getMessageById
   }
-)(withStyles(styles)(withRouter(PostPage)));
+)(withStyles(styles)(withRouter(MessagePage)));

@@ -1,3 +1,4 @@
+// Form to create a new message for a training series
 import React from "react";
 import { connect } from "react-redux";
 import moment from "moment";
@@ -26,11 +27,11 @@ import {
 import {
   styles,
   MainContainer,
-  PostContainer,
+  MessageContainer,
   ButtonContainer
-} from "./CreatePostStyles.js";
+} from "./CreateMessageStyles.js";
 
-class CreatePost extends React.Component {
+class CreateMessage extends React.Component {
   state = {
     open: false,
     isUpdating: false,
@@ -91,7 +92,7 @@ class CreatePost extends React.Component {
               Create A New Message
             </Typography>
             <Divider />
-            <PostContainer>
+            <MessageContainer>
               <TextField
                 id="standard-name"
                 label="Message Title"
@@ -146,7 +147,7 @@ class CreatePost extends React.Component {
                   </Typography>
                 </ExpansionPanelDetails>
               </ExpansionPanel>
-            </PostContainer>
+            </MessageContainer>
             <ButtonContainer>
               <Button
                 variant="outlined"
@@ -191,4 +192,4 @@ export default connect(
     deleteMessage,
     getMessageById
   }
-)(withStyles(styles)(CreatePost));
+)(withStyles(styles)(CreateMessage));

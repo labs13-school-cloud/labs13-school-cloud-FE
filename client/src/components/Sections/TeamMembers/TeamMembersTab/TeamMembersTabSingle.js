@@ -26,7 +26,7 @@ function TeamMembersTabSingle(props) {
           last_name: ""
         });
       });
-  }, [teamMember, setMentor]);
+  }, [teamMember]);
 
   useEffect(() => {
     axios
@@ -46,22 +46,20 @@ function TeamMembersTabSingle(props) {
 
   return (
     <Grid
-      key={props.teamMember.id}
+      key={teamMember.id}
       item
       style={{ cursor: "pointer" }}
       onClick={e => {
-        props.history.push(`/home/team-member/${props.teamMember.id}`);
+        props.history.push(`/home/team-member/${teamMember.id}`);
       }}
     >
       <TeamsMember>
         <Typography variant="subtitle1">
-          {props.teamMember.first_name} {props.teamMember.last_name}
+          {teamMember.first_name} {teamMember.last_name}
         </Typography>
         <hr />
-        <Typography variant="subtitle2">{props.teamMember.email}</Typography>
-        <Typography variant="overline">
-          {props.teamMember.phone_number}
-        </Typography>
+        <Typography variant="subtitle2">{teamMember.email}</Typography>
+        <Typography variant="overline">{teamMember.phone_number}</Typography>
         <Typography variant="overline">
           mentor: {`${mentor.first_name} ${mentor.last_name}` || "not assigned"}
         </Typography>
@@ -72,11 +70,11 @@ function TeamMembersTabSingle(props) {
         <DeleteIcon
           onClick={e => {
             e.stopPropagation();
-            props.deleteTeamMember(props.teamMember.id);
+            props.deleteTeamMember(teamMember.id);
           }}
         />
         {/* <ul>
-                      {props.teamMember.trainingSeries.map(series => {
+                      {teamMember.trainingSeries.map(series => {
                         return <div>{series}</div>;
                       })}
                     </ul> */}

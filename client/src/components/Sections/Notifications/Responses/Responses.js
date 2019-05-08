@@ -40,11 +40,17 @@ function Responses(props) {
 
   useEffect(() => {
     console.log(props);
-  }, []);
+  }, [props]);
 
-  const ReturnCorrectSrviceLogo = service => {
+  const ReturnCorrectServiceLogo = service => {
     if (service === "slack") {
-      return <img style={{ width: "30px", height: "auto" }} src={SlackLogo} />;
+      return (
+        <img
+          alt="Slack logo"
+          style={{ width: "30px", height: "auto" }}
+          src={SlackLogo}
+        />
+      );
     } else if (service === "SMS") {
       return <SettingsCell />;
     } else {
@@ -94,7 +100,7 @@ function Responses(props) {
 
                   <Typography className={classes.pos} color="textSecondary">
                     responded to your message via {response.service}{" "}
-                    {ReturnCorrectSrviceLogo(response.service)}
+                    {ReturnCorrectServiceLogo(response.service)}
                   </Typography>
                   <Typography component="p">
                     {response.response}
