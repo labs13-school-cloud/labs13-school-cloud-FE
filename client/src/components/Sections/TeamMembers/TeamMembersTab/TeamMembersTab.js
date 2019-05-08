@@ -23,12 +23,12 @@ const TeamMembersTab = props => {
   const [localTeamMembers, setLocalTeamMembers] = useState([]);
   const [limit] = useState(8);
   const [offset, setOffset] = useState(0);
-  //const { getTeamMembers, userId, teamMembers } = props;
+  const { getTeamMembers, userId, teamMembers } = props;
 
   useEffect(() => {
-    props.getTeamMembers(props.userId);
-    setLocalTeamMembers(props.teamMembers);
-  }, []);
+    getTeamMembers(userId);
+    setLocalTeamMembers(teamMembers);
+  }, [getTeamMembers, userId, teamMembers]);
 
   const handleClick = offset => {
     setOffset(offset);
