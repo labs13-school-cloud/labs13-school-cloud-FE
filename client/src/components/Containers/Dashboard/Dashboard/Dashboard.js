@@ -5,6 +5,7 @@ import TeamMembersTab from "components/Sections/TeamMembers/TeamMembersTab";
 import TrainingSeriesView from "components/Sections/TrainingSeries/DashTSComponents/TrainingSeriesView";
 import TrainingSeriesTab from "components/Sections/TrainingSeries/TabTSComponents/TrainingSeriesTab.js";
 import NotificationsView from "components/Sections/Notifications/NotificationsView";
+import Responses from "components/Sections/Notifications/Responses";
 
 import BottomNavigation from "@material-ui/core/BottomNavigation";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
@@ -12,6 +13,7 @@ import PermIdentity from "@material-ui/icons/PermIdentityOutlined";
 import Home from "@material-ui/icons/HomeOutlined";
 import QuestionAnswer from "@material-ui/icons/QuestionAnswerOutlined";
 import Timeline from "@material-ui/icons/TimelineOutlined";
+import ModeComment from "@material-ui/icons/ModeCommentOutlined";
 
 import { TripleColumn, SmallColumns, DashWrapper } from "./styles.js";
 
@@ -26,7 +28,11 @@ function Dashboard(props) {
         onChange={(e, value) => {
           setTopTab(value);
         }}
-        style={{ width: "80%", whiteSpace: "nowrap" }}
+        style={{
+          width: "100%",
+          whiteSpace: "nowrap",
+          background: "rgb(240,240,240)"
+        }}
       >
         <BottomNavigationAction
           label="Overview"
@@ -48,6 +54,11 @@ function Dashboard(props) {
           label="Messages"
           value="messages"
           icon={<QuestionAnswer />}
+        />
+        <BottomNavigationAction
+          label="Responses"
+          value="responses"
+          icon={<ModeComment />}
         />
       </BottomNavigation>
 
@@ -73,6 +84,15 @@ function Dashboard(props) {
       )}
       {topTab === "training series" && (
         <TrainingSeriesTab history={props.history} userId={userId} />
+      )}
+      {topTab === "messages" && (
+        <div>
+          <h3>this is temporary until we actually build out this component</h3>
+          <NotificationsView history={props.history} userId={userId} />
+        </div>
+      )}
+      {topTab === "responses" && (
+        <Responses history={props.history} userId={userId} />
       )}
     </DashWrapper>
   );
