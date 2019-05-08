@@ -285,9 +285,9 @@ class CheckoutForm extends Component {
                 {freeButton}
               </div>
 
-              {this.props.plans.map(plan => {
+              {this.props.plans.map((plan, i) => {
                 return plan.nickname === accountType ? (
-                  <div className={classes.subCard}>
+                  <div key={plan.id} className={classes.subCard}>
                     <Typography className={classes.title}>
                       {plan.nickname}
                     </Typography>
@@ -325,7 +325,7 @@ class CheckoutForm extends Component {
                     </Button>
                   </div>
                 ) : (
-                  <div className={classes.subCard}>
+                  <div key={plan.id} className={classes.subCard}>
                     <Typography className={classes.title}>
                       {plan.nickname}
                     </Typography>
