@@ -47,8 +47,8 @@ const messagesReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
-        messages: action.payload.messages,
-        singleTrainingSeries: action.payload.training_series
+        messages: action.payload.messages, //validated
+        singleTrainingSeries: action.payload.trainingSeries // changed and validated
       };
     case GET_MESSAGES_FAIL:
       return {
@@ -66,7 +66,7 @@ const messagesReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
-        messages: action.payload
+        messages: action.payload //validated
       };
     case GET_SINGLE_MESSAGE_FAIL:
       return {
@@ -86,7 +86,7 @@ const messagesReducer = (state = initialState, action) => {
         ...state,
         isAdding: false,
         addedSuccessfully: true,
-        singleMessage: action.payload //should probably be newMessage??
+        singleMessage: action.payload
       };
     case ADD_MESSAGE_FAIL:
       return {
