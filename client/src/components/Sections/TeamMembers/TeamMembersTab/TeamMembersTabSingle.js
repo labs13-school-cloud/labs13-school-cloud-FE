@@ -11,14 +11,11 @@ import { connect } from "react-redux";
 function TeamMembersTabSingle(props) {
   const [mentor, setMentor] = useState("");
   const [manager, setManager] = useState("");
+  const { teamMember } = props;
 
   useEffect(() => {
     axios
-      .get(
-        `${process.env.REACT_APP_API}/api/team-members/${
-          props.teamMember.mentor
-        }`
-      )
+      .get(`${process.env.REACT_APP_API}/api/team-members/${teamMember.mentor}`)
       .then(res => {
         setMentor(res.data.teamMember);
       })
@@ -29,14 +26,12 @@ function TeamMembersTabSingle(props) {
           last_name: ""
         });
       });
-  }, []);
+  }, [teamMember, setMentor]);
 
   useEffect(() => {
     axios
       .get(
-        `${process.env.REACT_APP_API}/api/team-members/${
-          props.teamMember.manager
-        }`
+        `${process.env.REACT_APP_API}/api/team-members/${teamMember.manager}`
       )
       .then(res => {
         setManager(res.data.teamMember);
@@ -47,7 +42,7 @@ function TeamMembersTabSingle(props) {
           last_name: ""
         });
       });
-  }, []);
+  }, [teamMember]);
 
   return (
     <Grid
