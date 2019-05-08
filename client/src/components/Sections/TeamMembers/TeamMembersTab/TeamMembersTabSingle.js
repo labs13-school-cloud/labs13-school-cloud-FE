@@ -11,6 +11,7 @@ import { connect } from "react-redux";
 function TeamMembersTabSingle(props) {
   const [mentor, setMentor] = useState("");
   const [manager, setManager] = useState("");
+  const { teamMember } = props;
 
   const { teamMember } = props;
 

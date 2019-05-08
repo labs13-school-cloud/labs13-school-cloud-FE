@@ -35,7 +35,7 @@ const TeamMembersTab = props => {
   };
 
   return (
-    <div>
+    <div style={{ width: "90%" }}>
       <TeamsTabWrapper>
         <TeamsTabHeader>
           <TextField
@@ -125,7 +125,7 @@ export default connect(
 const TeamsTabWrapper = styled(Paper)`
   margin: 48px auto;
   padding: 10px;
-  width: 90%;
+  width: 100%;
 `;
 
 const TeamsTabHeader = styled.div`
