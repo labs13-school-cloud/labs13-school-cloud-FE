@@ -14,7 +14,6 @@ import {
   deleteTeamMember,
   deleteMessage,
   deleteUser,
-  deleteTeamMemberFromTrainingSeries,
   getTextNotifications,
   getEmailNotifications
 } from "store/actions/";
@@ -97,12 +96,6 @@ class TrainingSeriesModal extends React.Component {
         break;
       case "inTeamMemberPage":
         this.props.deleteTeamMember(this.props.teamMemberId);
-        break;
-      case "removeMemberFromTS":
-        this.props.deleteTeamMemberFromTrainingSeries(
-          this.props.id,
-          this.props.id
-        );
         break;
       case "trainingSeries":
         this.props.deleteTrainingSeries(
@@ -198,7 +191,6 @@ export default connect(
     deleteTeamMember,
     deleteUser,
     deleteTrainingSeries,
-    deleteTeamMemberFromTrainingSeries,
     getTextNotifications,
     getEmailNotifications
   }

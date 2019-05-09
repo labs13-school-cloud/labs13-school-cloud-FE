@@ -1,116 +1,116 @@
-import React from "react";
-import moment from "moment";
+// import React from "react";
+// import moment from "moment";
 
-import { connect } from "react-redux";
-import DeleteModal from "components/UI/Modals/deleteModal";
-import { deleteTeamMemberFromTrainingSeries } from "store/actions";
-import styled from "styled-components";
+// import { connect } from "react-redux";
+// import DeleteModal from "components/UI/Modals/deleteModal";
+// import { deleteTeamMemberFromTrainingSeries } from "store/actions";
+// import styled from "styled-components";
 
-// Material UI
-import { withStyles } from "@material-ui/core/styles";
-import {
-  ListItem,
-  ListItemText,
-  ListItemSecondaryAction,
-  Divider
-} from "@material-ui/core/";
+// // Material UI
+// import { withStyles } from "@material-ui/core/styles";
+// import {
+//   ListItem,
+//   ListItemText,
+//   ListItemSecondaryAction,
+//   Divider
+// } from "@material-ui/core/";
 
-// import DeleteIcon from "@material-ui/icons/Delete";
+// // import DeleteIcon from "@material-ui/icons/Delete";
 
-const styles = theme => ({
-  listStyle: {
-    display: "flex",
+// const styles = theme => ({
+//   listStyle: {
+//     display: "flex",
 
-    padding: "5px"
-  },
-  listItem: {
-    display: "flex",
-    flexDirections: "column",
-    width: "90%",
-    justifyContent: "space-between",
-    alignItems: "center"
-    // borderBottom: "1px solid #e8e9eb"
-  },
-  bullet: {
-    display: "inline-block",
-    margin: "0 2px",
-    transform: "scale(0.8)"
-  },
-  title: {
-    fontSize: 14
-  },
-  pos: {
-    marginBottom: 12
-  },
-  margin: {
-    margin: theme.spacing.unit
-  },
-  secondaryAction: {
-    display: "flex",
-    flexDirection: "row",
-    "align-items": "center"
-  }
-});
+//     padding: "5px"
+//   },
+//   listItem: {
+//     display: "flex",
+//     flexDirections: "column",
+//     width: "90%",
+//     justifyContent: "space-between",
+//     alignItems: "center"
+//     // borderBottom: "1px solid #e8e9eb"
+//   },
+//   bullet: {
+//     display: "inline-block",
+//     margin: "0 2px",
+//     transform: "scale(0.8)"
+//   },
+//   title: {
+//     fontSize: 14
+//   },
+//   pos: {
+//     marginBottom: 12
+//   },
+//   margin: {
+//     margin: theme.spacing.unit
+//   },
+//   secondaryAction: {
+//     display: "flex",
+//     flexDirection: "row",
+//     "align-items": "center"
+//   }
+// });
 
-const TrainingSeriesAssignments = props => {
-  const { classes } = props;
+// const TrainingSeriesAssignments = props => {
+//   const { classes } = props;
 
-  const { teamMemberId } = props;
-  const { id } = props.trainingSeries;
-  // add hours to sendDate, formatting with moment ensures it displays properly on the FE
-  const formattedStartDate = moment(props.trainingSeries.start_date)
-    .add(1, "hours")
-    .format("MMMM Do, YYYY");
+//   const { teamMemberId } = props;
+//   const { id } = props.trainingSeries;
+//   // add hours to sendDate, formatting with moment ensures it displays properly on the FE
+//   const formattedStartDate = moment(props.trainingSeries.start_date)
+//     .add(1, "hours")
+//     .format("MMMM Do, YYYY");
 
-  // const handleDelete = e => {
-  // 	e.preventDefault();
-  // 	props.deleteTeamMemberFromTrainingSeries(teamMemberId, id);
-  // };
+//   // const handleDelete = e => {
+//   // 	e.preventDefault();
+//   // 	props.deleteTeamMemberFromTrainingSeries(teamMemberId, id);
+//   // };
 
-  //console.log("***ASSIGNMENTS***", teamMemberId, id);
+//   //console.log("***ASSIGNMENTS***", teamMemberId, id);
 
-  return (
-    <>
-      <ListItem className={classes.listItem}>
-        <ListItemText
-          className={classes.listItemText}
-          primary={`Title: ${props.trainingSeries.title}`}
-          secondary={`Start Date: ${formattedStartDate}`}
-        />
-        <ListItemSecondaryAction className={classes.secondaryAction}>
-          <ListButtonContainer>
-            <DeleteModal
-              teamMemberId={teamMemberId}
-              id={id}
-              deleteType="removeMemberFromTS"
-            />
-          </ListButtonContainer>
-        </ListItemSecondaryAction>
-      </ListItem>
-      <Divider />
-    </>
-  );
-};
+//   return (
+//     <>
+//       <ListItem className={classes.listItem}>
+//         <ListItemText
+//           className={classes.listItemText}
+//           primary={`Title: ${props.trainingSeries.title}`}
+//           secondary={`Start Date: ${formattedStartDate}`}
+//         />
+//         <ListItemSecondaryAction className={classes.secondaryAction}>
+//           <ListButtonContainer>
+//             <DeleteModal
+//               teamMemberId={teamMemberId}
+//               id={id}
+//               deleteType="removeMemberFromTS"
+//             />
+//           </ListButtonContainer>
+//         </ListItemSecondaryAction>
+//       </ListItem>
+//       <Divider />
+//     </>
+//   );
+// };
 
-const mapStateToProps = state => {
-  return {};
-};
+// const mapStateToProps = state => {
+//   return {};
+// };
 
-export default connect(
-  mapStateToProps,
-  { deleteTeamMemberFromTrainingSeries }
-)(withStyles(styles)(TrainingSeriesAssignments));
+// export default connect(
+//   mapStateToProps,
+//   { deleteTeamMemberFromTrainingSeries }
+// )(withStyles(styles)(TrainingSeriesAssignments));
 
-// const ListStyles = styled.div`
-// 	display: flex;
-// 	flex-direction: column;
-// 	align-items: center;
-// 	border-bottom: 1px solid #E8E9EB;
-//    width: 100%;
-//    border-bottom: 1px solid #e8e9eb;
+// // const ListStyles = styled.div`
+// // 	display: flex;
+// // 	flex-direction: column;
+// // 	align-items: center;
+// // 	border-bottom: 1px solid #E8E9EB;
+// //    width: 100%;
+// //    border-bottom: 1px solid #e8e9eb;
+// // `;
+// const ListButtonContainer = styled.div`
+//   display: flex;
+//   align-items: center;
+//   justify-content: space-between;
 // `;
-const ListButtonContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-`;

@@ -117,19 +117,16 @@ const styles = theme => ({
 class TeamMemberPage extends React.Component {
   state = {
     team_member: {
+      id: "",
       first_name: "",
       last_name: "",
       job_description: "",
       email: "",
       phone_number: "",
       user_id: "",
-      team_member_col: "",
-      team_member_id: "",
-      text_on: false,
-      email_on: false,
-      slack_on: false,
-      manager: null,
-      mentor: null
+      slack_uuid: "",
+      manager_id: null,
+      mentor_id: null
     },
     memberManager: "",
     memberMentor: "",
@@ -142,24 +139,26 @@ class TeamMemberPage extends React.Component {
   componentDidMount() {
     let data = this.props.teamMember;
     let allMembers = this.props.teamMembers;
-    let assignmentIds = data.assignments.map(a => a.training_series_id);
+    console.log(data);
+    // let assignmentIds = data.assignments.map(a => a.training_series_id);
     if (Object.keys(data).length !== 0) {
+      //console.log("on componentDidMount", this.props);
       this.setState({
-        team_member: data.teamMember,
-        assignments: data.assignments,
+        team_member: data,
+        // assignments: data.assignments,
         otherTeamMembers: allMembers.filter(
           //sets all other team members in an array to make later filtering simpler
-          m => m.id !== data.teamMember.id
+          m => m.id !== data.id
         ),
-        memberManager: data.teamMember.manager
-          ? allMembers.find(m => m.id === data.teamMember.manager) //sets manager on state if already has one
+        memberManager: data.manager
+          ? allMembers.find(m => m.id === data.manager) //sets manager on state if already has one
           : "",
-        memberMentor: data.teamMember.mentor
-          ? allMembers.find(m => m.id === data.teamMember.mentor) //ditto for mentor
-          : "",
-        messages: this.props.messages.filter(msg =>
-          assignmentIds.includes(msg.training_series_id)
-        )
+        memberMentor: data.mentor
+          ? allMembers.find(m => m.id === data.mentor) //ditto for mentor
+          : ""
+        // messages: this.props.messages.filter(msg =>
+        //   assignmentIds.includes(msg.training_series_id)
+        // )
       });
     }
   }
@@ -182,11 +181,16 @@ class TeamMemberPage extends React.Component {
     });
 
     // PUT request on toggle
-    this.props.editTeamMember(
-      this.state.team_member.id,
-      this.state.team_member
-    );
+    const { manager_name, mentor_name, ...rest } = this.state.team_member;
+    this.props.editTeamMember(this.state.team_member.id, rest);
   };
+  // this.state.team_member.first_name,
+  // this.state.team_member.last_name,
+  // this.state.team_member.job_description,
+  // this.state.team_member.email,
+  // this.state.team_member.phone_number,
+  // this.state.team_member.user_id
+  //
 
   handleDate = name => event => {
     this.setState({
@@ -194,20 +198,20 @@ class TeamMemberPage extends React.Component {
     });
   };
 
-  routeToAssigning = e => {
-    console.log("ROUTETOASSIGNING");
-    e.preventDefault();
+  // routeToAssigning = e => {
+  //   //console.log("ROUTETOASSIGNING");
+  //   e.preventDefault();
 
-    this.props.history.push({
-      pathname: `/home/assign-series/${this.state.team_member.id}`,
-      state: {
-        userId: this.props.userId,
-        urlId: this.props.urlId,
-        assignments: this.props.teamMember.assignments,
-        trainingSeries: this.props.trainingSeries
-      }
-    });
-  };
+  //   this.props.history.push({
+  //     pathname: `/home/assign-series/${this.state.team_member.id}`,
+  //     state: {
+  //       userId: this.props.userId,
+  //       urlId: this.props.urlId,
+  //       assignments: this.props.teamMember.assignments,
+  //       trainingSeries: this.props.trainingSeries
+  //     }
+  //   });
+  // };
 
   selectHandler = (e, relationType) => {
     let val = e.target.value !== "null" ? parseInt(e.target.value) : null;
@@ -225,29 +229,29 @@ class TeamMemberPage extends React.Component {
   render() {
     const { classes } = this.props;
 
-    const { text_on, email_on, slack_on } = this.state.team_member;
+    // const { text_on, email_on, slack_on } = this.state.team_member;
 
-    let textEnabled;
-    let emailEnabled;
-    let slackEnabled;
+    // let textEnabled;
+    // let emailEnabled;
+    // let slackEnabled;
 
-    if (text_on && !email_on && !slack_on) {
-      textEnabled = true;
-    }
+    // if (text_on && !email_on && !slack_on) {
+    //   textEnabled = true;
+    // }
 
-    if (email_on && !text_on && !slack_on) {
-      emailEnabled = true;
-    }
+    // if (email_on && !text_on && !slack_on) {
+    //   emailEnabled = true;
+    // }
 
-    if (slack_on && !text_on && !slack_on) {
-      slackEnabled = true;
-    }
+    // if (slack_on && !text_on && !slack_on) {
+    //   slackEnabled = true;
+    // }
 
-    if (email_on && text_on && slack_on) {
-      textEnabled = false;
-      emailEnabled = false;
-      slackEnabled = false;
-    }
+    // if (email_on && text_on && slack_on) {
+    //   textEnabled = false;
+    //   emailEnabled = false;
+    //   slackEnabled = false;
+    // }
     //Checks to see if one number has been entered and if the full number matches
     let addDisabled = false;
     if (
@@ -260,77 +264,77 @@ class TeamMemberPage extends React.Component {
       addDisabled = true;
     }
 
-    const trainingAssigments =
-      this.props.teamMember.assignments &&
-      this.props.teamMember.assignments.map(trainingSeries => {
-        return (
-          <TrainingSeriesAssignments
-            trainingSeries={trainingSeries}
-            teamMemberId={this.props.urlId}
-          />
-        );
-      });
+    // const trainingAssigments =
+    //   this.props.teamMember.assignments &&
+    //   this.props.teamMember.assignments.map(trainingSeries => {
+    //     return (
+    //       <TrainingSeriesAssignments
+    //         trainingSeries={trainingSeries}
+    //         teamMemberId={this.props.urlId}
+    //       />
+    //     );
+    //   });
 
-    let disabledTrainingSeries;
+    // let disabledTrainingSeries;
 
-    if (
-      this.props.trainingSeries.length > 0 &&
-      this.state.assignments.length === 0
-    ) {
-      disabledTrainingSeries = (
-        <>
-          <div className={classes.trainingSeriesHeader}>
-            <Typography variant="title">Training Series</Typography>
-            <Button
-              className={classes.button}
-              variant="outlined"
-              onClick={this.routeToAssigning}
-            >
-              Assign to Training Series
-            </Button>
-          </div>
-          <HolderText>
-            <p>This team member currently does not have any assignments.</p>
-            <p>Click the button above to assign them to a training series.</p>
-          </HolderText>
-        </>
-      );
-    } else if (this.props.trainingSeries.length > 0) {
-      disabledTrainingSeries = (
-        <>
-          <div className={classes.trainingSeriesHeader}>
-            <Typography variant="title">Assigned Training Series</Typography>
-            <Button
-              className={classes.assignBtn}
-              variant="outlined"
-              // className={classes.button}
-              onClick={this.routeToAssigning}
-            >
-              Assign to Training Series
-            </Button>
-          </div>
-          <List>{trainingAssigments}</List>
-        </>
-      );
-    } else {
-      disabledTrainingSeries = (
-        <>
-          <div className={classes.trainingSeriesHeader}>
-            <Typography variant="title">Training Series</Typography>
-            <Button className={classes.assignBtn} variant="outlined" disabled>
-              Assign to Training Series
-            </Button>
-          </div>
-          <HolderText>
-            <p>You don't have any training series to assign.</p>
-            <p variant="subheading" className={classes.messageText}>
-              <Link to="/home/create-training-series">Click here</Link> to
-              create your first training series.
-            </p>
-          </HolderText>
-        </>
-      );
-    }
+    // if (
+    //   this.props.trainingSeries.length > 0 &&
+    //   this.state.assignments.length === 0
+    // ) {
+    //   disabledTrainingSeries = (
+    //     <>
+    //       <div className={classes.trainingSeriesHeader}>
+    //         <Typography variant="title">Training Series</Typography>
+    //         <Button
+    //           className={classes.button}
+    //           variant="outlined"
+    //           onClick={this.routeToAssigning}
+    //         >
+    //           Assign to Training Series
+    //         </Button>
+    //       </div>
+    //       <HolderText>
+    //         <p>This team member currently does not have any assignments.</p>
+    //         <p>Click the button above to assign them to a training series.</p>
+    //       </HolderText>
+    //     </>
+    //   );
+    // } else if (this.props.trainingSeries.length > 0) {
+    //   disabledTrainingSeries = (
+    //     <>
+    //       <div className={classes.trainingSeriesHeader}>
+    //         <Typography variant="title">Assigned Training Series</Typography>
+    //         <Button
+    //           className={classes.assignBtn}
+    //           variant="outlined"
+    //           // className={classes.button}
+    //           onClick={this.routeToAssigning}
+    //         >
+    //           Assign to Training Series
+    //         </Button>
+    //       </div>
+    //       <List>{trainingAssigments}</List>
+    //     </>
+    //   );
+    // } else {
+    //   disabledTrainingSeries = (
+    //     <>
+    //       <div className={classes.trainingSeriesHeader}>
+    //         <Typography variant="title">Training Series</Typography>
+    //         <Button className={classes.assignBtn} variant="outlined" disabled>
+    //           Assign to Training Series
+    //         </Button>
+    //       </div>
+    //       <HolderText>
+    //         <p>You don't have any training series to assign.</p>
+    //         <p variant="subheading" className={classes.messageText}>
+    //           <Link to="/home/create-training-series">Click here</Link> to
+    //           create your first training series.
+    //         </p>
+    //       </HolderText>
+    //     </>
+    //   );
+    // }
 
     let disabledMessages;
 
@@ -420,7 +424,7 @@ class TeamMemberPage extends React.Component {
             </MemberInfoContainer>
             <div className="mentor display">
               Mentor
-              {this.state.memberMentor !== null
+              {this.state.memberMentor !== null //gannon fix this
                 ? `: ${this.state.memberMentor.first_name} ${
                     this.state.memberMentor.last_name
                   }`
@@ -478,8 +482,8 @@ class TeamMemberPage extends React.Component {
               </select>
             </form>
 
-            <ButtonContainer>
-              <FormControlLabel
+            {/* <ButtonContainer> */}
+            {/* <FormControlLabel
                 control={
                   <Switch
                     checked={this.state.team_member.text_on}
@@ -522,8 +526,8 @@ class TeamMemberPage extends React.Component {
                     ? "Email Active"
                     : "Email Inactive"
                 }
-              />
-              <FormControlLabel
+              /> */}
+            {/* <FormControlLabel
                 control={
                   <Switch
                     checked={this.state.team_member.slack_on}
@@ -545,7 +549,7 @@ class TeamMemberPage extends React.Component {
                     : "Slack Inactive"
                 }
               />
-            </ButtonContainer>
+            </ButtonContainer> */}
             <ButtonContainer>
               <NotificationWidget
                 disabled={addDisabled ? true : false}
@@ -556,14 +560,14 @@ class TeamMemberPage extends React.Component {
               />
               <DeleteModal
                 deleteType="inTeamMemberPage"
-                teamMemberId={this.props.teamMember.teamMember.id}
+                teamMemberId={this.props.teamMember.id}
                 userId={this.props.userId}
                 displayType="button"
               />
             </ButtonContainer>
           </Paper>
         </form>
-        <Paper className={classes.paper}>{disabledTrainingSeries}</Paper>
+        {/* <Paper className={classes.paper}>{disabledTrainingSeries}</Paper> */}
         <Paper className={classes.paper}>{disabledMessages}</Paper>
       </MainContainer>
     );

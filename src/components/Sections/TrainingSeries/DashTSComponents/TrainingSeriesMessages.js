@@ -35,8 +35,6 @@ import {
   Divider
 } from "@material-ui/core/";
 
-import AddMemberSnackbar from "../AddMembersToTrainingSeries/AddMemberSnackbar";
-
 import {
   styles,
   PageContainer,
@@ -295,14 +293,6 @@ class TrainingSeriesMessages extends React.Component {
     );
     return (
       <>
-        {this.state.displaySnackbar && (
-          <>
-            <AddMemberSnackbar
-              message="Your team members have been successfully assigned."
-              type="success"
-            />
-          </>
-        )}
         <PageContainer>
           {/* <Paper className={classes.paperTitle}>{titleEdit}</Paper> */}
           <Paper className={classes.paper}>
