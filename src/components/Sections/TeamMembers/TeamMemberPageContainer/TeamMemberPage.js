@@ -1,23 +1,12 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import NumberFormat from "react-number-format";
 import styled from "styled-components";
 
 // Material UI
 import { withStyles } from "@material-ui/core/styles";
-import {
-  Paper,
-  List,
-  Typography,
-  TextField,
-  Button,
-  Divider,
-  Switch,
-  FormControlLabel
-} from "@material-ui/core/";
+import { Paper, Typography, TextField, Divider } from "@material-ui/core/";
 import NotificationWidget from "./SnackBarTeamMember";
 //Components
-import TrainingSeriesAssignments from "./TrainingSeriesAssigments";
 import DeleteModal from "components/UI/Modals/deleteModal";
 
 //Redux
