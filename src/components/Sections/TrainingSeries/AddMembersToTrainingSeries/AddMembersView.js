@@ -12,8 +12,8 @@ import AddMember from "./AddMember";
 //Styles
 import {
   addTeamMemberToTrainingSeries,
-  getTeamMembers,
-  getMembersAssigned
+  getTeamMembers
+  //getMembersAssigned
 } from "store/actions/";
 
 import { styles } from "./AddMemberViewStyles.js";
@@ -33,7 +33,7 @@ class AddMembersView extends Component {
 
   componentDidMount() {
     this.props.getTeamMembers(this.props.userId);
-    this.getAssigned();
+    //this.getAssigned();
     let d = new Date();
     let formattedDate = d.toISOString();
     this.setState({
@@ -50,9 +50,9 @@ class AddMembersView extends Component {
   handleClick(offset) {
     this.setState({ offset });
   }
-  getAssigned = () => {
-    this.props.getMembersAssigned(this.props.match.params.id);
-  };
+  // getAssigned = () => {
+  //   this.props.getMembersAssigned(this.props.match.params.id);
+  // };
   render() {
     const { classes } = this.props;
 
@@ -134,7 +134,7 @@ export default connect(
   mapStateToProps,
   {
     addTeamMemberToTrainingSeries,
-    getTeamMembers,
-    getMembersAssigned
+    getTeamMembers
+    //getMembersAssigned
   }
 )(withStyles(styles)(AddMembersView));

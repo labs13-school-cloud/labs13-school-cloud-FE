@@ -10,8 +10,8 @@ import { Wrapper, HeaderWrapper, Series } from "./TrainingSeriesTabStyles.js";
 //functional related imports
 import {
   getTrainingSeries,
-  deleteTrainingSeries,
-  getMembersAssigned
+  deleteTrainingSeries
+  //getMembersAssigned
 } from "store/actions";
 
 const TrainingSeriesTab = props => {
@@ -90,5 +90,5 @@ const mapStateToProps = state => {
 };
 export default connect(
   mapStateToProps,
-  { getTrainingSeries, deleteTrainingSeries, getMembersAssigned }
+  { getTrainingSeries, deleteTrainingSeries /*, getMembersAssigned*/ }
 )(TrainingSeriesTab);

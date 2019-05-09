@@ -5,8 +5,8 @@ import { Link } from "react-router-dom";
 import Fuse from "fuse.js";
 
 // Components
-import DeleteModal from "../../../UI/Modals/deleteModal";
-import TrainingSeriesAssignment from "./TrainingSeriesAssignment";
+import DeleteModal from "components/UI/Modals/deleteModal";
+//import TrainingSeriesAssignment from "./TrainingSeriesAssignment";
 
 // Redux
 import { connect } from "react-redux";
@@ -16,7 +16,7 @@ import {
   createAMessage,
   editMessage,
   deleteMessage,
-  getMembersAssigned,
+  //getMembersAssigned,
   editTrainingSeries
 } from "store/actions";
 
@@ -63,7 +63,7 @@ class TrainingSeriesMessages extends React.Component {
   componentDidMount() {
     this.getTrainingSeriesWithMessages(this.props.match.params.id);
     this.props.getTeamMembers(this.props.userId);
-    this.props.getMembersAssigned(this.props.match.params.id);
+    //this.props.getMembersAssigned(this.props.match.params.id);
     if (this.props.location.state) {
       this.setState({
         displaySnackbar: this.props.location.state.success
@@ -246,12 +246,12 @@ class TrainingSeriesMessages extends React.Component {
               Assign Members
             </Button>
           </HeaderContainer>
-          {this.props.assignments.map(member => (
+          {/*this.props.assignments.map(member => (
             <>
               <TrainingSeriesAssignment member={member} />
               <Divider />
             </>
-          ))}
+          ))*/}
         </>
       );
     } else {
@@ -414,7 +414,7 @@ export default connect(
     createAMessage,
     editMessage,
     deleteMessage,
-    getMembersAssigned,
+    //getMembersAssigned,
     editTrainingSeries
   }
 )(withStyles(styles)(TrainingSeriesMessages));
