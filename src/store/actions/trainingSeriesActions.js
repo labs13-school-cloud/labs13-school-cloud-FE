@@ -16,21 +16,24 @@ export const EDIT_TRAINING_SERIES_FAIL = "EDIT_TRAINING_SERIES_FAIL";
 export const DELETE_TRAINING_SERIES_START = "DELETE_TRAINING_SERIES_START";
 export const DELETE_TRAINING_SERIES_SUCCESS = "DELETE_TRAINING_SERIES_SUCCESS";
 export const DELETE_TRAINING_SERIES_FAIL = "DELETE_TRAINING_SERIES_FAIL";
-//GET MEMBERS ASSIGNED TO SINGLE TRAINING SERIES
-export const GET_MEMBERS_ASSIGNED_START = "GET_MEMBERS_ASSIGNED_START";
-export const GET_MEMBERS_ASSIGNED_SUCCESS = "GET_MEMBERS_ASSIGNED_SUCCESS";
-export const GET_MEMBERS_ASSIGNED_FAIL = "GET_MEMBERS_ASSIGNED_FAIL";
 
-export const getTrainingSeries = id => dispatch => {
+export const GET_TRAINING_SERIES_MESSAGES_START =
+  "GET_TRAINING_SERIES_MESSAGES_START";
+export const GET_TRAINING_SERIES_MESSAGES_SUCCESS =
+  "GET_TRAINING_SERIES_MESSAGES_SUCCESS";
+export const GET_TRAINING_SERIES_MESSAGES_FAIL =
+  "GET_TRAINING_SERIES_MESSAGES_FAIL";
+
+export const getTrainingSeries = () => dispatch => {
   dispatch({
     type: GET_TRAINING_SERIES_START
   });
   axios
-    .get(`${process.env.REACT_APP_API}/api/users/${id}/training-series`)
+    .get(`${process.env.REACT_APP_API}/api/training-series`)
     .then(res =>
       dispatch({
         type: GET_TRAINING_SERIES_SUCCESS,
-        payload: res.data.userTrainingSeries
+        payload: res.data.trainingSeries
       })
     )
     .catch(err => dispatch({ type: GET_TRAINING_SERIES_FAIL, error: err }));
@@ -41,7 +44,7 @@ export const addTrainingSeries = trainingSeriesData => dispatch => {
     type: ADD_TRAINING_SERIES_START
   });
   axios
-    .message(
+    .post(
       `${process.env.REACT_APP_API}/api/training-series`,
       trainingSeriesData
     )
@@ -70,7 +73,7 @@ export const editTrainingSeries = (id, trainingSeriesData) => dispatch => {
     .catch(err => dispatch({ type: EDIT_TRAINING_SERIES_FAIL, error: err }));
 };
 
-export const deleteTrainingSeries = (trainingSeriesID, userID) => dispatch => {
+export const deleteTrainingSeries = trainingSeriesID => dispatch => {
   dispatch({ type: DELETE_TRAINING_SERIES_START });
   axios
     .delete(
@@ -82,22 +85,25 @@ export const deleteTrainingSeries = (trainingSeriesID, userID) => dispatch => {
         payload: trainingSeriesID
       })
     )
-    .then(() => {
-      //dispatch(getEmailNotifications(userID)); //Not sure why these where here... but they were throwing error. Gannon&Adam.
-      //dispatch(getTextNotifications(userID)); //the ID is coming back as undefined.
-    })
     .catch(err => dispatch({ type: DELETE_TRAINING_SERIES_FAIL, error: err }));
 };
 
-export const getMembersAssigned = id => dispatch => {
-  dispatch({ type: GET_MEMBERS_ASSIGNED_START });
+export const getTrainingSeriesMessages = training_series_id => dispatch => {
+  dispatch({ type: GET_TRAINING_SERIES_MESSAGES_START });
   axios
-    .get(`${process.env.REACT_APP_API}/api/training-series/${id}/assignments`)
-    .then(res =>
-      dispatch({
-        type: GET_MEMBERS_ASSIGNED_SUCCESS,
-        payload: res.data.assignments
-      })
+    .post(
+      `${
+        process.env.REACT_APP_API
+      }/api/messages/training-series/${training_series_id}`
     )
-    .catch(err => dispatch({ type: GET_MEMBERS_ASSIGNED_FAIL, error: err }));
+    .then(res => {
+      dispatch({
+        type: GET_TRAINING_SERIES_MESSAGES_SUCCESS,
+        payload: res.data.messages
+      });
+    })
+    .catch(err => {
+      console.log(err);
+      dispatch({ type: GET_TRAINING_SERIES_MESSAGES_FAIL, error: err });
+    });
 };
