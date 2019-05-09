@@ -3,7 +3,6 @@ import { Router, Route } from "react-router-dom";
 
 import Profile from "components/Containers/Profile";
 import TeamMemberPageView from "components/Sections/TeamMembers/TeamMemberPageContainer/TeamMemberPageView";
-import AddTrainingSeriesView from "components/Sections/TrainingSeries/AddMembersToTrainingSeries/AddMembersView.js";
 import CreateTrainingSeries from "components/Sections/TrainingSeries/CreateTSComponents/CreateTrainingSeries";
 import TrainingSeriesMessages from "components/Sections/TrainingSeries/DashTSComponents/TrainingSeriesMessages";
 import AddTeamMemberPage from "components/Sections/TeamMembers/TeamMemberPageContainer/AddTeamMemberPage";
@@ -74,12 +73,6 @@ function Routes(props) {
       <Route
         path="/home/create-message"
         render={renderProps => <CreateMessage {...renderProps} />}
-      />
-      <Route
-        path="/home/assign-members/:id"
-        render={renderProps => (
-          <AddTrainingSeriesView {...renderProps} userId={props.user.id} />
-        )}
       />
       <Route
         path="/home/assign-series/:id"

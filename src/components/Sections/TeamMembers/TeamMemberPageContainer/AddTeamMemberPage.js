@@ -87,12 +87,12 @@ class TeamMemberPage extends React.Component {
       email: "",
       phone_number: "",
       user_id: "",
-      slack_id: "",
-      text_on: true,
-      email_on: false,
-      slack_on: false,
-      manager: "",
-      mentor: ""
+      slack_uuid: "",
+      // text_on: true,
+      // email_on: false,
+      // slack_on: false,
+      manager_id: null,
+      mentor_id: null
     },
     assignments: [],
     training_series: [],
@@ -167,30 +167,30 @@ class TeamMemberPage extends React.Component {
 
   render() {
     const { classes } = this.props;
-    const { text_on, email_on, slack_on } = this.state.teamMember;
+    //const { text_on, email_on, slack_on } = this.state.teamMember;
 
-    let textEnabled;
-    let emailEnabled;
-    let slackEnabled;
+    // let textEnabled;
+    // let emailEnabled;
+    // let slackEnabled;
     let addDisabled = false;
 
-    if (text_on && !email_on && !slack_on) {
-      textEnabled = true;
-    }
+    // if (text_on && !email_on && !slack_on) {
+    //   textEnabled = true;
+    // }
 
-    if (email_on && !text_on && !slack_on) {
-      emailEnabled = true;
-    }
+    // if (email_on && !text_on && !slack_on) {
+    //   emailEnabled = true;
+    // }
 
-    if (slack_on && !text_on && !slack_on) {
-      slackEnabled = true;
-    }
+    // if (slack_on && !text_on && !slack_on) {
+    //   slackEnabled = true;
+    // }
 
-    if (email_on && text_on && slack_on) {
-      textEnabled = false;
-      emailEnabled = false;
-      slackEnabled = false;
-    }
+    // if (email_on && text_on && slack_on) {
+    //   textEnabled = false;
+    //   emailEnabled = false;
+    //   slackEnabled = false;
+    // }
     //Checks to see if one number has been entered and if the full number matches
     if (
       /^$/gm.test(this.state.teamMember.phone_number) === true ||
@@ -323,8 +323,8 @@ class TeamMemberPage extends React.Component {
             </div>
             <MemberInfoContainer>
               <select
-                value={this.state.teamMember.slack_id}
-                onChange={this.handleChange("slack_id")}
+                value={this.state.teamMember.slack_uuid}
+                onChange={this.handleChange("slack_uuid")}
               >
                 {this.state.slackUsers &&
                   this.state.slackUsers.map(user => (
@@ -335,7 +335,7 @@ class TeamMemberPage extends React.Component {
               </select>
             </MemberInfoContainer>
 
-            <ButtonContainer>
+            {/* <ButtonContainer>
               <FormControlLabel
                 control={
                   <Switch
@@ -403,7 +403,7 @@ class TeamMemberPage extends React.Component {
                     : "Slack Inactive"
                 }
               />
-            </ButtonContainer>
+            </ButtonContainer> */}
             <ButtonContainer>
               <Button
                 disabled={

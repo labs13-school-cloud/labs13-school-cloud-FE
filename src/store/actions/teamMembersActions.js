@@ -25,24 +25,15 @@ export const EDIT_MEMBER_START = "EDIT_MEMBER_START";
 export const EDIT_MEMBER_SUCCESS = "EDIT_MEMBER_SUCCESS";
 export const EDIT_MEMBER_FAIL = "EDIT_MEMBER_FAIL";
 
-export const ADD_MEMBER_TO_TRAININGSERIES_START =
-  "ADD_MEMBER_TO_TRAININGSERIES_START";
-export const ADD_MEMBER_TO_TRAININGSERIES_SUCCESS =
-  "ADD_MEMBER_TO_TRAININGSERIES_SUCCESS";
-export const ADD_MEMBER_TO_TRAININGSERIES_FAIL =
-  "ADD_MEMBER_TO_TRAININGSERIES_FAIL";
-
-export const REMOVE_MEMBER_FROM_TS_START = "REMOVE_MEMBER_FROM_TS_START";
-export const REMOVE_MEMBER_FROM_TS_SUCCESS = "REMOVE_MEMBER_FROM_TS_SUCCESS";
-export const REMOVE_MEMBER_FROM_TS_FAIL = "REMOVE_MEMBER_FROM_TS_FAIL";
-
 const baseUrl = `${process.env.REACT_APP_API}/api`;
 
 export const getTeamMembers = id => dispatch => {
+  console.log(id);
   dispatch({ type: FETCH_TEAM_START });
   axios
     .get(`${baseUrl}/users/${id}/team-members`)
     .then(res => {
+      console.log(res.data);
       dispatch({ type: FETCH_TEAM_SUCCESS, payload: res.data.members });
     })
     .catch(err => dispatch({ type: FETCH_TEAM_FAIL, payload: err }));
@@ -52,7 +43,7 @@ export const addTeamMember = teamMember => dispatch => {
   dispatch({ type: ADD_MEMBER_START });
   console.log(teamMember);
   axios
-    .message(`${baseUrl}/team-members`, teamMember)
+    .post(`${baseUrl}/team-members`, teamMember)
     .then(res => {
       dispatch({ type: ADD_MEMBER_SUCCESS, payload: res.data.newTeamMember });
     })
@@ -99,66 +90,8 @@ export const getTeamMemberByID = id => dispatch => {
     .then(res => {
       dispatch({
         type: FETCH_SINGLE_MEMBER_SUCCESS,
-        payload: res.data
+        payload: res.data.teamMember
       });
     })
     .catch(err => dispatch({ type: FETCH_SINGLE_MEMBER_FAIL, error: err }));
-};
-
-export const addTeamMemberToTrainingSeries = data => dispatch => {
-  dispatch({ type: ADD_MEMBER_TO_TRAININGSERIES_START });
-  axios
-    .message(`${baseUrl}/team-members/assign`, data)
-    .then(res => {
-      axios
-        .get(`${baseUrl}/team-members/${data.assignments[0]}`)
-        .then(res => {
-          dispatch({
-            type: ADD_MEMBER_TO_TRAININGSERIES_SUCCESS,
-            payload: res.data
-          });
-        })
-        .then(() => {
-          if (
-            history.location.pathname ===
-            `/home/assign-members/${data.training_series_id}`
-          ) {
-            history.push({
-              pathname: `/home/training-series/${data.training_series_id}`,
-              state: { success: true }
-            });
-          } else {
-            history.push({ pathname: "/home", state: { success: true } });
-          }
-        })
-        .catch(
-          err => {}
-          //console.log(err)
-        );
-    })
-    .catch(err =>
-      dispatch({ type: ADD_MEMBER_TO_TRAININGSERIES_FAIL, error: err })
-    );
-};
-
-export const deleteTeamMemberFromTrainingSeries = (id, ts_id) => dispatch => {
-  dispatch({ type: REMOVE_MEMBER_FROM_TS_START });
-
-  axios
-    .delete(`${baseUrl}/team-members/${id}/assign/${ts_id}`)
-    .then(res => {
-      axios
-        .get(`${baseUrl}/team-members/${id}`)
-        .then(res => {
-          dispatch({ type: FETCH_SINGLE_MEMBER_START });
-          dispatch({
-            type: FETCH_SINGLE_MEMBER_SUCCESS,
-            payload: res.data
-          });
-        })
-        .catch(err =>
-          dispatch({ type: FETCH_SINGLE_MEMBER_FAIL, payload: err })
-        );
-    })
-    .catch(err => dispatch({ type: REMOVE_MEMBER_FROM_TS_FAIL, error: err }));
 };

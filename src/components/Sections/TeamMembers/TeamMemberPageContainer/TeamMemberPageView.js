@@ -36,8 +36,8 @@ class TeamMemberPageView extends React.Component {
 
   editTeamMemberSubmit = (e, changes) => {
     e.preventDefault();
-    // console.log(changes);
-    this.props.editTeamMember(this.props.match.params.id, changes);
+    const { manager_name, mentor_name, id, ...rest } = changes;
+    this.props.editTeamMember(this.props.match.params.id, rest);
   };
 
   deleteTeamMember = async e => {
