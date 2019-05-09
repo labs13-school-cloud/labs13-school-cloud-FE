@@ -1,4 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { connect } from "react-redux";
+
+import { getNotifications } from "store/actions/";
 
 import TeamMembersView from "components/Sections/TeamMembers/TeamMembersView";
 import TeamMembersTab from "components/Sections/TeamMembers/TeamMembersTab";
@@ -20,6 +23,11 @@ import { TripleColumn, SmallColumns, DashWrapper } from "./styles.js";
 function Dashboard(props) {
   const [topTab, setTopTab] = useState("overview");
   const { userId } = props;
+  const get_Notifications = props.getNotifications;
+
+  useEffect(() => {
+    get_Notifications();
+  }, [get_Notifications]);
 
   return (
     <DashWrapper>
@@ -98,4 +106,7 @@ function Dashboard(props) {
   );
 }
 
-export default Dashboard;
+export default connect(
+  null,
+  getNotifications
+)(Dashboard);
