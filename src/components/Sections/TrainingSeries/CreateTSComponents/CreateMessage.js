@@ -14,6 +14,7 @@ import ExpansionPanel from "@material-ui/core/ExpansionPanel";
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import Checkbox from "@material-ui/core/Checkbox";
 
 // Redux
 import {
@@ -40,7 +41,9 @@ class CreateMessage extends React.Component {
       body: "", //should be body
       link: "",
       days_from_start: 1,
-      training_series_id: ""
+      training_series_id: "",
+      for_manager: false,
+      for_mentor: false
     }
   };
 
@@ -149,6 +152,38 @@ class CreateMessage extends React.Component {
                 </ExpansionPanelDetails>
               </ExpansionPanel>
             </MessageContainer>
+            include manager? :
+            <Checkbox
+              checked={this.state.for_manager}
+              value="checkedB"
+              color="primary"
+              onChange={e => {
+                this.setState({
+                  ...this.state,
+                  message: {
+                    ...this.state.message,
+                    for_mentor: !this.state.message.for_manager
+                  }
+                });
+                console.log(this.state.message.for_manager);
+              }}
+            />
+            include mentor? :
+            <Checkbox
+              checked={this.state.for_mentor}
+              value="checkedB"
+              color="primary"
+              onChange={e => {
+                this.setState({
+                  ...this.state,
+                  message: {
+                    ...this.state.message,
+                    for_mentor: !this.state.message.for_mentor
+                  }
+                });
+                console.log(this.state.message.for_mentor);
+              }}
+            />
             <ButtonContainer>
               <Button
                 variant="outlined"
