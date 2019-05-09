@@ -73,8 +73,15 @@ export const deleteTeamMember = (teamMemberID, userID) => dispatch => {
     })
     .then(() => {
       if (history.location.pathname === "/home") {
+<<<<<<< HEAD
         // dispatch(getEmailNotifications(userID));
         // dispatch(getTextNotifications(userID));
+=======
+
+        // dispatch(getEmailNotifications(userID));
+        // dispatch(getTextNotifications(userID));
+
+>>>>>>> e4a714be073d8dace1d005c0665577aff1098149
       } else {
         history.push("/home");
       }

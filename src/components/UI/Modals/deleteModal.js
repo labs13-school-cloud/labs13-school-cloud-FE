@@ -13,10 +13,19 @@ import {
   deleteTrainingSeries,
   deleteTeamMember,
   deleteMessage,
+<<<<<<< HEAD
   deleteUser
   // deleteTeamMemberFromTrainingSeries
   // getTextNotifications,
   // getEmailNotifications
+=======
+  deleteUser,
+
+  deleteTeamMemberFromTrainingSeries
+  // getTextNotifications,
+  // getEmailNotifications
+
+>>>>>>> e4a714be073d8dace1d005c0665577aff1098149
 } from "store/actions/";
 
 import { Typography, Paper } from "@material-ui/core";
@@ -191,9 +200,18 @@ export default connect(
     deleteMessage,
     deleteTeamMember,
     deleteUser,
+<<<<<<< HEAD
     deleteTrainingSeries
     //deleteTeamMemberFromTrainingSeries
     // getTextNotifications,
     // getEmailNotifications
+=======
+    deleteTrainingSeries,
+
+    deleteTeamMemberFromTrainingSeries
+    // getTextNotifications,
+    // getEmailNotifications
+
+>>>>>>> e4a714be073d8dace1d005c0665577aff1098149
   }
 )(withRouter(TrainingSeriesModalWrapped));
