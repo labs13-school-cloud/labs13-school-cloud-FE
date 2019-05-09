@@ -104,7 +104,7 @@ const trainingSeriesReducer = (state = initialState, action) => {
       };
     // ---DELETE TRAINING SERIES---
     case DELETE_TRAINING_SERIES_START:
-      return { ...state, isLoading: false, error: action.payload };
+      return { ...state, isLoading: false };
     case DELETE_TRAINING_SERIES_SUCCESS:
       return {
         ...state,
@@ -116,7 +116,17 @@ const trainingSeriesReducer = (state = initialState, action) => {
       };
     case DELETE_TRAINING_SERIES_FAIL:
       return { ...state, isLoading: false, error: action.payload };
-
+    case GET_TRAINING_SERIES_MESSAGES_START:
+      return { ...state, isLoading: true };
+    case GET_TRAINING_SERIES_MESSAGES_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        message: action.payload.messages,
+        error: ""
+      };
+    case GET_TRAINING_SERIES_MESSAGES_FAIL:
+      return { ...state, isLoading: false, error: action.payload };
     default:
       return state;
   }
