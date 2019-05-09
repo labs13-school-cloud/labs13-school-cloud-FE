@@ -30,11 +30,11 @@ export const getTrainingSeries = () => dispatch => {
   });
   axios
     .get(`${process.env.REACT_APP_API}/api/training-series`)
-    .then(res => 
+    .then(res =>
       dispatch({
         type: GET_TRAINING_SERIES_SUCCESS,
         payload: res.data.trainingSeries
-      });
+      })
     )
     .catch(err => dispatch({ type: GET_TRAINING_SERIES_FAIL, error: err }));
 };
