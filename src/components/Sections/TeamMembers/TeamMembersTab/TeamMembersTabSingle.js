@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Paper, Typography } from "@material-ui/core/";
-import DeleteIcon from "@material-ui/icons/Delete";
-import Grid from "@material-ui/core/Grid";
-
-import styled from "styled-components";
-
 import axios from "axios";
 import { connect } from "react-redux";
+
+import Grid from "@material-ui/core/Grid";
+import { Paper, Typography } from "@material-ui/core/";
+import DeleteIcon from "@material-ui/icons/Delete";
+
+import styled from "styled-components";
 
 function TeamMembersTabSingle(props) {
   const [mentor, setMentor] = useState("");

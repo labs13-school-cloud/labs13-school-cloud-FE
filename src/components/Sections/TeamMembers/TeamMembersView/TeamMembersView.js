@@ -2,18 +2,14 @@
 
 import React, { Suspense } from "react";
 import Fuse from "fuse.js";
-
-//Components
-// import TeamMembersList from './TeamMembersList';
-
-import { MessageContainer, styles } from "./styles.js";
-
-import Pagination from "material-ui-flat-pagination";
-
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
 
+import Pagination from "material-ui-flat-pagination";
 import { withStyles } from "@material-ui/core/styles";
+
+import { MessageContainer, styles } from "./styles.js";
+
 import {
   Paper,
   Typography,
