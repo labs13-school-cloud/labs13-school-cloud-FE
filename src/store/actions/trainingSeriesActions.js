@@ -17,6 +17,13 @@ export const DELETE_TRAINING_SERIES_START = "DELETE_TRAINING_SERIES_START";
 export const DELETE_TRAINING_SERIES_SUCCESS = "DELETE_TRAINING_SERIES_SUCCESS";
 export const DELETE_TRAINING_SERIES_FAIL = "DELETE_TRAINING_SERIES_FAIL";
 
+export const GET_TRAINING_SERIES_MESSAGES_START =
+  "GET_TRAINING_SERIES_MESSAGES_START";
+export const GET_TRAINING_SERIES_MESSAGES_SUCCESS =
+  "GET_TRAINING_SERIES_MESSAGES_SUCCESS";
+export const GET_TRAINING_SERIES_MESSAGES_FAIL =
+  "GET_TRAINING_SERIES_MESSAGES_FAIL";
+
 export const getTrainingSeries = () => dispatch => {
   dispatch({
     type: GET_TRAINING_SERIES_START
@@ -79,4 +86,24 @@ export const deleteTrainingSeries = trainingSeriesID => dispatch => {
       })
     )
     .catch(err => dispatch({ type: DELETE_TRAINING_SERIES_FAIL, error: err }));
+};
+
+export const getTrainingSeriesMessages = training_series_id => dispatch => {
+  dispatch({ type: GET_TRAINING_SERIES_MESSAGES_START });
+  axios
+    .post(
+      `${
+        process.env.REACT_APP_API
+      }/api/messages/training-series/${training_series_id}`
+    )
+    .then(res => {
+      dispatch({
+        type: GET_TRAINING_SERIES_MESSAGES_SUCCESS,
+        payload: res.data.messages
+      });
+    })
+    .catch(err => {
+      console.log(err);
+      dispatch({ type: GET_TRAINING_SERIES_MESSAGES_FAIL, error: err });
+    });
 };
