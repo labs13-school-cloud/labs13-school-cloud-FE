@@ -12,10 +12,10 @@ import Select from "@material-ui/core/Select";
 
 //State Management
 import { connect } from "react-redux";
-import {
-  getTextNotifications,
-  getEmailNotifications
-} from "store/actions/notificationsActions";
+// import {
+//   getTextNotifications,
+//   getEmailNotifications
+// } from "store/actions/notificationsActions";
 
 const NotificationsList = React.lazy(() => import("../NotificationsList"));
 
@@ -74,8 +74,8 @@ class Notifications extends Component {
   };
 
   componentDidMount() {
-    this.props.getTextNotifications(this.props.userId);
-    this.props.getEmailNotifications(this.props.userId);
+    // this.props.getTextNotifications(this.props.userId);
+    // this.props.getEmailNotifications(this.props.userId);
   }
 
   handleClick(offset) {
@@ -214,7 +214,7 @@ const mapStateToProps = state => {
 export default connect(
   mapStateToProps,
   {
-    getTextNotifications,
-    getEmailNotifications
+    // getTextNotifications,
+    // getEmailNotifications
   }
 )(withStyles(styles)(Notifications));

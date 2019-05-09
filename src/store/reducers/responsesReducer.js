@@ -24,6 +24,7 @@ const initialState = {
 
 const responsesReducer = (state = initialState, action) => {
   switch (action.type) {
+    // get responses
     case GET_RESPONSES_START:
       return {
         ...state,
@@ -42,6 +43,7 @@ const responsesReducer = (state = initialState, action) => {
         isLoading: false,
         error: action.error
       };
+    //get single response
     case GET_SINGLE_RESPONSE_START:
       return {
         ...state,
@@ -54,12 +56,13 @@ const responsesReducer = (state = initialState, action) => {
         isLoading: false,
         singleResponse: action.payload
       };
-    case GET_RESPONSES_FAIL:
+    case GET_SINGLE_RESPONSE_FAIL:
       return {
         ...state,
         isLoading: false,
         error: action.error
       };
+    //add response
     case ADD_RESPONSE_START:
       return {
         ...state,
@@ -78,6 +81,7 @@ const responsesReducer = (state = initialState, action) => {
         isAdding: false,
         error: action.error
       };
+    //delete response
     case DELETE_RESPONSE_START:
       return {
         ...state,
