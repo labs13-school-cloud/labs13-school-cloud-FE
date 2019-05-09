@@ -1,10 +1,9 @@
 import axios from "axios";
 import history from "../../history.js";
 
-import {
-  getTextNotifications,
-  getEmailNotifications
-} from "./notificationsActions";
+import // getTextNotifications,
+// getEmailNotifications
+"./notificationsActions";
 
 export const FETCH_TEAM_START = "FETCH_TEAM_START";
 export const FETCH_TEAM_SUCCESS = "FETCH_TEAM_SUCCESS";
@@ -74,8 +73,8 @@ export const deleteTeamMember = (teamMemberID, userID) => dispatch => {
     })
     .then(() => {
       if (history.location.pathname === "/home") {
-        dispatch(getEmailNotifications(userID));
-        dispatch(getTextNotifications(userID)); //gannon might need to purge this
+        // dispatch(getEmailNotifications(userID));
+        // dispatch(getTextNotifications(userID));
       } else {
         history.push("/home");
       }
