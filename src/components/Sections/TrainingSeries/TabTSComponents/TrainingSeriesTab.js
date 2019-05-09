@@ -2,10 +2,9 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 
 import TrainingSeriesTabSingle from "./TrainingSeriesTabSingle.js";
+
 import Pagination from "material-ui-flat-pagination";
-
 import { Typography, Fab, TextField, InputAdornment } from "@material-ui/core/";
-
 import { Wrapper, HeaderWrapper, Series } from "./TrainingSeriesTabStyles.js";
 
 //functional related imports

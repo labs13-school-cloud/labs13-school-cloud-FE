@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { CardElement, injectStripe } from "react-stripe-elements";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+
 import {
   getPlans,
   getCustomersPlan,
@@ -17,8 +18,9 @@ import {
   Typography,
   Modal
 } from "@material-ui/core/";
-import UnsubscribeModal from "./unsubscribeModal";
 import TrainingBotGIF from "img/trainingBot.gif";
+
+import UnsubscribeModal from "./UnsubscribeModal.js";
 
 const styles = theme => ({
   paper: {

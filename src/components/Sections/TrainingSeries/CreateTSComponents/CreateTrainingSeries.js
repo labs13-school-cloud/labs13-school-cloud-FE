@@ -1,16 +1,12 @@
 import React from "react";
-
-//Prop Types
 import PropTypes from "prop-types";
-
 import { connect } from "react-redux";
+
 import { addTrainingSeries } from "store/actions/trainingSeriesActions";
 import ProgressCircle from "components/UI/Progress/ProgressCircle";
 
-//Styles
 import { withStyles } from "@material-ui/core/styles";
 import { Typography, Button, TextField, Divider } from "@material-ui/core/";
-
 import { styles, MainContainer } from "./CreateTrainingSeriesStyles.js";
 
 class CreateTrainingSeries extends React.Component {
