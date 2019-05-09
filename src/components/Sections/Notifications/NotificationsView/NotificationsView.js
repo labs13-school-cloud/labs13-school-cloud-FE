@@ -94,8 +94,8 @@ class Notifications extends Component {
   render() {
     const { classes } = this.props;
     const allNotifications = [
-      ...this.props.textNotifications,
-      ...this.props.emailNotifications
+      // ...this.props.textNotifications,
+      // ...this.props.emailNotifications
     ];
 
     // this is a quick fix to filter out empty values from the notification table.

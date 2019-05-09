@@ -25,7 +25,8 @@ const initialState = {
   isGettingMessages: false,
   messages: [],
   isAdding: false,
-  addSuccess: false
+  addSuccess: false,
+  assignments: []
 };
 
 const trainingSeriesReducer = (state = initialState, action) => {
@@ -122,7 +123,7 @@ const trainingSeriesReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
-        message: action.payload.messages,
+        messages: action.payload,
         error: ""
       };
     case GET_TRAINING_SERIES_MESSAGES_FAIL:

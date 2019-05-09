@@ -139,7 +139,6 @@ class TeamMemberPage extends React.Component {
   componentDidMount() {
     let data = this.props.teamMember;
     let allMembers = this.props.teamMembers;
-    console.log(data);
     // let assignmentIds = data.assignments.map(a => a.training_series_id);
     if (Object.keys(data).length !== 0) {
       //console.log("on componentDidMount", this.props);

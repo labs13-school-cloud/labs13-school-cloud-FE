@@ -43,6 +43,7 @@ function SeriesCard(props) {
   async function getMessageCount() {
     try {
       const { data } = await axios.get(`${url}/messages`);
+      console.log(data);
       setMessageLength(data.messages.length);
     } catch (err) {
       console.log(err);

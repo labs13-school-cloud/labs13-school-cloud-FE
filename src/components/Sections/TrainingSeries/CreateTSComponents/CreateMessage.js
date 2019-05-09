@@ -36,8 +36,8 @@ class CreateMessage extends React.Component {
     open: false,
     isUpdating: false,
     message: {
-      message_name: "",
-      message_details: "",
+      subject: "",
+      body: "", //should be body
       link: "",
       days_from_start: 1,
       training_series_id: ""
@@ -45,6 +45,7 @@ class CreateMessage extends React.Component {
   };
 
   componentDidMount() {
+    console.log("inside CM: ", this.props);
     if (this.props.location.state.training_series_id) {
       this.setState({
         ...this.state,
@@ -97,8 +98,8 @@ class CreateMessage extends React.Component {
                 id="standard-name"
                 label="Message Title"
                 className={classes.textField}
-                value={this.state.message.message_name}
-                onChange={this.handleChange("message_name")}
+                value={this.state.message.subject}
+                onChange={this.handleChange("subject")}
                 margin="normal"
                 required
               />
@@ -106,8 +107,8 @@ class CreateMessage extends React.Component {
                 id="standard-name"
                 label="Message Content"
                 className={classes.textField}
-                value={this.state.message.message_details}
-                onChange={this.handleChange("message_details")}
+                value={this.state.message.body}
+                onChange={this.handleChange("body")}
                 margin="normal"
                 required
               />
