@@ -35,6 +35,7 @@ class TeamMembersView extends React.Component {
 
   componentDidMount() {
     this.props.getTeamMembers(this.props.userId);
+    //console.log(this.props);
     this.setState({
       teamMembers: this.props.teamMembers
     });

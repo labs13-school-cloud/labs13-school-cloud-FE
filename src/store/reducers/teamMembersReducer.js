@@ -11,15 +11,9 @@ import {
   EDIT_MEMBER_START,
   EDIT_MEMBER_SUCCESS,
   EDIT_MEMBER_FAIL,
-  ADD_MEMBER_TO_TRAININGSERIES_START,
-  ADD_MEMBER_TO_TRAININGSERIES_SUCCESS,
-  ADD_MEMBER_TO_TRAININGSERIES_FAIL,
   FETCH_SINGLE_MEMBER_START,
   FETCH_SINGLE_MEMBER_SUCCESS,
   FETCH_SINGLE_MEMBER_FAIL,
-  REMOVE_MEMBER_FROM_TS_START,
-  REMOVE_MEMBER_FROM_TS_SUCCESS,
-  REMOVE_MEMBER_FROM_TS_FAIL
 } from "../actions";
 
 const initialState = {
@@ -215,65 +209,6 @@ const teamMembersReducer = (state = initialState, action) => {
         },
         error: action.payload
       };
-    case ADD_MEMBER_TO_TRAININGSERIES_START:
-      return {
-        ...state,
-        status: {
-          ...state.status,
-          isAssigning: true,
-          assignSuccess: false
-        }
-      };
-    case ADD_MEMBER_TO_TRAININGSERIES_SUCCESS:
-      return {
-        ...state,
-        teamMember: action.payload,
-        status: {
-          ...state.status,
-          isAssigning: false,
-          assignSuccess: true
-        }
-      };
-    case ADD_MEMBER_TO_TRAININGSERIES_FAIL:
-      return {
-        ...state,
-        status: {
-          ...state.status,
-          isAssigning: false
-        },
-        error: action.error
-      };
-    case REMOVE_MEMBER_FROM_TS_START:
-      return {
-        ...state,
-        status: {
-          ...state.status,
-          isDeleting: true,
-          deleteSuccess: false,
-          deleteFailed: false
-        }
-      };
-    case REMOVE_MEMBER_FROM_TS_SUCCESS:
-      return {
-        ...state,
-        teamMember: action.payload,
-        status: {
-          ...state.status,
-          isDeleting: false,
-          deleteSuccess: true
-        }
-      };
-    case REMOVE_MEMBER_FROM_TS_FAIL:
-      return {
-        ...state,
-        status: {
-          ...state.status,
-          deleteSuccess: false,
-          deleteFailed: true
-        },
-        error: action.error
-      };
-
     default:
       return state;
   }
