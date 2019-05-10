@@ -3,6 +3,7 @@ import React from "react";
 
 import { Link } from "react-router-dom";
 import Fuse from "fuse.js";
+import axios from "axios";
 
 // Components
 import DeleteModal from "components/UI/Modals/deleteModal";
@@ -59,7 +60,7 @@ class TrainingSeriesMessages extends React.Component {
   };
 
   componentDidMount() {
-    this.getTrainingSeriesWithMessages(this.props.match.params.id);
+    this.props.getTrainingSeriesMessages(this.props.match.params.id);
     this.props.getTeamMembers(this.props.userId);
     //this.props.getMembersAssigned(this.props.match.params.id);
     if (this.props.location.state) {
@@ -68,13 +69,14 @@ class TrainingSeriesMessages extends React.Component {
       });
     }
     this.resetHistory();
+    setTimeout(() => {
+      console.log(this.props.messages);
+    }, 2000);
   }
+
   openSearch = e => {
     e.preventDefault();
     this.setState({ searchOpen: !this.state.searchOpen });
-  };
-  getTrainingSeriesWithMessages = id => {
-    this.props.getTrainingSeriesMessages(id);
   };
 
   deleteMessage = (e, id) => {
@@ -140,7 +142,7 @@ class TrainingSeriesMessages extends React.Component {
       distance: 100,
       maxPatternLength: 32,
       minMatchCharLength: 3,
-      keys: ["message_name", "message_details", "link"]
+      keys: ["subject", "body", "link"]
     };
 
     const fuse = new Fuse(messages, options);
@@ -337,8 +339,8 @@ class TrainingSeriesMessages extends React.Component {
                   <ListItemContainer key={message.id}>
                     <ListItem key={message.id} className={classes.listItem}>
                       <ListItemText
-                        primary={message.message_name}
-                        secondary={message.message_details}
+                        primary={message.subject}
+                        secondary={message.body}
                         className={classes.listItemText}
                         onClick={e => this.routeToeditMessagePage(e, message)}
                       />
@@ -383,7 +385,7 @@ const mapStateToProps = state => ({
   //singleTrainingSeries: state.trainingSeriesReducer.trainingSeries.filter(
   //   series => series.id === this.props.match.params.id
   // ),
-  messages: state.messagesReducer.messages,
+  messages: state.trainingSeriesReducer.messages,
   assignments: state.trainingSeriesReducer.assignments,
   trainingSeries: state.trainingSeriesReducer.trainingSeries,
   teamMembers: state.teamMembersReducer.teamMembers

@@ -14,6 +14,7 @@ import ExpansionPanel from "@material-ui/core/ExpansionPanel";
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import Checkbox from "@material-ui/core/Checkbox";
 
 // Redux
 import {
@@ -36,15 +37,18 @@ class CreateMessage extends React.Component {
     open: false,
     isUpdating: false,
     message: {
-      message_name: "",
-      message_details: "",
+      subject: "",
+      body: "", //should be body
       link: "",
       days_from_start: 1,
-      training_series_id: ""
+      training_series_id: "",
+      for_manager: false,
+      for_mentor: false
     }
   };
 
   componentDidMount() {
+    console.log("inside CM: ", this.props);
     if (this.props.location.state.training_series_id) {
       this.setState({
         ...this.state,
@@ -97,8 +101,8 @@ class CreateMessage extends React.Component {
                 id="standard-name"
                 label="Message Title"
                 className={classes.textField}
-                value={this.state.message.message_name}
-                onChange={this.handleChange("message_name")}
+                value={this.state.message.subject}
+                onChange={this.handleChange("subject")}
                 margin="normal"
                 required
               />
@@ -106,8 +110,8 @@ class CreateMessage extends React.Component {
                 id="standard-name"
                 label="Message Content"
                 className={classes.textField}
-                value={this.state.message.message_details}
-                onChange={this.handleChange("message_details")}
+                value={this.state.message.body}
+                onChange={this.handleChange("body")}
                 margin="normal"
                 required
               />
@@ -148,6 +152,38 @@ class CreateMessage extends React.Component {
                 </ExpansionPanelDetails>
               </ExpansionPanel>
             </MessageContainer>
+            include manager? :
+            <Checkbox
+              checked={this.state.for_manager}
+              value="checkedB"
+              color="primary"
+              onChange={e => {
+                this.setState({
+                  ...this.state,
+                  message: {
+                    ...this.state.message,
+                    for_mentor: !this.state.message.for_manager
+                  }
+                });
+                console.log(this.state.message.for_manager);
+              }}
+            />
+            include mentor? :
+            <Checkbox
+              checked={this.state.for_mentor}
+              value="checkedB"
+              color="primary"
+              onChange={e => {
+                this.setState({
+                  ...this.state,
+                  message: {
+                    ...this.state.message,
+                    for_mentor: !this.state.message.for_mentor
+                  }
+                });
+                console.log(this.state.message.for_mentor);
+              }}
+            />
             <ButtonContainer>
               <Button
                 variant="outlined"

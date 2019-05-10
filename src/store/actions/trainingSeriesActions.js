@@ -91,10 +91,10 @@ export const deleteTrainingSeries = trainingSeriesID => dispatch => {
 export const getTrainingSeriesMessages = training_series_id => dispatch => {
   dispatch({ type: GET_TRAINING_SERIES_MESSAGES_START });
   axios
-    .post(
+    .get(
       `${
         process.env.REACT_APP_API
-      }/api/messages/training-series/${training_series_id}`
+      }/api/training-series/${training_series_id}/messages`
     )
     .then(res => {
       dispatch({
@@ -103,7 +103,6 @@ export const getTrainingSeriesMessages = training_series_id => dispatch => {
       });
     })
     .catch(err => {
-      console.log(err);
       dispatch({ type: GET_TRAINING_SERIES_MESSAGES_FAIL, error: err });
     });
 };
