@@ -5,8 +5,6 @@ import { Select } from "./TrainingSeriesTabStyles.js";
 
 export default function TrainingSeriesTabSingle(props) {
   const [messageLength, setMessageLength] = useState(0);
-  const [assignedLength, setAssignedLength] = useState(0);
-  const [assignments, setAssignments] = useState([]);
   const [daysLong, setDaysLong] = useState([]);
   const {
     series: { id }
@@ -25,14 +23,6 @@ export default function TrainingSeriesTabSingle(props) {
         setDaysLong(longestDaysFromStart[0].days_from_start);
       })
       .catch(err => setMessageLength(err));
-
-    axios
-      .get(`${url}/assignments`)
-      .then(res => {
-        setAssignedLength(res.data.assignments.length);
-        setAssignments(res.data.assignments);
-      })
-      .catch(err => console.log(err));
   }, [id]);
 
   return (
@@ -53,9 +43,6 @@ export default function TrainingSeriesTabSingle(props) {
             <option value="remove me">
               once backend is up, finish this!!!
             </option>
-            {assignments.map(assignment => {
-              console.log(assignment);
-            })}
           </Select>
           <p>
             and is <span style={{ color: "blue" }}>{daysLong}</span> days long.
@@ -66,11 +53,6 @@ export default function TrainingSeriesTabSingle(props) {
           <Grid item>
             <Typography variant="overline">
               messages: {messageLength}
-            </Typography>
-          </Grid>
-          <Grid item>
-            <Typography variant="overline">
-              assigned: {assignedLength}
             </Typography>
           </Grid>
         </Grid>
