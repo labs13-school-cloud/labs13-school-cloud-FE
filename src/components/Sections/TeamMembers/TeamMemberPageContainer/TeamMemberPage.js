@@ -1,23 +1,12 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import NumberFormat from "react-number-format";
 import styled from "styled-components";
 
 // Material UI
 import { withStyles } from "@material-ui/core/styles";
-import {
-  Paper,
-  List,
-  Typography,
-  TextField,
-  Button,
-  Divider,
-  Switch,
-  FormControlLabel
-} from "@material-ui/core/";
+import { Paper, Typography, TextField, Divider } from "@material-ui/core/";
 import NotificationWidget from "./SnackBarTeamMember";
 //Components
-import TrainingSeriesAssignments from "./TrainingSeriesAssigments";
 import DeleteModal from "components/UI/Modals/deleteModal";
 
 //Redux
@@ -132,17 +121,14 @@ class TeamMemberPage extends React.Component {
     memberMentor: "",
     assignments: [],
     trainingSeries: [], //Leigh-Ann: this may not be needed?
-    otherTeamMembers: [],
-    messages: []
+    otherTeamMembers: []
   };
 
   componentDidMount() {
     let data = this.props.teamMember;
     let allMembers = this.props.teamMembers;
-    console.log(data);
     // let assignmentIds = data.assignments.map(a => a.training_series_id);
     if (Object.keys(data).length !== 0) {
-      //console.log("on componentDidMount", this.props);
       this.setState({
         team_member: data,
         // assignments: data.assignments,
@@ -156,9 +142,6 @@ class TeamMemberPage extends React.Component {
         memberMentor: data.mentor
           ? allMembers.find(m => m.id === data.mentor) //ditto for mentor
           : ""
-        // messages: this.props.messages.filter(msg =>
-        //   assignmentIds.includes(msg.training_series_id)
-        // )
       });
     }
   }
@@ -184,13 +167,6 @@ class TeamMemberPage extends React.Component {
     const { manager_name, mentor_name, ...rest } = this.state.team_member;
     this.props.editTeamMember(this.state.team_member.id, rest);
   };
-  // this.state.team_member.first_name,
-  // this.state.team_member.last_name,
-  // this.state.team_member.job_description,
-  // this.state.team_member.email,
-  // this.state.team_member.phone_number,
-  // this.state.team_member.user_id
-  //
 
   handleDate = name => event => {
     this.setState({
@@ -228,7 +204,6 @@ class TeamMemberPage extends React.Component {
 
   render() {
     const { classes } = this.props;
-
     // const { text_on, email_on, slack_on } = this.state.team_member;
 
     // let textEnabled;
@@ -336,10 +311,9 @@ class TeamMemberPage extends React.Component {
     //   );
     // }
 
-    let disabledMessages;
-
-    if (!this.state.messages.length) {
-      disabledMessages = (
+    let notificationsToRender;
+    if (!this.props.notifications.length) {
+      notificationsToRender = (
         <>
           <div className={classes.trainingSeriesHeader}>
             <Typography variant="title">Messages</Typography>
@@ -350,16 +324,20 @@ class TeamMemberPage extends React.Component {
         </>
       );
     } else {
-      disabledMessages = (
+      notificationsToRender = (
         <>
           <div className={classes.trainingSeriesHeader}>
             <Typography variant="title">Messages</Typography>
           </div>
-          {this.state.messages.map(msg => (
-            <div className="message" key={msg.id}>
-              {msg.title}
-            </div>
-          ))}
+          {this.props.notifications
+            .filter(n => {
+              return n.team_member_id === this.props.teamMember.id;
+            })
+            .map(n => (
+              <div className="message" key={n.id}>
+                {n.subject}
+              </div>
+            ))}
         </>
       );
     }
@@ -568,7 +546,7 @@ class TeamMemberPage extends React.Component {
           </Paper>
         </form>
         {/* <Paper className={classes.paper}>{disabledTrainingSeries}</Paper> */}
-        <Paper className={classes.paper}>{disabledMessages}</Paper>
+        <Paper className={classes.paper}>{notificationsToRender}</Paper>
       </MainContainer>
     );
   }
@@ -614,7 +592,7 @@ const ButtonContainer = styled.div`
 const mapStateToProps = state => ({
   trainingSeries: state.trainingSeriesReducer.trainingSeries,
   teamMembers: state.teamMembersReducer.teamMembers,
-  messages: state.messagesReducer.messages
+  notifications: state.notificationsReducer.notifications
 });
 
 export default connect(

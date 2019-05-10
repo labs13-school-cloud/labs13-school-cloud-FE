@@ -10,57 +10,13 @@ import Pagination from "material-ui-flat-pagination";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 
+import { styles } from "./styles.js";
+
 //State Management
 import { connect } from "react-redux";
 import { getNotifications } from "store/actions";
 
 const NotificationsList = React.lazy(() => import("../NotificationsList"));
-
-const styles = theme => ({
-  root: {
-    ...theme.mixins.gutters(),
-    paddingTop: theme.spacing.unit * 2,
-    paddingBottom: theme.spacing.unit * 2,
-    display: "flex",
-    flexDirection: "column",
-    width: "50%",
-    boxSizing: "border-box",
-    minHeight: "533px",
-    height: "100%",
-    margin: 5,
-    "@media (max-width: 1400px)": {
-      width: "100%",
-      height: "533px"
-    },
-    "@media (max-width: 1000px)": {
-      width: "100%"
-    },
-
-    "@media (max-width: 768px)": {
-      width: "92%",
-      height: "100%"
-    }
-  },
-  columnHeader: {
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginBottom: 15
-  },
-  icons: {
-    display: "flex",
-    alignItems: "center"
-  },
-  fab: { margin: 5 },
-  footer: {
-    display: "flex",
-    justifyContent: "space-between",
-    position: "sticky",
-    top: "100%"
-  },
-  pagination: { width: "90%" },
-  selection: { margin: "0 10px" }
-});
 
 class Notifications extends Component {
   state = {
@@ -69,10 +25,6 @@ class Notifications extends Component {
     filterType: "all",
     filterSent: "pending"
   };
-
-  componentDidMount() {
-    this.props.getNotifications();
-  }
 
   handleClick(offset) {
     this.setState({ offset });

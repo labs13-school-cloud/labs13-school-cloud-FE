@@ -21,6 +21,7 @@ export const getNotifications = () => dispatch => {
   axios
     .get(`${process.env.REACT_APP_API}/api/notifications`)
     .then(res => {
+      // console.log("NOTIF", res.data.notifications);
       dispatch({
         type: GET_NOTIFICATIONS_SUCCESS,
         payload: res.data.notifications

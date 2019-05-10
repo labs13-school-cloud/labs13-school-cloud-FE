@@ -12,8 +12,6 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
 import TrainingBotGIF from "img/trainingBot.gif";
-import Switch from "@material-ui/core/Switch";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
 
 //State Management
 import { addTeamMember } from "store/actions";
