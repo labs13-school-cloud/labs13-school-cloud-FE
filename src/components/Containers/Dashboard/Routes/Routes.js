@@ -10,6 +10,8 @@ import CreateMessage from "components/Sections/TrainingSeries/CreateTSComponents
 import MessagePage from "components/Sections/TrainingSeries/CreateTSComponents/MessagePage";
 import AssignMemberPage from "components/Sections/TeamMembers/TeamMemberPageContainer/AssignMemberPage";
 
+import AddMemberToTrainingSeries from "components/Sections/TrainingSeries/CreateTSComponents/AddMemberToTrainingSeries.js";
+
 import Dashboard from "../Dashboard";
 
 function Routes(props) {
@@ -78,6 +80,13 @@ function Routes(props) {
         path="/home/assign-series/:id"
         render={renderProps => (
           <AssignMemberPage {...renderProps} userId={props.user.id} />
+        )}
+      />
+
+      <Route
+        path="/home/assign-members/:id"
+        render={renderProps => (
+          <AddMemberToTrainingSeries {...renderProps} userId={props.user.id} />
         )}
       />
       <Route path="/home/message/:id" component={MessagePage} />
