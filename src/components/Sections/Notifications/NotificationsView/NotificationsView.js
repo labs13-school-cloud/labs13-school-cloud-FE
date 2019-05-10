@@ -48,7 +48,6 @@ class Notifications extends Component {
   };
 
   render() {
-    console.log(this.props);
     const { classes } = this.props;
     const { textNotifications } = this.props;
     const { emailNotifications } = this.props;
