@@ -30,12 +30,11 @@ function Notification(props) {
     .add(1, "hours")
     .format("MMMM Do");
 
-  //todo:add tm.last_name to list of properties returned by Notifications.find() in BE, then take out || "Snow"
   return (
     <ListItem className={classes.listItem}>
       <ListItemText
         primary={`${subject} | ${series}`}
-        secondary={`${first_name} ${last_name || "Snow"} | ${
+        secondary={`${first_name} ${last_name} | ${
           email
             ? email
             : phone_number
