@@ -14,6 +14,7 @@ export default function SingleMemberCheck(props) {
           color="primary"
           onChange={e => {
             setChecked(!checked);
+            props.addMember(props.teamMember.id);
           }}
         />
       </p>

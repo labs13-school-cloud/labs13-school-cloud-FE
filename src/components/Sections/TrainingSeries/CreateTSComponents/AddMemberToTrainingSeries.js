@@ -9,6 +9,20 @@ import {
 import SingleMemberCheck from "./singleMemberCheck.js";
 
 function AddMemberToTrainingSeries(props) {
+  const [activeMembers, setActiveMembers] = useState([]); //an array of all IDS of members being added to a series
+
+  const addMember = member_id => {
+    //this function is passed down to the single members. on check, it sets or removes their id from activeMembers.
+    let newMembers = [...activeMembers];
+    if (newMembers.includes(member_id)) {
+      let index = newMembers.indexOf(member_id);
+      newMembers.splice(index, 1);
+    } else {
+      newMembers.push(member_id);
+    }
+    setActiveMembers(newMembers);
+  };
+
   useEffect(() => {
     console.log(props);
     props.getTrainingSeriesMessages(props.match.params.id);
@@ -30,9 +44,18 @@ function AddMemberToTrainingSeries(props) {
       </p>
       <div>
         {props.teamMembers.map(member => {
-          return <SingleMemberCheck key={member.id} teamMember={member} />;
+          return (
+            <SingleMemberCheck
+              addMember={addMember}
+              key={member.id}
+              teamMember={member}
+            />
+          );
         })}
       </div>
+      {activeMembers.map(mem => (
+        <div>{mem}</div>
+      ))}
     </div>
   );
 }
