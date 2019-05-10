@@ -79,10 +79,16 @@ function AddMemberToTrainingSeries(props) {
             activeMembers.map(memberID => {
               props.messages.map(msg => {
                 //find member who has memberID and check what services they have avaible to thgem
-
+                const memberServices = props.teamMembers.filter(
+                  mem => mem.id === memberID
+                );
                 const newNotification = {
                   team_member_id: memberID,
-                  service_id: "",
+                  service_id: memberServices[0].phone_number
+                    ? 1
+                    : memberServices[0].email
+                    ? 2
+                    : 3,
                   message_id: msg.id,
                   num_attempts: 0,
                   is_sent: false,
@@ -90,7 +96,7 @@ function AddMemberToTrainingSeries(props) {
                     .add(msg.days_from_start, "days")
                     .toISOString()
                 };
-                console.log(newNotification);
+                props.addNotification(newNotification);
               });
             });
           }}
@@ -112,5 +118,10 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { getTrainingSeriesMessages, getTeamMembers, getTrainingSeries }
+  {
+    getTrainingSeriesMessages,
+    getTeamMembers,
+    getTrainingSeries,
+    addNotification
+  }
 )(AddMemberToTrainingSeries);
