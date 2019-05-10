@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+
 import { Grid, Typography } from "@material-ui/core/";
 import { Select } from "./TrainingSeriesTabStyles.js";
 
-export default function TrainingSeriesTabSingle(props) {
+function TrainingSeriesTabSingle(props) {
   const [messageLength, setMessageLength] = useState(0);
+  const [messageNames, setMessageNames] = useState([]);
+
   const [daysLong, setDaysLong] = useState([]);
+
   const {
     series: { id }
   } = props;
@@ -21,6 +25,13 @@ export default function TrainingSeriesTabSingle(props) {
           (a, b) => b.days_from_start - a.days_from_start
         );
         setDaysLong(longestDaysFromStart[0].days_from_start);
+
+        let namesArray = [];
+        res.data.messages.map(msg => {
+          namesArray.push(msg.subject);
+        });
+        setMessageNames(namesArray);
+        console.log(namesArray);
       })
       .catch(err => setMessageLength(err));
   }, [id]);
@@ -33,19 +44,26 @@ export default function TrainingSeriesTabSingle(props) {
           <hr />
         </Grid>
         <Grid item xs={8}>
-          <p style={{ marginTop: 0 }}>This training series is assigned to:</p>
+          <p style={{ marginTop: 0 }}>
+            This training series includes messages:
+          </p>
+
           <Select
             onClick={e => {
               e.stopPropagation();
             }}
           >
-            <option value="default">default</option>
-            <option value="remove me">
-              once backend is up, finish this!!!
-            </option>
+            {messageNames.map((name, i) => {
+              return (
+                <option key={i} value={name}>
+                  {name}
+                </option>
+              );
+            })}
           </Select>
           <p>
-            and is <span style={{ color: "blue" }}>{daysLong}</span> days long.
+            and is <span style={{ color: "blue" }}>{daysLong}</span> day(s)
+            long.
           </p>
         </Grid>
 
@@ -60,3 +78,5 @@ export default function TrainingSeriesTabSingle(props) {
     </div>
   );
 }
+
+export default TrainingSeriesTabSingle;
