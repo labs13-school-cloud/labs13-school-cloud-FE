@@ -1,15 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
+import moment from "moment";
 import {
   getTrainingSeriesMessages,
   getTeamMembers,
-  getTrainingSeries
+  getTrainingSeries,
+  addNotification
 } from "store/actions";
+
+import TextField from "@material-ui/core/TextField";
 
 import SingleMemberCheck from "./singleMemberCheck.js";
 
 function AddMemberToTrainingSeries(props) {
   const [activeMembers, setActiveMembers] = useState([]); //an array of all IDS of members being added to a series
+  const [startDate, setStartDate] = useState(moment().format("YYYY-MM-DD"));
 
   const addMember = member_id => {
     //this function is passed down to the single members. on check, it sets or removes their id from activeMembers.
@@ -53,9 +58,46 @@ function AddMemberToTrainingSeries(props) {
           );
         })}
       </div>
-      {activeMembers.map(mem => (
-        <div>{mem}</div>
-      ))}
+      <form noValidate>
+        <TextField
+          id="date"
+          label="Start Date"
+          type="date"
+          defaultValue={moment().format("YYYY-MM-DD")}
+          InputLabelProps={{
+            shrink: true
+          }}
+          onChange={e => {
+            setStartDate(e.target.value); //gives a text version of date in YYY-MM-DD
+            console.log(startDate);
+          }}
+        />
+        <button
+          type="submit"
+          onClick={e => {
+            e.preventDefault();
+            activeMembers.map(memberID => {
+              props.messages.map(msg => {
+                //find member who has memberID and check what services they have avaible to thgem
+
+                const newNotification = {
+                  team_member_id: memberID,
+                  service_id: "",
+                  message_id: msg.id,
+                  num_attempts: 0,
+                  is_sent: false,
+                  send_date: moment(startDate)
+                    .add(msg.days_from_start, "days")
+                    .toISOString()
+                };
+                console.log(newNotification);
+              });
+            });
+          }}
+        >
+          submit
+        </button>
+      </form>
     </div>
   );
 }
