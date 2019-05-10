@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
+import axios from "axios";
 
 import styled from "styled-components";
 
@@ -37,9 +38,41 @@ function Responses(props) {
   const { classes } = props;
 
   const [service, setService] = useState("");
+  const [allResponses, setAllResponses] = useState([
+    {
+      id: 1,
+      first_name: "Fake",
+      last_name: "Dude",
+      team_member_id: 1,
+      response: "This is some fake response text from slack...",
+      service: "slack",
+      created_at: "Aug 25th",
+      thread: "12345"
+    },
+    {
+      id: 2,
+      first_name: "Fake",
+      last_name: "Person",
+      team_member_id: 2,
+      response: "This is some fake response text from twillo...",
+      service: "twillo",
+      created_at: "Aug 25th",
+      thread: "12345"
+    },
+    {
+      id: 3,
+      first_name: "Also",
+      last_name: "Fake",
+      team_member_id: 3,
+      response: "This is some fake response text from sendgrid...",
+      service: "sendgrid",
+      created_at: "Aug 25th",
+      thread: "12345"
+    }
+  ]);
 
   useEffect(() => {
-    console.log(props);
+    getAllUserNotifications();
   }, [props]);
 
   const ReturnCorrectServiceLogo = service => {
@@ -51,11 +84,27 @@ function Responses(props) {
           src={SlackLogo}
         />
       );
-    } else if (service === "SMS") {
+    } else if (service === "twillo") {
       return <SettingsCell />;
     } else {
       return <Email />;
     }
+  };
+
+  const getAllUserNotifications = () => {
+    //gets a list of ALLLL responses based on notifications
+    props.notifications.notifications.map(notification => {
+      axios
+        .get(
+          `${process.env.REACT_APP_API}/api/notifications/${
+            notification.id
+          }/responses`
+        )
+        .then(res => {
+          const newResponses = [...allResponses, ...res.data.responses];
+          setAllResponses(newResponses);
+        });
+    });
   };
 
   return (
@@ -77,51 +126,55 @@ function Responses(props) {
           >
             <option value="">all</option>
             <option value="slack">slack</option>
-            <option value="SMS">SMS</option>
-            <option value="email">email</option>
+            <option value="twillo">twillo</option>
+            <option value="sendgrid">sendgrid</option>
           </select>
         </div>
       </HeaderWrapper>
 
       <ResponsesWrapper>
-        {fakeResponses
-          .filter(response => response.service.includes(service))
-          .map(response => {
-            return (
-              <Card
-                style={{ margin: "10px" }}
-                key={response.id}
-                className={classes.card}
-              >
-                <CardContent>
-                  <Typography variant="h5" component="h2">
-                    {response.first_name} {response.last_name}
-                  </Typography>
+        {allResponses.length === 0 ? (
+          <div>Sorry, no responses available!</div>
+        ) : (
+          allResponses
+            .filter(response => response.service.includes(service))
+            .map(response => {
+              return (
+                <Card
+                  style={{ margin: "10px" }}
+                  key={response.id}
+                  className={classes.card}
+                >
+                  <CardContent>
+                    <Typography variant="h5" component="h2">
+                      {response.first_name} {response.last_name}
+                    </Typography>
 
-                  <Typography className={classes.pos} color="textSecondary">
-                    responded to your message via {response.service}{" "}
-                    {ReturnCorrectServiceLogo(response.service)}
-                  </Typography>
-                  <Typography component="p">
-                    {response.response}
-                    <br />
-                  </Typography>
-                </CardContent>
-                <CardActions>
-                  <Button
-                    size="small"
-                    onClick={e => {
-                      props.history.push(
-                        `/home/team-member/${response.team_member_id}`
-                      );
-                    }}
-                  >
-                    See Team Memeber
-                  </Button>
-                </CardActions>
-              </Card>
-            );
-          })}
+                    <Typography className={classes.pos} color="textSecondary">
+                      responded to your message via {response.service}{" "}
+                      {ReturnCorrectServiceLogo(response.service)}
+                    </Typography>
+                    <Typography component="p">
+                      {response.response}
+                      <br />
+                    </Typography>
+                  </CardContent>
+                  <CardActions>
+                    <Button
+                      size="small"
+                      onClick={e => {
+                        props.history.push(
+                          `/home/team-member/${response.team_member_id}`
+                        );
+                      }}
+                    >
+                      See Team Memeber
+                    </Button>
+                  </CardActions>
+                </Card>
+              );
+            })
+        )}
       </ResponsesWrapper>
     </MainWrapper>
   );
@@ -131,7 +184,8 @@ const mapStateToProps = state => {
   return {
     teamMembers: state.teamMembersReducer.teamMembers,
     trainingSeries: state.trainingSeriesReducer.trainingSeries,
-    notifications: state.notificationsReducer
+    notifications: state.notificationsReducer,
+    responses: state.responsesReducer.responses
   };
 };
 
@@ -141,36 +195,6 @@ export default withStyles(styles)(
     {}
   )(Responses)
 );
-
-const fakeResponses = [
-  {
-    id: 1,
-    first_name: "Tom",
-    last_name: "Hessburg",
-    team_member_id: 1,
-    response: "This is some fake response text from slack...",
-    service: "slack",
-    created_at: "Aug 25th"
-  },
-  {
-    id: 2,
-    first_name: "Fake A.",
-    last_name: "Person",
-    team_member_id: 2,
-    response: "This is some fake response text from SMS...",
-    service: "SMS",
-    created_at: "Aug 25th"
-  },
-  {
-    id: 3,
-    first_name: "Ima",
-    last_name: "Nerd",
-    team_member_id: 3,
-    response: "This is some fake response text from email...",
-    service: "email",
-    created_at: "Aug 25th"
-  }
-];
 
 const ResponsesWrapper = styled.div`
   margin: 40px auto;
