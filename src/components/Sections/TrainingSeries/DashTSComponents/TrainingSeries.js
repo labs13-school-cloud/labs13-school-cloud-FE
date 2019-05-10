@@ -2,6 +2,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { withRouter } from "react-router";
+import { connect } from "react-redux";
+
 //PropTypes
 import PropTypes from "prop-types";
 
@@ -33,7 +35,7 @@ const styles = {
 };
 
 function SeriesCard(props) {
-  const { classes } = props;
+  const { classes, notifications } = props;
   const [messageLength, setMessageLength] = useState(0);
   const [assignedLength, setAssignedLength] = useState(0);
 
@@ -43,19 +45,23 @@ function SeriesCard(props) {
   async function getMessageCount() {
     try {
       const { data } = await axios.get(`${url}/messages`);
-      console.log(data);
+      // console.log(data);
       setMessageLength(data.messages.length);
     } catch (err) {
       console.log(err);
     }
   }
-  async function getMemberCount() {
-    try {
-      const { data } = await axios.get(`${url}/assignments`);
-      setAssignedLength(data.assignments.length);
-    } catch (err) {
-      console.log(err);
-    }
+  function getMemberCount() {
+    //first filter all notifications brought in from Redux state for only ones linked to this series
+    const filteredNotifs = props.notifications.filter(
+      n => n.training_series_id === id
+    );
+    //push each unique team member id from remaining notifications, length of this is # of assigned members
+    let tmIds = [];
+    filteredNotifs.forEach(
+      n => !tmIds.includes(n.team_member_id) && tmIds.push(n.team_member_id)
+    );
+    setAssignedLength(tmIds.length);
   }
 
   useEffect(() => {
@@ -90,4 +96,13 @@ SeriesCard.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(withRouter(SeriesCard));
+const mapStateToProps = state => {
+  return {
+    notifications: state.notificationsReducer.notifications
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  null
+)(withStyles(styles)(withRouter(SeriesCard)));
