@@ -12,10 +12,7 @@ import Select from "@material-ui/core/Select";
 
 //State Management
 import { connect } from "react-redux";
-// import {
-//   getTextNotifications,
-//   getEmailNotifications
-// } from "store/actions/notificationsActions";
+import { getNotifications } from "store/actions";
 
 const NotificationsList = React.lazy(() => import("../NotificationsList"));
 
@@ -74,8 +71,7 @@ class Notifications extends Component {
   };
 
   componentDidMount() {
-    // this.props.getTextNotifications(this.props.userId);
-    // this.props.getEmailNotifications(this.props.userId);
+    this.props.getNotifications();
   }
 
   handleClick(offset) {
@@ -93,46 +89,21 @@ class Notifications extends Component {
 
   render() {
     const { classes } = this.props;
-    const allNotifications = [
-      ...this.props.textNotifications,
-      ...this.props.emailNotifications
-    ];
+    const allNotifications = this.props.notifications;
 
-    // this is a quick fix to filter out empty values from the notification table.
-    // ideally we would filter out empty contact values on the back end
-    // we ran out of time and had to deliver
-    const nonNullContactInformation = allNotifications.filter(
-      notification =>
-        notification.email !== "" && notification.phone_number !== ""
-    );
-
-    const filteredNotifications = nonNullContactInformation.filter(
-      notification => {
-        // check if first key included email or text
-        if (notification.hasOwnProperty(this.state.filterType)) {
-          return notification;
-        } else if (this.state.filterType === "all") {
-          return notification;
-        } else {
-          return undefined;
-        }
-      }
-    );
-
-    filteredNotifications.sort((a, b) =>
+    allNotifications.sort((a, b) =>
       a.send_date > b.send_date ? 1 : b.send_date > a.send_date ? -1 : 0
     );
 
+    const serviceFiltered =
+      this.state.filterType === "all"
+        ? allNotifications
+        : allNotifications.filter(n => n.name === this.state.filterType);
+
     const filteredReturn =
       this.state.filterSent === "pending"
-        ? filteredNotifications.filter(
-            notification =>
-              notification.text_sent === 0 || notification.email_sent === 0
-          )
-        : filteredNotifications.filter(
-            notification =>
-              notification.text_sent === 1 || notification.email_sent === 1
-          );
+        ? serviceFiltered.filter(n => !n.is_sent)
+        : serviceFiltered.filter(n => n.is_sent);
 
     const notificationCount = filteredReturn.length;
 
@@ -157,8 +128,9 @@ class Notifications extends Component {
                 }}
               >
                 <option value={"all"}>All</option>
-                <option value={"phoneNumber"}>Text</option>
-                <option value={"email"}>Email</option>
+                <option value={"twilio"}>Text</option>
+                <option value={"sendgrid"}>Email</option>
+                <option value={"slack"}>Slack</option>
               </Select>
             </FormControl>
             <FormControl className={classes.formControl}>
@@ -205,8 +177,7 @@ class Notifications extends Component {
 
 const mapStateToProps = state => {
   return {
-    textNotifications: state.notificationsReducer.textNotifications,
-    emailNotifications: state.notificationsReducer.emailNotifications,
+    notifications: state.notificationsReducer.notifications,
     isLoading: state.notificationsReducer.isLoading
   };
 };
@@ -214,7 +185,6 @@ const mapStateToProps = state => {
 export default connect(
   mapStateToProps,
   {
-    // getTextNotifications,
-    // getEmailNotifications
+    getNotifications
   }
 )(withStyles(styles)(Notifications));
