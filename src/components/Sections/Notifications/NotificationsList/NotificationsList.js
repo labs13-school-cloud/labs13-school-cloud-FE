@@ -14,7 +14,6 @@ const NotificationsList = props => {
   let x = offset;
   let y = offset + props.limit;
   arr = props.notifications.slice(x, y);
-
   let notificationDisplay;
 
   if (props.notificationCount === 0) {
@@ -26,11 +25,11 @@ const NotificationsList = props => {
   } else {
     notificationDisplay = (
       <ListStyles>
-        {arr.map((notification, index) => {
+        {arr.map(n => {
           return (
             <Notification
-              key={index}
-              notification={notification}
+              key={n.id}
+              notification={n}
               filterSent={props.filterSent}
               match={props.match}
             />
@@ -39,7 +38,6 @@ const NotificationsList = props => {
       </ListStyles>
     );
   }
-  //console.log("NOTIFICATION COUNT", props.notificationCount)
   return <>{notificationDisplay}</>;
 };
 

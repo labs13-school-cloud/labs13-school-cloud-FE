@@ -70,6 +70,7 @@ export const deleteTeamMember = (teamMemberID, userID) => dispatch => {
     })
     .then(() => {
       if (history.location.pathname === "/home") {
+        //leaving this legacy code here but commented out in case this spot needs to dispatch getNotifications
         // dispatch(getEmailNotifications(userID));
         // dispatch(getTextNotifications(userID));
       } else {

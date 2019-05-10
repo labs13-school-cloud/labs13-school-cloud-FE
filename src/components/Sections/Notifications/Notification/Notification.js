@@ -18,10 +18,11 @@ function Notification(props) {
     first_name,
     last_name,
     send_date,
-    message_name,
+    subject,
+    name,
     email,
     phone_number,
-    title
+    series
   } = props.notification;
 
   // add hours to sendDate, formatting with moment ensures it displays properly on the FE
@@ -29,12 +30,17 @@ function Notification(props) {
     .add(1, "hours")
     .format("MMMM Do");
 
+  //todo:add tm.last_name to list of properties returned by Notifications.find() in BE, then take out || "Snow"
   return (
     <ListItem className={classes.listItem}>
       <ListItemText
-        primary={`${message_name} | ${title}`}
-        secondary={`${first_name} ${last_name} | ${
-          email ? email : phoneFormatter.format(phone_number, "(NNN) NNN-NNNN")
+        primary={`${subject} | ${series}`}
+        secondary={`${first_name} ${last_name || "Snow"} | ${
+          email
+            ? email
+            : phone_number
+            ? phoneFormatter.format(phone_number, "(NNN) NNN-NNNN")
+            : name
         }`}
       />
       <Typography className={classes.send_date}>
