@@ -117,28 +117,21 @@ class TrainingSeriesMessages extends React.Component {
   };
 
   beginTitleEdit = e => {
-    this.setState({
-      editingTitle: true,
-      title: this.state.singleTrainingSeries.title
-    });
+    this.setState({ editingTitle: true });
   };
 
-  handleChange = name => event => {
-    this.setState({ [name]: event.target.value });
+  handleChange = title => {
+    const { singleTrainingSeries } = this.state;
+    singleTrainingSeries.title = title;
+    this.setState({ singleTrainingSeries });
   };
 
   updateTitle = async e => {
     e.preventDefault();
-    const data = { title: this.state.title };
-    await this.props.editTrainingSeries(
-      this.state.singleTrainingSeries.id,
-      data
-    );
-    await this.getTrainingSeriesMessages(this.props.match.params.id);
-    this.setState({
-      ...this.state,
-      editingTitle: false
-    });
+    const { title, id } = this.state.singleTrainingSeries;
+    await this.props.editTrainingSeries(id, { title });
+    await this.getTrainingSeriesWithMessages(this.props.match.params.id);
+    this.setState({ editingTitle: false });
   };
 
   searchedMessages = messages => {
@@ -169,8 +162,8 @@ class TrainingSeriesMessages extends React.Component {
               id="standard-name"
               label="Title"
               className={classes.textField}
-              value={this.state.title}
-              onChange={this.handleChange("title")}
+              value={this.state.singleTrainingSeries.title}
+              onChange={e => this.handleChange(e.target.value)}
               margin="normal"
             />
             <div>
@@ -205,8 +198,8 @@ class TrainingSeriesMessages extends React.Component {
 
     let assignedMembersStatus;
     if (
-      this.props.teamMembers.length > 0 &&
-      this.props.assignments.length === 0
+      this.props.teamMembers.length > 0 //&&
+      //this.props.assignments.length === 0
     ) {
       assignedMembersStatus = (
         <>
