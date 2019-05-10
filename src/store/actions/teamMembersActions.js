@@ -28,12 +28,10 @@ export const EDIT_MEMBER_FAIL = "EDIT_MEMBER_FAIL";
 const baseUrl = `${process.env.REACT_APP_API}/api`;
 
 export const getTeamMembers = id => dispatch => {
-  console.log(id);
   dispatch({ type: FETCH_TEAM_START });
   axios
     .get(`${baseUrl}/users/${id}/team-members`)
     .then(res => {
-      console.log(res.data);
       dispatch({ type: FETCH_TEAM_SUCCESS, payload: res.data.members });
     })
     .catch(err => dispatch({ type: FETCH_TEAM_FAIL, payload: err }));
@@ -41,7 +39,6 @@ export const getTeamMembers = id => dispatch => {
 
 export const addTeamMember = teamMember => dispatch => {
   dispatch({ type: ADD_MEMBER_START });
-  console.log(teamMember);
   axios
     .post(`${baseUrl}/team-members`, teamMember)
     .then(res => {
