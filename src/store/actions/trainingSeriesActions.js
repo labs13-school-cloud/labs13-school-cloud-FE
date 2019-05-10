@@ -97,7 +97,6 @@ export const getTrainingSeriesMessages = training_series_id => dispatch => {
       }/api/training-series/${training_series_id}/messages`
     )
     .then(res => {
-      console.log("its working tho?");
       dispatch({
         type: GET_TRAINING_SERIES_MESSAGES_SUCCESS,
         payload: res.data.messages

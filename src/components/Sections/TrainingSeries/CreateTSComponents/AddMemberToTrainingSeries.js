@@ -8,7 +8,11 @@ import {
   addNotification
 } from "store/actions";
 
+import { Paper } from "@material-ui/core";
+import styled from "styled-components";
+
 import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
 
 import SingleMemberCheck from "./singleMemberCheck.js";
 
@@ -29,14 +33,13 @@ function AddMemberToTrainingSeries(props) {
   };
 
   useEffect(() => {
-    console.log(props);
     props.getTrainingSeriesMessages(props.match.params.id);
     props.getTeamMembers(props.userId);
     props.getTrainingSeries(props.match.params.id);
   }, []);
 
   return (
-    <div>
+    <Wrapper>
       <h1>
         {props.trainingSeries.length &&
           props.trainingSeries.filter(
@@ -44,8 +47,8 @@ function AddMemberToTrainingSeries(props) {
           )[0].title}
       </h1>
       <p>
-        Employee's will be sent {props.messages.length} messages throughout this
-        trainign series.
+        Employee's will be sent {props.messages.length} message(s) throughout
+        this training series.
       </p>
       <div>
         {props.teamMembers.map(member => {
@@ -69,42 +72,45 @@ function AddMemberToTrainingSeries(props) {
           }}
           onChange={e => {
             setStartDate(e.target.value); //gives a text version of date in YYY-MM-DD
-            console.log(startDate);
           }}
         />
-        <button
-          type="submit"
-          onClick={e => {
-            e.preventDefault();
-            activeMembers.map(memberID => {
-              props.messages.map(msg => {
-                //find member who has memberID and check what services they have avaible to thgem
-                const memberServices = props.teamMembers.filter(
-                  mem => mem.id === memberID
-                );
-                const newNotification = {
-                  team_member_id: memberID,
-                  service_id: memberServices[0].phone_number
-                    ? 1
-                    : memberServices[0].email
-                    ? 2
-                    : 3,
-                  message_id: msg.id,
-                  num_attempts: 0,
-                  is_sent: false,
-                  send_date: moment(startDate)
-                    .add(msg.days_from_start, "days")
-                    .toISOString()
-                };
-                props.addNotification(newNotification);
-              });
-            });
-          }}
-        >
-          submit
-        </button>
       </form>
-    </div>
+      <Button
+        style={{ margin: "15px" }}
+        variant="contained"
+        color="primary"
+        type="submit"
+        onClick={e => {
+          e.preventDefault();
+          activeMembers.map(memberID => {
+            props.messages.map(msg => {
+              //find member who has memberID and check what services they have avaible to thgem
+              const memberServices = props.teamMembers.filter(
+                mem => mem.id === memberID
+              );
+              const newNotification = {
+                team_member_id: memberID,
+                service_id: memberServices[0].phone_number
+                  ? 1
+                  : memberServices[0].email
+                  ? 2
+                  : 3,
+                message_id: msg.id,
+                num_attempts: 0,
+                is_sent: false,
+                send_date: moment(startDate)
+                  .add(msg.days_from_start, "days")
+                  .toISOString()
+              };
+              props.addNotification(newNotification);
+            });
+          });
+          props.history.push(`/home/training-series/${props.match.params.id}`);
+        }}
+      >
+        submit
+      </Button>
+    </Wrapper>
   );
 }
 
@@ -125,3 +131,10 @@ export default connect(
     addNotification
   }
 )(AddMemberToTrainingSeries);
+
+const Wrapper = styled(Paper)`
+  margin: auto;
+  padding: 10px;
+  width: 80%;
+  max-width: 1000px;
+`;
