@@ -196,8 +196,8 @@ class TrainingSeriesMessages extends React.Component {
 
     let assignedMembersStatus;
     if (
-      this.props.teamMembers.length > 0 &&
-      this.props.assignments.length === 0
+      this.props.teamMembers.length > 0 //&&
+      //this.props.assignments.length === 0
     ) {
       assignedMembersStatus = (
         <>
