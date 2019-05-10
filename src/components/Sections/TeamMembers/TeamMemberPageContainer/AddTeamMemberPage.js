@@ -122,10 +122,9 @@ class TeamMemberPage extends React.Component {
   addNewTeamMember = e => {
     e.preventDefault();
     const newMember = {
-      ...this.state.teamMember,
+      ...this.state.teamMember, //where is it getting manaer and mentor from??? look at console log when youre trying to submit
       user_id: this.props.userId
     };
-
     this.props.addTeamMember(newMember);
     this.setState({ isRouting: true });
   };
@@ -152,6 +151,7 @@ class TeamMemberPage extends React.Component {
 
   selectHandler = (e, relationType) => {
     let val = e.target.value !== "null" ? parseInt(e.target.value) : null;
+    console.log("is this the problem??", e.target.name, val);
     this.setState({
       teamMember: {
         ...this.state.teamMember,
@@ -270,8 +270,8 @@ class TeamMemberPage extends React.Component {
             </div>
             <div className="mentor select">
               <select
-                name="mentor"
-                value={this.state.teamMember.mentor}
+                name="mentor_id"
+                value={this.state.memberMentor}
                 onChange={e => this.selectHandler(e, "memberMentor")}
               >
                 <option>select mentor</option>{" "}
@@ -300,8 +300,8 @@ class TeamMemberPage extends React.Component {
             </div>
             <div className="manager select">
               <select
-                name="manager"
-                value={this.state.teamMember.manager}
+                name="manager_id"
+                value={this.state.memberManager}
                 onChange={e => this.selectHandler(e, "memberManager")}
               >
                 <option>select manager</option>

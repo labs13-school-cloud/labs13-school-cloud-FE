@@ -126,11 +126,14 @@ class TeamMemberPage extends React.Component {
 
   componentDidMount() {
     let data = this.props.teamMember;
+    console.log("asfasdfasdf", data);
     let allMembers = this.props.teamMembers;
     // let assignmentIds = data.assignments.map(a => a.training_series_id);
     if (Object.keys(data).length !== 0) {
       this.setState({
         team_member: data,
+        memberManager: data.manager_name,
+        memberMentor: data.mentor_name,
         // assignments: data.assignments,
         otherTeamMembers: allMembers.filter(
           //sets all other team members in an array to make later filtering simpler
