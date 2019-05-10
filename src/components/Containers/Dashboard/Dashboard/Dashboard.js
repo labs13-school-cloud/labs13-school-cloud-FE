@@ -108,5 +108,5 @@ function Dashboard(props) {
 
 export default connect(
   null,
-  getNotifications
+  { getNotifications }
 )(Dashboard);
