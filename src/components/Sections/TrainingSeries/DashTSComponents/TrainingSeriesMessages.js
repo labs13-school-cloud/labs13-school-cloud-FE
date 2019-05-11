@@ -3,7 +3,6 @@ import React from "react";
 
 import { Link } from "react-router-dom";
 import Fuse from "fuse.js";
-import axios from "axios";
 
 // Components
 import DeleteModal from "components/UI/Modals/deleteModal";
