@@ -82,7 +82,7 @@ class TrainingSeriesModal extends React.Component {
 
   handleTrainingSeriesSubmit = e => {
     e.preventDefault();
-    const data = { title: this.state.title, user_id: this.props.userID };
+    const data = { title: this.state.title, user_id: this.props.user_id };
     if (this.props.modalType === "edit") {
       this.setState({ title: this.props.title });
       this.props.editTrainingSeries(this.props.trainingSeriesID, data);

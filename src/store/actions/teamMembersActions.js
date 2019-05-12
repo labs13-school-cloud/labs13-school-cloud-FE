@@ -61,7 +61,7 @@ export const editTeamMember = (id, changes) => dispatch => {
     .catch(err => dispatch({ type: EDIT_MEMBER_FAIL, payload: err }));
 };
 
-export const deleteTeamMember = (teamMemberID, userID) => dispatch => {
+export const deleteTeamMember = (teamMemberID, user_id) => dispatch => {
   dispatch({ type: DELETE_MEMBER_START });
   axios
     .delete(`${baseUrl}/team-members/${teamMemberID}`)
@@ -71,8 +71,8 @@ export const deleteTeamMember = (teamMemberID, userID) => dispatch => {
     .then(() => {
       if (history.location.pathname === "/home") {
         //leaving this legacy code here but commented out in case this spot needs to dispatch getNotifications
-        // dispatch(getEmailNotifications(userID));
-        // dispatch(getTextNotifications(userID));
+        // dispatch(getEmailNotifications(user_id));
+        // dispatch(getTextNotifications(user_id));
       } else {
         history.push("/home");
       }

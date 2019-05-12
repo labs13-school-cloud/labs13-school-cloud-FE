@@ -52,13 +52,13 @@ export const getCustomersPlan = stripe => dispatch => {
     .catch(err => dispatch({ type: GET_CUSTOMER_PLAN_FAIL, error: err }));
 };
 
-export const unsubscribe = (userID, stripe) => dispatch => {
+export const unsubscribe = (user_id, stripe) => dispatch => {
   dispatch({
     type: POST_UNSUBSCRIBE_START
   });
   axios
     .post(`${process.env.REACT_APP_API}/api/stripe/unsubscribe`, {
-      userID,
+      user_id,
       stripe
     })
     .then(res =>
@@ -71,7 +71,7 @@ export const submit = (
   token,
   name,
   email,
-  userID,
+  user_id,
   stripe,
   plan
 ) => dispatch => {
@@ -84,7 +84,7 @@ export const submit = (
         token,
         name,
         email,
-        userID,
+        user_id,
         stripe,
         plan
       })
@@ -101,7 +101,7 @@ export const submit = (
         token,
         name,
         email,
-        userID,
+        user_id,
         stripe,
         plan
       })
@@ -113,15 +113,15 @@ export const submit = (
 };
 
 //Notes on what everything equals out to for debugging purposes.
-// const { name, email, userID, stripe } = this.props.user;
+// const { name, email, user_id, stripe } = this.props.user;
 // const { plan } = this.state;
 
-// let { token } = this.createToken(userID);
+// let { token } = this.createToken(user_id);
 // let response = await axios.post(`${process.env.REACT_APP_API}/api/stripe`, {
 // token,
 // name,
 // email,
-// userID,
+// user_id,
 // stripe,
 // plan,
 // });

@@ -20,7 +20,7 @@ import { TripleColumn, SmallColumns, DashWrapper } from "./styles.js";
 
 function Dashboard(props) {
   const [topTab, setTopTab] = useState("overview");
-  const { userId } = props;
+  const { user_id } = props;
 
   return (
     <DashWrapper>
@@ -68,26 +68,26 @@ function Dashboard(props) {
           <SmallColumns>
             <TeamMembersView
               disableSnackbar={props.disableSnackbar}
-              userId={userId}
+              user_id={user_id}
             />
             <TrainingSeriesView
               disableSnackbar={props.disableSnackbar}
-              userId={userId}
+              user_id={user_id}
               match={props.match}
             />
           </SmallColumns>
           <NotificationsContainer
             Notifications={NotificationsOverview}
-            userId={userId}
+            user_id={user_id}
           />
         </TripleColumn>
       )}
 
       {topTab === "team members" && (
-        <TeamMembersTab history={props.history} userId={userId} />
+        <TeamMembersTab history={props.history} user_id={user_id} />
       )}
       {topTab === "training series" && (
-        <TrainingSeriesTab history={props.history} userId={userId} />
+        <TrainingSeriesTab history={props.history} user_id={user_id} />
       )}
       {topTab === "messages" && (
         <div>
@@ -95,12 +95,12 @@ function Dashboard(props) {
           <NotificationsContainer
             Notifications={NotificationsOverview}
             history={props.history}
-            userId={userId}
+            user_id={user_id}
           />
         </div>
       )}
       {topTab === "responses" && (
-        <Responses history={props.history} userId={userId} />
+        <Responses history={props.history} user_id={user_id} />
       )}
     </DashWrapper>
   );

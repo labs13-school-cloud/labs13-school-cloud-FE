@@ -34,7 +34,7 @@ function Routes(props) {
             {...renderProps}
             disableSnackbar={disableSnackbar}
             history={props.history}
-            userId={props.user.id}
+            user_id={props.user.id}
           />
         )}
       />
@@ -51,25 +51,25 @@ function Routes(props) {
       <Route
         path="/home/team-member/:id"
         render={renderProps => (
-          <TeamMemberPageView {...renderProps} userId={props.user.id} />
+          <TeamMemberPageView {...renderProps} user_id={props.user.id} />
         )}
       />
       <Route
         path="/home/create-team-member/"
         render={renderProps => (
-          <AddTeamMemberPage {...renderProps} userId={props.user.id} />
+          <AddTeamMemberPage {...renderProps} user_id={props.user.id} />
         )}
       />
       <Route
         path="/home/create-training-series"
         render={renderProps => (
-          <CreateTrainingSeries {...renderProps} userId={props.user.id} />
+          <CreateTrainingSeries {...renderProps} user_id={props.user.id} />
         )}
       />
       <Route
         path="/home/training-series/:id"
         render={renderProps => (
-          <TrainingSeriesMessages {...renderProps} userId={props.user.id} />
+          <TrainingSeriesMessages {...renderProps} user_id={props.user.id} />
         )}
       />
       <Route
@@ -79,14 +79,14 @@ function Routes(props) {
       <Route
         path="/home/assign-series/:id"
         render={renderProps => (
-          <AssignMemberPage {...renderProps} userId={props.user.id} />
+          <AssignMemberPage {...renderProps} user_id={props.user.id} />
         )}
       />
 
       <Route
         path="/home/assign-members/:id"
         render={renderProps => (
-          <AddMemberToTrainingSeries {...renderProps} userId={props.user.id} />
+          <AddMemberToTrainingSeries {...renderProps} user_id={props.user.id} />
         )}
       />
       <Route path="/home/message/:id" component={MessagePage} />

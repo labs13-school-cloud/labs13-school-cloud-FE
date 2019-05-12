@@ -34,8 +34,7 @@ class TeamMembersView extends React.Component {
   };
 
   componentDidMount() {
-    this.props.getTeamMembers(this.props.userId);
-    //console.log(this.props);
+    this.props.getTeamMembers(this.props.user_id);
     this.setState({
       teamMembers: this.props.teamMembers
     });
@@ -106,8 +105,9 @@ class TeamMembersView extends React.Component {
             deleteTeamMember={this.deleteMember}
             limit={this.state.limit}
             offset={this.state.offset}
-            userId={this.props.user_id}
+            user_id={this.props.user_id}
           />
+          user_id
         </Suspense>
       );
     }

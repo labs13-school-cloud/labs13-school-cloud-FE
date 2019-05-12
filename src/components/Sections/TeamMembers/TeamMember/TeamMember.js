@@ -42,7 +42,7 @@ function TeamMember(props) {
           routeToMemberPage={routeToMemberPage}
           handleDelete={handleDelete}
           teamMemberID={id}
-          userId={props.userId}
+          user_id={props.user_id}
         />
       </div>
     </ListItem>

@@ -184,7 +184,7 @@ class TeamMemberPage extends React.Component {
   //   this.props.history.push({
   //     pathname: `/home/assign-series/${this.state.team_member.id}`,
   //     state: {
-  //       userId: this.props.userId,
+  //       user_id: this.props.user_id,
   //       urlId: this.props.urlId,
   //       assignments: this.props.teamMember.assignments,
   //       trainingSeries: this.props.trainingSeries
@@ -542,7 +542,7 @@ class TeamMemberPage extends React.Component {
               <DeleteModal
                 deleteType="inTeamMemberPage"
                 teamMemberId={this.props.teamMember.id}
-                userId={this.props.userId}
+                user_id={this.props.user_id}
                 displayType="button"
               />
             </ButtonContainer>

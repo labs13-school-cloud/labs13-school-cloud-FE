@@ -20,7 +20,7 @@ class TeamMemberPageView extends React.Component {
   };
   componentDidMount() {
     this.props.getTeamMemberByID(this.props.match.params.id);
-    this.props.getTrainingSeries(this.props.userId);
+    this.props.getTrainingSeries(this.props.user_id);
     if (this.props.location.state) {
       this.setState({
         displaySnackbar: this.props.location.state.success
@@ -61,7 +61,7 @@ class TeamMemberPageView extends React.Component {
           urlId={this.props.match.params.id}
           editTeamMemberSubmit={this.editTeamMemberSubmit}
           deleteTeamMember={this.deleteTeamMember}
-          userId={this.props.userId}
+          user_id={this.props.user_id}
           history={this.props.history}
         />
       );

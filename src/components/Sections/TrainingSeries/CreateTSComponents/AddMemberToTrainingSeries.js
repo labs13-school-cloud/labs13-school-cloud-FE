@@ -25,7 +25,7 @@ function AddMemberToTrainingSeries(props) {
     getTeamMembers,
     getTrainingSeries,
     match,
-    userId
+    user_id
   } = props;
   const {
     params: { id }
@@ -45,13 +45,13 @@ function AddMemberToTrainingSeries(props) {
 
   useEffect(() => {
     getTrainingSeriesMessages(id);
-    getTeamMembers(userId);
+    getTeamMembers(user_id);
     getTrainingSeries(id);
   }, [
     getTrainingSeriesMessages,
     getTeamMembers,
     getTrainingSeries,
-    userId,
+    user_id,
     id
   ]);
 

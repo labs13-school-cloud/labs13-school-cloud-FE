@@ -123,7 +123,7 @@ class TeamMemberPage extends React.Component {
     e.preventDefault();
     const newMember = {
       ...this.state.teamMember, //where is it getting manaer and mentor from??? look at console log when youre trying to submit
-      user_id: this.props.userId
+      user_id: this.props.user_id
     };
     this.props.addTeamMember(newMember);
     this.setState({ isRouting: true });

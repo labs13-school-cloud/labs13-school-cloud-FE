@@ -19,7 +19,7 @@ const TeamMembersList = props => {
               key={member.id}
               teamMember={member}
               deleteTeamMember={props.deleteTeamMember}
-              userId={props.id}
+              user_id={props.id}
             />
           </Suspense>
         ))}
