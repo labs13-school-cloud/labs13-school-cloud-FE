@@ -1,3 +1,5 @@
+import styled from "styled-components";
+
 export const styles = theme => ({
   root: {
     ...theme.mixins.gutters(),
@@ -43,3 +45,11 @@ export const styles = theme => ({
   pagination: { width: "90%" },
   selection: { margin: "0 10px" }
 });
+
+export const MessageContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: lightgray;
+`;

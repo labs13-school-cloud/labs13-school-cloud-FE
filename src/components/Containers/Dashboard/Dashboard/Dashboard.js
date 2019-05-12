@@ -1,13 +1,11 @@
-import React, { useState, useEffect } from "react";
-import { connect } from "react-redux";
-
-import { getNotifications } from "store/actions/";
+import React, { useState } from "react";
 
 import TeamMembersView from "components/Sections/TeamMembers/TeamMembersView";
 import TeamMembersTab from "components/Sections/TeamMembers/TeamMembersTab";
 import TrainingSeriesView from "components/Sections/TrainingSeries/DashTSComponents/TrainingSeriesView";
 import TrainingSeriesTab from "components/Sections/TrainingSeries/TabTSComponents/TrainingSeriesTab.js";
-import NotificationsView from "components/Sections/Notifications/NotificationsView";
+import NotificationsContainer from "components/Sections/Notifications/Container";
+import NotificationsOverview from "components/Sections/Notifications/Notification/Overview";
 import Responses from "components/Sections/Notifications/Responses";
 
 import BottomNavigation from "@material-ui/core/BottomNavigation";
@@ -23,11 +21,6 @@ import { TripleColumn, SmallColumns, DashWrapper } from "./styles.js";
 function Dashboard(props) {
   const [topTab, setTopTab] = useState("overview");
   const { userId } = props;
-  const get_Notifications = props.getNotifications;
-
-  useEffect(() => {
-    get_Notifications();
-  }, [get_Notifications]);
 
   return (
     <DashWrapper>
@@ -83,7 +76,10 @@ function Dashboard(props) {
               match={props.match}
             />
           </SmallColumns>
-          <NotificationsView userId={userId} />
+          <NotificationsContainer
+            Notifications={NotificationsOverview}
+            userId={userId}
+          />
         </TripleColumn>
       )}
 
@@ -96,7 +92,11 @@ function Dashboard(props) {
       {topTab === "messages" && (
         <div>
           <h3>this is temporary until we actually build out this component</h3>
-          <NotificationsView history={props.history} userId={userId} />
+          <NotificationsContainer
+            Notifications={NotificationsOverview}
+            history={props.history}
+            userId={userId}
+          />
         </div>
       )}
       {topTab === "responses" && (
@@ -106,7 +106,4 @@ function Dashboard(props) {
   );
 }
 
-export default connect(
-  null,
-  { getNotifications }
-)(Dashboard);
+export default Dashboard;
