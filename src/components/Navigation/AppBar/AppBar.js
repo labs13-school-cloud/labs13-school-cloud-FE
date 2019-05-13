@@ -41,6 +41,14 @@ class AppBar extends Component {
             <>
               <Link to="/home">
                 <NavigationLogo alt="A cute, personable robot" src={Logo} />
+                <button
+                  onClick={e => {
+                    e.preventDefault();
+                    this.props.history.push("/home/help");
+                  }}
+                >
+                  help
+                </button>
               </Link>
               <RightItemsContainer>
                 <Link to="/home/profile">

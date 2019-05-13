@@ -4,8 +4,17 @@ import { Paper } from "@material-ui/core";
 
 const HelpModal = props => {
   return (
-    <HelpModalWrapper>
-      <HelpModalPaper>
+    <HelpModalWrapper
+      style={{ cursor: "pointer" }}
+      onClick={e => {
+        e.preventDefault();
+        props.history.push("/home");
+      }}
+    >
+      <HelpModalPaper
+        style={{ cursor: "auto" }}
+        onClick={e => e.stopPropagation()}
+      >
         <h3>Welcome to the Help Panel!</h3>
         <hr />
         <TypeWrapper>
