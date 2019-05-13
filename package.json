@@ -34,6 +34,9 @@
     "stripe": "^6.31.0",
     "styled-components": "^4.2.0"
   },
+  "resolutions": {
+    "babel-jest": "23.6.0"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
