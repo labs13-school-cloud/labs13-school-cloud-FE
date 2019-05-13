@@ -3,11 +3,10 @@ import React from "react";
 
 import { Link } from "react-router-dom";
 import Fuse from "fuse.js";
-import axios from "axios";
 
 // Components
 import DeleteModal from "components/UI/Modals/deleteModal";
-//import TrainingSeriesAssignment from "./TrainingSeriesAssignment";
+import TrainingSeriesAssignment from "./TrainingSeriesAssignment";
 
 // Redux
 import { connect } from "react-redux";
@@ -61,8 +60,8 @@ class TrainingSeriesMessages extends React.Component {
 
   componentDidMount() {
     this.props.getTrainingSeriesMessages(this.props.match.params.id);
-    this.props.getTeamMembers(this.props.userId);
-    //this.props.getMembersAssigned(this.props.match.params.id);
+    this.props.getTeamMembers(this.props.user_id);
+
     if (this.props.location.state) {
       this.setState({
         displaySnackbar: this.props.location.state.success
@@ -197,10 +196,25 @@ class TrainingSeriesMessages extends React.Component {
     }
 
     let assignedMembersStatus;
-    if (
-      this.props.teamMembers.length > 0 //&&
-      //this.props.assignments.length === 0
-    ) {
+
+    //first filter all notifications brought in from Redux state for only ones linked to this series
+    const filteredNotifs = this.props.notifications.filter(
+      n => n.training_series_id === parseInt(this.props.match.params.id)
+    );
+
+    //push each unique team member id from remaining notifications, length of this is # of assigned members
+    let assignedMemberIds = [];
+    filteredNotifs.forEach(
+      n =>
+        !assignedMemberIds.includes(n.team_member_id) &&
+        assignedMemberIds.push(n.team_member_id)
+    );
+    //make list of team members found in the assignedMemberIds array
+    let assignedMembers = this.props.teamMembers.filter(t =>
+      assignedMemberIds.includes(t.id)
+    );
+
+    if (this.props.teamMembers.length > 0 && assignedMembers.length === 0) {
       assignedMembersStatus = (
         <>
           <HeaderContainer>
@@ -239,12 +253,12 @@ class TrainingSeriesMessages extends React.Component {
               Assign Members
             </Button>
           </HeaderContainer>
-          {/*this.props.assignments.map(member => (
+          {assignedMembers.map(member => (
             <>
               <TrainingSeriesAssignment member={member} />
               <Divider />
             </>
-          ))*/}
+          ))}
         </>
       );
     } else {
@@ -385,6 +399,7 @@ const mapStateToProps = state => ({
   //singleTrainingSeries: state.trainingSeriesReducer.trainingSeries.filter(
   //   series => series.id === this.props.match.params.id
   // ),
+  notifications: state.notificationsReducer.notifications,
   messages: state.trainingSeriesReducer.messages,
   assignments: state.trainingSeriesReducer.assignments,
   trainingSeries: state.trainingSeriesReducer.trainingSeries,

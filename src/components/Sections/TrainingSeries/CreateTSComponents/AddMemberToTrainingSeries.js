@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import moment from "moment";
+import styled from "styled-components";
+
+import Button from "@material-ui/core/Button";
+import { Paper } from "@material-ui/core";
+import TextField from "@material-ui/core/TextField";
+
+import SingleMemberCheck from "./singleMemberCheck.js";
 import {
   getTrainingSeriesMessages,
   getTeamMembers,
@@ -8,17 +15,21 @@ import {
   addNotification
 } from "store/actions";
 
-import { Paper } from "@material-ui/core";
-import styled from "styled-components";
-
-import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
-
-import SingleMemberCheck from "./singleMemberCheck.js";
-
 function AddMemberToTrainingSeries(props) {
   const [activeMembers, setActiveMembers] = useState([]); //an array of all IDS of members being added to a series
   const [startDate, setStartDate] = useState(moment().format("YYYY-MM-DD"));
+
+  // Abstracting to remove useEffect dependency warnings
+  const {
+    getTrainingSeriesMessages,
+    getTeamMembers,
+    getTrainingSeries,
+    match,
+    user_id
+  } = props;
+  const {
+    params: { id }
+  } = match;
 
   const addMember = member_id => {
     //this function is passed down to the single members. on check, it sets or removes their id from activeMembers.
@@ -33,10 +44,16 @@ function AddMemberToTrainingSeries(props) {
   };
 
   useEffect(() => {
-    props.getTrainingSeriesMessages(props.match.params.id);
-    props.getTeamMembers(props.userId);
-    props.getTrainingSeries(props.match.params.id);
-  }, []);
+    getTrainingSeriesMessages(id);
+    getTeamMembers(user_id);
+    getTrainingSeries(id);
+  }, [
+    getTrainingSeriesMessages,
+    getTeamMembers,
+    getTrainingSeries,
+    user_id,
+    id
+  ]);
 
   return (
     <Wrapper>
@@ -82,8 +99,8 @@ function AddMemberToTrainingSeries(props) {
         type="submit"
         onClick={e => {
           e.preventDefault();
-          activeMembers.map(memberID => {
-            props.messages.map(msg => {
+          activeMembers.forEach(memberID => {
+            props.messages.forEach(msg => {
               //find member who has memberID and check what services they have avaible to thgem
               const memberServices = props.teamMembers.filter(
                 mem => mem.id === memberID

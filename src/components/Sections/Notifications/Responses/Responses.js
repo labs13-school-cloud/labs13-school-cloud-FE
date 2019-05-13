@@ -2,78 +2,81 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import axios from "axios";
 
-import styled from "styled-components";
-
 import { withStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import Paper from "@material-ui/core/Paper";
 
 import SettingsCell from "@material-ui/icons/SettingsCell";
 import Email from "@material-ui/icons/Email";
 
 import SlackLogo from "img/slacklogo.jpg";
 
-const styles = {
-  card: {
-    minWidth: 275
+import {
+  styles,
+  ResponsesWrapper,
+  MainWrapper,
+  HeaderWrapper
+} from "./styles.js";
+
+const fakeData = [
+  {
+    id: 1,
+    first_name: "Fake",
+    last_name: "Dude",
+    team_member_id: 1,
+    response: "This is some fake response text from slack...",
+    service: "slack",
+    created_at: "Aug 25th",
+    thread: "12345"
   },
-  bullet: {
-    display: "inline-block",
-    margin: "0 2px",
-    transform: "scale(0.8)"
+  {
+    id: 2,
+    first_name: "Fake",
+    last_name: "Person",
+    team_member_id: 2,
+    response: "This is some fake response text from twillo...",
+    service: "twillo",
+    created_at: "Aug 25th",
+    thread: "12345"
   },
-  title: {
-    fontSize: 14
-  },
-  pos: {
-    marginBottom: 12
+  {
+    id: 3,
+    first_name: "Also",
+    last_name: "Fake",
+    team_member_id: 3,
+    response: "This is some fake response text from sendgrid...",
+    service: "sendgrid",
+    created_at: "Aug 25th",
+    thread: "12345"
   }
-};
+];
 
 function Responses(props) {
   const { classes } = props;
-
   const [service, setService] = useState("");
-  const [allResponses, setAllResponses] = useState([
-    {
-      id: 1,
-      first_name: "Fake",
-      last_name: "Dude",
-      team_member_id: 1,
-      response: "This is some fake response text from slack...",
-      service: "slack",
-      created_at: "Aug 25th",
-      thread: "12345"
-    },
-    {
-      id: 2,
-      first_name: "Fake",
-      last_name: "Person",
-      team_member_id: 2,
-      response: "This is some fake response text from twillo...",
-      service: "twillo",
-      created_at: "Aug 25th",
-      thread: "12345"
-    },
-    {
-      id: 3,
-      first_name: "Also",
-      last_name: "Fake",
-      team_member_id: 3,
-      response: "This is some fake response text from sendgrid...",
-      service: "sendgrid",
-      created_at: "Aug 25th",
-      thread: "12345"
-    }
-  ]);
+  const [allResponses, setAllResponses] = useState(fakeData);
+
+  const { notifications } = props;
 
   useEffect(() => {
-    getAllUserNotifications();
-  }, [props]);
+    //gets a list of ALLLL responses based on notifications
+    notifications.notifications.forEach(async notification => {
+      // Promise.all?
+      const url = `${process.env.REACT_APP_API}/api/notifications/${
+        notification.id
+      }/responses`;
+      const notificationResponses = await axios.get(url);
+
+      const newResponses = [
+        ...allResponses,
+        ...notificationResponses.data.responses
+      ];
+      setAllResponses(newResponses);
+    });
+  }, [notifications, allResponses, setAllResponses]);
 
   const ReturnCorrectServiceLogo = service => {
     if (service === "slack") {
@@ -89,22 +92,6 @@ function Responses(props) {
     } else {
       return <Email />;
     }
-  };
-
-  const getAllUserNotifications = () => {
-    //gets a list of ALLLL responses based on notifications
-    props.notifications.notifications.map(notification => {
-      axios
-        .get(
-          `${process.env.REACT_APP_API}/api/notifications/${
-            notification.id
-          }/responses`
-        )
-        .then(res => {
-          const newResponses = [...allResponses, ...res.data.responses];
-          setAllResponses(newResponses);
-        });
-    });
   };
 
   return (
@@ -195,45 +182,3 @@ export default withStyles(styles)(
     {}
   )(Responses)
 );
-
-const ResponsesWrapper = styled.div`
-  margin: 40px auto;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-`;
-const MainWrapper = styled(Paper)`
-  margin: 48px auto;
-  padding: 10px;
-  width: 90%;
-`;
-const HeaderWrapper = styled.div`
-  display: flex;
-  align-items: flex-end;
-  padding: 10px;
-  border-bottom: 1px solid gray;
-  @media (max-width: 700px) {
-    justify-content: space-between;
-  }
-  h2 {
-    text-decoration: underline;
-    margin: 0 40px 0 10px;
-    @media (max-width: 700px) {
-      margin: 0 20px 0 10px;
-    }
-  }
-  select {
-    width: 125px;
-    margin-left: 10px;
-    height: 25px;
-    border: 1px solid black;
-  }
-  div {
-    display: flex;
-    align-items: center;
-    @media (max-width: 700px) {
-      flex-direction: column;
-    }
-  }
-`;

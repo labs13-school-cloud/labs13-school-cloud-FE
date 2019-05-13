@@ -115,7 +115,7 @@ class TeamMemberModal extends React.Component {
     } else {
       const newMember = {
         ...this.state.teamMember,
-        user_id: this.props.userId
+        user_id: this.props.user_id
       };
 
       this.props.addTeamMember(newMember);

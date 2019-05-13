@@ -2,10 +2,10 @@ import React from "react";
 import { Router, Route } from "react-router-dom";
 
 import Profile from "components/Containers/Profile";
-import TeamMemberPageView from "components/Sections/TeamMembers/TeamMemberPageContainer/TeamMemberPageView";
+import EditTeamMember from "components/Sections/TeamMembers/Edit/";
 import CreateTrainingSeries from "components/Sections/TrainingSeries/CreateTSComponents/CreateTrainingSeries";
 import TrainingSeriesMessages from "components/Sections/TrainingSeries/DashTSComponents/TrainingSeriesMessages";
-import AddTeamMemberPage from "components/Sections/TeamMembers/TeamMemberPageContainer/AddTeamMemberPage";
+import AddTeamMember from "components/Sections/TeamMembers/Add/";
 import CreateMessage from "components/Sections/TrainingSeries/CreateTSComponents/CreateMessage";
 import MessagePage from "components/Sections/TrainingSeries/CreateTSComponents/MessagePage";
 import AssignMemberPage from "components/Sections/TeamMembers/TeamMemberPageContainer/AssignMemberPage";
@@ -46,7 +46,7 @@ function Routes(props) {
             {...renderProps}
             disableSnackbar={disableSnackbar}
             history={props.history}
-            userId={props.user.id}
+            user_id={props.user.id}
           />
         )}
       />
@@ -63,42 +63,36 @@ function Routes(props) {
       <Route
         path="/home/team-member/:id"
         render={renderProps => (
-          <TeamMemberPageView {...renderProps} userId={props.user.id} />
+          <EditTeamMember {...renderProps} user_id={props.user.id} />
         )}
       />
       <Route
         path="/home/create-team-member/"
         render={renderProps => (
-          <AddTeamMemberPage {...renderProps} userId={props.user.id} />
+          <AddTeamMember {...renderProps} user_id={props.user.id} />
         )}
       />
       <Route
         path="/home/create-training-series"
         render={renderProps => (
-          <CreateTrainingSeries {...renderProps} userId={props.user.id} />
+          <CreateTrainingSeries {...renderProps} user_id={props.user.id} />
         )}
       />
       <Route
         path="/home/training-series/:id"
         render={renderProps => (
-          <TrainingSeriesMessages {...renderProps} userId={props.user.id} />
+          <TrainingSeriesMessages {...renderProps} user_id={props.user.id} />
         )}
       />
       <Route
         path="/home/create-message"
         render={renderProps => <CreateMessage {...renderProps} />}
       />
-      <Route
-        path="/home/assign-series/:id"
-        render={renderProps => (
-          <AssignMemberPage {...renderProps} userId={props.user.id} />
-        )}
-      />
 
       <Route
         path="/home/assign-members/:id"
         render={renderProps => (
-          <AddMemberToTrainingSeries {...renderProps} userId={props.user.id} />
+          <AddMemberToTrainingSeries {...renderProps} user_id={props.user.id} />
         )}
       />
       <Route path="/home/message/:id" component={MessagePage} />

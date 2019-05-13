@@ -97,7 +97,7 @@ class TrainingSeriesSubView extends Component {
             trainingSeries={trainingSeries}
             offset={this.state.offset}
             match={this.props.match}
-            userId={this.props.userId}
+            user_id={this.props.user_id}
             limit={this.state.limit}
           />
         </Suspense>

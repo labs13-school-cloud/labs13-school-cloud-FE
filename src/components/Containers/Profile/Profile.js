@@ -203,7 +203,7 @@ class Profile extends React.Component {
                   variant="contained"
                   color="secondary"
                   onClick={() => {
-                    this.handleDelete(user.userID);
+                    this.handleDelete(user.user_id);
                   }}
                 >
                   Delete Account
