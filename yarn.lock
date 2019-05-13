@@ -1096,7 +1096,7 @@
     jest-runner "^24.8.0"
     jest-runtime "^24.8.0"
 
-"@jest/transform@^24.7.1", "@jest/transform@^24.8.0":
+"@jest/transform@^24.8.0":
   version "24.8.0"
   resolved "https://registry.yarnpkg.com/@jest/transform/-/transform-24.8.0.tgz#628fb99dce4f9d254c6fd9341e3eea262e06fef5"
   integrity sha512-xBMfFUP7TortCs0O+Xtez2W7Zu1PLH9bvJgtraN1CDST6LBM/eTOZ9SfwS/lvV8yOfcDpFmwf9bq5cYbXvqsvA==
@@ -2011,7 +2011,7 @@ babel-extract-comments@^1.0.0:
   dependencies:
     babylon "^6.18.0"
 
-babel-jest@^24.8.0:
+babel-jest@24.7.1, babel-jest@^24.8.0:
   version "24.8.0"
   resolved "https://registry.yarnpkg.com/babel-jest/-/babel-jest-24.8.0.tgz#5c15ff2b28e20b0f45df43fe6b7f2aae93dba589"
   integrity sha512-+5/kaZt4I9efoXzPlZASyK/lN9qdRKmmUav9smVc0ruPQD7IsfucQ87gpOE8mn2jbDuS6M/YOW6n3v9ZoIfgnw==
@@ -8574,7 +8574,7 @@ react-scripts@3.0.0:
     "@typescript-eslint/eslint-plugin" "1.6.0"
     "@typescript-eslint/parser" "1.6.0"
     babel-eslint "10.0.1"
-    babel-jest "^24.8.0"
+    babel-jest "24.7.1"
     babel-loader "8.0.5"
     babel-plugin-named-asset-import "^0.3.2"
     babel-preset-react-app "^8.0.0"
