@@ -3,7 +3,6 @@ import React from "react";
 
 import { Link } from "react-router-dom";
 import Fuse from "fuse.js";
-import axios from "axios";
 
 // Components
 import DeleteModal from "components/UI/Modals/deleteModal";
@@ -61,7 +60,7 @@ class TrainingSeriesMessages extends React.Component {
 
   componentDidMount() {
     this.props.getTrainingSeriesMessages(this.props.match.params.id);
-    this.props.getTeamMembers(this.props.userId);
+    this.props.getTeamMembers(this.props.user_id);
 
     if (this.props.location.state) {
       this.setState({

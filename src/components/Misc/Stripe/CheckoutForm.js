@@ -217,8 +217,8 @@ class CheckoutForm extends Component {
     }
   };
 
-  unsub = (userID, stripe) => {
-    this.props.unsubscribe(userID, stripe);
+  unsub = (user_id, stripe) => {
+    this.props.unsubscribe(user_id, stripe);
     this.setState({ open: false });
   };
 

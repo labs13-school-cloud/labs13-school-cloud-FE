@@ -1,13 +1,13 @@
-import React from 'react';
-import { withRouter } from 'react-router';
+import React from "react";
+import { withRouter } from "react-router";
 
 // styles
-import { withStyles } from '@material-ui/core/styles';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
-import { IconButton, Menu, MenuItem } from '@material-ui/core/';
+import { withStyles } from "@material-ui/core/styles";
+import MoreVertIcon from "@material-ui/icons/MoreVert";
+import { IconButton, Menu, MenuItem } from "@material-ui/core/";
 
 // components
-import DeleteModal from '../Modals/deleteModal';
+import DeleteModal from "../Modals/deleteModal";
 
 const styles = {};
 
@@ -40,9 +40,10 @@ class TeamMemberOptions extends React.Component {
           aria-label="More"
           aria-haspopup="true"
           onClick={this.handleClick}
-          className={classes.root}>
+          className={classes.root}
+        >
           <MoreVertIcon
-            aria-owns={this.state.anchorEl ? 'simple-menu' : undefined}
+            aria-owns={this.state.anchorEl ? "simple-menu" : undefined}
             aria-haspopup="true"
           />
         </IconButton>
@@ -50,11 +51,13 @@ class TeamMemberOptions extends React.Component {
           id="simple-menu"
           anchorEl={this.state.anchorEl}
           open={Boolean(this.state.anchorEl)}
-          onClose={this.handleClose}>
+          onClose={this.handleClose}
+        >
           <MenuItem
             onClick={e =>
               this.props.routeToMemberPage(e, this.props.teamMemberID)
-            }>
+            }
+          >
             Manage
           </MenuItem>
           <MenuItem>
@@ -62,7 +65,7 @@ class TeamMemberOptions extends React.Component {
               deleteType="teamMember"
               teamMemberId={this.props.teamMemberID}
               displayType="text"
-              userId={this.props.userId}
+              user_id={this.props.user_id}
             />
           </MenuItem>
         </Menu>

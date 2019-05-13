@@ -1,9 +1,7 @@
 import axios from "axios";
 import history from "../../history.js";
 
-import // getTextNotifications,
-// getEmailNotifications
-"./notificationsActions";
+import "./notificationsActions";
 
 export const FETCH_TEAM_START = "FETCH_TEAM_START";
 export const FETCH_TEAM_SUCCESS = "FETCH_TEAM_SUCCESS";
@@ -48,7 +46,8 @@ export const addTeamMember = teamMember => dispatch => {
     .catch(err => dispatch({ type: ADD_MEMBER_FAIL, payload: err }));
 };
 
-export const editTeamMember = (id, changes) => dispatch => {
+export const editTeamMember = changes => dispatch => {
+  const { id } = changes;
   dispatch({ type: EDIT_MEMBER_START });
   axios
     .put(`${baseUrl}/team-members/${id}`, changes)
@@ -61,7 +60,7 @@ export const editTeamMember = (id, changes) => dispatch => {
     .catch(err => dispatch({ type: EDIT_MEMBER_FAIL, payload: err }));
 };
 
-export const deleteTeamMember = (teamMemberID, userID) => dispatch => {
+export const deleteTeamMember = (teamMemberID, user_id) => dispatch => {
   dispatch({ type: DELETE_MEMBER_START });
   axios
     .delete(`${baseUrl}/team-members/${teamMemberID}`)
@@ -71,8 +70,8 @@ export const deleteTeamMember = (teamMemberID, userID) => dispatch => {
     .then(() => {
       if (history.location.pathname === "/home") {
         //leaving this legacy code here but commented out in case this spot needs to dispatch getNotifications
-        // dispatch(getEmailNotifications(userID));
-        // dispatch(getTextNotifications(userID));
+        // dispatch(getEmailNotifications(user_id));
+        // dispatch(getTextNotifications(user_id));
       } else {
         history.push("/home");
       }

@@ -72,7 +72,7 @@ class SlideDownModal extends React.Component {
           <MenuItem>
             <AddToTrainingSeriesModal
               modalType="assignMultiple"
-              userID={this.props.userID}
+              user_id={this.props.user_id}
               trainingSeriesID={this.props.data.trainingSeriesID}
             />
           </MenuItem>
@@ -92,7 +92,7 @@ class SlideDownModal extends React.Component {
               deleteType="trainingSeries"
               trainingSeriesId={this.props.data.id}
               displayType="text"
-              userId={this.props.userId}
+              user_id={this.props.user_id}
             />
           </MenuItem>
         </Menu>

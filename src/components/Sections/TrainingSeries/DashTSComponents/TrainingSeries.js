@@ -35,7 +35,7 @@ const styles = {
 };
 
 function SeriesCard(props) {
-  const { classes, notifications } = props;
+  const { classes } = props;
   const [messageLength, setMessageLength] = useState(0);
   const [assignedLength, setAssignedLength] = useState(0);
 
@@ -86,7 +86,7 @@ function SeriesCard(props) {
       <SlideDownModal
         deleteTrainingSeries={props.deleteTrainingSeries}
         data={props.data}
-        userId={props.userId}
+        user_id={props.user_id}
       />
     </ListItem>
   );

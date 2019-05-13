@@ -1,13 +1,12 @@
-import React, { useState, useEffect } from "react";
-import { connect } from "react-redux";
+import React, { useState } from "react";
 
-import { getNotifications } from "store/actions/";
-
-import TeamMembersView from "components/Sections/TeamMembers/TeamMembersView";
-import TeamMembersTab from "components/Sections/TeamMembers/TeamMembersTab";
+import SearchCard from "components/UI/SearchCard/";
+import TeamMembersOverview from "components/Sections/TeamMembers/List/Overview";
+import TeamMembersTab from "components/Sections/TeamMembers/Tab";
 import TrainingSeriesView from "components/Sections/TrainingSeries/DashTSComponents/TrainingSeriesView";
 import TrainingSeriesTab from "components/Sections/TrainingSeries/TabTSComponents/TrainingSeriesTab.js";
-import NotificationsView from "components/Sections/Notifications/NotificationsView";
+import NotificationsCard from "components/Sections/Notifications/Card";
+import NotificationsOverview from "components/Sections/Notifications/Card/Overview";
 import Responses from "components/Sections/Notifications/Responses";
 
 import BottomNavigation from "@material-ui/core/BottomNavigation";
@@ -22,12 +21,7 @@ import { TripleColumn, SmallColumns, DashWrapper } from "./styles.js";
 
 function Dashboard(props) {
   const [topTab, setTopTab] = useState("overview");
-  const { userId } = props;
-  const get_Notifications = props.getNotifications;
-
-  useEffect(() => {
-    get_Notifications();
-  }, [get_Notifications]);
+  const { user_id } = props;
 
   return (
     <DashWrapper>
@@ -73,40 +67,48 @@ function Dashboard(props) {
       {topTab === "overview" && (
         <TripleColumn>
           <SmallColumns>
-            <TeamMembersView
-              disableSnackbar={props.disableSnackbar}
-              userId={userId}
+            <SearchCard
+              user_id={user_id}
+              Child={TeamMembersOverview}
+              containerTourNum="1"
+              section="Team Members"
+              headerTourNum={["2", "3"]}
+              handleAdd={() => props.history.push("/home/create-team-member")}
             />
             <TrainingSeriesView
               disableSnackbar={props.disableSnackbar}
-              userId={userId}
+              user_id={user_id}
               match={props.match}
             />
           </SmallColumns>
-          <NotificationsView userId={userId} />
+          <NotificationsCard
+            Notifications={NotificationsOverview}
+            user_id={user_id}
+          />
         </TripleColumn>
       )}
 
       {topTab === "team members" && (
-        <TeamMembersTab history={props.history} userId={userId} />
+        <TeamMembersTab history={props.history} user_id={user_id} />
       )}
       {topTab === "training series" && (
-        <TrainingSeriesTab history={props.history} userId={userId} />
+        <TrainingSeriesTab history={props.history} user_id={user_id} />
       )}
       {topTab === "messages" && (
         <div>
           <h3>this is temporary until we actually build out this component</h3>
-          <NotificationsView history={props.history} userId={userId} />
+          <NotificationsCard
+            Notifications={NotificationsOverview}
+            history={props.history}
+            user_id={user_id}
+          />
         </div>
       )}
       {topTab === "responses" && (
-        <Responses history={props.history} userId={userId} />
+        <Responses history={props.history} user_id={user_id} />
       )}
     </DashWrapper>
   );
 }
 
-export default connect(
-  null,
-  { getNotifications }
-)(Dashboard);
+export default Dashboard;
