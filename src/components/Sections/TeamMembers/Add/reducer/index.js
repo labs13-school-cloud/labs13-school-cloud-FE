@@ -16,6 +16,18 @@ export const initialState = {
   memberMentor: ""
 };
 
+const emptyUser = {
+  first_name: "",
+  last_name: "",
+  job_description: "",
+  email: "",
+  phone_number: "",
+  user_id: "",
+  slack_uuid: "",
+  manager_id: "",
+  mentor_id: ""
+};
+
 export const reducer = (state, action) => {
   switch (action.type) {
     case "UPDATE_MEMBER":
@@ -25,6 +37,8 @@ export const reducer = (state, action) => {
       };
     case "EDITING_MEMBER":
       return { ...state, teamMember: action.payload };
+    case "CLEAR_MEMBER":
+      return { ...state, teamMember: emptyUser };
     case "TOGGLE_ROUTING":
       return { ...state, isRouting: !state.isRouting };
     case "UPDATE_DISABLED":

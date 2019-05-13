@@ -33,9 +33,10 @@ function Add(props) {
     getSlackUsers();
     getTeamMembersFromProps(user_id);
     dispatch({ type: "UPDATE_MEMBER", key: "user_id", payload: user_id });
-    if (Object.keys(teamMember).length) {
+    if (teamMember) {
       dispatch({ type: "EDITING_MEMBER", payload: teamMember });
     }
+    return () => dispatch({ type: "CLEAR_MEMBER" });
   }, [dispatch, getTeamMembersFromProps, user_id, teamMember]);
 
   const phoneNumberTest = () => {
@@ -57,6 +58,14 @@ function Add(props) {
 
   const addNewTeamMember = e => {
     e.preventDefault();
+    const { teamMember } = state;
+    if (teamMember.manager_id === "") {
+      teamMember.manager_id = null;
+    }
+    if (teamMember.mentor_id === "") {
+      teamMember.mentor_id = null;
+    }
+
     props.addTeamMember(state.teamMember);
     dispatch({ type: "TOGGLE_ROUTING" });
   };
@@ -66,7 +75,9 @@ function Add(props) {
     <MainContainer>
       <form className={classes.form} onSubmit={e => addNewTeamMember(e)}>
         <Paper className={classes.paper}>
-          <Typography variant="title">Add A New Team Member</Typography>
+          <Typography variant="title">
+            {teamMember ? "Edit Team Member" : "Add A New Team Member"}
+          </Typography>{" "}
           <Divider className={classes.divider} />
           <MemberInfoForm
             state={state}
@@ -79,7 +90,7 @@ function Add(props) {
             teamMembers={props.teamMembers}
           />
           <SelectSlackID state={state} updateMember={updateMember} />
-          {Object.keys(teamMember).length ? (
+          {teamMember ? (
             <EditButtons state={state} />
           ) : (
             <AddButtons
@@ -95,7 +106,6 @@ function Add(props) {
 }
 
 const mapStateToProps = state => ({
-  teamMember: state.teamMembersReducer.teamMember,
   teamMembers: state.teamMembersReducer.teamMembers
 });
 
