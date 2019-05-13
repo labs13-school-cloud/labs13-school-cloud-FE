@@ -17,14 +17,14 @@ function Overview(props) {
     filters,
     limit,
     countNotifications,
-    getNotifications,
+    getNotifications: getNotificationsFromProps,
     notifications,
     classes
   } = props;
 
   useEffect(() => {
-    getNotifications();
-  }, [getNotifications]);
+    getNotificationsFromProps();
+  }, [getNotificationsFromProps]);
 
   const setFilters = {
     items: notifications,
