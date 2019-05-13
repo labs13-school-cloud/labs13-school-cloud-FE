@@ -10,18 +10,17 @@ import { withStyles } from "@material-ui/core/styles";
 import { ListItem, ListItemText, Typography } from "@material-ui/core/";
 import { ListStyles, styles } from "./styles.js";
 
-function Overview(props) {
-  const {
-    offset,
-    filter,
-    filters,
-    limit,
-    countNotifications,
-    getNotifications,
-    notifications,
-    classes
-  } = props;
-
+function TeamMember({
+  offset,
+  filter,
+  filters,
+  limit,
+  countNotifications,
+  getNotifications,
+  notifications,
+  classes,
+  member_id
+}) {
   useEffect(() => {
     getNotifications();
   }, [getNotifications]);
@@ -30,10 +29,13 @@ function Overview(props) {
     items: notifications,
     offset,
     limit,
-    filters
+    filters,
+    member_id
   };
 
-  const formatted = filter(setFilters).map(
+  let formatted = filter(setFilters);
+  console.log(formatted);
+  formatted = formatted.map(
     ({
       id,
       first_name,
@@ -69,6 +71,7 @@ function Overview(props) {
       );
     }
   );
+
   countNotifications(formatted.length);
 
   return <ListStyles>{formatted}</ListStyles>;
@@ -81,4 +84,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { getNotifications }
-)(withStyles(styles)(Overview));
+)(withStyles(styles)(TeamMember));

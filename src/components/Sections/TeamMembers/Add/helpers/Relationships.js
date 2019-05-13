@@ -16,7 +16,7 @@ function Relationships({ state, dispatch, teamMembers }) {
       <div className="mentor display">Select Mentor:</div>
       <div className="mentor select">
         <select
-          value={state.teamMember.mentor_id}
+          value={state.teamMember.mentor_id || ""}
           onChange={e => updateRelationship("mentor", e.target.value)}
         >
           <option value="">None</option>
@@ -38,7 +38,7 @@ function Relationships({ state, dispatch, teamMembers }) {
       <div className="manager display">Select Manager:</div>
       <div className="manager select">
         <select
-          value={state.teamMember.manager_id}
+          value={state.teamMember.manager_id || ""}
           onChange={e => updateRelationship("manager", e.target.value)}
         >
           <option value="">None</option>

@@ -119,7 +119,7 @@ class TrainingSeriesModal extends React.Component {
       case "button":
         return (
           <Button
-            variant="primary"
+            variant="outlined"
             style={{ marginLeft: 10 }}
             onClick={this.handleOpen}
           >

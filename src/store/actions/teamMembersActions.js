@@ -46,7 +46,8 @@ export const addTeamMember = teamMember => dispatch => {
     .catch(err => dispatch({ type: ADD_MEMBER_FAIL, payload: err }));
 };
 
-export const editTeamMember = (id, changes) => dispatch => {
+export const editTeamMember = changes => dispatch => {
+  const { id } = changes;
   dispatch({ type: EDIT_MEMBER_START });
   axios
     .put(`${baseUrl}/team-members/${id}`, changes)

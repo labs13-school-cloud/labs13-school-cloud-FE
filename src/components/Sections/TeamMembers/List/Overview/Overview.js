@@ -26,6 +26,9 @@ function Overview({
 
   const setFilter = { items: teamMembers, offset, limit, search };
   const filtered = filter(setFilter);
+  const routeToMember = id => {
+    history.push(`/home/team-member/${id}`);
+  };
 
   const formatted = filtered.map(
     ({ first_name, last_name, job_description, id, user_id }) => {
@@ -34,11 +37,11 @@ function Overview({
           <ListItemText
             primary={first_name + " " + last_name}
             secondary={`Job: ${job_description}`}
-            onClick={e => console.log(e, id)}
+            onClick={() => routeToMember(id)}
           />
           <div>
             <TeamMemberOptions
-              routeToMemberPage={() => history.push(`/home/team-member/${id}`)}
+              routeToMemberPage={() => routeToMember(id)}
               handleDelete={() => deleteMemberFromProps(id)}
               teamMemberID={id}
               user_id={user_id}

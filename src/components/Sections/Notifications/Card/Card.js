@@ -2,6 +2,8 @@
 import React, { useState, Suspense } from "react";
 import { connect } from "react-redux";
 
+import filter from "./filter.js";
+
 import { withStyles } from "@material-ui/core/styles";
 import { Paper, Typography } from "@material-ui/core/";
 import Pagination from "material-ui-flat-pagination";
@@ -64,9 +66,11 @@ function Card(props) {
       <Suspense fallback={<div>Loading...</div>}>
         <Notifications
           offset={offset}
+          filter={filter}
           filters={filters}
           limit={limit}
           countNotifications={setNotificationsCount}
+          member_id={props.member_id}
         />
         {!notificationsCount && (
           <MessageContainer>

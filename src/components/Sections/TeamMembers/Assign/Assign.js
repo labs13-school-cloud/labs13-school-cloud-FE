@@ -60,11 +60,11 @@ class Assign extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    const data = {
-      start_date: this.state.start_date,
-      training_series_id: this.state.training_series_id,
-      assignments: [this.props.location.state.urlId]
-    };
+    // const data = {
+    //   start_date: this.state.start_date,
+    //   training_series_id: this.state.training_series_id,
+    //   assignments: [this.props.location.state.urlId]
+    // };
     //this.props.addTeamMemberToTrainingSeries(data);
     this.setState({
       isRouting: true

@@ -23,6 +23,8 @@ export const reducer = (state, action) => {
         ...state,
         teamMember: { ...state.teamMember, [action.key]: action.payload }
       };
+    case "EDITING_MEMBER":
+      return { ...state, teamMember: action.payload };
     case "TOGGLE_ROUTING":
       return { ...state, isRouting: !state.isRouting };
     case "UPDATE_DISABLED":

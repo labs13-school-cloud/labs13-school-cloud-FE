@@ -1,101 +1,44 @@
-import React from "react";
-
-//Components
-import TeamMemberPage from "./TeamMemberPage";
-import Snackbar from "components/UI/Snackbar/Snackbar";
-import ProgressCircle from "components/UI/Progress/ProgressCircle.js";
-
-//Redux
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
+
+import EditTeamMember from "../Add/";
+import NotificationsCard from "components/Sections/Notifications/Card/";
+import TeamMemberNotifications from "components/Sections/Notifications/Card/TeamMember";
+//import Snackbar from "components/UI/Snackbar/Snackbar";
+
 import {
   editTeamMember,
   getTrainingSeries,
-  getTeamMemberByID,
-  deleteTeamMember
+  getTeamMemberByID
 } from "store/actions";
 
-class TeamMemberPageView extends React.Component {
-  state = {
-    displaySnackbar: false
-  };
-  componentDidMount() {
-    this.props.getTeamMemberByID(this.props.match.params.id);
-    this.props.getTrainingSeries(this.props.user_id);
-    if (this.props.location.state) {
-      this.setState({
-        displaySnackbar: this.props.location.state.success
-      });
-    }
-    this.resetHistory();
-  }
-  resetHistory = () => {
-    this.props.history.replace({
-      state: null
-    });
-  };
+function Edit(props) {
+  const {
+    match,
+    user_id,
+    getTeamMemberByID: getTMFromProps,
+    getTrainingSeries: getTSFromProps
+  } = props;
 
-  editTeamMemberSubmit = (e, changes) => {
-    e.preventDefault();
-    const { manager_name, mentor_name, id, ...rest } = changes;
-    this.props.editTeamMember(this.props.match.params.id, rest);
-  };
+  useEffect(() => {
+    getTMFromProps(match.params.id);
+    getTSFromProps(user_id);
+  }, [getTMFromProps, getTSFromProps, match, user_id]);
 
-  deleteTeamMember = async e => {
-    e.preventDefault();
-    this.props.deleteTeamMember(this.props.match.params.id);
-
-    setTimeout(() => {
-      this.props.history.push("/home");
-    }, 400);
-  };
-
-  renderTeamMemberPage = () => {
-    if (
-      this.props.loadSuccess &&
-      Object.keys(this.props.teamMember).length !== 0 &&
-      !this.props.isLoading
-    ) {
-      return (
-        <TeamMemberPage
-          teamMember={this.props.teamMember}
-          urlId={this.props.match.params.id}
-          editTeamMemberSubmit={this.editTeamMemberSubmit}
-          deleteTeamMember={this.deleteTeamMember}
-          user_id={this.props.user_id}
-          history={this.props.history}
-        />
-      );
-    } else {
-      return <ProgressCircle />;
-    }
-  };
-
-  render() {
-    return (
-      <>
-        {this.state.displaySnackbar && (
-          <>
-            <Snackbar
-              message="Your team member has been successfully added."
-              type="success"
-            />
-          </>
-        )}
-        {this.renderTeamMemberPage()}
-      </>
-    );
-  }
+  return (
+    <>
+      <EditTeamMember user_id={user_id} teamMember={props.teamMember} />
+      <NotificationsCard
+        limit={10}
+        Notifications={TeamMemberNotifications}
+        member_id={match.params.id}
+      />
+    </>
+  );
 }
 
 const mapStateToProps = state => {
   return {
-    isEditing: state.teamMembersReducer.status.isEditing,
-    isLoading: state.trainingSeriesReducer.isLoading,
-    loadSuccess: state.teamMembersReducer.status.loadSuccess,
-    loadFailed: state.teamMembersReducer.status.loadFailed,
-    deleteSuccess: state.teamMembersReducer.status.deleteSuccess,
-    isDeleting: state.teamMembersReducer.status.isDeleting,
-    isAssigning: state.teamMembersReducer.status.isAssigning,
     trainingSeries: state.trainingSeriesReducer.trainingSeries,
     teamMember: state.teamMembersReducer.teamMember
   };
@@ -103,5 +46,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { getTeamMemberByID, editTeamMember, getTrainingSeries, deleteTeamMember }
-)(TeamMemberPageView);
+  { getTeamMemberByID, editTeamMember, getTrainingSeries }
+)(Edit);

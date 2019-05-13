@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import SearchCard from "components/UI/SearchCard/";
 import TeamMembersOverview from "components/Sections/TeamMembers/List/Overview";
-import TeamMembersTab from "components/Sections/TeamMembers/TeamMembersTab";
+import TeamMembersTab from "components/Sections/TeamMembers/Tab";
 import TrainingSeriesView from "components/Sections/TrainingSeries/DashTSComponents/TrainingSeriesView";
 import TrainingSeriesTab from "components/Sections/TrainingSeries/TabTSComponents/TrainingSeriesTab.js";
 import NotificationsCard from "components/Sections/Notifications/Card";

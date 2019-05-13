@@ -8,6 +8,7 @@ import MemberInfoForm from "./helpers/MemberInfoForm.js";
 import Relationships from "./helpers/Relationships.js";
 import SelectSlackID from "./helpers/SelectSlackID.js";
 import AddButtons from "./helpers/AddButtons.js";
+import EditButtons from "./helpers/EditButtons.js";
 
 import { withStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
@@ -16,7 +17,11 @@ import Divider from "@material-ui/core/Divider";
 import { styles, MainContainer } from "./styles.js";
 
 function Add(props) {
-  const { getTeamMembers: getTeamMembersFromProps, user_id } = props;
+  const {
+    getTeamMembers: getTeamMembersFromProps,
+    user_id,
+    teamMember
+  } = props;
   const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
@@ -28,7 +33,10 @@ function Add(props) {
     getSlackUsers();
     getTeamMembersFromProps(user_id);
     dispatch({ type: "UPDATE_MEMBER", key: "user_id", payload: user_id });
-  }, [dispatch, getTeamMembersFromProps, user_id]);
+    if (Object.keys(teamMember).length) {
+      dispatch({ type: "EDITING_MEMBER", payload: teamMember });
+    }
+  }, [dispatch, getTeamMembersFromProps, user_id, teamMember]);
 
   const phoneNumberTest = () => {
     return (
@@ -71,7 +79,15 @@ function Add(props) {
             teamMembers={props.teamMembers}
           />
           <SelectSlackID state={state} updateMember={updateMember} />
-          <AddButtons state={state} classes={classes} history={props.history} />
+          {Object.keys(teamMember).length ? (
+            <EditButtons state={state} />
+          ) : (
+            <AddButtons
+              state={state}
+              classes={classes}
+              history={props.history}
+            />
+          )}
         </Paper>
       </form>
     </MainContainer>
