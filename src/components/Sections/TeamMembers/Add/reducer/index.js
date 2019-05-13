@@ -13,8 +13,7 @@ export const initialState = {
   isRouting: false,
   addDisabled: false,
   memberManager: "",
-  memberMentor: "",
-  slackUsers: []
+  memberMentor: ""
 };
 
 export const reducer = (state, action) => {
