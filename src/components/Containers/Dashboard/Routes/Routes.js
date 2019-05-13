@@ -8,6 +8,7 @@ import TrainingSeriesMessages from "components/Sections/TrainingSeries/DashTSCom
 import AddTeamMember from "components/Sections/TeamMembers/Add/";
 import CreateMessage from "components/Sections/TrainingSeries/CreateTSComponents/CreateMessage";
 import MessagePage from "components/Sections/TrainingSeries/CreateTSComponents/MessagePage";
+import HelpModal from "components/UI/HelpModal/HelpModal.js";
 
 import AddMemberToTrainingSeries from "components/Sections/TrainingSeries/CreateTSComponents/AddMemberToTrainingSeries.js";
 
@@ -25,6 +26,17 @@ function Routes(props) {
   };
   return (
     <Router history={history}>
+      <Route
+        exact
+        path="/home/help"
+        render={renderProps => (
+          <HelpModal
+            {...renderProps}
+            history={props.history}
+            userId={props.user.id}
+          />
+        )}
+      />
       <Route
         exact
         path="/home"
