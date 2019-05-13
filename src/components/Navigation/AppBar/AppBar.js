@@ -40,15 +40,24 @@ class AppBar extends Component {
           ) : (
             <>
               <Link to="/home">
-                <NavigationLogo alt="A cute, personable robot" src={Logo} />
-                <button
-                  onClick={e => {
-                    e.preventDefault();
-                    this.props.history.push("/home/help");
-                  }}
-                >
-                  help
-                </button>
+                <div style={{ display: "flex", alignItems: "center" }}>
+                  <NavigationLogo alt="A cute, personable robot" src={Logo} />
+                  <button
+                    onClick={e => {
+                      e.preventDefault();
+                      this.props.history.push("/home/help");
+                    }}
+                    style={{
+                      padding: "5px 0",
+                      width: "22px",
+                      margin: "5px",
+                      borderRadius: "50%",
+                      cursor: "help"
+                    }}
+                  >
+                    ?
+                  </button>
+                </div>
               </Link>
               <RightItemsContainer>
                 <Link to="/home/profile">
