@@ -107,7 +107,6 @@ class TeamMembersView extends React.Component {
             offset={this.state.offset}
             user_id={this.props.user_id}
           />
-          user_id
         </Suspense>
       );
     }

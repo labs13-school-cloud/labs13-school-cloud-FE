@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 
-import TeamMembersView from "components/Sections/TeamMembers/TeamMembersView";
+import SearchCard from "components/UI/SearchCard/";
+import TeamMembersOverview from "components/Sections/TeamMembers/List/Overview";
 import TeamMembersTab from "components/Sections/TeamMembers/TeamMembersTab";
 import TrainingSeriesView from "components/Sections/TrainingSeries/DashTSComponents/TrainingSeriesView";
 import TrainingSeriesTab from "components/Sections/TrainingSeries/TabTSComponents/TrainingSeriesTab.js";
-import NotificationsContainer from "components/Sections/Notifications/Container";
-import NotificationsOverview from "components/Sections/Notifications/Notification/Overview";
+import NotificationsCard from "components/Sections/Notifications/Card";
+import NotificationsOverview from "components/Sections/Notifications/Card/Overview";
 import Responses from "components/Sections/Notifications/Responses";
 
 import BottomNavigation from "@material-ui/core/BottomNavigation";
@@ -66,9 +67,13 @@ function Dashboard(props) {
       {topTab === "overview" && (
         <TripleColumn>
           <SmallColumns>
-            <TeamMembersView
-              disableSnackbar={props.disableSnackbar}
+            <SearchCard
               user_id={user_id}
+              Child={TeamMembersOverview}
+              containerTourNum="1"
+              section="Team Members"
+              headerTourNum={["2", "3"]}
+              handleAdd={() => props.history.push("/home/create-team-member")}
             />
             <TrainingSeriesView
               disableSnackbar={props.disableSnackbar}
@@ -76,7 +81,7 @@ function Dashboard(props) {
               match={props.match}
             />
           </SmallColumns>
-          <NotificationsContainer
+          <NotificationsCard
             Notifications={NotificationsOverview}
             user_id={user_id}
           />
@@ -92,7 +97,7 @@ function Dashboard(props) {
       {topTab === "messages" && (
         <div>
           <h3>this is temporary until we actually build out this component</h3>
-          <NotificationsContainer
+          <NotificationsCard
             Notifications={NotificationsOverview}
             history={props.history}
             user_id={user_id}

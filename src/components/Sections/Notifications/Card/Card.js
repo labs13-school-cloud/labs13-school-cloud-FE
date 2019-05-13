@@ -1,6 +1,4 @@
-// Container component for Notifications.  It is agnostic about the notifications themselves.
-// And instead just handles the common elements: pagination, filters, title.
-// The component supplied as props under "Notifications" handles the rendering of Notifications instead
+// Parent "card" container for any Notification displays
 import React, { useState, Suspense } from "react";
 import { connect } from "react-redux";
 
@@ -11,7 +9,7 @@ import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import { styles, MessageContainer } from "./styles.js";
 
-function Container(props) {
+function Card(props) {
   const [serviceFilter, setServiceFilter] = useState("all");
   const [statusFilter, setStatusFilter] = useState("pending");
   const [offset, setOffset] = useState(0);
@@ -70,7 +68,7 @@ function Container(props) {
           limit={limit}
           countNotifications={setNotificationsCount}
         />
-        {!notificationsCount ? (
+        {!notificationsCount && (
           <MessageContainer>
             <p>
               {props.isLoading
@@ -78,8 +76,6 @@ function Container(props) {
                 : "You do not have any pending messages."}
             </p>
           </MessageContainer>
-        ) : (
-          ""
         )}
       </Suspense>
       <div className={classes.footer}>
@@ -88,7 +84,7 @@ function Container(props) {
           offset={offset}
           total={notificationsCount}
           centerRipple={true}
-          onClick={(e, offset) => setOffset(offset)}
+          onClick={(e, newOffset) => setOffset(newOffset)}
         />
       </div>
     </Paper>
@@ -99,7 +95,4 @@ const mapStateToProps = state => ({
   isLoading: state.notificationsReducer.isLoading
 });
 
-export default connect(
-  mapStateToProps,
-  {}
-)(withStyles(styles)(Container));
+export default connect(mapStateToProps)(withStyles(styles)(Card));

@@ -2,13 +2,13 @@ import React from "react";
 import { Router, Route } from "react-router-dom";
 
 import Profile from "components/Containers/Profile";
-import TeamMemberPageView from "components/Sections/TeamMembers/TeamMemberPageContainer/TeamMemberPageView";
+import EditTeamMember from "components/Sections/TeamMembers/Edit/";
 import CreateTrainingSeries from "components/Sections/TrainingSeries/CreateTSComponents/CreateTrainingSeries";
 import TrainingSeriesMessages from "components/Sections/TrainingSeries/DashTSComponents/TrainingSeriesMessages";
-import AddTeamMemberPage from "components/Sections/TeamMembers/TeamMemberPageContainer/AddTeamMemberPage";
+import AddTeamMember from "components/Sections/TeamMembers/Add/";
 import CreateMessage from "components/Sections/TrainingSeries/CreateTSComponents/CreateMessage";
 import MessagePage from "components/Sections/TrainingSeries/CreateTSComponents/MessagePage";
-import AssignMemberPage from "components/Sections/TeamMembers/TeamMemberPageContainer/AssignMemberPage";
+import AssignMember from "components/Sections/TeamMembers/Assign";
 
 import AddMemberToTrainingSeries from "components/Sections/TrainingSeries/CreateTSComponents/AddMemberToTrainingSeries.js";
 
@@ -51,13 +51,13 @@ function Routes(props) {
       <Route
         path="/home/team-member/:id"
         render={renderProps => (
-          <TeamMemberPageView {...renderProps} user_id={props.user.id} />
+          <EditTeamMember {...renderProps} user_id={props.user.id} />
         )}
       />
       <Route
         path="/home/create-team-member/"
         render={renderProps => (
-          <AddTeamMemberPage {...renderProps} user_id={props.user.id} />
+          <AddTeamMember {...renderProps} user_id={props.user.id} />
         )}
       />
       <Route
@@ -79,7 +79,7 @@ function Routes(props) {
       <Route
         path="/home/assign-series/:id"
         render={renderProps => (
-          <AssignMemberPage {...renderProps} user_id={props.user.id} />
+          <AssignMember {...renderProps} user_id={props.user.id} />
         )}
       />
 

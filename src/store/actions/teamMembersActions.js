@@ -1,9 +1,7 @@
 import axios from "axios";
 import history from "../../history.js";
 
-import // getTextNotifications,
-// getEmailNotifications
-"./notificationsActions";
+import "./notificationsActions";
 
 export const FETCH_TEAM_START = "FETCH_TEAM_START";
 export const FETCH_TEAM_SUCCESS = "FETCH_TEAM_SUCCESS";
