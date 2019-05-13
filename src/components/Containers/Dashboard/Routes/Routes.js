@@ -8,7 +8,6 @@ import TrainingSeriesMessages from "components/Sections/TrainingSeries/DashTSCom
 import AddTeamMember from "components/Sections/TeamMembers/Add/";
 import CreateMessage from "components/Sections/TrainingSeries/CreateTSComponents/CreateMessage";
 import MessagePage from "components/Sections/TrainingSeries/CreateTSComponents/MessagePage";
-import AssignMember from "components/Sections/TeamMembers/Assign";
 
 import AddMemberToTrainingSeries from "components/Sections/TrainingSeries/CreateTSComponents/AddMemberToTrainingSeries.js";
 
@@ -75,12 +74,6 @@ function Routes(props) {
       <Route
         path="/home/create-message"
         render={renderProps => <CreateMessage {...renderProps} />}
-      />
-      <Route
-        path="/home/assign-series/:id"
-        render={renderProps => (
-          <AssignMember {...renderProps} user_id={props.user.id} />
-        )}
       />
 
       <Route
