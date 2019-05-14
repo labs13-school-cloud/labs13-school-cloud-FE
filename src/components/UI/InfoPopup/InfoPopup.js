@@ -8,6 +8,10 @@ export default function InfoPopup(props) {
   return (
     <div>
       <InfoIcon
+        style={{
+          top: props.top,
+          left: props.left
+        }}
         onMouseEnter={e => {
           setHoverIconActive(true);
         }}
