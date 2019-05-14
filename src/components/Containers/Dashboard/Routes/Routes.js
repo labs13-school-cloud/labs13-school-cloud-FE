@@ -37,6 +37,18 @@ function Routes(props) {
           />
         )}
       />
+      {/*
+        <Router history={history}>
+      <Route
+        exact
+        path="/home/contact"
+        render={renderProps => (
+          <ContactModal
+            {...renderProps}
+            history={props.history}
+            userId={props.user.id}
+          />
+          */}
       <Route
         exact
         path="/home"
