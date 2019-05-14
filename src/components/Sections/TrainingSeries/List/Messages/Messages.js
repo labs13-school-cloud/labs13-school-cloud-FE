@@ -42,7 +42,7 @@ function Messages(props) {
           <div>
             <p>
               {message.days_from_start} day
-              {message.days_from_start.length > 1 ? "s" : ""}
+              {message.days_from_start > 1 ? "s" : ""}
             </p>
           </div>
           <ListButtonContainer>

@@ -8,29 +8,32 @@ import { withStyles } from "@material-ui/core/styles";
 import { styles, TrainingSeriesTitle } from "../styles.js";
 
 function Title(props) {
-  const { isEditing, classes, getTrainingSeries: getTSFromProps } = props;
-
-  useEffect(() => {
-    getTSFromProps();
-  }, [getTSFromProps]);
+  const { classes, getTrainingSeries: getTSFromProps } = props;
 
   const trainingSeries =
     props.trainingSeries.find(
       ts => ts.id === parseInt(props.match.params.id, 10)
     ) || {};
-
   const [title, setTitle] = useState(trainingSeries.title);
   const [isEditingTitle, setIsEditingTitle] = useState(false);
 
+  useEffect(() => {
+    getTSFromProps();
+  }, [getTSFromProps]);
+
+  useEffect(() => {
+    setTitle(trainingSeries.title);
+  }, [trainingSeries, setTitle]);
+
   const updateTitle = e => {
     e.preventDefault();
-    props.editTrainingSeries(trainingSeries.id, { ...trainingSeries, title });
-    isEditingTitle(false);
+    props.editTrainingSeries(trainingSeries.id, { title });
+    setIsEditingTitle(false);
   };
 
   return (
     <>
-      {isEditing ? (
+      {isEditingTitle ? (
         <form onSubmit={e => updateTitle(e)} autoComplete="off">
           <TrainingSeriesTitle>
             <TextField
@@ -54,14 +57,11 @@ function Title(props) {
           </TrainingSeriesTitle>
         </form>
       ) : (
-        <TrainingSeriesTitle>
-          <Typography variant="headline">
-            {`${trainingSeries.title} \u00A0`}
-          </Typography>
+        <TrainingSeriesTitle onClick={() => setIsEditingTitle(!isEditingTitle)}>
+          <Typography variant="headline">{`${title} \u00A0`}</Typography>
           <i
             style={{ fontSize: 25 }}
             className={`material-icons ${classes.icons}`}
-            onClick={() => setIsEditingTitle(!isEditingTitle)}
           >
             edit
           </i>
