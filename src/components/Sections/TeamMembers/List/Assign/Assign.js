@@ -14,7 +14,7 @@ function Assign({ classes, teamMembers }) {
           .add(1, "hours")
           .format("MMMM Do, YYYY");
         return (
-          <ListStyles>
+          <ListStyles key={member.id}>
             <ListItem className={classes.listItem}>
               <ListItemText
                 primary={`Member: ${member.first_name} ${member.last_name}`}

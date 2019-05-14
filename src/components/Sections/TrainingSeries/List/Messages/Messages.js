@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 
 import { createAMessage, editMessage, getAllMessages } from "store/actions";
@@ -15,8 +15,19 @@ import {
 import { styles, ListItemContainer, ListButtonContainer } from "./styles.js";
 
 function Messages(props) {
-  const { messages, search, classes } = props;
-  const setFilter = { messages, search };
+  const {
+    ts_id,
+    messages,
+    search,
+    classes,
+    history,
+    getAllMessages: getMessagesFromProps
+  } = props;
+
+  useEffect(() => {
+    getMessagesFromProps();
+  }, [getMessagesFromProps]);
+  const setFilter = { messages, search, ts_id };
   const filtered = props.filter(setFilter);
   const formatted = filtered.map(message => (
     <ListItemContainer key={message.id}>
@@ -34,7 +45,7 @@ function Messages(props) {
           <ListButtonContainer>
             <i
               className={`material-icons ${classes.icons}`}
-              onClick={e => props.history.push(`/home/message/${message.id}`)}
+              onClick={e => history.push(`/home/message/${message.id}`)}
             >
               edit
             </i>

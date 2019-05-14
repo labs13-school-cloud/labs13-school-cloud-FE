@@ -19,7 +19,7 @@ function Edit(props) {
       <Paper className={classes.paper}>
         <Title history={props.history} match={props.match} />
         <Divider variant="fullWidth" className={classes.divider} />
-        <Messages List={MessagesList} />
+        <Messages List={MessagesList} ts_id={props.match.params.id} />
       </Paper>
       <AssignTeamMembers
         history={props.history}

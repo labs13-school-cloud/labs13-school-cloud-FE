@@ -6,13 +6,15 @@ const noSearch = [
   "days_from_start"
 ];
 
-export default ({ messages, search }) => {
+export default ({ ts_id, messages, search }) => {
   search = search.toLowerCase();
   return messages
+    .filter(message => message.training_series_id === parseInt(ts_id, 10))
     .filter(message => {
       for (let property in message) {
-        const willSearch = !noSearch.find(message[property]);
-        if (willSearch && message[property].toLowerCase().includes(search)) {
+        const key = message[property].toString().toLowerCase();
+        const willSearch = !noSearch.find(str => str === key);
+        if (willSearch && key.includes(search)) {
           return true;
         }
       }

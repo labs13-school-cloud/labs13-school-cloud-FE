@@ -26,14 +26,14 @@ function Assign(props) {
   }, [getTMsFromProps, getNotifFromProps, user_id]);
 
   // Filter unique team member IDs from notifications
+  // Add is_sent to filter to remove old messages?
   const tmIDs = new Set(
     props.notifications
-      .filter(n => n.training_series_id === parseInt(params.ts_id))
+      .filter(n => n.training_series_id === parseInt(params.id))
       .map(n => n.team_member_id)
   );
-
   const assignedMembers = props.teamMembers.filter(t => tmIDs.has(t.id));
-  console.log("ASSIGNED MEMBERS", assignedMembers);
+
   return (
     <Paper className={classes.paper}>
       <HeaderContainer>

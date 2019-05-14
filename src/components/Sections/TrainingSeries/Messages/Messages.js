@@ -69,6 +69,7 @@ function Messages(props) {
           search={search.toLowerCase()}
           history={props.history}
           setCount={setCount}
+          ts_id={props.ts_id}
         />
       </ListStyles>
     </>
