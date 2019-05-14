@@ -4,10 +4,10 @@ import { Route, Router } from "react-router-dom";
 import { createStore, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 
-import LandingPage from "components/Containers/LandingPage/LandingPage/";
-import Pricing from "components/Containers/LandingPage/Pricing";
-import Team from "components/Containers/LandingPage/Team";
-import LoadDashboard from "components/Containers/Dashboard/Loader/";
+import LandingPage from "components/Pages/LandingPage/LandingPage/";
+import Pricing from "components/Pages/LandingPage/Pricing";
+import Team from "components/Pages/LandingPage/Team";
+import LoadDashboard from "components/Pages/Dashboard/Loader/";
 
 import Callback from "components/Misc/Callback/Callback.js";
 import SlackCallback from "components/Misc/Callback/SlackCallback.js";

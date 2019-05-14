@@ -2,9 +2,6 @@ import {
   GET_MESSAGES_START,
   GET_MESSAGES_SUCCESS,
   GET_MESSAGES_FAIL,
-  GET_SINGLE_MESSAGE_START,
-  GET_SINGLE_MESSAGE_SUCCESS,
-  GET_SINGLE_MESSAGE_FAIL,
   ADD_MESSAGE_START,
   ADD_MESSAGE_SUCCESS,
   ADD_MESSAGE_FAIL,
@@ -13,16 +10,11 @@ import {
   EDIT_MESSAGE_FAIL,
   DELETE_MESSAGE_START,
   DELETE_MESSAGE_SUCCESS,
-  DELETE_MESSAGE_FAIL,
-  EDIT_TRAINING_SERIES_START,
-  EDIT_TRAINING_SERIES_SUCCESS,
-  EDIT_TRAINING_SERIES_FAIL
+  DELETE_MESSAGE_FAIL
 } from "../actions";
 
 const initialState = {
   messages: [],
-  newMessage: [],
-  singleTrainingSeries: {},
   isLoading: false,
   isAdding: false,
   isEditing: false,
@@ -37,43 +29,16 @@ const messagesReducer = (state = initialState, action) => {
   switch (action.type) {
     // ---GET ACTIVITIES---
     case GET_MESSAGES_START:
-      return {
-        ...state,
-        isLoading: true,
-        isAdding: false,
-        error: ""
-      };
+      return { ...state, isLoading: true, error: "" };
     case GET_MESSAGES_SUCCESS:
       return {
         ...state,
         isLoading: false,
-        messages: action.payload.messages, //validated
-        singleTrainingSeries: action.payload.trainingSeries // changed and validated
-      };
-    case GET_MESSAGES_FAIL:
-      return {
-        ...state,
-        isLoading: false,
-        error: action.error
-      };
-    case GET_SINGLE_MESSAGE_START:
-      return {
-        ...state,
-        isLoading: true,
+        messages: action.payload,
         error: ""
       };
-    case GET_SINGLE_MESSAGE_SUCCESS:
-      return {
-        ...state,
-        isLoading: false,
-        messages: action.payload //validated
-      };
-    case GET_SINGLE_MESSAGE_FAIL:
-      return {
-        ...state,
-        isLoading: false,
-        error: action.error
-      };
+    case GET_MESSAGES_FAIL:
+      return { ...state, isLoading: false, error: action.error };
     // ---POST ACTIVITIES---
     case ADD_MESSAGE_START:
       return {
@@ -86,7 +51,7 @@ const messagesReducer = (state = initialState, action) => {
         ...state,
         isAdding: false,
         addedSuccessfully: true,
-        singleMessage: action.payload
+        messages: [...state.messages, action.payload]
       };
     case ADD_MESSAGE_FAIL:
       return {
@@ -106,10 +71,7 @@ const messagesReducer = (state = initialState, action) => {
         if (msg.id === action.payload.id) {
           return {
             ...msg,
-            message_name: action.payload.message_name,
-            message_details: action.payload.message_details,
-            link: action.payload.link,
-            days_from_start: action.payload.days_from_start
+            ...action.payload
           };
         } else return msg;
       });
@@ -125,6 +87,7 @@ const messagesReducer = (state = initialState, action) => {
         isEditing: false,
         error: action.error
       };
+    // ---DELETE ACTIVITIES---
     case DELETE_MESSAGE_START:
       return {
         ...state,
@@ -146,24 +109,6 @@ const messagesReducer = (state = initialState, action) => {
         ...state,
         isDeleting: false,
         error: action.error
-      };
-    case EDIT_TRAINING_SERIES_START:
-      return {
-        ...state
-      };
-    case EDIT_TRAINING_SERIES_SUCCESS:
-      let updates = {
-        training_series_id: state.singleTrainingSeries.id,
-        title: action.payload.title,
-        user_id: state.singleTrainingSeries.user_id
-      };
-      return {
-        ...state,
-        singleTrainingSeries: updates
-      };
-    case EDIT_TRAINING_SERIES_FAIL:
-      return {
-        ...state
       };
     default:
       return state;
