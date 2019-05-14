@@ -1,6 +1,5 @@
 // contains all components for landing page
 import React from "react";
-import { Link } from "react-router-dom";
 import { scroller, animateScroll as scroll } from "react-scroll";
 import CssBaseline from "@material-ui/core/CssBaseline";
 
