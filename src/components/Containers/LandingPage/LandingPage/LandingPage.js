@@ -54,8 +54,8 @@ class LandingPage extends React.Component {
           <NavbarContainer>
             <img src={Logo} alt="A cute, personable robot" />
             <NavbarItemsContainer>
-              <NavbarItem to="/team">Team</NavbarItem>
-              <NavbarItem to="/pricing">Pricing</NavbarItem>
+              <NavbarItem href="/team">Team</NavbarItem>
+              <NavbarItem href="/pricing">Pricing</NavbarItem>
               <h2 onClick={login}>Sign In</h2>
             </NavbarItemsContainer>
           </NavbarContainer>
@@ -139,8 +139,8 @@ class LandingPage extends React.Component {
           </FirstSection>
           <FooterContainer>
             <FooterItemsContainer>
-              <Link to="/team">Team</Link>
-              <Link to="/pricing">Pricing</Link>
+              <a href="/team">Team</a>
+              <a href="/pricing">Pricing</a>
             </FooterItemsContainer>
             <ArrowUpward onClick={() => this.scrollToTop()} />
           </FooterContainer>

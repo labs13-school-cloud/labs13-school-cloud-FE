@@ -54,8 +54,8 @@ class Team extends React.Component {
               <img src={Logo} alt="A cute, personable robot" />
             </Link>
             <NavbarItemsContainer>
-              <NavbarItem to="/team">Team</NavbarItem>
-              <NavbarItem to="/pricing">Pricing</NavbarItem>
+              <NavbarItem href="/team">Team</NavbarItem>
+              <NavbarItem href="/pricing">Pricing</NavbarItem>
               <h2 onClick={login}>Sign In</h2>
             </NavbarItemsContainer>
           </NavbarContainer>
@@ -218,8 +218,8 @@ class Team extends React.Component {
           </ContactContainer>
           <FooterContainer>
             <FooterItemsContainer>
-              <Link to="/team">Team</Link>
-              <Link to="/pricing">Pricing</Link>
+              <a href="/team">Team</a>
+              <a href="/pricing">Pricing</a>
             </FooterItemsContainer>
             <ArrowUpward onClick={() => this.scrollToTop()} />
           </FooterContainer>
