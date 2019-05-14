@@ -63,7 +63,8 @@ function Responses(props) {
 
   useEffect(() => {
     //gets a list of ALLLL responses based on notifications
-    notifications.notifications.forEach(async notification => {
+    notifications.notifications.map(async notification => {
+      console.log("blah");
       // Promise.all?
       const url = `${process.env.REACT_APP_API}/api/notifications/${
         notification.id
@@ -76,7 +77,7 @@ function Responses(props) {
       ];
       setAllResponses(newResponses);
     });
-  }, [notifications, allResponses, setAllResponses]);
+  }, [notifications]); //including "allResponses" as the console suggests makes this run infinitely...
 
   const ReturnCorrectServiceLogo = service => {
     if (service === "slack") {
