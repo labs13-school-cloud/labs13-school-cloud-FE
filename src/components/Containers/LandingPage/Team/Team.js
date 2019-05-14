@@ -1,5 +1,4 @@
 import React from "react";
-
 import { ArrowUpward } from "@material-ui/icons";
 import { withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
@@ -67,18 +66,24 @@ class Team extends React.Component {
                 <Typography variant="title">Nick Cannariato</Typography>
                 <p>Full-Stack Developer</p>
                 <PortfolioLink
-                  target="blank"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   href="https://github.com/nickcannariato"
                 >
                   Portfolio Site
                 </PortfolioLink>
 
                 <TeamMemberLinks>
-                  <a target="blank" href="https://github.com/nickcannariato">
+                  <a
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href="https://github.com/nickcannariato"
+                  >
                     <FontAwesomeIcon className="fa-2x" icon={faGithubSquare} />
                   </a>
                   <a
-                    target="blank"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     href="https://www.linkedin.com/in/nickcannariato/"
                   >
                     <FontAwesomeIcon className="fa-2x" icon={faLinkedin} />
@@ -89,16 +94,25 @@ class Team extends React.Component {
                 <img src={Gannon} alt="Gannon Darcy" />
                 <Typography variant="title">Gannon Darcy</Typography>
                 <p>Full-Stack Developer</p>
-                <PortfolioLink target="blank" href="http://gannon.dev">
+                <PortfolioLink
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href="http://gannon.dev"
+                >
                   Portfolio Site
                 </PortfolioLink>
 
                 <TeamMemberLinks>
-                  <a target="blank" href="https://github.com/GannonDetroit">
+                  <a
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href="https://github.com/GannonDetroit"
+                  >
                     <FontAwesomeIcon className="fa-2x" icon={faGithubSquare} />
                   </a>
                   <a
-                    target="blank"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     href="https://www.linkedin.com/in/gannon-darcy-b8345073/"
                   >
                     <FontAwesomeIcon className="fa-2x" icon={faLinkedin} />
@@ -109,16 +123,25 @@ class Team extends React.Component {
                 <img src={AJ} alt="Andrew Brush" />
                 <Typography variant="title">Andrew Brush</Typography>
                 <p>Full-Stack Developer</p>
-                <PortfolioLink target="blank" href="http://ajbrush.com/">
+                <PortfolioLink
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href="http://ajbrush.com/"
+                >
                   Portfolio Site
                 </PortfolioLink>
 
                 <TeamMemberLinks>
-                  <a target="blank" href="https://github.com/ajb85">
+                  <a
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href="https://github.com/ajb85"
+                  >
                     <FontAwesomeIcon className="fa-2x" icon={faGithubSquare} />
                   </a>
                   <a
-                    target="blank"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     href="https://www.linkedin.com/in/andrew-brush-58205b122/"
                   >
                     <FontAwesomeIcon className="fa-2x" icon={faLinkedin} />
@@ -130,18 +153,24 @@ class Team extends React.Component {
                 <Typography variant="title">Thomas Hessburg</Typography>
                 <p>Full-Stack Developer</p>
                 <PortfolioLink
-                  target="blank"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   href="https://github.com/TomHessburg"
                 >
                   Portfolio Site
                 </PortfolioLink>
 
                 <TeamMemberLinks>
-                  <a target="blank" href="https://github.com/TomHessburg">
+                  <a
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href="https://github.com/TomHessburg"
+                  >
                     <FontAwesomeIcon className="fa-2x" icon={faGithubSquare} />
                   </a>
                   <a
-                    target="blank"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     href="https://www.linkedin.com/in/thomas-hessburg-596948180/"
                   >
                     <FontAwesomeIcon className="fa-2x" icon={faLinkedin} />
@@ -153,18 +182,23 @@ class Team extends React.Component {
                 <Typography variant="title">Adam McKenney</Typography>
                 <p>Full-Stack Developer</p>
                 <PortfolioLink
-                  target="blank"
+                  target="_blank"
                   href="https://github.com/DaftBeowulf"
                 >
                   Portfolio Site
                 </PortfolioLink>
 
                 <TeamMemberLinks>
-                  <a target="blank" href="https://github.com/DaftBeowulf">
+                  <a
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href="https://github.com/DaftBeowulf"
+                  >
                     <FontAwesomeIcon className="fa-2x" icon={faGithubSquare} />
                   </a>
                   <a
-                    target="blank"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     href="https://www.linkedin.com/in/adam-mckenney-04827a35/"
                   >
                     <FontAwesomeIcon className="fa-2x" icon={faLinkedin} />
