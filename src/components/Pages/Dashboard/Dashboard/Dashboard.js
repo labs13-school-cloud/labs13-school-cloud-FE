@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 
 import SearchCard from "components/UI/SearchCard/";
-import TeamMembersOverview from "components/Sections/TeamMembers/List/Overview";
-import TeamMembersTab from "components/Sections/TeamMembers/Tab";
-import TrainingSeriesOverview from "components/Sections/TrainingSeries/List/Overview";
-import TrainingSeriesTab from "components/Sections/TrainingSeries/Tabs/TrainingSeriesTab.js";
-import NotificationsCard from "components/Sections/Notifications/Card";
-import NotificationsOverview from "components/Sections/Notifications/Card/Overview/Overview.js";
-import Responses from "components/Sections/Notifications/Responses";
+import TeamMembersOverview from "components/Pages/TeamMembers/List/Overview";
+import TeamMembersTab from "components/Pages/TeamMembers/Tab";
+import TrainingSeriesOverview from "components/Pages/TrainingSeries/List/Overview";
+import TrainingSeriesTab from "components/Pages/TrainingSeries/Tabs/TrainingSeriesTab.js";
+import NotificationsCard from "components/Pages/Notifications/Card";
+import NotificationsOverview from "components/Pages/Notifications/Card/Overview/Overview.js";
+import Responses from "components/Pages/Notifications/Responses";
 import TabNavigation from "./helpers/TabNavigation.js";
 
 import { TripleColumn, SmallColumns, DashWrapper } from "./styles.js";

@@ -1,16 +1,16 @@
 import React from "react";
 import { Router, Route } from "react-router-dom";
 
-import Profile from "components/Containers/Profile";
-import EditTeamMember from "components/Sections/TeamMembers/Edit/";
-import CreateTrainingSeries from "components/Sections/TrainingSeries/Add/CreateTrainingSeries";
-import EditTrainingSeries from "components/Sections/TrainingSeries/Edit/";
-import AddTeamMember from "components/Sections/TeamMembers/Add/";
-import CreateMessage from "components/Sections/TrainingSeries/Add/CreateMessage";
-import MessagePage from "components/Sections/TrainingSeries/Add/MessagePage";
+import Profile from "components/Pages/Profile";
+import EditTeamMember from "components/Pages/TeamMembers/Edit/";
+import CreateTrainingSeries from "components/Pages/TrainingSeries/Add/CreateTrainingSeries";
+import EditTrainingSeries from "components/Pages/TrainingSeries/Edit/";
+import AddTeamMember from "components/Pages/TeamMembers/Add/";
+import CreateMessage from "components/Pages/TrainingSeries/Add/CreateMessage";
+import MessagePage from "components/Pages/TrainingSeries/Add/MessagePage";
 import HelpModal from "components/UI/HelpModal/HelpModal.js";
 
-import AddMemberToTrainingSeries from "components/Sections/TrainingSeries/Add/AddMemberToTrainingSeries.js";
+import AddMemberToTrainingSeries from "components/Pages/TrainingSeries/Add/AddMemberToTrainingSeries.js";
 
 import Dashboard from "../Dashboard";
 

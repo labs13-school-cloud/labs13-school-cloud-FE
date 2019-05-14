@@ -1,8 +1,8 @@
 import React from "react";
 
 import Title from "./helpers/Title.js";
-import AssignTeamMembers from "components/Sections/TeamMembers/Assign/";
-import AssignList from "components/Sections/TeamMembers/List/Assign/";
+import AssignTeamMembers from "components/Pages/TeamMembers/Assign/";
+import AssignList from "components/Pages/TeamMembers/List/Assign/";
 import Messages from "../Messages/";
 import MessagesList from "../List/Messages/";
 
