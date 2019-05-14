@@ -43,12 +43,15 @@ import {
   ListItemContainer,
   ListStyles,
   ListButtonContainer,
-  TrainingSeriesTitle
+  TrainingSeriesTitle,
+  InfoIcon,
+  PopOverModal
 } from "./TrainingSeriesMessagesStyles.js";
 
 class TrainingSeriesMessages extends React.Component {
   state = {
     active: false,
+    hoverIconActive: false,
     displaySnackbar: false,
     editingTitle: false,
     searchInput: "",
@@ -59,6 +62,7 @@ class TrainingSeriesMessages extends React.Component {
   };
 
   componentDidMount() {
+    console.log("hey look, i found it");
     this.props.getTrainingSeriesMessages(this.props.match.params.id);
     this.props.getTeamMembers(this.props.user_id);
 
@@ -68,9 +72,6 @@ class TrainingSeriesMessages extends React.Component {
       });
     }
     this.resetHistory();
-    setTimeout(() => {
-      console.log(this.props.messages);
-    }, 2000);
   }
 
   openSearch = e => {
@@ -181,6 +182,40 @@ class TrainingSeriesMessages extends React.Component {
     } else {
       titleEdit = (
         <TrainingSeriesTitle>
+          <InfoIcon
+            onMouseEnter={e => {
+              this.setState({
+                hoverIconActive: true
+              });
+            }}
+            onMouseLeave={e => {
+              this.setState({
+                hoverIconActive: false
+              });
+            }}
+          >
+            i
+          </InfoIcon>
+          <PopOverModal
+            style={
+              this.state.hoverIconActive
+                ? { display: "block" }
+                : { display: "none" }
+            }
+          >
+            You're currently on the "Training Series" page for "
+            {this.state.singleTrainingSeries.title}". You can start adding
+            messages by clicking on "Add Message". Your messages will be tied to
+            this series, and whenever you assign a team member to this training
+            series, they will recieve those messages based on the "days from
+            start" value you give each message.
+            <br />
+            <br />
+            Once you've created some messages, feel free to assign a team member
+            to this series. Set the date in which youd like for the team member
+            to start recieving the materials, and they will recieve scheduled
+            notifications based on the messages that you've scheduled for them.
+          </PopOverModal>
           <Typography variant="headline">
             {`${this.state.singleTrainingSeries.title} \u00A0`}
           </Typography>
@@ -302,7 +337,7 @@ class TrainingSeriesMessages extends React.Component {
     );
     return (
       <>
-        <PageContainer>
+        <PageContainer style={{ position: "relative" }}>
           {/* <Paper className={classes.paperTitle}>{titleEdit}</Paper> */}
           <Paper className={classes.paper}>
             <>{titleEdit}</>
@@ -345,7 +380,14 @@ class TrainingSeriesMessages extends React.Component {
             )}
             {this.props.messages.length === 0 ? (
               <HolderText>
-                <p>You do not have any messages.</p>
+                <p>
+                  This training series currently does not have any messages in
+                  it.
+                </p>
+                <p>
+                  Add some messages, then assign some team members to recieve
+                  this content.
+                </p>
               </HolderText>
             ) : (
               <ListStyles className={classes.listStyle}>
