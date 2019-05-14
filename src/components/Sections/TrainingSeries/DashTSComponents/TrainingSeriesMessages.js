@@ -345,7 +345,14 @@ class TrainingSeriesMessages extends React.Component {
             )}
             {this.props.messages.length === 0 ? (
               <HolderText>
-                <p>You do not have any messages.</p>
+                <p>
+                  This training series currently does not have any messages in
+                  it.
+                </p>
+                <p>
+                  Add some messages, then assign some team members to recieve
+                  this content.
+                </p>
               </HolderText>
             ) : (
               <ListStyles className={classes.listStyle}>
