@@ -46,12 +46,12 @@ class DashboardTour extends Component {
       {
         selector: '[data-tour="4"]',
         content:
-          "This is your Training Series. Your training series will be where the content getting sent to your team members will be stored."
+          "This is your Training Series. A training series is like a little house for the content youd like to send. Give it a name and some messages, then assign team members to recieve those messages"
       },
       {
         selector: '[data-tour="5"]',
         content:
-          "This is your notification window. Once you've assigned members to your training series, you will see all outgoing messages here."
+          "This is your notification window. Once you've assigned team members to your training series, you will see all outgoing messages here."
       },
       {
         selector: '[data-tour="6"]',
@@ -62,9 +62,10 @@ class DashboardTour extends Component {
         content: (
           <Container>
             <p>
-              We're super glad to have you as a part of Training Bot. Please{" "}
-              <Link to="/team">contact us</Link> if you have any questions or
-              concerns.
+              We're super glad to have you as a part of Training Bot. Take a
+              poke around, and please don't hesitate to
+              <Link to="/team"> contact us</Link> if you have any questions or
+              concerns!
             </p>
             <ImageContainer>
               <Progress />
