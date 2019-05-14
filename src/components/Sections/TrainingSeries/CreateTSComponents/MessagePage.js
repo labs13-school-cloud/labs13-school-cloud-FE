@@ -11,13 +11,7 @@ import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 
-import {
-  getTrainingSeriesMessages,
-  createAMessage,
-  editMessage,
-  deleteMessage,
-  getMessageById
-} from "store/actions";
+import { createAMessage, editMessage, deleteMessage } from "store/actions";
 
 import {
   MainContainer,
@@ -177,10 +171,8 @@ const mapStateToProps = state => {
 export default connect(
   mapStateToProps,
   {
-    getTrainingSeriesMessages,
     createAMessage,
     editMessage,
-    deleteMessage,
-    getMessageById
+    deleteMessage
   }
 )(withStyles(styles)(withRouter(MessagePage)));

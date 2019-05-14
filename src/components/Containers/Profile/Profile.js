@@ -220,8 +220,7 @@ class Profile extends React.Component {
 const mapStateToProps = state => {
   return {
     userProfile: state.userReducer.userProfile,
-    doneLoading: state.userReducer.doneLoading,
-    isEditing: state.userReducer.isEditing
+    doneLoading: state.userReducer.doneLoading
   };
 };
 

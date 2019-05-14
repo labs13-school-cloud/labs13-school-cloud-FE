@@ -3,10 +3,10 @@ import React, { useState } from "react";
 import SearchCard from "components/UI/SearchCard/";
 import TeamMembersOverview from "components/Sections/TeamMembers/List/Overview";
 import TeamMembersTab from "components/Sections/TeamMembers/Tab";
-import TrainingSeriesView from "components/Sections/TrainingSeries/DashTSComponents/TrainingSeriesView";
+import TrainingSeriesOverview from "components/Sections/TrainingSeries/List/Overview";
 import TrainingSeriesTab from "components/Sections/TrainingSeries/TabTSComponents/TrainingSeriesTab.js";
 import NotificationsCard from "components/Sections/Notifications/Card";
-import NotificationsOverview from "components/Sections/Notifications/Card/Overview";
+import NotificationsOverview from "components/Sections/Notifications/Card/Overview/Overview.js";
 import Responses from "components/Sections/Notifications/Responses";
 
 import BottomNavigation from "@material-ui/core/BottomNavigation";
@@ -75,10 +75,14 @@ function Dashboard(props) {
               headerTourNum={["2", "3"]}
               handleAdd={() => props.history.push("/home/create-team-member")}
             />
-            <TrainingSeriesView
-              disableSnackbar={props.disableSnackbar}
+            <SearchCard
               user_id={user_id}
-              match={props.match}
+              Child={TrainingSeriesOverview}
+              containerTourNum="4"
+              section="Training Series"
+              handleAdd={() =>
+                props.history.push("/home/create-training-series")
+              }
             />
           </SmallColumns>
           <NotificationsCard

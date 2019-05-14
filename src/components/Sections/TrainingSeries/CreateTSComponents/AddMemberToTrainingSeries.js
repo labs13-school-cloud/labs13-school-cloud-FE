@@ -9,7 +9,6 @@ import TextField from "@material-ui/core/TextField";
 
 import SingleMemberCheck from "./singleMemberCheck.js";
 import {
-  getTrainingSeriesMessages,
   getTeamMembers,
   getTrainingSeries,
   addNotification
@@ -20,13 +19,7 @@ function AddMemberToTrainingSeries(props) {
   const [startDate, setStartDate] = useState(moment().format("YYYY-MM-DD"));
 
   // Abstracting to remove useEffect dependency warnings
-  const {
-    getTrainingSeriesMessages,
-    getTeamMembers,
-    getTrainingSeries,
-    match,
-    user_id
-  } = props;
+  const { getTeamMembers, getTrainingSeries, match, user_id } = props;
   const {
     params: { id }
   } = match;
@@ -44,16 +37,9 @@ function AddMemberToTrainingSeries(props) {
   };
 
   useEffect(() => {
-    getTrainingSeriesMessages(id);
     getTeamMembers(user_id);
     getTrainingSeries(id);
-  }, [
-    getTrainingSeriesMessages,
-    getTeamMembers,
-    getTrainingSeries,
-    user_id,
-    id
-  ]);
+  }, [getTeamMembers, getTrainingSeries, user_id, id]);
 
   return (
     <Wrapper>
@@ -142,7 +128,6 @@ const mapStateToProps = state => {
 export default connect(
   mapStateToProps,
   {
-    getTrainingSeriesMessages,
     getTeamMembers,
     getTrainingSeries,
     addNotification

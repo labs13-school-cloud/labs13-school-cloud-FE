@@ -17,13 +17,7 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Checkbox from "@material-ui/core/Checkbox";
 
 // Redux
-import {
-  getTrainingSeriesMessages,
-  createAMessage,
-  editMessage,
-  deleteMessage,
-  getMessageById
-} from "store/actions";
+import { createAMessage, editMessage, deleteMessage } from "store/actions";
 
 import {
   styles,
@@ -222,10 +216,8 @@ const mapStateToProps = state => {
 export default connect(
   mapStateToProps,
   {
-    getTrainingSeriesMessages,
     createAMessage,
     editMessage,
-    deleteMessage,
-    getMessageById
+    deleteMessage
   }
 )(withStyles(styles)(CreateMessage));

@@ -88,21 +88,21 @@ export const deleteTrainingSeries = trainingSeriesID => dispatch => {
     .catch(err => dispatch({ type: DELETE_TRAINING_SERIES_FAIL, error: err }));
 };
 
-export const getTrainingSeriesMessages = training_series_id => dispatch => {
-  dispatch({ type: GET_TRAINING_SERIES_MESSAGES_START });
-  axios
-    .get(
-      `${
-        process.env.REACT_APP_API
-      }/api/training-series/${training_series_id}/messages`
-    )
-    .then(res => {
-      dispatch({
-        type: GET_TRAINING_SERIES_MESSAGES_SUCCESS,
-        payload: res.data.messages
-      });
-    })
-    .catch(err => {
-      dispatch({ type: GET_TRAINING_SERIES_MESSAGES_FAIL, error: err });
-    });
-};
+// export const getTrainingSeriesMessages = training_series_id => dispatch => {
+//   dispatch({ type: GET_TRAINING_SERIES_MESSAGES_START });
+//   axios
+//     .get(
+//       `${
+//         process.env.REACT_APP_API
+//       }/api/training-series/${training_series_id}/messages`
+//     )
+//     .then(res => {
+//       dispatch({
+//         type: GET_TRAINING_SERIES_MESSAGES_SUCCESS,
+//         payload: res.data.messages
+//       });
+//     })
+//     .catch(err => {
+//       dispatch({ type: GET_TRAINING_SERIES_MESSAGES_FAIL, error: err });
+//     });
+// };

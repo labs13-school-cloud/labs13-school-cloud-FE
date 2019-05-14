@@ -11,7 +11,6 @@ import TrainingSeriesAssignment from "./TrainingSeriesAssignment";
 // Redux
 import { connect } from "react-redux";
 import {
-  getTrainingSeriesMessages,
   getTeamMembers,
   createAMessage,
   editMessage,
@@ -59,7 +58,7 @@ class TrainingSeriesMessages extends React.Component {
   };
 
   componentDidMount() {
-    this.props.getTrainingSeriesMessages(this.props.match.params.id);
+    //this.props.getTrainingSeriesMessages(this.props.match.params.id);
     this.props.getTeamMembers(this.props.user_id);
 
     if (this.props.location.state) {
@@ -409,7 +408,6 @@ TrainingSeriesMessages.propTypes = {};
 export default connect(
   mapStateToProps,
   {
-    getTrainingSeriesMessages,
     getTeamMembers,
     createAMessage,
     editMessage,
