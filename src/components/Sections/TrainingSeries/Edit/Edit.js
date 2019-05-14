@@ -19,13 +19,18 @@ function Edit(props) {
       <Paper className={classes.paper}>
         <Title history={props.history} match={props.match} />
         <Divider variant="fullWidth" className={classes.divider} />
-        <Messages List={MessagesList} ts_id={props.match.params.id} />
+        <Messages
+          List={MessagesList}
+          ts_id={props.match.params.id}
+          history={props.history}
+        />
       </Paper>
       <AssignTeamMembers
         history={props.history}
         match={props.match}
         user_id={props.user_id}
         List={AssignList}
+        ts_id={props.match.params.id}
       />
     </PageContainer>
   );

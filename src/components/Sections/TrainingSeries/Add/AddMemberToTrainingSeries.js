@@ -11,7 +11,8 @@ import SingleMemberCheck from "./singleMemberCheck.js";
 import {
   getTeamMembers,
   getTrainingSeries,
-  addNotification
+  addNotification,
+  getAllMessages
 } from "store/actions";
 
 function AddMemberToTrainingSeries(props) {
@@ -19,7 +20,13 @@ function AddMemberToTrainingSeries(props) {
   const [startDate, setStartDate] = useState(moment().format("YYYY-MM-DD"));
 
   // Abstracting to remove useEffect dependency warnings
-  const { getTeamMembers, getTrainingSeries, match, user_id } = props;
+  const {
+    getTeamMembers: getMembersFromProps,
+    getTrainingSeries: getTSFromProps,
+    getAllMessages: getMessagesFromProps,
+    match,
+    user_id
+  } = props;
   const {
     params: { id }
   } = match;
@@ -37,9 +44,39 @@ function AddMemberToTrainingSeries(props) {
   };
 
   useEffect(() => {
-    getTeamMembers(user_id);
-    getTrainingSeries(id);
-  }, [getTeamMembers, getTrainingSeries, user_id, id]);
+    getMembersFromProps(user_id);
+    getTSFromProps(id);
+    getMessagesFromProps();
+  }, [getMembersFromProps, getTSFromProps, getMessagesFromProps, user_id, id]);
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    console.log(activeMembers, props.messages);
+    activeMembers.forEach(memberID => {
+      props.messages.forEach(msg => {
+        //find member who has memberID and check what services they have avaible to thgem
+        const memberServices = props.teamMembers.filter(
+          mem => mem.id === memberID
+        );
+        const newNotification = {
+          team_member_id: memberID,
+          service_id: memberServices[0].phone_number
+            ? 1
+            : memberServices[0].email
+            ? 2
+            : 3,
+          message_id: msg.id,
+          num_attempts: 0,
+          is_sent: false,
+          send_date: moment(startDate)
+            .add(msg.days_from_start, "days")
+            .toISOString()
+        };
+        props.addNotification(newNotification);
+      });
+    });
+    props.history.push(`/home/training-series/${props.match.params.id}`);
+  };
 
   return (
     <Wrapper>
@@ -83,33 +120,7 @@ function AddMemberToTrainingSeries(props) {
         variant="contained"
         color="primary"
         type="submit"
-        onClick={e => {
-          e.preventDefault();
-          activeMembers.forEach(memberID => {
-            props.messages.forEach(msg => {
-              //find member who has memberID and check what services they have avaible to thgem
-              const memberServices = props.teamMembers.filter(
-                mem => mem.id === memberID
-              );
-              const newNotification = {
-                team_member_id: memberID,
-                service_id: memberServices[0].phone_number
-                  ? 1
-                  : memberServices[0].email
-                  ? 2
-                  : 3,
-                message_id: msg.id,
-                num_attempts: 0,
-                is_sent: false,
-                send_date: moment(startDate)
-                  .add(msg.days_from_start, "days")
-                  .toISOString()
-              };
-              props.addNotification(newNotification);
-            });
-          });
-          props.history.push(`/home/training-series/${props.match.params.id}`);
-        }}
+        onClick={e => handleSubmit(e)}
       >
         submit
       </Button>
@@ -119,7 +130,7 @@ function AddMemberToTrainingSeries(props) {
 
 const mapStateToProps = state => {
   return {
-    messages: state.trainingSeriesReducer.messages,
+    messages: state.messagesReducer.messages,
     teamMembers: state.teamMembersReducer.teamMembers,
     trainingSeries: state.trainingSeriesReducer.trainingSeries
   };
@@ -130,7 +141,8 @@ export default connect(
   {
     getTeamMembers,
     getTrainingSeries,
-    addNotification
+    addNotification,
+    getAllMessages
   }
 )(AddMemberToTrainingSeries);
 

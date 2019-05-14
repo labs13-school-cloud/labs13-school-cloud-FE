@@ -62,8 +62,10 @@ export const editMessage = (id, updates) => dispatch => {
 // DELETE a message
 export const deleteMessage = id => dispatch => {
   dispatch({ type: DELETE_MESSAGE_START });
+  const url = `${process.env.REACT_APP_API}/api/messages/${id}`;
+  console.log(url);
   axios
-    .delete(`${process.env.REACT_APP_API}/api/messages/${id}`) //endpint validated
-    .then(res => dispatch({ type: DELETE_MESSAGE_SUCCESS, payload: id })) //100000%
+    .delete(url) //endpint validated
+    .then(() => dispatch({ type: DELETE_MESSAGE_SUCCESS, payload: id })) //100000%
     .catch(err => dispatch({ type: DELETE_MESSAGE_FAIL, error: err }));
 };

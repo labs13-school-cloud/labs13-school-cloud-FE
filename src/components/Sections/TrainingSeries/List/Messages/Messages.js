@@ -40,7 +40,10 @@ function Messages(props) {
         />
         <ListItemSecondaryAction className={classes.secondaryAction}>
           <div>
-            <p>{message.days_from_start} days</p>
+            <p>
+              {message.days_from_start} day
+              {message.days_from_start.length > 1 ? "s" : ""}
+            </p>
           </div>
           <ListButtonContainer>
             <i

@@ -32,9 +32,11 @@ export const getNotifications = () => dispatch => {
 // ADD notification
 export const addNotification = notification => dispatch => {
   dispatch({ type: ADD_NOTIFICATION_START });
+  console.log("Adding: ", notification);
   axios
     .post(`${process.env.REACT_APP_API}/api/notifications/`, notification)
     .then(res => {
+      console.log("Added", res.data);
       dispatch({
         type: ADD_NOTIFICATION_SUCCESS,
         payload: res.data.newNotification

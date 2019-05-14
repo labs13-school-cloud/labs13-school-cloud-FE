@@ -11,7 +11,12 @@ import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 
-import { createAMessage, editMessage, deleteMessage } from "store/actions";
+import {
+  createAMessage,
+  editMessage,
+  deleteMessage,
+  getAllMessages
+} from "store/actions";
 
 import {
   MainContainer,
@@ -25,8 +30,8 @@ class MessagePage extends React.Component {
     open: false,
     isUpdating: false,
     message: {
-      message_name: "",
-      message_details: "",
+      subject: "",
+      body: "",
       link: "",
       days_from_start: "",
       training_series_id: "",
@@ -35,23 +40,17 @@ class MessagePage extends React.Component {
   };
 
   componentDidMount() {
-    if (this.props.location.state.message) {
-      //changed back to to message to fix bug... can change in be later
-      this.setState({
-        ...this.state,
-        message: this.props.location.state.message //changed back to to message to fix bug... can change in be later
-      });
-    }
+    this.props.getAllMessages();
   }
 
-  //   componentDidUpdate(prevProps) {
-  //     if (prevProps.addSuccess !== this.props.addSuccess) {
-  //       setTimeout(() => {
-  //         const { teamMemberID } = this.props.teamMember && this.props.teamMember;
-  //         this.props.history.push(`/home/team-member/${teamMemberID}`);
-  //       }, 400);
-  //     }
-  //   }
+  componentDidUpdate(prevProps) {
+    if (prevProps.messages !== this.props.messages) {
+      const message = this.props.messages.find(
+        m => m.id === parseInt(this.props.match.params.id, 10)
+      );
+      this.setState({ message });
+    }
+  }
 
   handleChange = name => e => {
     this.setState({
@@ -66,7 +65,12 @@ class MessagePage extends React.Component {
   handleMessageSubmit = e => {
     e.preventDefault();
 
-    this.props.editMessage(this.state.message.id, this.state.message);
+    const message = { ...this.state.message };
+    delete message.id;
+    delete message.series;
+    console.log(message);
+
+    this.props.editMessage(this.state.message.id, message);
 
     setTimeout(() => {
       this.props.history.push(
@@ -95,8 +99,8 @@ class MessagePage extends React.Component {
                 id="standard-name"
                 label="Message Title"
                 className={classes.textField}
-                value={this.state.message.message_name}
-                onChange={this.handleChange("message_name")}
+                value={this.state.message.subject}
+                onChange={this.handleChange("subject")}
                 margin="normal"
                 required
               />
@@ -104,8 +108,8 @@ class MessagePage extends React.Component {
                 id="standard-name"
                 label="Message Content"
                 className={classes.textField}
-                value={this.state.message.message_details}
-                onChange={this.handleChange("message_details")}
+                value={this.state.message.body}
+                onChange={this.handleChange("body")}
                 margin="normal"
                 required
               />
@@ -161,18 +165,17 @@ class MessagePage extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    addSuccess: state.teamMembersReducer.status.addSuccess,
-    teamMember: state.teamMembersReducer.teamMember
-  };
-};
+const mapStateToProps = state => ({
+  teamMember: state.teamMembersReducer.teamMember,
+  messages: state.messagesReducer.messages
+});
 
 export default connect(
   mapStateToProps,
   {
     createAMessage,
     editMessage,
-    deleteMessage
+    deleteMessage,
+    getAllMessages
   }
 )(withStyles(styles)(withRouter(MessagePage)));

@@ -18,7 +18,7 @@ function Messages(props) {
   const [isSearching, setIsSearching] = useState(false);
   const [count, setCount] = useState(0);
 
-  const { classes, List } = props;
+  const { classes, List, ts_id: training_series_id } = props;
 
   return (
     <>
@@ -28,8 +28,14 @@ function Messages(props) {
           <Button
             className={classes.button}
             variant="outlined"
-            onClick={e => props.history.push("/home/create-message")}
+            onClick={e =>
+              props.history.push({
+                pathname: "/home/create-message",
+                state: { training_series_id }
+              })
+            }
           >
+            {/* ^^^^^^^Long term, the id should just be in the URL so it doesn't break on refresh */}
             New Message
           </Button>
           <Button
@@ -52,7 +58,7 @@ function Messages(props) {
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
-                <i class="material-icons">search</i>
+                <i className="material-icons">search</i>
               </InputAdornment>
             )
           }}

@@ -42,7 +42,6 @@ class CreateMessage extends React.Component {
   };
 
   componentDidMount() {
-    console.log("inside CM: ", this.props);
     if (this.props.location.state.training_series_id) {
       this.setState({
         ...this.state,
@@ -51,6 +50,7 @@ class CreateMessage extends React.Component {
           training_series_id: this.props.location.state.training_series_id
         }
       });
+      delete this.props.location.state;
     }
   }
 
