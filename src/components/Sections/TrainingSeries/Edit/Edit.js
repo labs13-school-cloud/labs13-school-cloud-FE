@@ -17,12 +17,13 @@ function Edit(props) {
   return (
     <PageContainer>
       <Paper className={classes.paper}>
-        <Title history={props.history} />
+        <Title history={props.history} match={props.match} />
         <Divider variant="fullWidth" className={classes.divider} />
         <Messages List={MessagesList} />
       </Paper>
       <AssignTeamMembers
         history={props.history}
+        match={props.match}
         user_id={props.user_id}
         List={AssignList}
       />

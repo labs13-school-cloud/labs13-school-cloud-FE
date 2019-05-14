@@ -3,14 +3,14 @@ import { Router, Route } from "react-router-dom";
 
 import Profile from "components/Containers/Profile";
 import EditTeamMember from "components/Sections/TeamMembers/Edit/";
-import CreateTrainingSeries from "components/Sections/TrainingSeries/CreateTSComponents/CreateTrainingSeries";
-import TrainingSeriesMessages from "components/Sections/TrainingSeries/DashTSComponents/TrainingSeriesMessages";
+import CreateTrainingSeries from "components/Sections/TrainingSeries/Add/CreateTrainingSeries";
+import EditTrainingSeries from "components/Sections/TrainingSeries/Edit/";
 import AddTeamMember from "components/Sections/TeamMembers/Add/";
-import CreateMessage from "components/Sections/TrainingSeries/CreateTSComponents/CreateMessage";
-import MessagePage from "components/Sections/TrainingSeries/CreateTSComponents/MessagePage";
+import CreateMessage from "components/Sections/TrainingSeries/Add/CreateMessage";
+import MessagePage from "components/Sections/TrainingSeries/Add/MessagePage";
 import HelpModal from "components/UI/HelpModal/HelpModal.js";
 
-import AddMemberToTrainingSeries from "components/Sections/TrainingSeries/CreateTSComponents/AddMemberToTrainingSeries.js";
+import AddMemberToTrainingSeries from "components/Sections/TrainingSeries/Add/AddMemberToTrainingSeries.js";
 
 import Dashboard from "../Dashboard";
 
@@ -80,7 +80,7 @@ function Routes(props) {
       <Route
         path="/home/training-series/:id"
         render={renderProps => (
-          <TrainingSeriesMessages {...renderProps} user_id={props.user.id} />
+          <EditTrainingSeries {...renderProps} user_id={props.user.id} />
         )}
       />
       <Route

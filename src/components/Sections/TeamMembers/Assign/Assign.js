@@ -34,7 +34,6 @@ function Assign(props) {
 
   const assignedMembers = props.teamMembers.filter(t => tmIDs.has(t.id));
   console.log("ASSIGNED MEMBERS", assignedMembers);
-
   return (
     <Paper className={classes.paper}>
       <HeaderContainer>
@@ -51,7 +50,7 @@ function Assign(props) {
         </Button>
       </HeaderContainer>
       <List teamMembers={assignedMembers} />
-      {props.TeamMembers.length && !assignedMembers.length && (
+      {props.teamMembers.length && !assignedMembers.length && (
         <>
           <Typography variant="subheading" className={classes.messageTextTop}>
             This training series currently does not have any team members

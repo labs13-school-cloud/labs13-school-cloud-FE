@@ -1,19 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 
-import { editTrainingSeries } from "store/actions";
+import { editTrainingSeries, getTrainingSeries } from "store/actions";
 
 import { Typography, TextField, Button } from "@material-ui/core/";
 import { withStyles } from "@material-ui/core/styles";
 import { styles, TrainingSeriesTitle } from "../styles.js";
 
 function Title(props) {
-  const { isEditing, classes } = props;
+  const { isEditing, classes, getTrainingSeries: getTSFromProps } = props;
+
+  useEffect(() => {
+    getTSFromProps();
+  }, [getTSFromProps]);
+
+  const trainingSeries =
+    props.trainingSeries.find(
+      ts => ts.id === parseInt(props.match.params.id, 10)
+    ) || {};
+
   const [title, setTitle] = useState(trainingSeries.title);
   const [isEditingTitle, setIsEditingTitle] = useState(false);
-  const trainingSeries = props.trainingSeries.find(
-    ts => ts.id === props.match.params.id
-  );
 
   const updateTitle = e => {
     e.preventDefault();
@@ -49,7 +56,7 @@ function Title(props) {
       ) : (
         <TrainingSeriesTitle>
           <Typography variant="headline">
-            {`${this.state.singleTrainingSeries.title} \u00A0`}
+            {`${trainingSeries.title} \u00A0`}
           </Typography>
           <i
             style={{ fontSize: 25 }}
@@ -64,7 +71,11 @@ function Title(props) {
   );
 }
 
+const mapStateToProps = state => ({
+  trainingSeries: state.trainingSeriesReducer.trainingSeries
+});
+
 export default connect(
-  null,
-  { editTrainingSeries }
+  mapStateToProps,
+  { editTrainingSeries, getTrainingSeries }
 )(withStyles(styles)(Title));

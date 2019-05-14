@@ -1,2 +1,2 @@
 import Messages from "./Messages.js";
-export default Messeages;
+export default Messages;

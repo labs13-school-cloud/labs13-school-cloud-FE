@@ -48,3 +48,9 @@ export const PageContainer = styled.div`
   width: 100%;
   margin: 0 auto;
 `;
+
+export const TrainingSeriesTitle = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+`;
