@@ -69,7 +69,7 @@ function Dashboard(props) {
           <SmallColumns>
             <SearchCard
               user_id={user_id}
-              Child={TeamMembersOverview}
+              List={TeamMembersOverview}
               containerTourNum="1"
               section="Team Members"
               headerTourNum={["2", "3"]}
@@ -77,7 +77,7 @@ function Dashboard(props) {
             />
             <SearchCard
               user_id={user_id}
-              Child={TrainingSeriesOverview}
+              List={TrainingSeriesOverview}
               containerTourNum="4"
               section="Training Series"
               handleAdd={() =>

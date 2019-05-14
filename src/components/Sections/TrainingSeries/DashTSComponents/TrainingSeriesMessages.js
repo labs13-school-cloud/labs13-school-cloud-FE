@@ -60,16 +60,14 @@ class TrainingSeriesMessages extends React.Component {
   componentDidMount() {
     //this.props.getTrainingSeriesMessages(this.props.match.params.id);
     this.props.getTeamMembers(this.props.user_id);
-
+    console.log(this.props);
     if (this.props.location.state) {
       this.setState({
         displaySnackbar: this.props.location.state.success
       });
     }
     this.resetHistory();
-    setTimeout(() => {
-      console.log(this.props.messages);
-    }, 2000);
+    setTimeout(() => {}, 2000);
   }
 
   openSearch = e => {
@@ -150,7 +148,7 @@ class TrainingSeriesMessages extends React.Component {
 
   render() {
     const { classes } = this.props;
-
+    console.log(this.props);
     let titleEdit;
     if (this.state.editingTitle) {
       titleEdit = (
@@ -200,6 +198,7 @@ class TrainingSeriesMessages extends React.Component {
     const filteredNotifs = this.props.notifications.filter(
       n => n.training_series_id === parseInt(this.props.match.params.id)
     );
+    console.log(filteredNotifs);
 
     //push each unique team member id from remaining notifications, length of this is # of assigned members
     let assignedMemberIds = [];

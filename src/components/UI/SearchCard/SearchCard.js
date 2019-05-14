@@ -21,7 +21,7 @@ function SearchCard(props) {
   const {
     user_id,
     classes,
-    Child,
+    List,
     containerTourNum,
     headerTourNum,
     section,
@@ -40,9 +40,9 @@ function SearchCard(props) {
         add={() => handleAdd()}
       />
       <Suspense fallback={<span />}>
-        <Child
+        <List
           pagination={pagination}
-          search={search[0]}
+          search={search[0].toLowerCase()}
           user_id={user_id}
           filter={filter}
           history={history}

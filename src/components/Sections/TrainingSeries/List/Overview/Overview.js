@@ -41,8 +41,8 @@ function Overview({
     });
     const userCount = new Set(
       notifications
-        .filter(notif => notif.training_series_id === id)
-        .map(notif => notif.team_member_id)
+        .filter(n => n.training_series_id === id)
+        .map(n => n.team_member_id)
     ).size;
 
     return (
@@ -52,7 +52,6 @@ function Overview({
           secondary={`Messages: ${tsMessages.length} | Assigned: ${userCount}`}
           onClick={e => history.push(`/home/training-series/${id}`)}
         />
-
         <SlideDownModal
           deleteTrainingSeries={deleteTSFromProps}
           data={{ title, id, user: email }}
