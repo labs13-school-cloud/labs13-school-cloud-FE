@@ -10,6 +10,8 @@ import SelectSlackID from "./helpers/SelectSlackID.js";
 import AddButtons from "./helpers/AddButtons.js";
 import EditButtons from "./helpers/EditButtons.js";
 
+import InfoPopup from "components/UI/InfoPopup/InfoPopup.js";
+
 import { withStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
@@ -72,7 +74,19 @@ function Add(props) {
 
   const { classes } = props;
   return (
-    <MainContainer>
+    <MainContainer style={{ position: "relative" }}>
+      <InfoPopup
+        popOverText={
+          <p>
+            On this page you can add a new Team Member! If you've already got
+            some Team Members, you can assign them as a mentor or a manager.
+            Whenever a team member is assigned to a training series, you can
+            choose to send their mentor or managers notifications as well. If
+            you've set up Slack in your preferences, you can choose to assign
+            this team member to their slack account.
+          </p>
+        }
+      />
       <form className={classes.form} onSubmit={e => addNewTeamMember(e)}>
         <Paper className={classes.paper}>
           <Typography variant="title">
