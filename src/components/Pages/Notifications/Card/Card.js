@@ -71,6 +71,7 @@ function Card(props) {
           limit={limit}
           countNotifications={setNotificationsCount}
           member_id={props.member_id}
+          history={props.history}
         />
         {!notificationsCount && (
           <MessageContainer>

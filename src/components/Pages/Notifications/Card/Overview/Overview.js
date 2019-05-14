@@ -19,7 +19,8 @@ function Overview(props) {
     countNotifications,
     getNotifications: getNotificationsFromProps,
     notifications,
-    classes
+    classes,
+    history
   } = props;
 
   useEffect(() => {
@@ -33,6 +34,10 @@ function Overview(props) {
     filters
   };
 
+  const routeToMember = id => {
+    history.push(`/home/team-member/${id}`);
+  };
+
   const formatted = filter(setFilters).map(
     ({
       id,
@@ -43,13 +48,18 @@ function Overview(props) {
       name,
       email,
       phone_number,
-      series
+      series,
+      team_member_id
     }) => {
       const formattedSendDate = moment(send_date)
         .add(1, "hours")
         .format("MMMM Do");
       return (
-        <ListItem key={id} className={classes.listItem}>
+        <ListItem
+          key={id}
+          className={classes.listItem}
+          onClick={() => routeToMember(team_member_id)}
+        >
           <ListItemText
             primary={`${subject} | ${series}`}
             secondary={`${first_name} ${last_name} | ${

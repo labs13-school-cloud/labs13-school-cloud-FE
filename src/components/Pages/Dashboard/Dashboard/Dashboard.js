@@ -41,6 +41,7 @@ function Dashboard(props) {
           <NotificationsCard
             Notifications={NotificationsOverview}
             user_id={user_id}
+            history={props.history}
           />
         </TripleColumn>
       )}
