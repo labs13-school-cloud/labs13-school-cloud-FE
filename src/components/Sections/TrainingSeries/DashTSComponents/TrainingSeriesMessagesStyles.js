@@ -178,3 +178,30 @@ export const TrainingSeriesTitle = styled.div`
   justify-content: space-between;
   align-items: baseline;
 `;
+
+export const InfoIcon = styled.div`
+  padding: 2px 8px;
+  border-radius: 50%;
+  background: rgb(0, 0, 0, 0.38);
+  font-size: 12px;
+  color: white;
+  position: absolute;
+  top: 15px;
+  left: 20px;
+  cursor: pointer;
+  &:hover {
+    background: #591a99;
+  }
+`;
+
+export const PopOverModal = styled.div`
+  width: 700px;
+  padding: 10px;
+  background: white;
+  box-shadow: 0 0 5px (0, 0, 0, 0.2);;
+  border: 1px solid black
+  position: absolute;
+  top: 35px;
+  left: 40px;
+  z-index: 3;
+`;

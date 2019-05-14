@@ -63,7 +63,7 @@ function Responses(props) {
 
   useEffect(() => {
     //gets a list of ALLLL responses based on notifications
-    notifications.notifications.forEach(async notification => {
+    notifications.notifications.map(async notification => {
       console.log("blah");
       // Promise.all?
       const url = `${process.env.REACT_APP_API}/api/notifications/${
@@ -77,9 +77,7 @@ function Responses(props) {
       ];
       setAllResponses(newResponses);
     });
-  }, []); //this is whats throwing the "missing dependencies" warning. If you keep the dependencies in here, it runs
-  //the request infinitely. wasnt doing this before the refactor, and not able to fix it right now without just
-  //removing the useEffect depndencies..
+  }, [notifications]); //including "allResponses" as the console suggests makes this run infinitely...
 
   const ReturnCorrectServiceLogo = service => {
     if (service === "slack") {
