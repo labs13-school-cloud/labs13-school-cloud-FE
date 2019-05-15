@@ -9,7 +9,7 @@ import Relationships from "./helpers/Relationships.js";
 import SelectSlackID from "./helpers/SelectSlackID.js";
 import AddButtons from "./helpers/AddButtons.js";
 import EditButtons from "./helpers/EditButtons.js";
-
+import phoneNumberTest from "./helpers/testPhoneNumber.js";
 import InfoPopup from "components/UI/InfoPopup/InfoPopup.js";
 
 import { withStyles } from "@material-ui/core/styles";
@@ -42,25 +42,16 @@ function Add(props) {
   }, [dispatch, getTeamMembersFromProps, user_id, teamMember]);
 
   useEffect(() => {
-    const phoneNumberTest = () => {
-      return (
-        /^$/gm.test(state.teamMember.phone_number) === true ||
-        (/\+1 \(\d{0}/gm.test(state.teamMember.phone_number) === true &&
-          /^\s*(?:\+?(\d{1,3}))?([-. (]*(\d{3})[-. )]*)?((\d{3})[-. ]*(\d{4})(?:[-.x ]*(\d+))?)\S*$/gm.test(
-            state.teamMember.phone_number
-          ) === false)
-      );
-    };
     // Checks input conditions.  If all required field conditions are met, Add Member button is activated
     const { first_name, last_name, job_description } = state.teamMember;
     const payload = !(
       first_name.length &&
       last_name.length &&
       job_description.length &&
-      !phoneNumberTest()
+      !phoneNumberTest(state.teamMember.phone_number)
     );
     dispatch({ type: "UPDATE_DISABLED", payload });
-  }, [state]);
+  }, [state.teamMember]);
 
   const updateMember = (key, value) => {
     dispatch({ type: "UPDATE_MEMBER", key, payload: value });
