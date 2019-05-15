@@ -24,6 +24,7 @@ function Add(props) {
     user_id,
     teamMember
   } = props;
+
   const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
@@ -40,22 +41,18 @@ function Add(props) {
     }
   }, [dispatch, getTeamMembersFromProps, user_id, teamMember]);
 
-  const phoneNumberTest = () => {
-    return (
-      /^$/gm.test(state.teamMember.phone_number) === true ||
-      (/\+1 \(\d{0}/gm.test(state.teamMember.phone_number) === true &&
-        /^\s*(?:\+?(\d{1,3}))?([-. (]*(\d{3})[-. )]*)?((\d{3})[-. ]*(\d{4})(?:[-.x ]*(\d+))?)\S*$/gm.test(
-          state.teamMember.phone_number
-        ) === false)
-    );
-  };
-
-  const { teamMember: teamMemberState } = state;
-
   useEffect(() => {
+    const phoneNumberTest = () => {
+      return (
+        /^$/gm.test(state.teamMember.phone_number) === true ||
+        (/\+1 \(\d{0}/gm.test(state.teamMember.phone_number) === true &&
+          /^\s*(?:\+?(\d{1,3}))?([-. (]*(\d{3})[-. )]*)?((\d{3})[-. ]*(\d{4})(?:[-.x ]*(\d+))?)\S*$/gm.test(
+            state.teamMember.phone_number
+          ) === false)
+      );
+    };
     // Checks input conditions.  If all required field conditions are met, Add Member button is activated
-    const { first_name, last_name, job_description } = teamMemberState;
-    //console.log(first_name.length, )
+    const { first_name, last_name, job_description } = state.teamMember;
     const payload = !(
       first_name.length &&
       last_name.length &&
@@ -63,7 +60,7 @@ function Add(props) {
       !phoneNumberTest()
     );
     dispatch({ type: "UPDATE_DISABLED", payload });
-  }, [teamMemberState]);
+  }, [state]);
 
   const updateMember = (key, value) => {
     dispatch({ type: "UPDATE_MEMBER", key, payload: value });

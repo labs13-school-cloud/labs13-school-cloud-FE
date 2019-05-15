@@ -30,7 +30,7 @@ function Edit(props) {
       <EditTeamMember user_id={user_id} teamMember={props.teamMember} />
       <NotificationsCard
         limit={10}
-        Notifications={TeamMemberNotifications}
+        List={TeamMemberNotifications}
         member_id={match.params.id}
       />
     </>
