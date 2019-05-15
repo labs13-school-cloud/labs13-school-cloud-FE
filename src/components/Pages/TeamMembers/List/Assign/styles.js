@@ -7,14 +7,9 @@ export const styles = theme => ({
     padding: "5px"
   },
   listItem: {
-    // display: "flex",
-    // flexDirections: "column",
-    // width: "90%"
     width: "79%",
     height: 95,
     display: "flex",
-    // justifyContent: "space-between",
-    // alignItems: "center",
 
     "@media (max-width: 768px)": {
       width: "100%",

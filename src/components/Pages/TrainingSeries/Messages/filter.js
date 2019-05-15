@@ -28,7 +28,6 @@ export default ({ ts_id, messages, search }) => {
         : 0
     );
 };
-
 // Sample message
 // {
 //     subject,

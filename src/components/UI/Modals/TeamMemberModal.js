@@ -148,9 +148,6 @@ class TeamMemberModal extends React.Component {
         >
           {this.props.modalType === "edit" ? "Edit" : "+"}
         </Fab>
-        {/* <Button onClick={this.handleOpen}>
-          {this.props.modalType === "edit" ? "Edit" : "Add new team member"}
-        </Button> */}
         <Modal
           aria-labelledby="simple-modal-title"
           aria-describedby="simple-modal-description"

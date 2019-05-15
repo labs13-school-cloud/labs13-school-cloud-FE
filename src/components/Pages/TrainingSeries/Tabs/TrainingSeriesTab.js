@@ -8,11 +8,7 @@ import { Typography, Fab, TextField, InputAdornment } from "@material-ui/core/";
 import { Wrapper, HeaderWrapper, Series } from "./TrainingSeriesTabStyles.js";
 
 //functional related imports
-import {
-  getTrainingSeries,
-  deleteTrainingSeries
-  //getMembersAssigned
-} from "store/actions";
+import { getTrainingSeries, deleteTrainingSeries } from "store/actions";
 
 const TrainingSeriesTab = props => {
   const [searchValue, setSearchValue] = useState("");
@@ -90,5 +86,5 @@ const mapStateToProps = state => {
 };
 export default connect(
   mapStateToProps,
-  { getTrainingSeries, deleteTrainingSeries /*, getMembersAssigned*/ }
+  { getTrainingSeries, deleteTrainingSeries }
 )(TrainingSeriesTab);

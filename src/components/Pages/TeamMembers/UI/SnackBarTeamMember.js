@@ -1,5 +1,4 @@
 import React from "react";
-// import PropTypes from "prop-types";
 import classNames from "classnames";
 import Button from "@material-ui/core/Button";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
@@ -113,9 +112,6 @@ class CustomizedSnackbars extends React.Component {
     } else if (this.props.submitType === "add") {
       this.props.addTeamMember(e);
       this.setState({ open: true });
-      // setTimeout(() => {
-      //   this.props.history.push("/home");
-      // }, 1000);
     }
   };
 
@@ -165,7 +161,6 @@ class CustomizedSnackbars extends React.Component {
           disabled={this.props.disabled}
           variant="outlined"
           type="submit"
-          // color="primary"
           className={classes.button}
           onClick={e => this.handleClick(e)}
         >

@@ -20,7 +20,6 @@ export default function SingleMemberCheck({ addMember, teamMember }) {
           onChange={e => {
             setChecked(!checked);
             addMember(collectIDs());
-            //addMember(teamMember.id);
           }}
         />
       </p>

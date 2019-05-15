@@ -25,9 +25,6 @@ export const NavItemsContainer = styled.div`
   margin: 10px 0;
   padding: 0px 40px;
   width: 100%;
-  /* @media only screen and (max-width: 600px) {
-		padding: 0 10px;
-	} */
   a {
     margin: 0 10px;
     text-decoration: none;

@@ -91,8 +91,6 @@ class MessagePage extends React.Component {
           id="form1"
           onSubmit={e => this.handleMessageSubmit(e)}
         >
-          {/* <DeleteModal deleteType='inTeamMemberPage' id={this.props.urlId} /> */}
-
           <Paper className={classes.root}>
             <MessageContainer>
               <TextField

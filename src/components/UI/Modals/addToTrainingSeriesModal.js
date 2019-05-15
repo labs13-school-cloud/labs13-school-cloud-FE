@@ -10,17 +10,13 @@ import { withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Modal from "@material-ui/core/Modal";
 import Button from "@material-ui/core/Button";
-import AddIcon from "@material-ui/icons/Add";
-import Fab from "@material-ui/core/Fab";
 import Checkbox from "@material-ui/core/Checkbox";
 import FormLabel from "@material-ui/core/FormLabel";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
-import MenuItem from "@material-ui/core/MenuItem";
 
 //Redux
 import { connect } from "react-redux";
 import { addTeamMemberToTrainingSeries } from "store/actions/";
-import { TransitionGroup } from "react-transition-group";
 
 function getModalStyle() {
   const top = 50;
@@ -143,7 +139,6 @@ class UserModal extends React.Component {
     const { classes } = this.props;
 
     let modalMap;
-    let modalTitle;
     if (this.props.modalType === "assignMultiple") {
       modalMap = this.props.teamMembers.map(member => (
         <>
@@ -168,9 +163,6 @@ class UserModal extends React.Component {
 
     return (
       <div>
-        {/* <Fab color="primary" aria-label="Add" className={classes.fab}>
-          <AddIcon onClick={this.handleOpen} />
-        </Fab> */}
         <div onClick={this.handleOpen}>Assign Training Series</div>
 
         <Modal
@@ -203,24 +195,6 @@ class UserModal extends React.Component {
               {modalMap}
               <Button type="submit">Submit</Button>
             </form>
-            {/* <form
-              onSubmit={e => this.handleSubmit(e)}
-              className={classes.container}
-              noValidate
-              autoComplete="off"
-
-            />
-            <BottomNavigation
-
-              onChange={this.handleChange}
-              showLabels
-              className={classes.root}
-            >
-
-              <Button type="submit">Submit</Button>
-            </BottomNavigation>
-
-            </BottomNavigation> */}
           </div>
         </Modal>
       </div>

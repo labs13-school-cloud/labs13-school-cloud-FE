@@ -1,8 +1,6 @@
 import styled from "styled-components";
 export const styles = theme => ({
   root: {
-    // width: "75%",
-    // marginTop: theme.spacing.unit * 3,
     overflowX: "auto",
     margin: "0 auto",
     fontSize: "1rem",
