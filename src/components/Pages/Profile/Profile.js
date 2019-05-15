@@ -73,16 +73,16 @@ class Profile extends React.Component {
     let accountType, account, maxCount;
 
     if (this.props.doneLoading) {
-      let type = user.account_type_id;
-      if (type === 3) {
+      let type = user.subscription;
+      if (type === "pro") {
         accountType = <span>Pro</span>;
         account = true;
         maxCount = 1000;
-      } else if (type === 2) {
+      } else if (type === "premium") {
         accountType = <span>Premium</span>;
         account = true;
         maxCount = 200;
-      } else if (type === 1) {
+      } else if (type === "free") {
         accountType = <span>Free</span>;
         account = false;
         maxCount = 50;
@@ -203,7 +203,7 @@ class Profile extends React.Component {
                   variant="contained"
                   color="secondary"
                   onClick={() => {
-                    this.handleDelete(user.user_id);
+                    this.handleDelete(user.id);
                   }}
                 >
                   Delete Account
