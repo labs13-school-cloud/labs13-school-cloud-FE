@@ -40,10 +40,10 @@ function SearchCard(props) {
       />
       <Suspense fallback={<span />}>
         <List
-          pagination={pagination}
-          search={search[0].toLowerCase()}
           user_id={user_id}
-          filter={filter}
+          getFiltered={items =>
+            filter({ items, pagination, search: search[0].toLowerCase(0) })
+          }
           history={history}
         />
       </Suspense>

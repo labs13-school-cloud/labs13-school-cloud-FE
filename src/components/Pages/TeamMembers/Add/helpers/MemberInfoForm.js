@@ -42,7 +42,6 @@ function MemberInfoForm({ classes, state, updateMember }) {
         <NumberFormat
           format="+1 (###) ###-####"
           type="tel"
-          inputProps={{ minLength: 10 }}
           id="standard-name"
           label="Phone Number"
           customInput={TextField}
