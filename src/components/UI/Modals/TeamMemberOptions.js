@@ -53,13 +53,6 @@ class TeamMemberOptions extends React.Component {
           open={Boolean(this.state.anchorEl)}
           onClose={this.handleClose}
         >
-          <MenuItem
-            onClick={e =>
-              this.props.routeToMemberPage(e, this.props.teamMemberID)
-            }
-          >
-            Manage
-          </MenuItem>
           <MenuItem>
             <DeleteModal
               deleteType="teamMember"

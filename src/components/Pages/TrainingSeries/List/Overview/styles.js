@@ -3,7 +3,6 @@ import styled from "styled-components";
 export const styles = {
   listItem: {
     width: "100%",
-    // marginTop: 10,
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
@@ -12,7 +11,6 @@ export const styles = {
     "&:hover": {
       cursor: "pointer",
       backgroundColor: "whitesmoke"
-      // "box-shadow": "0px 6px 15px -4px rgba(0,0,0,0.84)"
     }
   },
   title: {
