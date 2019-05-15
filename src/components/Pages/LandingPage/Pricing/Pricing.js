@@ -39,6 +39,7 @@ function createData(name, basic, premium, pro) {
 }
 
 const rows = [
+  createData("Price", "Free", "$5/month", "$10/month"),
   createData(
     "Automated Text/Email",
     <span>&#10004;</span>,
