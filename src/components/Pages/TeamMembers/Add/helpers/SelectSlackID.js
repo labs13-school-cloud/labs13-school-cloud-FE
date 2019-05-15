@@ -11,7 +11,7 @@ function SelectSlackID({ updateMember, state }) {
           value={state.teamMember.slack_uuid}
           onChange={e => updateMember("slack_uuid", e.target.value)}
         >
-          {/*<option value="">None</option>*/}
+          <option value="">None</option>
           {state.slackUsers &&
             state.slackUsers
               .filter(
