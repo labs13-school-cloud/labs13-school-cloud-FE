@@ -66,25 +66,16 @@ class Profile extends React.Component {
   };
 
   render() {
-    //Destructure user from userProfile
     const { user } = this.props.userProfile;
     const { classes } = this.props;
-    let accountType, account, maxCount;
+    let account;
 
     if (this.props.doneLoading) {
       let type = user.subscription;
-      if (type === "pro") {
-        accountType = <span>Pro</span>;
+      if (type === "Pro" || type === "Premium") {
         account = true;
-        maxCount = 1000;
-      } else if (type === "premium") {
-        accountType = <span>Premium</span>;
-        account = true;
-        maxCount = 200;
       } else if (type === "free") {
-        accountType = <span>Free</span>;
         account = false;
-        maxCount = 50;
       }
     }
 
@@ -102,7 +93,7 @@ class Profile extends React.Component {
                   <i className="fab fa-slack" />
                 </Button>
                 <Avatar
-                  alt="Remy Sharp"
+                  alt="profile pic of logged-in user"
                   src={JSON.parse(localStorage.getItem("Profile")).picture}
                   className={classes.bigAvatar}
                 />
@@ -117,7 +108,7 @@ class Profile extends React.Component {
                   variant="subtitle1"
                   component="subtitle1"
                 >
-                  <div>Account Type: {accountType}</div>
+                  <div>Account Type: {user.subscription}</div>
                 </Typography>
               </div>
               <div>
@@ -136,8 +127,8 @@ class Profile extends React.Component {
                   component="subtitle1"
                 >
                   {/* quick fix for minor bug, newUser object doesn't have notification count */}
-                  {user.notification_count ? user.notification_count : 0} out of{" "}
-                  {maxCount}
+                  {user.notifications_sent ? user.notifications_sent : 0} out of{" "}
+                  {user.max_notification_count}
                 </Typography>
                 <CardActions>
                   <ButtonContainer>
