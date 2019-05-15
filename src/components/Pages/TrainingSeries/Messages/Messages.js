@@ -31,7 +31,7 @@ function Messages(props) {
             onClick={e =>
               props.history.push({
                 pathname: "/home/create-message",
-                state: { ts_id }
+                state: { training_series_id: ts_id }
               })
             }
           >
