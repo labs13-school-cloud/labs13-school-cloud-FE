@@ -36,7 +36,7 @@ function Messages(props) {
           primary={message.subject}
           secondary={message.body}
           className={classes.listItemText}
-          onClick={e => this.routeToeditMessagePage(e, message)}
+          onClick={e => history.push(`/home/message/${message.id}`)}
         />
         <ListItemSecondaryAction className={classes.secondaryAction}>
           <div>

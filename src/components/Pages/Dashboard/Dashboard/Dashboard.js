@@ -39,7 +39,7 @@ function Dashboard(props) {
             />
           </SmallColumns>
           <NotificationsCard
-            Notifications={NotificationsOverview}
+            List={NotificationsOverview}
             user_id={user_id}
             history={props.history}
           />
