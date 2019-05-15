@@ -53,7 +53,6 @@ function Add(props) {
     };
     // Checks input conditions.  If all required field conditions are met, Add Member button is activated
     const { first_name, last_name, job_description } = state.teamMember;
-    console.log("STATE", state);
     const payload = !(
       first_name.length &&
       last_name.length &&
