@@ -207,6 +207,7 @@ class CheckoutForm extends Component {
     const { name, email, id, stripe } = this.props.userProfile;
     const { plan } = this.state;
     let token = await this.createToken(email);
+    // console.log(token, name, email, id, stripe, plan);
     if (token !== undefined) {
       await this.props.submit(token, name, email, id, stripe, plan);
       this.setState({
@@ -280,7 +281,7 @@ class CheckoutForm extends Component {
                   </Typography>
 
                   <Typography className={classes.feature}>
-                    Message Limit 50/month
+                    Notification Limit 50/month
                   </Typography>
                 </div>
                 {freeButton}
@@ -308,7 +309,7 @@ class CheckoutForm extends Component {
                       </Typography>
 
                       <Typography className={classes.feature}>
-                        Message Limit
+                        Notification Limit
                         {plan.nickname === "Premium"
                           ? " 200/month"
                           : " 1000/month"}
@@ -342,7 +343,7 @@ class CheckoutForm extends Component {
                         Unlimited Team Members
                       </Typography>
                       <Typography className={classes.feature}>
-                        Message Limit
+                        Notification Limit
                         {plan.nickname === "Premium"
                           ? " 200/month"
                           : " 1000/month"}

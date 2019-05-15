@@ -57,7 +57,7 @@ const rows = [
     <span>&#10004;</span>,
     <span>&#10004;</span>
   ),
-  createData("Message Limit", "50/month", "200/month", "1000/month")
+  createData("Notification Limit", "50/month", "200/month", "1000/month")
 ];
 class Pricing extends React.Component {
   scrollToTop(e) {
