@@ -18,6 +18,7 @@ import {
 function AddMemberToTrainingSeries(props) {
   const [activeMembers, setActiveMembers] = useState([]); //an array of all IDS of members being added to a series
   const [startDate, setStartDate] = useState(moment().format("YYYY-MM-DD"));
+  const [memberComMethods, setMemberComMethods] = useState([]); //an array of object containing members firat name and last nam, pluswhich communication method is selected
 
   // Abstracting to remove useEffect dependency warnings
   const {
@@ -33,7 +34,6 @@ function AddMemberToTrainingSeries(props) {
 
   const getNewNotification = (id, msg) => {
     const memberServices = props.teamMembers.filter(mem => mem.id === id);
-    console.log(id);
     return {
       team_member_id: id,
       service_id: memberServices[0].phone_number
@@ -68,6 +68,22 @@ function AddMemberToTrainingSeries(props) {
     getMessagesFromProps();
   }, [getMembersFromProps, getTSFromProps, getMessagesFromProps, user_id, id]);
 
+  const handelAddComMethod = (id, method) => {
+    const memberMethod = { id, method }; //create an object for the team member and their prefered method of communication.
+
+    const workArray = [...memberComMethods]; //take our current array of members and communications and spread it into a new array so we can work on it.
+
+    workArray.map((mem, i) => {
+      //map over that array and check if the member being added already exists in our array. if so, delete their original prefered item from the list;
+      if (mem.id === memberMethod.id) {
+        workArray.splice(i, 1);
+      }
+    });
+
+    setMemberComMethods([...workArray, memberMethod]); //add member to list
+    console.log(memberComMethods);
+  };
+
   const handleSubmit = e => {
     e.preventDefault();
     if (!activeMembers.length) return;
@@ -84,6 +100,14 @@ function AddMemberToTrainingSeries(props) {
       });
     });
     newNotifications.forEach(n => {
+      memberComMethods.map(member => {
+        //this looks at the communication methods set by clicking o nthe radio buttons.
+        //it then assigns which type of notification should be sent out based on what you clicked.
+        //if you forgot to click anything, it defaults to SMS.
+        if (n.team_member_id === member.id) {
+          n.service_id = member.method;
+        }
+      });
       props.addNotification(n);
     });
     props.history.push(`/home/training-series/${props.match.params.id}`);
@@ -108,6 +132,7 @@ function AddMemberToTrainingSeries(props) {
               addMember={addMember}
               key={member.id}
               teamMember={member}
+              handelAddComMethod={handelAddComMethod}
             />
           );
         })}
