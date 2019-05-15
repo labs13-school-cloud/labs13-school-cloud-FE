@@ -66,18 +66,19 @@ function Card(props) {
       </div>
       <Suspense fallback={<div>Loading...</div>}>
         <List
-          pagination={pagination}
-          filter={filter}
+          getFiltered={(items, member_id) =>
+            filter({ items, pagination, filters, member_id })
+          }
           filters={filters}
           member_id={props.member_id}
           history={props.history}
         />
         {!notificationsCount && (
-          <MessageContainer>
+          <MessageContainer style={{ marginTop: "30%" }}>
             <p>
               {props.isLoading
                 ? "Loading your Notifications."
-                : "You do not have any pending Notifications."}
+                : `You do not have any ${statusFilter} Notifications.`}
             </p>
           </MessageContainer>
         )}

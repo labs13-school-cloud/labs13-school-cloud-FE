@@ -6,7 +6,6 @@ export default ({ items, pagination, filters, member_id }) => {
       ({ team_member_id: id }) => id === parseInt(member_id, 10)
     );
   }
-
   filtered = filtered.filter(({ name, is_sent }) => {
     if (
       (filters.status === "pending" && !is_sent) ||
@@ -15,7 +14,6 @@ export default ({ items, pagination, filters, member_id }) => {
       return filters.service === "all" ? true : name === filters.service;
     } else return false;
   });
-
   filtered.sort((a, b) =>
     a.send_date > b.send_date ? 1 : b.send_date > a.send_date ? -1 : 0
   );
