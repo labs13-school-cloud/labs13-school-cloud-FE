@@ -42,3 +42,13 @@ export const DashWrapper = styled.div`
   justify-content: center;
   align-items: center;
 `;
+
+export const Popover = styled.div`
+  padding: 4px;
+  background: #591a99;
+  color: white;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  position: absolute;
+  z-index: 2;
+  top: 60px;
+`;
