@@ -133,7 +133,6 @@ const HelpModal = props => {
             hits, your members will be sent their training materials.
           </p>
         </TypeWrapper>
-
         <TypeWrapper>
           <h4>Recieving Responses</h4>
           <hr />
@@ -149,7 +148,6 @@ const HelpModal = props => {
 };
 
 export default HelpModal;
-
 const HelpModalWrapper = styled.div`
   width: 100vw;
   height: 100vh;
@@ -158,7 +156,6 @@ const HelpModalWrapper = styled.div`
   left: 0;
   background: rgba(0, 0, 0, 0.4);
 `;
-
 const HelpModalPaper = styled(Paper)`
   width: 90%;
   max-width: 1400px;
@@ -172,15 +169,12 @@ const HelpModalPaper = styled(Paper)`
     margin: 0;
   }
 `;
-
 const TypeWrapper = styled.div`
   margin: 15px auto;
   width: 95%;
-
   min-height: 200px;
   padding: 15px;
   background: rgba(0, 0, 0, 0.04);
-
   h4 {
     margin: 0 10px 10px 5px;
     font-size: 24px;
