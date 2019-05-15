@@ -75,7 +75,6 @@ const userReducer = (state = initialState, action) => {
         error: ""
       };
     case EDIT_USER_SUCCESS:
-      //console.log(state.userProfile);
       return {
         ...state,
         userProfile: {

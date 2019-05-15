@@ -5,7 +5,6 @@ export const TripleColumn = styled.div`
   display: flex;
   justify-content: space-between;
   margin: 48px auto;
-  /* height: 500px; */
   @media (max-width: 1400px) {
     flex-wrap: wrap;
     max-width: 1000px;
@@ -33,7 +32,6 @@ export const SmallColumns = styled.div`
     justify-content: center;
     align-items: center;
     margin: 0 auto;
-    /* margin-bottom: 5px; */
   }
 `;
 export const DashWrapper = styled.div`

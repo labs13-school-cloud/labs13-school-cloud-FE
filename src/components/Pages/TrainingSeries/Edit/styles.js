@@ -11,13 +11,11 @@ export const styles = theme => ({
 
     "@media (max-width: 768px)": {
       width: "89%",
-      // padding: 0,
       margin: "5px auto"
     },
 
     "@media (max-width: 480px)": {
       width: "80%",
-      // padding: 0,
       margin: "5px auto"
     }
   },

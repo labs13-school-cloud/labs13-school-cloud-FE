@@ -31,7 +31,6 @@ export default ({ ts_id, items, search, setMax }) => {
       : 0
   );
 };
-
 // Sample message
 // {
 //     subject,

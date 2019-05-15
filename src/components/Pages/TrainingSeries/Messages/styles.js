@@ -5,7 +5,6 @@ export const styles = theme => ({
     margin: 0
   },
   button: {
-    // margin: 5,
     "margin-left": theme.spacing.unit,
     background: "#451476",
     color: "white",
