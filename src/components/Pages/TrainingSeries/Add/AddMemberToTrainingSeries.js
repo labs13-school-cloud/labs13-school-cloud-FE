@@ -31,8 +31,27 @@ function AddMemberToTrainingSeries(props) {
     params: { id }
   } = match;
 
+  const getNewNotification = (id, msg) => {
+    const memberServices = props.teamMembers.filter(mem => mem.id === id);
+    console.log(id);
+    return {
+      team_member_id: id,
+      service_id: memberServices[0].phone_number
+        ? 1
+        : memberServices[0].email
+        ? 2
+        : 3,
+      message_id: msg.id,
+      num_attempts: 0,
+      is_sent: false,
+      send_date: moment(startDate)
+        .add(msg.days_from_start, "days")
+        .toISOString()
+    };
+  };
+
   const addMember = member_id => {
-    //this function is passed down to the single members. on check, it sets or removes their id from activeMembers.
+    //this function is passed down to the single members. on check, it sets or removes their + mentors/managers ids from activeMembers.
     let newMembers = [...activeMembers];
     if (newMembers.includes(member_id)) {
       let index = newMembers.indexOf(member_id);
@@ -51,29 +70,21 @@ function AddMemberToTrainingSeries(props) {
 
   const handleSubmit = e => {
     e.preventDefault();
-    console.log(activeMembers, props.messages);
-    activeMembers.forEach(memberID => {
+    if (!activeMembers.length) return;
+    const newNotifications = [];
+    let roles = getRoles(props.messages[0]);
+    activeMembers.forEach(idSet => {
       props.messages.forEach(msg => {
-        //find member who has memberID and check what services they have avaible to thgem
-        const memberServices = props.teamMembers.filter(
-          mem => mem.id === memberID
-        );
-        const newNotification = {
-          team_member_id: memberID,
-          service_id: memberServices[0].phone_number
-            ? 1
-            : memberServices[0].email
-            ? 2
-            : 3,
-          message_id: msg.id,
-          num_attempts: 0,
-          is_sent: false,
-          send_date: moment(startDate)
-            .add(msg.days_from_start, "days")
-            .toISOString()
-        };
-        props.addNotification(newNotification);
+        //find member who has memberID and check what services they have available to them
+        roles.forEach(role => {
+          if (msg[`for_${role}`] && idSet[role]) {
+            newNotifications.push(getNewNotification(idSet[role], msg));
+          }
+        });
       });
+    });
+    newNotifications.forEach(n => {
+      props.addNotification(n);
     });
     props.history.push(`/home/training-series/${props.match.params.id}`);
   };
@@ -152,3 +163,14 @@ const Wrapper = styled(Paper)`
   width: 80%;
   max-width: 1000px;
 `;
+
+function getRoles(msg) {
+  // No, this isn't necessary for 3 roles. But this will scale better if more roles are added
+  const roles = [];
+  for (let prop in msg) {
+    if (prop.substring(0, 4) === "for_") {
+      roles.push(prop.substring(4));
+    }
+  }
+  return roles;
+}
