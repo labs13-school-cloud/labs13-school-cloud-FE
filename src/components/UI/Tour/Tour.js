@@ -24,7 +24,7 @@ class DashboardTour extends Component {
     dashboardSteps: [
       {
         content:
-          "Welcome to Training Bot! Our little bot helper will get you through getting started!"
+          "Welcome to Training Bot! Our little bot helper will help you through getting started!"
       },
       {
         selector: '[data-tour="1"]',
@@ -46,7 +46,7 @@ class DashboardTour extends Component {
       {
         selector: '[data-tour="4"]',
         content:
-          "This is your Training Series. A training series is like a little house for the content youd like to send. Give it a name and some messages, then assign team members to recieve those messages"
+          "This is your Training Series. A training series is like a little house for the content you'd like to send. Give it a name and some content, then assign team members to recieve the content"
       },
       {
         selector: '[data-tour="5"]',
@@ -62,10 +62,10 @@ class DashboardTour extends Component {
         content: (
           <Container>
             <p>
-              We're super glad to have you as a part of Training Bot. Take a
-              poke around, and please don't hesitate to
-              <Link to="/team"> contact us</Link> if you have any questions or
-              concerns!
+              We're thrilled to have you as a part of Training Bot. Take a poke
+              around, and please don't hesitate to
+              <Link to="/home/contact"> contact us</Link> if you have any
+              questions or concerns!
             </p>
             <ImageContainer>
               <Progress />

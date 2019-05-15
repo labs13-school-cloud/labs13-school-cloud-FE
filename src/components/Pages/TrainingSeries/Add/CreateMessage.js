@@ -37,7 +37,8 @@ class CreateMessage extends React.Component {
       days_from_start: 1,
       training_series_id: "",
       for_manager: false,
-      for_mentor: false
+      for_mentor: false,
+      for_team_member: true
     }
   };
 
@@ -146,9 +147,9 @@ class CreateMessage extends React.Component {
                 </ExpansionPanelDetails>
               </ExpansionPanel>
             </MessageContainer>
-            include manager? :
+            Send To:{"  "}
             <Checkbox
-              checked={this.state.for_manager}
+              checked={this.state.message.for_team_member}
               value="checkedB"
               color="primary"
               onChange={e => {
@@ -156,15 +157,29 @@ class CreateMessage extends React.Component {
                   ...this.state,
                   message: {
                     ...this.state.message,
-                    for_mentor: !this.state.message.for_manager
+                    for_team_member: !this.state.message.for_team_member
                   }
                 });
-                console.log(this.state.message.for_manager);
               }}
             />
-            include mentor? :
+            Team Member
             <Checkbox
-              checked={this.state.for_mentor}
+              checked={this.state.message.for_manager}
+              value="checkedB"
+              color="primary"
+              onChange={e => {
+                this.setState({
+                  ...this.state,
+                  message: {
+                    ...this.state.message,
+                    for_manager: !this.state.message.for_manager
+                  }
+                });
+              }}
+            />
+            Manager
+            <Checkbox
+              checked={this.state.message.for_mentor}
               value="checkedB"
               color="primary"
               onChange={e => {
@@ -175,9 +190,9 @@ class CreateMessage extends React.Component {
                     for_mentor: !this.state.message.for_mentor
                   }
                 });
-                console.log(this.state.message.for_mentor);
               }}
             />
+            Mentor
             <ButtonContainer>
               <Button
                 variant="outlined"
@@ -192,7 +207,7 @@ class CreateMessage extends React.Component {
                 onClick={e =>
                   this.props.history.push(
                     `/home/training-series/${
-                      this.props.location.state.training_series_id
+                      this.state.messages.training_series_id
                     }`
                   )
                 }

@@ -11,7 +11,7 @@ export const initialState = {
     mentor_id: ""
   },
   isRouting: false,
-  addDisabled: false,
+  addDisabled: true,
   memberManager: "",
   memberMentor: ""
 };

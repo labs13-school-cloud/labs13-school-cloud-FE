@@ -2,35 +2,53 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import moment from "moment";
-import phoneFormatter from "phone-formatter";
 
 import { getNotifications } from "store/actions";
 
 import { withStyles } from "@material-ui/core/styles";
-import { ListItem, ListItemText, Typography } from "@material-ui/core/";
+import {
+  ListItem,
+  ListItemText,
+  ListItemIcon,
+  Typography
+} from "@material-ui/core/";
 import { ListStyles, styles } from "./styles.js";
+
+import slack_black_logo from "img/slack_black_logo.png";
+import TextsmsOutlined from "@material-ui/icons/TextsmsOutlined";
+import EmailOutlined from "@material-ui/icons/EmailOutlined";
 
 function Overview(props) {
   const {
-    offset,
-    filter,
+    pagination,
     filters,
-    limit,
-    countNotifications,
+    filter,
     getNotifications: getNotificationsFromProps,
     notifications,
-    classes
+    classes,
+    history
   } = props;
 
   useEffect(() => {
     getNotificationsFromProps();
   }, [getNotificationsFromProps]);
 
-  const setFilters = {
-    items: notifications,
-    offset,
-    limit,
-    filters
+  const setFilters = { items: notifications, pagination, filters };
+
+  const displayedLogo = {
+    twilio: <TextsmsOutlined />,
+    sendgrid: <EmailOutlined />,
+    slack: (
+      <img
+        className={classes.listItemIcon}
+        src={slack_black_logo}
+        alt="monochrome Slack app logo"
+      />
+    )
+  };
+
+  const routeToMember = id => {
+    history.push(`/home/team-member/${id}`);
   };
 
   const formatted = filter(setFilters).map(
@@ -41,24 +59,22 @@ function Overview(props) {
       send_date,
       subject,
       name,
-      email,
-      phone_number,
-      series
+      series,
+      team_member_id
     }) => {
       const formattedSendDate = moment(send_date)
         .add(1, "hours")
         .format("MMMM Do");
       return (
-        <ListItem key={id} className={classes.listItem}>
+        <ListItem
+          key={id}
+          className={classes.listItem}
+          onClick={() => routeToMember(team_member_id)}
+        >
+          <ListItemIcon>{displayedLogo[name]}</ListItemIcon>
           <ListItemText
             primary={`${subject} | ${series}`}
-            secondary={`${first_name} ${last_name} | ${
-              email
-                ? email
-                : phone_number
-                ? phoneFormatter.format(phone_number, "(NNN) NNN-NNNN")
-                : name
-            }`}
+            secondary={`${first_name} ${last_name}`}
           />
           <Typography className={classes.send_date}>
             {filters.status === "pending" ? "Send Date" : "Sent on"}
@@ -69,8 +85,6 @@ function Overview(props) {
       );
     }
   );
-  countNotifications(formatted.length);
-
   return <ListStyles>{formatted}</ListStyles>;
 }
 

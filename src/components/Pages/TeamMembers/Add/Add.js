@@ -38,7 +38,6 @@ function Add(props) {
     if (teamMember) {
       dispatch({ type: "EDITING_MEMBER", payload: teamMember });
     }
-    return () => dispatch({ type: "CLEAR_MEMBER" });
   }, [dispatch, getTeamMembersFromProps, user_id, teamMember]);
 
   const phoneNumberTest = () => {
@@ -51,11 +50,23 @@ function Add(props) {
     );
   };
 
+  const { teamMember: teamMemberState } = state;
+
+  useEffect(() => {
+    // Checks input conditions.  If all required field conditions are met, Add Member button is activated
+    const { first_name, last_name, job_description } = teamMemberState;
+    //console.log(first_name.length, )
+    const payload = !(
+      first_name.length &&
+      last_name.length &&
+      job_description.length &&
+      !phoneNumberTest()
+    );
+    dispatch({ type: "UPDATE_DISABLED", payload });
+  }, [teamMemberState]);
+
   const updateMember = (key, value) => {
     dispatch({ type: "UPDATE_MEMBER", key, payload: value });
-    if ((key = "phone_number")) {
-      dispatch({ type: "UPDATE_DISABLED", payload: phoneNumberTest() });
-    }
   };
 
   const addNewTeamMember = e => {
@@ -90,7 +101,7 @@ function Add(props) {
       <form className={classes.form} onSubmit={e => addNewTeamMember(e)}>
         <Paper className={classes.paper}>
           <Typography variant="title">
-            {teamMember ? "Edit Team Member" : "Add A New Team Member"}
+            {teamMember ? "Edit Team Member" : "Add New Team Member"}
           </Typography>{" "}
           <Divider className={classes.divider} />
           <MemberInfoForm

@@ -10,7 +10,7 @@ import { ListItem, ListItemText } from "@material-ui/core/";
 import { ListStyles, styles } from "./styles.js";
 
 function Overview({
-  pagination: { offset, limit, setMax },
+  pagination,
   search,
   user_id,
   filter,
@@ -24,7 +24,7 @@ function Overview({
     getMemberFromProps(user_id);
   }, [getMemberFromProps, user_id]);
 
-  const setFilter = { items: teamMembers, offset, limit, search };
+  const setFilter = { items: teamMembers, pagination, search };
   const filtered = filter(setFilter);
   const routeToMember = id => {
     history.push(`/home/team-member/${id}`);
@@ -51,7 +51,6 @@ function Overview({
       );
     }
   );
-  setMax(formatted.length);
   return <ListStyles>{formatted}</ListStyles>;
 }
 
