@@ -9,6 +9,8 @@ import { withStyles } from "@material-ui/core/styles";
 import { Typography, Button, TextField, Divider } from "@material-ui/core/";
 import { styles, MainContainer } from "./CreateTrainingSeriesStyles.js";
 
+import InfoPopup from "components/UI/InfoPopup/InfoPopup.js";
+
 class CreateTrainingSeries extends React.Component {
   state = {
     title: "",
@@ -43,7 +45,18 @@ class CreateTrainingSeries extends React.Component {
     return this.state.isRouting ? (
       <ProgressCircle />
     ) : (
-      <MainContainer>
+      <MainContainer style={{ position: "relative" }}>
+        <InfoPopup
+          top={"15px"}
+          left={"50px"}
+          popOverText={
+            <p>
+              This is step one of creating a training series! Simply pick a
+              name, then youll be forwarded to a page to start creating messages
+              and adding team members.
+            </p>
+          }
+        />
         <div className={classes.paper}>
           <Typography variant="h6" id="modal-title">
             Create A New Training Series
