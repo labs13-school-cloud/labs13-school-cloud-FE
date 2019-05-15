@@ -114,8 +114,8 @@ function Responses(props) {
           >
             <option value="">all</option>
             <option value="slack">slack</option>
-            <option value="twillo">twillo</option>
-            <option value="sendgrid">sendgrid</option>
+            <option value="twillo">text</option>
+            <option value="sendgrid">email</option>
           </select>
         </div>
       </HeaderWrapper>
@@ -139,7 +139,12 @@ function Responses(props) {
                     </Typography>
 
                     <Typography className={classes.pos} color="textSecondary">
-                      responded to your message via {response.service}{" "}
+                      responded to your message via{" "}
+                      {response.service === "slack"
+                        ? "slack"
+                        : response.service === "sendgrid"
+                        ? "email"
+                        : "text"}{" "}
                       {ReturnCorrectServiceLogo(response.service)}
                     </Typography>
                     <Typography component="p">
