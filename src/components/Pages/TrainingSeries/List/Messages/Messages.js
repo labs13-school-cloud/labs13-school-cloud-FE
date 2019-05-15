@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 
-import { createAMessage, editMessage, getAllMessages } from "store/actions";
+import { getAllMessages } from "store/actions";
 import DeleteModal from "components/UI/Modals/deleteModal";
 
 import { withStyles } from "@material-ui/core/styles";
@@ -73,5 +73,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { createAMessage, editMessage, getAllMessages }
+  { getAllMessages }
 )(withStyles(styles)(Messages));
