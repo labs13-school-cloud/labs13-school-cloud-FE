@@ -57,9 +57,9 @@ function Add(props) {
     const { first_name, last_name, job_description } = teamMemberState;
     //console.log(first_name.length, )
     const payload = !(
-      first_name.length >= 3 &&
-      last_name.length >= 3 &&
-      job_description.length >= 3 &&
+      first_name.length &&
+      last_name.length &&
+      job_description.length &&
       !phoneNumberTest()
     );
     dispatch({ type: "UPDATE_DISABLED", payload });
