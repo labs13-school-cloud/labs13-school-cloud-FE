@@ -254,9 +254,6 @@ class CheckoutForm extends Component {
     }
 
     if (this.state.complete) return <h1>Purchase Complete</h1>;
-    // if (this.props.stripeLoading || this.props.userLoading) {
-    // 	return <ProgressCircle />;
-    // } else {
 
     return (
       <div className={classes.root}>

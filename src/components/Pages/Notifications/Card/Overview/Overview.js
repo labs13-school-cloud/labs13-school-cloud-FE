@@ -20,9 +20,8 @@ import EmailOutlined from "@material-ui/icons/EmailOutlined";
 
 function Overview(props) {
   const {
-    pagination,
+    getFiltered,
     filters,
-    filter,
     getNotifications: getNotificationsFromProps,
     notifications,
     classes,
@@ -32,8 +31,6 @@ function Overview(props) {
   useEffect(() => {
     getNotificationsFromProps();
   }, [getNotificationsFromProps]);
-
-  const setFilters = { items: notifications, pagination, filters };
 
   const displayedLogo = {
     twilio: <TextsmsOutlined />,
@@ -47,45 +44,46 @@ function Overview(props) {
     )
   };
 
-  const routeToMember = id => {
-    history.push(`/home/team-member/${id}`);
-  };
-
-  const formatted = filter(setFilters).map(
-    ({
-      id,
-      first_name,
-      last_name,
-      send_date,
-      subject,
-      name,
-      series,
-      team_member_id
-    }) => {
-      const formattedSendDate = moment(send_date)
-        .add(1, "hours")
-        .format("MMMM Do");
-      return (
-        <ListItem
-          key={id}
-          className={classes.listItem}
-          onClick={() => routeToMember(team_member_id)}
-        >
-          <ListItemIcon>{displayedLogo[name]}</ListItemIcon>
-          <ListItemText
-            primary={`${subject} | ${series}`}
-            secondary={`${first_name} ${last_name}`}
-          />
-          <Typography className={classes.send_date}>
-            {filters.status === "pending" ? "Send Date" : "Sent on"}
-            <br />
-            {formattedSendDate}
-          </Typography>
-        </ListItem>
-      );
-    }
+  return (
+    <ListStyles>
+      {getFiltered(notifications).map(
+        ({
+          id,
+          first_name,
+          last_name,
+          send_date,
+          subject,
+          name,
+          series,
+          team_member_id
+        }) => {
+          const formattedSendDate = moment(send_date)
+            .add(1, "hours")
+            .format("MMMM Do");
+          return (
+            <ListItem
+              key={id}
+              className={classes.listItem}
+              onClick={() =>
+                history.push(`/home/team-member/${team_member_id}`)
+              }
+            >
+              <ListItemIcon>{displayedLogo[name]}</ListItemIcon>
+              <ListItemText
+                primary={`${subject} | ${series}`}
+                secondary={`${first_name} ${last_name}`}
+              />
+              <Typography className={classes.send_date}>
+                {filters.status === "pending" ? "Send Date" : "Sent on"}
+                <br />
+                {formattedSendDate}
+              </Typography>
+            </ListItem>
+          );
+        }
+      )}
+    </ListStyles>
   );
-  return <ListStyles>{formatted}</ListStyles>;
 }
 
 const mapStateToProps = state => ({

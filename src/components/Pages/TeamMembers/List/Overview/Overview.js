@@ -10,10 +10,8 @@ import { ListItem, ListItemText } from "@material-ui/core/";
 import { ListStyles, styles } from "./styles.js";
 
 function Overview({
-  pagination,
-  search,
   user_id,
-  filter,
+  getFiltered,
   getTeamMembers: getMemberFromProps,
   deleteTeamMember: deleteMemberFromProps,
   teamMembers,
@@ -24,34 +22,33 @@ function Overview({
     getMemberFromProps(user_id);
   }, [getMemberFromProps, user_id]);
 
-  const setFilter = { items: teamMembers, pagination, search };
-  const filtered = filter(setFilter);
-  const routeToMember = id => {
-    history.push(`/home/team-member/${id}`);
-  };
-
-  const formatted = filtered.map(
-    ({ first_name, last_name, job_description, id, user_id }) => {
-      return (
-        <ListItem key={id} className={classes.listItem}>
-          <ListItemText
-            primary={first_name + " " + last_name}
-            secondary={`Job: ${job_description}`}
-            onClick={() => routeToMember(id)}
-          />
-          <div>
-            <TeamMemberOptions
-              routeToMemberPage={() => routeToMember(id)}
-              handleDelete={() => deleteMemberFromProps(id)}
-              teamMemberID={id}
-              user_id={user_id}
-            />
-          </div>
-        </ListItem>
-      );
-    }
+  return (
+    <ListStyles>
+      {getFiltered(teamMembers).map(
+        ({ first_name, last_name, job_description, id, user_id }) => {
+          return (
+            <ListItem key={id} className={classes.listItem}>
+              <ListItemText
+                primary={first_name + " " + last_name}
+                secondary={`Job: ${job_description}`}
+                onClick={() => history.push(`/home/team-member/${id}`)}
+              />
+              <div>
+                <TeamMemberOptions
+                  routeToMemberPage={() =>
+                    history.push(`/home/team-member/${id}`)
+                  }
+                  handleDelete={() => deleteMemberFromProps(id)}
+                  teamMemberID={id}
+                  user_id={user_id}
+                />
+              </div>
+            </ListItem>
+          );
+        }
+      )}
+    </ListStyles>
   );
-  return <ListStyles>{formatted}</ListStyles>;
 }
 
 const mapStateToProps = state => ({

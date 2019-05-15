@@ -67,52 +67,6 @@ const ContactModal = props => {
 
 export default withStyles(styles)(ContactModal);
 
-// const styles = theme => ({
-//   form: {
-//     width: "75%",
-//     margin: "0 auto",
-//     display: "flex",
-//     flexDirection: "column",
-//     justifyContent: "center"
-//   },
-//   textField: {
-//     marginLeft: theme.spacing.unit,
-//     marginRight: theme.spacing.unit,
-//     width: "100%",
-//     margin: "15px auto"
-//   },
-//   button: {
-//     background: "#451476",
-//     color: "white",
-//     margin: "0 auto",
-//     "&:hover": {
-//       background: "#591a99",
-//       color: "white"
-//     }
-//   }
-// });
-
-// const ContactContainer = styled.div`
-//   display: flex;
-//   justify-content: center;
-//   flex-direction: column;
-//   width: 95%;
-//   margin: 40px auto;
-//   background-color: #fafafa;
-//   padding: 30px 20px;
-//   box-sizing: border-box;
-//   h3 {
-//     color: #451476;
-//     font-size: 32px;
-//     text-align: center;
-//     margin: 0;
-//     margin-bottom: 5px;
-//   }
-//   @media (max-width: 1000px) {
-//     width: 100%;
-//   }
-// `;
-
 const ContactModalWrapper = styled.div`
   width: 100vw;
   height: 100vh;

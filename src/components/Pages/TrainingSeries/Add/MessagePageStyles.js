@@ -27,15 +27,12 @@ export const styles = theme => ({
     margin: "20px auto"
   },
   form: {
-    // width: "100%",
     margin: "0 auto"
   },
   info: {
     "margin-right": "50px"
   },
   textField: {
-    // marginLeft: theme.spacing.unit,
-    // marginRight: theme.spacing.unit,
     width: "80%",
     margin: "15px auto"
   },
@@ -46,7 +43,6 @@ export const styles = theme => ({
     "margin-left": theme.spacing.unit
   },
   saveButton: {
-    // margin: 5,
     "margin-left": theme.spacing.unit,
     color: "#451476",
     "&:hover": {

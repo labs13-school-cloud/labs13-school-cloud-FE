@@ -102,8 +102,6 @@ class UserModal extends React.Component {
         <IconButton className={classes.fab} onClick={this.handleOpen}>
           <EditIcon />
         </IconButton>
-
-        {/* <Button onClick={this.handleOpen}>Edit</Button> */}
         <Modal
           aria-labelledby="simple-modal-title"
           aria-describedby="simple-modal-description"

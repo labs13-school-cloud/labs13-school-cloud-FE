@@ -12,15 +12,12 @@ export const styles = theme => ({
 
     "@media (max-width: 768px)": {
       textAlign: "center"
-      // padding: "30px"
     }
   },
   container: {
     display: "flex",
-    // flexWrap: "wrap",
     "flex-direction": "column",
     "align-items": "center"
-    // "align-items": "baseline"
   },
   textField: {
     marginLeft: theme.spacing.unit,

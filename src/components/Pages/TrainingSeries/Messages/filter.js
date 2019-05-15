@@ -6,9 +6,9 @@ const noSearch = [
   "days_from_start"
 ];
 
-export default ({ ts_id, messages, search }) => {
+export default ({ ts_id, items, search, setMax }) => {
   search = search.toLowerCase();
-  return messages
+  const filtered = items
     .filter(message => message.training_series_id === parseInt(ts_id, 10))
     .filter(message => {
       for (let property in message) {
@@ -19,16 +19,18 @@ export default ({ ts_id, messages, search }) => {
         }
       }
       return false;
-    })
-    .sort((a, b) =>
-      a.days_from_start > b.days_from_start
-        ? 1
-        : b.days_from_start > a.days_from_start
-        ? -1
-        : 0
-    );
-};
+    });
 
+  setMax(filtered.length);
+
+  return filtered.sort((a, b) =>
+    a.days_from_start > b.days_from_start
+      ? 1
+      : b.days_from_start > a.days_from_start
+      ? -1
+      : 0
+  );
+};
 // Sample message
 // {
 //     subject,

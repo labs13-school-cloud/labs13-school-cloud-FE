@@ -1,7 +1,5 @@
 import React from "react";
 
-//import { MemberInfoContainer } from "../styles.js";
-
 function SelectSlackID({ updateMember, state }) {
   return (
     <>

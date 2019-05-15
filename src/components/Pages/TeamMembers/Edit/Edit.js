@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import EditTeamMember from "../Add/";
 import NotificationsCard from "components/Pages/Notifications/Card/";
 import TeamMemberNotifications from "components/Pages/Notifications/Card/TeamMember";
-//import Snackbar from "components/UI/Snackbar/Snackbar";
 
 import {
   editTeamMember,

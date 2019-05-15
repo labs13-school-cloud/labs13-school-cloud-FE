@@ -18,7 +18,7 @@ function Messages(props) {
   const [isSearching, setIsSearching] = useState(false);
   const [count, setCount] = useState(0);
 
-  const { classes, List, ts_id: training_series_id } = props;
+  const { classes, List, ts_id } = props;
 
   return (
     <>
@@ -31,7 +31,7 @@ function Messages(props) {
             onClick={e =>
               props.history.push({
                 pathname: "/home/create-message",
-                state: { training_series_id }
+                state: { training_series_id: ts_id }
               })
             }
           >
@@ -71,11 +71,16 @@ function Messages(props) {
       )}
       <ListStyles className={classes.listStyle}>
         <List
-          filter={filter}
+          getFiltered={items =>
+            filter({
+              ts_id,
+              items,
+              search: search.toLowerCase(),
+              setMax: setCount
+            })
+          }
           search={search.toLowerCase()}
           history={props.history}
-          setCount={setCount}
-          ts_id={props.ts_id}
         />
       </ListStyles>
     </>
