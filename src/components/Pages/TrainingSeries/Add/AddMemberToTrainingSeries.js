@@ -77,8 +77,7 @@ function AddMemberToTrainingSeries(props) {
       props.messages.forEach(msg => {
         //find member who has memberID and check what services they have available to them
         roles.forEach(role => {
-          if (msg[`for_${role}`]) {
-            console.log(role);
+          if (msg[`for_${role}`] && idSet[role]) {
             newNotifications.push(getNewNotification(idSet[role], msg));
           }
         });
