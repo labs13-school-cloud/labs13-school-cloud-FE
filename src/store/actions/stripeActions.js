@@ -1,5 +1,4 @@
 import axios from "axios";
-// import { Http2SecureServer } from 'http2';
 
 // GET POSTS
 export const GET_PLANS_START = "GET_PLANS_START";
@@ -88,9 +87,9 @@ export const submit = (
         stripe,
         plan
       })
-      .then(res =>
-        dispatch({ type: POST_SUBSCRIBE_SUCCESS, payload: res.data })
-      )
+      .then(res => {
+        dispatch({ type: POST_SUBSCRIBE_SUCCESS, payload: res.data });
+      })
       .catch(err => dispatch({ type: POST_SUBSCRIBE_FAIL, error: err }));
   } else {
     dispatch({
@@ -105,9 +104,9 @@ export const submit = (
         stripe,
         plan
       })
-      .then(res =>
-        dispatch({ type: POST_REGISTERSTRIPE_SUCCESS, payload: res.data })
-      )
+      .then(res => {
+        dispatch({ type: POST_REGISTERSTRIPE_SUCCESS, payload: res.data });
+      })
       .catch(err => dispatch({ type: POST_REGISTERSTRIPE_FAIL, error: err }));
   }
 };

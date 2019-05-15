@@ -28,6 +28,12 @@ const initialState = {
   newUser: true
 };
 
+//returned stripe ids, currently only test versions should be passed back unless App wants to accept real money
+const testPremium = "plan_EyjXqiSYXoKEXf";
+const testPro = "plan_EyjXEzjQkZf78d";
+const livePremium = "plan_Ex95NK1FuaNiWb";
+const livePro = "plan_Ex955Zz8JE0ZuW";
+
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_USER_START:
@@ -75,7 +81,6 @@ const userReducer = (state = initialState, action) => {
         error: ""
       };
     case EDIT_USER_SUCCESS:
-      //console.log(state.userProfile);
       return {
         ...state,
         userProfile: {
@@ -101,45 +106,35 @@ const userReducer = (state = initialState, action) => {
     case POST_SUBSCRIBE_START:
       return {
         ...state,
-        // isLoading: true,
         paymentLoading: true,
         error: ""
       };
 
     case POST_SUBSCRIBE_SUCCESS:
-      let accountTypeID;
-      if (action.payload.plan.id === "plan_EyjXqiSYXoKEXf") {
-        //Live = plan_Ex95NK1FuaNiWb
-        //Test = plan_EyjXqiSYXoKEXf
-
-        accountTypeID = 2;
-      } else if (action.payload.plan.id === "plan_EyjXEzjQkZf78d") {
-        //Live = plan_Ex955Zz8JE0ZuW
-        //Test = plan_EyjXEzjQkZf78d
-        accountTypeID = 3;
+      let sub, maxNotif;
+      if (action.payload.plan.id === testPremium) {
+        sub = "Premium";
+        maxNotif = 200;
+      } else if (action.payload.plan.id === testPro) {
+        sub = "Pro";
+        maxNotif = 1000;
       }
-      let update = {
-        message: state.userProfile.message,
-        user: {
-          user_id: state.userProfile.user.user_id,
-          accountTypeID: accountTypeID,
-          email: state.userProfile.user.email,
-          name: state.userProfile.user.name,
-          stripe: state.userProfile.user.stripe,
-          notificationCount: state.userProfile.user.notificationCount
-        },
-        trainingSeries: [...state.userProfile.trainingSeries]
-      };
       return {
         ...state,
-        // isLoading: false,
         paymentLoading: false,
-        userProfile: update
+        userProfile: {
+          ...state.userProfile,
+          user: {
+            ...state.userProfile.user,
+            subscription: sub,
+            stripe: state.userProfile.user.stripe,
+            max_notification_count: maxNotif
+          }
+        }
       };
     case POST_SUBSCRIBE_FAIL:
       return {
         ...state,
-        // isLoading: false,
         paymentLoading: false,
         error: action.payload
       };
@@ -152,37 +147,26 @@ const userReducer = (state = initialState, action) => {
       };
 
     case POST_REGISTERSTRIPE_SUCCESS:
-      let accountTypeID2;
-      if (
-        action.payload.subscriptions.data[0].plan.id === "plan_Ex955Zz8JE0ZuW"
-      ) {
-        //Live = plan_Ex95NK1FuaNiWb
-        //Test = plan_EyjXqiSYXoKEXf
-        accountTypeID2 = 2;
-      } else if (
-        action.payload.subscriptions.data[0].plan.id === "plan_EyjXEzjQkZf78d"
-      ) {
-        //Live = plan_Ex955Zz8JE0ZuW
-        //Test = plan_EyjXEzjQkZf78d
-        accountTypeID2 = 3;
+      if (action.payload.subscriptions.data[0].plan.id === testPremium) {
+        sub = "Premium";
+        maxNotif = 200;
+      } else if (action.payload.subscriptions.data[0].plan.id === testPro) {
+        sub = "Pro";
+        maxNotif = 1000;
       }
 
-      let update3 = {
-        message: state.userProfile.message,
-        user: {
-          user_id: state.userProfile.user.user_id,
-          accountTypeID: accountTypeID2,
-          email: state.userProfile.user.email,
-          name: state.userProfile.user.name,
-          stripe: action.payload.id,
-          notificationCount: state.userProfile.user.notificationCount
-        },
-        trainingSeries: [...state.userProfile.trainingSeries]
-      };
       return {
         ...state,
         isLoading: false,
-        userProfile: update3
+        userProfile: {
+          ...state.userProfile,
+          user: {
+            ...state.userProfile.user,
+            subscription: sub,
+            stripe: action.payload.id,
+            max_notification_count: maxNotif
+          }
+        }
       };
     case POST_REGISTERSTRIPE_FAIL:
       return {
@@ -191,31 +175,26 @@ const userReducer = (state = initialState, action) => {
         error: action.payload
       };
 
-    // UNSUBSCRIPE
+    // UNSUBSCRIBE
     case POST_UNSUBSCRIBE_START:
       return {
         ...state,
         isLoading: true,
         error: ""
       };
-
     case POST_UNSUBSCRIBE_SUCCESS:
-      let update2 = {
-        message: state.userProfile.message,
-        user: {
-          user_id: state.userProfile.user.user_id,
-          accountTypeID: 1,
-          email: state.userProfile.user.email,
-          name: state.userProfile.user.name,
-          stripe: state.userProfile.user.stripe,
-          notificationCount: state.userProfile.user.notificationCount
-        },
-        trainingSeries: [...state.userProfile.trainingSeries]
-      };
       return {
         ...state,
         isLoading: false,
-        userProfile: update2
+        userProfile: {
+          ...state.userProfile,
+          user: {
+            ...state.userProfile.user,
+            subscription: "free",
+            stripe: null,
+            max_notification_count: 50
+          }
+        }
       };
     case POST_UNSUBSCRIBE_FAIL:
       return {
