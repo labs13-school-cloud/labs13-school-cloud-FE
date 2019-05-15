@@ -70,6 +70,7 @@ function Card(props) {
           filter={filter}
           filters={filters}
           member_id={props.member_id}
+          history={props.history}
         />
         {!notificationsCount && (
           <MessageContainer>

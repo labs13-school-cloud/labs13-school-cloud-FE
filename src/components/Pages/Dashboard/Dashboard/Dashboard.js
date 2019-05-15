@@ -38,7 +38,11 @@ function Dashboard(props) {
               handleAdd={() => history.push("/home/create-training-series")}
             />
           </SmallColumns>
-          <NotificationsCard List={NotificationsOverview} user_id={user_id} />
+          <NotificationsCard
+            List={NotificationsOverview}
+            user_id={user_id}
+            history={props.history}
+          />
         </TripleColumn>
       )}
 
