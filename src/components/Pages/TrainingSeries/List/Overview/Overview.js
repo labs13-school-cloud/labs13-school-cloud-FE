@@ -14,9 +14,7 @@ import SlideDownModal from "components/UI/Modals/SlideDownModal";
 import { ListStyles, styles } from "./styles.js";
 
 function Overview({
-  pagination,
-  search,
-  filter,
+  getFiltered,
   user_id,
   getTrainingSeries: getTSFromProps,
   getAllMessages: getMessagesFromProps,
@@ -32,35 +30,37 @@ function Overview({
     getMessagesFromProps();
   }, [getTSFromProps, getMessagesFromProps]);
 
-  const setFilter = { items: trainingSeries, pagination, search };
-  const filtered = filter(setFilter);
+  return (
+    <ListStyles>
+      {getFiltered(trainingSeries).map(({ title, id, user: email }) => {
+        const tsMessages = messages.filter(msg => {
+          return msg.training_series_id === id;
+        });
+        const userCount = new Set(
+          notifications
+            .filter(n => n.training_series_id === id)
+            .map(n => n.team_member_id)
+        ).size;
 
-  const formatted = filtered.map(({ title, id, user: email }) => {
-    const tsMessages = messages.filter(msg => {
-      return msg.training_series_id === id;
-    });
-    const userCount = new Set(
-      notifications
-        .filter(n => n.training_series_id === id)
-        .map(n => n.team_member_id)
-    ).size;
-
-    return (
-      <ListItem key={id} component="li" className={classes.listItem}>
-        <ListItemText
-          primary={title}
-          secondary={`Messages: ${tsMessages.length} | Assigned: ${userCount}`}
-          onClick={e => history.push(`/home/training-series/${id}`)}
-        />
-        <SlideDownModal
-          deleteTrainingSeries={deleteTSFromProps}
-          data={{ title, id, user: email }}
-          user_id={user_id}
-        />
-      </ListItem>
-    );
-  });
-  return <ListStyles>{formatted}</ListStyles>;
+        return (
+          <ListItem key={id} component="li" className={classes.listItem}>
+            <ListItemText
+              primary={title}
+              secondary={`Messages: ${
+                tsMessages.length
+              } | Assigned: ${userCount}`}
+              onClick={e => history.push(`/home/training-series/${id}`)}
+            />
+            <SlideDownModal
+              deleteTrainingSeries={deleteTSFromProps}
+              data={{ title, id, user: email }}
+              user_id={user_id}
+            />
+          </ListItem>
+        );
+      })}
+    </ListStyles>
+  );
 }
 
 const mapStateToProps = state => ({
