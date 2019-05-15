@@ -12,11 +12,9 @@ import { ListStyles, styles } from "./styles.js";
 
 function Overview(props) {
   const {
-    offset,
-    filter,
+    pagination,
     filters,
-    limit,
-    countNotifications,
+    filter,
     getNotifications: getNotificationsFromProps,
     notifications,
     classes
@@ -26,12 +24,7 @@ function Overview(props) {
     getNotificationsFromProps();
   }, [getNotificationsFromProps]);
 
-  const setFilters = {
-    items: notifications,
-    offset,
-    limit,
-    filters
-  };
+  const setFilters = { items: notifications, pagination, filters };
 
   const formatted = filter(setFilters).map(
     ({
@@ -69,8 +62,6 @@ function Overview(props) {
       );
     }
   );
-  countNotifications(formatted.length);
-
   return <ListStyles>{formatted}</ListStyles>;
 }
 

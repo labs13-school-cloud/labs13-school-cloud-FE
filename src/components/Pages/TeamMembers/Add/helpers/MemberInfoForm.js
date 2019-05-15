@@ -41,7 +41,6 @@ function MemberInfoForm({ classes, state, updateMember }) {
       <MemberInfoContainer>
         <NumberFormat
           format="+1 (###) ###-####"
-          // mask='_'
           type="tel"
           inputProps={{ minLength: 10 }}
           id="standard-name"
