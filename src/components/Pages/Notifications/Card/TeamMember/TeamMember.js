@@ -19,11 +19,9 @@ import TextsmsOutlined from "@material-ui/icons/TextsmsOutlined";
 import EmailOutlined from "@material-ui/icons/EmailOutlined";
 
 function TeamMember({
-  offset,
+  pagination,
   filter,
   filters,
-  limit,
-  countNotifications,
   getNotifications,
   notifications,
   classes,
@@ -47,8 +45,7 @@ function TeamMember({
 
   const setFilters = {
     items: notifications,
-    offset,
-    limit,
+    pagination,
     filters,
     member_id
   };
@@ -76,8 +73,6 @@ function TeamMember({
       );
     }
   );
-
-  countNotifications(formatted.length);
 
   return <ListStyles>{formatted}</ListStyles>;
 }
