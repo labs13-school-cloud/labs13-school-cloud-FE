@@ -30,7 +30,7 @@ function Overview(props) {
     classes,
     history
   } = props;
-  console.log(classes);
+
   useEffect(() => {
     getNotificationsFromProps();
   }, [getNotificationsFromProps]);
