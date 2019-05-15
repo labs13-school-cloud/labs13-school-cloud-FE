@@ -14,7 +14,7 @@ import SlideDownModal from "components/UI/Modals/SlideDownModal";
 import { ListStyles, styles } from "./styles.js";
 
 function Overview({
-  pagination: { offset, limit, setMax },
+  pagination,
   search,
   filter,
   user_id,
@@ -32,7 +32,7 @@ function Overview({
     getMessagesFromProps();
   }, [getTSFromProps, getMessagesFromProps]);
 
-  const setFilter = { items: trainingSeries, offset, limit, search };
+  const setFilter = { items: trainingSeries, pagination, search };
   const filtered = filter(setFilter);
 
   const formatted = filtered.map(({ title, id, user: email }) => {
@@ -60,7 +60,6 @@ function Overview({
       </ListItem>
     );
   });
-  setMax(formatted.length);
   return <ListStyles>{formatted}</ListStyles>;
 }
 

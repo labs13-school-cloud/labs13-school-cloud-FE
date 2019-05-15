@@ -15,7 +15,6 @@ import { MessageContainer, styles } from "./styles.js";
 function SearchCard(props) {
   const [itemCount, setItemCount] = useState(0);
   const search = useState("");
-
   const [offset, setOffset] = useState(0);
 
   const {
@@ -30,7 +29,7 @@ function SearchCard(props) {
   } = props;
   const limit = props.limit || 5;
 
-  const pagination = { offset: offset, limit: limit, setMax: setItemCount };
+  const pagination = { offset, limit, setMax: setItemCount };
   return (
     <Paper data-tour={containerTourNum} className={classes.root} elevation={2}>
       <CardHeader
