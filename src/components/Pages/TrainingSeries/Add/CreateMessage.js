@@ -207,7 +207,7 @@ class CreateMessage extends React.Component {
                 onClick={e =>
                   this.props.history.push(
                     `/home/training-series/${
-                      this.props.location.state.training_series_id
+                      this.state.messages.training_series_id
                     }`
                   )
                 }
