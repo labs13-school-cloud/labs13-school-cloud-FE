@@ -81,23 +81,30 @@ function AddMemberToTrainingSeries(props) {
     });
 
     setMemberComMethods([...workArray, memberMethod]); //add member to list
-    console.log(memberComMethods);
   };
 
   const handleSubmit = e => {
     e.preventDefault();
+
+    const currentTrainingSeries = props.trainingSeries.filter(
+      series => parseInt(series.id) === parseInt(props.match.params.id)
+    )[0];
+
     if (!activeMembers.length) return;
     const newNotifications = [];
     let roles = getRoles(props.messages[0]);
     activeMembers.forEach(idSet => {
-      props.messages.forEach(msg => {
-        //find member who has memberID and check what services they have available to them
-        roles.forEach(role => {
-          if (msg[`for_${role}`] && idSet[role]) {
-            newNotifications.push(getNewNotification(idSet[role], msg));
-          }
+      props.messages
+        .filter(msg => msg.training_series_id === currentTrainingSeries.id)
+        .forEach(msg => {
+          //need to filter through these messages to make sure theyre a part of this training series
+          //find member who has memberID and check what services they have available to them
+          roles.forEach(role => {
+            if (msg[`for_${role}`] && idSet[role]) {
+              newNotifications.push(getNewNotification(idSet[role], msg));
+            }
+          });
         });
-      });
     });
     newNotifications.forEach(n => {
       memberComMethods.map(member => {
@@ -121,6 +128,7 @@ function AddMemberToTrainingSeries(props) {
             series => parseInt(series.id) === parseInt(props.match.params.id)
           )[0].title}
       </h1>
+      {/* need to filter these messages to get current series messages only */}
       <p>
         Employee's will be sent {props.messages.length} message(s) throughout
         this training series.
