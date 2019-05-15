@@ -17,12 +17,13 @@ function Card(props) {
   const [offset, setOffset] = useState(0);
   const [notificationsCount, setNotificationsCount] = useState(0);
 
-  const { classes, Notifications } = props;
+  const { classes, List } = props;
   const limit = props.limit || 5;
 
   const filters = { status: statusFilter, service: serviceFilter };
   const title =
     statusFilter === "pending" ? `${notificationsCount} Pending` : "Sent";
+  const pagination = { limit, offset, setMax: setNotificationsCount };
 
   return (
     <Paper data-tour="5" className={classes.root} elevation={2}>
@@ -64,12 +65,10 @@ function Card(props) {
         </div>
       </div>
       <Suspense fallback={<div>Loading...</div>}>
-        <Notifications
-          offset={offset}
+        <List
+          pagination={pagination}
           filter={filter}
           filters={filters}
-          limit={limit}
-          countNotifications={setNotificationsCount}
           member_id={props.member_id}
         />
         {!notificationsCount && (
@@ -77,7 +76,7 @@ function Card(props) {
             <p>
               {props.isLoading
                 ? "Loading your Notifications."
-                : "You do not have any pending messages."}
+                : "You do not have any pending Notifications."}
             </p>
           </MessageContainer>
         )}
