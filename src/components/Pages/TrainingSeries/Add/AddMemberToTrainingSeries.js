@@ -100,8 +100,10 @@ function AddMemberToTrainingSeries(props) {
       });
     });
     newNotifications.forEach(n => {
-      console.log("ADDING NOTIFICATION", n);
       memberComMethods.map(member => {
+        //this looks at the communication methods set by clicking o nthe radio buttons.
+        //it then assigns which type of notification should be sent out based on what you clicked.
+        //if you forgot to click anything, it defaults to SMS.
         if (n.team_member_id === member.id) {
           n.service_id = member.method;
         }
