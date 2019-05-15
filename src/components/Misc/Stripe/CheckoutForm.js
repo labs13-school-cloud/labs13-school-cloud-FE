@@ -51,7 +51,8 @@ const styles = theme => ({
   },
   formControl: {
     display: "flex",
-    margin: "15px 5px"
+    margin: "15px 5px",
+    whiteSpace: "nowrap"
   },
   paymentForm: {
     display: "flex",
@@ -180,6 +181,7 @@ class CheckoutForm extends Component {
   };
 
   handleChange = (e, nickname) => {
+    console.log("nickname: ", nickname, "name: ", e.currentTarget.name);
     e.preventDefault();
     if (e.currentTarget.name === "plan") {
       this.setState({
@@ -277,12 +279,10 @@ class CheckoutForm extends Component {
                   <Typography className={classes.feature}>
                     Unlimited Team Members
                   </Typography>
-                  <div className={classes.spread}>
-                    <Typography className={classes.feature}>
-                      Message Limit
-                    </Typography>
-                    <Typography className={classes.feature}>50 / mo</Typography>
-                  </div>
+
+                  <Typography className={classes.feature}>
+                    Message Limit 50/month
+                  </Typography>
                 </div>
                 {freeButton}
               </div>
@@ -295,7 +295,7 @@ class CheckoutForm extends Component {
                     </Typography>
                     <Typography className={classes.price}>
                       ${plan.amount / 100}
-                      <span className={classes.subPrice}> / mo</span>
+                      <span className={classes.subPrice}> / month</span>
                     </Typography>
                     <div className={classes.content}>
                       <Typography className={classes.feature}>
@@ -307,16 +307,13 @@ class CheckoutForm extends Component {
                       <Typography className={classes.feature}>
                         Unlimited Team Members
                       </Typography>
-                      <div className={classes.spread}>
-                        <Typography className={classes.feature}>
-                          Message Limit
-                        </Typography>
-                        <Typography className={classes.feature}>
-                          {plan.nickname === "Premium"
-                            ? "200 / mo"
-                            : "1000 / mo"}
-                        </Typography>
-                      </div>
+
+                      <Typography className={classes.feature}>
+                        Message Limit
+                        {plan.nickname === "Premium"
+                          ? " 200/month"
+                          : " 1000/month"}
+                      </Typography>
                     </div>
                     <Button
                       key={plan.created}
@@ -333,7 +330,7 @@ class CheckoutForm extends Component {
                     </Typography>
                     <Typography className={classes.price}>
                       ${plan.amount / 100}
-                      <span className={classes.subPrice}> / mo</span>
+                      <span className={classes.subPrice}> / month</span>
                     </Typography>
                     <div className={classes.content}>
                       <Typography className={classes.feature}>
@@ -345,16 +342,12 @@ class CheckoutForm extends Component {
                       <Typography className={classes.feature}>
                         Unlimited Team Members
                       </Typography>
-                      <div className={classes.spread}>
-                        <Typography className={classes.feature}>
-                          Message Limit
-                        </Typography>
-                        <Typography className={classes.feature}>
-                          {plan.nickname === "Premium"
-                            ? "200 / mo"
-                            : "1000 / mo"}
-                        </Typography>
-                      </div>
+                      <Typography className={classes.feature}>
+                        Message Limit
+                        {plan.nickname === "Premium"
+                          ? " 200/month"
+                          : " 1000/month"}
+                      </Typography>
                     </div>
                     <Button
                       key={plan.created}

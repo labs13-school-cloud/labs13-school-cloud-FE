@@ -57,7 +57,7 @@ const rows = [
     <span>&#10004;</span>,
     <span>&#10004;</span>
   ),
-  createData("Message Limit", "50/mo", "200/mo", "1000/mo")
+  createData("Message Limit", "50/month", "200/month", "1000/month")
 ];
 class Pricing extends React.Component {
   scrollToTop(e) {
@@ -171,7 +171,7 @@ class Pricing extends React.Component {
                 <Typography className={classes.feature}>
                   Message Limit
                 </Typography>
-                <Typography className={classes.feature}>50 / mo</Typography>
+                <Typography className={classes.feature}>50 / month</Typography>
               </div>
             </div>
             <Button
@@ -180,13 +180,13 @@ class Pricing extends React.Component {
               onClick={login}
             >
               Sign Up
-            </Button>{" "}
+            </Button>
           </div>
           <div className={classes.subCard}>
             <Typography className={classes.title}>Premium</Typography>
             <Typography className={classes.price}>
               $5
-              <span className={classes.subPrice}> / mo</span>
+              <span className={classes.subPrice}> / month</span>
             </Typography>{" "}
             <div className={classes.content}>
               <Typography className={classes.feature}>
@@ -202,7 +202,7 @@ class Pricing extends React.Component {
                 <Typography className={classes.feature}>
                   Message Limit
                 </Typography>
-                <Typography className={classes.feature}>200 / mo</Typography>
+                <Typography className={classes.feature}>200 / month</Typography>
               </div>
             </div>
             <Button
@@ -211,13 +211,13 @@ class Pricing extends React.Component {
               onClick={login}
             >
               Sign Up
-            </Button>{" "}
+            </Button>
           </div>
           <div className={classes.subCard}>
             <Typography className={classes.title}>Pro</Typography>
             <Typography className={classes.price}>
               $10
-              <span className={classes.subPrice}> / mo</span>
+              <span className={classes.subPrice}> / month</span>
             </Typography>{" "}
             <div className={classes.content}>
               <Typography className={classes.feature}>
@@ -233,7 +233,9 @@ class Pricing extends React.Component {
                 <Typography className={classes.feature}>
                   Message Limit
                 </Typography>
-                <Typography className={classes.feature}>1000 / mo</Typography>
+                <Typography className={classes.feature}>
+                  1000 / month
+                </Typography>
               </div>
             </div>
             <Button
@@ -242,7 +244,7 @@ class Pricing extends React.Component {
               onClick={login}
             >
               Sign Up
-            </Button>{" "}
+            </Button>
           </div>
         </FirstSection>
         <FooterContainer>
