@@ -24,5 +24,10 @@ export const styles = {
   sendDate: {
     fontSize: 13,
     textAlign: "right"
+  },
+  listItemIcon: {
+    height: "100%",
+    width: "50px",
+    margin: "0px -13px"
   }
 };
