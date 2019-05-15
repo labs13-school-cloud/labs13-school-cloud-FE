@@ -64,8 +64,8 @@ class DashboardTour extends Component {
             <p>
               We're super glad to have you as a part of Training Bot. Take a
               poke around, and please don't hesitate to
-              <Link to="/team"> contact us</Link> if you have any questions or
-              concerns!
+              <Link to="/home/contact"> contact us</Link> if you have any
+              questions or concerns!
             </p>
             <ImageContainer>
               <Progress />

@@ -9,6 +9,7 @@ import AddTeamMember from "components/Pages/TeamMembers/Add/";
 import CreateMessage from "components/Pages/TrainingSeries/Add/CreateMessage";
 import MessagePage from "components/Pages/TrainingSeries/Add/MessagePage";
 import HelpModal from "components/UI/HelpModal/HelpModal.js";
+import ContactModal from "components/UI/ContactModal/ContactModal.js";
 
 import AddMemberToTrainingSeries from "components/Pages/TrainingSeries/Add/AddMemberToTrainingSeries.js";
 
@@ -37,8 +38,6 @@ function Routes(props) {
           />
         )}
       />
-      {/*
-        <Router history={history}>
       <Route
         exact
         path="/home/contact"
@@ -48,7 +47,8 @@ function Routes(props) {
             history={props.history}
             userId={props.user.id}
           />
-          */}
+        )}
+      />
       <Route
         exact
         path="/home"
