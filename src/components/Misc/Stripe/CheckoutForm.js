@@ -181,7 +181,6 @@ class CheckoutForm extends Component {
   };
 
   handleChange = (e, nickname) => {
-    console.log("nickname: ", nickname, "name: ", e.currentTarget.name);
     e.preventDefault();
     if (e.currentTarget.name === "plan") {
       this.setState({
