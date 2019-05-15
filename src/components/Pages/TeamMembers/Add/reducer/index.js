@@ -36,7 +36,10 @@ export const reducer = (state, action) => {
         teamMember: { ...state.teamMember, [action.key]: action.payload }
       };
     case "EDITING_MEMBER":
-      return { ...state, teamMember: action.payload };
+      return {
+        ...state,
+        teamMember: { ...state.teamMember, ...action.payload }
+      };
     case "CLEAR_MEMBER":
       return { ...state, teamMember: emptyUser };
     case "TOGGLE_ROUTING":
