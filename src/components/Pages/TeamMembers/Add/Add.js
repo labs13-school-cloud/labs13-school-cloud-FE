@@ -1,5 +1,4 @@
 import React, { useReducer, useEffect } from "react";
-import axios from "axios";
 import { connect } from "react-redux";
 
 import { addTeamMember, getTeamMembers } from "store/actions";
@@ -28,12 +27,6 @@ function Add(props) {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
-    async function getSlackUsers() {
-      const url = `${process.env.REACT_APP_API}/api/slack/`;
-      const { data } = await axios.get(url);
-      dispatch({ type: "UPDATE_SLACK_USERS", payload: data });
-    }
-    getSlackUsers();
     getTeamMembersFromProps(user_id);
     dispatch({ type: "UPDATE_MEMBER", key: "user_id", payload: user_id });
     if (teamMember) {
@@ -43,13 +36,13 @@ function Add(props) {
 
   useEffect(() => {
     // Checks input conditions.  If all required field conditions are met, Add Member button is activated
-    const { first_name, last_name, job_description } = state.teamMember;
     const payload = !(
-      first_name.length &&
-      last_name.length &&
-      job_description.length &&
+      state.teamMember.first_name &&
+      state.teamMember.last_name &&
+      state.teamMember.job_description &&
       !phoneNumberTest(state.teamMember.phone_number)
     );
+
     dispatch({ type: "UPDATE_DISABLED", payload });
   }, [state.teamMember]);
 
@@ -97,12 +90,18 @@ function Add(props) {
             updateMember={updateMember}
             classes={classes}
           />
-          <Relationships
-            state={state}
-            dispatch={dispatch}
-            teamMembers={props.teamMembers}
-          />
-          <SelectSlackID state={state} updateMember={updateMember} />
+          <div className={classes.root}>
+            <Relationships
+              state={state}
+              dispatch={dispatch}
+              teamMembers={props.teamMembers}
+            />
+            <SelectSlackID
+              state={state}
+              updateMember={updateMember}
+              dispatch={dispatch}
+            />
+          </div>
           {teamMember ? (
             <EditButtons state={state} />
           ) : (
