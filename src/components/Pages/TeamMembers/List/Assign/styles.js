@@ -3,7 +3,6 @@ import styled from "styled-components";
 export const styles = theme => ({
   listStyle: {
     display: "flex",
-
     padding: "5px"
   },
   listItem: {
@@ -35,4 +34,11 @@ export const styles = theme => ({
 
 export const ListStyles = styled.div`
   display: flex;
+  transition: background-color 0.3s;
+  &:hover {
+    width: 100%;
+    cursor: pointer;
+    background-color: whitesmoke;
+  }
+  border-bottom: 1px solid #e1e1e1;
 `;

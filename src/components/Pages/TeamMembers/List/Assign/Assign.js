@@ -5,7 +5,7 @@ import { styles, ListStyles } from "./styles.js";
 import { withStyles } from "@material-ui/core/styles";
 import { ListItem, ListItemText } from "@material-ui/core/";
 
-function Assign({ classes, teamMembers }) {
+function Assign({ classes, teamMembers, history }) {
   return (
     <>
       {teamMembers.map(member => {
@@ -15,7 +15,10 @@ function Assign({ classes, teamMembers }) {
           .format("MMMM Do, YYYY");
         return (
           <ListStyles key={member.id}>
-            <ListItem className={classes.listItem}>
+            <ListItem
+              className={classes.listItem}
+              onClick={e => history.push(`/home/team-member/${member.id}`)}
+            >
               <ListItemText
                 primary={`Member: ${member.first_name} ${member.last_name}`}
                 secondary={`Start Date: ${formattedStartDate}`}

@@ -108,7 +108,7 @@ function AddMemberToTrainingSeries(props) {
     });
     newNotifications.forEach(n => {
       memberComMethods.map(member => {
-        //this looks at the communication methods set by clicking o nthe radio buttons.
+        //this looks at the communication methods set by clicking on the radio buttons.
         //it then assigns which type of notification should be sent out based on what you clicked.
         //if you forgot to click anything, it defaults to SMS.
         if (n.team_member_id === member.id) {
@@ -119,6 +119,14 @@ function AddMemberToTrainingSeries(props) {
     });
     props.history.push(`/home/training-series/${props.match.params.id}`);
   };
+
+  //grabs list of all tmIDs currently assigned to TS (they have a notification assigned to them and this TS)
+  const filteredMemberIds = props.notifications
+    .filter(n => n.training_series_id === parseInt(props.match.params.id))
+    .map(n => n.team_member_id);
+  const assignedIds = props.teamMembers
+    .filter(m => filteredMemberIds.includes(m.id))
+    .map(m => m.id);
 
   return (
     <Wrapper>
@@ -141,6 +149,7 @@ function AddMemberToTrainingSeries(props) {
               key={member.id}
               teamMember={member}
               handelAddComMethod={handelAddComMethod}
+              assigned={assignedIds.includes(member.id)}
             />
           );
         })}
@@ -176,7 +185,8 @@ const mapStateToProps = state => {
   return {
     messages: state.messagesReducer.messages,
     teamMembers: state.teamMembersReducer.teamMembers,
-    trainingSeries: state.trainingSeriesReducer.trainingSeries
+    trainingSeries: state.trainingSeriesReducer.trainingSeries,
+    notifications: state.notificationsReducer.notifications
   };
 };
 

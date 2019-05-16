@@ -35,9 +35,9 @@ export const getAllMessages = () => dispatch => {
 export const createAMessage = (message, trainingSeriesID) => dispatch => {
   dispatch({ type: ADD_MESSAGE_START });
   axios
-    .post(`${process.env.REACT_APP_API}/api/messages`, message) //endpoint validated
+    .post(`${process.env.REACT_APP_API}/api/messages`, message)
     .then(res => {
-      dispatch({ type: ADD_MESSAGE_SUCCESS, payload: res.data.newMessage }); //response is correct
+      dispatch({ type: ADD_MESSAGE_SUCCESS, payload: res.data.newMessage });
       history.push(`/home/training-series/${trainingSeriesID}`);
     })
     .catch(err => dispatch({ type: ADD_MESSAGE_FAIL, error: err }));
@@ -47,13 +47,12 @@ export const createAMessage = (message, trainingSeriesID) => dispatch => {
 export const editMessage = (id, updates) => dispatch => {
   dispatch({ type: EDIT_MESSAGE_START });
   axios
-    .put(`${process.env.REACT_APP_API}/api/messages/${id}`, updates) //endpoint validated, but should endpoint now be req.body.updates?
-    .then(
-      res =>
-        dispatch({
-          type: EDIT_MESSAGE_SUCCESS,
-          payload: res.data.updatedMessage
-        }) //response validated
+    .put(`${process.env.REACT_APP_API}/api/messages/${id}`, updates)
+    .then(res =>
+      dispatch({
+        type: EDIT_MESSAGE_SUCCESS,
+        payload: res.data.updatedMessage
+      })
     )
     .catch(err => dispatch({ type: EDIT_MESSAGE_FAIL, error: err }));
 };
@@ -61,10 +60,8 @@ export const editMessage = (id, updates) => dispatch => {
 // DELETE a message
 export const deleteMessage = id => dispatch => {
   dispatch({ type: DELETE_MESSAGE_START });
-  const url = `${process.env.REACT_APP_API}/api/messages/${id}`;
-  console.log(url);
   axios
-    .delete(url) //endpint validated
-    .then(() => dispatch({ type: DELETE_MESSAGE_SUCCESS, payload: id })) //100000%
+    .delete(`${process.env.REACT_APP_API}/api/messages/${id}`)
+    .then(() => dispatch({ type: DELETE_MESSAGE_SUCCESS, payload: id }))
     .catch(err => dispatch({ type: DELETE_MESSAGE_FAIL, error: err }));
 };

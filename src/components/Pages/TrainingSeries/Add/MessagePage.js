@@ -118,7 +118,6 @@ class MessagePage extends React.Component {
                 value={this.state.message.link}
                 onChange={this.handleChange("link")}
                 margin="normal"
-                required
               />
               <TextField
                 id="outlined-number"

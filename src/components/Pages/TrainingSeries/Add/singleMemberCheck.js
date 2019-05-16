@@ -5,9 +5,10 @@ import styled from "styled-components";
 export default function SingleMemberCheck({
   addMember,
   teamMember,
-  handelAddComMethod
+  handelAddComMethod,
+  assigned
 }) {
-  const [checked, setChecked] = useState(false);
+  const [checked, setChecked] = useState(assigned);
 
   const [textChecked, setTextChecked] = useState(false);
   const [emailChecked, setEmailChecked] = useState(false);
