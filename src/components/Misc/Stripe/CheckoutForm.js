@@ -207,7 +207,7 @@ class CheckoutForm extends Component {
     const { name, email, id, stripe } = this.props.userProfile;
     const { plan } = this.state;
     let token = await this.createToken(email);
-    // console.log(token, name, email, id, stripe, plan);
+    console.log(token, name, email, id, stripe, plan);
     if (token !== undefined) {
       await this.props.submit(token, name, email, id, stripe, plan);
       this.setState({
@@ -227,15 +227,15 @@ class CheckoutForm extends Component {
   render() {
     const { classes } = this.props;
     let accountType;
-    if (this.props.userProfile.account_type_id === 2) {
+    if (this.props.userProfile.subscription === "Premium") {
       accountType = "Premium";
-    } else if (this.props.userProfile.account_type_id === 3) {
+    } else if (this.props.userProfile.subscription === "Pro") {
       accountType = "Pro";
     }
 
     let freeButton;
 
-    if (this.props.userProfile.account_type_id > 1) {
+    if (this.props.userProfile.subscription !== "free") {
       freeButton = (
         <Button
           color="primary"
@@ -254,9 +254,6 @@ class CheckoutForm extends Component {
     }
 
     if (this.state.complete) return <h1>Purchase Complete</h1>;
-    // if (this.props.stripeLoading || this.props.userLoading) {
-    // 	return <ProgressCircle />;
-    // } else {
 
     return (
       <div className={classes.root}>

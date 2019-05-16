@@ -112,8 +112,6 @@ class TrainingSeriesModal extends React.Component {
             >
               <i className="material-icons">add</i>
             </Fab>
-
-            // <Button onClick={this.handleOpen}>Add New Training Series</Button>
           )}
         </div>
         <Modal

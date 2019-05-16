@@ -45,7 +45,6 @@ export const createAMessage = (message, trainingSeriesID) => dispatch => {
 
 // PUT a message
 export const editMessage = (id, updates) => dispatch => {
-  //console.log(updates)
   dispatch({ type: EDIT_MESSAGE_START });
   axios
     .put(`${process.env.REACT_APP_API}/api/messages/${id}`, updates) //endpoint validated, but should endpoint now be req.body.updates?

@@ -5,7 +5,6 @@ import MenuItem from "@material-ui/core/MenuItem";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 
 import DeleteModal from "../Modals/deleteModal";
-import MessageModal from "../Modals/MessageModal";
 
 import { withRouter } from "react-router";
 
@@ -25,7 +24,6 @@ class MessageOptionsModal extends React.Component {
   };
 
   render() {
-    //console.log(this.props);
     const { anchorEl } = this.state;
     const open = Boolean(anchorEl);
 
@@ -51,15 +49,6 @@ class MessageOptionsModal extends React.Component {
             }
           }}
         >
-          <MenuItem>
-            {/* <MessageModal
-							trainingSeries={this.props.singleTrainingSeries}
-							createAMessage={this.props.createAMessage}
-							editMessage={this.props.editMessage}
-							modalType="edit"
-							message={this.props.message}
-						/> */}
-          </MenuItem>
           <MenuItem>
             <DeleteModal deleteType="message" id={this.props.message.id} />
           </MenuItem>

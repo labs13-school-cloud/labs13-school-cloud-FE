@@ -16,7 +16,6 @@ export const LoginContent = styled.div`
   width: 25vw;
   display: flex;
   flex-direction: column;
-  /* background-color: #2699fb; */
   justify-content: center;
   align-items: center;
 `;
@@ -68,9 +67,6 @@ export const NavbarItem = styled.a`
 `;
 export const LogoImage = styled.img`
   width: 100px;
-  /* position: absolute;
-	right: 50%;
-	top: 45%; */
 `;
 export const StyledButton = styled(Button)`
   background-color: #451476;

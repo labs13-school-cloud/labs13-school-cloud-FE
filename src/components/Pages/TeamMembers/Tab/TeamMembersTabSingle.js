@@ -20,7 +20,6 @@ function TeamMembersTabSingle(props) {
         setMentor(res.data.teamMember);
       })
       .catch(err => {
-        //I know, this is a hilarious way to do this, but I think it looks a bit cleaner over all hahaha. Change if you want xD
         setMentor({
           first_name: "not assigned",
           last_name: ""
@@ -73,11 +72,6 @@ function TeamMembersTabSingle(props) {
             props.deleteTeamMember(teamMember.id);
           }}
         />
-        {/* <ul>
-                      {teamMember.trainingSeries.map(series => {
-                        return <div>{series}</div>;
-                      })}
-                    </ul> */}
       </TeamsMember>
     </Grid>
   );

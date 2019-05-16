@@ -88,7 +88,6 @@ export const styles = theme => ({
   }
 });
 export const Container = styled.div`
-  /* margin-top: 80px; */
   margin: 0 auto;
   box-sizing: border-box;
   display: flex;

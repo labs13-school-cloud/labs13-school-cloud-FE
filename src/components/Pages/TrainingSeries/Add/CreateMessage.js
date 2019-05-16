@@ -32,7 +32,7 @@ class CreateMessage extends React.Component {
     isUpdating: false,
     message: {
       subject: "",
-      body: "", //should be body
+      body: "",
       link: "",
       days_from_start: 1,
       training_series_id: "",
