@@ -2,6 +2,8 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 
+import styled from "styled-components";
+
 import TeamMemberOptions from "components/UI/Modals/TeamMemberOptions";
 import { getTeamMembers, deleteTeamMember } from "store/actions";
 
@@ -27,7 +29,7 @@ function Overview({
       {getFiltered(teamMembers).map(
         ({ first_name, last_name, job_description, id, user_id }) => {
           return (
-            <ListItem key={id} className={classes.listItem}>
+            <SingleMember key={id} component="li" className={classes.listItem}>
               <ListItemText
                 primary={first_name + " " + last_name}
                 secondary={`Job: ${job_description}`}
@@ -43,7 +45,7 @@ function Overview({
                   user_id={user_id}
                 />
               </div>
-            </ListItem>
+            </SingleMember>
           );
         }
       )}
@@ -59,3 +61,5 @@ export default connect(
   mapStateToProps,
   { getTeamMembers, deleteTeamMember }
 )(withStyles(styles)(Overview));
+
+const SingleMember = styled(ListItem)``;

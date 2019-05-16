@@ -57,7 +57,13 @@ function TeamMembersTabSingle(props) {
           {teamMember.first_name} {teamMember.last_name}
         </Typography>
         <hr />
-        <Typography variant="subtitle2">{teamMember.email}</Typography>
+        <Typography variant="subtitle2">
+          {teamMember.email || (
+            <p style={{ color: "rgba(0,0,0,0.3)", margin: 0 }}>
+              no email assigned
+            </p>
+          )}
+        </Typography>
         <Typography variant="overline">{teamMember.phone_number}</Typography>
         <Typography variant="overline">
           mentor: {`${mentor.first_name} ${mentor.last_name}` || "not assigned"}
