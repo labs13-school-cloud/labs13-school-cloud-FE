@@ -11,6 +11,8 @@ import {
   getTeamMemberByID
 } from "store/actions";
 
+import { EditWrapper } from "./styles.js";
+
 function Edit(props) {
   const {
     match,
@@ -25,23 +27,23 @@ function Edit(props) {
   }, [getTMFromProps, getTSFromProps, match, user_id]);
 
   return (
-    <>
+    <EditWrapper>
       <EditTeamMember user_id={user_id} teamMember={props.teamMember} />
       <NotificationsCard
         limit={10}
         List={TeamMemberNotifications}
         member_id={match.params.id}
+        minWidth="100%"
+        minHeight="100%"
       />
-    </>
+    </EditWrapper>
   );
 }
 
-const mapStateToProps = state => {
-  return {
-    trainingSeries: state.trainingSeriesReducer.trainingSeries,
-    teamMember: state.teamMembersReducer.teamMember
-  };
-};
+const mapStateToProps = state => ({
+  trainingSeries: state.trainingSeriesReducer.trainingSeries,
+  teamMember: state.teamMembersReducer.teamMember
+});
 
 export default connect(
   mapStateToProps,
