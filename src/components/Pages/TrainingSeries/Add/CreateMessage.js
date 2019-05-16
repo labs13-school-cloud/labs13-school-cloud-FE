@@ -84,7 +84,6 @@ class CreateMessage extends React.Component {
         id="form1"
         onSubmit={e => this.handleMessageSubmit(e)}
       >
-        {/* <DeleteModal deleteType='inTeamMemberPage' id={this.props.urlId} /> */}
         <MainContainer>
           <Paper className={classes.root}>
             <Typography variant="title" gutterBottom>
@@ -117,6 +116,7 @@ class CreateMessage extends React.Component {
                 value={this.state.message.link}
                 onChange={this.handleChange("link")}
                 margin="normal"
+                helperText="must be a URI link or this message will not be submittable"
               />
               <TextField
                 id="outlined-number"
