@@ -53,10 +53,17 @@ function Dashboard(props) {
         <TrainingSeriesTab history={props.history} user_id={user_id} />
       )}
       {topTab === "messages" && (
-        <div>
-          <h3>this is temporary until we actually build out this component</h3>
+        <div
+          style={{
+            width: "90vw",
+            marginTop: "48px"
+          }}
+        >
           <NotificationsCard
-            Notifications={NotificationsOverview}
+            style={{
+              width: "100%"
+            }}
+            List={NotificationsOverview}
             history={props.history}
             user_id={user_id}
           />

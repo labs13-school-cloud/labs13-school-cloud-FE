@@ -49,8 +49,8 @@ const PopOverModal = styled.div`
   width: 80%;
   padding: 10px;
   background: white;
-  box-shadow: 0 0 5px (0, 0, 0, 0.2);;
-  border: 1px solid black
+  box-shadow: 0 0 5px (0, 0, 0, 0.2);
+  border: 1px solid black;
   position: absolute;
   top: 35px;
   left: 40px;
