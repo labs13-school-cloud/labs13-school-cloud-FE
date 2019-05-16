@@ -7,6 +7,5 @@ export const DashboardContainer = styled.div`
     max-width: 768px;
     height: 100%;
     flex-direction: column;
-    padding: 10px;
   }
 `;

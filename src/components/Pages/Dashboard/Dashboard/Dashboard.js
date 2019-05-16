@@ -9,6 +9,7 @@ import NotificationsCard from "components/Pages/Notifications/Card";
 import NotificationsOverview from "components/Pages/Notifications/Card/Overview/Overview.js";
 import Responses from "components/Pages/Notifications/Responses";
 import TabNavigation from "./helpers/TabNavigation.js";
+import NotificationsTab from "components/Pages/Notifications/Card/NotificationsTab.js";
 
 import { TripleColumn, SmallColumns, DashWrapper } from "./styles.js";
 
@@ -53,10 +54,17 @@ function Dashboard(props) {
         <TrainingSeriesTab history={props.history} user_id={user_id} />
       )}
       {topTab === "messages" && (
-        <div>
-          <h3>this is temporary until we actually build out this component</h3>
-          <NotificationsCard
-            Notifications={NotificationsOverview}
+        <div
+          style={{
+            width: "90vw",
+            marginTop: "48px"
+          }}
+        >
+          <NotificationsTab
+            style={{
+              width: "100%"
+            }}
+            List={NotificationsOverview}
             history={props.history}
             user_id={user_id}
           />
