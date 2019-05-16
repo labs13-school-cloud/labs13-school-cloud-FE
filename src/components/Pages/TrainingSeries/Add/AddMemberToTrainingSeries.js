@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import moment from "moment";
 import styled from "styled-components";
 
@@ -136,7 +137,7 @@ function AddMemberToTrainingSeries(props) {
           )[0].title}
       </h1>
       <p>
-        Employee's will be sent{" "}
+        Employees will be sent{" "}
         {
           props.messages.filter(
             m => m.training_series_id === parseInt(props.match.params.id)
@@ -156,20 +157,29 @@ function AddMemberToTrainingSeries(props) {
           );
         })}
       </div>
-      <form noValidate>
-        <TextField
-          id="date"
-          label="Start Date"
-          type="date"
-          defaultValue={moment().format("YYYY-MM-DD")}
-          InputLabelProps={{
-            shrink: true
-          }}
-          onChange={e => {
-            setStartDate(e.target.value); //gives a text version of date in YYY-MM-DD
-          }}
-        />
-      </form>
+      {unassignedMembers.length ? (
+        <form noValidate>
+          <TextField
+            id="date"
+            label="Start Date"
+            type="date"
+            defaultValue={moment().format("YYYY-MM-DD")}
+            InputLabelProps={{
+              shrink: true
+            }}
+            onChange={e => {
+              setStartDate(e.target.value); //gives a text version of date in YYY-MM-DD
+            }}
+          />
+        </form>
+      ) : (
+        <p>
+          All your available team members are already assigned to this training
+          series, either click Cancel to return or{" "}
+          <Link to="/home/create-team-member">click here</Link> to create more
+          team members.
+        </p>
+      )}
       <Button
         style={{ margin: "15px" }}
         variant="contained"
@@ -178,6 +188,17 @@ function AddMemberToTrainingSeries(props) {
         onClick={e => handleSubmit(e)}
       >
         submit
+      </Button>
+      <Button
+        style={{ margin: "15px" }}
+        variant="contained"
+        color="accent"
+        type="submit"
+        onClick={e =>
+          props.history.push(`/home/training-series/${props.match.params.id}`)
+        }
+      >
+        cancel
       </Button>
     </Wrapper>
   );
