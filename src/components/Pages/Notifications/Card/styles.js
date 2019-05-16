@@ -9,21 +9,8 @@ export const styles = theme => ({
     flexDirection: "column",
     width: "50%",
     boxSizing: "border-box",
-    minHeight: "533px",
     height: "100%",
-    margin: 5,
-    "@media (max-width: 1400px)": {
-      width: "100%",
-      height: "533px"
-    },
-    "@media (max-width: 1000px)": {
-      width: "100%"
-    },
-
-    "@media (max-width: 768px)": {
-      width: "92%",
-      height: "100%"
-    }
+    margin: "5px auto"
   },
   columnHeader: {
     display: "flex",
@@ -52,4 +39,10 @@ export const MessageContainer = styled.div`
   justify-content: center;
   height: 100%;
   color: lightgray;
+`;
+
+export const CardWrapper = styled.div`
+  min-height: ${props => props.minHeight};
+  min-width: ${props => props.minWidth};
+  width: 100%;
 `;
