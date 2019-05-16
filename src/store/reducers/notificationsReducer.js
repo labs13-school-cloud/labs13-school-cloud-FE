@@ -7,7 +7,10 @@ import {
   ADD_NOTIFICATION_FAIL,
   DELETE_NOTIFICATION_START,
   DELETE_NOTIFICATION_SUCCESS,
-  DELETE_NOTIFICATION_FAIL
+  DELETE_NOTIFICATION_FAIL,
+  UNASSIGN_START,
+  UNASSIGN_SUCCESS,
+  UNASSIGN_FAIL
 } from "../actions";
 
 const initialState = {
@@ -61,6 +64,24 @@ const notificationsReducer = (state = initialState, action) => {
         notifications: state.notifications.filter(n => n.id !== action.payload)
       };
     case DELETE_NOTIFICATION_FAIL:
+      return {
+        ...state,
+        error: action.error
+      };
+    // unassigned member
+    case UNASSIGN_START:
+      return {
+        ...state,
+        error: ""
+      };
+    case UNASSIGN_SUCCESS:
+      return {
+        ...state,
+        notifications: state.notifications.filter(
+          n => !action.payload.includes(n.id)
+        )
+      };
+    case UNASSIGN_FAIL:
       return {
         ...state,
         error: action.error

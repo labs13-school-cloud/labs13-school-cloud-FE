@@ -6,7 +6,7 @@ export const styles = theme => ({
     padding: "5px"
   },
   listItem: {
-    width: "79%",
+    width: "100%",
     height: 95,
     display: "flex",
 
@@ -41,4 +41,13 @@ export const ListStyles = styled.div`
     background-color: whitesmoke;
   }
   border-bottom: 1px solid #e1e1e1;
+`;
+
+export const ListButtonContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  margin-left: 40px;
+  padding-right: 5px;
 `;

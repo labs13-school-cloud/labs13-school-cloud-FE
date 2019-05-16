@@ -124,10 +124,9 @@ function AddMemberToTrainingSeries(props) {
   const filteredMemberIds = props.notifications
     .filter(n => n.training_series_id === parseInt(props.match.params.id))
     .map(n => n.team_member_id);
-  const assignedIds = props.teamMembers
-    .filter(m => filteredMemberIds.includes(m.id))
-    .map(m => m.id);
-
+  const unassignedMembers = props.teamMembers.filter(
+    m => !filteredMemberIds.includes(m.id)
+  );
   return (
     <Wrapper>
       <h1>
@@ -136,20 +135,23 @@ function AddMemberToTrainingSeries(props) {
             series => parseInt(series.id) === parseInt(props.match.params.id)
           )[0].title}
       </h1>
-      {/* need to filter these messages to get current series messages only */}
       <p>
-        Employee's will be sent {props.messages.length} message(s) throughout
-        this training series.
+        Employee's will be sent{" "}
+        {
+          props.messages.filter(
+            m => m.training_series_id === parseInt(props.match.params.id)
+          ).length
+        }{" "}
+        message(s) throughout this training series.
       </p>
       <div>
-        {props.teamMembers.map(member => {
+        {unassignedMembers.map(member => {
           return (
             <SingleMemberCheck
               addMember={addMember}
               key={member.id}
               teamMember={member}
               handelAddComMethod={handelAddComMethod}
-              assigned={assignedIds.includes(member.id)}
             />
           );
         })}

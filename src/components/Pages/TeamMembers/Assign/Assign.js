@@ -46,10 +46,10 @@ function Assign(props) {
           variant={"outlined"}
           onClick={() => history.push(`/home/assign-members/${props.ts_id}`)}
         >
-          Assign Members
+          {assignedMembers.length ? "Assign More Members" : "Assign Members"}
         </Button>
       </HeaderContainer>
-      <List teamMembers={assignedMembers} history={history} />
+      <List params={params} teamMembers={assignedMembers} history={history} />
       {props.teamMembers.length && !assignedMembers.length && (
         <>
           <Typography variant="subheading" className={classes.messageTextTop}>
