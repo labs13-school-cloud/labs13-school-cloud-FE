@@ -1,12 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import ArrowBack from "@material-ui/icons/ArrowBack";
 
 const ReturnToDashboardButton = () => {
   return (
     <ButtonStyles>
       <Link to="/home">
-        Return to Dashboard<button>X</button>
+        <ArrowBack />
       </Link>
     </ButtonStyles>
   );
@@ -15,25 +16,15 @@ const ReturnToDashboardButton = () => {
 export default ReturnToDashboardButton;
 
 const ButtonStyles = styled.div`
-  margin: 18px 0 15px 70%;
-
-  &:hover {
-    a {
-      color: #441476;
-    }
-    button {
-      background: #441476;
-      color: white;
-    }
-  }
+  margin: 12px 0 15px 10px;
+  font-size: 14px;
   a {
     text-decoration: none;
     color: #252525;
   }
-  button {
-    margin: 5px;
-    padding: 5px 8px;
-    border-radius: 50%;
-    cursor: pointer;
+  &:hover {
+    a {
+      color: #3fbe93;
+    }
   }
 `;

@@ -44,8 +44,9 @@ export const DashWrapper = styled.div`
 `;
 
 export const Popover = styled.div`
-  padding: 8px;
-  width: 125px;
+  padding: 4px;
+  width: 105px;
+  font-size: 14px;
   text-align: center;
   background: rgba(0, 0, 0, 0.01);
   color: black;
