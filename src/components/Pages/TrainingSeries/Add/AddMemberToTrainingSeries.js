@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import moment from "moment";
 import styled from "styled-components";
 
@@ -108,7 +109,7 @@ function AddMemberToTrainingSeries(props) {
     });
     newNotifications.forEach(n => {
       memberComMethods.map(member => {
-        //this looks at the communication methods set by clicking o nthe radio buttons.
+        //this looks at the communication methods set by clicking on the radio buttons.
         //it then assigns which type of notification should be sent out based on what you clicked.
         //if you forgot to click anything, it defaults to SMS.
         if (n.team_member_id === member.id) {
@@ -120,6 +121,13 @@ function AddMemberToTrainingSeries(props) {
     props.history.push(`/home/training-series/${props.match.params.id}`);
   };
 
+  //grabs list of all tmIDs currently assigned to TS (they have a notification assigned to them and this TS)
+  const filteredMemberIds = props.notifications
+    .filter(n => n.training_series_id === parseInt(props.match.params.id))
+    .map(n => n.team_member_id);
+  const unassignedMembers = props.teamMembers.filter(
+    m => !filteredMemberIds.includes(m.id)
+  );
   return (
     <Wrapper>
       <h1>
@@ -128,13 +136,17 @@ function AddMemberToTrainingSeries(props) {
             series => parseInt(series.id) === parseInt(props.match.params.id)
           )[0].title}
       </h1>
-      {/* need to filter these messages to get current series messages only */}
       <p>
-        Employee's will be sent {props.messages.length} message(s) throughout
-        this training series.
+        Employees will be sent{" "}
+        {
+          props.messages.filter(
+            m => m.training_series_id === parseInt(props.match.params.id)
+          ).length
+        }{" "}
+        message(s) throughout this training series.
       </p>
       <div>
-        {props.teamMembers.map(member => {
+        {unassignedMembers.map(member => {
           return (
             <SingleMemberCheck
               addMember={addMember}
@@ -145,20 +157,29 @@ function AddMemberToTrainingSeries(props) {
           );
         })}
       </div>
-      <form noValidate>
-        <TextField
-          id="date"
-          label="Start Date"
-          type="date"
-          defaultValue={moment().format("YYYY-MM-DD")}
-          InputLabelProps={{
-            shrink: true
-          }}
-          onChange={e => {
-            setStartDate(e.target.value); //gives a text version of date in YYY-MM-DD
-          }}
-        />
-      </form>
+      {unassignedMembers.length ? (
+        <form noValidate>
+          <TextField
+            id="date"
+            label="Start Date"
+            type="date"
+            defaultValue={moment().format("YYYY-MM-DD")}
+            InputLabelProps={{
+              shrink: true
+            }}
+            onChange={e => {
+              setStartDate(e.target.value); //gives a text version of date in YYY-MM-DD
+            }}
+          />
+        </form>
+      ) : (
+        <p>
+          All your available team members are already assigned to this training
+          series, either click Cancel to return or{" "}
+          <Link to="/home/create-team-member">click here</Link> to create more
+          team members.
+        </p>
+      )}
       <Button
         style={{ margin: "15px" }}
         variant="contained"
@@ -168,6 +189,17 @@ function AddMemberToTrainingSeries(props) {
       >
         submit
       </Button>
+      <Button
+        style={{ margin: "15px" }}
+        variant="contained"
+        color="accent"
+        type="submit"
+        onClick={e =>
+          props.history.push(`/home/training-series/${props.match.params.id}`)
+        }
+      >
+        cancel
+      </Button>
     </Wrapper>
   );
 }
@@ -176,7 +208,8 @@ const mapStateToProps = state => {
   return {
     messages: state.messagesReducer.messages,
     teamMembers: state.teamMembersReducer.teamMembers,
-    trainingSeries: state.trainingSeriesReducer.trainingSeries
+    trainingSeries: state.trainingSeriesReducer.trainingSeries,
+    notifications: state.notificationsReducer.notifications
   };
 };
 

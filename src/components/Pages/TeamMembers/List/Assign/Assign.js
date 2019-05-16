@@ -1,11 +1,13 @@
 import React from "react";
 import moment from "moment";
 
-import { styles, ListStyles } from "./styles.js";
+import DeleteModal from "components/UI/Modals/deleteModal";
+
+import { styles, ListStyles, ListButtonContainer } from "./styles.js";
 import { withStyles } from "@material-ui/core/styles";
 import { ListItem, ListItemText } from "@material-ui/core/";
 
-function Assign({ classes, teamMembers }) {
+function Assign({ classes, teamMembers, history, params }) {
   return (
     <>
       {teamMembers.map(member => {
@@ -19,7 +21,16 @@ function Assign({ classes, teamMembers }) {
               <ListItemText
                 primary={`Member: ${member.first_name} ${member.last_name}`}
                 secondary={`Start Date: ${formattedStartDate}`}
+                onClick={e => history.push(`/home/team-member/${member.id}`)}
               />
+              <ListButtonContainer>
+                <DeleteModal
+                  className={`material-icons ${classes.icons}`}
+                  deleteType="unassign"
+                  id={member.id}
+                  ts_id={params.id}
+                />
+              </ListButtonContainer>
             </ListItem>
           </ListStyles>
         );
