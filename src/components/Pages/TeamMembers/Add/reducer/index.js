@@ -44,14 +44,19 @@ export const reducer = (state, action) => {
       return { ...state, teamMember: emptyUser };
     case "TOGGLE_ROUTING":
       return { ...state, isRouting: !state.isRouting };
+    case "TOGGLE_BUTTON":
+      return {
+        ...state,
+        buttons: { ...state.buttons, [action.key]: !state.buttons[action.key] }
+      };
+    case "KILL_POPUP":
+      return { ...state, buttons: { ...state.buttons, [action.key]: false } };
     case "UPDATE_DISABLED":
       return { ...state, addDisabled: action.payload };
     case "UPDATE_MANAGER_NAME":
       return { ...state, memberManager: action.payload };
     case "UPDATE_MENTOR_NAME":
       return { ...state, memberMentor: action.payload };
-    case "UPDATE_SLACK_USERS":
-      return { ...state, slackUsers: action.payload };
     default:
       return state;
   }

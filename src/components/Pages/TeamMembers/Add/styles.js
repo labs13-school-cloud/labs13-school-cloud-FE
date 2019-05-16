@@ -59,6 +59,20 @@ export const styles = theme => ({
   }
 });
 
+export const buttonStyles = theme => ({
+  root: {
+    display: "flex",
+    flexWrap: "wrap"
+  },
+  formControl: {
+    margin: theme.spacing.unit,
+    minWidth: 120
+  },
+  selectEmpty: {
+    marginTop: theme.spacing.unit * 2
+  }
+});
+
 export const MainContainer = styled.div`
   margin: 0 auto;
   max-width: 768px;
