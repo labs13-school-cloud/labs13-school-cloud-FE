@@ -9,6 +9,7 @@ import NotificationsCard from "components/Pages/Notifications/Card";
 import NotificationsOverview from "components/Pages/Notifications/Card/Overview/Overview.js";
 import Responses from "components/Pages/Notifications/Responses";
 import TabNavigation from "./helpers/TabNavigation.js";
+import NotificationsTab from "components/Pages/Notifications/Card/NotificationsTab.js";
 
 import { TripleColumn, SmallColumns, DashWrapper } from "./styles.js";
 
@@ -59,7 +60,7 @@ function Dashboard(props) {
             marginTop: "48px"
           }}
         >
-          <NotificationsCard
+          <NotificationsTab
             style={{
               width: "100%"
             }}
