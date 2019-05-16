@@ -45,5 +45,5 @@ export const RightItemsContainer = styled.div`
   align-items: center;
 `;
 export const LogoutStyling = styled.a`
-  padding-bottom: 10px;
+  padding-bottom: 0px;
 `;

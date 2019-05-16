@@ -38,7 +38,7 @@ function SearchCard(props) {
         tour={headerTourNum}
         add={() => handleAdd()}
       />
-      <Suspense fallback={<span />}>
+      <Suspense fallback={<div />}>
         <List
           user_id={user_id}
           getFiltered={items =>

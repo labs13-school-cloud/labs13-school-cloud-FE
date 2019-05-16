@@ -13,7 +13,8 @@ export const initialState = {
   isRouting: false,
   addDisabled: true,
   memberManager: "",
-  memberMentor: ""
+  memberMentor: "",
+  slackUsers: []
 };
 
 const emptyUser = {

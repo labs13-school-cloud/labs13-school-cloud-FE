@@ -1,6 +1,12 @@
 import styled from "styled-components";
 
 export const styles = theme => ({
+  root: {
+    display: "flex",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
+    marginBottom: "30px"
+  },
   paper: {
     width: "89%",
     backgroundColor: theme.palette.background.paper,
@@ -56,6 +62,14 @@ export const styles = theme => ({
   },
   color: {
     color: "red"
+  },
+  formControl: {
+    margin: theme.spacing.unit,
+    minWidth: 120,
+    width: "30%"
+  },
+  selectEmpty: {
+    marginTop: theme.spacing.unit * 2
   }
 });
 
