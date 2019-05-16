@@ -5,5 +5,6 @@ export const EditWrapper = styled.div`
   justify-content: space-evenly;
   flex-wrap: wrap;
   margin: auto;
-  max-width: 1600px;
+  max-width: 1710px;
+  width: 100%;
 `;

@@ -65,7 +65,7 @@ function Add(props) {
 
   const { classes } = props;
   return (
-    <MainContainer>
+    <MainContainer maxWidth={props.maxWidth} maxHeight={props.maxHeight}>
       <InfoPopup
         popOverText={
           <p>

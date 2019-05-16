@@ -9,7 +9,7 @@ import { Paper, Typography } from "@material-ui/core/";
 import Pagination from "material-ui-flat-pagination";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
-import { styles, MessageContainer, CardWrapper } from "./styles.js";
+import { styles, MessageContainer, MainContainer } from "./styles.js";
 
 function Card(props) {
   const [serviceFilter, setServiceFilter] = useState("all");
@@ -21,15 +21,21 @@ function Card(props) {
   const limit = props.limit || 5;
 
   const filters = { status: statusFilter, service: serviceFilter };
-  const title =
-    statusFilter === "pending" ? `${notificationsCount} Pending` : "Sent";
+  const notifNum = notificationsCount ? notificationsCount : "No";
+  const title = statusFilter === "pending" ? `Pending` : "Sent";
+  const plural = notificationsCount === 1 ? "" : "s";
   const pagination = { limit, offset, setMax: setNotificationsCount };
 
   return (
-    <CardWrapper minWidth={props.minWidth} minHeight={props.minHeight}>
+    <MainContainer maxWidth={props.maxWidth} maxHeight={props.maxHeight}>
       <Paper data-tour="5" className={classes.root} elevation={2}>
         <div className={classes.columnHeader}>
-          <Typography variant="h5">{title} Notifications</Typography>
+          <Typography variant="h5" className={classes.lgTitle}>
+            {notifNum} {title} Notification{plural}
+          </Typography>
+          <Typography variant="h5" className={classes.smTitle}>
+            {notifNum} Notification{plural}
+          </Typography>
           <div>
             <FormControl className={classes.formControl}>
               <Select
@@ -94,7 +100,7 @@ function Card(props) {
           />
         </div>
       </Paper>
-    </CardWrapper>
+    </MainContainer>
   );
 }
 

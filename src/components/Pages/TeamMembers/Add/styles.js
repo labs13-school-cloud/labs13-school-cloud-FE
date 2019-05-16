@@ -32,9 +32,12 @@ export const styles = theme => ({
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
     minWidth: 200,
+    maxWidth: 200,
+    overflow: "hidden",
 
     "@media (max-width: 590px)": {
       width: "100%",
+      maxWidth: "none",
       margin: "16px auto 0"
     }
   },
@@ -62,9 +65,12 @@ export const styles = theme => ({
   formControl: {
     margin: theme.spacing.unit,
     minWidth: 200,
+    maxWidth: 200,
+    overflow: "hidden",
 
     "@media (max-width: 590px)": {
       width: "100%",
+      maxWidth: "none",
       margin: "16px auto 0"
     }
   },
@@ -75,9 +81,10 @@ export const styles = theme => ({
 
 export const MainContainer = styled.div`
   margin: 0 auto;
-  max-width: 768px;
+  max-width: ${props => props.maxWidth || "768px"};
+  max-height: ${props => props.maxHeight || "none"};
   @media (max-width: 768px) {
-    width: 90%;
+    width: 95%;
     margin: auto;
   }
 `;
@@ -91,7 +98,7 @@ export const MemberInfoContainer = styled.div`
   @media (max-width: 590px) {
     flex-direction: column;
     justify-content: center;
-    width: 90%;
+    width: 95%;
   }
 `;
 

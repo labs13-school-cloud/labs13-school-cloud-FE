@@ -16,18 +16,19 @@ export const styles = theme => ({
     paddingBottom: theme.spacing.unit * 2,
     display: "flex",
     flexDirection: "column",
-    maxWidth: "500px",
+    maxWidth: 500,
+    minWidth: 330,
     width: "100%",
-    minHeight: "533px",
+    minHeight: 533,
     boxSizing: "border-box",
     height: "100%",
     margin: 5,
 
     "@media (max-width:768px)": {
-      width: "92%",
+      width: "95%",
       marginBottom: 10,
       maxWidth: "none",
-      height: "533px"
+      height: 533
     }
   },
 
