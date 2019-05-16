@@ -79,8 +79,8 @@ function TabNavigation(props) {
         Training Series
       </Popover>
       <BottomNavigationAction
-        label="Messages"
-        value="messages"
+        label="Notifications"
+        value="notifications"
         icon={<QuestionAnswer />}
         onMouseEnter={e => {
           setMessagesHover(true);
@@ -92,7 +92,7 @@ function TabNavigation(props) {
       <Popover
         style={messagesHover ? { display: "block" } : { display: "none" }}
       >
-        Messages
+        Notifications
       </Popover>
       <BottomNavigationAction
         label="Responses"

@@ -21,43 +21,10 @@ import {
   HeaderWrapper
 } from "./styles.js";
 
-const fakeData = [
-  {
-    id: 1,
-    first_name: "Fake",
-    last_name: "Dude",
-    team_member_id: 1,
-    response: "This is some fake response text from slack...",
-    service: "slack",
-    created_at: "Aug 25th",
-    thread: "12345"
-  },
-  {
-    id: 2,
-    first_name: "Fake",
-    last_name: "Person",
-    team_member_id: 2,
-    response: "This is some fake response text from twillo...",
-    service: "twillo",
-    created_at: "Aug 25th",
-    thread: "12345"
-  },
-  {
-    id: 3,
-    first_name: "Also",
-    last_name: "Fake",
-    team_member_id: 3,
-    response: "This is some fake response text from sendgrid...",
-    service: "sendgrid",
-    created_at: "Aug 25th",
-    thread: "12345"
-  }
-];
-
 function Responses(props) {
   const { classes } = props;
   const [service, setService] = useState("");
-  const [allResponses, setAllResponses] = useState(fakeData);
+  const [allResponses, setAllResponses] = useState([]);
 
   const { notifications } = props;
 
@@ -122,7 +89,9 @@ function Responses(props) {
 
       <ResponsesWrapper>
         {allResponses.length === 0 ? (
-          <div>Sorry, no responses available!</div>
+          <div style={{ color: "rgba(0,0,0,0.4)" }}>
+            Sorry, no responses available!
+          </div>
         ) : (
           allResponses
             .filter(response => response.service.includes(service))
