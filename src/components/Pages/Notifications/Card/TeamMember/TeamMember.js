@@ -35,7 +35,7 @@ function TeamMember({
     sendgrid: <EmailOutlined />,
     slack: (
       <img
-        className={classes.listItemIcon}
+        className={classes.icon}
         src={slack_black_logo}
         alt="monochrome Slack app logo"
       />
@@ -52,12 +52,14 @@ function TeamMember({
           return (
             <ListItem key={id} className={classes.listItem}>
               <ListItemIcon>{displayedLogo[name]}</ListItemIcon>
+
               <ListItemText
+                className={classes.item}
                 primary={`${subject} | ${series}`}
                 secondary={`${first_name} ${last_name}`}
               />
 
-              <Typography className={classes.send_date}>
+              <Typography className={classes.sendDate}>
                 {filters.status === "pending" ? "Send Date" : "Sent on"}
                 <br />
                 {formattedSendDate}

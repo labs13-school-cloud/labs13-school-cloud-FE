@@ -9,7 +9,7 @@ import { Paper, Typography } from "@material-ui/core/";
 import Pagination from "material-ui-flat-pagination";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
-import { styles, MessageContainer } from "./styles.js";
+import { styles, MessageContainer, MainContainer } from "./styles.js";
 
 function Card(props) {
   const [serviceFilter, setServiceFilter] = useState("all");
@@ -21,78 +21,86 @@ function Card(props) {
   const limit = props.limit || 5;
 
   const filters = { status: statusFilter, service: serviceFilter };
-  const title =
-    statusFilter === "pending" ? `${notificationsCount} Pending` : "Sent";
+  const notifNum = notificationsCount ? notificationsCount : "No";
+  const title = statusFilter === "pending" ? `Pending` : "Sent";
+  const plural = notificationsCount === 1 ? "" : "s";
   const pagination = { limit, offset, setMax: setNotificationsCount };
 
   return (
-    <Paper data-tour="5" className={classes.root} elevation={2}>
-      <div className={classes.columnHeader}>
-        <Typography variant="h5">{title} Notifications</Typography>
-        <div>
-          <FormControl className={classes.formControl}>
-            <Select
-              native
-              className={classes.selection}
-              value={serviceFilter}
-              onChange={e => setServiceFilter(e.target.value)}
-              inputProps={{
-                id: "kind-selector",
-                label: "Filter Selector"
-              }}
-            >
-              <option value={"all"}>All</option>
-              <option value={"twilio"}>Text</option>
-              <option value={"sendgrid"}>Email</option>
-              <option value={"slack"}>Slack</option>
-            </Select>
-          </FormControl>
-          <FormControl className={classes.formControl}>
-            <Select
-              native
-              className={classes.selection}
-              value={statusFilter}
-              onChange={e => setStatusFilter(e.target.value)}
-              inputProps={{
-                id: "status-selector",
-                label: "Filter Selector"
-              }}
-            >
-              <option value={"pending"}>Pending</option>
-              <option value={"sent"}>Sent</option>
-            </Select>
-          </FormControl>
+    <MainContainer maxWidth={props.maxWidth} maxHeight={props.maxHeight}>
+      <Paper data-tour="5" className={classes.root} elevation={2}>
+        <div className={classes.columnHeader}>
+          <Typography variant="h5" className={classes.lgTitle}>
+            {notifNum} {title} Notification{plural}
+          </Typography>
+          <Typography variant="h5" className={classes.smTitle}>
+            {notifNum} Notification{plural}
+          </Typography>
+          <div>
+            <FormControl className={classes.formControl}>
+              <Select
+                native
+                className={classes.selection}
+                value={serviceFilter}
+                onChange={e => setServiceFilter(e.target.value)}
+                inputProps={{
+                  id: "kind-selector",
+                  label: "Filter Selector"
+                }}
+              >
+                <option value={"all"}>All</option>
+                <option value={"twilio"}>Text</option>
+                <option value={"sendgrid"}>Email</option>
+                <option value={"slack"}>Slack</option>
+              </Select>
+            </FormControl>
+            <FormControl className={classes.formControl}>
+              <Select
+                native
+                className={classes.selection}
+                value={statusFilter}
+                onChange={e => setStatusFilter(e.target.value)}
+                inputProps={{
+                  id: "status-selector",
+                  label: "Filter Selector"
+                }}
+              >
+                <option value={"pending"}>Pending</option>
+                <option value={"sent"}>Sent</option>
+              </Select>
+            </FormControl>
+          </div>
         </div>
-      </div>
-      <Suspense fallback={<div>Loading...</div>}>
-        <List
-          getFiltered={(items, member_id) =>
-            filter({ items, pagination, filters, member_id })
-          }
-          filters={filters}
-          member_id={props.member_id}
-          history={props.history}
-        />
-        {!notificationsCount && (
-          <MessageContainer style={{ marginTop: "30%" }}>
-            <p>
-              {props.isLoading
-                ? "Loading your Notifications."
-                : `You do not have any ${statusFilter} Notifications.`}
-            </p>
-          </MessageContainer>
-        )}
-      </Suspense>
-      <div className={classes.footer}>
-        <Pagination
-          limit={limit}
-          offset={offset}
-          total={notificationsCount}
-          centerRipple={true}
-          onClick={(e, newOffset) => setOffset(newOffset)}
-        />
-      </div>
-    </Paper>
+        <Suspense fallback={<div>Loading...</div>}>
+          <List
+            getFiltered={(items, member_id) =>
+              filter({ items, pagination, filters, member_id })
+            }
+            filters={filters}
+            member_id={props.member_id}
+            history={props.history}
+          />
+          {!notificationsCount && (
+            <MessageContainer style={{ marginTop: "30%" }}>
+              <p>
+                {props.isLoading
+                  ? "Loading your Notifications."
+                  : `You do not have any ${statusFilter} Notifications.`}
+              </p>
+            </MessageContainer>
+          )}
+        </Suspense>
+        <div className={classes.footer}>
+          <Pagination
+            limit={limit}
+            offset={offset}
+            total={notificationsCount}
+            centerRipple={true}
+            onClick={(e, newOffset) => setOffset(newOffset)}
+          />
+        </div>
+      </Paper>
+    </MainContainer>
   );
 }
 

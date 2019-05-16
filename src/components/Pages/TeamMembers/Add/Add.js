@@ -15,7 +15,7 @@ import { withStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
-import { styles, MainContainer } from "./styles.js";
+import { styles, MainContainer, MemberInfoContainer } from "./styles.js";
 
 function Add(props) {
   const {
@@ -42,7 +42,6 @@ function Add(props) {
       state.teamMember.job_description &&
       !phoneNumberTest(state.teamMember.phone_number)
     );
-
     dispatch({ type: "UPDATE_DISABLED", payload });
   }, [state.teamMember]);
 
@@ -66,7 +65,7 @@ function Add(props) {
 
   const { classes } = props;
   return (
-    <MainContainer style={{ position: "relative" }}>
+    <MainContainer maxWidth={props.maxWidth} maxHeight={props.maxHeight}>
       <InfoPopup
         popOverText={
           <p>
@@ -83,14 +82,14 @@ function Add(props) {
         <Paper className={classes.paper}>
           <Typography variant="title">
             {teamMember ? "Edit Team Member" : "Add New Team Member"}
-          </Typography>{" "}
+          </Typography>
           <Divider className={classes.divider} />
-          <MemberInfoForm
-            state={state}
-            updateMember={updateMember}
-            classes={classes}
-          />
-          <div className={classes.root}>
+          <MemberInfoContainer>
+            <MemberInfoForm
+              state={state}
+              updateMember={updateMember}
+              classes={classes}
+            />
             <Relationships
               state={state}
               dispatch={dispatch}
@@ -101,7 +100,7 @@ function Add(props) {
               updateMember={updateMember}
               dispatch={dispatch}
             />
-          </div>
+          </MemberInfoContainer>
           {teamMember ? (
             <EditButtons state={state} />
           ) : (

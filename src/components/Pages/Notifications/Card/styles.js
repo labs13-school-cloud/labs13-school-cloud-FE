@@ -7,29 +7,26 @@ export const styles = theme => ({
     paddingBottom: theme.spacing.unit * 2,
     display: "flex",
     flexDirection: "column",
-    width: "50%",
+    width: "100%",
     boxSizing: "border-box",
-    minHeight: "533px",
     height: "100%",
-    margin: 5,
-    "@media (max-width: 1400px)": {
-      width: "100%",
-      height: "533px"
-    },
-    "@media (max-width: 1000px)": {
-      width: "100%"
-    },
+    minWidth: 330,
+    margin: "5px auto",
 
     "@media (max-width: 768px)": {
-      width: "92%",
-      height: "100%"
+      flexDirection: "column",
+      width: "95%"
     }
   },
   columnHeader: {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    marginBottom: 15
+    marginBottom: 15,
+
+    "@media (max-width: 400px)": {
+      flexDirection: "column"
+    }
   },
   icons: {
     display: "flex",
@@ -43,7 +40,26 @@ export const styles = theme => ({
     top: "100%"
   },
   pagination: { width: "90%" },
-  selection: { margin: "0 10px" }
+  selection: {
+    margin: "0 10px",
+    "@media (max-width: 450px)": {
+      fontSize: "0.9rem"
+    }
+  },
+  lgTitle: {
+    "@media (max-width: 535px)": {
+      display: "none"
+    }
+  },
+  smTitle: {
+    display: "none",
+    "@media (max-width: 535px)": {
+      display: "initial"
+    },
+    "@media (max-width: 450px)": {
+      fontSize: "1.2rem"
+    }
+  }
 });
 
 export const MessageContainer = styled.div`
@@ -52,4 +68,15 @@ export const MessageContainer = styled.div`
   justify-content: center;
   height: 100%;
   color: lightgray;
+`;
+
+export const MainContainer = styled.div`
+  margin: 0 auto;
+  max-width: 768px;
+  max-width: ${props => props.maxWidth || "none"};
+  max-height: ${props => props.maxHeight || "none"};
+  @media (max-width: 769px) {
+    width: 100%;
+    margin: auto;
+  }
 `;

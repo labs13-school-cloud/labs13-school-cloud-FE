@@ -16,18 +16,31 @@ export const styles = {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    borderBottom: "1px solid #E8E9EB"
+    borderBottom: "1px solid #E8E9EB",
+    paddingRight: 10,
+    paddingLeft: 0,
+    overflow: "hidden"
   },
   title: {
     fontSize: 16
   },
   sendDate: {
+    backgroundColor: "white",
     fontSize: 13,
-    textAlign: "right"
+    textAlign: "right",
+    position: "absolute",
+    right: 10,
+    width: 65
   },
-  listItemIcon: {
+  icon: {
     height: "100%",
     width: "50px",
     margin: "0px -13px"
+  },
+  item: {
+    whiteSpace: "nowrap",
+    overflow: "hidden",
+    padding: 0,
+    paddingLeft: 16
   }
 };

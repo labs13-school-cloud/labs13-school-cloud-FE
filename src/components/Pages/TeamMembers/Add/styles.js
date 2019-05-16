@@ -5,27 +5,18 @@ export const styles = theme => ({
     display: "flex",
     flexWrap: "wrap",
     justifyContent: "space-between",
-    marginBottom: "30px"
+    marginBottom: 30
   },
   paper: {
-    width: "89%",
+    width: "100%",
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
     padding: theme.spacing.unit * 4,
     outline: "none",
     margin: "5px auto",
-
-    "@media (max-width: 768px)": {
-      width: "89%",
-      textAlign: "center",
-      padding: "30px"
-    },
-
-    "@media (max-width: 480px)": {
-      width: "80%",
-      // padding: 0,
-      margin: "5px auto"
-    }
+    maxWidth: 768,
+    minWidth: 330,
+    boxSizing: "border-box"
   },
   form: {
     display: "flex",
@@ -35,21 +26,29 @@ export const styles = theme => ({
     margin: "0 auto"
   },
   info: {
-    "margin-right": "50px"
+    marginRight: 50
   },
-  textField: {
+  textFieldMain: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
-    width: "100%"
+    minWidth: 200,
+    maxWidth: 200,
+    overflow: "hidden",
+
+    "@media (max-width: 590px)": {
+      width: "100%",
+      maxWidth: "none",
+      margin: "16px auto 0"
+    }
   },
   fab: {
     margin: theme.spacing.unit
   },
   button: {
-    "margin-left": theme.spacing.unit
+    marginLeft: theme.spacing.unit
   },
   addButton: {
-    "margin-left": theme.spacing.unit,
+    marginLeft: theme.spacing.unit,
     background: "#451476",
     color: "white",
     "&:hover": {
@@ -65,8 +64,15 @@ export const styles = theme => ({
   },
   formControl: {
     margin: theme.spacing.unit,
-    minWidth: 120,
-    width: "30%"
+    minWidth: 200,
+    maxWidth: 200,
+    overflow: "hidden",
+
+    "@media (max-width: 590px)": {
+      width: "100%",
+      maxWidth: "none",
+      margin: "16px auto 0"
+    }
   },
   selectEmpty: {
     marginTop: theme.spacing.unit * 2
@@ -75,20 +81,24 @@ export const styles = theme => ({
 
 export const MainContainer = styled.div`
   margin: 0 auto;
-  max-width: 768px;
+  max-width: ${props => props.maxWidth || "768px"};
+  max-height: ${props => props.maxHeight || "none"};
   @media (max-width: 768px) {
     width: 95%;
+    margin: auto;
   }
 `;
 
 export const MemberInfoContainer = styled.div`
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
   align-items: baseline;
   margin: 20px auto;
-  @media (max-width: 480px) {
+  @media (max-width: 590px) {
     flex-direction: column;
-    width: 90%;
+    justify-content: center;
+    width: 95%;
   }
 `;
 
