@@ -15,6 +15,9 @@ export const ADD_RESPONSE_START = "ADD_RESPONSE_START";
 export const ADD_RESPONSE_SUCCESS = "ADD_RESPONSE_SUCCESS";
 export const ADD_RESPONSE_FAIL = "ADD_RESPONSE_FAIL";
 
+// MARKED AS SEEN  - TEMPORARY ENDPOINT
+export const SEE_RESPONSE = "SEE_RESPONSE";
+
 // DELETE RESPONSE
 export const DELETE_RESPONSE_START = "DELETE_RESPONSE_START";
 export const DELETE_RESPONSE_SUCCESS = "DELETE_RESPONSE_SUCCESS";
@@ -67,4 +70,22 @@ export const deleteResponse = id => dispatch => {
       dispatch({ type: DELETE_RESPONSE_SUCCESS, payload: id });
     })
     .catch(err => dispatch({ tye: DELETE_RESPONSE_FAIL }));
+};
+
+// TEMPORARY AFTER THIS LINE
+
+export const getAllResponses = () => dispatch => {
+  dispatch({ type: GET_RESPONSES_START });
+  axios
+    .get(`${process.env.REACT_APP_API}/api/responses`)
+    .then(res => {
+      dispatch({ type: GET_RESPONSES_SUCCESS, payload: res.data.responses });
+    })
+    .catch(err => {
+      dispatch({ type: GET_RESPONSES_FAIL, error: err });
+    });
+};
+
+export const seeResponse = id => {
+  return { type: SEE_RESPONSE, payload: id };
 };

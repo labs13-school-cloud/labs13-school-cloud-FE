@@ -1,4 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { connect } from "react-redux";
+
+import { getAllResponses } from "store/actions";
 
 import SearchCard from "components/UI/SearchCard/";
 import TeamMembersOverview from "components/Pages/TeamMembers/List/Overview";
@@ -15,11 +18,33 @@ import { TripleColumn, SmallColumns, DashWrapper } from "./styles.js";
 
 function Dashboard(props) {
   const [topTab, setTopTab] = useState("overview");
-  const { user_id, history } = props;
+  const [newResponses, setNewResponses] = useState([]);
+  const {
+    user_id,
+    history,
+    getAllResponses: responsesFromProps,
+    responses
+  } = props;
+
+  useEffect(() => {
+    responsesFromProps();
+    setTimeout(() => {
+      responsesFromProps();
+    }, 60 * 1000);
+  }, [responsesFromProps]);
+
+  useEffect(() => {
+    console.log("REPONSES", responses);
+    setNewResponses(responses.filter(r => !r.seen));
+  }, [responses]);
 
   return (
     <DashWrapper>
-      <TabNavigation topTab={topTab} setTopTab={setTopTab} />
+      <TabNavigation
+        topTab={topTab}
+        setTopTab={setTopTab}
+        newResponses={newResponses}
+      />
       {topTab === "overview" && (
         <TripleColumn>
           <SmallColumns>
@@ -77,4 +102,11 @@ function Dashboard(props) {
   );
 }
 
-export default Dashboard;
+const mapStateToProps = state => ({
+  responses: state.responsesReducer.responses
+});
+
+export default connect(
+  mapStateToProps,
+  { getAllResponses }
+)(Dashboard);

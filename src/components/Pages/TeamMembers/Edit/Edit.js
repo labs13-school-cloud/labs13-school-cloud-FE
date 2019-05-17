@@ -1,5 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
+import axios from "axios";
 
 import EditTeamMember from "../Add/";
 import NotificationsCard from "components/Pages/Notifications/Card/";
@@ -26,9 +27,36 @@ function Edit(props) {
     getTMFromProps(match.params.id);
     getTSFromProps(user_id);
   }, [getTMFromProps, getTSFromProps, match, user_id]);
+  const [secretMsg, setSecretMsg] = useState("");
 
+  const sendMsgMeow = () => {
+    const { first_name, slack_uuid } = props.teamMember;
+    const notification = {
+      first_name,
+      subject: "Slack Test",
+      body: secretMsg,
+      slack_uuid,
+      team_member_id: props.teamMember.id
+    };
+    const url = `${process.env.REACT_APP_API}/api/slack/sendMessageNow`;
+    axios.post(url, { notification });
+    setSecretMsg("");
+  };
+  const buttonText = props.teamMember.slack_uuid
+    ? "Send Msg Meow"
+    : "No Slack ID";
   return (
     <EditWrapper>
+      <div style={{ display: "none" }}>
+        <input value={secretMsg} onChange={e => setSecretMsg(e.target.value)} />
+        <button
+          disabled={!props.teamMember.slack_uuid}
+          onClick={() => sendMsgMeow()}
+        >
+          {buttonText}
+        </button>
+      </div>
+
       <Grid item xs={12} lg={5}>
         <EditTeamMember user_id={user_id} teamMember={props.teamMember} />
       </Grid>

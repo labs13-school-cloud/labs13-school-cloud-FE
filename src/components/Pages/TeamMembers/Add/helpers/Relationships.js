@@ -41,7 +41,7 @@ function Relationships({ state, dispatch, teamMembers, classes }) {
               {teamMembers.map(member => {
                 const name = `${member.first_name} ${member.last_name}`;
                 return (
-                  <MenuItem key={member.id} value={member.id}>
+                  <MenuItem key={`${role}_${member.id}`} value={member.id}>
                     {name}
                   </MenuItem>
                 );

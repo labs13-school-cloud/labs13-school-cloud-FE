@@ -29,7 +29,7 @@ function Loader(props) {
 
   useEffect(() => {
     // componentDidUpdate (CDU) --> update when props.newUser changes
-    setIsTourOpen(false);
+    setIsTourOpen(newUser);
   }, [newUser]);
 
   useEffect(() => {

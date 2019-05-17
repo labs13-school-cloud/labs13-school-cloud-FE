@@ -13,15 +13,25 @@ function SelectSlackID({ updateMember, state, classes, dispatch }) {
   useEffect(() => {
     async function getSlackUsers() {
       const url = `${process.env.REACT_APP_API}/api/slack/`;
-      const { data } = await axios.get(url);
-      dispatch({ type: "UPDATE_SLACK_USERS", payload: data });
+      try {
+        const res = await axios.get(url);
+        dispatch({ type: "UPDATE_SLACK_USERS", payload: res.data });
+      } catch (err) {
+        if (err.response.status === 404) {
+          dispatch({ type: "SLACK_ERROR", payload: "NO TOKEN" });
+        }
+      }
     }
     getSlackUsers();
   }, []);
+
+  const title =
+    state.slackError === "NO TOKEN" ? "AUTHORIZE SLACK" : "Slack User";
   return (
     <FormControl className={classes.formControl}>
-      <InputLabel htmlFor={`slack-simple`}>Slack User</InputLabel>
+      <InputLabel htmlFor={`slack-simple`}>{title}</InputLabel>
       <Select
+        disabled={state.slackError}
         value={state.teamMember.slack_uuid}
         onChange={e => updateMember("slack_uuid", e.target.value)}
         inputProps={{
