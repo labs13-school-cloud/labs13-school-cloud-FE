@@ -23,13 +23,13 @@ function Edit(props) {
             You're currently on the "Training Series" page. You can start adding
             messages by clicking on "Add Message". Your messages will be tied to
             this series, and whenever you assign a team member to this training
-            series, they will recieve those messages based on the "days from
+            series, they will receive those messages based on the "days from
             start" value you give each message.
             <br />
             <br />
             Once you've created some messages, feel free to assign a team member
-            to this series. Set the date in which youd like for the team member
-            to start recieving the materials, and they will recieve scheduled
+            to this series. Set the date in which you'd like for the team member
+            to start receiving the materials, and they will receive scheduled
             notifications based on the messages that you've scheduled for them.
           </p>
         }

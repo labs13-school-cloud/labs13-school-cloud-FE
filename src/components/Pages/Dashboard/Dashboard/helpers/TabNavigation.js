@@ -20,6 +20,7 @@ function TabNavigation(props) {
 
   return (
     <BottomNavigation
+      data-tour="7"
       value={props.topTab}
       onChange={(e, value) => {
         props.setTopTab(value);
@@ -81,8 +82,8 @@ function TabNavigation(props) {
         Training Series
       </Popover>
       <BottomNavigationAction
-        label="Messages"
-        value="messages"
+        label="Notifications"
+        value="notifications"
         icon={<QuestionAnswer />}
         onMouseEnter={e => {
           setMessagesHover(true);
@@ -94,7 +95,7 @@ function TabNavigation(props) {
       <Popover
         style={messagesHover ? { display: "block" } : { display: "none" }}
       >
-        Messages
+        Notifications
       </Popover>
       <div
         onClick={() => {

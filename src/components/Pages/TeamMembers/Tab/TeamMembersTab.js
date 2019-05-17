@@ -8,7 +8,13 @@ import styled from "styled-components";
 
 import TeamMembersTabSingle from "./TeamMembersTabSingle.js";
 
-import { Paper, Fab, TextField, InputAdornment } from "@material-ui/core/";
+import {
+  Paper,
+  Fab,
+  TextField,
+  InputAdornment,
+  Typography
+} from "@material-ui/core/";
 
 //functional related imports
 
@@ -38,6 +44,23 @@ const TeamMembersTab = props => {
     <div style={{ width: "90%" }}>
       <TeamsTabWrapper>
         <TeamsTabHeader>
+          <div>
+            <Typography variant="h6">Team Members</Typography>
+            <Fab
+              size="small"
+              aria-label="Add"
+              onClick={() => {
+                props.history.push("/home/create-team-member");
+              }}
+              style={{
+                margin: "0 10px",
+                background: "#451476",
+                color: "white"
+              }}
+            >
+              <i className="material-icons">add</i>
+            </Fab>
+          </div>
           <TextField
             value={searchValue}
             onChange={e => {
@@ -54,25 +77,8 @@ const TeamMembersTab = props => {
               )
             }}
           />
-          <div>
-            <Fab
-              size="small"
-              aria-label="Add"
-              onClick={() => {
-                props.history.push("/home/create-team-member");
-              }}
-              style={{
-                margin: "0 10px",
-                background: "#451476",
-                color: "white"
-              }}
-            >
-              <i className="material-icons">add</i>
-            </Fab>
-          </div>
         </TeamsTabHeader>
 
-        <hr />
         <Pagination
           limit={limit}
           reduced={true}
@@ -129,6 +135,12 @@ const TeamsTabWrapper = styled(Paper)`
 `;
 
 const TeamsTabHeader = styled.div`
-  display: flex;
-  justify-content: space-between;
+  // display: flex;
+  // justify-content: space-between;
+  div {
+    display: flex;
+    h6 {
+      margin-top: 4px;
+    }
+  }
 `;

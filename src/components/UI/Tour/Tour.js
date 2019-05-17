@@ -28,7 +28,7 @@ class DashboardTour extends Component {
       },
       {
         selector: '[data-tour="1"]',
-        content: "This is where you will see all of your team members.",
+        content: "This is where you'll see all of your team members.",
         stepInteraction: false,
         position: "top"
       },
@@ -46,17 +46,22 @@ class DashboardTour extends Component {
       {
         selector: '[data-tour="4"]',
         content:
-          "This is your Training Series. A training series is like a little house for the content you'd like to send. Give it a name and some content, then assign team members to recieve the content"
+          "You'll find your Training Series here, which is where you can store messages!  When team members join a series, they'll automatically be assigned the messages in that series!"
       },
       {
         selector: '[data-tour="5"]',
         content:
-          "This is your notification window. Once you've assigned team members to your training series, you will see all outgoing messages here."
+          "This is your notification window. Once a team member is assigned to a training series the messages will be sent as notifications and can be viewed here."
       },
       {
         selector: '[data-tour="6"]',
         content:
           "Your account information and current membership plan can be viewed by clicking your profile icon here."
+      },
+      {
+        selector: '[data-tour="7"]',
+        content:
+          "These tabs can give more specific and in-depth information on your Team Members, Training Series, Notifications and Responses while the Overview tab is for quick-glance summary info. "
       },
       {
         content: (

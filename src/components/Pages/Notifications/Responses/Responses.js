@@ -27,6 +27,8 @@ function Responses(props) {
   const [service, setService] = useState("");
   const [allResponses, setAllResponses] = useState([]);
 
+  const { notifications } = props;
+
   useEffect(() => {
     responsesFromProps();
   }, [responsesFromProps]);
@@ -78,7 +80,9 @@ function Responses(props) {
 
       <ResponsesWrapper>
         {allResponses.length === 0 ? (
-          <div>Sorry, no responses available!</div>
+          <div style={{ color: "rgba(0,0,0,0.4)" }}>
+            Sorry, no responses available!
+          </div>
         ) : (
           allResponses
             .filter(response => response.service.includes(service))

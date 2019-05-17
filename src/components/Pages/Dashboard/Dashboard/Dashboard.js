@@ -78,7 +78,7 @@ function Dashboard(props) {
       {topTab === "training series" && (
         <TrainingSeriesTab history={props.history} user_id={user_id} />
       )}
-      {topTab === "messages" && (
+      {topTab === "notifications" && (
         <div
           style={{
             width: "90vw",
