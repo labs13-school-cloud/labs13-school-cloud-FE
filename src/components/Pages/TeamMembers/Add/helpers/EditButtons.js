@@ -14,7 +14,6 @@ function EditButtons(props) {
       <NotificationWidget
         disabled={state.addDisabled}
         teamMember={state.teamMember}
-        editTeamMemberSubmit={() => props.editTeamMember(state.teamMember)}
         type="success"
         submitType="edit"
       />

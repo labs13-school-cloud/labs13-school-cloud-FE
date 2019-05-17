@@ -46,8 +46,11 @@ export const addTeamMember = teamMember => dispatch => {
     .catch(err => dispatch({ type: ADD_MEMBER_FAIL, payload: err }));
 };
 
-export const editTeamMember = changes => dispatch => {
-  const { id } = changes;
+export const editTeamMember = teamMember => dispatch => {
+  const { id, manager_name, mentor_name, ...changes } = teamMember;
+  //destructuring forbidden properties here in the action since this function is called in multiple places in app
+  //only submits valid fields to be changed, otherwise would throw Joi validation error
+
   dispatch({ type: EDIT_MEMBER_START });
   axios
     .put(`${baseUrl}/team-members/${id}`, changes)
@@ -69,9 +72,6 @@ export const deleteTeamMember = (teamMemberID, user_id) => dispatch => {
     })
     .then(() => {
       if (history.location.pathname === "/home") {
-        //leaving this legacy code here but commented out in case this spot needs to dispatch getNotifications
-        // dispatch(getEmailNotifications(user_id));
-        // dispatch(getTextNotifications(user_id));
       } else {
         history.push("/home");
       }
