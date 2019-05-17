@@ -1,7 +1,7 @@
 import React, { useReducer, useEffect } from "react";
 import { connect } from "react-redux";
 
-import { addTeamMember, getTeamMembers } from "store/actions";
+import { addTeamMember, editTeamMember, getTeamMembers } from "store/actions";
 import { initialState, reducer } from "./reducer";
 import MemberInfoForm from "./helpers/MemberInfoForm.js";
 import Relationships from "./helpers/Relationships.js";
@@ -49,6 +49,11 @@ function Add(props) {
     dispatch({ type: "UPDATE_MEMBER", key, payload: value });
   };
 
+  const editExistingMember = e => {
+    e.preventDefault();
+    props.editTeamMember(state.teamMember);
+  };
+
   const addNewTeamMember = e => {
     e.preventDefault();
     const { teamMember } = state;
@@ -58,7 +63,7 @@ function Add(props) {
     if (teamMember.mentor_id === "") {
       teamMember.mentor_id = null;
     }
-
+    console.log("shouldn't display here");
     props.addTeamMember(state.teamMember);
     dispatch({ type: "TOGGLE_ROUTING" });
   };
@@ -78,7 +83,12 @@ function Add(props) {
           </p>
         }
       />
-      <form className={classes.form} onSubmit={e => addNewTeamMember(e)}>
+      <form
+        className={classes.form}
+        onSubmit={
+          teamMember ? e => editExistingMember(e) : e => addNewTeamMember(e)
+        }
+      >
         <Paper className={classes.paper}>
           <Typography variant="title">
             {teamMember ? "Edit Team Member" : "Add New Team Member"}
@@ -122,5 +132,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { addTeamMember, getTeamMembers }
+  { addTeamMember, editTeamMember, getTeamMembers }
 )(withStyles(styles)(Add));
