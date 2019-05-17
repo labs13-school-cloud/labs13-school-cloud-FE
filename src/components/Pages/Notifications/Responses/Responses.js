@@ -112,7 +112,9 @@ function Responses(props) {
                       <br />
                     </Typography>
                   </CardContent>
-                  <CardActions>
+                  <CardActions
+                    style={{ display: "flex", justifyContent: "space-between" }}
+                  >
                     <Button
                       size="small"
                       onClick={e => {
@@ -121,7 +123,15 @@ function Responses(props) {
                         );
                       }}
                     >
-                      See Team Memeber
+                      See Team Member
+                    </Button>
+                    <Button
+                      size="small"
+                      onClick={e => {
+                        props.seeResponse(response.id);
+                      }}
+                    >
+                      Dismiss
                     </Button>
                   </CardActions>
                 </Card>
