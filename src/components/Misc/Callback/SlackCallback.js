@@ -1,16 +1,46 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 
+import history from "history.js";
+
 function SlackCallback(props) {
+  const [authFailed, setAuthFailed] = useState(false);
+  const [code, setCode] = useState(null);
+
   useEffect(() => {
-    // componentDidMount;
-    console.log("CDM");
+    if (authFailed) {
+      setTimeout(() => {
+        history.push("/home/profile");
+      }, 2000);
+    }
+  }, [authFailed]);
+
+  useEffect(() => {
+    // componentDidMount
     const code = getQueryVariable("code");
     //const state = getQueryVariable("state");
-    axios.post(`${process.env.REACT_APP_API}/api/slack/oauth`, { code });
+    axios
+      .post(`${process.env.REACT_APP_API}/api/slack/oauth`, {
+        code
+      })
+      .then(res => {
+        history.push("/home");
+      })
+      .catch(err => {
+        setCode(err.response.status);
+        setAuthFailed(true);
+      });
   }, []);
 
-  return <div>Authorizing Slack, please wait...</div>;
+  return (
+    <>
+      {!authFailed ? (
+        <div>Authorizing Slack, please wait...</div>
+      ) : (
+        <div>Auth failed with code {code}, rerouting to profile...</div>
+      )}
+    </>
+  );
 }
 
 function getQueryVariable(variable) {

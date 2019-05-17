@@ -20,7 +20,7 @@ function Routes(props) {
   const disableSnackbar = () => {
     setDisplaySnackbar(false);
   };
-
+  console.log(setIsTourOpen);
   const activateTutorial = () => {
     props.history.push("/home");
     setIsTourOpen(true);

@@ -2,17 +2,18 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import axios from "axios";
 
+import SlackLogo from "img/slacklogo.jpg";
+
+import { getAllResponses, seeResponse } from "store/actions";
+
 import { withStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-
 import SettingsCell from "@material-ui/icons/SettingsCell";
 import Email from "@material-ui/icons/Email";
-
-import SlackLogo from "img/slacklogo.jpg";
 
 import {
   styles,
@@ -22,29 +23,19 @@ import {
 } from "./styles.js";
 
 function Responses(props) {
-  const { classes } = props;
+  const { classes, getAllResponses: responsesFromProps, responses } = props;
   const [service, setService] = useState("");
   const [allResponses, setAllResponses] = useState([]);
 
   const { notifications } = props;
 
   useEffect(() => {
-    //gets a list of ALLLL responses based on notifications
-    notifications.notifications.map(async notification => {
-      console.log("blah");
-      // Promise.all?
-      const url = `${process.env.REACT_APP_API}/api/notifications/${
-        notification.id
-      }/responses`;
-      const notificationResponses = await axios.get(url);
+    responsesFromProps();
+  }, [responsesFromProps]);
 
-      const newResponses = [
-        ...allResponses,
-        ...notificationResponses.data.responses
-      ];
-      setAllResponses(newResponses);
-    });
-  }, [notifications]); //including "allResponses" as the console suggests makes this run infinitely...
+  useEffect(() => {
+    setAllResponses(responses.filter(r => !r.seen));
+  }, [responses]);
 
   const ReturnCorrectServiceLogo = service => {
     if (service === "slack") {
@@ -142,18 +133,13 @@ function Responses(props) {
   );
 }
 
-const mapStateToProps = state => {
-  return {
-    teamMembers: state.teamMembersReducer.teamMembers,
-    trainingSeries: state.trainingSeriesReducer.trainingSeries,
-    notifications: state.notificationsReducer,
-    responses: state.responsesReducer.responses
-  };
-};
+const mapStateToProps = state => ({
+  responses: state.responsesReducer.responses
+});
 
 export default withStyles(styles)(
   connect(
     mapStateToProps,
-    {}
+    { getAllResponses, seeResponse }
   )(Responses)
 );

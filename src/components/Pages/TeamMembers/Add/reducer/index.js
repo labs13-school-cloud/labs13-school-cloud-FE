@@ -14,7 +14,8 @@ export const initialState = {
   addDisabled: true,
   memberManager: "",
   memberMentor: "",
-  slackUsers: []
+  slackUsers: [],
+  slackError: null
 };
 
 const emptyUser = {
@@ -53,6 +54,8 @@ export const reducer = (state, action) => {
       return { ...state, memberMentor: action.payload };
     case "UPDATE_SLACK_USERS":
       return { ...state, slackUsers: action.payload };
+    case "SLACK_ERROR":
+      return { ...state, slackError: action.payload };
     default:
       return state;
   }

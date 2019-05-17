@@ -7,9 +7,11 @@ import Home from "@material-ui/icons/HomeOutlined";
 import QuestionAnswer from "@material-ui/icons/QuestionAnswerOutlined";
 import Timeline from "@material-ui/icons/TimelineOutlined";
 import ModeComment from "@material-ui/icons/ModeCommentOutlined";
-import { Popover } from "../styles.js";
+import { withStyles } from "@material-ui/core/styles";
+import { styles, Popover } from "../styles.js";
 
 function TabNavigation(props) {
+  const { classes, newResponses } = props;
   const [overviewHover, setOverviewHover] = useState(false);
   const [teamMembersHover, setTeamMembersHover] = useState(false);
   const [trainingSeriesHover, setTrainingSeriesHover] = useState(false);
@@ -95,17 +97,24 @@ function TabNavigation(props) {
       >
         Notifications
       </Popover>
-      <BottomNavigationAction
-        label="Responses"
-        value="responses"
-        icon={<ModeComment />}
-        onMouseEnter={e => {
-          setResponsesHover(true);
+      <div
+        onClick={() => {
+          props.setTopTab("responses");
         }}
-        onMouseLeave={e => {
-          setResponsesHover(false);
-        }}
-      />
+      >
+        <BottomNavigationAction
+          label="Responses"
+          value="responses"
+          icon={<ModeComment />}
+          onMouseEnter={e => {
+            setResponsesHover(true);
+          }}
+          onMouseLeave={e => {
+            setResponsesHover(false);
+          }}
+        />
+        {newResponses.length ? <div className={classes.circle} /> : ""}
+      </div>
       <Popover
         style={responsesHover ? { display: "block" } : { display: "none" }}
       >
@@ -114,4 +123,4 @@ function TabNavigation(props) {
     </BottomNavigation>
   );
 }
-export default TabNavigation;
+export default withStyles(styles)(TabNavigation);

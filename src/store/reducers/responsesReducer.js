@@ -8,6 +8,7 @@ import {
   ADD_RESPONSE_START,
   ADD_RESPONSE_SUCCESS,
   ADD_RESPONSE_FAIL,
+  SEE_RESPONSE,
   DELETE_RESPONSE_START,
   DELETE_RESPONSE_SUCCESS,
   DELETE_RESPONSE_FAIL
@@ -15,7 +16,6 @@ import {
 
 const initialState = {
   responses: [],
-  singleResponse: [],
   isLoading: false,
   isAdding: false,
   isDeleting: false,
@@ -32,10 +32,18 @@ const responsesReducer = (state = initialState, action) => {
         error: ""
       };
     case GET_RESPONSES_SUCCESS:
+      // Temp code for presentation
+      const newResponses = action.payload.filter(
+        newRes => !state.responses.find(oldRes => oldRes.id === newRes.id)
+      );
+      const addResponses = newResponses.map(newRes => ({
+        ...newRes,
+        seen: false
+      }));
       return {
         ...state,
         isLoading: false,
-        responses: action.payload
+        responses: [...state.responses, ...addResponses]
       };
     case GET_RESPONSES_FAIL:
       return {
@@ -99,6 +107,14 @@ const responsesReducer = (state = initialState, action) => {
         ...state,
         isDeleting: false,
         error: action.error
+      };
+    case SEE_RESPONSE:
+      const markedResponses = state.responses.map(res =>
+        res.id === action.payload ? { ...res, seen: true } : res
+      );
+      return {
+        ...state,
+        responses: markedResponses
       };
     default:
       return state;

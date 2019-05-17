@@ -30,6 +30,7 @@ export const styles = theme => ({
     width: "30%",
     padding: 10,
     textAlign: "center",
+
     "@media (max-width: 1000px)": {
       // eslint-disable-line no-useless-computed-key
       justifyContent: "space-around",
@@ -71,9 +72,9 @@ export const styles = theme => ({
     width: 200
   },
   bigAvatar: {
-    margin: 10,
-    width: 150,
-    height: 150
+    margin: "10px auto",
+    width: 100,
+    height: 100
   },
   divider: {
     width: "70%",

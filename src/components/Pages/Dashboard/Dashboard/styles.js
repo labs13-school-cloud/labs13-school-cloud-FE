@@ -1,5 +1,17 @@
 import styled from "styled-components";
 
+export const styles = {
+  circle: {
+    background: "red",
+    width: 10,
+    height: 10,
+    borderRadius: "50%",
+    position: "relative",
+    left: 45,
+    bottom: 47
+  }
+};
+
 export const TripleColumn = styled.div`
   max-width: 1400px;
   display: flex;

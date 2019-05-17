@@ -85,13 +85,6 @@ class Profile extends React.Component {
           <>
             <Card className={classes.profileContainer}>
               <div>
-                <Button
-                  variant="contained"
-                  style={{ width: "30px", padding: "0px" }}
-                  onClick={() => this.authorizeSlack()}
-                >
-                  <i className="fab fa-slack" />
-                </Button>
                 <Avatar
                   alt="profile pic of logged-in user"
                   src={JSON.parse(localStorage.getItem("Profile")).picture}
@@ -147,6 +140,15 @@ class Profile extends React.Component {
                     >
                       Show Tutorial
                     </Button>
+                    <a href="https://slack.com/oauth/authorize?client_id=604670969987.618830021958&scope=bot,channels:read,chat:write:bot,im:write,users:read,channels:history,im:history,groups:history,mpim:history,reactions:read">
+                      <img
+                        alt="Add to Slack"
+                        height="40"
+                        width="149.08"
+                        src="https://platform.slack-edge.com/img/add_to_slack.png"
+                        srcset="https://platform.slack-edge.com/img/add_to_slack.png 1x, https://platform.slack-edge.com/img/add_to_slack@2x.png 2x"
+                      />
+                    </a>
                   </ButtonContainer>
                 </CardActions>
               </div>
