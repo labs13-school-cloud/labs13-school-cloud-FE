@@ -4,6 +4,8 @@ import React from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
 
+import styled from "styled-components";
+
 // Material UI
 import { withStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
@@ -132,30 +134,30 @@ class MessagePage extends React.Component {
                 required
               />
             </MessageContainer>
+            <ButtonContainer>
+              <Button
+                variant="outlined"
+                className={classes.saveButton}
+                type="submit"
+                form="form1"
+              >
+                Save
+              </Button>
+              <Button
+                variant="contained"
+                className={classes.button}
+                onClick={e =>
+                  this.props.history.push(
+                    `/home/training-series/${
+                      this.state.message.training_series_id
+                    }`
+                  )
+                }
+              >
+                Cancel
+              </Button>
+            </ButtonContainer>
           </Paper>
-          <ButtonContainer>
-            <Button
-              variant="outlined"
-              className={classes.saveButton}
-              type="submit"
-              form="form1"
-            >
-              Save
-            </Button>
-            <Button
-              variant="contained"
-              className={classes.button}
-              onClick={e =>
-                this.props.history.push(
-                  `/home/training-series/${
-                    this.state.message.training_series_id
-                  }`
-                )
-              }
-            >
-              Cancel
-            </Button>
-          </ButtonContainer>
         </form>
       </MainContainer>
     );
