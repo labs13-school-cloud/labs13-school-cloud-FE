@@ -10,6 +10,7 @@ export const styles = theme => ({
     width: "100%",
     boxSizing: "border-box",
     height: "100%",
+    minHeight: 533,
     minWidth: 330,
     margin: "5px auto",
 
@@ -75,7 +76,7 @@ export const MainContainer = styled.div`
   max-width: 768px;
   max-width: ${props => props.maxWidth || "none"};
   max-height: ${props => props.maxHeight || "none"};
-  @media (max-width: 769px) {
+  @media (max-width: 1400px) {
     width: 100%;
     margin: auto;
   }

@@ -111,6 +111,7 @@ class TrainingSeriesModal extends React.Component {
         break;
       case "unassign":
         this.props.unassignTeamMember(this.props.id, this.props.ts_id);
+        break;
       default:
         break;
     }

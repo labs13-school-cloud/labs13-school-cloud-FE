@@ -10,7 +10,7 @@ import {
 
 import { withStyles } from "@material-ui/core/styles";
 import { ListItem, ListItemText } from "@material-ui/core/";
-import SlideDownModal from "components/UI/Modals/SlideDownModal";
+import DeleteModal from "components/UI/Modals/deleteModal";
 import { ListStyles, styles } from "./styles.js";
 
 function Overview({
@@ -51,9 +51,10 @@ function Overview({
               } | Assigned: ${userCount}`}
               onClick={e => history.push(`/home/training-series/${id}`)}
             />
-            <SlideDownModal
-              deleteTrainingSeries={deleteTSFromProps}
-              data={{ title, id, user: email }}
+            <DeleteModal
+              deleteType="trainingSeries"
+              trainingSeriesId={id}
+              className={`material-icons ${classes.icons}`}
               user_id={user_id}
             />
           </ListItem>
