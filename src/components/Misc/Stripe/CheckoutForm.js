@@ -84,13 +84,13 @@ const styles = theme => ({
     marginRight: theme.spacing.unit,
     width: 200
   },
-  progress: { margin: "50px auto", maxWidth: 100, width: 100 },
+  progress: { margin: "50px auto", maxWidth: 10, width: 100 },
   subCard: {
     border: "1px solid #EBEBEB",
     borderRadiusTopLeft: "3px",
     borderRadiusTopRight: "3px",
-    width: "31%",
-    minWidth: 201,
+    width: "35%",
+    minWidth: 211,
     margin: 5,
     textAlign: "center"
   },
