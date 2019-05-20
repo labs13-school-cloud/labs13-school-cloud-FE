@@ -207,7 +207,6 @@ class CheckoutForm extends Component {
     const { name, email, id, stripe } = this.props.userProfile;
     const { plan } = this.state;
     let token = await this.createToken(email);
-    console.log(token, name, email, id, stripe, plan);
     if (token !== undefined) {
       await this.props.submit(token, name, email, id, stripe, plan);
       this.setState({
