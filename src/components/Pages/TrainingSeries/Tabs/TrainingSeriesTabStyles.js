@@ -6,6 +6,7 @@ export const Wrapper = styled(Paper)`
   width: 90%;
   padding: 10px;
   margin: 48px auto;
+  max-width: 1200px;
 `;
 
 export const HeaderWrapper = styled.div`

@@ -132,6 +132,7 @@ const TeamsTabWrapper = styled(Paper)`
   margin: 48px auto;
   padding: 10px;
   width: 100%;
+  max-width: 1200px;
 `;
 
 const TeamsTabHeader = styled.div`

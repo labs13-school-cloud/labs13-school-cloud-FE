@@ -28,7 +28,10 @@ function Card(props) {
   const pagination = { limit, offset, setMax: setNotificationsCount };
 
   return (
-    <NotificationsPaper elevation={2}>
+    <NotificationsPaper
+      style={{ maxWidth: "1200px", margin: "auto" }}
+      elevation={2}
+    >
       <div className={classes.columnHeader}>
         <Typography variant="h5">{title} Notifications</Typography>
         <div>
