@@ -11,11 +11,13 @@ import { styles } from "../styles.js";
 function Relationships({ state, dispatch, teamMembers, classes }) {
   const roles = ["manager", "mentor"];
 
+  const teamMinusSelf = teamMembers.filter(m => m.id !== state.teamMember.id);
+
   return (
     <>
       {roles.map(role => {
         let title = role[0].toUpperCase() + role.substring(1);
-        title = teamMembers.length ? title : `Add Team Members First`;
+        title = teamMinusSelf.length ? title : `Add Team Members First`;
         const updateRole = (id, name) => {
           dispatch({ type: "UPDATE_MEMBER", key: `${role}_id`, payload: id });
           dispatch({
@@ -27,7 +29,7 @@ function Relationships({ state, dispatch, teamMembers, classes }) {
           <FormControl className={classes.formControl}>
             <InputLabel htmlFor={`${role}-simple`}>{title}</InputLabel>
             <Select
-              disabled={!teamMembers.length}
+              disabled={!teamMinusSelf.length}
               value={state.teamMember[`${role}_id`]}
               onChange={(e, value) => {
                 updateRole(e.target.value, value.props.children);
@@ -40,10 +42,10 @@ function Relationships({ state, dispatch, teamMembers, classes }) {
               <MenuItem value="">
                 <em>None</em>
               </MenuItem>
-              {teamMembers.map(member => {
-                const name = `${member.first_name} ${member.last_name}`;
+              {teamMinusSelf.map(m => {
+                const name = `${m.first_name} ${m.last_name}`;
                 return (
-                  <MenuItem key={`${role}_${member.id}`} value={member.id}>
+                  <MenuItem key={`${role}_${m.id}`} value={m.id}>
                     {name}
                   </MenuItem>
                 );
