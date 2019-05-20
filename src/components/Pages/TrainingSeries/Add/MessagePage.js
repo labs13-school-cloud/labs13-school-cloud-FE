@@ -12,6 +12,7 @@ import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+import Checkbox from "@material-ui/core/Checkbox";
 
 import {
   createAMessage,
@@ -37,11 +38,15 @@ class MessagePage extends React.Component {
       link: "",
       days_from_start: "",
       training_series_id: "",
+      for_mentor: false,
+      for_manager: false,
+      for_team_member: false,
       id: ""
     }
   };
 
   componentDidMount() {
+    console.log("LOOK AT ME!", this.props);
     this.props.getAllMessages();
   }
 
@@ -133,6 +138,54 @@ class MessagePage extends React.Component {
                 inputProps={{ min: 1 }}
                 required
               />
+              <CheckBoxWrapper>
+                Send to:{" "}
+                <Checkbox
+                  checked={this.state.message.for_team_member}
+                  value="checkedB"
+                  color="primary"
+                  onChange={e => {
+                    this.setState({
+                      ...this.state,
+                      message: {
+                        ...this.state.message,
+                        for_team_member: !this.state.message.for_team_member
+                      }
+                    });
+                  }}
+                />
+                Team Member
+                <Checkbox
+                  checked={this.state.message.for_manager}
+                  value="checkedB"
+                  color="primary"
+                  onChange={e => {
+                    this.setState({
+                      ...this.state,
+                      message: {
+                        ...this.state.message,
+                        for_manager: !this.state.message.for_manager
+                      }
+                    });
+                  }}
+                />
+                Manager
+                <Checkbox
+                  checked={this.state.message.for_mentor}
+                  value="checkedB"
+                  color="primary"
+                  onChange={e => {
+                    this.setState({
+                      ...this.state,
+                      message: {
+                        ...this.state.message,
+                        for_mentor: !this.state.message.for_mentor
+                      }
+                    });
+                  }}
+                />
+                Mentor
+              </CheckBoxWrapper>
             </MessageContainer>
             <ButtonContainer>
               <Button
@@ -178,3 +231,10 @@ export default connect(
     getAllMessages
   }
 )(withStyles(styles)(withRouter(MessagePage)));
+
+const CheckBoxWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
