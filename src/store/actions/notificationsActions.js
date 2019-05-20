@@ -67,7 +67,6 @@ export const unassignTeamMember = (tm_id, ts_id) => dispatch => {
       `${process.env.REACT_APP_API}/api/team-members/${tm_id}/unassign/${ts_id}`
     )
     .then(res => {
-      console.log(res);
       dispatch({ type: UNASSIGN_SUCCESS, payload: res.data.ids });
     })
     .catch(err => dispatch({ type: UNASSIGN_FAIL, error: err }));
