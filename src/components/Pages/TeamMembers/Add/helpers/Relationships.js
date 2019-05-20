@@ -14,7 +14,8 @@ function Relationships({ state, dispatch, teamMembers, classes }) {
   return (
     <>
       {roles.map(role => {
-        const title = role[0].toUpperCase() + role.substring(1);
+        let title = role[0].toUpperCase() + role.substring(1);
+        title = teamMembers.length ? title : `Add Team Members First`;
         const updateRole = (id, name) => {
           dispatch({ type: "UPDATE_MEMBER", key: `${role}_id`, payload: id });
           dispatch({
@@ -26,6 +27,7 @@ function Relationships({ state, dispatch, teamMembers, classes }) {
           <FormControl className={classes.formControl}>
             <InputLabel htmlFor={`${role}-simple`}>{title}</InputLabel>
             <Select
+              disabled={!teamMembers.length}
               value={state.teamMember[`${role}_id`]}
               onChange={(e, value) => {
                 updateRole(e.target.value, value.props.children);
