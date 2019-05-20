@@ -72,9 +72,11 @@ class DashboardTour extends Component {
           <Container>
             <p>
               We're thrilled to have you as a part of Training Bot. Take a poke
-              around, and please don't hesitate to
-              <Link to="/home/contact">contact us</Link> if you have any
-              questions or concerns!
+              around, and please don't hesitate to{" "}
+              <Link onClick={() => this.props.closeTour()} to="/home/contact">
+                contact us
+              </Link>{" "}
+              if you have any questions or concerns!
             </p>
             <ImageContainer>
               <Progress />
