@@ -159,4 +159,10 @@ export const SlackButton = styled.button`
       display: initial;
     }
   }
+  @media (max-width: 590px) {
+      width: 100%;
+      max-width: none;
+      margin: 16px auto 0;
+    }    
+  }
 `;
