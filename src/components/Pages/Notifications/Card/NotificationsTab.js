@@ -79,7 +79,7 @@ function Card(props) {
           history={props.history}
         />
         {!notificationsCount && (
-          <MessageContainer style={{ marginTop: "30%" }}>
+          <MessageContainer>
             <p>
               {props.isLoading
                 ? "Loading your Notifications."
