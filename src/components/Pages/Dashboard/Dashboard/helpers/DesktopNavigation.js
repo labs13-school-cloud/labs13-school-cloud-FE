@@ -32,7 +32,12 @@ class SimpleTabs extends React.Component {
     return (
       <div>
         <AppBar position="static">
-          <TabsStyled value={value} onChange={this.handleChange}>
+          <TabsStyled
+            indicatorColor="primary"
+            textColor="primary"
+            value={value}
+            onChange={this.handleChange}
+          >
             <Tab label="Overview" />
             <Tab label="Team Members" />
             <Tab label="Training Series" />
@@ -47,7 +52,8 @@ class SimpleTabs extends React.Component {
 export default SimpleTabs;
 
 const TabsStyled = styled(Tabs)`
-  background: #441476;
+  background: #f0f0f0;
+  color: black;
   width: 100vw;
   display: flex;
   justify-content: center;
