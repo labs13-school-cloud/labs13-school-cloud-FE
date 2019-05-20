@@ -44,9 +44,10 @@ export const styles = theme => ({
   },
   saveButton: {
     "margin-left": theme.spacing.unit,
-    color: "#451476",
+    color: "white",
+    background: "#451476",
     "&:hover": {
-      background: "#451476",
+      background: "#501f84",
       color: "white"
     }
   }

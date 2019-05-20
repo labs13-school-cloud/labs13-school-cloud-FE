@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 
 import { getAllResponses } from "store/actions";
 
+import styled from "styled-components";
+
 import SearchCard from "components/UI/SearchCard/";
 import TeamMembersOverview from "components/Pages/TeamMembers/List/Overview";
 import TeamMembersTab from "components/Pages/TeamMembers/Tab";
@@ -12,6 +14,7 @@ import NotificationsCard from "components/Pages/Notifications/Card";
 import NotificationsOverview from "components/Pages/Notifications/Card/Overview/Overview.js";
 import Responses from "components/Pages/Notifications/Responses";
 import TabNavigation from "./helpers/TabNavigation.js";
+import DektopNavigation from "./helpers/DesktopNavigation.js";
 import NotificationsTab from "components/Pages/Notifications/Card/NotificationsTab.js";
 
 import { TripleColumn, SmallColumns, DashWrapper } from "./styles.js";
@@ -39,11 +42,17 @@ function Dashboard(props) {
 
   return (
     <DashWrapper>
-      <TabNavigation
-        topTab={topTab}
-        setTopTab={setTopTab}
-        newResponses={newResponses}
-      />
+      <MobileNav>
+        <TabNavigation
+          topTab={topTab}
+          setTopTab={setTopTab}
+          newResponses={newResponses}
+        />
+      </MobileNav>
+      <DesktopNav>
+        <DektopNavigation topTab={topTab} setTopTab={setTopTab} />
+      </DesktopNav>
+
       {topTab === "overview" && (
         <TripleColumn>
           <SmallColumns>
@@ -109,3 +118,18 @@ export default connect(
   mapStateToProps,
   { getAllResponses }
 )(Dashboard);
+
+const MobileNav = styled.div`
+  display: block;
+  width: 100vw;
+  @media (min-width: 765px) {
+    display: none;
+  }
+`;
+
+const DesktopNav = styled.div`
+  display: block;
+  @media (max-width: 764px) {
+    display: none;
+  }
+`;

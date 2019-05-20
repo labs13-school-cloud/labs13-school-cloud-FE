@@ -204,13 +204,14 @@ class CreateMessage extends React.Component {
               </Button>
               <Button
                 className={classes.button}
-                onClick={e =>
+                onClick={e => {
+                  console.log(this.state);
                   this.props.history.push(
                     `/home/training-series/${
-                      this.state.messages.training_series_id
+                      this.state.message.training_series_id
                     }`
-                  )
-                }
+                  );
+                }}
               >
                 Cancel
               </Button>
