@@ -31,7 +31,6 @@ function TrainingSeriesTabSingle(props) {
           namesArray.push(msg.subject);
         });
         setMessageNames(namesArray);
-        console.log(namesArray);
       })
       .catch(err => setMessageLength(err));
   }, [id]);

@@ -23,7 +23,6 @@ export const getUser = () => dispatch => {
       name
     })
     .then(res => {
-      console.log(res.data);
       dispatch({ type: GET_USER_SUCCESS, payload: res.data });
     })
     .catch(err => dispatch({ type: GET_USER_FAIL, error: err }));

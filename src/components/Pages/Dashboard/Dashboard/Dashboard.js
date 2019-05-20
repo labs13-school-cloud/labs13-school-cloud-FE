@@ -34,7 +34,6 @@ function Dashboard(props) {
   }, [responsesFromProps]);
 
   useEffect(() => {
-    console.log("REPONSES", responses);
     setNewResponses(responses.filter(r => !r.seen));
   }, [responses]);
 

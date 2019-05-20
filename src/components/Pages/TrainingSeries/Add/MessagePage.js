@@ -68,7 +68,6 @@ class MessagePage extends React.Component {
     const message = { ...this.state.message };
     delete message.id;
     delete message.series;
-    console.log(message);
 
     this.props.editMessage(this.state.message.id, message);
 
