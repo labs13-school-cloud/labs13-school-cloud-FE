@@ -19,7 +19,7 @@ const HelpModal = props => {
         <hr />
         <TypeWrapper>
           <h4>Login/Set up</h4>
-          <hr />
+
           <p>
             With Training Bot, creating/logging in to an account is simple!
             After clicking onto the login section, simply{" "}
@@ -33,7 +33,7 @@ const HelpModal = props => {
 
         <TypeWrapper>
           <h4>Creating A Team Member</h4>
-          <hr />
+
           <p>
             The first thing that you'll want to do with Training Bot is create
             what we like to call <span>"Team Members"</span>. A team member is
@@ -67,7 +67,7 @@ const HelpModal = props => {
 
         <TypeWrapper>
           <h4>Create A Training Series</h4>
-          <hr />
+
           <p>
             Next, you'll want to actually set up a set of training information
             to send to your employees! A <span>Training Series</span> is simply
@@ -135,7 +135,7 @@ const HelpModal = props => {
         </TypeWrapper>
         <TypeWrapper>
           <h4>Recieving Responses</h4>
-          <hr />
+
           <p>
             Your employees will have the option to respond to messages sent out
             during a Training Series. You can view these responses in the{" "}
@@ -167,22 +167,24 @@ const HelpModalPaper = styled(Paper)`
     text-align: center;
     font-size: 35px;
     margin: 0;
+    @media (max-width: 600px) {
+      font-size: 30px;
+    }
   }
 `;
 const TypeWrapper = styled.div`
   margin: 15px auto;
   width: 95%;
-  min-height: 200px;
+  min-height: 40px;
   padding: 15px;
-  background: rgba(0, 0, 0, 0.04);
   h4 {
-    margin: 0 10px 10px 5px;
-    font-size: 24px;
-    font-weight: 200;
-    text-decoration: underline;
-    color: #1ce55e;
+    margin: 0 10px 10px 0;
+    font-size: 32px;
+    font-weight: 400;
+    @media (max-width: 600px) {
+      font-size: 24px;
+    }
   }
   span {
-    color: #923ee5;
   }
 `;

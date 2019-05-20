@@ -89,7 +89,7 @@ const TeamMembersTab = props => {
         />
         <Grid container justify="center">
           {localTeamMembers.length === 0 ? (
-            <div>add some members</div>
+            <div style={{ color: "rgba(0,0,0,0.4)" }}>add some members</div>
           ) : (
             props.teamMembers
               .slice(offset, offset + limit)
@@ -132,6 +132,7 @@ const TeamsTabWrapper = styled(Paper)`
   margin: 48px auto;
   padding: 10px;
   width: 100%;
+  max-width: 1200px;
 `;
 
 const TeamsTabHeader = styled.div`

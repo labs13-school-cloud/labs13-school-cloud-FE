@@ -97,24 +97,21 @@ function TabNavigation(props) {
       >
         Notifications
       </Popover>
-      <div
+      <BottomNavigationAction
         onClick={() => {
           props.setTopTab("responses");
         }}
-      >
-        <BottomNavigationAction
-          label="Responses"
-          value="responses"
-          icon={<ModeComment />}
-          onMouseEnter={e => {
-            setResponsesHover(true);
-          }}
-          onMouseLeave={e => {
-            setResponsesHover(false);
-          }}
-        />
-        {newResponses.length ? <div className={classes.circle} /> : ""}
-      </div>
+        label="Responses"
+        value="responses"
+        icon={<ModeComment />}
+        onMouseEnter={e => {
+          setResponsesHover(true);
+        }}
+        onMouseLeave={e => {
+          setResponsesHover(false);
+        }}
+      />
+      {newResponses.length ? <div className={classes.circle} /> : ""}
       <Popover
         style={responsesHover ? { display: "block" } : { display: "none" }}
       >

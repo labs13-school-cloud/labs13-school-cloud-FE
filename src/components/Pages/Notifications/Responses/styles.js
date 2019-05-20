@@ -29,6 +29,7 @@ export const MainWrapper = styled(Paper)`
   margin: 48px auto;
   padding: 10px;
   width: 90%;
+  max-width: 1200px;
 `;
 export const HeaderWrapper = styled.div`
   display: flex;
