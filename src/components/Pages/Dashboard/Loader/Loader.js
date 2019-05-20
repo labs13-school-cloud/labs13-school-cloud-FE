@@ -50,7 +50,9 @@ function Loader(props) {
             />
           )}
           <AppBar />
-          {props.location.pathname !== "/home" && <ReturnToDashboardButton />}
+          {props.location.pathname !== "/home" && (
+            <ReturnToDashboardButton history={props.history} />
+          )}
           <DashboardContainer>
             <DashboardRoutes
               {...props}

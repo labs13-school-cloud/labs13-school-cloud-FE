@@ -63,7 +63,6 @@ function Add(props) {
     if (teamMember.mentor_id === "") {
       teamMember.mentor_id = null;
     }
-    console.log("shouldn't display here");
     props.addTeamMember(state.teamMember);
     dispatch({ type: "TOGGLE_ROUTING" });
   };

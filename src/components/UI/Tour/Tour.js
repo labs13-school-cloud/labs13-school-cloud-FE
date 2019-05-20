@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Tour from "reactour";
 import Progress from "../Progress/ProgressCircle";
 import styled from "styled-components";
+import Button from "@material-ui/core/Button";
 
 class DashboardTour extends Component {
   render() {
@@ -14,6 +15,9 @@ class DashboardTour extends Component {
             steps={this.state.dashboardSteps}
             isOpen={this.props.isTourOpen}
             onRequestClose={this.props.closeTour}
+            lastStepNextButton={
+              <ButtonStyled variant="contained">Get Started</ButtonStyled>
+            }
           />
         )}
       </>
@@ -68,9 +72,11 @@ class DashboardTour extends Component {
           <Container>
             <p>
               We're thrilled to have you as a part of Training Bot. Take a poke
-              around, and please don't hesitate to
-              <Link to="/home/contact"> contact us</Link> if you have any
-              questions or concerns!
+              around, and please don't hesitate to{" "}
+              <Link onClick={() => this.props.closeTour()} to="/home/contact">
+                contact us
+              </Link>{" "}
+              if you have any questions or concerns!
             </p>
             <ImageContainer>
               <Progress />
@@ -90,4 +96,10 @@ const ImageContainer = styled.div`
   img {
     width: 50px;
   }
+`;
+
+//Not working, not sure why.
+const ButtonStyled = styled(Button)`
+  background: #451476;
+  color: white;
 `;
