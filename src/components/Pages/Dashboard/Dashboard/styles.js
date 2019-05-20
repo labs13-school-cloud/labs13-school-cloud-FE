@@ -45,6 +45,11 @@ export const SmallColumns = styled.div`
     align-items: center;
     margin: 0 auto;
   }
+  @media (min-width: 1400px) {
+    div:nth-child(2) {
+      margin-right: 10px;
+    }
+  }
 `;
 export const DashWrapper = styled.div`
   width: 100%;

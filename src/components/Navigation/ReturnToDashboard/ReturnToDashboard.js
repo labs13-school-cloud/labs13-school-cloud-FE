@@ -1,14 +1,11 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 import ArrowBack from "@material-ui/icons/ArrowBack";
 
-const ReturnToDashboardButton = () => {
+const ReturnToDashboardButton = ({ history }) => {
   return (
     <ButtonStyles>
-      <Link to="/home">
-        <ArrowBack />
-      </Link>
+      <ArrowBack onClick={() => history.goBack()} />
     </ButtonStyles>
   );
 };

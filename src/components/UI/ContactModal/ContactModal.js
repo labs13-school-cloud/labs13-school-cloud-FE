@@ -77,10 +77,10 @@ const ContactModalWrapper = styled.div`
 `;
 
 const ContactModalPaper = styled(Paper)`
-  width: 90%;
-  max-width: 1400px;
-  margin: 10vh auto;
-  height: 70vh;
+  width: 80%;
+  max-width: 600px;
+  margin: 7vh auto;
+  height: 60vh;
   overflow-y: scroll;
   padding: 20px;
   h3 {

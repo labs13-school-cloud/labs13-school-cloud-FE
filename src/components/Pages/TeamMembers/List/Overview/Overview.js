@@ -4,8 +4,8 @@ import { connect } from "react-redux";
 
 import styled from "styled-components";
 
-import TeamMemberOptions from "components/UI/Modals/TeamMemberOptions";
-import { getTeamMembers, deleteTeamMember } from "store/actions";
+import DeleteModal from "components/UI/Modals/deleteModal";
+import { getTeamMembers } from "store/actions";
 
 import { withStyles } from "@material-ui/core/styles";
 import { ListItem, ListItemText } from "@material-ui/core/";
@@ -15,7 +15,6 @@ function Overview({
   user_id,
   getFiltered,
   getTeamMembers: getMemberFromProps,
-  deleteTeamMember: deleteMemberFromProps,
   teamMembers,
   classes,
   history
@@ -35,16 +34,12 @@ function Overview({
                 secondary={`Job: ${job_description}`}
                 onClick={() => history.push(`/home/team-member/${id}`)}
               />
-              <div>
-                <TeamMemberOptions
-                  routeToMemberPage={() =>
-                    history.push(`/home/team-member/${id}`)
-                  }
-                  handleDelete={() => deleteMemberFromProps(id)}
-                  teamMemberID={id}
-                  user_id={user_id}
-                />
-              </div>
+              <DeleteModal
+                deleteType="teamMember"
+                teamMemberId={id}
+                className={`material-icons ${classes.icons}`}
+                user_id={user_id}
+              />
             </SingleMember>
           );
         }
@@ -59,7 +54,7 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getTeamMembers, deleteTeamMember }
+  { getTeamMembers }
 )(withStyles(styles)(Overview));
 
 const SingleMember = styled(ListItem)``;
