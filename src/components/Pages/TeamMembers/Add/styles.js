@@ -91,9 +91,9 @@ export const MainContainer = styled.div`
 
 export const MemberInfoContainer = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   flex-wrap: wrap;
-  align-items: baseline;
+  align-items: center;
   margin: 20px auto;
   @media (max-width: 590px) {
     flex-direction: column;
@@ -117,4 +117,52 @@ export const LoadingImage = styled.img`
   position: relative;
   padding: 0;
   margin: 0;
+`;
+
+export const SlackButton = styled.button`
+  margin: 8px;
+  overflow: hidden;
+  min-width: 200px;
+  max-width: 200px;
+  min-height: 48px;
+  max-height: 48px;
+  display: flex;
+  padding: 0 0 7px;
+  position: relative;
+  top: 4px;
+  border: 0px;
+  line-height: 1;
+  background-color: transparent;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.42);
+  cursor: pointer;
+  flex-direction: column;
+  justify-content: flex-end;
+  transition: border-bottom-color 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+
+  p {
+    color: rgba(0, 0, 0, 0.54);
+    font-size: 1rem;
+    margin: 0;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  }
+  p:nth-child(2) {
+    display: none;
+  }
+  &:hover {
+    border-radius: 4px;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.87);
+
+    p:nth-child(1) {
+      display: none;
+    }
+    p:nth-child(2) {
+      display: initial;
+    }
+  }
+  @media (max-width: 590px) {
+      width: 100%;
+      max-width: none;
+      margin: 16px auto 0;
+    }    
+  }
 `;

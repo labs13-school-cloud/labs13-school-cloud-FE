@@ -7,7 +7,10 @@ import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import { withStyles } from "@material-ui/core/styles";
 
-import { styles } from "../styles.js";
+import { styles, SlackButton } from "../styles.js";
+
+const authorizeSlack =
+  "https://slack.com/oauth/authorize?client_id=604670969987.618830021958&scope=bot,channels:read,chat:write:bot,im:write,users:read,channels:history,im:history,groups:history,mpim:history,reactions:read";
 
 function SelectSlackID({ updateMember, state, classes, dispatch }) {
   useEffect(() => {
@@ -27,36 +30,55 @@ function SelectSlackID({ updateMember, state, classes, dispatch }) {
 
   const title =
     state.slackError === "NO TOKEN" ? "AUTHORIZE SLACK" : "Slack User";
+
+  const authSlackButton = (
+    <SlackButton
+      className={classes.slackButton}
+      type="button"
+      onClick={() => (window.location = authorizeSlack)}
+    >
+      <p>Authorize Slack</p>
+      <p>Click To Transfer</p>
+    </SlackButton>
+  );
   return (
-    <FormControl className={classes.formControl}>
-      <InputLabel htmlFor={`slack-simple`}>{title}</InputLabel>
-      <Select
-        disabled={state.slackError}
-        value={state.teamMember.slack_uuid}
-        onChange={e => updateMember("slack_uuid", e.target.value)}
-        inputProps={{
-          name: `slack`,
-          id: `slack-simple`
-        }}
-      >
-        <MenuItem value="">
-          <em>None</em>
-        </MenuItem>
-        {state.slackUsers &&
-          state.slackUsers
-            .filter(
-              user =>
-                user.id !== "USLACKBOT" &&
-                user.real_name.toLowerCase() !== "Training Bot".toLowerCase() &&
-                user.real_name.toLowerCase() !== "Training-Bot".toLowerCase()
-            )
-            .map(user => (
-              <MenuItem key={user.id} value={user.id}>
-                {user.real_name}
-              </MenuItem>
-            ))}
-      </Select>
-    </FormControl>
+    <>
+      {state.slackError === "NO TOKEN" ? (
+        <>{authSlackButton}</>
+      ) : (
+        <FormControl className={classes.formControl}>
+          <InputLabel htmlFor={`slack-simple`}>{title}</InputLabel>
+          <Select
+            disabled={state.slackError}
+            value={state.teamMember.slack_uuid}
+            onChange={e => updateMember("slack_uuid", e.target.value)}
+            inputProps={{
+              name: `slack`,
+              id: `slack-simple`
+            }}
+          >
+            <MenuItem value="">
+              <em>None</em>
+            </MenuItem>
+            {state.slackUsers &&
+              state.slackUsers
+                .filter(
+                  user =>
+                    user.id !== "USLACKBOT" &&
+                    user.real_name.toLowerCase() !==
+                      "Training Bot".toLowerCase() &&
+                    user.real_name.toLowerCase() !==
+                      "Training-Bot".toLowerCase()
+                )
+                .map(user => (
+                  <MenuItem key={user.id} value={user.id}>
+                    {user.real_name}
+                  </MenuItem>
+                ))}
+          </Select>
+        </FormControl>
+      )}
+    </>
   );
 }
 
