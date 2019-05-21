@@ -28,7 +28,7 @@ function TabNavigation(props) {
       style={{
         width: "100%",
         whiteSpace: "nowrap",
-        background: "rgb(240,240,240)",
+        background: "rgb(255,255,255)",
         position: "relative"
       }}
     >
