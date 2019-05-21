@@ -69,8 +69,13 @@ function Add(props) {
 
   const { classes } = props;
   return (
-    <MainContainer maxWidth={props.maxWidth} maxHeight={props.maxHeight}>
+    <MainContainer
+      style={{ position: "relative" }}
+      maxWidth={props.maxWidth}
+      maxHeight={props.maxHeight}
+    >
       <InfoPopup
+        left="10px"
         popOverText={
           <p>
             On this page you can add a new Team Member! If you've already got

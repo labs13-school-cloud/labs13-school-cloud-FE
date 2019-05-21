@@ -21,16 +21,14 @@ export default function SingleMemberCheck({
   };
   return (
     <MainWrapper>
-      <p>
-        <Checkbox
-          checked={checked}
-          value="checkedB"
-          color="primary"
-          onChange={e => {
-            setChecked(!checked);
-            addMember(collectIDs());
-          }}
-        />
+      <p
+        style={{ cursor: "pointer" }}
+        onClick={e => {
+          setChecked(!checked);
+          addMember(collectIDs());
+        }}
+      >
+        <Checkbox checked={checked} value="checkedB" color="primary" />
         {teamMember.first_name} {teamMember.last_name}
       </p>
       <Options>
