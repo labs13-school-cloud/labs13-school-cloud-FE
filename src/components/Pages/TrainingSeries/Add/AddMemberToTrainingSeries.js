@@ -33,10 +33,13 @@ function AddMemberToTrainingSeries(props) {
     params: { id }
   } = match;
 
-  const getNewNotification = (id, msg, for_team_member) => {
-    const memberServices = props.teamMembers.filter(mem => mem.id === id);
+  const getNewNotification = (recipient_id, msg, team_member_id) => {
+    const memberServices = props.teamMembers.filter(
+      tm => tm.id === recipient_id
+    );
     return {
-      team_member_id: id,
+      recipient_id,
+      team_member_id,
       service_id: memberServices[0].phone_number
         ? 1
         : memberServices[0].email
@@ -47,8 +50,7 @@ function AddMemberToTrainingSeries(props) {
       is_sent: false,
       send_date: moment(startDate)
         .add(msg.days_from_start, "days")
-        .toISOString(),
-      for_team_member
+        .toISOString()
     };
   };
 
@@ -75,7 +77,7 @@ function AddMemberToTrainingSeries(props) {
 
     const workArray = [...memberComMethods]; //take our current array of members and communications and spread it into a new array so we can work on it.
 
-    workArray.map((mem, i) => {
+    workArray.forEach((mem, i) => {
       //map over that array and check if the member being added already exists in our array. if so, delete their original prefered item from the list;
       if (mem.id === memberMethod.id) {
         workArray.splice(i, 1);
@@ -103,16 +105,15 @@ function AddMemberToTrainingSeries(props) {
           //find member who has memberID and check what services they have available to them
           roles.forEach(role => {
             if (msg[`for_${role}`] && idSet[role]) {
-              const isTeamMember = role === "team_member";
               newNotifications.push(
-                getNewNotification(idSet[role], msg, isTeamMember)
+                getNewNotification(idSet[role], msg, idSet.team_member)
               );
             }
           });
         });
     });
     newNotifications.forEach(n => {
-      memberComMethods.map(member => {
+      memberComMethods.forEach(member => {
         //this looks at the communication methods set by clicking on the radio buttons.
         //it then assigns which type of notification should be sent out based on what you clicked.
         //if you forgot to click anything, it defaults to SMS.
