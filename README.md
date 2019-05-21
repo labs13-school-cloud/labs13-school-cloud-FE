@@ -1,68 +1,95 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# training-bot-frontend
 
-## Available Scripts
+![banner](img/logo.png)
 
-In the project directory, you can run:
+[![standard-readme compliant](https://img.shields.io/badge/standard--readme-OK-green.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
 
-### `npm start`
+> Training Bot React/Redux Application
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Table of Contents
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+- [Background](#background)
+- [Deploy](#Deploy)
+- [Components](#Components)
+- [Maintainers](#maintainers)
+- [License](#license)
 
-### `npm test`
+## Background
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+TODO: Write background section
 
-### `npm run build`
+## Deploy
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+We've configured a one-click deploy to Netlify that will allow you to get the front end of the site up and running with a guided set up:
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+TODO: Write Netlify Deploy buttom
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Components
 
-### `npm run eject`
+    *note that the structure of this documentation is broken up by folder. Headings will represent top level folders, and blockquotes will represent nested folders*
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Misc
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+> authenticate
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+| Name            | Purpose                                          | How To View |
+| --------------- | ------------------------------------------------ | ----------- |
+| authenticate.js | --                                               | --          |
+| index.js        | import/export authenticate.js for easier loading | n/a         |
+| styles.js       | styles for authenticate.js                       | n/a         |
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+> Callback
 
-## Learn More
+> Stripe
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Navigation
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+> AppBar
 
-### Code Splitting
+> ReturnToPreviousPage
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+### Pages
 
-### Analyzing the Bundle Size
+> Dashboard
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+> LandingPage
 
-### Making a Progressive Web App
+> Notifications
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+> Profile
 
-### Advanced Configuration
+> TeamMembers
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+> TrainingSeries
 
-### Deployment
+### UI
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+> ContactModal
 
-### `npm run build` fails to minify
+> HelpModal
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+> InfoPopup
+
+> Modals
+
+> Progress
+
+> SearchCard
+
+> Snackbar
+
+> Tour
+
+## Auth
+
+## Store
+
+## Maintainers
+
+| ![Andrew Brush](https://github.com/ajb85.png) | ![Nick Cannariato](https://github.com/nickcannariato.png) | ![Adam McKenney](https://github.com/DaftBeowulf.png) | ![Gannon Darcy](https://github.com/GannonDetroit.png) | ![Thomas Hessburg](https://github.com/TomHessburg.png) |
+| --------------------------------------------- | --------------------------------------------------------- | ---------------------------------------------------- | ----------------------------------------------------- | ------------------------------------------------------ |
+| [@ajb85](https://github.com/ajb85)            | [@nickcannariato](https://github.com/nickcannariato)      | [@DaftBeowulf](https://github.com/DaftBeowulf)       | [@GannonDetroit](https://github.com/GannonDetroit)    | [@TomHessburg](https://github.com/TomHessburg)         |
+
+## License
+
+MIT © 2019 Training Bot
