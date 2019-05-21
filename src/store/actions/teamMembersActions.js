@@ -28,9 +28,9 @@ const baseUrl = `${process.env.REACT_APP_API}/api`;
 export const getTeamMembers = id => dispatch => {
   dispatch({ type: FETCH_TEAM_START });
   axios
-    .get(`${baseUrl}/users/${id}/team-members`)
+    .get(`${baseUrl}/team-members`)
     .then(res => {
-      dispatch({ type: FETCH_TEAM_SUCCESS, payload: res.data.members });
+      dispatch({ type: FETCH_TEAM_SUCCESS, payload: res.data.teamMembers });
     })
     .catch(err => dispatch({ type: FETCH_TEAM_FAIL, payload: err }));
 };
@@ -48,6 +48,8 @@ export const addTeamMember = teamMember => dispatch => {
 
 export const editTeamMember = teamMember => dispatch => {
   const { id, manager_name, mentor_name, ...changes } = teamMember;
+  changes.mentor_id = changes.mentor_id ? changes.mentor_id : null;
+  changes.manager_id = changes.manager_id ? changes.manager_id : null;
   //destructuring forbidden properties here in the action since this function is called in multiple places in app
   //only submits valid fields to be changed, otherwise would throw Joi validation error
 

@@ -22,15 +22,15 @@ function Overview(props) {
   const {
     getFiltered,
     filters,
-    getNotifications: getNotificationsFromProps,
+    getNotifications,
     notifications,
     classes,
     history
   } = props;
 
   useEffect(() => {
-    getNotificationsFromProps();
-  }, [getNotificationsFromProps]);
+    getNotifications();
+  }, [getNotifications]);
 
   const displayedLogo = {
     twilio: <TextsmsOutlined />,

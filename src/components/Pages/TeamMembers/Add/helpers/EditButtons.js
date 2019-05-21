@@ -1,8 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { connect } from "react-redux";
 
-import { editTeamMember } from "store/actions";
 import DeleteModal from "components/UI/Modals/deleteModal";
 import NotificationWidget from "components/UI/Snackbar/SnackBarTeamMember.js";
 
@@ -27,10 +25,7 @@ function EditButtons(props) {
   );
 }
 
-export default connect(
-  null,
-  { editTeamMember }
-)(EditButtons);
+export default EditButtons;
 
 const ButtonContainer = styled.div`
   display: flex;

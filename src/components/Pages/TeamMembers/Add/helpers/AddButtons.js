@@ -6,7 +6,7 @@ import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import { styles, ButtonContainer, LoadingImage } from "../styles.js";
 
-function AddButtons({ classes, state, history }) {
+function AddButtons({ classes, state }) {
   return (
     <ButtonContainer>
       <Button
@@ -21,9 +21,7 @@ function AddButtons({ classes, state, history }) {
           "Add Member"
         )}
       </Button>
-      <Button className={classes.button} onClick={() => history.push("/home")}>
-        Cancel
-      </Button>
+      <Button className={classes.button}>Cancel</Button>
     </ButtonContainer>
   );
 }

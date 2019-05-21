@@ -52,7 +52,7 @@ class SimpleTabs extends React.Component {
 export default SimpleTabs;
 
 const TabsStyled = styled(Tabs)`
-  background: #f0f0f0;
+  background: white;
   color: black;
   width: 100vw;
   display: flex;
