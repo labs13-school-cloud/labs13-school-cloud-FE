@@ -28,9 +28,9 @@ const baseUrl = `${process.env.REACT_APP_API}/api`;
 export const getTeamMembers = id => dispatch => {
   dispatch({ type: FETCH_TEAM_START });
   axios
-    .get(`${baseUrl}/users/${id}/team-members`)
+    .get(`${baseUrl}/team-members`)
     .then(res => {
-      dispatch({ type: FETCH_TEAM_SUCCESS, payload: res.data.members });
+      dispatch({ type: FETCH_TEAM_SUCCESS, payload: res.data.teamMembers });
     })
     .catch(err => dispatch({ type: FETCH_TEAM_FAIL, payload: err }));
 };
