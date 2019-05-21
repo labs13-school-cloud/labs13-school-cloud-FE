@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
@@ -6,10 +6,14 @@ import { getTeamMembers, getNotifications } from "store/actions";
 
 import { withStyles } from "@material-ui/core/styles";
 import { Paper, Button, Typography } from "@material-ui/core/";
+import Pagination from "material-ui-flat-pagination";
 
 import { styles, HeaderContainer, HolderText } from "./styles.js";
 
 function Assign(props) {
+  const [offset, setOffset] = useState(0);
+  const limit = props.limit || 5;
+
   const {
     List,
     classes,
@@ -49,7 +53,11 @@ function Assign(props) {
           {assignedMembers.length ? "Assign More Members" : "Assign Members"}
         </Button>
       </HeaderContainer>
-      <List params={params} teamMembers={assignedMembers} history={history} />
+      <List
+        params={params}
+        teamMembers={assignedMembers.slice(offset, offset + limit)}
+        history={history}
+      />
       {props.teamMembers.length && !assignedMembers.length && (
         <>
           <Typography variant="subheading" className={classes.messageTextTop}>
@@ -72,6 +80,13 @@ function Assign(props) {
           </HolderText>
         </Typography>
       )}
+      <Pagination
+        limit={limit}
+        offset={offset}
+        total={assignedMembers.length}
+        centerRipple={true}
+        onClick={(e, newOffset) => setOffset(newOffset)}
+      />
     </Paper>
   );
 }
