@@ -41,6 +41,7 @@ TODO: Write Netlify Deploy buttom
 | styles.js       | styles for authenticate.js                       | n/a         |
 
 <br />
+<br />
 
 > Callback
 
@@ -52,6 +53,7 @@ TODO: Write Netlify Deploy buttom
 | SlackCallback.js |         |             |
 
 <br />
+<br />
 
 > Stripe
 
@@ -61,6 +63,9 @@ TODO: Write Netlify Deploy buttom
 | StripeCard.js       |         |             |
 | StripeView.js       |         |             |
 | UnsubscribeModal.js |         |             |
+
+<br />
+<br />
 
 ### Navigation
 
@@ -75,6 +80,7 @@ TODO: Write Netlify Deploy buttom
 | styles.js |         |             |
 
 <br />
+<br />
 
 > ReturnToPreviousPage
 
@@ -82,6 +88,9 @@ TODO: Write Netlify Deploy buttom
 | ----------------------- | ------- | ----------- |
 | index.js                |         |             |
 | ReturnToPreviousPage.js |         |             |
+
+<br />
+<br />
 
 ### Pages
 
@@ -120,6 +129,7 @@ TODO: Write Netlify Deploy buttom
 | Routes.js |         |             |
 
 <br />
+<br />
 
 > LandingPage
 
@@ -148,34 +158,293 @@ TODO: Write Netlify Deploy buttom
 | styles.js |         |             |
 
 <br />
+<br />
 
 > Notifications
 
+> > Card
+
+| Name                | Purpose | How To View |
+| ------------------- | ------- | ----------- |
+| index.js            |         |             |
+| Card.js             |         |             |
+| styles.js           |         |             |
+| NotificationsTab.js |         |             |
+| filter.js           |         |             |
+
+> > > Overview
+
+| Name        | Purpose | How To View |
+| ----------- | ------- | ----------- |
+| index.js    |         |             |
+| Overview.js |         |             |
+| styles.js   |         |             |
+
+> > > TeamMember
+
+| Name          | Purpose | How To View |
+| ------------- | ------- | ----------- |
+| index.js      |         |             |
+| TeamMember.js |         |             |
+| styles.js     |         |             |
+
+> > Responses
+
+| Name         | Purpose | How To View |
+| ------------ | ------- | ----------- |
+| index.js     |         |             |
+| Responses.js |         |             |
+| styles.js    |         |             |
+
+<br />
+<br />
+
 > Profile
+
+| Name       | Purpose | How To View |
+| ---------- | ------- | ----------- |
+| index.js   |         |             |
+| Profile.js |         |             |
+| styles.js  |         |             |
+
+<br />
+<br />
 
 > TeamMembers
 
+> > Add
+
+| Name      | Purpose | How To View |
+| --------- | ------- | ----------- |
+| index.js  |         |             |
+| Add.js    |         |             |
+| styles.js |         |             |
+
+> > > helpers
+
+| Name               | Purpose | How To View |
+| ------------------ | ------- | ----------- |
+| AddButtons.js      |         |             |
+| EditButtons.js     |         |             |
+| MemberInfoform.js  |         |             |
+| Relationships.js   |         |             |
+| SelectSlackID.js   |         |             |
+| testPhoneNumber.js |         |             |
+
+> > > reducer
+
+| Name     | Purpose | How To View |
+| -------- | ------- | ----------- |
+| index.js |         |             |
+
+> > Assign
+
+| Name      | Purpose | How To View |
+| --------- | ------- | ----------- |
+| Assign.js |         |             |
+| index.js  |         |             |
+| styles.js |         |             |
+
+> > Edit
+
+| Name      | Purpose | How To View |
+| --------- | ------- | ----------- |
+| Edit.js   |         |             |
+| index.js  |         |             |
+| styles.js |         |             |
+
+> > List
+
+> > > Assign
+
+| Name      | Purpose | How To View |
+| --------- | ------- | ----------- |
+| Assign.js |         |             |
+| index.js  |         |             |
+| styles.js |         |             |
+
+> > > Overview
+
+| Name        | Purpose | How To View |
+| ----------- | ------- | ----------- |
+| Overview.js |         |             |
+| index.js    |         |             |
+| styles.js   |         |             |
+
+> > Tab
+
+| Name                    | Purpose | How To View |
+| ----------------------- | ------- | ----------- |
+| TeamMembersTab.js       |         |             |
+| index.js                |         |             |
+| styles.js               |         |             |
+| TeamMembersTabSingle.js |         |             |
+
+<br />
+<br />
+
 > TrainingSeries
 
+> > Add
+
+| Name                          | Purpose | How To View |
+| ----------------------------- | ------- | ----------- |
+| AddMemberToTrainingSeries.js  |         |             |
+| CreateMessage.js              |         |             |
+| CreateMessageStyles.js        |         |             |
+| CreateTrainingSeries.js       |         |             |
+| CreateTrainingSeriesStyles.js |         |             |
+| MessagePage.js                |         |             |
+| MessagePageStyles.js          |         |             |
+| singleMemberCheck.js          |         |             |
+
+> > Edit
+
+| Name      | Purpose | How To View |
+| --------- | ------- | ----------- |
+| Edit.js   |         |             |
+| index.js  |         |             |
+| styles.js |         |             |
+
+> > > helpers
+
+| Name     | Purpose | How To View |
+| -------- | ------- | ----------- |
+| Title.js |         |             |
+
+> > List
+
+> > > Messages
+
+| Name        | Purpose | How To View |
+| ----------- | ------- | ----------- |
+| index.js    |         |             |
+| Messages.js |         |             |
+| styles.js   |         |             |
+
+> > > Overview
+
+| Name        | Purpose | How To View |
+| ----------- | ------- | ----------- |
+| index.js    |         |             |
+| Overview.js |         |             |
+| styles.js   |         |             |
+
+> > Messages
+
+| Name        | Purpose | How To View |
+| ----------- | ------- | ----------- |
+| index.js    |         |             |
+| filter.js   |         |             |
+| styles.js   |         |             |
+| Messages.js |         |             |
+
+> > Tabs
+
+| Name                       | Purpose | How To View |
+| -------------------------- | ------- | ----------- |
+| TrainingSeriesTab.js       |         |             |
+| TrainingSeriesTabSingle.js |         |             |
+| TrainingSeriesTabStyles.js |         |             |
+
+<br />
+<br />
 ### UI
 
 ---
 
 > ContactModal
 
+| Name            | Purpose | How To View |
+| --------------- | ------- | ----------- |
+| ContactModal.js |         |             |
+
+<br />
+<br />
+
 > HelpModal
+
+| Name         | Purpose | How To View |
+| ------------ | ------- | ----------- |
+| HelpModal.js |         |             |
+
+<br />
+<br />
 
 > InfoPopup
 
+| Name         | Purpose | How To View |
+| ------------ | ------- | ----------- |
+| InfoPopup.js |         |             |
+
+<br />
+<br />
+
 > Modals
+
+| Name                                     | Purpose | How To View |
+| ---------------------------------------- | ------- | ----------- |
+| addTeamMembertoTrainingSeriesModal.js.js |         |             |
+| addToTrainingSeriesModal.js              |         |             |
+| deleteModal.js                           |         |             |
+| PostModal.js                             |         |             |
+| PostOptionsModal.js                      |         |             |
+| TeamMemberModal.js                       |         |             |
+| TrainingSeriesModal.js                   |         |             |
+| userModal.js                             |         |             |
+
+<br />
+<br />
 
 > Progress
 
+| Name              | Purpose | How To View |
+| ----------------- | ------- | ----------- |
+| loacing.css       |         |             |
+| ProgressCircle.js |         |             |
+
+<br />
+<br />
+
 > SearchCard
+
+| Name          | Purpose | How To View |
+| ------------- | ------- | ----------- |
+| filter.css    |         |             |
+| index.js      |         |             |
+| SearchCard.js |         |             |
+| styles.js     |         |             |
+
+> > CardHeader
+
+| Name          | Purpose | How To View |
+| ------------- | ------- | ----------- |
+| CardHeader.js |         |             |
+| index.js      |         |             |
+| styles.js     |         |             |
+
+<br />
+<br />
 
 > Snackbar
 
+| Name                  | Purpose | How To View |
+| --------------------- | ------- | ----------- |
+| Snackbar.js           |         |             |
+| index.js              |         |             |
+| SnackBarTeamMember.js |         |             |
+
+<br />
+<br />
+
 > Tour
+
+| Name    | Purpose | How To View |
+| ------- | ------- | ----------- |
+| Tour.js |         |             |
+
+<br />
+<br />
 
 ---
 
