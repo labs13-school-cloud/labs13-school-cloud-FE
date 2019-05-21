@@ -49,7 +49,7 @@ function Assign(props) {
           {assignedMembers.length ? "Assign More Members" : "Assign Members"}
         </Button>
       </HeaderContainer>
-      <List params={params} teamMembers={assignedMembers} history={history} />
+      <List params={params} teamMembers={assignedMembers} />
       {props.teamMembers.length && !assignedMembers.length && (
         <>
           <Typography variant="subheading" className={classes.messageTextTop}>
