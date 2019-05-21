@@ -53,13 +53,6 @@ const TrainingSeriesTab = props => {
           )
         }}
       />
-      <Pagination
-        limit={limit}
-        offset={offset}
-        total={props.trainingSeries.length}
-        centerRipple={true}
-        onClick={(e, offset) => handleClick(offset)}
-      />
       {!props.trainingSeries.length ? (
         <p style={{ textAlign: "center", margin: 0, color: "rgba(0,0,0,0.4)" }}>
           add some training series
@@ -78,11 +71,21 @@ const TrainingSeriesTab = props => {
                   routeToSeries(series.id);
                 }}
               >
-                <TrainingSeriesTabSingle series={series} />
+                <TrainingSeriesTabSingle
+                  series={series}
+                  history={props.history}
+                />
               </Series>
             );
           })
       )}
+      <Pagination
+        limit={limit}
+        offset={offset}
+        total={props.trainingSeries.length}
+        centerRipple={true}
+        onClick={(e, offset) => handleClick(offset)}
+      />
     </Wrapper>
   );
 };
