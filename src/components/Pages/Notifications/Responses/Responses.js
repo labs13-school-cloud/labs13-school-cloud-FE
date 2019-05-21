@@ -4,7 +4,7 @@ import axios from "axios";
 
 import SlackLogo from "img/slacklogo.jpg";
 
-import { getAllResponses, seeResponse } from "store/actions";
+import { seeResponse } from "store/actions";
 
 import { withStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
@@ -23,15 +23,11 @@ import {
 } from "./styles.js";
 
 function Responses(props) {
-  const { classes, getAllResponses: responsesFromProps, responses } = props;
+  const { classes, responses } = props;
   const [service, setService] = useState("");
   const [allResponses, setAllResponses] = useState([]);
 
   const { notifications } = props;
-
-  useEffect(() => {
-    responsesFromProps();
-  }, [responsesFromProps]);
 
   useEffect(() => {
     setAllResponses(responses.filter(r => !r.seen));
@@ -156,6 +152,6 @@ const mapStateToProps = state => ({
 export default withStyles(styles)(
   connect(
     mapStateToProps,
-    { getAllResponses, seeResponse }
+    { seeResponse }
   )(Responses)
 );

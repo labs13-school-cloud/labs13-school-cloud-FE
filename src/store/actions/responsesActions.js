@@ -72,20 +72,6 @@ export const deleteResponse = id => dispatch => {
     .catch(err => dispatch({ tye: DELETE_RESPONSE_FAIL }));
 };
 
-// TEMPORARY AFTER THIS LINE
-
-export const getAllResponses = () => dispatch => {
-  dispatch({ type: GET_RESPONSES_START });
-  axios
-    .get(`${process.env.REACT_APP_API}/api/responses`)
-    .then(res => {
-      dispatch({ type: GET_RESPONSES_SUCCESS, payload: res.data.responses });
-    })
-    .catch(err => {
-      dispatch({ type: GET_RESPONSES_FAIL, error: err });
-    });
-};
-
 export const seeResponse = id => {
   return { type: SEE_RESPONSE, payload: id };
 };

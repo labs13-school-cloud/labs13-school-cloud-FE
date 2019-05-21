@@ -37,7 +37,6 @@ function Assign(props) {
       .filter(n => n.recipient_id === n.team_member_id)
       .map(n => n.team_member_id)
   );
-  console.log(props.notifications);
   const assignedMembers = props.teamMembers.filter(t => tmIDs.has(t.id));
 
   return (
