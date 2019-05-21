@@ -40,6 +40,8 @@ TODO: Write Netlify Deploy buttom
 | index.js        | import/export authenticate.js for easier loading | n/a         |
 | styles.js       | styles for authenticate.js                       | n/a         |
 
+<br />
+
 > Callback
 
 | Name             | Purpose | How To View |
@@ -48,6 +50,8 @@ TODO: Write Netlify Deploy buttom
 | index.js         |         | n/a         |
 | styles.js        |         | n/a         |
 | SlackCallback.js |         |             |
+
+<br />
 
 > Stripe
 
@@ -69,6 +73,8 @@ TODO: Write Netlify Deploy buttom
 | AppBar.js |         |             |
 | index.js  |         |             |
 | styles.js |         |             |
+
+<br />
 
 > ReturnToPreviousPage
 
@@ -113,6 +119,8 @@ TODO: Write Netlify Deploy buttom
 | index.js  |         |             |
 | Routes.js |         |             |
 
+<br />
+
 > LandingPage
 
 > > LandingPage
@@ -138,6 +146,8 @@ TODO: Write Netlify Deploy buttom
 | index.js  |         |             |
 | Team.js   |         |             |
 | styles.js |         |             |
+
+<br />
 
 > Notifications
 
