@@ -33,7 +33,7 @@ function AddMemberToTrainingSeries(props) {
     params: { id }
   } = match;
 
-  const getNewNotification = (id, msg) => {
+  const getNewNotification = (id, msg, for_team_member) => {
     const memberServices = props.teamMembers.filter(mem => mem.id === id);
     return {
       team_member_id: id,
@@ -47,7 +47,8 @@ function AddMemberToTrainingSeries(props) {
       is_sent: false,
       send_date: moment(startDate)
         .add(msg.days_from_start, "days")
-        .toISOString()
+        .toISOString(),
+      for_team_member
     };
   };
 
@@ -102,7 +103,10 @@ function AddMemberToTrainingSeries(props) {
           //find member who has memberID and check what services they have available to them
           roles.forEach(role => {
             if (msg[`for_${role}`] && idSet[role]) {
-              newNotifications.push(getNewNotification(idSet[role], msg));
+              const isTeamMember = role === "team_member";
+              newNotifications.push(
+                getNewNotification(idSet[role], msg, isTeamMember)
+              );
             }
           });
         });
