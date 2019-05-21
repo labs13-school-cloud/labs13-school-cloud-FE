@@ -30,6 +30,8 @@ TODO: Write Netlify Deploy buttom
 
 ### Misc
 
+---
+
 > authenticate
 
 | Name            | Purpose                                          | How To View |
@@ -40,19 +42,102 @@ TODO: Write Netlify Deploy buttom
 
 > Callback
 
+| Name             | Purpose | How To View |
+| ---------------- | ------- | ----------- |
+| Callback.js      | --      | --          |
+| index.js         |         | n/a         |
+| styles.js        |         | n/a         |
+| SlackCallback.js |         |             |
+
 > Stripe
+
+| Name                | Purpose | How To View |
+| ------------------- | ------- | ----------- |
+| CheckoutForm.js     |         |             |
+| StripeCard.js       |         |             |
+| StripeView.js       |         |             |
+| UnsubscribeModal.js |         |             |
 
 ### Navigation
 
+---
+
 > AppBar
+
+| Name      | Purpose | How To View |
+| --------- | ------- | ----------- |
+| AppBar.js |         |             |
+| index.js  |         |             |
+| styles.js |         |             |
 
 > ReturnToPreviousPage
 
+| Name                    | Purpose | How To View |
+| ----------------------- | ------- | ----------- |
+| index.js                |         |             |
+| ReturnToPreviousPage.js |         |             |
+
 ### Pages
+
+---
 
 > Dashboard
 
+> > Dashboard
+
+| Name         | Purpose | How To View |
+| ------------ | ------- | ----------- |
+| index.js     |         |             |
+| Dashboard.js |         |             |
+| styles.js    |         |             |
+
+> > > _helpers_
+
+| Name                 | Purpose | How To View |
+| -------------------- | ------- | ----------- |
+| TabNavigation.js     |         |             |
+| DesktopNavigation.js |         |             |
+
+> > Loader
+
+| Name      | Purpose | How To View |
+| --------- | ------- | ----------- |
+| index.js  |         |             |
+| Loader.js |         |             |
+| styles.js |         |             |
+
+> > Routes
+
+| Name      | Purpose | How To View |
+| --------- | ------- | ----------- |
+| index.js  |         |             |
+| Routes.js |         |             |
+
 > LandingPage
+
+> > LandingPage
+
+| Name           | Purpose | How To View |
+| -------------- | ------- | ----------- |
+| index.js       |         |             |
+| LandingPage.js |         |             |
+| styles.js      |         |             |
+
+> > Pricing
+
+| Name       | Purpose | How To View |
+| ---------- | ------- | ----------- |
+| index.js   |         |             |
+| Pricing.js |         |             |
+| styles.js  |         |             |
+
+> > Team
+
+| Name      | Purpose | How To View |
+| --------- | ------- | ----------- |
+| index.js  |         |             |
+| Team.js   |         |             |
+| styles.js |         |             |
 
 > Notifications
 
@@ -63,6 +148,8 @@ TODO: Write Netlify Deploy buttom
 > TrainingSeries
 
 ### UI
+
+---
 
 > ContactModal
 
@@ -79,6 +166,12 @@ TODO: Write Netlify Deploy buttom
 > Snackbar
 
 > Tour
+
+---
+
+---
+
+---
 
 ## Auth
 
