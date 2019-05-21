@@ -1,7 +1,17 @@
 import React, { useReducer, useEffect } from "react";
 import { connect } from "react-redux";
 
-import { addTeamMember, editTeamMember, getTeamMembers } from "store/actions";
+import {
+  addTeamMember,
+  editTeamMember,
+  getTeamMembers,
+  getAllMessages,
+  getNotifications,
+  addNotification,
+  deleteNotification
+} from "store/actions";
+import history from "history.js";
+
 import { initialState, reducer } from "./reducer";
 import MemberInfoForm from "./helpers/MemberInfoForm.js";
 import Relationships from "./helpers/Relationships.js";
@@ -10,6 +20,7 @@ import AddButtons from "./helpers/AddButtons.js";
 import EditButtons from "./helpers/EditButtons.js";
 import phoneNumberTest from "./helpers/testPhoneNumber.js";
 import InfoPopup from "components/UI/InfoPopup/InfoPopup.js";
+import updateNotifications from "./helpers/updateNotifications.js";
 
 import { withStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
@@ -19,20 +30,39 @@ import { styles, MainContainer, MemberInfoContainer } from "./styles.js";
 
 function Add(props) {
   const {
-    getTeamMembers: getTeamMembersFromProps,
+    addTeamMember,
+    editTeamMember,
+    getTeamMembers,
+    getAllMessages,
+    getNotifications,
+    addNotification,
+    deleteNotification,
     user_id,
-    teamMember
+    teamMember,
+    teamMembers,
+    notifications,
+    messages
   } = props;
 
   const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
-    getTeamMembersFromProps(user_id);
+    // CDM
+    getAllMessages();
+    getNotifications();
+    getTeamMembers(user_id);
     dispatch({ type: "UPDATE_MEMBER", key: "user_id", payload: user_id });
     if (teamMember) {
       dispatch({ type: "EDITING_MEMBER", payload: teamMember });
     }
-  }, [dispatch, getTeamMembersFromProps, user_id, teamMember]);
+  }, [
+    getAllMessages,
+    getNotifications,
+    getTeamMembers,
+    user_id,
+    dispatch,
+    teamMember
+  ]);
 
   useEffect(() => {
     // Checks input conditions.  If all required field conditions are met, Add Member button is activated
@@ -51,7 +81,17 @@ function Add(props) {
 
   const editExistingMember = e => {
     e.preventDefault();
-    props.editTeamMember(state.teamMember);
+    const updateNotifObj = {
+      state,
+      teamMembers,
+      notifications,
+      messages,
+      deleteNotification,
+      addNotification
+    };
+    updateNotifications(updateNotifObj);
+    editTeamMember(state.teamMember);
+    history.push("/home");
   };
 
   const addNewTeamMember = e => {
@@ -63,8 +103,9 @@ function Add(props) {
     if (teamMember.mentor_id === "") {
       teamMember.mentor_id = null;
     }
-    props.addTeamMember(state.teamMember);
+    addTeamMember(state.teamMember);
     dispatch({ type: "TOGGLE_ROUTING" });
+    history.push("/home");
   };
 
   const { classes } = props;
@@ -113,17 +154,13 @@ function Add(props) {
             <Relationships
               state={state}
               dispatch={dispatch}
-              teamMembers={props.teamMembers}
+              teamMembers={teamMembers}
             />
           </MemberInfoContainer>
           {teamMember ? (
             <EditButtons state={state} />
           ) : (
-            <AddButtons
-              state={state}
-              classes={classes}
-              history={props.history}
-            />
+            <AddButtons state={state} classes={classes} />
           )}
         </Paper>
       </form>
@@ -132,10 +169,20 @@ function Add(props) {
 }
 
 const mapStateToProps = state => ({
+  messages: state.messagesReducer.messages,
+  notifications: state.notificationsReducer.notifications,
   teamMembers: state.teamMembersReducer.teamMembers
 });
 
 export default connect(
   mapStateToProps,
-  { addTeamMember, editTeamMember, getTeamMembers }
+  {
+    addTeamMember,
+    editTeamMember,
+    getTeamMembers,
+    getAllMessages,
+    getNotifications,
+    addNotification,
+    deleteNotification
+  }
 )(withStyles(styles)(Add));

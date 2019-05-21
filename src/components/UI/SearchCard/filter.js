@@ -4,8 +4,6 @@ export default ({ items, pagination, search }) => {
     for (let property in item) {
       const noSearch = [
         "user_id",
-        "manager_name",
-        "mentor_name",
         "manager_id",
         "mentor_id",
         "id",

@@ -20,14 +20,14 @@ function Assign(props) {
     user_id,
     history,
     match: { params },
-    getTeamMembers: getTMsFromProps,
-    getNotifications: getNotifFromProps
+    getTeamMembers,
+    getNotifications
   } = props;
 
   useEffect(() => {
-    getTMsFromProps(user_id);
-    getNotifFromProps();
-  }, [getTMsFromProps, getNotifFromProps, user_id]);
+    getTeamMembers(user_id);
+    getNotifications();
+  }, [getTeamMembers, getNotifications, user_id]);
 
   // Filter unique team member IDs from notifications
   // Add is_sent to filter to remove old messages?
