@@ -112,7 +112,7 @@ class Profile extends React.Component {
                   component="subtitle1"
                   className={classes.bold}
                 >
-                  Messages Sent
+                  Notifications Sent
                 </Typography>
                 <Typography
                   gutterBottom

@@ -30,6 +30,8 @@ function Edit(props) {
   const [secretMsg, setSecretMsg] = useState("");
 
   const sendMsgMeow = () => {
+    // This was a demo function only, never intended to be used in production.
+    // But if you want to test Slack notifications, just uncheck display:none in your dev tools
     const { first_name, slack_uuid } = props.teamMember;
     const notification = {
       first_name,
@@ -48,6 +50,7 @@ function Edit(props) {
   return (
     <EditWrapper>
       <div style={{ display: "none" }}>
+        {/* We used this to demo Slack messages*/}
         <input value={secretMsg} onChange={e => setSecretMsg(e.target.value)} />
         <button
           disabled={!props.teamMember.slack_uuid}
