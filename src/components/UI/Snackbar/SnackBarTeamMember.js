@@ -1,8 +1,6 @@
 import React from "react";
 import classNames from "classnames";
 
-import history from "history.js";
-
 import Button from "@material-ui/core/Button";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 import ErrorIcon from "@material-ui/icons/Error";
@@ -112,9 +110,9 @@ class CustomizedSnackbars extends React.Component {
     if (this.props.submitType === "edit") {
       this.setState({ open: true });
     } else if (this.props.submitType === "add") {
+      // Not used
       this.setState({ open: true });
     }
-    history.push("/home");
   };
 
   handleClose = (event, reason) => {

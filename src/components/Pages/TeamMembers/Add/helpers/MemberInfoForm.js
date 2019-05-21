@@ -3,7 +3,7 @@ import NumberFormat from "react-number-format";
 
 import TextField from "@material-ui/core/TextField";
 import { withStyles } from "@material-ui/core/styles";
-import { styles, MemberInfoContainer } from "../styles.js";
+import { styles } from "../styles.js";
 
 function MemberInfoForm({ classes, state, updateMember }) {
   return (
