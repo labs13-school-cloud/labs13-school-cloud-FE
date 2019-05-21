@@ -53,6 +53,33 @@ const TrainingSeriesTab = props => {
           )
         }}
       />
+      <div style={{ width: "100%", minHeight: "400px" }}>
+        {!props.trainingSeries.length ? (
+          <p
+            style={{ textAlign: "center", margin: 0, color: "rgba(0,0,0,0.4)" }}
+          >
+            add some training series
+          </p>
+        ) : (
+          props.trainingSeries
+            .slice(offset, limit + offset)
+            .filter(series =>
+              series.title.toLowerCase().includes(searchValue.toLowerCase())
+            )
+            .map(series => {
+              return (
+                <Series
+                  key={series.id}
+                  onClick={e => {
+                    routeToSeries(series.id);
+                  }}
+                >
+                  <TrainingSeriesTabSingle series={series} />
+                </Series>
+              );
+            })
+        )}
+      </div>
       <Pagination
         limit={limit}
         offset={offset}
@@ -60,29 +87,6 @@ const TrainingSeriesTab = props => {
         centerRipple={true}
         onClick={(e, offset) => handleClick(offset)}
       />
-      {!props.trainingSeries.length ? (
-        <p style={{ textAlign: "center", margin: 0, color: "rgba(0,0,0,0.4)" }}>
-          add some training series
-        </p>
-      ) : (
-        props.trainingSeries
-          .slice(offset, limit + offset)
-          .filter(series =>
-            series.title.toLowerCase().includes(searchValue.toLowerCase())
-          )
-          .map(series => {
-            return (
-              <Series
-                key={series.id}
-                onClick={e => {
-                  routeToSeries(series.id);
-                }}
-              >
-                <TrainingSeriesTabSingle series={series} />
-              </Series>
-            );
-          })
-      )}
     </Wrapper>
   );
 };

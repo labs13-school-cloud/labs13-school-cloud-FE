@@ -22,7 +22,6 @@ export const ResponsesWrapper = styled.div`
   margin: 40px auto;
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
   align-items: center;
 `;
 export const MainWrapper = styled(Paper)`
