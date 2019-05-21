@@ -20,7 +20,7 @@ function Card(props) {
   const [notificationsCount, setNotificationsCount] = useState(0);
 
   const { classes, List } = props;
-  const limit = props.limit || 5;
+  const limit = props.limit || 10;
 
   const filters = { status: statusFilter, service: serviceFilter };
   const title =

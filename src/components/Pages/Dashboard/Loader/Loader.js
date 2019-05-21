@@ -5,7 +5,7 @@ import { DashboardContainer } from "./styles.js";
 
 import ProgressCircle from "components/UI/Progress/ProgressCircle";
 import AppBar from "components/Navigation/AppBar/AppBar";
-import ReturnToDashboardButton from "components/Navigation/ReturnToDashboard";
+import ReturnToPreviousPageButton from "components/Navigation/ReturnToPreviousPage";
 import Snackbar from "components/UI/Snackbar/Snackbar";
 import DashboardTour from "components/UI/Tour/Tour";
 
@@ -51,7 +51,7 @@ function Loader(props) {
           )}
           <AppBar />
           {props.location.pathname !== "/home" && (
-            <ReturnToDashboardButton history={props.history} />
+            <ReturnToPreviousPageButton history={props.history} />
           )}
           <DashboardContainer>
             <DashboardRoutes
