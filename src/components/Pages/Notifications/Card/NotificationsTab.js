@@ -70,16 +70,18 @@ function Card(props) {
         </div>
       </div>
       <Suspense fallback={<div>Loading...</div>}>
-        <List
-          getFiltered={(items, member_id) =>
-            filter({ items, pagination, filters, member_id })
-          }
-          filters={filters}
-          member_id={props.member_id}
-          history={props.history}
-        />
+        <div style={{ width: "100%", minHeight: "420px" }}>
+          <List
+            getFiltered={(items, member_id) =>
+              filter({ items, pagination, filters, member_id })
+            }
+            filters={filters}
+            member_id={props.member_id}
+            history={props.history}
+          />
+        </div>
         {!notificationsCount && (
-          <MessageContainer>
+          <MessageContainer style={{ minHeight: "420px" }}>
             <p>
               {props.isLoading
                 ? "Loading your Notifications."

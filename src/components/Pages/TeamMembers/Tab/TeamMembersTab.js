@@ -78,16 +78,11 @@ const TeamMembersTab = props => {
             }}
           />
         </TeamsTabHeader>
-
-        <Pagination
-          limit={limit}
-          reduced={true}
-          offset={offset}
-          total={props.teamMembers.length}
-          centerRipple={true}
-          onClick={(e, offset) => handleClick(offset)}
-        />
-        <Grid container justify="center">
+        <Grid
+          style={{ minHeight: "400px" }}
+          container
+          justify={props.teamMembers.length ? "flex-start" : "center"}
+        >
           {localTeamMembers.length === 0 ? (
             <div style={{ color: "rgba(0,0,0,0.4)" }}>add some members</div>
           ) : (
@@ -110,6 +105,14 @@ const TeamMembersTab = props => {
               })
           )}
         </Grid>
+        <Pagination
+          limit={limit}
+          reduced={true}
+          offset={offset}
+          total={props.teamMembers.length}
+          centerRipple={true}
+          onClick={(e, offset) => handleClick(offset)}
+        />
       </TeamsTabWrapper>
     </div>
   );

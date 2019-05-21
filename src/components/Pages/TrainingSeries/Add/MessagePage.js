@@ -139,11 +139,9 @@ class MessagePage extends React.Component {
               />
               <CheckBoxWrapper>
                 Send to:{" "}
-                <Checkbox
-                  checked={this.state.message.for_team_member}
-                  value="checkedB"
-                  color="primary"
-                  onChange={e => {
+                <p
+                  style={{ cursor: "pointer" }}
+                  onClick={e => {
                     this.setState({
                       ...this.state,
                       message: {
@@ -152,13 +150,17 @@ class MessagePage extends React.Component {
                       }
                     });
                   }}
-                />
-                Team Member
-                <Checkbox
-                  checked={this.state.message.for_manager}
-                  value="checkedB"
-                  color="primary"
-                  onChange={e => {
+                >
+                  <Checkbox
+                    checked={this.state.message.for_team_member}
+                    value="checkedB"
+                    color="primary"
+                  />
+                  Team Member
+                </p>
+                <p
+                  style={{ cursor: "pointer" }}
+                  onClick={e => {
                     this.setState({
                       ...this.state,
                       message: {
@@ -167,13 +169,17 @@ class MessagePage extends React.Component {
                       }
                     });
                   }}
-                />
-                Manager
-                <Checkbox
-                  checked={this.state.message.for_mentor}
-                  value="checkedB"
-                  color="primary"
-                  onChange={e => {
+                >
+                  <Checkbox
+                    checked={this.state.message.for_manager}
+                    value="checkedB"
+                    color="primary"
+                  />
+                  Manager
+                </p>
+                <p
+                  style={{ cursor: "pointer" }}
+                  onClick={e => {
                     this.setState({
                       ...this.state,
                       message: {
@@ -182,8 +188,14 @@ class MessagePage extends React.Component {
                       }
                     });
                   }}
-                />
-                Mentor
+                >
+                  <Checkbox
+                    checked={this.state.message.for_mentor}
+                    value="checkedB"
+                    color="primary"
+                  />
+                  Mentor
+                </p>
               </CheckBoxWrapper>
             </MessageContainer>
             <ButtonContainer>

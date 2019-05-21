@@ -78,7 +78,13 @@ function Responses(props) {
         </div>
       </HeaderWrapper>
 
-      <ResponsesWrapper>
+      <ResponsesWrapper
+        style={
+          allResponses.length === 0
+            ? { minHeight: "400px", justifyContent: "center" }
+            : { minHeight: "400px", justifyContent: "flex-start" }
+        }
+      >
         {allResponses.length === 0 ? (
           <div style={{ color: "rgba(0,0,0,0.4)" }}>
             Sorry, no responses available!
