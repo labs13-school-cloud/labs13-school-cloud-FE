@@ -48,6 +48,8 @@ export const addTeamMember = teamMember => dispatch => {
 
 export const editTeamMember = teamMember => dispatch => {
   const { id, manager_name, mentor_name, ...changes } = teamMember;
+  changes.mentor_id = changes.mentor_id ? changes.mentor_id : null;
+  changes.manager_id = changes.manager_id ? changes.manager_id : null;
   //destructuring forbidden properties here in the action since this function is called in multiple places in app
   //only submits valid fields to be changed, otherwise would throw Joi validation error
 
