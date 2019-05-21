@@ -23,9 +23,9 @@ function AddMemberToTrainingSeries(props) {
 
   // Abstracting to remove useEffect dependency warnings
   const {
-    getTeamMembers: getMembersFromProps,
-    getTrainingSeries: getTSFromProps,
-    getAllMessages: getMessagesFromProps,
+    getTeamMembers,
+    getTrainingSeries,
+    getAllMessages,
     match,
     user_id
   } = props;
@@ -55,7 +55,7 @@ function AddMemberToTrainingSeries(props) {
     //this function is passed down to the single members. on check, it sets or removes their + mentors/managers ids from activeMembers.
     let newMembers = [...activeMembers];
     if (newMembers.includes(member_id)) {
-      let index = newMembers.indexOf(member_id);
+      const index = newMembers.indexOf(member_id);
       newMembers.splice(index, 1);
     } else {
       newMembers.push(member_id);
@@ -64,10 +64,10 @@ function AddMemberToTrainingSeries(props) {
   };
 
   useEffect(() => {
-    getMembersFromProps(user_id);
-    getTSFromProps(id);
-    getMessagesFromProps();
-  }, [getMembersFromProps, getTSFromProps, getMessagesFromProps, user_id, id]);
+    getTeamMembers(user_id);
+    getTrainingSeries(id);
+    getAllMessages();
+  }, [getTeamMembers, getTrainingSeries, getAllMessages, user_id, id]);
 
   const handelAddComMethod = (id, method) => {
     const memberMethod = { id, method }; //create an object for the team member and their prefered method of communication.
@@ -87,9 +87,9 @@ function AddMemberToTrainingSeries(props) {
   const handleSubmit = e => {
     e.preventDefault();
 
-    const currentTrainingSeries = props.trainingSeries.filter(
+    const currentTrainingSeries = props.trainingSeries.find(
       series => parseInt(series.id) === parseInt(props.match.params.id)
-    )[0];
+    );
 
     if (!activeMembers.length) return;
     const newNotifications = [];
@@ -98,7 +98,7 @@ function AddMemberToTrainingSeries(props) {
       props.messages
         .filter(msg => msg.training_series_id === currentTrainingSeries.id)
         .forEach(msg => {
-          //need to filter through these messages to make sure theyre a part of this training series
+          //need to filter through these messages to make sure they're a part of this training series
           //find member who has memberID and check what services they have available to them
           roles.forEach(role => {
             if (msg[`for_${role}`] && idSet[role]) {
