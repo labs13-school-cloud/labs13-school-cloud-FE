@@ -14,33 +14,53 @@ function TeamMembersTabSingle(props) {
   const { teamMember } = props;
 
   useEffect(() => {
-    axios
-      .get(`${process.env.REACT_APP_API}/api/team-members/${teamMember.mentor}`)
-      .then(res => {
-        setMentor(res.data.teamMember);
-      })
-      .catch(err => {
-        setMentor({
-          first_name: "not assigned",
-          last_name: ""
+    if (teamMember.mentor_id) {
+      axios
+        .get(
+          `${process.env.REACT_APP_API}/api/team-members/${
+            teamMember.mentor_id
+          }`
+        )
+        .then(res => {
+          setMentor(res.data.teamMember);
+        })
+        .catch(err => {
+          setMentor({
+            first_name: "not assigned",
+            last_name: ""
+          });
         });
+    } else {
+      setMentor({
+        first_name: "not assigned",
+        last_name: ""
       });
+    }
   }, [teamMember]);
 
   useEffect(() => {
-    axios
-      .get(
-        `${process.env.REACT_APP_API}/api/team-members/${teamMember.manager}`
-      )
-      .then(res => {
-        setManager(res.data.teamMember);
-      })
-      .catch(err => {
-        setManager({
-          first_name: "not assigned",
-          last_name: ""
+    if (teamMember.manager_id) {
+      axios
+        .get(
+          `${process.env.REACT_APP_API}/api/team-members/${
+            teamMember.manager_id
+          }`
+        )
+        .then(res => {
+          setManager(res.data.teamMember);
+        })
+        .catch(err => {
+          setManager({
+            first_name: "not assigned",
+            last_name: ""
+          });
         });
+    } else {
+      setManager({
+        first_name: "not assigned",
+        last_name: ""
       });
+    }
   }, [teamMember]);
 
   return (

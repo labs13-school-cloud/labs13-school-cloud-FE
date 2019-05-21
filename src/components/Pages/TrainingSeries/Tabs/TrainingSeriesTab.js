@@ -74,7 +74,10 @@ const TrainingSeriesTab = props => {
                     routeToSeries(series.id);
                   }}
                 >
-                  <TrainingSeriesTabSingle series={series} />
+                  <TrainingSeriesTabSingle
+                    series={series}
+                    history={props.history}
+                  />
                 </Series>
               );
             })
