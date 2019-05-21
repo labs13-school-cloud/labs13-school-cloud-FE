@@ -11,7 +11,6 @@
     "auth0-js": "^9.10.2",
     "axios": "^0.18.0",
     "dotenv": "^7.0.0",
-    "fuse.js": "^3.4.4",
     "jwt-decode": "^2.2.0",
     "material-ui-flat-pagination": "^3.2.0",
     "moment": "^2.24.0",

@@ -52,7 +52,7 @@ export const addNotification = notification => dispatch => {
 export const deleteNotification = id => dispatch => {
   dispatch({ type: DELETE_NOTIFICATION_START });
   axios
-    .delete(`${process.env.REACT_APP_API}/api/notifications/${id}`)
+    .delete(`${process.env.REACT_APP_API}/api/notifications/${id}/delete`)
     .then(res => {
       dispatch({ type: DELETE_NOTIFICATION_SUCCESS, payload: id });
     })
