@@ -174,19 +174,19 @@ TODO: Write Netlify Deploy buttom
 
 > > > Overview
 
-| Name        | Purpose | How To View |
-| ----------- | ------- | ----------- |
-| index.js    |         |             |
-| Overview.js |         |             |
-| styles.js   |         |             |
+| Name        | Purpose                                     | How To View |
+| ----------- | ------------------------------------------- | ----------- |
+| index.js    | loads and renders overview.js               | n/a         |
+| Overview.js | loads cards inside of pending notifications | "/home"     |
+| styles.js   | styles for overview.js                      | n/a         |
 
 > > > TeamMember
 
-| Name          | Purpose | How To View |
-| ------------- | ------- | ----------- |
-| index.js      |         |             |
-| TeamMember.js |         |             |
-| styles.js     |         |             |
+| Name          | Purpose                                     | How To View |
+| ------------- | ------------------------------------------- | ----------- |
+| index.js      | loads and renders TeamMember.js             | n/a         |
+| TeamMember.js | loads cards inside of pending notifications | "/home"     |
+| styles.js     | styles for TeamMember                       | n/a         |
 
 > > Responses
 
