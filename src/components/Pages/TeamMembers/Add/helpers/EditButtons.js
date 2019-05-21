@@ -10,7 +10,7 @@ import {
   addNotification
 } from "store/actions";
 import DeleteModal from "components/UI/Modals/deleteModal";
-import NotificationWidget from "../../UI/SnackBarTeamMember.js";
+import NotificationWidget from "components/UI/Snackbar/SnackBarTeamMember.js";
 
 function EditButtons(props) {
   const {

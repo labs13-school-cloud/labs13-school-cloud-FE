@@ -20,7 +20,7 @@ function Card(props) {
   const [notificationsCount, setNotificationsCount] = useState(0);
 
   const { classes, List } = props;
-  const limit = props.limit || 5;
+  const limit = props.limit || 10;
 
   const filters = { status: statusFilter, service: serviceFilter };
   const title =
@@ -70,16 +70,18 @@ function Card(props) {
         </div>
       </div>
       <Suspense fallback={<div>Loading...</div>}>
-        <List
-          getFiltered={(items, member_id) =>
-            filter({ items, pagination, filters, member_id })
-          }
-          filters={filters}
-          member_id={props.member_id}
-          history={props.history}
-        />
+        <div style={{ width: "100%", minHeight: "420px" }}>
+          <List
+            getFiltered={(items, member_id) =>
+              filter({ items, pagination, filters, member_id })
+            }
+            filters={filters}
+            member_id={props.member_id}
+            history={props.history}
+          />
+        </div>
         {!notificationsCount && (
-          <MessageContainer>
+          <MessageContainer style={{ minHeight: "420px" }}>
             <p>
               {props.isLoading
                 ? "Loading your Notifications."

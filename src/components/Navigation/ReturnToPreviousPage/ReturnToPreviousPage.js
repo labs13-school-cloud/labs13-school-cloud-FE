@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import ArrowBack from "@material-ui/icons/ArrowBack";
 
-const ReturnToDashboardButton = ({ history }) => {
+const ReturnToPreviousPageButton = ({ history }) => {
   return (
     <ButtonStyles>
       <ArrowBack onClick={() => history.goBack()} />
@@ -10,7 +10,7 @@ const ReturnToDashboardButton = ({ history }) => {
   );
 };
 
-export default ReturnToDashboardButton;
+export default ReturnToPreviousPageButton;
 
 const ButtonStyles = styled.div`
   margin: 12px 0 15px 10px;

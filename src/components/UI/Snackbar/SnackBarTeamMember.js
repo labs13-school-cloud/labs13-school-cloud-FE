@@ -1,5 +1,8 @@
 import React from "react";
 import classNames from "classnames";
+
+import history from "history.js";
+
 import Button from "@material-ui/core/Button";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 import ErrorIcon from "@material-ui/icons/Error";
@@ -111,6 +114,7 @@ class CustomizedSnackbars extends React.Component {
     } else if (this.props.submitType === "add") {
       this.setState({ open: true });
     }
+    history.push("/home");
   };
 
   handleClose = (event, reason) => {
@@ -162,7 +166,7 @@ class CustomizedSnackbars extends React.Component {
           className={classes.button}
           onClick={e => this.handleClick(e)}
         >
-          Save
+          {this.props.submitType === "add" ? "Add Member" : "Save"}
         </Button>
         <Snackbar
           anchorOrigin={{

@@ -69,8 +69,14 @@ function Add(props) {
 
   const { classes } = props;
   return (
-    <MainContainer maxWidth={props.maxWidth} maxHeight={props.maxHeight}>
+    <MainContainer
+      style={{ position: "relative" }}
+      maxWidth={props.maxWidth}
+      maxHeight={props.maxHeight}
+    >
       <InfoPopup
+        left="10px"
+        style={{ position: "relative" }}
         popOverText={
           <p>
             On this page you can add a new Team Member! If you've already got
@@ -99,15 +105,15 @@ function Add(props) {
               updateMember={updateMember}
               classes={classes}
             />
-            <Relationships
-              state={state}
-              dispatch={dispatch}
-              teamMembers={props.teamMembers}
-            />
             <SelectSlackID
               state={state}
               updateMember={updateMember}
               dispatch={dispatch}
+            />
+            <Relationships
+              state={state}
+              dispatch={dispatch}
+              teamMembers={props.teamMembers}
             />
           </MemberInfoContainer>
           {teamMember ? (
