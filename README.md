@@ -26,13 +26,13 @@ TODO: Write Netlify Deploy buttom
 
 ## Components
 
-    *note that the structure of this documentation is broken up by folder. Headings will represent top level folders, and blockquotes will represent nested folders*
+    note that the structure of this documentation is broken up by folder. Headings will represent top level folders, and blockquotes will represent nested folders
 
 ### Misc
 
 ---
 
-> authenticate
+####authenticate
 
 | Name            | Purpose                                          | How To View |
 | --------------- | ------------------------------------------------ | ----------- |
@@ -43,7 +43,7 @@ TODO: Write Netlify Deploy buttom
 <br />
 <br />
 
-> Callback
+####Callback
 
 | Name             | Purpose | How To View |
 | ---------------- | ------- | ----------- |
@@ -55,7 +55,7 @@ TODO: Write Netlify Deploy buttom
 <br />
 <br />
 
-> Stripe
+####Stripe
 
 | Name                | Purpose | How To View |
 | ------------------- | ------- | ----------- |
@@ -71,7 +71,7 @@ TODO: Write Netlify Deploy buttom
 
 ---
 
-> AppBar
+####AppBar
 
 | Name      | Purpose | How To View |
 | --------- | ------- | ----------- |
@@ -82,7 +82,7 @@ TODO: Write Netlify Deploy buttom
 <br />
 <br />
 
-> ReturnToPreviousPage
+####ReturnToPreviousPage
 
 | Name                    | Purpose | How To View |
 | ----------------------- | ------- | ----------- |
@@ -96,7 +96,7 @@ TODO: Write Netlify Deploy buttom
 
 ---
 
-> Dashboard
+####Dashboard
 
 > > Dashboard
 
@@ -131,7 +131,7 @@ TODO: Write Netlify Deploy buttom
 <br />
 <br />
 
-> LandingPage
+####LandingPage
 
 > > LandingPage
 
@@ -160,7 +160,7 @@ TODO: Write Netlify Deploy buttom
 <br />
 <br />
 
-> Notifications
+####Notifications
 
 > > Card
 
@@ -199,7 +199,7 @@ TODO: Write Netlify Deploy buttom
 <br />
 <br />
 
-> Profile
+####Profile
 
 | Name       | Purpose | How To View |
 | ---------- | ------- | ----------- |
@@ -210,7 +210,7 @@ TODO: Write Netlify Deploy buttom
 <br />
 <br />
 
-> TeamMembers
+####TeamMembers
 
 > > Add
 
@@ -283,7 +283,7 @@ TODO: Write Netlify Deploy buttom
 <br />
 <br />
 
-> TrainingSeries
+####TrainingSeries
 
 > > Add
 
@@ -353,7 +353,7 @@ TODO: Write Netlify Deploy buttom
 
 ---
 
-> ContactModal
+####ContactModal
 
 | Name            | Purpose | How To View |
 | --------------- | ------- | ----------- |
@@ -362,7 +362,7 @@ TODO: Write Netlify Deploy buttom
 <br />
 <br />
 
-> HelpModal
+####HelpModal
 
 | Name         | Purpose | How To View |
 | ------------ | ------- | ----------- |
@@ -371,7 +371,7 @@ TODO: Write Netlify Deploy buttom
 <br />
 <br />
 
-> InfoPopup
+####InfoPopup
 
 | Name         | Purpose | How To View |
 | ------------ | ------- | ----------- |
@@ -380,7 +380,7 @@ TODO: Write Netlify Deploy buttom
 <br />
 <br />
 
-> Modals
+####Modals
 
 | Name                                     | Purpose | How To View |
 | ---------------------------------------- | ------- | ----------- |
@@ -396,7 +396,7 @@ TODO: Write Netlify Deploy buttom
 <br />
 <br />
 
-> Progress
+####Progress
 
 | Name              | Purpose | How To View |
 | ----------------- | ------- | ----------- |
@@ -406,7 +406,7 @@ TODO: Write Netlify Deploy buttom
 <br />
 <br />
 
-> SearchCard
+####SearchCard
 
 | Name          | Purpose | How To View |
 | ------------- | ------- | ----------- |
@@ -426,7 +426,7 @@ TODO: Write Netlify Deploy buttom
 <br />
 <br />
 
-> Snackbar
+####Snackbar
 
 | Name                  | Purpose | How To View |
 | --------------------- | ------- | ----------- |
@@ -437,7 +437,7 @@ TODO: Write Netlify Deploy buttom
 <br />
 <br />
 
-> Tour
+####Tour
 
 | Name    | Purpose | How To View |
 | ------- | ------- | ----------- |
@@ -454,7 +454,11 @@ TODO: Write Netlify Deploy buttom
 
 ## Auth
 
+    Probably just want to write a description on how auth system works
+
 ## Store
+
+    same for store. think they should probably understand this without any help but mineaswell break it down anyways haha
 
 ## Maintainers
 
