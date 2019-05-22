@@ -24,7 +24,9 @@ TODO: Write background section
 
 We've configured a one-click deploy to Netlify that will allow you to get the front end of the site up and running with a guided set up:
 
-TODO: Write Netlify Deploy buttom
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/labs12-training-bot-2/labs12-training-bot-2-FE)
+
+TODO: Fill out netlify.toml to correct settings for deployment. see these docs for direction, I got stuck not knowing exactly how out netlify is setup but someone with some more knowledge there might have more luck: https://www.netlify.com/docs/netlify-toml-reference/
 
 ## Components
 

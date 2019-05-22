@@ -1,0 +1,28 @@
+[build]
+  # Probably dont have to specify this?
+  base = "/"
+
+  # taking since react-scripts build results in a "build" folder, that this correct?? or just /src ?
+  publish = "build/"
+
+  command = "react-scripts build"
+
+[context.production]
+  publish = ""
+  command = ""
+  environment = {}
+
+# Deploy Preview context: all deploys resulting from a pull/merge request will 
+# inherit these settings.
+[context.deploy-preview]
+  publish = ""
+
+# A basic redirect rule... Im not really farmiliar with out redirect 
+urls/how they relate on netlify so.. help xD
+[[redirects]]
+  from = "/*"
+  to = "/blog/:splat"
+
+
+[template.environment]
+  #what ENV does deploy need specifically?
