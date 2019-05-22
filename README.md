@@ -11,6 +11,8 @@
 - [Background](#background)
 - [Deploy](#Deploy)
 - [Components](#Components)
+- [Auth](#Auth)
+- [Store](#Store)
 - [Maintainers](#maintainers)
 - [License](#license)
 
@@ -448,11 +450,13 @@ TODO: Write Netlify Deploy buttom
 
 ## Auth
 
+TODO: Write Auth section
+
     Probably just want to write a description on how auth system works
 
 ## Store
 
-    same for store. think they should probably understand this without any help but mineaswell break it down anyways haha
+    The actions/store setup for this application are fairly standard for react/redux applications you've likely worked with in the past. Youll notice that actions are split into seprate folders based on what theyre used for. All actions are being exported via index.js and can be referenced as such. Reducers are similar, in that they are being split into seprate reduceres dependent on useage and combined via redux's "combineReducers". You can reference individual reducers via their specific files. The store itself lives entirely inside of index.js "rootReducer".
 
 ## Maintainers
 
