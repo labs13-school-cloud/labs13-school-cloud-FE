@@ -11,6 +11,8 @@
 - [Background](#background)
 - [Deploy](#Deploy)
 - [Components](#Components)
+- [Auth](#Auth)
+- [Store](#Store)
 - [Maintainers](#maintainers)
 - [License](#license)
 
@@ -22,7 +24,9 @@ TODO: Write background section
 
 We've configured a one-click deploy to Netlify that will allow you to get the front end of the site up and running with a guided set up:
 
-TODO: Write Netlify Deploy buttom
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/labs12-training-bot-2/labs12-training-bot-2-FE)
+
+TODO: Fill out netlify.toml to correct settings for deployment. see these docs for direction, I got stuck not knowing exactly how out netlify is setup but someone with some more knowledge there might have more luck: https://www.netlify.com/docs/netlify-toml-reference/
 
 ## Components
 
@@ -190,22 +194,22 @@ TODO: Write Netlify Deploy buttom
 
 > > Responses
 
-| Name         | Purpose | How To View |
-| ------------ | ------- | ----------- |
-| index.js     |         |             |
-| Responses.js |         |             |
-| styles.js    |         |             |
+| Name         | Purpose                                                           | How To View                       |
+| ------------ | ----------------------------------------------------------------- | --------------------------------- |
+| index.js     | loads and renders Responses.js                                    | n/a                               |
+| Responses.js | this component is the tab used to view responses on the dashboard | "/home" navigate to responses tab |
+| styles.js    | styles for Responses.js                                           | n/a                               |
 
 <br />
 <br />
 
 #### Profile
 
-| Name       | Purpose | How To View |
-| ---------- | ------- | ----------- |
-| index.js   |         |             |
-| Profile.js |         |             |
-| styles.js  |         |             |
+| Name       | Purpose                                 | How To View     |
+| ---------- | --------------------------------------- | --------------- |
+| index.js   | loads and renders Profile.js            | n/a             |
+| Profile.js | component for the profile/settings page | "/home/profile" |
+| styles.js  | styles for Profile.js                   | n/a             |
 
 <br />
 <br />
@@ -214,71 +218,72 @@ TODO: Write Netlify Deploy buttom
 
 > > Add
 
-| Name      | Purpose | How To View |
-| --------- | ------- | ----------- |
-| index.js  |         |             |
-| Add.js    |         |             |
-| styles.js |         |             |
+| Name      | Purpose                                                             | How To View                                           |
+| --------- | ------------------------------------------------------------------- | ----------------------------------------------------- |
+| index.js  | loads and renders Add.js                                            | n/a                                                   |
+| Add.js    | This component display conditionally the add/edit team member pages | "/home/create-team-member" or "/home/team-member/:id" |
+| styles.js | styles for Add.js                                                   | n/a                                                   |
 
 > > > helpers
 
-| Name               | Purpose | How To View |
-| ------------------ | ------- | ----------- |
-| AddButtons.js      |         |             |
-| EditButtons.js     |         |             |
-| MemberInfoform.js  |         |             |
-| Relationships.js   |         |             |
-| SelectSlackID.js   |         |             |
-| testPhoneNumber.js |         |             |
+| Name                   | Purpose                                                                                                                   | How To View            |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------- | ---------------------- |
+| AddButtons.js          | Buttons for adding team member. checks if routing and shows animation                                                     | add a team member      |
+| EditButtons.js         | Edit buttons for team members. Add.js renders this or AddButtons.js conditionally dependent on if youre adding or editing | edit a team member     |
+| MemberInfoform.js      | Form rendered when adding or editing a team member                                                                        | add/edit a team member |
+| Relationships.js       | Renders "Select" drop downs for mentor/manager assignments when adding/editing a team member                              | add/edit a team member |
+| SelectSlackID.js       | Conditionally renders slack drop down or a prompt to set up your slack.                                                   | add/edit a team member |
+| testPhoneNumber.js     | a RegEx function which checks to see if the input phone number is actually a phone number.                                | add/edit a team member |
+| updateNotifications.js | If the user updates a relationship (manager/mentor), this will update their notifications.                                | add/edit a team member |
 
 > > > reducer
 
-| Name     | Purpose | How To View |
-| -------- | ------- | ----------- |
-| index.js |         |             |
+| Name     | Purpose                                                                                                                                               | How To View |
+| -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- |
+| index.js | Reducer for the react "useReducer" hook. stores all team member info for filling out form. essentially the "state" of Add.js and its child components | n/a         |
 
 > > Assign
 
-| Name      | Purpose | How To View |
-| --------- | ------- | ----------- |
-| Assign.js |         |             |
-| index.js  |         |             |
-| styles.js |         |             |
+| Name      | Purpose                                                                                                                                                | How To View                 |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------- |
+| Assign.js | Component for the piece of a training series page where you see the list of your currently assigned team members, as well as the button to assign them | "/home/training-series/:id" |
+| index.js  | loads and renders Assigns.js                                                                                                                           | n/a                         |
+| styles.js | styles for Assign.js                                                                                                                                   | n/a                         |
 
 > > Edit
 
-| Name      | Purpose | How To View |
-| --------- | ------- | ----------- |
-| Edit.js   |         |             |
-| index.js  |         |             |
-| styles.js |         |             |
+| Name      | Purpose                                    | How To View            |
+| --------- | ------------------------------------------ | ---------------------- |
+| Edit.js   | Dispalys the entire edit team members page | /home/team-member/:id" |
+| index.js  | loads and renders Edit.js                  | n/a                    |
+| styles.js | styles for Edit.js                         | n/a                    |
 
 > > List
 
 > > > Assign
 
-| Name      | Purpose | How To View |
-| --------- | ------- | ----------- |
-| Assign.js |         |             |
-| index.js  |         |             |
-| styles.js |         |             |
+| Name      | Purpose                                                                               | How To View                |
+| --------- | ------------------------------------------------------------------------------------- | -------------------------- |
+| Assign.js | Shows list of assigned team members to a training series, as well as their start date | "/home/training-series/29" |
+| index.js  | Loads and renders Assign.js                                                           | n/a                        |
+| styles.js | styles for Assign.js                                                                  | n/a                        |
 
 > > > Overview
 
-| Name        | Purpose | How To View |
-| ----------- | ------- | ----------- |
-| Overview.js |         |             |
-| index.js    |         |             |
-| styles.js   |         |             |
+| Name        | Purpose                                       | How To View |
+| ----------- | --------------------------------------------- | ----------- |
+| Overview.js | List of team members seen on the overview tab | "/home"     |
+| index.js    | loads and renders Overview.js                 | n/a         |
+| styles.js   | styles for Overview.js                        | n/a         |
 
 > > Tab
 
-| Name                    | Purpose | How To View |
-| ----------------------- | ------- | ----------- |
-| TeamMembersTab.js       |         |             |
-| index.js                |         |             |
-| styles.js               |         |             |
-| TeamMembersTabSingle.js |         |             |
+| Name                    | Purpose                                                   | How To View                          |
+| ----------------------- | --------------------------------------------------------- | ------------------------------------ |
+| TeamMembersTab.js       | Team members tab wrapper component                        | "/home" navigate to team member page |
+| index.js                | loads and renders TeamMembersTab.js                       | n/a                                  |
+| styles.js               | styles for TeamMembersTab.js                              | n/a                                  |
+| TeamMembersTabSingle.js | Since member component loaded inside of TeamMembersTab.js | "/home" navigate to team member page |
 
 <br />
 <br />
@@ -287,65 +292,65 @@ TODO: Write Netlify Deploy buttom
 
 > > Add
 
-| Name                          | Purpose | How To View |
-| ----------------------------- | ------- | ----------- |
-| AddMemberToTrainingSeries.js  |         |             |
-| CreateMessage.js              |         |             |
-| CreateMessageStyles.js        |         |             |
-| CreateTrainingSeries.js       |         |             |
-| CreateTrainingSeriesStyles.js |         |             |
-| MessagePage.js                |         |             |
-| MessagePageStyles.js          |         |             |
-| singleMemberCheck.js          |         |             |
+| Name                          | Purpose                                                                    | How To View                    |
+| ----------------------------- | -------------------------------------------------------------------------- | ------------------------------ |
+| AddMemberToTrainingSeries.js  | Comoponent for adding a team member to a training series                   | "/home/assign-members/:id"     |
+| CreateMessage.js              | Component fro creating a new message for a training series                 | "/home/create-message"         |
+| CreateMessageStyles.js        | Styles for CreateMessage.js                                                | n/a                            |
+| CreateTrainingSeries.js       | Component for creating a training series (form where you fill out a title) | "/home/create-training-series" |
+| CreateTrainingSeriesStyles.js | Styles for CreateTrainingSeries                                            | n/a                            |
+| MessagePage.js                | Component for Editing a message in a training series                       | "/home/message/:id"            |
+| MessagePageStyles.js          | Styles for MessagePage.js                                                  | n/a                            |
+| singleMemberCheck.js          | Component for each team member when assigning members to a series          | "/home/assign-members/:id"     |
 
 > > Edit
 
-| Name      | Purpose | How To View |
-| --------- | ------- | ----------- |
-| Edit.js   |         |             |
-| index.js  |         |             |
-| styles.js |         |             |
+| Name      | Purpose                                      | How To View                 |
+| --------- | -------------------------------------------- | --------------------------- |
+| Edit.js   | Wrapper component for a training series page | "/home/training-series/:id" |
+| index.js  | loads and renders Edit.js                    | n/a                         |
+| styles.js | styles for Edit.js                           | n/a                         |
 
 > > > helpers
 
-| Name     | Purpose | How To View |
-| -------- | ------- | ----------- |
-| Title.js |         |             |
+| Name     | Purpose                                                                           | How To View                 |
+| -------- | --------------------------------------------------------------------------------- | --------------------------- |
+| Title.js | Title component for a training series. allows editing of title of training series | "/home/training-series/:id" |
 
 > > List
 
 > > > Messages
 
-| Name        | Purpose | How To View |
-| ----------- | ------- | ----------- |
-| index.js    |         |             |
-| Messages.js |         |             |
-| styles.js   |         |             |
+| Name        | Purpose                                    | How To View                 |
+| ----------- | ------------------------------------------ | --------------------------- |
+| index.js    | loads and renders Messages.js              | n/a                         |
+| Messages.js | list of messages on a trainign series page | "/home/training-series/:id" |
+| styles.js   | styles for Messages.js                     | n/a                         |
 
 > > > Overview
 
-| Name        | Purpose | How To View |
-| ----------- | ------- | ----------- |
-| index.js    |         |             |
-| Overview.js |         |             |
-| styles.js   |         |             |
+| Name        | Purpose                                              | How To View |
+| ----------- | ---------------------------------------------------- | ----------- |
+| index.js    | loads and renders Overview.js                        | n/a         |
+| Overview.js | List of training series on overview tab of dashboard | "/home"     |
+| styles.js   | styles for Overview.js                               | n/a         |
 
 > > Messages
 
-| Name        | Purpose | How To View |
-| ----------- | ------- | ----------- |
-| index.js    |         |             |
-| filter.js   |         |             |
-| styles.js   |         |             |
-| Messages.js |         |             |
+| Name        | Purpose                                                            | How To View                 |
+| ----------- | ------------------------------------------------------------------ | --------------------------- |
+| index.js    | loads and renders Messages.js                                      | n/a                         |
+| filter.js   | a function for filtering search results                            | n/a                         |
+| styles.js   | styles for Messages.js                                             | n/a                         |
+| Messages.js | inner component starting with "Messages" on a training series page | "/home/training-series/:id" |
 
 > > Tabs
 
-| Name                       | Purpose | How To View |
-| -------------------------- | ------- | ----------- |
-| TrainingSeriesTab.js       |         |             |
-| TrainingSeriesTabSingle.js |         |             |
-| TrainingSeriesTabStyles.js |         |             |
+| Name                       | Purpose                                                        | How To View                             |
+| -------------------------- | -------------------------------------------------------------- | --------------------------------------- |
+| TrainingSeriesTab.js       | Training series wrapper component for tab on dashboard         | "/home" navigate to training series tab |
+| TrainingSeriesTabSingle.js | Single training series components withing TrainingSeriesTab.js | "/home" navigate to training series tab |
+| TrainingSeriesTabStyles.js | Styles for training series tab                                 | n/a                                     |
 
 <br />
 <br />
@@ -355,93 +360,86 @@ TODO: Write Netlify Deploy buttom
 
 #### ContactModal
 
-| Name            | Purpose | How To View |
-| --------------- | ------- | ----------- |
-| ContactModal.js |         |             |
+| Name            | Purpose                    | How To View                            |
+| --------------- | -------------------------- | -------------------------------------- |
+| ContactModal.js | Component for contact form | Go through tour and clicj "contact us" |
 
 <br />
 <br />
 
 #### HelpModal
 
-| Name         | Purpose | How To View |
-| ------------ | ------- | ----------- |
-| HelpModal.js |         |             |
+| Name         | Purpose                  | How To View                         |
+| ------------ | ------------------------ | ----------------------------------- |
+| HelpModal.js | Component for help panel | Click help icon at top left of page |
 
 <br />
 <br />
 
 #### InfoPopup
 
-| Name         | Purpose | How To View |
-| ------------ | ------- | ----------- |
-| InfoPopup.js |         |             |
+| Name         | Purpose                                            | How To View                                                      |
+| ------------ | -------------------------------------------------- | ---------------------------------------------------------------- |
+| InfoPopup.js | Reusable tomponent for creating help popups in app | for instance, click on a training series and hover over "i" icon |
 
 <br />
 <br />
 
 #### Modals
 
-| Name                                     | Purpose | How To View |
-| ---------------------------------------- | ------- | ----------- |
-| addTeamMembertoTrainingSeriesModal.js.js |         |             |
-| addToTrainingSeriesModal.js              |         |             |
-| deleteModal.js                           |         |             |
-| PostModal.js                             |         |             |
-| PostOptionsModal.js                      |         |             |
-| TeamMemberModal.js                       |         |             |
-| TrainingSeriesModal.js                   |         |             |
-| userModal.js                             |         |             |
+| Name           | Purpose               | How To View                               |
+| -------------- | --------------------- | ----------------------------------------- |
+| deleteModal.js | reusable delete modal | click trash icon on overview team members |
 
 <br />
 <br />
 
 #### Progress
 
-| Name              | Purpose | How To View |
-| ----------------- | ------- | ----------- |
-| loacing.css       |         |             |
-| ProgressCircle.js |         |             |
+| Name              | Purpose                              | How To View |
+| ----------------- | ------------------------------------ | ----------- |
+| loading.css       | styles for progress circle animation | n/a         |
+| ProgressCircle.js | a loading progress cirlce            | on login    |
 
 <br />
 <br />
 
 #### SearchCard
 
-| Name          | Purpose | How To View |
-| ------------- | ------- | ----------- |
-| filter.css    |         |             |
-| index.js      |         |             |
-| SearchCard.js |         |             |
-| styles.js     |         |             |
+| Name          | Purpose                                              | How To View                          |
+| ------------- | ---------------------------------------------------- | ------------------------------------ |
+| filter.js     | filter function for searching                        | n/a                                  |
+| index.js      | loads and renders SearchCard.js                      | n/a                                  |
+| SearchCard.js | Parent "card" container for any TeamMembers displays | "/home" team members on overview tab |
+| styles.js     | styles for SearchCard                                | n/a                                  |
 
 > > CardHeader
 
-| Name          | Purpose | How To View |
-| ------------- | ------- | ----------- |
-| CardHeader.js |         |             |
-| index.js      |         |             |
-| styles.js     |         |             |
+| Name          | Purpose                                         | How To View                      |
+| ------------- | ----------------------------------------------- | -------------------------------- |
+| CardHeader.js | Header for Team Members search card on overview | "/home" Team Members on overview |
+| index.js      | loads and renders CardHeader.js                 | n/a                              |
+| styles.js     | styles for CardHeader.js                        | n/a                              |
 
 <br />
 <br />
 
 #### Snackbar
 
-| Name                  | Purpose | How To View |
-| --------------------- | ------- | ----------- |
-| Snackbar.js           |         |             |
-| index.js              |         |             |
-| SnackBarTeamMember.js |         |             |
+| Name                  | Purpose                                                   | How To View       |
+| --------------------- | --------------------------------------------------------- | ----------------- |
+| Snackbar.js           | renders snackbar popups throughout app                    |                   |
+| index.js              | import and render Snackbar.js                             | n/a               |
+| SnackBarTeamMember.js | small popup modal for successfully creating a Team Member | add a team member |
 
 <br />
 <br />
 
 #### Tour
 
-| Name    | Purpose | How To View |
-| ------- | ------- | ----------- |
-| Tour.js |         |             |
+| Name    | Purpose                                      | How To View                                                  |
+| ------- | -------------------------------------------- | ------------------------------------------------------------ |
+| Tour.js | parent component for tour on login/take tour | create new account or click show tutorial at "/home/profile" |
 
 <br />
 <br />
@@ -454,11 +452,13 @@ TODO: Write Netlify Deploy buttom
 
 ## Auth
 
+TODO: Write Auth section
+
     Probably just want to write a description on how auth system works
 
 ## Store
 
-    same for store. think they should probably understand this without any help but mineaswell break it down anyways haha
+    The actions/store setup for this application are fairly standard for react/redux applications you've likely worked with in the past. Youll notice that actions are split into seprate folders based on what theyre used for. All actions are being exported via index.js and can be referenced as such. Reducers are similar, in that they are being split into seprate reduceres dependent on useage and combined via redux's "combineReducers". You can reference individual reducers via their specific files. The store itself lives entirely inside of index.js "rootReducer".
 
 ## Maintainers
 
