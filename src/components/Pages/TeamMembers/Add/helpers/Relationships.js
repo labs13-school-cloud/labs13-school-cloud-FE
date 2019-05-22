@@ -26,7 +26,7 @@ function Relationships({ state, dispatch, teamMembers, classes }) {
           });
         };
         return (
-          <FormControl className={classes.formControl}>
+          <FormControl key={role} className={classes.formControl}>
             <InputLabel htmlFor={`${role}-simple`}>{title}</InputLabel>
             <Select
               disabled={!teamMinusSelf.length}
