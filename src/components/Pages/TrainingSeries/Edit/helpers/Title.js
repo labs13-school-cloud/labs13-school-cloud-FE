@@ -27,7 +27,11 @@ function Title(props) {
 
   const updateTitle = e => {
     e.preventDefault();
-    props.editTrainingSeries(trainingSeries.id, { title });
+    console.log(trainingSeries);
+    props.editTrainingSeries(trainingSeries.id, {
+      title,
+      user_id: props.user_id
+    });
     setIsEditingTitle(false);
   };
 
