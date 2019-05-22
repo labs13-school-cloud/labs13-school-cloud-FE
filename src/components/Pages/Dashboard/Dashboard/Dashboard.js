@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 
-import { getAllResponses } from "store/actions";
-
 import styled from "styled-components";
 
 import SearchCard from "components/UI/SearchCard/";
@@ -22,19 +20,7 @@ import { TripleColumn, SmallColumns, DashWrapper } from "./styles.js";
 function Dashboard(props) {
   const [topTab, setTopTab] = useState("overview");
   const [newResponses, setNewResponses] = useState([]);
-  const {
-    user_id,
-    history,
-    getAllResponses: responsesFromProps,
-    responses
-  } = props;
-
-  useEffect(() => {
-    responsesFromProps();
-    setTimeout(() => {
-      responsesFromProps();
-    }, 60 * 1000);
-  }, [responsesFromProps]);
+  const { user_id, history, responses } = props;
 
   useEffect(() => {
     setNewResponses(responses.filter(r => !r.seen));
@@ -116,7 +102,7 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getAllResponses }
+  null
 )(Dashboard);
 
 const MobileNav = styled.div`
