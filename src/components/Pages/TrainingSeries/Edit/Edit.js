@@ -35,7 +35,11 @@ function Edit(props) {
         }
       />
       <Paper className={classes.paper}>
-        <Title history={props.history} match={props.match} />
+        <Title
+          history={props.history}
+          match={props.match}
+          user_id={props.user_id}
+        />
         <Divider variant="fullWidth" className={classes.divider} />
         <Messages
           List={MessagesList}
