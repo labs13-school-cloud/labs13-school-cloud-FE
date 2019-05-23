@@ -31,8 +31,8 @@ const initialState = {
 //returned stripe ids, currently only test versions should be passed back unless App wants to accept real money
 const testPremium = "plan_EyjXqiSYXoKEXf";
 const testPro = "plan_EyjXEzjQkZf78d";
-const livePremium = "plan_Ex95NK1FuaNiWb";
-const livePro = "plan_Ex955Zz8JE0ZuW";
+// const livePremium = "plan_Ex95NK1FuaNiWb";
+// const livePro = "plan_Ex955Zz8JE0ZuW";
 
 const userReducer = (state = initialState, action) => {
   switch (action.type) {

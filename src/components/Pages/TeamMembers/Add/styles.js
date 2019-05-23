@@ -56,6 +56,20 @@ export const styles = theme => ({
       color: "white"
     }
   },
+  Editbutton: {
+    "margin-left": theme.spacing.unit,
+    background: "#451476",
+    color: "white",
+    "&:hover": {
+      background: "#591a99",
+      color: "white"
+    },
+    "&:disabled": {
+      backgroundColor: "rgba(0, 0, 0, 0.12)",
+      color: "rgba(0, 0, 0, 0.26)",
+      border: "none"
+    }
+  },
   divider: {
     margin: "15px 0"
   },

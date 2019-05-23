@@ -46,7 +46,6 @@ class MessagePage extends React.Component {
   };
 
   componentDidMount() {
-    console.log("LOOK AT ME!", this.props);
     this.props.getAllMessages();
   }
 

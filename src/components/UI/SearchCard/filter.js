@@ -9,8 +9,11 @@ export default ({ items, pagination, search }) => {
         "id",
         "slack_uuid"
       ];
+      const string = item[property]
+        ? item[property].toString().toLowerCase()
+        : "";
       const foundNoSearch = noSearch.find(prop => prop === property);
-      if (!foundNoSearch && item[property].toString().includes(search)) {
+      if (!foundNoSearch && string.includes(search)) {
         return true;
       }
     }

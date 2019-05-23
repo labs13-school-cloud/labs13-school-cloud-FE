@@ -10,7 +10,7 @@ class SimpleTabs extends React.Component {
     value: 0
   };
 
-  handleChange = (event, value) => {
+  handleChange = (_, value) => {
     value === 0
       ? this.props.setTopTab("overview")
       : value === 1
@@ -57,10 +57,4 @@ const TabsStyled = styled(Tabs)`
   width: 100vw;
   display: flex;
   justify-content: center;
-`;
-
-const Wrapper = styled(AppBar)`
-  @media (max-width: 650px) {
-    display: none;
-  }
 `;

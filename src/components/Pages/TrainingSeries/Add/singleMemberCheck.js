@@ -1,17 +1,27 @@
 import React, { useState } from "react";
 import Checkbox from "@material-ui/core/Checkbox";
-import styled from "styled-components";
+import Radio from "@material-ui/core/Radio";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import RadioGroup from "@material-ui/core/RadioGroup";
 
-export default function SingleMemberCheck({
+import { styles, MainWrapper } from "./styles.js";
+import { withStyles } from "@material-ui/core/styles";
+
+function SingleMemberCheck({
   addMember,
   teamMember,
-  handelAddComMethod
+  handelAddComMethod,
+  classes
 }) {
-  const [checked, setChecked] = useState(false);
+  const [isUserSelected, setIsUserSelected] = useState(false);
 
-  const [textChecked, setTextChecked] = useState(false);
-  const [emailChecked, setEmailChecked] = useState(false);
-  const [slackChecked, setSlackChecked] = useState(false);
+  const [service, setService] = useState("Text");
+
+  const changeService = service => {
+    const serviceConversion = { Text: 1, Email: 2, Slack: 3 };
+    handelAddComMethod(serviceConversion[service]);
+    setService(service);
+  };
 
   const collectIDs = () => {
     const ids = { team_member: teamMember.id };
@@ -21,102 +31,47 @@ export default function SingleMemberCheck({
   };
   return (
     <MainWrapper>
-      <p
+      <div
         style={{ cursor: "pointer" }}
         onClick={e => {
-          setChecked(!checked);
+          setIsUserSelected(!isUserSelected);
           addMember(collectIDs());
         }}
       >
-        <Checkbox checked={checked} value="checkedB" color="primary" />
+        <Checkbox checked={isUserSelected} value="checkedB" color="primary" />
         {teamMember.first_name} {teamMember.last_name}
-      </p>
-      <Options>
-        {teamMember.phone_number && (
-          <div>
-            text:{" "}
-            <Checkbox
-              checked={textChecked}
-              value="checkedB"
-              color="secondary"
-              onChange={e => {
-                //These check boxes will send an object up to AddMemberToTrainingSeries with the name of the team member plus their preffered method of communication.
-                if (textChecked === true) {
-                  setTextChecked(false);
-                } else {
-                  setSlackChecked(false);
-                  setEmailChecked(false);
-                  setTextChecked(true);
+      </div>
 
-                  const method = 1; //1 is the equvilant of saying you want this to send via twillio
-                  handelAddComMethod(teamMember.id, method);
-                }
-              }}
-            />
-          </div>
-        )}
-
-        {teamMember.email && (
-          <div>
-            email:{" "}
-            <Checkbox
-              checked={emailChecked}
-              value="checkedB"
-              color="secondary"
-              onChange={e => {
-                if (emailChecked === true) {
-                  setEmailChecked(false);
-                } else {
-                  setSlackChecked(false);
-                  setEmailChecked(true);
-                  setTextChecked(false);
-
-                  const method = 2; //2 is the same as saying you want this to send via sendgrid
-                  handelAddComMethod(teamMember.id, method);
-                }
-              }}
-            />
-          </div>
-        )}
-
-        {teamMember.slack_uuid && (
-          <div>
-            slack:{" "}
-            <Checkbox
-              checked={slackChecked}
-              value="checkedB"
-              color="secondary"
-              onChange={e => {
-                if (slackChecked === true) {
-                  setSlackChecked(false);
-                } else {
-                  setSlackChecked(true);
-                  setEmailChecked(false);
-                  setTextChecked(false);
-
-                  const method = 3; //3 is the same as saying that you want this to send via slack
-                  handelAddComMethod(teamMember.id, method);
-                }
-              }}
-            />
-          </div>
-        )}
-      </Options>
+      <RadioGroup
+        aria-label="Service"
+        name="select-service"
+        className={classes.radioGroup}
+        value={service}
+        onChange={e => changeService(e.target.value)}
+      >
+        <FormControlLabel
+          value="Text"
+          control={<Radio />}
+          label="Text"
+          className={classes.radioItem}
+        />
+        <FormControlLabel
+          value="Email"
+          control={<Radio />}
+          label="Email"
+          disabled={!teamMember.email}
+          className={classes.radioItem}
+        />
+        <FormControlLabel
+          value="Slack"
+          control={<Radio />}
+          label="Slack"
+          disabled={!teamMember.slack_uuid}
+          className={classes.radioItem}
+        />
+      </RadioGroup>
     </MainWrapper>
   );
 }
 
-const MainWrapper = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom: 1px solid black;
-  margin-bottom: 5px;
-`;
-
-const Options = styled.div`
-  display: flex;
-  color: rgba(0, 0, 0, 0.4);
-  margin: 0;
-`;
+export default withStyles(styles)(SingleMemberCheck);

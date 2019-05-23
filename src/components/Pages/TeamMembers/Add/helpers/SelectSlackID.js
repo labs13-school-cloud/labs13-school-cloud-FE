@@ -26,7 +26,7 @@ function SelectSlackID({ updateMember, state, classes, dispatch }) {
       }
     }
     getSlackUsers();
-  }, []);
+  }, [dispatch]);
 
   const title =
     state.slackError === "NO TOKEN" ? "AUTHORIZE SLACK" : "Slack User";

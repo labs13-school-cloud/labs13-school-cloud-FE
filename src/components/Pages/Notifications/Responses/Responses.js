@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import axios from "axios";
 
 import SlackLogo from "img/slacklogo.jpg";
 
@@ -26,8 +25,6 @@ function Responses(props) {
   const { classes, responses } = props;
   const [service, setService] = useState("");
   const [allResponses, setAllResponses] = useState([]);
-
-  const { notifications } = props;
 
   useEffect(() => {
     setAllResponses(responses.filter(r => !r.seen));

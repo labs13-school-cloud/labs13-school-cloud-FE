@@ -16,8 +16,7 @@ import { initialState, reducer } from "./reducer";
 import MemberInfoForm from "./helpers/MemberInfoForm.js";
 import Relationships from "./helpers/Relationships.js";
 import SelectSlackID from "./helpers/SelectSlackID.js";
-import AddButtons from "./helpers/AddButtons.js";
-import EditButtons from "./helpers/EditButtons.js";
+import Buttons from "./helpers/Buttons.js";
 import phoneNumberTest from "./helpers/testPhoneNumber.js";
 import InfoPopup from "components/UI/InfoPopup/InfoPopup.js";
 import updateNotifications from "./helpers/updateNotifications.js";
@@ -50,10 +49,15 @@ function Add(props) {
     // CDM
     getAllMessages();
     getNotifications();
-    getTeamMembers(user_id);
+    getTeamMembers();
     dispatch({ type: "UPDATE_MEMBER", key: "user_id", payload: user_id });
     if (teamMember) {
-      dispatch({ type: "EDITING_MEMBER", payload: teamMember });
+      const manager_id = teamMember.manager_id ? teamMember.manager_id : "";
+      const mentor_id = teamMember.mentor_id ? teamMember.mentor_id : "";
+      dispatch({
+        type: "EDITING_MEMBER",
+        payload: { ...teamMember, manager_id, mentor_id }
+      });
     }
   }, [
     getAllMessages,
@@ -91,6 +95,7 @@ function Add(props) {
     };
     updateNotifications(updateNotifObj);
     editTeamMember(state.teamMember);
+    dispatch({ type: "DISPLAY_SNACKBAR", payload: true });
     history.push("/home");
   };
 
@@ -105,6 +110,7 @@ function Add(props) {
     }
     addTeamMember(state.teamMember);
     dispatch({ type: "TOGGLE_ROUTING" });
+    dispatch({ type: "DISPLAY_SNACKBAR", payload: true });
     history.push("/home");
   };
 
@@ -131,8 +137,8 @@ function Add(props) {
       />
       <form
         className={classes.form}
-        onSubmit={
-          teamMember ? e => editExistingMember(e) : e => addNewTeamMember(e)
+        onSubmit={e =>
+          teamMember ? editExistingMember(e) : addNewTeamMember(e)
         }
       >
         <Paper className={classes.paper}>
@@ -157,11 +163,12 @@ function Add(props) {
               teamMembers={teamMembers}
             />
           </MemberInfoContainer>
-          {teamMember ? (
-            <EditButtons state={state} />
-          ) : (
-            <AddButtons state={state} classes={classes} />
-          )}
+
+          <Buttons
+            state={state}
+            classes={classes}
+            status={teamMember ? "edit" : "add"}
+          />
         </Paper>
       </form>
     </MainContainer>
