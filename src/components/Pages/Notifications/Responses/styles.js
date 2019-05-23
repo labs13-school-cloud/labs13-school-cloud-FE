@@ -25,9 +25,9 @@ export const ResponsesWrapper = styled.div`
   align-items: center;
 `;
 export const MainWrapper = styled(Paper)`
-  margin: 48px auto;
+  margin: 4px auto;
   padding: 10px;
-  width: 90%;
+  width: 93%;
   max-width: 1200px;
 `;
 export const HeaderWrapper = styled.div`

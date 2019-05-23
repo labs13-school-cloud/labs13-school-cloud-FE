@@ -6,8 +6,6 @@ import history from "history.js";
 import DeleteModal from "components/UI/Modals/deleteModal";
 import { getTeamMembers } from "store/actions";
 
-// import { withStyles } from "@material-ui/core/styles";
-// import { styles } from "./styles";
 import { TeamsMember } from "./styles.js";
 import { Typography } from "@material-ui/core/";
 

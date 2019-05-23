@@ -20,7 +20,7 @@ function TabNavigation(props) {
 
   return (
     <BottomNavigation
-      data-tour="7"
+      data-tour={window.innerWidth < 650 ? "7" : null}
       value={props.topTab}
       onChange={(e, value) => {
         props.setTopTab(value);
