@@ -9,7 +9,6 @@ import { getTeamMembers } from "store/actions";
 // import { withStyles } from "@material-ui/core/styles";
 // import { styles } from "./styles";
 import { TeamsMember } from "./styles.js";
-import Grid from "@material-ui/core/Grid";
 import { Typography } from "@material-ui/core/";
 
 function Tab({ user_id, getFiltered, getTeamMembers, teamMembers, classes }) {
