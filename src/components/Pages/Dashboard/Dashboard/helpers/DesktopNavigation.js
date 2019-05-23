@@ -31,7 +31,10 @@ class SimpleTabs extends React.Component {
 
     return (
       <div>
-        <AppBar position="static">
+        <AppBar
+          data-tour={window.innerWidth > 650 ? "7" : null}
+          position="static"
+        >
           <TabsStyled
             indicatorColor="primary"
             textColor="primary"
