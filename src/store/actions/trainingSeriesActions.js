@@ -59,7 +59,7 @@ export const addTrainingSeries = trainingSeriesData => dispatch => {
 
 export const editTrainingSeries = (id, trainingSeriesData) => dispatch => {
   dispatch({ type: EDIT_TRAINING_SERIES_START });
-  console.log(trainingSeriesData);
+
   axios
     .put(
       `${process.env.REACT_APP_API}/api/training-series/${id}`,
