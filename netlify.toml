@@ -4,9 +4,9 @@
   command = "yarn build"
 
 [template.environment]
-  REACT_APP_PROD = "Replace with your Auth0 Callback URL (i.e. http://app.netlify.com/callback"
-  REACT_APP_API = "Replace with your API's url (i.e. https://app.herokuapp.com"
-  NODE_PATH = "src/"
+  REACT_APP_PROD = "Your Auth0 Callback URL (no trailing slash)"
+  REACT_APP_API = "Your production API url (no trailing slash)"
+  NODE_PATH = "Your NODE_PATH (src/)"
 
 # Redirect all requests to our domain to our client-side router
 [[redirects]]
