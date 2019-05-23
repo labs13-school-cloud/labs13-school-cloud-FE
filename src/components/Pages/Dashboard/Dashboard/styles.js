@@ -13,14 +13,18 @@ export const styles = {
 };
 
 export const TripleColumn = styled.div`
-  max-width: 1400px;
+  box-sizing: border-box;
+  max-width: 1358px;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   margin: 48px auto;
+
   @media (max-width: 1400px) {
     flex-wrap: wrap;
-    max-width: 1000px;
+    width: 100%;
     padding: 10px;
+    max-width: 1000px;
   }
   @media (max-width: 768px) {
     max-width: 768px;
@@ -34,7 +38,9 @@ export const TripleColumn = styled.div`
 `;
 export const SmallColumns = styled.div`
   display: flex;
+  height: 100%;
   width: 800px;
+
   @media (max-width: 1400px) {
     width: 100%;
     margin-bottom: 50px;
@@ -71,4 +77,30 @@ export const Popover = styled.div`
   position: absolute;
   z-index: 2;
   top: 60px;
+`;
+
+export const Divider = styled.div`
+  margin: 0;
+  min-width: 10px;
+  max-width: 10px;
+  min-height: 1px;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+`;
+
+export const MobileNav = styled.div`
+  display: block;
+  width: 100vw;
+  @media (min-width: 765px) {
+    display: none;
+  }
+`;
+
+export const DesktopNav = styled.div`
+  display: block;
+  @media (max-width: 764px) {
+    display: none;
+  }
 `;
