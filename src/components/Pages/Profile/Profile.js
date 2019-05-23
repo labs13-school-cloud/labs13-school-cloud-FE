@@ -154,7 +154,10 @@ class Profile extends React.Component {
               </div>
             </Card>
 
-            <Card className={classes.pricing}>
+            <Card
+              style={{ display: "flex", alignItems: "center" }}
+              className={classes.pricing}
+            >
               {/* <Pricing /> */}
               <StripeView user={this.state.googleProfile} />
             </Card>

@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { withRouter } from "react-router";
 
+import HelpOutline from "@material-ui/icons/HelpOutline";
+
 //Styling
 import {
   NavigationContainer,
@@ -42,21 +44,19 @@ class AppBar extends Component {
               <Link to="/home">
                 <div style={{ display: "flex", alignItems: "center" }}>
                   <NavigationLogo alt="A cute, personable robot" src={Logo} />
-                  <button
+                  <HelpOutline
                     onClick={e => {
                       e.preventDefault();
                       this.props.history.push("/home/help");
                     }}
                     style={{
-                      padding: "5px 0",
-                      width: "22px",
-                      margin: "5px",
-                      borderRadius: "50%",
-                      cursor: "help"
+                      color: "black",
+                      marginLeft: "4px",
+                      marginTop: "3px",
+                      width: "20px",
+                      height: "20px"
                     }}
-                  >
-                    ?
-                  </button>
+                  />
                 </div>
               </Link>
               <RightItemsContainer>
