@@ -1,23 +1,5 @@
 import styled from "styled-components";
 
-export const MainContainer = styled.div`
-  margin: 0 auto;
-  width: 80%;
-`;
-
-export const MessageContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: baseline;
-`;
-
-export const ButtonContainer = styled.div`
-  display: flex;
-  margin-top: 10px;
-  justify-content: center;
-`;
-
 export const styles = theme => ({
   root: {
     ...theme.mixins.gutters(),
@@ -33,7 +15,7 @@ export const styles = theme => ({
     "margin-right": "50px"
   },
   textField: {
-    width: "80%",
+    width: "100%",
     margin: "15px auto"
   },
   fab: {
@@ -52,3 +34,29 @@ export const styles = theme => ({
     }
   }
 });
+
+export const MainContainer = styled.div`
+  margin: 0 auto;
+  width: 60%;
+  min-width:470px;
+  max-width: 700px;
+`;
+
+export const MessageContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: baseline;
+`;
+
+export const ButtonContainer = styled.div`
+  display: flex;
+  margin-top: 10px;
+  justify-content: center;
+`;
+
+export const CheckBoxWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+`;

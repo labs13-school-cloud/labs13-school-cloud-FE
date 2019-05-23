@@ -60,16 +60,16 @@ function Title(props) {
           </TrainingSeriesTitle>
         </form>
       ) : (
-        <TrainingSeriesTitle onClick={() => setIsEditingTitle(!isEditingTitle)}>
-          <Typography variant="headline">{`${title} \u00A0`}</Typography>
-          <i
-            style={{ fontSize: 25 }}
-            className={`material-icons ${classes.icons}`}
-          >
-            edit
+          <TrainingSeriesTitle onClick={() => setIsEditingTitle(!isEditingTitle)}>
+            <Typography variant="headline">{`${title} \u00A0`}</Typography>
+            <i
+              style={{ fontSize: 25 }}
+              className={`material-icons ${classes.icons}`}
+            >
+              edit
           </i>
-        </TrainingSeriesTitle>
-      )}
+          </TrainingSeriesTitle>
+        )}
     </>
   );
 }
