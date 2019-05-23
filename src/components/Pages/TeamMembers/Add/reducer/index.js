@@ -1,23 +1,3 @@
-export const initialState = {
-  teamMember: {
-    first_name: "",
-    last_name: "",
-    job_description: "",
-    email: "",
-    phone_number: "",
-    user_id: "",
-    slack_uuid: "",
-    manager_id: "",
-    mentor_id: ""
-  },
-  isRouting: false,
-  addDisabled: true,
-  memberManager: "",
-  memberMentor: "",
-  slackUsers: [],
-  slackError: null
-};
-
 const emptyUser = {
   first_name: "",
   last_name: "",
@@ -28,6 +8,17 @@ const emptyUser = {
   slack_uuid: "",
   manager_id: "",
   mentor_id: ""
+};
+
+export const initialState = {
+  teamMember: emptyUser,
+  isRouting: false,
+  buttonDisabled: true,
+  memberManager: "",
+  memberMentor: "",
+  slackUsers: [],
+  slackError: null,
+  snackbar: false
 };
 
 export const reducer = (state, action) => {
@@ -47,7 +38,7 @@ export const reducer = (state, action) => {
     case "TOGGLE_ROUTING":
       return { ...state, isRouting: !state.isRouting };
     case "UPDATE_DISABLED":
-      return { ...state, addDisabled: action.payload };
+      return { ...state, buttonDisabled: action.payload };
     case "UPDATE_MANAGER_NAME":
       return { ...state, memberManager: action.payload };
     case "UPDATE_MENTOR_NAME":
@@ -56,6 +47,8 @@ export const reducer = (state, action) => {
       return { ...state, slackUsers: action.payload };
     case "SLACK_ERROR":
       return { ...state, slackError: action.payload };
+    case "DISPLAY_SNACKBAR":
+      return { ...state, snackbar: action.payload };
     default:
       return state;
   }

@@ -17,14 +17,14 @@ function Assign(props) {
     params,
     messages,
     notifications,
-    getAllMessages: messagesFromProps,
-    getNotifications: notificationsFromProps
+    getAllMessages,
+    getNotifications
   } = props;
 
   useEffect(() => {
-    if (!notifications.length) notificationsFromProps();
-    if (!messages.length) messagesFromProps();
-  }, [messagesFromProps, notificationsFromProps]);
+    getNotifications();
+    getAllMessages();
+  }, [getAllMessages, getNotifications]);
 
   const getStartDate = tm_id => {
     const [notification, message] = _getNotifAndMsgPair(tm_id);

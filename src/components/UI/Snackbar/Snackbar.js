@@ -91,7 +91,7 @@ class CustomizedSnackbars extends React.Component {
     open: true
   };
 
-  handleClose = (event, reason) => {
+  handleClose = (_, reason) => {
     if (reason === "clickaway") {
       return;
     }
@@ -106,7 +106,7 @@ class CustomizedSnackbars extends React.Component {
           <MySnackbarContentWrapper
             onClose={this.handleClose}
             variant="success"
-            message={`${this.props.message}`}
+            message={this.props.message}
           />
         );
       case "delete":
@@ -140,7 +140,7 @@ class CustomizedSnackbars extends React.Component {
           autoHideDuration={2000}
           onClose={this.handleClose}
         >
-          {this.renderSnackBar}
+          {this.renderSnackBar()}
         </Snackbar>
       </div>
     );

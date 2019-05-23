@@ -4,6 +4,8 @@ import { connect } from "react-redux";
 
 import styled from "styled-components";
 
+import history from "history.js";
+
 import DeleteModal from "components/UI/Modals/deleteModal";
 import { getTeamMembers } from "store/actions";
 
@@ -14,14 +16,13 @@ import { ListStyles, styles } from "./styles.js";
 function Overview({
   user_id,
   getFiltered,
-  getTeamMembers: getMemberFromProps,
+  getTeamMembers,
   teamMembers,
-  classes,
-  history
+  classes
 }) {
   useEffect(() => {
-    getMemberFromProps(user_id);
-  }, [getMemberFromProps, user_id]);
+    getTeamMembers(user_id);
+  }, [getTeamMembers, user_id]);
 
   return (
     <ListStyles>

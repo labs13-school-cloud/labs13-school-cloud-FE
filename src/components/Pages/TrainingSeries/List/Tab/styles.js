@@ -2,10 +2,34 @@ import styled from "styled-components";
 
 import { Paper } from "@material-ui/core/";
 
+export const styles = () => ({
+  messages: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "flex-start",
+    flexWrap: "wrap",
+    padding: 0,
+
+    "@media (max-width:740px)": {
+      justifyContent: "center"
+    }
+  },
+  msgText: {
+    margin: "0 10px 0 0 ",
+    padding: 0
+  },
+  stats: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    marginBottom: 15
+  }
+});
+
 export const Wrapper = styled(Paper)`
   width: 90%;
   padding: 10px;
-  margin: 48px auto;
+  margin: 10px auto;
   max-width: 1200px;
 `;
 

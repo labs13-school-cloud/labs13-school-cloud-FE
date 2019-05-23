@@ -27,8 +27,13 @@ function Card(props) {
   const pagination = { limit, offset, setMax: setNotificationsCount };
 
   return (
-    <MainContainer maxWidth={props.maxWidth} maxHeight={props.maxHeight}>
-      <Paper data-tour="5" className={classes.root} elevation={2}>
+    <MainContainer>
+      <Paper
+        data-tour="5"
+        style={{ width: props.width || "100%" }}
+        className={classes.root}
+        elevation={2}
+      >
         <div className={classes.columnHeader}>
           <Typography variant="h5" className={classes.lgTitle}>
             {notifNum} {title} Notification{plural}
@@ -78,18 +83,17 @@ function Card(props) {
             }
             filters={filters}
             member_id={props.member_id}
-            history={props.history}
           />
-          {!notificationsCount && (
-            <MessageContainer>
-              <p>
-                {props.isLoading
-                  ? "Loading your Notifications."
-                  : `You do not have any ${statusFilter} Notifications.`}
-              </p>
-            </MessageContainer>
-          )}
         </Suspense>
+        {!notificationsCount && (
+          <MessageContainer>
+            <p>
+              {props.isLoading
+                ? "Loading your Notifications."
+                : `You do not have any ${statusFilter} Notifications.`}
+            </p>
+          </MessageContainer>
+        )}
         <div className={classes.footer}>
           <Pagination
             limit={limit}

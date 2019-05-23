@@ -34,6 +34,7 @@ function SearchCard(props) {
     <Paper data-tour={containerTourNum} className={classes.root} elevation={2}>
       <CardHeader
         searchHook={search}
+        isSearching={props.isSearching}
         title={section}
         tour={headerTourNum}
         add={() => handleAdd()}

@@ -5,8 +5,9 @@ import { Typography, Fab, TextField, InputAdornment } from "@material-ui/core/";
 import { withStyles } from "@material-ui/core/styles";
 import { styles } from "./styles.js";
 
-function CardHeader({ title, tour, classes, add, searchHook }) {
-  const [isSearching, setIsSearching] = useState(false);
+function CardHeader(props) {
+  const { title, tour, classes, add, searchHook } = props;
+  const [isSearching, setIsSearching] = useState(!!props.isSearching);
   const [search, setSearch] = searchHook;
 
   const toggleSearch = e => {
@@ -18,15 +19,17 @@ function CardHeader({ title, tour, classes, add, searchHook }) {
       <div className={classes.columnHeader}>
         <Typography variant="h5">{title}</Typography>
         <div className={classes.icons}>
-          <Fab
-            data-tour={tour ? tour[0] : ""}
-            size="small"
-            aria-label="Add"
-            className={classes.fab}
-            onClick={e => toggleSearch(e)}
-          >
-            <i className="material-icons">search</i>
-          </Fab>
+          {!props.isSearching && (
+            <Fab
+              data-tour={tour ? tour[0] : ""}
+              size="small"
+              aria-label="Add"
+              className={classes.fab}
+              onClick={e => toggleSearch(e)}
+            >
+              <i className="material-icons">search</i>
+            </Fab>
+          )}
           <Fab
             data-tour={tour ? tour[1] : ""}
             size="small"

@@ -16,6 +16,8 @@ import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Checkbox from "@material-ui/core/Checkbox";
 
+import { CheckboxWrapper } from "./styles.js";
+
 // Redux
 import { createAMessage, editMessage, deleteMessage } from "store/actions";
 
@@ -116,7 +118,7 @@ class CreateMessage extends React.Component {
                 value={this.state.message.link}
                 onChange={this.handleChange("link")}
                 margin="normal"
-                helperText="must be a URI link or this message will not be submittable"
+                helperText="must be a URL/link or this message will not be submittable"
               />
               <TextField
                 id="outlined-number"
@@ -147,52 +149,68 @@ class CreateMessage extends React.Component {
                 </ExpansionPanelDetails>
               </ExpansionPanel>
             </MessageContainer>
-            Send To:{"  "}
-            <Checkbox
-              checked={this.state.message.for_team_member}
-              value="checkedB"
-              color="primary"
-              onChange={e => {
-                this.setState({
-                  ...this.state,
-                  message: {
-                    ...this.state.message,
-                    for_team_member: !this.state.message.for_team_member
-                  }
-                });
-              }}
-            />
-            Team Member
-            <Checkbox
-              checked={this.state.message.for_manager}
-              value="checkedB"
-              color="primary"
-              onChange={e => {
-                this.setState({
-                  ...this.state,
-                  message: {
-                    ...this.state.message,
-                    for_manager: !this.state.message.for_manager
-                  }
-                });
-              }}
-            />
-            Manager
-            <Checkbox
-              checked={this.state.message.for_mentor}
-              value="checkedB"
-              color="primary"
-              onChange={e => {
-                this.setState({
-                  ...this.state,
-                  message: {
-                    ...this.state.message,
-                    for_mentor: !this.state.message.for_mentor
-                  }
-                });
-              }}
-            />
-            Mentor
+            <CheckboxWrapper>
+              <Typography variant="subtitle1">Send To:</Typography>
+              <div className="checkboxes">
+                <div
+                  style={{ cursor: "pointer" }}
+                  onClick={e => {
+                    this.setState({
+                      ...this.state,
+                      message: {
+                        ...this.state.message,
+                        for_team_member: !this.state.message.for_team_member
+                      }
+                    });
+                  }}
+                >
+                  <Checkbox
+                    checked={this.state.message.for_team_member}
+                    value="checkedB"
+                    color="primary"
+                  />
+                  Team Member
+                </div>
+                <div
+                  style={{ cursor: "pointer" }}
+                  onClick={e => {
+                    this.setState({
+                      ...this.state,
+                      message: {
+                        ...this.state.message,
+                        for_manager: !this.state.message.for_manager
+                      }
+                    });
+                  }}
+                >
+                  <Checkbox
+                    checked={this.state.message.for_manager}
+                    value="checkedB"
+                    color="primary"
+                  />
+                  Manager
+                </div>
+                <div
+                  style={{ cursor: "pointer" }}
+                  onClick={e => {
+                    this.setState({
+                      ...this.state,
+                      message: {
+                        ...this.state.message,
+                        for_mentor: !this.state.message.for_mentor
+                      }
+                    });
+                  }}
+                >
+                  <Checkbox
+                    checked={this.state.message.for_mentor}
+                    value="checkedB"
+                    color="primary"
+                  />
+                  Mentor
+                </div>
+              </div>
+            </CheckboxWrapper>
             <ButtonContainer>
               <Button
                 variant="outlined"
@@ -205,7 +223,6 @@ class CreateMessage extends React.Component {
               <Button
                 className={classes.button}
                 onClick={e => {
-                  console.log(this.state);
                   this.props.history.push(
                     `/home/training-series/${
                       this.state.message.training_series_id

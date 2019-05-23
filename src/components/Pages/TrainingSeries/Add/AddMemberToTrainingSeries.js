@@ -2,13 +2,15 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import moment from "moment";
-import styled from "styled-components";
-
-import Button from "@material-ui/core/Button";
-import { Paper } from "@material-ui/core";
-import TextField from "@material-ui/core/TextField";
 
 import SingleMemberCheck from "./singleMemberCheck.js";
+
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
+import Typography from "@material-ui/core/Typography";
+
+import { styles, Wrapper } from "./styles.js";
+import { withStyles } from "@material-ui/core/styles";
 import {
   getTeamMembers,
   getTrainingSeries,
@@ -21,17 +23,17 @@ function AddMemberToTrainingSeries(props) {
   const [startDate, setStartDate] = useState(moment().format("YYYY-MM-DD"));
   const [memberComMethods, setMemberComMethods] = useState([]); //an array of object containing members firat name and last nam, pluswhich communication method is selected
 
-  // Abstracting to remove useEffect dependency warnings
+  // Destructuring to remove useEffect dependency warnings
   const {
     getTeamMembers,
     getTrainingSeries,
     getAllMessages,
     match,
-    user_id
+    user_id,
+    classes
   } = props;
-  const {
-    params: { id }
-  } = match;
+  const { params } = match;
+  const { id } = params;
 
   const getNewNotification = (recipient_id, msg, team_member_id) => {
     const memberServices = props.teamMembers.filter(
@@ -73,12 +75,12 @@ function AddMemberToTrainingSeries(props) {
   }, [getTeamMembers, getTrainingSeries, getAllMessages, user_id, id]);
 
   const handelAddComMethod = (id, method) => {
-    const memberMethod = { id, method }; //create an object for the team member and their prefered method of communication.
+    const memberMethod = { id, method }; //create an object for the team member and their preferred method of communication.
 
     const workArray = [...memberComMethods]; //take our current array of members and communications and spread it into a new array so we can work on it.
 
     workArray.forEach((mem, i) => {
-      //map over that array and check if the member being added already exists in our array. if so, delete their original prefered item from the list;
+      //map over that array and check if the member being added already exists in our array. if so, delete their original preferred item from the list;
       if (mem.id === memberMethod.id) {
         workArray.splice(i, 1);
       }
@@ -133,23 +135,25 @@ function AddMemberToTrainingSeries(props) {
   const unassignedMembers = props.teamMembers.filter(
     m => !filteredMemberIds.includes(m.id)
   );
+
+  const messagesNumber = props.messages.filter(
+    m =>
+      m.training_series_id === parseInt(props.match.params.id) &&
+      m.for_team_member
+  ).length;
   return (
     <Wrapper>
-      <h1>
-        {props.trainingSeries.length &&
-          props.trainingSeries.filter(
-            series => parseInt(series.id) === parseInt(props.match.params.id)
-          )[0].title}
-      </h1>
-      <p>
-        Employees will be sent{" "}
-        {
-          props.messages.filter(
-            m => m.training_series_id === parseInt(props.match.params.id)
-          ).length
-        }{" "}
-        message(s) throughout this training series.
-      </p>
+      <div className={classes.headerText}>
+        <Typography variant="title" gutterBottom>
+          {props.trainingSeries.length &&
+            props.trainingSeries.find(
+              series => parseInt(series.id) === parseInt(props.match.params.id)
+            ).title}
+        </Typography>
+        <Typography variant="subtitle1">
+          Message Count: {messagesNumber}
+        </Typography>
+      </div>
       <div>
         {unassignedMembers.map(member => {
           return (
@@ -163,8 +167,9 @@ function AddMemberToTrainingSeries(props) {
         })}
       </div>
       {unassignedMembers.length ? (
-        <form noValidate>
+        <div className={classes.footer}>
           <TextField
+            style={{ maxWidth: 210, marginBottom: 20 }}
             id="date"
             label="Start Date"
             type="date"
@@ -176,7 +181,31 @@ function AddMemberToTrainingSeries(props) {
               setStartDate(e.target.value); //gives a text version of date in YYY-MM-DD
             }}
           />
-        </form>
+          <div style={{ minWidth: 208 }}>
+            <Button
+              style={{ margin: 10 }}
+              variant="contained"
+              color="primary"
+              type="submit"
+              onClick={e => handleSubmit(e)}
+            >
+              submit
+            </Button>
+            <Button
+              style={{ margin: 10 }}
+              variant="contained"
+              color="default"
+              type="submit"
+              onClick={e =>
+                props.history.push(
+                  `/home/training-series/${props.match.params.id}`
+                )
+              }
+            >
+              cancel
+            </Button>
+          </div>
+        </div>
       ) : (
         <p>
           All your available team members are already assigned to this training
@@ -185,26 +214,6 @@ function AddMemberToTrainingSeries(props) {
           team members.
         </p>
       )}
-      <Button
-        style={{ margin: "15px" }}
-        variant="contained"
-        color="primary"
-        type="submit"
-        onClick={e => handleSubmit(e)}
-      >
-        submit
-      </Button>
-      <Button
-        style={{ margin: "15px" }}
-        variant="contained"
-        color="accent"
-        type="submit"
-        onClick={e =>
-          props.history.push(`/home/training-series/${props.match.params.id}`)
-        }
-      >
-        cancel
-      </Button>
     </Wrapper>
   );
 }
@@ -226,14 +235,7 @@ export default connect(
     addNotification,
     getAllMessages
   }
-)(AddMemberToTrainingSeries);
-
-const Wrapper = styled(Paper)`
-  margin: auto;
-  padding: 10px;
-  width: 80%;
-  max-width: 1000px;
-`;
+)(withStyles(styles)(AddMemberToTrainingSeries));
 
 function getRoles(msg) {
   // No, this isn't necessary for 3 roles. But this will scale better if more roles are added

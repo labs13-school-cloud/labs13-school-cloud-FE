@@ -7,7 +7,6 @@ export const styles = theme => ({
     paddingBottom: theme.spacing.unit * 2,
     display: "flex",
     flexDirection: "column",
-    width: "100%",
     boxSizing: "border-box",
     height: "100%",
     minHeight: 533,
@@ -74,8 +73,9 @@ export const MessageContainer = styled.div`
 export const MainContainer = styled.div`
   margin: 0 auto;
   max-width: 768px;
-  max-width: ${props => props.maxWidth || "none"};
-  max-height: ${props => props.maxHeight || "none"};
+  /* https://bit.ly/2ElzpZl */
+  height: 0.4242px;
+  max-width: ${props => props.width || "none"};
   @media (max-width: 1400px) {
     width: 100%;
     margin: auto;

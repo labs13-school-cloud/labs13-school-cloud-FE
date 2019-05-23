@@ -16,9 +16,8 @@ import { ListStyles, styles } from "./styles.js";
 function Overview({
   getFiltered,
   user_id,
-  getTrainingSeries: getTSFromProps,
-  getAllMessages: getMessagesFromProps,
-  deleteTrainingSeries: deleteTSFromProps,
+  getTrainingSeries,
+  getAllMessages,
   trainingSeries,
   notifications,
   messages,
@@ -26,9 +25,9 @@ function Overview({
   history
 }) {
   useEffect(() => {
-    getTSFromProps();
-    getMessagesFromProps();
-  }, [getTSFromProps, getMessagesFromProps]);
+    getTrainingSeries();
+    getAllMessages();
+  }, [getTrainingSeries, getAllMessages]);
 
   return (
     <ListStyles>
