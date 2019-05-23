@@ -4,8 +4,6 @@ import React from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
 
-import styled from "styled-components";
-
 // Material UI
 import { withStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
@@ -25,7 +23,8 @@ import {
   MainContainer,
   MessageContainer,
   ButtonContainer,
-  styles
+  styles,
+  CheckBoxWrapper
 } from "./MessagePageStyles.js";
 
 class MessagePage extends React.Component {
@@ -84,19 +83,20 @@ class MessagePage extends React.Component {
     }, 1000);
   };
 
+
   render() {
     const { classes } = this.props;
     return (
       <MainContainer>
-        <Typography variant="display1" align="center" gutterBottom>
-          Edit Message
-        </Typography>
         <form
           className={classes.form}
           id="form1"
           onSubmit={e => this.handleMessageSubmit(e)}
         >
           <Paper className={classes.root}>
+            <Typography className={classes.title} variant="h5" gutterBottom>
+              Edit Message
+        </Typography>
             <MessageContainer>
               <TextField
                 id="standard-name"
@@ -212,7 +212,7 @@ class MessagePage extends React.Component {
                 onClick={e =>
                   this.props.history.push(
                     `/home/training-series/${
-                      this.state.message.training_series_id
+                    this.state.message.training_series_id
                     }`
                   )
                 }
@@ -242,9 +242,4 @@ export default connect(
   }
 )(withStyles(styles)(withRouter(MessagePage)));
 
-const CheckBoxWrapper = styled.div`
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
+
