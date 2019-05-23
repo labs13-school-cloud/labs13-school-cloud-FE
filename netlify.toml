@@ -1,0 +1,15 @@
+[build]
+  base = "./"
+  publish = "./build"
+  command = "yarn build"
+
+[template.environment]
+  REACT_APP_PROD = "Replace with your Auth0 Callback URL (i.e. http://app.netlify.com/callback"
+  REACT_APP_API = "Replace with your API's url (i.e. https://app.herokuapp.com"
+  NODE_PATH = "src/"
+
+# Redirect all requests to our domain to our client-side router
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
