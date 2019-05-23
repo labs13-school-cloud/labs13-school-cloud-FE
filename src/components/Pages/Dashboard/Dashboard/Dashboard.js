@@ -8,7 +8,6 @@ import TrainingSeriesOverview from "components/Pages/TrainingSeries/List/Overvie
 import TrainingSeriesTab from "components/Pages/TrainingSeries/List/Tab";
 import NotificationsCard from "components/Pages/Notifications/Card";
 import NotificationsOverview from "components/Pages/Notifications/Card/Overview/Overview.js";
-//import NotificationsTab from "components/Pages/Notifications/Card/NotificationsTab.js";
 import Responses from "components/Pages/Notifications/Responses";
 import TabNavigation from "./helpers/TabNavigation.js";
 import DektopNavigation from "./helpers/DesktopNavigation.js";
