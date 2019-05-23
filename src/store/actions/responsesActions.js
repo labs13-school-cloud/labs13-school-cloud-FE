@@ -75,15 +75,17 @@ export const deleteResponse = id => dispatch => {
 // TEMPORARY AFTER THIS LINE
 
 export const getAllResponses = () => dispatch => {
-  dispatch({ type: GET_RESPONSES_START });
-  axios
-    .get(`${process.env.REACT_APP_API}/api/responses`)
-    .then(res => {
-      dispatch({ type: GET_RESPONSES_SUCCESS, payload: res.data.responses });
-    })
-    .catch(err => {
-      dispatch({ type: GET_RESPONSES_FAIL, error: err });
-    });
+  //dispatch({ type: GET_RESPONSES_START });
+  // axios
+  //   .get(`${process.env.REACT_APP_API}/api/responses`)
+  //   .then(res => {
+  //     dispatch({ type: GET_RESPONSES_SUCCESS, payload: res.data.responses });
+  //   })
+  //   .catch(err => {
+  //     dispatch({ type: GET_RESPONSES_FAIL, error: err });
+  //   });
+
+  console.log("You need to write this endpoint");
 };
 
 export const seeResponse = id => {
