@@ -26,7 +26,7 @@ We've configured a one-click deploy to Netlify that will allow you to get the fr
 
 **Note**: Make sure you've completed the [Auth0 section of the prerequisite docs](https://github.com/labs12-training-bot-2/labs12-training-bot-2-BE/blob/master/docs/prerequisites.md#configuring-auth0) in the [Training Bot API repository](https://github.com/labs12-training-bot-2/labs12-training-bot-2-BE)
 
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/labs12-training-bot-2/labs12-training-bot-2-FE/)
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/labs12-training-bot-2/labs12-training-bot-2-FE)
 
 ## Components
 
