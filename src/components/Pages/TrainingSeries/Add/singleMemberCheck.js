@@ -52,7 +52,7 @@ function SingleMemberCheck({
         <FormControlLabel
           value="Text"
           control={<Radio />}
-          label="Text"
+          label="Text Message"
           className={classes.radioItem}
         />
         <FormControlLabel
