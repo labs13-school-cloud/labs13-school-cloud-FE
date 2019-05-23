@@ -34,6 +34,7 @@ function Assign(props) {
   const tmIDs = new Set(
     props.notifications
       .filter(n => n.training_series_id === parseInt(params.id))
+      .filter(n => n.recipient_id === n.team_member_id)
       .map(n => n.team_member_id)
   );
   const assignedMembers = props.teamMembers.filter(t => tmIDs.has(t.id));
@@ -93,7 +94,8 @@ function Assign(props) {
 
 const mapStateToProps = state => ({
   notifications: state.notificationsReducer.notifications,
-  teamMembers: state.teamMembersReducer.teamMembers
+  teamMembers: state.teamMembersReducer.teamMembers,
+  messages: state.messagesReducer.messages
 });
 
 export default connect(

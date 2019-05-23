@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 
-import { getAllResponses } from "store/actions";
-
 import styled from "styled-components";
 
 import SearchCard from "components/UI/SearchCard/";
@@ -29,15 +27,7 @@ import {
 function Dashboard(props) {
   const [topTab, setTopTab] = useState("overview");
   const [newResponses, setNewResponses] = useState([]);
-  const { user_id, history, getAllResponses, responses } = props;
-
-  useEffect(() => {
-    getAllResponses();
-    setTimeout(() => {
-      // Feature freeze -- better solution here would be socket.io
-      getAllResponses();
-    }, 60 * 1000);
-  }, [getAllResponses]);
+  const { user_id, history, responses } = props;
 
   useEffect(() => {
     setNewResponses(responses.filter(r => !r.seen));
@@ -125,5 +115,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getAllResponses }
+  null
 )(Dashboard);
