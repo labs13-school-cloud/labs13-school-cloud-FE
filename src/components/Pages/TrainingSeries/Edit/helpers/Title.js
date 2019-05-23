@@ -27,7 +27,6 @@ function Title(props) {
 
   const updateTitle = e => {
     e.preventDefault();
-    console.log(trainingSeries);
     props.editTrainingSeries(trainingSeries.id, {
       title,
       user_id: props.user_id
@@ -61,16 +60,16 @@ function Title(props) {
           </TrainingSeriesTitle>
         </form>
       ) : (
-        <TrainingSeriesTitle onClick={() => setIsEditingTitle(!isEditingTitle)}>
-          <Typography variant="headline">{`${title} \u00A0`}</Typography>
-          <i
-            style={{ fontSize: 25 }}
-            className={`material-icons ${classes.icons}`}
-          >
-            edit
+          <TrainingSeriesTitle onClick={() => setIsEditingTitle(!isEditingTitle)}>
+            <Typography variant="headline">{`${title} \u00A0`}</Typography>
+            <i
+              style={{ fontSize: 25 }}
+              className={`material-icons ${classes.icons}`}
+            >
+              edit
           </i>
-        </TrainingSeriesTitle>
-      )}
+          </TrainingSeriesTitle>
+        )}
     </>
   );
 }
