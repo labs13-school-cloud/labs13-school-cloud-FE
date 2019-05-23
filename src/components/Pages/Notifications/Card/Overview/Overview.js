@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import moment from "moment";
 
 import { getNotifications } from "store/actions";
+import history from "history.js";
 
 import { withStyles } from "@material-ui/core/styles";
 import {
@@ -24,8 +25,7 @@ function Overview(props) {
     filters,
     getNotifications,
     notifications,
-    classes,
-    history
+    classes
   } = props;
 
   useEffect(() => {
