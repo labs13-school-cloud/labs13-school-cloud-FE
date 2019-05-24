@@ -18,7 +18,13 @@
 
 ## Background
 
-TODO: Write background section
+As Training Bot 2, we inherited our code base, as you do now, but found we were uncertain we could accomplish our goals with the code that we were given.  So we sacrificed some of our development time to refactor the code bases and designed it with future teams in mind (you'll have to let us know if we were successful or not)!  
+
+While the front end refactor was never 100% completed, the heavy lifting has already been done.  With all of our features and documentation added, the React portion of the app is actually significantly lighter than when we found it.  We have created reusable components that should make expanding any features far easier and our two main components (SearchCard and NotificationsCard) are largely stripped of context and can be used again on a whim!
+
+So now we pass the project on to you, much more robust than we found it, and we hope our efforts make your transition easier and that you're able to expand upon the ideas we started.  So in our final week, we've prepared these docs for you and added a one-click feature to get a live version of the app running ideally on day one.  We really loved working on Training Bot and hope you do too!
+
+- Training Bot 2
 
 ## Deploy
 
