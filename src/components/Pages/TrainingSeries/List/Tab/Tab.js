@@ -28,14 +28,13 @@ function Tab({
     getAllMessages();
   }, [getTrainingSeries, getAllMessages]);
 
-  const [selectedId, setSelectedId] = useState(0);
-
   return (
     <>
       {getFiltered(trainingSeries).map(({ id, title }) => {
         const tsMessages = messages.filter(msg => {
           return msg.training_series_id === id;
         });
+        let selectedId = tsMessages[0].id;
         const daysLong = Math.max(...tsMessages.map(m => m.days_from_start));
 
         return (
@@ -60,7 +59,7 @@ function Tab({
 
                     <Select
                       onChange={e => {
-                        setSelectedId(parseInt(e.target.value));
+                        selectedId = parseInt(e.target.value);
                       }}
                       onClick={e => {
                         e.stopPropagation();

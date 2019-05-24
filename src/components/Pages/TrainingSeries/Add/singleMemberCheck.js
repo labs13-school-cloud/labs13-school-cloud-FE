@@ -19,7 +19,8 @@ function SingleMemberCheck({
 
   const changeService = service => {
     const serviceConversion = { Text: 1, Email: 2, Slack: 3 };
-    handelAddComMethod(serviceConversion[service]);
+    //handelAddComMethod(serviceConversion[service]);
+    handelAddComMethod(teamMember.id, serviceConversion[service]);
     setService(service);
   };
 

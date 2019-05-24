@@ -18,11 +18,11 @@ const HelpModal = props => {
         <h3>Welcome to the Help Panel!</h3>
         <hr />
         <TypeWrapper>
-          <h4>Login/Set up</h4>
+          <h4>Account Creation & Login</h4>
 
           <p>
-            With Training Bot, creating/logging in to an account is simple!
-            After clicking onto the login section, simply{" "}
+            With Training Bot, creating/logging into an account is simple! After
+            clicking onto the login section, simply{" "}
             <span>
               choose an account that you already have (i.e. Facebook, Google, or
               LinkedIn)
@@ -46,7 +46,7 @@ const HelpModal = props => {
             <br />
             Once here, you'll be prompted to fill out your Team Members
             information. You can choose to assign them a{" "}
-            <span>phone number, email, or slack account</span> to recieve
+            <span>phone number, email, or slack account</span> to receive
             messages from (assuming that you've set up slack in your account
             settings. We will review that later on this page).
             <br />
@@ -73,14 +73,14 @@ const HelpModal = props => {
             to send to your employees! A <span>Training Series</span> is simply
             a house for a set of training material. You{" "}
             <span>
-              name your series, add messages with training materials attatched
-              to those series, then assign them to Team Members to start at a
+              name your series, add messages with training materials attached to
+              those series, then assign them to Team Members to start at a
               specified date.
             </span>
             <br />
             <br />
             We'll use a fictional situation to run you through how this works.
-            Lets assume you own a coffee shop. Youll likely need to send your
+            Lets assume you own a coffee shop. You'll likely need to send your
             new hires some information on the basics of coffee making. Lets
             start by <span>naming our series:</span>
             <br />
@@ -90,7 +90,7 @@ const HelpModal = props => {
             <span>click on the big purple "+" sign.</span>
             <br />
             <br />
-            Youll be prompted to name your new series. We will name ours{" "}
+            You'll be prompted to name your new series. We will name ours{" "}
             <span>"Coffee Shop Basics".</span> Once it's named, simply click{" "}
             <span>create</span> and you'll be pushed to the Training Series
             configuration page.
@@ -103,15 +103,15 @@ const HelpModal = props => {
             <br />
             Click on the <span>Add Message</span> button. A "message" is simply
             what ever you want to send to your employees. Fill out the{" "}
-            <span>title, content, and link</span> that youd like to send to your
-            employees for this series. Now you may ask,{" "}
+            <span>title, content, and link</span> that you'd like to send to
+            your employees for this series. Now you may ask,{" "}
             <span>WHAT THE HECK IS DAYS FROM START?</span> Easy!! Days from
             start is the number of days after a training series starts that a
             message will be sent. For example, if you assign a team member to
             this training series with a start date of Friday, and you set this
             message's "days from start" number to 3, it will send out the next
             Monday! We can also{" "}
-            <span>assign a Team Members mentor or manager</span> to recieve the
+            <span>assign a Team Members mentor or manager</span> to receive the
             message as well/instead!
             <br />
             <br />
@@ -134,7 +134,7 @@ const HelpModal = props => {
           </p>
         </TypeWrapper>
         <TypeWrapper>
-          <h4>Recieving Responses</h4>
+          <h4>Receiving Responses</h4>
 
           <p>
             Your employees will have the option to respond to messages sent out
