@@ -3,7 +3,16 @@ import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 
+import { withStyles } from "@material-ui/core/styles";
+
 import styled from "styled-components";
+
+const styles = theme => ({
+  root: {
+    flexGrow: 1,
+    boxShadow: "0 7px 3px rgba(0,0,0,0.2)"
+  }
+});
 
 class SimpleTabs extends React.Component {
   state = {
@@ -27,11 +36,16 @@ class SimpleTabs extends React.Component {
   };
 
   render() {
+    const { classes } = this.props;
     const { value } = this.state;
 
     return (
       <div>
-        <AppBar position="static">
+        <AppBar
+          className={classes.root}
+          data-tour={window.innerWidth > 650 ? "7" : null}
+          position="static"
+        >
           <TabsStyled
             indicatorColor="primary"
             textColor="primary"
@@ -49,7 +63,7 @@ class SimpleTabs extends React.Component {
     );
   }
 }
-export default SimpleTabs;
+export default withStyles(styles)(SimpleTabs);
 
 const TabsStyled = styled(Tabs)`
   background: white;

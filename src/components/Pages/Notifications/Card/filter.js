@@ -3,7 +3,7 @@ export default ({ items, pagination, filters, member_id }) => {
   let filtered = items;
   if (member_id) {
     filtered = filtered.filter(
-      ({ team_member_id: id }) => id === parseInt(member_id, 10)
+      ({ recipient_id: id }) => id === parseInt(member_id, 10)
     );
   }
   filtered = filtered.filter(({ name, is_sent }) => {

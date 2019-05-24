@@ -87,7 +87,7 @@ function Card(props) {
         </Suspense>
         {!notificationsCount && (
           <MessageContainer>
-            <p>
+            <p style={{ marginBottom: "70px" }}>
               {props.isLoading
                 ? "Loading your Notifications."
                 : `You do not have any ${statusFilter} Notifications.`}
