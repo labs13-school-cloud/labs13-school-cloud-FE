@@ -63,9 +63,10 @@ class LandingPage extends React.Component {
             <LandingPageContentContainer>
               <h1>Training Bot</h1>
               <p>
-                Training Bot empowers team leaders with tools to assist with
-                their team’s continual learning by sending automated text
-                messages and emails on scheduled intervals.
+                Training bot is a message scheduler that bridges the gap between
+                your training materials and employees. Automatically deliver
+                resources to team members on your schedule with just a few
+                clicks.
               </p>
               <LandingPageButtonContainer>
                 <Button onClick={login}>Get Started</Button>
