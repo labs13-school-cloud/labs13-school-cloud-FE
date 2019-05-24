@@ -20,7 +20,7 @@ const Stripe = styled.div`
  */
 function StripeView(props) {
   return (
-    <StripeProvider apiKey="pk_test_Xm1i1PmTqLH8BAuD0hAhn3je00REWKtBJ6">
+    <StripeProvider apiKey="pk_live_MPXtPBPZxYZEc2XRo3XLZoXV00O4i1z73y">
       {/* production key = pk_live_MPXtPBPZxYZEc2XRo3XLZoXV00O4i1z73y
       test key = pk_test_Xm1i1PmTqLH8BAuD0hAhn3je00REWKtBJ6 */}
       <Stripe>
