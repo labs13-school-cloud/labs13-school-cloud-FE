@@ -114,8 +114,8 @@ We've configured a one-click deploy to Netlify that will allow you to get the fr
 
 | Name                 | Purpose                                                              | How To View         |
 | -------------------- | -------------------------------------------------------------------- | ------------------- |
-| TabNavigation.js     | Navigation bar visiable below the @media breakpoint for desktop view | "/home" under 650px |
-| DesktopNavigation.js | Navigation bar visiable above the @media breakpoint for desktop view | "/home" above 650px |
+| TabNavigation.js     | Navigation bar visible below the @media breakpoint for desktop view | "/home" under 650px |
+| DesktopNavigation.js | Navigation bar visible above the @media breakpoint for desktop view | "/home" above 650px |
 
 > > Loader
 
@@ -130,7 +130,7 @@ We've configured a one-click deploy to Netlify that will allow you to get the fr
 | Name      | Purpose                                                               | How To View |
 | --------- | --------------------------------------------------------------------- | ----------- |
 | index.js  | loads and renders Routes.js                                           | n/a         |
-| Routes.js | indluces all routes which require authentication via authenticate.js. | n/a         |
+| Routes.js | includes all routes which require authentication via authenticate.js. | n/a         |
 
 <br />
 <br />
@@ -158,7 +158,7 @@ We've configured a one-click deploy to Netlify that will allow you to get the fr
 | Name      | Purpose                                         | How To View |
 | --------- | ----------------------------------------------- | ----------- |
 | index.js  | loads and renders team page                     | n/a         |
-| Team.js   | Team page thats accessible via the landing page | "/team"     |
+| Team.js   | Team page that's accessible via the landing page | "/team"     |
 | styles.js | styles for team page                            | n/a         |
 
 <br />
@@ -180,9 +180,9 @@ We've configured a one-click deploy to Netlify that will allow you to get the fr
 
 | Name        | Purpose                                     | How To View |
 | ----------- | ------------------------------------------- | ----------- |
-| index.js    | loads and renders overview.js               | n/a         |
+| index.js    | loads and renders Overview.js               | n/a         |
 | Overview.js | loads cards inside of pending notifications | "/home"     |
-| styles.js   | styles for overview.js                      | n/a         |
+| styles.js   | styles for Overview.js                      | n/a         |
 
 > > > TeamMember
 
@@ -229,8 +229,8 @@ We've configured a one-click deploy to Netlify that will allow you to get the fr
 | Name                   | Purpose                                                                                                                   | How To View            |
 | ---------------------- | ------------------------------------------------------------------------------------------------------------------------- | ---------------------- |
 | AddButtons.js          | Buttons for adding team member. checks if routing and shows animation                                                     | add a team member      |
-| EditButtons.js         | Edit buttons for team members. Add.js renders this or AddButtons.js conditionally dependent on if youre adding or editing | edit a team member     |
-| MemberInfoform.js      | Form rendered when adding or editing a team member                                                                        | add/edit a team member |
+| EditButtons.js         | Edit buttons for team members. Add.js renders this or AddButtons.js conditionally dependent on if you're adding or editing | edit a team member     |
+| MemberInfoForm.js      | Form rendered when adding or editing a team member                                                                        | add/edit a team member |
 | Relationships.js       | Renders "Select" drop downs for mentor/manager assignments when adding/editing a team member                              | add/edit a team member |
 | SelectSlackID.js       | Conditionally renders slack drop down or a prompt to set up your slack.                                                   | add/edit a team member |
 | testPhoneNumber.js     | a RegEx function which checks to see if the input phone number is actually a phone number.                                | add/edit a team member |
@@ -254,7 +254,7 @@ We've configured a one-click deploy to Netlify that will allow you to get the fr
 
 | Name      | Purpose                                    | How To View            |
 | --------- | ------------------------------------------ | ---------------------- |
-| Edit.js   | Dispalys the entire edit team members page | /home/team-member/:id" |
+| Edit.js   | Displays the entire edit team members page | /home/team-member/:id" |
 | index.js  | loads and renders Edit.js                  | n/a                    |
 | styles.js | styles for Edit.js                         | n/a                    |
 
@@ -294,7 +294,7 @@ We've configured a one-click deploy to Netlify that will allow you to get the fr
 
 | Name                          | Purpose                                                                    | How To View                    |
 | ----------------------------- | -------------------------------------------------------------------------- | ------------------------------ |
-| AddMemberToTrainingSeries.js  | Comoponent for adding a team member to a training series                   | "/home/assign-members/:id"     |
+| AddMemberToTrainingSeries.js  | Component for adding a team member to a training series                   | "/home/assign-members/:id"     |
 | CreateMessage.js              | Component fro creating a new message for a training series                 | "/home/create-message"         |
 | CreateMessageStyles.js        | Styles for CreateMessage.js                                                | n/a                            |
 | CreateTrainingSeries.js       | Component for creating a training series (form where you fill out a title) | "/home/create-training-series" |
@@ -302,6 +302,7 @@ We've configured a one-click deploy to Netlify that will allow you to get the fr
 | MessagePage.js                | Component for Editing a message in a training series                       | "/home/message/:id"            |
 | MessagePageStyles.js          | Styles for MessagePage.js                                                  | n/a                            |
 | singleMemberCheck.js          | Component for each team member when assigning members to a series          | "/home/assign-members/:id"     |
+| styles.js                     | styles for singleMemberCheck.js                                            | n/a                            |
 
 > > Edit
 
@@ -324,7 +325,7 @@ We've configured a one-click deploy to Netlify that will allow you to get the fr
 | Name        | Purpose                                    | How To View                 |
 | ----------- | ------------------------------------------ | --------------------------- |
 | index.js    | loads and renders Messages.js              | n/a                         |
-| Messages.js | list of messages on a trainign series page | "/home/training-series/:id" |
+| Messages.js | list of messages on a training series page | "/home/training-series/:id" |
 | styles.js   | styles for Messages.js                     | n/a                         |
 
 > > > Overview
@@ -335,6 +336,14 @@ We've configured a one-click deploy to Netlify that will allow you to get the fr
 | Overview.js | List of training series on overview tab of dashboard | "/home"     |
 | styles.js   | styles for Overview.js                               | n/a         |
 
+> > > Tab
+
+| Name                       | Purpose                                                        | How To View                             |
+| -------------------------- | -------------------------------------------------------------- | --------------------------------------- |
+| index.js                   | loads and renders Tab.js                                       | n/a                                     |
+| TrainingSeriesTab.js       | Training series wrapper component for tab on dashboard         | "/home" navigate to training series tab |
+| styles.js                  | styles for Tab.js                                              | n/a                                     |
+
 > > Messages
 
 | Name        | Purpose                                                            | How To View                 |
@@ -344,13 +353,6 @@ We've configured a one-click deploy to Netlify that will allow you to get the fr
 | styles.js   | styles for Messages.js                                             | n/a                         |
 | Messages.js | inner component starting with "Messages" on a training series page | "/home/training-series/:id" |
 
-> > Tabs
-
-| Name                       | Purpose                                                        | How To View                             |
-| -------------------------- | -------------------------------------------------------------- | --------------------------------------- |
-| TrainingSeriesTab.js       | Training series wrapper component for tab on dashboard         | "/home" navigate to training series tab |
-| TrainingSeriesTabSingle.js | Single training series components withing TrainingSeriesTab.js | "/home" navigate to training series tab |
-| TrainingSeriesTabStyles.js | Styles for training series tab                                 | n/a                                     |
 
 <br />
 <br />
@@ -362,7 +364,7 @@ We've configured a one-click deploy to Netlify that will allow you to get the fr
 
 | Name            | Purpose                    | How To View                            |
 | --------------- | -------------------------- | -------------------------------------- |
-| ContactModal.js | Component for contact form | Go through tour and clicj "contact us" |
+| ContactModal.js | Component for contact form | Go through tour and click "contact us" |
 
 <br />
 <br />
@@ -380,7 +382,7 @@ We've configured a one-click deploy to Netlify that will allow you to get the fr
 
 | Name         | Purpose                                            | How To View                                                      |
 | ------------ | -------------------------------------------------- | ---------------------------------------------------------------- |
-| InfoPopup.js | Reusable tomponent for creating help popups in app | for instance, click on a training series and hover over "i" icon |
+| InfoPopup.js | Reusable component for creating help popups in app | for instance, click on a training series and hover over "i" icon |
 
 <br />
 <br />
@@ -399,7 +401,7 @@ We've configured a one-click deploy to Netlify that will allow you to get the fr
 | Name              | Purpose                              | How To View |
 | ----------------- | ------------------------------------ | ----------- |
 | loading.css       | styles for progress circle animation | n/a         |
-| ProgressCircle.js | a loading progress cirlce            | on login    |
+| ProgressCircle.js | a loading progress circle            | on login    |
 
 <br />
 <br />
@@ -458,7 +460,7 @@ TODO: Write Auth section
 
 ## Store
 
-    The actions/store setup for this application are fairly standard for react/redux applications you've likely worked with in the past. Youll notice that actions are split into seprate folders based on what theyre used for. All actions are being exported via index.js and can be referenced as such. Reducers are similar, in that they are being split into seprate reduceres dependent on useage and combined via redux's "combineReducers". You can reference individual reducers via their specific files. The store itself lives entirely inside of index.js "rootReducer".
+    The actions/store setup for this application are fairly standard for react/redux applications you've likely worked with in the past. You'll notice that actions are split into separate folders based on what they're used for. All actions are being exported via index.js and can be referenced as such. Reducers are similar, in that they are being split into separate reducers dependent on usage and combined via Redux's "combineReducers". You can reference individual reducers via their specific files. The store itself lives entirely inside of index.js "rootReducer".
 
 ## Maintainers
 
