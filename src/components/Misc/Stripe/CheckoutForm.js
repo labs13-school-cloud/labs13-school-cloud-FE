@@ -1,8 +1,13 @@
+//dependencies imports
 import React, { Component } from "react";
 import { CardElement, injectStripe } from "react-stripe-elements";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
+//modal imports
+import UnsubscribeModal from "./UnsubscribeModal.js";
+
+//redux imports
 import {
   getPlans,
   getCustomersPlan,
@@ -11,6 +16,7 @@ import {
 } from "store/actions/";
 import { getUser } from "store/actions/userActions";
 
+//Material UI and Style Imports
 import {
   withStyles,
   FormControl,
@@ -19,8 +25,6 @@ import {
   Modal
 } from "@material-ui/core/";
 import TrainingBotGIF from "img/trainingBot.gif";
-
-import UnsubscribeModal from "./UnsubscribeModal.js";
 
 const styles = theme => ({
   paper: {
@@ -150,6 +154,14 @@ const styles = theme => ({
   }
 });
 
+/**
+ * This Checkout component is required from the Stripe documentation and
+ * the format can be found in the react-stripe-elements library.
+ * https://stripe.com/docs/recipes/elements-react
+ *
+ * understand that this component is on the profile page and contains
+ * the three plan cards.
+ */
 class CheckoutForm extends Component {
   constructor(props) {
     super(props);
@@ -194,6 +206,15 @@ class CheckoutForm extends Component {
     });
   };
 
+  /**
+   * @function
+   * @param {string} email
+   * This step is adding functionality to the CheckoutForm component’s submit method
+   * so that clicking the button tokenizes the card information. We choose to use
+   * email, though anything could have been choosen as long as it's unique to each
+   * user.
+   *
+   *  */
   createToken = async email => {
     try {
       let { token } = await this.props.stripe.createToken({ email: email });
@@ -203,6 +224,7 @@ class CheckoutForm extends Component {
     }
   };
 
+  // the submit method will tokenize the card information by invoking createToken on the stripe prop
   submit = async () => {
     const { name, email, id, stripe } = this.props.userProfile;
     const { plan } = this.state;
@@ -218,20 +240,32 @@ class CheckoutForm extends Component {
     }
   };
 
+  /**
+   * @function
+   * @param {object} user_id
+   * @param {object} stripe id.
+   * allows the user to unsubscribe from their current plan.
+   */
   unsub = (user_id, stripe) => {
     this.props.unsubscribe(user_id, stripe);
     this.setState({ open: false });
   };
 
   render() {
+    //const { classes } is for material UI
     const { classes } = this.props;
+
+    /*account type is to determine which plan our user is on. Our stripe plan has
+      only 1 product, with 3 payment plans (Basic, Premium, Pro), but those 3 plans
+      need 3 cooresponding subscriptions so Stripe knows to charge the account monthly */
+
     let accountType;
     if (this.props.userProfile.subscription === "Premium") {
       accountType = "Premium";
     } else if (this.props.userProfile.subscription === "Pro") {
       accountType = "Pro";
     }
-
+    //freeButton is for Material UI
     let freeButton;
 
     if (this.props.userProfile.subscription !== "free") {
