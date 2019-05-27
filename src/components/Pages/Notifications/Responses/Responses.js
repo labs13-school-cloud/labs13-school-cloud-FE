@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 
 import SlackLogo from "img/slacklogo.jpg";
 
-import { seeResponse } from "store/actions";
+import { getAllResponses, seeResponse } from "store/actions";
 
 import { withStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
@@ -22,9 +22,13 @@ import {
 } from "./styles.js";
 
 function Responses(props) {
-  const { classes, responses } = props;
+  const { classes, responses, getAllResponses: responsesFromProps } = props;
   const [service, setService] = useState("");
   const [allResponses, setAllResponses] = useState([]);
+
+  useEffect(() => {
+    responsesFromProps();
+  }, [responsesFromProps]);
 
   useEffect(() => {
     setAllResponses(responses.filter(r => !r.seen));
@@ -149,6 +153,6 @@ const mapStateToProps = state => ({
 export default withStyles(styles)(
   connect(
     mapStateToProps,
-    { seeResponse }
+    { getAllResponses, seeResponse }
   )(Responses)
 );
