@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 
+import { getAllResponses } from "store/actions";
+
 import SearchCard from "components/UI/SearchCard/";
 import TeamMembersOverview from "components/Pages/TeamMembers/List/Overview";
 import TeamMembersTab from "components/Pages/TeamMembers/List/Tab";
@@ -8,7 +10,6 @@ import TrainingSeriesOverview from "components/Pages/TrainingSeries/List/Overvie
 import TrainingSeriesTab from "components/Pages/TrainingSeries/List/Tab";
 import NotificationsCard from "components/Pages/Notifications/Card";
 import NotificationsOverview from "components/Pages/Notifications/Card/Overview/Overview.js";
-//import NotificationsTab from "components/Pages/Notifications/Card/NotificationsTab.js";
 import Responses from "components/Pages/Notifications/Responses";
 import TabNavigation from "./helpers/TabNavigation.js";
 import DektopNavigation from "./helpers/DesktopNavigation.js";
@@ -25,7 +26,19 @@ import {
 function Dashboard(props) {
   const [topTab, setTopTab] = useState("overview");
   const [newResponses, setNewResponses] = useState([]);
-  const { user_id, history, responses } = props;
+  const {
+    user_id,
+    history,
+    responses,
+    getAllResponses: responsesFromProps
+  } = props;
+
+  useEffect(() => {
+    responsesFromProps();
+    setTimeout(() => {
+      responsesFromProps();
+    }, 60 * 1000);
+  }, [responsesFromProps]);
 
   useEffect(() => {
     setNewResponses(responses.filter(r => !r.seen));
@@ -113,5 +126,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  null
+  { getAllResponses }
 )(Dashboard);
