@@ -34,7 +34,6 @@ function Tab({
         const tsMessages = messages.filter(msg => {
           return msg.training_series_id === id;
         });
-        let selectedId = tsMessages[0].id;
         const daysLong = Math.max(...tsMessages.map(m => m.days_from_start));
 
         return (
@@ -59,7 +58,7 @@ function Tab({
 
                     <Select
                       onChange={e => {
-                        selectedId = parseInt(e.target.value);
+                        tsMessages[0].id = parseInt(e.target.value);
                       }}
                       onClick={e => {
                         e.stopPropagation();
@@ -80,7 +79,7 @@ function Tab({
                       type="submit"
                       onClick={e => {
                         e.stopPropagation();
-                        history.push(`/home/message/${selectedId}`);
+                        history.push(`/home/message/${tsMessages[0].id}`);
                       }}
                     >
                       Go to Message
