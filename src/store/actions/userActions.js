@@ -16,12 +16,12 @@ export const DELETE_USER_FAIL = "DELETE_USER_FAIL";
 export const getUser = () => dispatch => {
   dispatch({ type: GET_USER_START });
   const userData = JSON.parse(localStorage.getItem("Profile"));
-  const { email, family_name, given_name } = userData;
+  const { email, given_name, family_name } = userData;
   axios
     .post(`${process.env.REACT_APP_API}/api/auth`, {
       email,
-      family_name,
-      given_name
+      given_name,
+      family_name
     })
     .then(res => {
       dispatch({ type: GET_USER_SUCCESS, payload: res.data });
