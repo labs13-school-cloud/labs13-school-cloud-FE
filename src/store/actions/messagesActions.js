@@ -19,7 +19,7 @@ export const DELETE_MESSAGE_FAIL = "DELETE_MESSAGE_FAIL";
 
 // GET all messages for a training series
 
-export const getAllMessages = (id) => dispatch => {
+export const getAllMessages = () => dispatch => {
   dispatch({ type: GET_MESSAGES_START });
   axios
     .get(`${process.env.REACT_APP_API}/api/messages`)
