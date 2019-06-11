@@ -1,6 +1,12 @@
 import React, { useState } from "react";
 
-import { Typography, Fab, TextField, InputAdornment } from "@material-ui/core/";
+import {
+  Typography,
+  Fab,
+  TextField,
+  InputAdornment,
+  Select
+} from "@material-ui/core/";
 
 import { withStyles } from "@material-ui/core/styles";
 import { styles } from "./styles.js";
@@ -30,7 +36,8 @@ function CardHeader(props) {
               <i className="material-icons">search</i>
             </Fab>
           )}
-          <Fab
+
+          {/* <Fab
             data-tour={tour ? tour[1] : ""}
             size="small"
             aria-label="Add"
@@ -38,7 +45,7 @@ function CardHeader(props) {
             onClick={() => add()}
           >
             <i className="material-icons">add</i>
-          </Fab>
+          </Fab> */}
         </div>
       </div>
       <div>
@@ -54,6 +61,14 @@ function CardHeader(props) {
               startAdornment: (
                 <InputAdornment position="start">
                   <i className="material-icons">search</i>
+                  <Select
+                    // value={values.age}
+                    // onChange={handleChange}
+                    inputProps={{
+                      name: "age",
+                      id: "age-simple"
+                    }}
+                  />
                 </InputAdornment>
               )
             }}

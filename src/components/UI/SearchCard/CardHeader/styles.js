@@ -4,12 +4,12 @@ export const styles = theme => ({
   },
   columnHeader: {
     display: "flex",
-    justifyContent: "space-between",
+    justifyContent: "center",
     alignItems: "center"
   },
   icons: {
-    display: "flex",
-    alignItems: "center"
+    display: "flex"
+    // alignItems: "center"
   },
   fab: {
     margin: 5,
