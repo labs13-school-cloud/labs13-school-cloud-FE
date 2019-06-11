@@ -31,28 +31,28 @@ function Overview({
 
   return (
     <ListStyles>
-      {getFiltered(trainingSeries).map(({ title, id, user: email }) => {
+      {getFiltered(trainingSeries).map(props => {
         const tsMessages = messages.filter(msg => {
-          return msg.training_series_id === id;
+          return msg.training_series_id === props.id;
         });
         const userCount = new Set(
           notifications
-            .filter(n => n.training_series_id === id)
+            .filter(n => n.training_series_id === props.id)
             .map(n => n.team_member_id)
         ).size;
 
         return (
-          <ListItem key={id} component="li" className={classes.listItem}>
+          <ListItem key={props.id} component="li" className={classes.listItem}>
             <ListItemText
-              primary={title}
+              primary={props.title}
               secondary={`Messages: ${
                 tsMessages.length
               } | Assigned: ${userCount}`}
-              onClick={e => history.push(`/home/training-series/${id}`)}
+              onClick={e => history.push(`/home/training-series/${props.id}`)}
             />
             <DeleteModal
               deleteType="trainingSeries"
-              trainingSeriesId={id}
+              trainingSeriesId={props.id}
               className={`material-icons ${classes.icons}`}
               user_id={user_id}
             />
