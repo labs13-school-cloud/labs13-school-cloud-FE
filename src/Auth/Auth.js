@@ -30,7 +30,8 @@ export const login = () => {
 export const logout = () => {
 	clearIdToken();
 	clearAccessToken();
-	clearUserProfile();
+    clearUserProfile();
+    auth.logout();
 	history.push("/");
 };
 
