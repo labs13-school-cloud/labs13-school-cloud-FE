@@ -30,7 +30,7 @@ function Routes() {
         <Route exact path="/" component={LandingPage} />
         <Route path="/pricing" component={Pricing} />
         <Route path="/team" component={Team} />
-        <Route path="/home" component={authenticate(LoadDashboard)} />
+        <Route path="/home" component={authenticate(LoadDashboard)} /> 
         <Route path="/callback" component={Callback} />
         <Route path="/slack-callback" component={SlackCallback} />
       </Router>
