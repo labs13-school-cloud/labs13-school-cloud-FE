@@ -22,10 +22,10 @@ function Loader(props) {
   const { getUser, newUser, location } = props;
   const { state } = location;
 
-  useEffect(() => {
-    // componentDidMount (CDM) --> getUser should never be different
-    getUser();
-  }, [getUser]);
+//   useEffect(() => {
+//     // componentDidMount (CDM) --> getUser should never be different
+//     getUser();
+//   }, [getUser]);
 
   useEffect(() => {
     // componentDidUpdate (CDU) --> update when props.newUser changes

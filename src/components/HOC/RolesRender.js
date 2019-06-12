@@ -1,41 +1,47 @@
 import React, { Component } from "react";
-import axios from "axios";
+import { connect } from "react-redux";
+
+import { getUser } from "store/actions/userActions";
 
 // Volunteer Component
-import Test from 'components/HOC/test.js';
+import VolunteerDashboard from "components/VolunteerComponents/Pages/Dashboard/";
 
-const RolesRenderHOC = (ComponentToRender) => {
-
+const RolesRenderHOC = ComponentToRender => {
 	class RolesRender extends Component {
-		constructor() {
-			super();
+		constructor(props) {
+			super(props);
 			this.state = {
-				user: null,
+				profile: null,
 			};
 		}
 
 		componentDidMount() {
+            // ! This still doesn't work for brand new auth users
+            // ! If auth through Auth0 once and not logged out then will work 
+            // ! Fixed now but might because of timing of async calls being finished perfectly
+            // ! Still might need to change keep comment here just in case
+			this.props.getUser();
+
             const profile = JSON.parse(localStorage.getItem("Profile"));
-            
-			axios
-				.get(`${process.env.REACT_APP_API}/api/users/${profile.email}`)
-				.then(res => {
-                    this.setState({ user: res.data.user });
-                });
+
+            this.setState({ profile: profile })
 		}
 
 		render() {
-			if (this.state.user === null) {
-                return <h1>Loading</h1>
-            }  else if (this.state.user.role === 'admin') {
-                return <ComponentToRender {...this.props}/>
-            }  else {
-                return <Test />
-            }
+			if (this.state.profile === null) {
+				return <h1>Loading</h1>;
+			} else if (this.state.profile.role === "admin") {
+				return <ComponentToRender {...this.props} />;
+			} else {
+				return <VolunteerDashboard />;
+			}
 		}
 	}
 
-	return RolesRender;
+	return connect(
+		null,
+		{ getUser },
+	)(RolesRender);
 };
 
 export default RolesRenderHOC;

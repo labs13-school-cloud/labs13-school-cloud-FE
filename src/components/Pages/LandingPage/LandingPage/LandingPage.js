@@ -31,7 +31,7 @@ import undrawNotify from "img/undraw_notify_88a4.svg";
 import undrawTask from "img/undraw_personal_text_vkd8.svg";
 
 //Auth
-import { login } from "Auth/Auth";
+import { login, logout } from "Auth/Auth";
 
 class LandingPage extends React.Component {
   scrollTo() {
@@ -47,6 +47,7 @@ class LandingPage extends React.Component {
   render() {
     return (
       <>
+        {/* {logout()} */}
         <CssBaseline />
         <LandingPageContainer>
           {/* NAVIGATION */}
