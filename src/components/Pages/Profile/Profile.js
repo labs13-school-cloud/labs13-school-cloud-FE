@@ -146,7 +146,7 @@ class Profile extends React.Component {
                         height="40"
                         width="149.08"
                         src="https://platform.slack-edge.com/img/add_to_slack.png"
-                        srcset="https://platform.slack-edge.com/img/add_to_slack.png 1x, https://platform.slack-edge.com/img/add_to_slack@2x.png 2x"
+                        srcSet="https://platform.slack-edge.com/img/add_to_slack.png 1x, https://platform.slack-edge.com/img/add_to_slack@2x.png 2x"
                       />
                     </a>
                   </ButtonContainer>
