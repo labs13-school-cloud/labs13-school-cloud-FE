@@ -63,7 +63,7 @@ export const editClass = classes => dispatch => {
 export const deleteClass = (classID) => dispatch => {
     dispatch({ type :DELETE_CLASS_START });
     axios
-        .delete(`${baseUrl}/classes/${classesID}`)
+        .delete(`${baseUrl}/classes/${classID}`)
         .then(res => {
             dispatch({ type: DELETE_CLASS_SUCCESS, payload: classID })
         })

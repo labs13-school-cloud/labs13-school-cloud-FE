@@ -4,40 +4,36 @@ import { connect } from  "react-redux";
 
 import styled from "styled-components";
 
-import history from "../../../../../history.js";
+import history from "history.js";
 
 import DeleteModal from "../../../../UI/Modals/deleteModal";
-import { getClasses } from "../../../../../store/actions";
+import { getClasses } from "../../../../../store/actions/classesActions";
 
 import { withStyles } from "@material-ui/core/styles";
 import { ListItem, ListItemText } from "@material-ui/core/";
-import { ListStyles, styles } from "./styles.js.js";
+import { ListStyles, styles } from "./styles.js";
 
-function  Overview({
-    getClasses,
-    classes,
-    getFiltered,
-    class_id
-}) {
+function  Overview(props) {
     useEffect(() => {
-        getClasses
+        props.getClasses()
     }, [getClasses]);
 
+    console.log(props)
     return (
         <ListStyles>
-            {getFiltered(classes).map(
+            {props.getFiltered(props.classes).map(
                 ({ id, class_name, subject, grade_level, number_of_students, teacher_name, class_id }) => {
                     return (
-                        <SingleClass key={id} component="li" className={classes.listItem}>
+                        <SingleClass key={id} component="li" className={props.classes.listItem}>
                             <ListItemText
                                 primary={class_name}
                                 secondary={`Subject: ${subject}, Grade Level: ${grade_level}, Teacher Name: ${teacher_name}, Number Of Students: ${number_of_students}`}
                                 onClick={() => history.push(`home/classes/${id}`)}
                             />
                             <DeleteModal 
-                                deleteType="classes"
+                                deleteType="class"
                                 classId={id}
-                                className={`material-icons ${classes.icons}`}
+                                className={`material-icons ${props.classes.icons}`}
                             />
                         </SingleClass>
                     )
@@ -47,9 +43,11 @@ function  Overview({
     )
 }
 
-const mapStateToProps = state => ({
-    classes: state.classesReducer.classes
-});
+const mapStateToProps = state => {
+    return {
+      classes: state.classesReducer.classes
+    }
+};
 
 export default connect(
     mapStateToProps,

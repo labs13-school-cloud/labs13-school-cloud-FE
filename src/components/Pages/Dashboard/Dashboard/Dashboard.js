@@ -8,6 +8,7 @@ import TeamMembersOverview from "components/Pages/TeamMembers/List/Overview";
 import TeamMembersTab from "components/Pages/TeamMembers/List/Tab";
 import TrainingSeriesOverview from "components/Pages/TrainingSeries/List/Overview";
 import TrainingSeriesTab from "components/Pages/TrainingSeries/List/Tab";
+import ClassesTab from "../../../../components/Pages/Classes/List/Overview"
 import NotificationsCard from "components/Pages/Notifications/Card";
 import NotificationsOverview from "components/Pages/Notifications/Card/Overview/Overview.js";
 import Responses from "components/Pages/Notifications/Responses";
@@ -101,6 +102,17 @@ function Dashboard(props) {
             isSearching={true}
             limit={3}
           />
+        )}
+
+        {topTab === "classes" && (
+          <div style={{ width: "100%" }} >
+            <SearchCard 
+              List={ClassesTab}
+              section="Classes"
+              handleAdd={() => history.push("/home/create-class")}
+              isSearching={false}
+            />
+          </div>
         )}
 
         {topTab === "notifications" && (
