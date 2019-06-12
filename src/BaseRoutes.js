@@ -11,7 +11,6 @@ import LoadDashboard from "components/Pages/Dashboard/Loader/";
 
 import Callback from "components/Misc/Callback/Callback.js";
 import SlackCallback from "components/Misc/Callback/SlackCallback.js";
-import authenticate from "components/Misc/authenticate/authenticate.js";
 import rootReducer from "store/reducers";
 
 import history from "./history.js";
