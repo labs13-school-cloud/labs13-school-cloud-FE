@@ -5,6 +5,7 @@ import Profile from "components/Pages/Profile";
 import EditTeamMember from "components/Pages/TeamMembers/Edit/";
 import CreateTrainingSeries from "components/Pages/TrainingSeries/Add/CreateTrainingSeries";
 import EditTrainingSeries from "components/Pages/TrainingSeries/Edit/";
+import SingleTrainingSeries from "components/Pages/TrainingSeries/SinglePage/";
 import AddTeamMember from "components/Pages/TeamMembers/Add/";
 import CreateMessage from "components/Pages/TrainingSeries/Add/CreateMessage";
 import MessagePage from "components/Pages/TrainingSeries/Add/MessagePage";
@@ -89,16 +90,26 @@ function Routes(props) {
         )}
       />
       <Route
-        path="/home/training-series/:id"
+        path="/home/training-series/:id/edit"
         render={renderProps => (
           <EditTrainingSeries {...renderProps} user_id={props.user.id} />
+        )}
+      />
+      <Route
+        path="/home/training-series/:id"
+        render={renderProps => (
+          <SingleTrainingSeries
+            {...renderProps}
+            props={props}
+            history={props.history}
+            activeTrainingSeries={props.activeTrainingSeries}
+          />
         )}
       />
       <Route
         path="/home/create-message"
         render={renderProps => <CreateMessage {...renderProps} />}
       />
-
       <Route
         path="/home/assign-members/:id"
         render={renderProps => (

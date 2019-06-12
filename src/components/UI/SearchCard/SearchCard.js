@@ -37,7 +37,7 @@ function SearchCard(props) {
         isSearching={props.isSearching}
         title={section}
         tour={headerTourNum}
-        add={() => handleAdd()}
+        // add={() => handleAdd()}
       />
       <Suspense fallback={<div />}>
         <List

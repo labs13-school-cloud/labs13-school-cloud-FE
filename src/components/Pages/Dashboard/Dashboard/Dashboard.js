@@ -8,6 +8,7 @@ import TeamMembersOverview from "components/Pages/TeamMembers/List/Overview";
 import TeamMembersTab from "components/Pages/TeamMembers/List/Tab";
 import TrainingSeriesOverview from "components/Pages/TrainingSeries/List/Overview";
 import TrainingSeriesTab from "components/Pages/TrainingSeries/List/Tab";
+import TrainingSeriesTabVolunteer from "components/Pages/TrainingSeries/List/TabVolunteer/TabVolunteer";
 import NotificationsCard from "components/Pages/Notifications/Card";
 import NotificationsOverview from "components/Pages/Notifications/Card/Overview/Overview.js";
 import Responses from "components/Pages/Notifications/Responses";
@@ -92,12 +93,22 @@ function Dashboard(props) {
           />
         )}
 
-        {topTab === "training series" && (
+        {/* {topTab === "training series" && (
           <SearchCard
             user_id={user_id}
             List={TrainingSeriesTab}
             section="Training Series"
             handleAdd={() => history.push("/home/create-training-series")}
+            isSearching={true}
+            limit={3}
+          />
+        )} */}
+
+        {topTab === "training series" && (
+          <SearchCard
+            user_id={user_id}
+            List={TrainingSeriesTabVolunteer}
+            section="Training Series"
             isSearching={true}
             limit={3}
           />
