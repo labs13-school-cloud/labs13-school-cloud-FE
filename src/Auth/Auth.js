@@ -31,6 +31,7 @@ export const logout = () => {
 	clearIdToken();
 	clearAccessToken();
 	clearUserProfile();
+	auth.logout();
 	history.push("/");
 };
 
