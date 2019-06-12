@@ -15,6 +15,7 @@ function TabNavigation(props) {
   const [overviewHover, setOverviewHover] = useState(false);
   const [teamMembersHover, setTeamMembersHover] = useState(false);
   const [trainingSeriesHover, setTrainingSeriesHover] = useState(false);
+  const [classesHover, setClassesHover] = useState(false);
   const [messagesHover, setMessagesHover] = useState(false);
   const [responsesHover, setResponsesHover] = useState(false);
 
@@ -80,6 +81,24 @@ function TabNavigation(props) {
         style={trainingSeriesHover ? { display: "block" } : { display: "none" }}
       >
         Training Series
+      
+      </Popover>
+
+      <BottomNavigationAction
+        label="Classes"
+        value="classes"
+        icon={<Timeline />}
+        onMouseEnter={e => {
+          setClassesHover(true);
+        }}
+        onMouseLeave={e => {
+          setClassesHover(false);
+        }}
+      />
+      <Popover 
+        style={classesHover ? { display: "block" } : { display: "none" }}
+      >
+        Classes
       </Popover>
       <BottomNavigationAction
         label="Notifications"
