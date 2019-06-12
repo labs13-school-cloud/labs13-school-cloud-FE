@@ -5,7 +5,8 @@ import {
   Fab,
   TextField,
   InputAdornment,
-  Select
+  Select,
+  FormControl
 } from "@material-ui/core/";
 
 import { withStyles } from "@material-ui/core/styles";
@@ -20,6 +21,7 @@ function CardHeader(props) {
     e.preventDefault();
     setIsSearching(!isSearching);
   };
+
   return (
     <>
       <div className={classes.columnHeader}>
@@ -61,14 +63,20 @@ function CardHeader(props) {
               startAdornment: (
                 <InputAdornment position="start">
                   <i className="material-icons">search</i>
-                  <Select
-                    // value={values.age}
-                    // onChange={handleChange}
-                    inputProps={{
-                      name: "age",
-                      id: "age-simple"
-                    }}
-                  />
+                  <FormControl className={classes.formControl}>
+                    <Select
+                      native
+                      className={classes.selection}
+                      inputProps={{
+                        id: "status-selector",
+                        label: "Filter Selector"
+                      }}
+                    >
+                      <option value={"active"}>Active</option>
+                      <option value={"available"}>Available</option>
+                      <option value={"Completed"}>Completed</option>
+                    </Select>
+                  </FormControl>
                 </InputAdornment>
               )
             }}

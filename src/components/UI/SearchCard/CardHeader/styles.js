@@ -1,6 +1,9 @@
 export const styles = theme => ({
   textField: {
-    width: "100%"
+    width: "50%"
+  },
+  selection: {
+    margin: "0 10px"
   },
   columnHeader: {
     display: "flex",
@@ -8,8 +11,8 @@ export const styles = theme => ({
     alignItems: "center"
   },
   icons: {
-    display: "flex"
-    // alignItems: "center"
+    display: "flex",
+    alignItems: "center"
   },
   fab: {
     margin: 5,
