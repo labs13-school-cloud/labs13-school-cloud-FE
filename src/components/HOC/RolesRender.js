@@ -8,38 +8,29 @@ import VolunteerDashboard from "components/VolunteerComponents/Pages/Dashboard/"
 
 const RolesRenderHOC = ComponentToRender => {
 	class RolesRender extends Component {
-		constructor(props) {
-			super(props);
-			this.state = {
-				profile: null,
-			};
-		}
-
 		componentDidMount() {
-            // ! This still doesn't work for brand new auth users
-            // ! If auth through Auth0 once and not logged out then will work 
-            // ! Fixed now but might because of timing of async calls being finished perfectly
-            // ! Still might need to change keep comment here just in case
 			this.props.getUser();
-
-            const profile = JSON.parse(localStorage.getItem("Profile"));
-
-            this.setState({ profile: profile })
 		}
 
 		render() {
-			if (this.state.profile === null) {
+			if (this.props.user === undefined) {
 				return <h1>Loading</h1>;
-			} else if (this.state.profile.role === "admin") {
+			} else if (this.props.user.role === "admin") {
 				return <ComponentToRender {...this.props} />;
-			} else {
+			} else if (this.props.user.role === "volunteer") {
 				return <VolunteerDashboard />;
 			}
 		}
-	}
+    }
+    
+    const mapStateToProps = (state) => {
+        return {
+            user: state.userReducer.userProfile.user
+        }
+    }
 
 	return connect(
-		null,
+		mapStateToProps,
 		{ getUser },
 	)(RolesRender);
 };

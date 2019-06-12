@@ -17,7 +17,6 @@ export const getUser = () => dispatch => {
 	dispatch({ type: GET_USER_START });
 	const userData = JSON.parse(localStorage.getItem("Profile"));
 	const { email, given_name, family_name } = userData;
-	console.log("userData", userData);
 	axios
 		.post(`${process.env.REACT_APP_API}/api/auth`, {
 			email,
@@ -26,12 +25,6 @@ export const getUser = () => dispatch => {
 		})
 		.then(res => {
 			dispatch({ type: GET_USER_SUCCESS, payload: res.data });
-			axios
-				.get(`${process.env.REACT_APP_API}/api/users/${email}`)
-				.then(res => {
-					localStorage.setItem("role", res.data.user.role);
-				})
-				.catch(err => console.log(err));
 		})
 		.catch(err => dispatch({ type: GET_USER_FAIL, error: err }));
 };
