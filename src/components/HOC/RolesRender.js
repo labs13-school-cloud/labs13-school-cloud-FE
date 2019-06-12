@@ -9,6 +9,7 @@ import VolunteerDashboard from "components/VolunteerComponents/Pages/Dashboard/"
 const RolesRenderHOC = ComponentToRender => {
 	class RolesRender extends Component {
 		componentDidMount() {
+            // Fires the action creator to set user info
 			this.props.getUser();
 		}
 
@@ -25,6 +26,7 @@ const RolesRenderHOC = ComponentToRender => {
     
     const mapStateToProps = (state) => {
         return {
+            // This will grab the user profile
             user: state.userReducer.userProfile.user
         }
     }
