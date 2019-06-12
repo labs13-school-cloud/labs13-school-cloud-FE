@@ -1,26 +1,12 @@
 import styled from "styled-components";
+import { Paper } from "@material-ui/core/";
 
-export const ListStyles = styled.ul`
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    padding-left: 0px;
-    margin: 0px;
-`;
-
-export const styles = {
-    listItem: {
-        width: "100%",
-        margin_bottom: 0,
-        margin_top: 4,
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-        borderBottom: "1px solid #E8E9EB",
-        transition: "background-color 0.3s",
-        "&:hover": {
-          cursor: "pointer",
-          backgroundColor: "whitesmoke"
-        }
-    }
-}
+export const ListStyles = styled(Paper)`
+display: flex;
+margin: 10px;
+padding: 10px;
+height: 100%;
+width: 16%;
+&:hover {
+    background: #f8f8f8;
+}`;

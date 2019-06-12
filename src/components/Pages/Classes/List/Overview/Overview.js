@@ -11,7 +11,8 @@ import { getClassList } from "../../../../../store/actions/classesActions";
 
 import { withStyles } from "@material-ui/core/styles";
 import { ListItem, ListItemText } from "@material-ui/core/";
-import { ListStyles, styles } from "./styles.js";
+import { ListStyles } from "./styles.js";
+import { Typography } from "@material-ui/core/";
 
 function  Overview(props) {
     useEffect(() => {
@@ -20,26 +21,57 @@ function  Overview(props) {
 
     console.log(props)
     return (
-        <ListStyles>
+        <div style={{ display: "flex", flexWrap: "wrap" }}>
             {props.getFiltered(props.classList).map(
-                ({ id, class_name, subject, grade_level, number_of_students, teacher_name, class_id }) => {
+                ({ id, class_name, subject, grade_level, number_of_students, teacher_name }) => {
                     return (
-                        <SingleClass key={id} component="li" className={props.classList.listItem}>
-                            <ListItemText
+                        <ListStyles key={id} component="li" className={props.classList.listItem}>
+                            {/* <ListItemText
                                 primary={class_name}
-                                secondary={`Subject: ${subject}, Grade Level: ${grade_level}, Teacher Name: ${teacher_name}, Number Of Students: ${number_of_students}`}
+                                secondary={`Number Of Students: ${number_of_students}`}
+                                secondary={`Teacher Name: ${teacher_name}`}
+                                secondary={`Grade Level: ${grade_level}`}
+                                secondary={`Subject: ${subject}`}
                                 onClick={() => history.push(`home/classes/${id}`)}
                             />
                             <DeleteModal 
                                 deleteType="class"
                                 classId={id}
                                 className={`material-icons ${props.classList.icons}`}
-                            />
-                        </SingleClass>
+                            /> */}
+                            <Typography key={id}>
+                                <div 
+                                style={{ cursor: "pointer" }}
+                                onClick={() => history.push(`home/classes/${id}`)}
+                                >
+                                    <Typography variant="subtitle1" style={{ display:"flex", justifyContent:"space-between" }}>
+                                        {class_name}
+                                    <DeleteModal 
+                                        deleteType="class"
+                                        classId={id}
+                                        className={`material-icons ${props.classList.icons}`}
+                                    />
+                                    </Typography>
+                                    <hr />
+                                    <Typography variant="overline">
+                                        {`Subject: ${subject}`}
+                                    </Typography>
+                                    <Typography variant="overline">
+                                        {`Grade Level: ${grade_level}`}
+                                    </Typography>
+                                    <Typography variant="overline">
+                                        {`Teacher Name: ${teacher_name}`}
+                                    </Typography>
+                                    <Typography variant="overline">
+                                        {`Number Of Students: ${number_of_students}`}
+                                    </Typography>
+                                </div>
+                            </Typography>
+                        </ListStyles>
                     )
                 }
             )}
-        </ListStyles>
+        </div>
     )
 }
 
@@ -52,6 +84,6 @@ const mapStateToProps = state => {
 export default connect(
     mapStateToProps,
     { getClassList }
-)(withStyles(styles)(Overview));
-
+)(Overview);
+//   (withStyles(ListStyles)  
 const SingleClass = styled(ListItem)``;
