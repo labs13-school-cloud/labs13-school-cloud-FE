@@ -7,7 +7,7 @@ import styled from "styled-components";
 import history from "history.js";
 
 import DeleteModal from "../../../../UI/Modals/deleteModal";
-import { getClasses } from "../../../../../store/actions/classesActions";
+import { getClassList } from "../../../../../store/actions/classesActions";
 
 import { withStyles } from "@material-ui/core/styles";
 import { ListItem, ListItemText } from "@material-ui/core/";
@@ -15,16 +15,16 @@ import { ListStyles, styles } from "./styles.js";
 
 function  Overview(props) {
     useEffect(() => {
-        props.getClasses()
-    }, [getClasses]);
+        props.getClassList()
+    }, [getClassList]);
 
     console.log(props)
     return (
         <ListStyles>
-            {props.getFiltered(props.classes).map(
+            {props.getFiltered(props.classList).map(
                 ({ id, class_name, subject, grade_level, number_of_students, teacher_name, class_id }) => {
                     return (
-                        <SingleClass key={id} component="li" className={props.classes.listItem}>
+                        <SingleClass key={id} component="li" className={props.classList.listItem}>
                             <ListItemText
                                 primary={class_name}
                                 secondary={`Subject: ${subject}, Grade Level: ${grade_level}, Teacher Name: ${teacher_name}, Number Of Students: ${number_of_students}`}
@@ -33,7 +33,7 @@ function  Overview(props) {
                             <DeleteModal 
                                 deleteType="class"
                                 classId={id}
-                                className={`material-icons ${props.classes.icons}`}
+                                className={`material-icons ${props.classList.icons}`}
                             />
                         </SingleClass>
                     )
@@ -45,13 +45,13 @@ function  Overview(props) {
 
 const mapStateToProps = state => {
     return {
-      classes: state.classesReducer.classes
+      classList: state.classesReducer.classList
     }
 };
 
 export default connect(
     mapStateToProps,
-    { getClasses }
+    { getClassList }
 )(withStyles(styles)(Overview));
 
 const SingleClass = styled(ListItem)``;

@@ -23,20 +23,22 @@ export const EDIT_CLASS_FAILURE = "EDIT_CLASS_FAILURE";
 
 const baseUrl = `${process.env.REACT_APP_API}/api`;
 
-export const getClasses = () => dispatch => {
+export const getClassList = () => dispatch => {
     dispatch({ type: FETCH_CLASSES_START });
+    console.log("GET_CLASSES_START")
     axios
         .get(`${baseUrl}/classes`)
         .then(res => {
-            dispatch({ type: FETCH_CLASSES_SUCCESS, payload: res.data.classes })
+            console.log(res)
+            dispatch({ type: FETCH_CLASSES_SUCCESS, payload: res.data })
         })
         .catch(err => dispatch({ type: FETCH_CLASSES_FAILURE, payload: err }));
 };
 
-export const addClass = classes => dispatch => {
+export const addClass = classList => dispatch => {
     dispatch({ type: ADD_CLASS_START });
     axios
-        .post(`${baseUrl}/classes`, classes)
+        .post(`${baseUrl}/classes`, classList)
         .then(res => {
             dispatch({ type: ADD_CLASS_SUCCESS, payload: res.data.newClass });
         })
@@ -44,8 +46,8 @@ export const addClass = classes => dispatch => {
         .catch(err => dispatch({ type: ADD_CLASS_FAILURE, payload: err }));
 };
 
-export const editClass = classes => dispatch => {
-    const { id, class_name, grade_level, subject, teacher_name, number_of_students, ...changes } = classes;
+export const editClass = classList => dispatch => {
+    const { id, class_name, grade_level, subject, teacher_name, number_of_students, ...changes } = classList;
     //
     //
     dispatch({ type: EDIT_CLASS_START });
@@ -83,7 +85,7 @@ export const getClassByID = id => dispatch => {
         .then(res => {
             dispatch({ 
                 type: FETCH_SINGLE_CLASS_SUCCESS,
-                payload: res.data.classes
+                payload: res.data.classList.id
             });
         })
         .catch(err => dispatch({ type: FETCH_SINGLE_CLASS_FAIL, error: err }));
