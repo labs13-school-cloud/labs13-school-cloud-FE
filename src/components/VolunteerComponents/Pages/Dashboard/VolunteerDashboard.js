@@ -8,6 +8,7 @@ import TeamMembersOverview from "components/Pages/TeamMembers/List/Overview";
 import TeamMembersTab from "components/Pages/TeamMembers/List/Tab";
 import TrainingSeriesOverview from "components/Pages/TrainingSeries/List/Overview";
 import TrainingSeriesTab from "components/Pages/TrainingSeries/List/Tab";
+import VolunteerClassTab from "../../../VolunteerComponents/Pages/Classes/List";
 import NotificationsCard from "components/Pages/Notifications/Card";
 import NotificationsOverview from "components/Pages/Notifications/Card/Overview/Overview.js";
 import Responses from "components/Pages/Notifications/Responses";
@@ -110,6 +111,17 @@ const VolunteerDashboard = props => {
 						handleAdd={() => history.push("/home/create-training-series")}
 						isSearching={true}
 						limit={3}
+					/>
+				)}
+
+				{topTab === "classes" && (
+					<SearchCard
+						user_id={user_id}
+						List={VolunteerClassTab}
+						section="classes"
+						handleAdd={() => history.push("/home/create-class")}
+						isSearching={true}
+						limit={10}
 					/>
 				)}
 
