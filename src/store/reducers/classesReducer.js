@@ -17,7 +17,7 @@ import {
 } from "../actions";
 
 const initialState = {
-    classes: [],
+    classList: [],
     singleClass: {},
     error: null,
     status: {
@@ -36,7 +36,7 @@ const initialState = {
     }
 };
 
-const classesReducer = (state = initialState, action) => {
+const classListReducer = (state = initialState, action) => {
     switch (action.type) {
         case FETCH_CLASSES_START:
             return {
@@ -51,7 +51,7 @@ const classesReducer = (state = initialState, action) => {
         case FETCH_CLASSES_SUCCESS:
             return {
                 ...state,
-                classes: action.payload.reverse(),
+                classList: action.payload.reverse(),
                 status: {
                     ...state.status,
                     isLoading: false,
@@ -114,7 +114,7 @@ const classesReducer = (state = initialState, action) => {
         case ADD_CLASS_SUCCESS:
             return {
                 ...state,
-                classes: [...state.classes, action.payload],
+                classList: [...state.classList, action.payload],
                 singleClass: action.payload,
                 status: {
                     isAdding: false,
@@ -142,19 +142,19 @@ const classesReducer = (state = initialState, action) => {
                 }
             }
         case EDIT_CLASS_SUCCESS:
-            const updatedClasses = state.classes.map(classes => {
-                if (classes.id === action.payload.id) {
+            const updatedClassList = state.classList.map(classList => {
+                if (classList.id === action.payload.id) {
                     return {
-                        ...classes,
+                        ...classList,
                         ...action.payload
                     };
                 } else {
-                    return classes;
+                    return classList;
                 }
             });
             return {
                 ...state,
-                classes: updatedClasses,
+                classList: updatedClassList,
                 status: {
                     ...state.status,
                     isEditing: false,
@@ -184,8 +184,8 @@ const classesReducer = (state = initialState, action) => {
         case DELETE_CLASS_SUCCESS:
             return {
                 ...state,
-                classes: [
-                    ...state.classes.filter(classes => classes.id !== action.payload)
+                classList: [
+                    ...state.classList.filter(c => c.id !== action.payload) // C = class, but it is reserved
                 ],
                 status: {
                     ...state,
@@ -213,4 +213,4 @@ const classesReducer = (state = initialState, action) => {
     }
 };
 
-export default classesReducer;
+export default classListReducer;

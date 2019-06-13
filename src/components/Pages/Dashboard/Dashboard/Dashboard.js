@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 
-import { getAllResponses } from "store/actions";
+import { getAllResponses, getClassList } from "store/actions";
 
 import SearchCard from "components/UI/SearchCard/";
 import TeamMembersOverview from "components/Pages/TeamMembers/List/Overview";
 import TeamMembersTab from "components/Pages/TeamMembers/List/Tab";
 import TrainingSeriesOverview from "components/Pages/TrainingSeries/List/Overview";
 import TrainingSeriesTab from "components/Pages/TrainingSeries/List/Tab";
+import ClassListTab from "components/Pages/Classes/List/Overview"
 import TrainingSeriesTabVolunteer from "components/Pages/TrainingSeries/List/TabVolunteer/TabVolunteer";
 import NotificationsCard from "components/Pages/Notifications/Card";
 import NotificationsOverview from "components/Pages/Notifications/Card/Overview/Overview.js";
@@ -31,10 +32,12 @@ function Dashboard(props) {
     user_id,
     history,
     responses,
-    getAllResponses: responsesFromProps
+    getAllResponses: responsesFromProps,
+    getClassList,
   } = props;
 
   useEffect(() => {
+    console.log("Dashboard use effect")
     responsesFromProps();
     setTimeout(() => {
       responsesFromProps();
@@ -44,6 +47,11 @@ function Dashboard(props) {
   useEffect(() => {
     setNewResponses(responses.filter(r => !r.seen));
   }, [responses]);
+
+  useEffect(() => {
+    console.log("I'm here!!")
+    getClassList()
+}, [getClassList]);
 
   return (
     <DashWrapper>
@@ -114,6 +122,15 @@ function Dashboard(props) {
           />
         )}
 
+        {topTab === "classes" && (
+            <SearchCard 
+              List={ClassListTab}
+              section="Classes"
+              handleAdd={() => history.push("/home/create-class")}
+              isSearching={false}
+            />
+        )}
+
         {topTab === "notifications" && (
           <div style={{ width: "100%" }}>
             <NotificationsCard
@@ -137,5 +154,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getAllResponses }
+  { getAllResponses, getClassList }
 )(Dashboard);
