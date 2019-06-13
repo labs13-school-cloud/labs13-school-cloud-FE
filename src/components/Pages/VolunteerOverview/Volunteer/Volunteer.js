@@ -4,24 +4,20 @@ import { connect } from "react-redux";
 import { getAllResponses } from "store/actions";
 
 import SearchCard from "components/UI/SearchCard/";
-import TeamMembersOverview from "components/Pages/TeamMembers/List/Overview";
-import TeamMembersTab from "components/Pages/TeamMembers/List/Tab";
 import TrainingSeriesOverview from "components/Pages/TrainingSeries/List/Overview";
 import TrainingSeriesTab from "components/Pages/TrainingSeries/List/Tab";
-import NotificationsCard from "components/Pages/Notifications/Card";
-import NotificationsOverview from "components/Pages/Notifications/Card/Overview/Overview.js";
-import Responses from "components/Pages/Notifications/Responses";
 import TabNavigation from "./helpers/TabNavigation.js";
-import DektopNavigation from "./helpers/DesktopNavigation.js";
+import DesktopNavigation from "./helpers/DesktopNavigation.js";
 
 import {
-  TripleColumn,
+  DoubleColumn,
   SmallColumns,
   Divider,
   DashWrapper,
   MobileNav,
   DesktopNav
 } from "./styles.js";
+
 
 function Dashboard(props) {
   const [topTab, setTopTab] = useState("overview");
@@ -54,35 +50,32 @@ function Dashboard(props) {
         />
       </MobileNav>
       <DesktopNav>
-        <DektopNavigation topTab={topTab} setTopTab={setTopTab} />
+        <DesktopNavigation topTab={topTab} setTopTab={setTopTab} />
       </DesktopNav>
 
-      <TripleColumn>
+      <DoubleColumn>
         {topTab === "overview" && (
           <>
             <SmallColumns>
-              <SearchCard
-                user_id={user_id}
-                List={TeamMembersOverview}
-                containerTourNum="1"
-                section="Team Members"
-                headerTourNum={["2", "3"]}
-                handleAdd={() => history.push("/home/create-team-member")}
-              />
-              <Divider />
-              <SearchCard
+             <SearchCard
                 user_id={user_id}
                 List={TrainingSeriesOverview}
                 containerTourNum="4"
                 section="Training Series"
-                handleAdd={() => history.push("/home/create-training-series")}
+              />
+              <Divider />
+              <SearchCard
+                user_id={user_id}
+                List={classTab}
+                containerTourNum="1"
+                section="Classes"
+                headerTourNum={["2", "3"]}
               />
             </SmallColumns>
-            <NotificationsCard List={NotificationsOverview} user_id={user_id} />
           </>
         )}
 
-        {topTab === "Team Members" && (
+        {topTab === "Classes" && (
           <SearchCard
             user_id={user_id}
             List={TeamMembersTab}
@@ -98,24 +91,11 @@ function Dashboard(props) {
             List={TrainingSeriesTab}
             section="Training Series"
             handleAdd={() => history.push("/home/create-training-series")}
-            isSearching={true}
-            limit={3}
+            
           />
         )}
 
-        {topTab === "notifications" && (
-          <div style={{ width: "100%" }}>
-            <NotificationsCard
-              List={NotificationsOverview}
-              user_id={user_id}
-              width="95%"
-            />
-          </div>
-        )}
-        {topTab === "responses" && (
-          <Responses history={props.history} user_id={user_id} />
-        )}
-      </TripleColumn>
+      </DoubleColumn>
     </DashWrapper>
   );
 }
