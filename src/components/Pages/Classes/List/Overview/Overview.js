@@ -26,19 +26,7 @@ function  Overview(props) {
                 ({ id, class_name, subject, grade_level, number_of_students, teacher_name }) => {
                     return (
                         <ListStyles key={id} component="li" className={props.classList.listItem}>
-                            {/* <ListItemText
-                                primary={class_name}
-                                secondary={`Number Of Students: ${number_of_students}`}
-                                secondary={`Teacher Name: ${teacher_name}`}
-                                secondary={`Grade Level: ${grade_level}`}
-                                secondary={`Subject: ${subject}`}
-                                onClick={() => history.push(`home/classes/${id}`)}
-                            />
-                            <DeleteModal 
-                                deleteType="class"
-                                classId={id}
-                                className={`material-icons ${props.classList.icons}`}
-                            /> */}
+                         
                             <Typography key={id}>
                                 <div 
                                 style={{ cursor: "pointer" }}
@@ -69,7 +57,7 @@ function  Overview(props) {
                             </Typography>
                         </ListStyles>
                     )
-                }
+                 } 
             )}
         </div>
     )
