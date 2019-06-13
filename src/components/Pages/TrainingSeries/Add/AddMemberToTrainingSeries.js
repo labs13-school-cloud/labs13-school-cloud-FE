@@ -106,7 +106,7 @@ function AddMemberToTrainingSeries(props) {
           //need to filter through these messages to make sure they're a part of this training series
           //find member who has memberID and check what services they have available to them
           roles.forEach(role => {
-            if (msg[`for_${role}`] && idSet[role]) {
+            if (msg[`for_${role}`] || idSet[role]) {
               newNotifications.push(
                 getNewNotification(idSet[role], msg, idSet.team_member)
               );

@@ -13,7 +13,10 @@ import {
   DELETE_TRAINING_SERIES_FAIL,
   GET_TRAINING_SERIES_MESSAGES_START,
   GET_TRAINING_SERIES_MESSAGES_SUCCESS,
-  GET_TRAINING_SERIES_MESSAGES_FAIL
+  GET_TRAINING_SERIES_MESSAGES_FAIL,
+  GET_TRAINING_SERIES_ID_START,
+  GET_TRAINING_SERIES_ID_SUCCESS,
+  GET_TRAINING_SERIES_ID_FAIL
 } from "../actions";
 
 const initialState = {
@@ -26,7 +29,8 @@ const initialState = {
   messages: [],
   isAdding: false,
   addSuccess: false,
-  assignments: []
+  assignments: [],
+  activeTrainingSeries: {}
 };
 
 const trainingSeriesReducer = (state = initialState, action) => {
@@ -47,6 +51,23 @@ const trainingSeriesReducer = (state = initialState, action) => {
         isLoading: false,
         error: action.payload
       };
+    // --- GET ID OF TRAINING SERIES --
+    case GET_TRAINING_SERIES_ID_START:
+      return { ...state, isLoading: true, error: "" };
+    case GET_TRAINING_SERIES_ID_SUCCESS:
+      return {
+        ...state,
+        activeTrainingSeries: action.payload,
+        isLoading: false,
+        error: ""
+      };
+    case GET_TRAINING_SERIES_ID_FAIL:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload
+      };
+
     // ---ADD TRAINING SERIES---
     case ADD_TRAINING_SERIES_START:
       return {
