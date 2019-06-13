@@ -1,4 +1,4 @@
-// main page for displaying list of all training series
+// main page for displaying list of all training series for Admin users
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 
@@ -34,7 +34,6 @@ function Tab({
         const tsMessages = messages.filter(msg => {
           return msg.training_series_id === id;
         });
-        const daysLong = Math.max(...tsMessages.map(m => m.days_from_start));
 
         return (
           <Wrapper key={`container_${id}`}>
@@ -90,10 +89,6 @@ function Tab({
                     <Grid item>
                       <Typography variant="overline">
                         Messages: {tsMessages.length}
-                      </Typography>
-
-                      <Typography variant="overline">
-                        Duration: {daysLong}
                       </Typography>
                     </Grid>
                   </Grid>

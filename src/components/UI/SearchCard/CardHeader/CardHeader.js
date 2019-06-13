@@ -1,6 +1,13 @@
 import React, { useState } from "react";
 
-import { Typography, Fab, TextField, InputAdornment } from "@material-ui/core/";
+import {
+  Typography,
+  Fab,
+  TextField,
+  InputAdornment,
+  Select,
+  FormControl
+} from "@material-ui/core/";
 
 import { withStyles } from "@material-ui/core/styles";
 import { styles } from "./styles.js";
@@ -14,6 +21,7 @@ function CardHeader(props) {
     e.preventDefault();
     setIsSearching(!isSearching);
   };
+
   return (
     <>
       <div className={classes.columnHeader}>
@@ -30,7 +38,8 @@ function CardHeader(props) {
               <i className="material-icons">search</i>
             </Fab>
           )}
-          <Fab
+
+          {/* <Fab
             data-tour={tour ? tour[1] : ""}
             size="small"
             aria-label="Add"
@@ -38,7 +47,7 @@ function CardHeader(props) {
             onClick={() => add()}
           >
             <i className="material-icons">add</i>
-          </Fab>
+          </Fab> */}
         </div>
       </div>
       <div>
@@ -54,6 +63,20 @@ function CardHeader(props) {
               startAdornment: (
                 <InputAdornment position="start">
                   <i className="material-icons">search</i>
+                  <FormControl className={classes.formControl}>
+                    <Select
+                      native
+                      className={classes.selection}
+                      inputProps={{
+                        id: "status-selector",
+                        label: "Filter Selector"
+                      }}
+                    >
+                      <option value={"active"}>Active</option>
+                      <option value={"available"}>Available</option>
+                      <option value={"Completed"}>Completed</option>
+                    </Select>
+                  </FormControl>
                 </InputAdornment>
               )
             }}

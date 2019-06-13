@@ -12,20 +12,14 @@ import DashboardTour from "components/UI/Tour/Tour";
 import authenticate from "components/Misc/authenticate/authenticate";
 
 import { connect } from "react-redux";
-import { getUser } from "store/actions/userActions";
 
 import DashboardRoutes from "../Routes";
 
 function Loader(props) {
   const [displaySnackbar, setDisplaySnackbar] = useState(false);
   const [isTourOpen, setIsTourOpen] = useState(true);
-  const { getUser, newUser, location } = props;
+  const { newUser, location } = props;
   const { state } = location;
-
-  useEffect(() => {
-    // componentDidMount (CDM) --> getUser should never be different
-    getUser();
-  }, [getUser]);
 
   useEffect(() => {
     // componentDidUpdate (CDU) --> update when props.newUser changes
@@ -83,5 +77,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getUser }
+  {}
 )(authenticate(Loader));
