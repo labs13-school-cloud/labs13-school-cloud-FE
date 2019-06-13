@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import { getAllResponses } from "store/actions";
 
 import SearchCard from "components/UI/SearchCard/";
-import TeamMembersOverview from "components/Pages/TeamMembers/List/Overview";
 import TeamMembersTab from "components/Pages/TeamMembers/List/Tab";
 import TrainingSeriesOverview from "components/Pages/TrainingSeries/List/Overview";
 import TrainingSeriesTab from "components/Pages/TrainingSeries/List/Tab";
@@ -72,15 +71,6 @@ const VolunteerDashboard = props => {
             <SmallColumns>
               <SearchCard
                 user_id={user_id}
-                List={TeamMembersOverview}
-                containerTourNum="1"
-                section="Team Members"
-                headerTourNum={["2", "3"]}
-                handleAdd={() => history.push("/home/create-team-member")}
-              />
-              <Divider />
-              <SearchCard
-                user_id={user_id}
                 List={TrainingSeriesOverview}
                 containerTourNum="4"
                 section="Training Series"
@@ -89,16 +79,6 @@ const VolunteerDashboard = props => {
             </SmallColumns>
             <NotificationsCard List={NotificationsOverview} user_id={user_id} />
           </>
-        )}
-
-        {topTab === "Team Members" && (
-          <SearchCard
-            user_id={user_id}
-            List={TeamMembersTab}
-            section="Team Members"
-            handleAdd={() => history.push("/home/create-team-member")}
-            isSearching={true}
-          />
         )}
 
         {topTab === "training series" && (
