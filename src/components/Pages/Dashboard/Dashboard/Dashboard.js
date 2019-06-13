@@ -8,7 +8,7 @@ import TeamMembersOverview from "components/Pages/TeamMembers/List/Overview";
 import TeamMembersTab from "components/Pages/TeamMembers/List/Tab";
 import TrainingSeriesOverview from "components/Pages/TrainingSeries/List/Overview";
 import TrainingSeriesTab from "components/Pages/TrainingSeries/List/Tab";
-import ClassListTab from "../../../../components/Pages/Classes/List/Overview"
+import ClassListTab from "components/Pages/Classes/List/Overview"
 import NotificationsCard from "components/Pages/Notifications/Card";
 import NotificationsOverview from "components/Pages/Notifications/Card/Overview/Overview.js";
 import Responses from "components/Pages/Notifications/Responses";
