@@ -1,8 +1,6 @@
 import React from "react";
 
 import Title from "./helpers/Title.js";
-import AssignTeamMembers from "components/Pages/TeamMembers/Assign/";
-import AssignList from "components/Pages/TeamMembers/List/Assign/";
 import Messages from "../Messages/";
 import MessagesList from "../List/Messages/";
 import InfoPopup from "components/UI/InfoPopup/InfoPopup.js";
@@ -47,13 +45,6 @@ function Edit(props) {
           history={props.history}
         />
       </Paper>
-      <AssignTeamMembers
-        history={props.history}
-        match={props.match}
-        user_id={props.user_id}
-        List={AssignList}
-        ts_id={props.match.params.id}
-      />
     </PageContainer>
   );
 }

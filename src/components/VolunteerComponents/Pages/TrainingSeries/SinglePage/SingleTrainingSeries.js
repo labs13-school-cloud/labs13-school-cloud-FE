@@ -8,12 +8,8 @@ import { Paper, Divider, Typography } from "@material-ui/core/";
 
 import { styles, PageContainer } from "./styles.js";
 
-function SingleTrainingSeries({ getTrainingSeriesID, props }) {
+function SingleTrainingSeries({ props }) {
   console.log(props);
-  useEffect(() => {
-    getTrainingSeriesID();
-  }, [getTrainingSeriesID]);
-
   return (
     <PageContainer style={{ position: "relative" }}>
       <InfoPopup

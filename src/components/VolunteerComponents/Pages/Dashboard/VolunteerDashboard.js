@@ -10,7 +10,7 @@ import NotificationsCard from "components/Pages/Notifications/Card";
 import NotificationsOverview from "components/Pages/Notifications/Card/Overview/Overview.js";
 import Responses from "components/Pages/Notifications/Responses";
 import TabNavigation from "components/Pages/Dashboard/Dashboard/helpers/TabNavigation.js";
-import DektopNavigation from "components/Pages/Dashboard/Dashboard/helpers/DesktopNavigation.js";
+import DektopNavigation from "components/VolunteerComponents/Pages/Dashboard/helpers/DesktopNavigation.js";
 
 import AppBar from "components/Navigation/AppBar/AppBar";
 
@@ -71,7 +71,7 @@ const VolunteerDashboard = props => {
               <SearchCard
                 user_id={user_id}
                 List={TrainingSeriesOverview}
-                containerTourNum="4"
+                containerTourNum="2"
                 section="Training Series"
                 handleAdd={() => history.push("/home/create-training-series")}
               />
