@@ -4,6 +4,8 @@ export * from "./teamMembersActions";
 
 export * from "./trainingSeriesActions";
 
+export * from "./classesActions";
+
 export * from "./messagesActions";
 
 export * from "./stripeActions";

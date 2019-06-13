@@ -1,4 +1,5 @@
-export default ({ items, pagination, search }) => {
+export default ({ items, pagination, search, ...rest }) => {
+  console.log(rest)
   const { offset, limit, setMax } = pagination;
   const filteredResults = items.filter(item => {
     for (let property in item) {
