@@ -4,9 +4,8 @@ import { connect } from "react-redux";
 import { getAllResponses } from "store/actions";
 
 import SearchCard from "components/UI/SearchCard/";
-import TeamMembersTab from "components/Pages/TeamMembers/List/Tab";
 import TrainingSeriesOverview from "components/Pages/TrainingSeries/List/Overview";
-import TrainingSeriesTab from "components/Pages/TrainingSeries/List/Tab";
+import TrainingSeriesTabVolunteer from "components/VolunteerComponents/Pages/TrainingSeries/List/TabVolunteer/TabVolunteer.js";
 import NotificationsCard from "components/Pages/Notifications/Card";
 import NotificationsOverview from "components/Pages/Notifications/Card/Overview/Overview.js";
 import Responses from "components/Pages/Notifications/Responses";
@@ -84,7 +83,7 @@ const VolunteerDashboard = props => {
         {topTab === "training series" && (
           <SearchCard
             user_id={user_id}
-            List={TrainingSeriesTab}
+            List={TrainingSeriesTabVolunteer}
             section="Training Series"
             handleAdd={() => history.push("/home/create-training-series")}
             isSearching={true}
