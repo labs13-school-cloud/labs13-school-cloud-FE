@@ -5,6 +5,8 @@ import { getAllResponses } from "store/actions";
 
 import SearchCard from "components/UI/SearchCard/";
 import TrainingSeriesOverview from "components/Pages/TrainingSeries/List/Overview";
+import TrainingSeriesTab from "components/Pages/TrainingSeries/List/Tab";
+import VolunteerClassTab from "components/VolunteerComponents/Pages/Classes/List";
 import TrainingSeriesTabVolunteer from "components/VolunteerComponents/Pages/TrainingSeries/List/TabVolunteer/TabVolunteer.js";
 import NotificationsCard from "components/Pages/Notifications/Card";
 import NotificationsOverview from "components/Pages/Notifications/Card/Overview/Overview.js";
@@ -89,7 +91,17 @@ const VolunteerDashboard = props => {
             isSearching={true}
             limit={3}
           />
-        )}
+				)}
+				
+				{topTab === "classes" && (
+					<SearchCard
+						user_id={user_id}
+						List={VolunteerClassTab}
+						section="classes"
+						isSearching={true}
+						limit={10}
+					/>
+				)}
 
         {topTab === "notifications" && (
           <div style={{ width: "100%" }}>
