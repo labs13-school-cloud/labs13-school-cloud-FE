@@ -104,9 +104,9 @@ export const getTrainingSeriesID = trainingSeriesID => dispatch => {
       dispatch(
         {
           type: GET_TRAINING_SERIES_ID_SUCCESS,
-          payload: res.data
+          payload: res.data.trainingSeries
         },
-        console.log("From Actions", res.data)
+        console.log("From Actions", res.data.trainingSeries)
       )
     )
     .catch(err => dispatch({ type: GET_TRAINING_SERIES_FAIL, error: err }));
