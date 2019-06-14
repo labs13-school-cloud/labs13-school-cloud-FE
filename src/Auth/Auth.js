@@ -54,6 +54,9 @@ export class AuthService {
     }
     
     logout() {
+        clearIdToken();
+        clearAccessToken();
+        clearUserProfile(); 
         this.lock.logout();
     }
 
@@ -87,13 +90,14 @@ export const lock = new AuthService();
 // };
 
 //Logs the user out and clears local storage
-export const logout = () => {
-	clearIdToken();
-	clearAccessToken();
-	clearUserProfile();
-	lock.logout();
-	history.push("/");
-};
+// ! DEPRECATED in favor of Auth0-lock
+// export const logout = () => {
+// 	clearIdToken();
+// 	clearAccessToken();
+// 	clearUserProfile();
+// 	lock.logout();
+// 	history.push("/");
+// };
 
 //use this function on components that require authentication.
 export const requiresAuth = (nextState, replace) => {
