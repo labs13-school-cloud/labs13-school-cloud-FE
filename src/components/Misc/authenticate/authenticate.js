@@ -20,7 +20,7 @@ import {
 import Logo from "img/training-bot.png";
 
 //Authentication
-import { login } from "Auth/Auth";
+import { lock } from "Auth/Auth";
 
 //axios defaults and interceptors.
 axios.defaults.baseURL = `${process.env.REACT_APP_API}`;
@@ -50,7 +50,7 @@ export default function(Component) {
               <NavbarItem>Team</NavbarItem>
               <NavbarItem to="/pricing">Pricing</NavbarItem>
               <NavbarItem>Blog</NavbarItem>
-              <h2 onClick={login}>Sign In</h2>
+              <h2 onClick={() => lock.login()}>Sign In</h2>
             </NavbarItemsContainer>
           </NavbarContainer>
 
@@ -59,7 +59,7 @@ export default function(Component) {
               <LogoImage src={logo} alt="loading" className="ld ld-bounce" />
               <p>Please login to view this page or return Home.</p>
               <ButtonContainer>
-                <StyledButton variant="contained" onClick={e => login()}>
+                <StyledButton variant="contained" onClick={e => lock.login()}>
                   Login
                 </StyledButton>
                 <StyledLink to="/">
