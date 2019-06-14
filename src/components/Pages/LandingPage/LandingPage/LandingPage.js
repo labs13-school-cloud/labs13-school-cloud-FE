@@ -32,9 +32,16 @@ import undrawTask from "img/undraw_personal_text_vkd8.svg";
 
 //Auth
 
-import { login } from "Auth/Auth";
+import { lock } from "Auth/Auth";
 
 class LandingPage extends React.Component {
+  handleChange = (e) => {
+    this.setState({
+        ...this.state,
+        [e.target.name]: e.target.value
+    });
+  };
+
   scrollTo() {
     scroller.scrollTo("MarketingContent", {
       duration: 800,
@@ -42,13 +49,14 @@ class LandingPage extends React.Component {
       smooth: "easeInOutQuart"
     });
   }
+
   scrollToTop() {
     scroll.scrollToTop();
   }
+
   render() {
     return (
       <>
-    
         <CssBaseline />
         <LandingPageContainer>
           {/* NAVIGATION */}
@@ -57,7 +65,7 @@ class LandingPage extends React.Component {
             <NavbarItemsContainer>
               <NavbarItem href="/team">Team</NavbarItem>
               <NavbarItem href="/pricing">Pricing</NavbarItem>
-              <h2 onClick={login}>Sign In</h2>
+              <h2 onClick={() => lock.login()}>Sign In</h2>
             </NavbarItemsContainer>
           </NavbarContainer>
           {/* JUMBOTRON STYLED SECTION */}
@@ -71,7 +79,7 @@ class LandingPage extends React.Component {
                 clicks.
               </p>
               <LandingPageButtonContainer>
-                <Button onClick={login}>Get Started</Button>
+                <Button onClick={() => lock.login()}>Get Started</Button>
                 <Button variant="outlined" onClick={() => this.scrollTo(500)}>
                   Learn More
                 </Button>
@@ -135,7 +143,7 @@ class LandingPage extends React.Component {
               </p>
               <LogoImage src={Logo} alt="A cute, personable robot" />
               <GetStartedButton>
-                <Button onClick={login}>Get Started</Button>
+                <Button onClick={() => lock.login()}>Get Started</Button>
               </GetStartedButton>
             </LandingPageContentContainer>
           </FirstSection>

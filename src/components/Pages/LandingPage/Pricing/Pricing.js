@@ -30,7 +30,7 @@ import {
 
 import Logo from "img/training-bot.png";
 //Auth
-import { login } from "Auth/Auth";
+import { lock } from "Auth/Auth";
 
 let id = 0;
 function createData(name, basic, premium, pro) {
@@ -77,7 +77,7 @@ class Pricing extends React.Component {
           <NavbarItemsContainer>
             <NavbarItem href="/team">Team</NavbarItem>
             <NavbarItem href="/pricing">Pricing</NavbarItem>
-            <h2 onClick={login}>Sign In</h2>
+            <h2 onClick={() => lock.login()}>Sign In</h2>
           </NavbarItemsContainer>
         </NavbarContainer>
         {/* JUMBOTRON STYLED SECTION */}
@@ -128,7 +128,7 @@ class Pricing extends React.Component {
                     <Button
                       variant="contained"
                       className={classes.selectButton}
-                      onClick={login}
+                      onClick={() => lock.login()}
                     >
                       Sign Up
                     </Button>
@@ -137,7 +137,7 @@ class Pricing extends React.Component {
                     <Button
                       variant="contained"
                       className={classes.selectButton}
-                      onClick={login}
+                      onClick={() => lock.login()}
                     >
                       Sign Up
                     </Button>
@@ -146,7 +146,7 @@ class Pricing extends React.Component {
                     <Button
                       variant="contained"
                       className={classes.selectButton}
-                      onClick={login}
+                      onClick={() => lock.login()}
                     >
                       Sign Up
                     </Button>
@@ -178,7 +178,7 @@ class Pricing extends React.Component {
             <Button
               variant="contained"
               className={classes.selectButton}
-              onClick={login}
+              onClick={() => lock.login()}
             >
               Sign Up
             </Button>
@@ -209,7 +209,7 @@ class Pricing extends React.Component {
             <Button
               variant="contained"
               className={classes.selectButton}
-              onClick={login}
+              onClick={() => lock.login()}
             >
               Sign Up
             </Button>
@@ -242,7 +242,7 @@ class Pricing extends React.Component {
             <Button
               variant="contained"
               className={classes.selectButton}
-              onClick={login}
+              onClick={() => lock.login()}
             >
               Sign Up
             </Button>

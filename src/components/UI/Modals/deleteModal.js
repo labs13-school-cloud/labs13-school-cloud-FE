@@ -12,7 +12,9 @@ import { connect } from "react-redux";
 import {
   deleteTrainingSeries,
   deleteMessage,
-  deleteUser
+  deleteUser,
+  unassignTeamMember,
+  deleteClass
 } from "store/actions/";
 
 import { Typography, Paper } from "@material-ui/core";
@@ -110,6 +112,10 @@ class TrainingSeriesModal extends React.Component {
       case "unassign":
         this.props.unassignTeamMember(this.props.id, this.props.ts_id);
         break;
+      case "classes":
+        this.props.deleteClass(this.props.classId);
+        // this.props.reRouteOnDelete();
+        break;
       default:
         break;
     }
@@ -144,6 +150,7 @@ class TrainingSeriesModal extends React.Component {
   };
 
   render() {
+    console.log(this.props)
     const { classes } = this.props;
 
     return (
@@ -190,6 +197,8 @@ export default connect(
   {
     deleteMessage,
     deleteUser,
-    deleteTrainingSeries
+    deleteTrainingSeries,
+    unassignTeamMember,
+    deleteClass
   }
 )(withRouter(TrainingSeriesModalWrapped));
