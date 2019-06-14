@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Paper } from "@material-ui/core/";
 
 export const styles = theme => ({
   paper: {
@@ -51,4 +52,11 @@ export const TrainingSeriesTitle = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: baseline;
+`;
+
+export const Wrapper = styled(Paper)`
+  width: 90%;
+  padding: 10px;
+  margin: 10px auto;
+  max-width: 1200px;
 `;

@@ -1,19 +1,19 @@
 // main page for displaying list of all training series for Volunteer users
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
+import { withRouter } from 'react-router-dom';
 
 import {
   getTrainingSeries,
-  deleteTrainingSeries,
   getTrainingSeriesID
 } from "store/actions";
 //import DeleteModal from "components/UI/Modals/deleteModal";
 import history from "history.js";
 
-import { Grid, Typography, Link } from "@material-ui/core/";
+import { Grid, Typography, Link, Select, FormControl } from "@material-ui/core/";
 import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
-import { Select, Wrapper, styles } from "./styles.js";
+import { Wrapper, styles } from "./styles.js";
 
 function TabVolunteer({
   getFiltered,
@@ -25,17 +25,37 @@ function TabVolunteer({
     getTrainingSeries();
   }, [getTrainingSeries]);
 
+
   const setTrainingSeries = id => {
     getTrainingSeriesID(id);
     history.push(`/home/training-series/${id}`);
-    console.log(id);
   };
+  
+const filterTraining = () => {
+
+}
+ 
 
   return (
     <>
+    <FormControl>
+                    <Select
+                      // native
+                      // className={selection}
+                      // // value={trainingfilter}
+                      // onChange={e => setTrainingFilter(e.target.value)}
+                      inputProps={{
+                        id: "status-selector",
+                        label: "Filter Selector"
+                      }}
+                    >
+                      <option value={"active"}>Active</option>
+                      <option value={"available"}>Available</option>
+                      <option value={"Completed"}>Completed</option>
+                    </Select>
+                  </FormControl>
       {getFiltered(trainingSeries).map(
-        ({ id, title, subject, first_name, last_name }) => {
-          // console.log(trainingSeries)
+        ({ id, title, subject, first_name, last_name, finished }) => {
           return (
             <Wrapper key={`container_${id}`}>
               <Grid container spacing={24}>
@@ -68,7 +88,7 @@ const mapStateToProps = state => ({
   activeTrainingSeries: state.messagesReducer.activeTrainingSeries
 });
 
-export default connect(
+export default withRouter(connect(
   mapStateToProps,
-  { getTrainingSeries, deleteTrainingSeries, getTrainingSeriesID }
-)(withStyles(styles)(TabVolunteer));
+  { getTrainingSeries,  getTrainingSeriesID }
+)(withStyles(styles)(TabVolunteer)));

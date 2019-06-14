@@ -21,7 +21,7 @@ import {
   DashWrapper,
   MobileNav,
   DesktopNav
-} from "components/Pages/Dashboard/Dashboard/styles.js";
+} from "components/VolunteerComponents/Pages/Dashboard/styles.js";
 
 /**
  * This is where we will set up our volunteer routes

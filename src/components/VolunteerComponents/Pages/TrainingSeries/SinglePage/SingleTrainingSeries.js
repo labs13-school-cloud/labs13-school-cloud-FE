@@ -1,45 +1,57 @@
 import React, { useState, useEffect } from "react";
+import { withRouter } from 'react-router-dom';
+
 import { connect } from "react-redux";
 import { getTrainingSeriesID } from "store/actions";
 import InfoPopup from "components/UI/InfoPopup/InfoPopup.js";
 
 import { withStyles } from "@material-ui/core/styles";
-import { Paper, Divider, Typography } from "@material-ui/core/";
+import { Paper, Divider, Typography, Grid, Button } from "@material-ui/core/";
 
-import { styles, PageContainer } from "./styles.js";
+import { styles, PageContainer, Wrapper } from "./styles.js";
 
-function SingleTrainingSeries({ props }) {
-  console.log(props);
+function SingleTrainingSeries({
+  getFiltered,
+  getTrainingSeriesID
+}) {
+  useEffect(() => {
+    getTrainingSeriesID(this.props.match.params.id);
+  }, [getTrainingSeriesID]);
+
+
   return (
-    <PageContainer style={{ position: "relative" }}>
-      <InfoPopup
-        popOverText={
-          <p>
-            You're currently on the "Training Series" page. You can start adding
-            messages by clicking on "Add Message". Your messages will be tied to
-            this series, and whenever you assign a team member to this training
-            series, they will receive those messages based on the "days from
-            start" value you give each message.
-            <br />
-            <br />
-            Once you've created some messages, feel free to assign a team member
-            to this series. Set the date in which you'd like for the team member
-            to start receiving the materials, and they will receive scheduled
-            notifications based on the messages that you've scheduled for them.
-          </p>
+    <>
+      {getFiltered(getTrainingSeriesID).map(
+        ({ id, title, subject, first_name, last_name }) => {
+          console.log(getTrainingSeriesID)
+          return (
+            <Wrapper key={`container_${id}`}>
+              <Grid container spacing={24}>
+                <Grid item xs={12}>
+                  <Typography variant="h6">{title}
+                  </Typography>
+                  <hr />
+                  <Typography variant="body1">Subject: {subject}</Typography>
+                  <Typography variant="body1">
+                    Creator: {first_name} {""}
+                    {last_name}
+                  </Typography>
+                  <Button>Done</Button>
+                </Grid>
+              </Grid>
+            </Wrapper>
+          );
         }
-      />
-      <Paper>
-        <Typography>{props.title}</Typography>
-      </Paper>
-    </PageContainer>
+      )}
+    </>
   );
 }
+
 const mapStateToProps = state => ({
   activeTrainingSeries: state.trainingSeriesReducer.activeTrainingSeries
 });
 
-export default connect(
+export default withRouter(connect(
   mapStateToProps,
   { getTrainingSeriesID }
-)(withStyles(styles)(SingleTrainingSeries));
+)(withStyles(styles)(SingleTrainingSeries)));

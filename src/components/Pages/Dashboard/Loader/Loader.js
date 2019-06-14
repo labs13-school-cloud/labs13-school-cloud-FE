@@ -43,9 +43,6 @@ function Loader(props) {
               type="success"
             />
           )}
-          <AppBar />
-          {props.location.pathname !== "/home" && (
-            <ReturnToPreviousPageButton history={props.history} />
           )}
           <DashboardContainer>
             <DashboardRoutes
