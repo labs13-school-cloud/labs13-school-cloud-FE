@@ -24,8 +24,8 @@ function Edit(props) {
   }, [getTrainingSeriesID]);
   const { classes } = props;
 
-  const [title, setTitle] = useState(props.activeTrainingSeries.title);
-  const [subject, setSubject] = useState(props.activeTrainingSeries.subject);
+  const [title, setTitle] = useState("");
+  const [subject, setSubject] = useState("");
 
   const updateTrainingSeries = e => {
     e.preventDefault();
@@ -48,8 +48,8 @@ function Edit(props) {
             label="Title"
             name="title"
             className={classes.textField}
-            onChange={e => setTitle(props.activeTrainingSeries.title)}
-            value={props.activeTrainingSeries.title}
+            onChange={e => setTitle(e.target.value)}
+            value={title}
             margin="normal"
           />
 
@@ -58,8 +58,8 @@ function Edit(props) {
             label="Subject"
             name="subject"
             className={classes.textField}
-            onChange={e => setSubject(props.activeTrainingSeries.subject)}
-            value={props.activeTrainingSeries.subject}
+            onChange={e => setSubject(e.target.value)}
+            value={subject}
             margin="normal"
           />
         </FormControl>
