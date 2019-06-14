@@ -119,7 +119,6 @@ const VolunteerDashboard = props => {
 						user_id={user_id}
 						List={VolunteerClassTab}
 						section="classes"
-						handleAdd={() => history.push("/home/create-class")}
 						isSearching={true}
 						limit={10}
 					/>

@@ -14,7 +14,8 @@ import {
   deleteTeamMember,
   deleteMessage,
   deleteUser,
-  unassignTeamMember
+  unassignTeamMember,
+  deleteClass
 } from "store/actions/";
 
 import { Typography, Paper } from "@material-ui/core";
@@ -112,6 +113,10 @@ class TrainingSeriesModal extends React.Component {
       case "unassign":
         this.props.unassignTeamMember(this.props.id, this.props.ts_id);
         break;
+      case "classes":
+        this.props.deleteClass(this.props.classId);
+        // this.props.reRouteOnDelete();
+        break;
       default:
         break;
     }
@@ -146,6 +151,7 @@ class TrainingSeriesModal extends React.Component {
   };
 
   render() {
+    console.log(this.props)
     const { classes } = this.props;
 
     return (
@@ -196,6 +202,7 @@ export default connect(
     deleteTeamMember,
     deleteUser,
     deleteTrainingSeries,
-    unassignTeamMember
+    unassignTeamMember,
+    deleteClass
   }
 )(withRouter(TrainingSeriesModalWrapped));
