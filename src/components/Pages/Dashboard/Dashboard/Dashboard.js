@@ -7,7 +7,6 @@ import SearchCard from "components/UI/SearchCard/";
 import TrainingSeriesOverview from "components/Pages/TrainingSeries/List/Overview";
 import TrainingSeriesTab from "components/Pages/TrainingSeries/List/Tab";
 import ClassListTab from "../../../../components/Pages/Classes/List/Overview"
-import TrainingSeriesTabVolunteer from "components/Pages/TrainingSeries/List/TabVolunteer/TabVolunteer";
 import NotificationsCard from "components/Pages/Notifications/Card";
 import NotificationsOverview from "components/Pages/Notifications/Card/Overview/Overview.js";
 import Responses from "components/Pages/Notifications/Responses";
@@ -97,6 +96,7 @@ function Dashboard(props) {
             section="Classes"
             handleAdd={() => history.push("/home/create-class")}
             isSearching={false}
+            limit={10}
           />
         )}
 
