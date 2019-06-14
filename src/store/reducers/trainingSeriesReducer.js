@@ -19,7 +19,10 @@ import {
   GET_TRAINING_SERIES_ID_FAIL,
   GET_VOLUNTEERS_FOR_TRAINING_SERIES_START,
   GET_VOLUNTEERS_FOR_TRAINING_SERIES_SUCCESS,
-  GET_VOLUNTEERS_FOR_TRAINING_SERIES_FAIL
+  GET_VOLUNTEERS_FOR_TRAINING_SERIES_FAIL,
+  ADD_VOLUNTEERS_FOR_TRAINING_SERIES_START,
+  ADD_VOLUNTEERS_FOR_TRAINING_SERIES_SUCCESS,
+  ADD_VOLUNTEERS_FOR_TRAINING_SERIES_FAIL
 } from "../actions";
 
 const initialState = {
@@ -34,7 +37,8 @@ const initialState = {
   addSuccess: false,
   assignments: [],
   activeTrainingSeries: {},
-  trainingSeriesVolunteers: []
+  trainingSeriesVolunteers: [],
+  volunteers: []
 };
 
 const trainingSeriesReducer = (state = initialState, action) => {
@@ -91,6 +95,27 @@ const trainingSeriesReducer = (state = initialState, action) => {
         error: ""
       };
     case ADD_TRAINING_SERIES_FAIL:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload
+      };
+    // ---ADD VOLUNTEER TO TRAINING SERIES---
+    case ADD_VOLUNTEERS_FOR_TRAINING_SERIES_START:
+      return {
+        ...state,
+        isAdding: true,
+        error: ""
+      };
+    case ADD_VOLUNTEERS_FOR_TRAINING_SERIES_SUCCESS:
+      return {
+        ...state,
+        volunteers: [...state.volunteers, action.payload],
+        isAdding: false,
+        addSuccess: true,
+        error: ""
+      };
+    case ADD_VOLUNTEERS_FOR_TRAINING_SERIES_FAIL:
       return {
         ...state,
         isLoading: false,

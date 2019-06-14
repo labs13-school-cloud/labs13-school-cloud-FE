@@ -4,7 +4,9 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import {
   getTrainingSeriesForVolunteer,
-  getTrainingSeriesID
+  getTrainingSeriesID,
+  editTrainingSeries,
+  deleteTrainingSeries
 } from "store/actions";
 import InfoPopup from "components/UI/InfoPopup/InfoPopup.js";
 
@@ -24,9 +26,16 @@ function SingleTrainingSeries(props) {
   useEffect(() => {
     props.getTrainingSeriesForVolunteer(props.match.params.id);
   }, [getTrainingSeriesForVolunteer]);
-  // useEffect(() => {
-  //   props.getTrainingSeriesID(props.match.params.id);
-  // }, [getTrainingSeriesID]);
+  useEffect(() => {
+    props.getTrainingSeriesID(props.match.params.id);
+  }, [getTrainingSeriesID]);
+
+  const removeTrainingSeries = id => {
+    props.deleteTrainingSeries(props.activeTrainingSeries.id);
+    props.history.push(`/home`);
+    console.log("Remove Training Series", id);
+  };
+
   const {
     id,
     first_name,
@@ -37,16 +46,20 @@ function SingleTrainingSeries(props) {
     finished
   } = props.activeTrainingSeries;
 
-  console.log(props.trainingSeriesVolunteers);
+  console.log("activeTrainingSeries", props.trainingSeriesVolunteers.length);
+  console.log("Training Series ", props.match.params.id);
   return (
     <>
       <Wrapper key={`container_${id}`}>
         <Grid container spacing={24}>
           <Grid item xs={12}>
+            <i class="material-icons" onClick={e => removeTrainingSeries(id)}>
+              delete
+            </i>{" "}
+            <i class="material-icons">edit</i>
             <Typography variant="h6">{title}</Typography>
             <Typography variant="body1">Subject: {subject}</Typography>
             <Link>Link: {link}</Link>
-
             <Typography variant="body1">
               Creator: {first_name} {""}
               {last_name}
@@ -55,11 +68,13 @@ function SingleTrainingSeries(props) {
           </Grid>
           <Grid item xs={12}>
             <Typography variant="h6">Active Volunteers</Typography>
+            <i class="material-icons">add_circle</i>
             {props.trainingSeriesVolunteers.map(v =>
-              v.length !== 0 ? ( // checks if any Volunteers are assigned to TrainingSeries
-                <Typography variant="body1">
+              // checks if any Volunteers are assigned to TrainingSeries
+              v.length !== 0 ? (
+                <Typography variant="body1" key={v.id}>
                   {v.first_name} {""}
-                  {v.last_name}
+                  {v.last_name} <i class="material-icons">delete_forever</i>
                 </Typography>
               ) : (
                 <Typography variant="body1">
@@ -76,12 +91,20 @@ function SingleTrainingSeries(props) {
 
 const mapStateToProps = state => ({
   activeTrainingSeries: state.trainingSeriesReducer.activeTrainingSeries,
-  trainingSeriesVolunteers: state.trainingSeriesReducer.trainingSeriesVolunteers
+  trainingSeriesVolunteers:
+    state.trainingSeriesReducer.trainingSeriesVolunteers,
+  volunteers: state.trainingSeriesReducer.volunteers,
+  trainingSeries: state.trainingSeriesReducer.trainingSeries
 });
 
 export default withRouter(
   connect(
     mapStateToProps,
-    { getTrainingSeriesForVolunteer }
+    {
+      getTrainingSeriesForVolunteer,
+      getTrainingSeriesID,
+      editTrainingSeries,
+      deleteTrainingSeries
+    }
   )(withStyles(styles)(SingleTrainingSeries))
 );
