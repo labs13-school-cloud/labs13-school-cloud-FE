@@ -18,7 +18,7 @@ import Tom from "img/Tom.png";
 import { animateScroll as scroll } from "react-scroll";
 
 //Auth
-import { login } from "Auth/Auth";
+import { lock } from "Auth/Auth";
 
 import {
   styles,
@@ -55,7 +55,7 @@ class Team extends React.Component {
             <NavbarItemsContainer>
               <NavbarItem href="/team">Team</NavbarItem>
               <NavbarItem href="/pricing">Pricing</NavbarItem>
-              <h2 onClick={login}>Sign In</h2>
+              <h2 onClick={() => lock.login()}>Sign In</h2>
             </NavbarItemsContainer>
           </NavbarContainer>
           <TeamContainer>

@@ -20,7 +20,7 @@ import Avatar from "@material-ui/core/Avatar";
 import Logo from "img/training-bot.png";
 
 //AUTH
-import { login, logout } from "../../../Auth/Auth";
+import { lock } from "Auth/Auth";
 
 class AppBar extends Component {
   render() {
@@ -37,7 +37,7 @@ class AppBar extends Component {
                 <Link to="/home">Dashboard</Link>
                 <Link to="/pricing">Pricing</Link>
               </NavLinkItems>
-              <p onClick={() => login()}>Login</p>
+              <p onClick={() => lock.login()}>Login</p>
             </>
           ) : (
             <>
@@ -68,7 +68,7 @@ class AppBar extends Component {
                     alt={JSON.parse(localStorage.getItem("Profile")).name}
                   />
                 </Link>
-                <LogoutStyling onClick={() => logout()}>Logout</LogoutStyling>
+                <LogoutStyling onClick={() => lock.logout()}>Logout</LogoutStyling>
               </RightItemsContainer>
             </>
           )}
