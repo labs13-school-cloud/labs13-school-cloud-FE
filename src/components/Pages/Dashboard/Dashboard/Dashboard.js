@@ -119,7 +119,7 @@ function Dashboard(props) {
               section="Classes"
               handleAdd={() => history.push("/home/create-class")}
               isSearching={false}
-              
+              limit={10}
             />
         )}
 
