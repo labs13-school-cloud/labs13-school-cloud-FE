@@ -23,9 +23,16 @@ function Edit(props) {
     props.getTrainingSeriesID(props.match.params.id);
   }, [getTrainingSeriesID]);
   const { classes } = props;
-
+  // Used to update the title and subject for Training Series
   const [title, setTitle] = useState("");
   const [subject, setSubject] = useState("");
+
+  useEffect(() => {
+    setTitle(props.activeTrainingSeries.title);
+  }, [props.activeTrainingSeries, setTitle]);
+  useEffect(() => {
+    setSubject(props.activeTrainingSeries.subject);
+  }, [props.activeTrainingSeries, setSubject]);
 
   const updateTrainingSeries = e => {
     e.preventDefault();

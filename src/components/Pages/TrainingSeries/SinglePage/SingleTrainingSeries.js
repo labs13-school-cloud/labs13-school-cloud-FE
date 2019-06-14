@@ -52,8 +52,7 @@ function SingleTrainingSeries(props) {
 
   const {
     id,
-    first_name,
-    last_name,
+    name,
     title,
     subject,
     link,
@@ -79,10 +78,7 @@ function SingleTrainingSeries(props) {
               Link to Training Series:
               <Link>{link}</Link>
             </Typography>
-            <Typography variant="body1">
-              Creator: {first_name} {""}
-              {last_name}
-            </Typography>
+            <Typography variant="body1">Creator: {name}</Typography>
             <Button onClick={e => completeTrainingSeries(finished)}>
               Done
             </Button>
@@ -94,8 +90,7 @@ function SingleTrainingSeries(props) {
               // checks if any Volunteers are assigned to TrainingSeries
               v.length !== 0 ? (
                 <Typography variant="body1" key={v.id}>
-                  {v.first_name} {""}
-                  {v.last_name} <i class="material-icons">delete_forever</i>
+                  {v.name} <i class="material-icons">delete_forever</i>
                 </Typography>
               ) : (
                 <Typography variant="body1">
