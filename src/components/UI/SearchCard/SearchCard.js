@@ -71,9 +71,7 @@ function SearchCard(props) {
   );
 }
 
-const mapStateToProps = state => ({
-  isLoading: state.teamMembersReducer.status.isLoading
-});
+const mapStateToProps = state => ({});
 
 export default connect(mapStateToProps)(
   withStyles(styles)(withRouter(SearchCard))

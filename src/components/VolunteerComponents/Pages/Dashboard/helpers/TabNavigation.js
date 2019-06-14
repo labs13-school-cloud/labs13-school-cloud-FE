@@ -2,7 +2,6 @@ import React, { useState } from "react";
 
 import BottomNavigation from "@material-ui/core/BottomNavigation";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
-import PermIdentity from "@material-ui/icons/PermIdentityOutlined";
 import Home from "@material-ui/icons/HomeOutlined";
 import QuestionAnswer from "@material-ui/icons/QuestionAnswerOutlined";
 import Timeline from "@material-ui/icons/TimelineOutlined";
@@ -13,7 +12,6 @@ import { styles, Popover } from "../styles.js";
 function TabNavigation(props) {
   const { classes, newResponses } = props;
   const [overviewHover, setOverviewHover] = useState(false);
-  const [volunteersHover, setVolunteersHover] = useState(false);
   const [trainingSeriesHover, setTrainingSeriesHover] = useState(false);
   const [classListHover, setClassListHover] = useState(false);
   const [messagesHover, setMessagesHover] = useState(false);
@@ -50,7 +48,6 @@ function TabNavigation(props) {
       >
         Overview
       </Popover>
-    
       <BottomNavigationAction
         label="Training Series"
         value="training series"
@@ -66,7 +63,6 @@ function TabNavigation(props) {
         style={trainingSeriesHover ? { display: "block" } : { display: "none" }}
       >
         Training Series
-      
       </Popover>
 
       <BottomNavigationAction
@@ -80,26 +76,10 @@ function TabNavigation(props) {
           setClassListHover(false);
         }}
       />
-      <Popover 
+      <Popover
         style={classListHover ? { display: "block" } : { display: "none" }}
       >
         Classes
-      </Popover>
-      <BottomNavigationAction
-        label="Volunteers"
-        value="volunteers"
-        icon={<PermIdentity />}
-        onMouseEnter={e => {
-          setVolunteersHover(true);
-        }}
-        onMouseLeave={e => {
-          setVolunteersHover(false);
-        }}
-      />
-      <Popover
-        style={volunteersHover ? { display: "block" } : { display: "none" }}
-      >
-        Team Members
       </Popover>
       <BottomNavigationAction
         label="Notifications"
