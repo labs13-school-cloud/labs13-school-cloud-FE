@@ -14,14 +14,13 @@ export const DELETE_USER_SUCCESS = "DELETE_USER_SUCCESS";
 export const DELETE_USER_FAIL = "DELETE_USER_FAIL";
 //--GET USER--
 export const getUser = () => dispatch => {
-	dispatch({ type: GET_USER_START });
-	const userData = JSON.parse(localStorage.getItem("Profile"));
-	const { email, given_name, family_name } = userData;
+    dispatch({ type: GET_USER_START });
+    const userData = JSON.parse(localStorage.getItem("Profile"));
+	const { email, name } = userData;
 	axios
 		.post(`${process.env.REACT_APP_API}/api/auth`, {
 			email,
-			given_name,
-			family_name,
+            name
 		})
 		.then(res => {
 			dispatch({ type: GET_USER_SUCCESS, payload: res.data });

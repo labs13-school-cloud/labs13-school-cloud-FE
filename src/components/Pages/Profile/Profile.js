@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 
 //Components
 import StripeView from "../../Misc/Stripe/StripeView";
-import { logout } from "Auth/Auth";
+import { lock } from "Auth/Auth";
 import Authentication from "../../Misc/authenticate";
 
 //State Management
@@ -48,7 +48,7 @@ class Profile extends React.Component {
 
   handleLogout = e => {
     e.preventDefault();
-    logout();
+    lock.logout();
     this.props.history.push("/");
   };
 
