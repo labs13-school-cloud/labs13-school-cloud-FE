@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { getUser } from "store/actions/userActions";
 
 // Volunteer Component
-import VolunteerDashboard from "components/VolunteerComponents/Pages/Dashboard/";
+import VolunteerDashboard from "components/VolunteerComponents/Pages/Dashboard/VolunteerOverview/Overview";
 
 const RolesRenderHOC = ComponentToRender => {
 	class RolesRender extends Component {

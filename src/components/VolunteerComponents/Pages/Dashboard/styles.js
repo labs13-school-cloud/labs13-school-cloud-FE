@@ -12,7 +12,7 @@ export const styles = {
   }
 };
 
-export const DoubleColumn = styled.div`
+export const TripleColumn = styled.div`
   box-sizing: border-box;
   max-width: 1358px;
   width: 100%;

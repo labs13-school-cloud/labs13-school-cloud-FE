@@ -4,8 +4,6 @@ import { connect } from "react-redux";
 import { getAllResponses, getClassList } from "store/actions";
 
 import SearchCard from "components/UI/SearchCard/";
-import TeamMembersOverview from "components/Pages/TeamMembers/List/Overview";
-import TeamMembersTab from "components/Pages/TeamMembers/List/Tab";
 import TrainingSeriesOverview from "components/Pages/TrainingSeries/List/Overview";
 import TrainingSeriesTab from "components/Pages/TrainingSeries/List/Tab";
 import ClassListTab from "../../../../components/Pages/Classes/List/Overview"
@@ -33,11 +31,11 @@ function Dashboard(props) {
     history,
     responses,
     getAllResponses: responsesFromProps,
-    getClassList,
+    getClassList
   } = props;
 
   useEffect(() => {
-    console.log("Dashboard use effect")
+    console.log("Dashboard use effect");
     responsesFromProps();
     setTimeout(() => {
       responsesFromProps();
@@ -49,9 +47,9 @@ function Dashboard(props) {
   }, [responses]);
 
   useEffect(() => {
-    console.log("I'm here!!")
-    getClassList()
-}, [getClassList]);
+    console.log("I'm here!!");
+    getClassList();
+  }, [getClassList]);
 
   return (
     <DashWrapper>
@@ -72,15 +70,6 @@ function Dashboard(props) {
             <SmallColumns>
               <SearchCard
                 user_id={user_id}
-                List={TeamMembersOverview}
-                containerTourNum="1"
-                section="Team Members"
-                headerTourNum={["2", "3"]}
-                handleAdd={() => history.push("/home/create-team-member")}
-              />
-              <Divider />
-              <SearchCard
-                user_id={user_id}
                 List={TrainingSeriesOverview}
                 containerTourNum="4"
                 section="Training Series"
@@ -91,36 +80,24 @@ function Dashboard(props) {
           </>
         )}
 
-        {topTab === "Team Members" && (
+        {topTab === "training series" && (
           <SearchCard
             user_id={user_id}
-            List={TeamMembersTab}
-            section="Team Members"
-            handleAdd={() => history.push("/home/create-team-member")}
-            isSearching={true}
-          />
-        )}
-
-
-
-        {/* {topTab === "training series" && (
-          <SearchCard
-            user_id={user_id}
-            List={TrainingSeriesTabVolunteer}
+            List={TrainingSeriesTab}
             section="Training Series"
+            handleAdd={() => history.push("/home/create-training-series")}
             isSearching={true}
             limit={3}
           />
-        )} */}
+        )}
 
         {topTab === "classes" && (
-            <SearchCard 
-              List={ClassListTab}
-              section="Classes"
-              handleAdd={() => history.push("/home/create-class")}
-              isSearching={false}
-              limit={10}
-            />
+          <SearchCard
+            List={ClassListTab}
+            section="Classes"
+            handleAdd={() => history.push("/home/create-class")}
+            isSearching={false}
+          />
         )}
 
         {topTab === "notifications" && (

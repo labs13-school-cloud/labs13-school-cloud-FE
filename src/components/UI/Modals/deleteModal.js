@@ -11,7 +11,6 @@ import { withRouter } from "react-router";
 import { connect } from "react-redux";
 import {
   deleteTrainingSeries,
-  deleteTeamMember,
   deleteMessage,
   deleteUser,
   unassignTeamMember,
@@ -188,9 +187,7 @@ TrainingSeriesModal.propTypes = {
 };
 
 const mapStateToProps = state => {
-  return {
-    deleteSuccess: state.teamMembersReducer.status.deleteSuccess
-  };
+  return {};
 };
 
 const TrainingSeriesModalWrapped = withStyles(styles)(TrainingSeriesModal);
@@ -199,7 +196,6 @@ export default connect(
   mapStateToProps,
   {
     deleteMessage,
-    deleteTeamMember,
     deleteUser,
     deleteTrainingSeries,
     unassignTeamMember,
