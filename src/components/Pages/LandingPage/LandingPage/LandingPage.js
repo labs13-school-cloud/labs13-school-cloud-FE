@@ -35,13 +35,6 @@ import undrawTask from "img/undraw_personal_text_vkd8.svg";
 import { lock } from "Auth/Auth";
 
 class LandingPage extends React.Component {
-  constructor(props) {
-      super(props);
-      this.state = {
-          email: ''
-      }
-  }
-
   handleChange = (e) => {
     this.setState({
         ...this.state,
