@@ -27,6 +27,13 @@ export const GET_TRAINING_SERIES_MESSAGES_FAIL =
 export const GET_TRAINING_SERIES_ID_START = "GET_TRAINING_SERIES_ID_START";
 export const GET_TRAINING_SERIES_ID_SUCCESS = "GET_TRAINING_SERIES_ID_SUCCESS";
 export const GET_TRAINING_SERIES_ID_FAIL = "GET_TRAINING_SERIES_ID_FAIL";
+// GET VOLUNTEERS IN TRAINING SERIES BY ID
+export const GET_VOLUNTEERS_FOR_TRAINING_SERIES_START =
+  "GET_VOLUNTEERS_FOR_TRAINING_SERIES_START";
+export const GET_VOLUNTEERS_FOR_TRAINING_SERIES_SUCCESS =
+  "GET_VOLUNTEERS_FOR_TRAINING_SERIES_SUCCESS";
+export const GET_VOLUNTEERS_FOR_TRAINING_SERIES_FAIL =
+  "GET_VOLUNTEERS_FOR_TRAINING_SERIES_FAIL";
 
 export const getTrainingSeries = () => dispatch => {
   dispatch({
@@ -110,4 +117,29 @@ export const getTrainingSeriesID = trainingSeriesID => dispatch => {
       )
     )
     .catch(err => dispatch({ type: GET_TRAINING_SERIES_FAIL, error: err }));
+};
+
+// Get a list of Volunteers assigned to a Training Series
+export const getTrainingSeriesForVolunteer = trainingSeriesID => dispatch => {
+  dispatch({
+    type: GET_VOLUNTEERS_FOR_TRAINING_SERIES_START
+  });
+  axios
+    .get(
+      `${
+        process.env.REACT_APP_API
+      }/api/training-series/${trainingSeriesID}/volunteers`
+    )
+    .then(res =>
+      dispatch(
+        {
+          type: GET_VOLUNTEERS_FOR_TRAINING_SERIES_SUCCESS,
+          payload: res.data.volunteers
+        },
+        console.log("From Actions", res.data.volunteers)
+      )
+    )
+    .catch(err =>
+      dispatch({ type: GET_VOLUNTEERS_FOR_TRAINING_SERIES_FAIL, error: err })
+    );
 };
