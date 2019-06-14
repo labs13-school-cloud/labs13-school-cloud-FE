@@ -11,10 +11,8 @@ import { withRouter } from "react-router";
 import { connect } from "react-redux";
 import {
   deleteTrainingSeries,
-  deleteTeamMember,
   deleteMessage,
-  deleteUser,
-  unassignTeamMember
+  deleteUser
 } from "store/actions/";
 
 import { Typography, Paper } from "@material-ui/core";
@@ -182,9 +180,7 @@ TrainingSeriesModal.propTypes = {
 };
 
 const mapStateToProps = state => {
-  return {
-    deleteSuccess: state.teamMembersReducer.status.deleteSuccess
-  };
+  return {};
 };
 
 const TrainingSeriesModalWrapped = withStyles(styles)(TrainingSeriesModal);
@@ -193,9 +189,7 @@ export default connect(
   mapStateToProps,
   {
     deleteMessage,
-    deleteTeamMember,
     deleteUser,
-    deleteTrainingSeries,
-    unassignTeamMember
+    deleteTrainingSeries
   }
 )(withRouter(TrainingSeriesModalWrapped));

@@ -16,7 +16,13 @@ import {
   GET_TRAINING_SERIES_MESSAGES_FAIL,
   GET_TRAINING_SERIES_ID_START,
   GET_TRAINING_SERIES_ID_SUCCESS,
-  GET_TRAINING_SERIES_ID_FAIL
+  GET_TRAINING_SERIES_ID_FAIL,
+  GET_VOLUNTEERS_FOR_TRAINING_SERIES_START,
+  GET_VOLUNTEERS_FOR_TRAINING_SERIES_SUCCESS,
+  GET_VOLUNTEERS_FOR_TRAINING_SERIES_FAIL,
+  ADD_VOLUNTEERS_FOR_TRAINING_SERIES_START,
+  ADD_VOLUNTEERS_FOR_TRAINING_SERIES_SUCCESS,
+  ADD_VOLUNTEERS_FOR_TRAINING_SERIES_FAIL
 } from "../actions";
 
 const initialState = {
@@ -30,7 +36,9 @@ const initialState = {
   isAdding: false,
   addSuccess: false,
   assignments: [],
-  activeTrainingSeries: {}
+  activeTrainingSeries: {},
+  trainingSeriesVolunteers: [],
+  volunteers: []
 };
 
 const trainingSeriesReducer = (state = initialState, action) => {
@@ -92,6 +100,27 @@ const trainingSeriesReducer = (state = initialState, action) => {
         isLoading: false,
         error: action.payload
       };
+    // ---ADD VOLUNTEER TO TRAINING SERIES---
+    case ADD_VOLUNTEERS_FOR_TRAINING_SERIES_START:
+      return {
+        ...state,
+        isAdding: true,
+        error: ""
+      };
+    case ADD_VOLUNTEERS_FOR_TRAINING_SERIES_SUCCESS:
+      return {
+        ...state,
+        volunteers: [...state.volunteers, action.payload],
+        isAdding: false,
+        addSuccess: true,
+        error: ""
+      };
+    case ADD_VOLUNTEERS_FOR_TRAINING_SERIES_FAIL:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload
+      };
     // ---EDIT TRAINING SERIES---
     case EDIT_TRAINING_SERIES_START:
       return {
@@ -105,7 +134,7 @@ const trainingSeriesReducer = (state = initialState, action) => {
         if (series.trainingSeriesID === action.payload.id) {
           return {
             ...series,
-            title: action.payload.title
+            series: action.payload
           };
         } else return series;
       });
@@ -114,7 +143,7 @@ const trainingSeriesReducer = (state = initialState, action) => {
         isEditing: false,
         // isLoading: false,
         error: "",
-        trainingSeries: updatedItem
+        activeTrainingSeries: updatedItem
       };
 
     case EDIT_TRAINING_SERIES_FAIL:
@@ -149,6 +178,20 @@ const trainingSeriesReducer = (state = initialState, action) => {
       };
     case GET_TRAINING_SERIES_MESSAGES_FAIL:
       return { ...state, isLoading: false, error: action.payload };
+    // --- GET VOLUNTEERS ASSIGNED TO TRAINING SERIES --
+    case GET_VOLUNTEERS_FOR_TRAINING_SERIES_START:
+      return { ...state, error: "" };
+    case GET_VOLUNTEERS_FOR_TRAINING_SERIES_SUCCESS:
+      return {
+        ...state,
+        trainingSeriesVolunteers: action.payload,
+        error: ""
+      };
+    case GET_VOLUNTEERS_FOR_TRAINING_SERIES_FAIL:
+      return {
+        ...state,
+        error: action.payload
+      };
     default:
       return state;
   }

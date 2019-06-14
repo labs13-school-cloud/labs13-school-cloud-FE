@@ -1,17 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 
-import { getAllResponses, getClassList } from "store/actions";
+import { getAllResponses } from "store/actions";
 
 import SearchCard from "components/UI/SearchCard/";
 import TrainingSeriesOverview from "components/Pages/TrainingSeries/List/Overview";
-import TrainingSeriesTab from "components/Pages/TrainingSeries/List/Tab";
-import ClassListTab from "components/Pages/Classes/List/Overview";
+import TrainingSeriesTabVolunteer from "components/VolunteerComponents/Pages/TrainingSeries/List/TabVolunteer/TabVolunteer.js";
 import NotificationsCard from "components/Pages/Notifications/Card";
 import NotificationsOverview from "components/Pages/Notifications/Card/Overview/Overview.js";
 import Responses from "components/Pages/Notifications/Responses";
-import TabNavigation from "./helpers/TabNavigation.js";
-import DektopNavigation from "./helpers/DesktopNavigation.js";
+import TabNavigation from "components/Pages/Dashboard/Dashboard/helpers/TabNavigation.js";
+import DektopNavigation from "components/VolunteerComponents/Pages/Dashboard/helpers/DesktopNavigation.js";
+
+import AppBar from "components/Navigation/AppBar/AppBar";
 
 import {
   TripleColumn,
@@ -20,21 +21,25 @@ import {
   DashWrapper,
   MobileNav,
   DesktopNav
-} from "./styles.js";
+} from "components/VolunteerComponents/Pages/Dashboard/styles.js";
 
-function Dashboard(props) {
+/**
+ * This is where we will set up our volunteer routes
+ * and connect all of our components regarding
+ * volunteers
+ */
+
+const VolunteerDashboard = props => {
   const [topTab, setTopTab] = useState("overview");
   const [newResponses, setNewResponses] = useState([]);
   const {
     user_id,
     history,
     responses,
-    getAllResponses: responsesFromProps,
-    getClassList
+    getAllResponses: responsesFromProps
   } = props;
 
   useEffect(() => {
-    console.log("Dashboard use effect");
     responsesFromProps();
     setTimeout(() => {
       responsesFromProps();
@@ -45,13 +50,9 @@ function Dashboard(props) {
     setNewResponses(responses.filter(r => !r.seen));
   }, [responses]);
 
-  useEffect(() => {
-    console.log("I'm here!!");
-    getClassList();
-  }, [getClassList]);
-
   return (
     <DashWrapper>
+      <AppBar />
       <MobileNav>
         <TabNavigation
           topTab={topTab}
@@ -70,7 +71,7 @@ function Dashboard(props) {
               <SearchCard
                 user_id={user_id}
                 List={TrainingSeriesOverview}
-                containerTourNum="4"
+                containerTourNum="2"
                 section="Training Series"
                 handleAdd={() => history.push("/home/create-training-series")}
               />
@@ -82,20 +83,11 @@ function Dashboard(props) {
         {topTab === "training series" && (
           <SearchCard
             user_id={user_id}
-            List={TrainingSeriesTab}
+            List={TrainingSeriesTabVolunteer}
             section="Training Series"
             handleAdd={() => history.push("/home/create-training-series")}
             isSearching={true}
             limit={3}
-          />
-        )}
-
-        {topTab === "classes" && (
-          <SearchCard
-            List={ClassListTab}
-            section="Classes"
-            handleAdd={() => history.push("/home/create-class")}
-            isSearching={false}
           />
         )}
 
@@ -114,7 +106,7 @@ function Dashboard(props) {
       </TripleColumn>
     </DashWrapper>
   );
-}
+};
 
 const mapStateToProps = state => ({
   responses: state.responsesReducer.responses
@@ -122,5 +114,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getAllResponses, getClassList }
-)(Dashboard);
+  { getAllResponses }
+)(VolunteerDashboard);

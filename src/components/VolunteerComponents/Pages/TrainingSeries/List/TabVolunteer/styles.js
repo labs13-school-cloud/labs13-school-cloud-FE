@@ -23,7 +23,10 @@ export const styles = () => ({
     flexDirection: "column",
     justifyContent: "center",
     marginBottom: 15
-  }
+  },
+  selection: {
+    margin: "0 10px"
+  },
 });
 
 export const Wrapper = styled(Paper)`
