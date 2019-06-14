@@ -134,7 +134,7 @@ const trainingSeriesReducer = (state = initialState, action) => {
         if (series.trainingSeriesID === action.payload.id) {
           return {
             ...series,
-            title: action.payload.title
+            series: action.payload
           };
         } else return series;
       });
@@ -143,7 +143,7 @@ const trainingSeriesReducer = (state = initialState, action) => {
         isEditing: false,
         // isLoading: false,
         error: "",
-        trainingSeries: updatedItem
+        activeTrainingSeries: updatedItem
       };
 
     case EDIT_TRAINING_SERIES_FAIL:

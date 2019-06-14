@@ -30,10 +30,24 @@ function SingleTrainingSeries(props) {
     props.getTrainingSeriesID(props.match.params.id);
   }, [getTrainingSeriesID]);
 
+  // Removes Training Series from database
   const removeTrainingSeries = id => {
     props.deleteTrainingSeries(props.activeTrainingSeries.id);
     props.history.push(`/home`);
-    console.log("Remove Training Series", id);
+  };
+  // Sends Admin to Edit screen for Training Series
+  const editTrainingSeries = id => {
+    props.getTrainingSeriesID(id);
+    props.history.push(`/home/training-series/${id}/edit`);
+  };
+
+  const completeTrainingSeries = e => {
+    e.preventDefault();
+    if (props.activeTrainingSeries.id === props.match.params.id) {
+      this.setState({
+        finished: true
+      });
+    }
   };
 
   const {
@@ -46,25 +60,32 @@ function SingleTrainingSeries(props) {
     finished
   } = props.activeTrainingSeries;
 
-  console.log("activeTrainingSeries", props.trainingSeriesVolunteers.length);
+  console.log("activeTrainingSeries", props.activeTrainingSeries);
   console.log("Training Series ", props.match.params.id);
   return (
     <>
       <Wrapper key={`container_${id}`}>
         <Grid container spacing={24}>
           <Grid item xs={12}>
-            <i class="material-icons" onClick={e => removeTrainingSeries(id)}>
+            <i class="material-icons" onClick={removeTrainingSeries}>
               delete
             </i>{" "}
-            <i class="material-icons">edit</i>
+            <i class="material-icons" onClick={e => editTrainingSeries(id)}>
+              edit
+            </i>
             <Typography variant="h6">{title}</Typography>
             <Typography variant="body1">Subject: {subject}</Typography>
-            <Link>Link: {link}</Link>
+            <Typography>
+              Link to Training Series:
+              <Link>{link}</Link>
+            </Typography>
             <Typography variant="body1">
               Creator: {first_name} {""}
               {last_name}
             </Typography>
-            <Button>Done</Button>
+            <Button onClick={e => completeTrainingSeries(finished)}>
+              Done
+            </Button>
           </Grid>
           <Grid item xs={12}>
             <Typography variant="h6">Active Volunteers</Typography>
