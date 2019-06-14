@@ -5,13 +5,15 @@ import Progress from "components/UI/Progress/ProgressCircle";
 import { style } from "./styles.js";
 
 //Auth
-import { setAccessToken, setIdToken, getUserProfile } from "Auth/Auth";
+import { getUserProfile } from "Auth/Auth";
+// * if deprecated functions are needed please add "setAccessToken" and "setIdToken" to above import
 
 function Callback({ history }) {
   useEffect(() => {
     // componentDidMount
-    setAccessToken();
-    setIdToken();
+    // ! Deprecated in favor of letting the AuthService take care of setting the access_token and id_token
+    // setAccessToken();
+    // setIdToken();
     getUserProfile(() => {
       history.push("/home");
     });
