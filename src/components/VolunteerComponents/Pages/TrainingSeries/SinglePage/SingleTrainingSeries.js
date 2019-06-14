@@ -14,8 +14,7 @@ function SingleTrainingSeries(props) {
   console.log(props.activeTrainingSeries.trainingSeries);
   const {
     id,
-    first_name,
-    last_name,
+    name,
     title,
     subject,
     link,
@@ -30,10 +29,7 @@ function SingleTrainingSeries(props) {
             <hr />
             <Typography variant="body1">Subject: {subject}</Typography>
 
-            <Typography variant="body1">
-              Creator: {first_name} {""}
-              {last_name}
-            </Typography>
+            <Typography variant="body1">Creator: {name}</Typography>
             <Button>Done</Button>
           </Grid>
         </Grid>

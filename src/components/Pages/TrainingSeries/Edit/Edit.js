@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import Title from "./helpers/Title.js";
 import Messages from "../Messages/";
@@ -24,38 +24,31 @@ function Edit(props) {
   }, [getTrainingSeriesID]);
   const { classes } = props;
 
+  const [title, setTitle] = useState(props.activeTrainingSeries.title);
+  const [subject, setSubject] = useState(props.activeTrainingSeries.subject);
+
   const updateTrainingSeries = e => {
     e.preventDefault();
-    props.editTrainingSeries(props.activeTrainingSeries);
+    props.editTrainingSeries(props.activeTrainingSeries.id, {
+      title,
+      subject,
+      user_id: props.user_id
+    });
     props.history.push("/home");
   };
 
-  console.log(props);
+  console.log(title);
   return (
     <PageContainer style={{ position: "relative" }}>
-      <InfoPopup
-        popOverText={
-          <p>
-            You're currently on the "Training Series" page. You can start adding
-            messages by clicking on "Add Message". Your messages will be tied to
-            this series, and whenever you assign a team member to this training
-            series, they will receive those messages based on the "days from
-            start" value you give each message.
-            <br />
-            <br />
-            Once you've created some messages, feel free to assign a team member
-            to this series. Set the date in which you'd like for the team member
-            to start receiving the materials, and they will receive scheduled
-            notifications based on the messages that you've scheduled for them.
-          </p>
-        }
-      />
+      <InfoPopup popOverText={<p>Will edit this later....</p>} />
       <Paper className={classes.paper}>
         <FormControl>
           <TextField
             id="standard-name"
             label="Title"
+            name="title"
             className={classes.textField}
+            onChange={e => setTitle(props.activeTrainingSeries.title)}
             value={props.activeTrainingSeries.title}
             margin="normal"
           />
@@ -63,7 +56,9 @@ function Edit(props) {
           <TextField
             id="standard-name"
             label="Subject"
+            name="subject"
             className={classes.textField}
+            onChange={e => setSubject(props.activeTrainingSeries.subject)}
             value={props.activeTrainingSeries.subject}
             margin="normal"
           />
@@ -74,11 +69,12 @@ function Edit(props) {
           <Link>{props.activeTrainingSeries.link}</Link>
         </Typography>
         <Typography variant="body1">
-          Creator: {props.activeTrainingSeries.first_name} {""}
-          {props.activeTrainingSeries.last_name}
+          Creator: {props.activeTrainingSeries.name}
         </Typography>
 
-        <Button onClick={e => updateTrainingSeries}>Submit</Button>
+        <Button type="submit" onClick={updateTrainingSeries}>
+          Submit
+        </Button>
       </Paper>
     </PageContainer>
   );
