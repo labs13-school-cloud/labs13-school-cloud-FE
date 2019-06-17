@@ -16,10 +16,10 @@ export const styles = theme => ({
   },
   fab: {
     margin: 5,
-    background: "#451476",
+    background: "royalbluegit",
     color: "white",
     "&:hover": {
-      background: "#591a99"
+      background: "#8FCAFC"
     }
   }
 });
