@@ -16,7 +16,7 @@ export const styles = theme => ({
   },
   fab: {
     margin: 5,
-    background: "royalbluegit",
+    background: "royalblue",
     color: "white",
     "&:hover": {
       background: "#8FCAFC"
