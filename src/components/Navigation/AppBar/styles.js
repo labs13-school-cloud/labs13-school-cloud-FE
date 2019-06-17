@@ -11,7 +11,7 @@ export const NavigationContainer = styled.div`
   border-bottom: 1px solid #eeeeee;
 `;
 export const NavigationTop = styled.div`
-  background-color: #3ebd93;
+  background-color: #8FCAFC;
   width: 100%;
   padding: 8px 0;
   margin-bottom: 10px;
