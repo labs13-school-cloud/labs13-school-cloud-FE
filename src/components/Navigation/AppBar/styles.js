@@ -38,7 +38,7 @@ export const NavLinkItems = styled.div`
   display: flex;
 `;
 export const NavigationLogo = styled.img`
-  height: 35px;
+  height: 45px;
 `;
 export const RightItemsContainer = styled.div`
   display: flex;
