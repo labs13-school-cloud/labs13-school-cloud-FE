@@ -11,7 +11,7 @@ export const NavigationContainer = styled.div`
   border-bottom: 1px solid #eeeeee;
 `;
 export const NavigationTop = styled.div`
-  background-color: #3ebd93;
+  background-color: #8FCAFC;
   width: 100%;
   padding: 8px 0;
   margin-bottom: 10px;
@@ -28,7 +28,7 @@ export const NavItemsContainer = styled.div`
   a {
     margin: 0 10px;
     text-decoration: none;
-    color: #690cb0;
+    color: royalblue;
     &:hover {
       cursor: pointer;
     }
@@ -38,7 +38,7 @@ export const NavLinkItems = styled.div`
   display: flex;
 `;
 export const NavigationLogo = styled.img`
-  height: 35px;
+  height: 45px;
 `;
 export const RightItemsContainer = styled.div`
   display: flex;
