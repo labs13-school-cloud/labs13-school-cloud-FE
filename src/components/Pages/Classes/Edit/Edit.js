@@ -24,7 +24,7 @@ function Edit(props) {
 
     const updateClass = e => {
         e.preventDefault();
-        props.editClass(props.classList);
+        props.editClass(props.singleClass);
     };
 
     return (
@@ -35,39 +35,49 @@ function Edit(props) {
                         id="standard-name"
                         label="Class Name"
                         className={classes.textField}
-                        value={props.classList.class_name}
+                        value={props.singleClass.class_name}
                         margin="normal"
                     />
                     <TextField 
                         id="standard-name"
                         label="Subject"
                         className={classes.textField}
-                        value={props.classList.subject}
+                        value={props.singleClass.subject}
                         margin="normal"
                     />
                     <TextField 
                         id="standard-name"
                         label="Number Of Students"
                         className={classes.textField}
-                        value={props.classList.number_of_students}
+                        value={props.singleClass.number_of_students}
                         margin="normal"
                     />
                     <TextField 
                         id="standard-name"
                         label="Teacher's Name"
                         className={classes.textField}
-                        value={props.classList.teacher_name}
+                        value={props.singleClass.teacher_name}
                         margin="normal"
                     />
                     <TextField 
                         id="standard-name"
                         label="Grade Level"
                         className={classes.textField}
-                        value={props.classList.grade_level}
+                        value={props.singleClass.grade_level}
                         margin="normal"
                     />
                 </FormControl>
+                <Button onClick={e => updateClass}>Submit</Button>
             </Paper>
         </PageContainer>
     )
 }
+
+const mapStateToProps = state => ({
+    singleClass: state.classList.singleClass
+});
+
+export default coonnect(
+    mapStateToProps,
+    { getClassById, editClass }
+)(withStyles(styles)(Edit))
