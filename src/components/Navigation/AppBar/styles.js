@@ -28,7 +28,7 @@ export const NavItemsContainer = styled.div`
   a {
     margin: 0 10px;
     text-decoration: none;
-    color: #690cb0;
+    color: royalblue;
     &:hover {
       cursor: pointer;
     }
