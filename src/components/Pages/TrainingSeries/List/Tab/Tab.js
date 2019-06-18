@@ -37,6 +37,8 @@ function Tab(
     getTrainingSeries();
   }, [getTrainingSeries]);
 
+  const { classes } = props;
+
   const setTrainingSeries = id => {
     getTrainingSeriesID(id);
     getTrainingSeriesForVolunteer(id);
@@ -54,22 +56,27 @@ function Tab(
     history.push(`/home/training-series/${id}/edit`);
   };
 
-  const filterTraining = () => {};
+  const [trainingFilter, setTrainingFilter] = useState("available");
+
+  // Marks training as complete
+  // const [trainingComplete, setTrainingComplete] = useState("");
+  // useEffect(() => {
+  //   setTrainingComplete(props.activeTrainingSeries.finished);
+  // }, [props.activeTrainingSeries, setTrainingComplete]);
 
   return (
     <>
       <FormControl>
         <Select
-          // native
+          native
           // className={selection}
-          // // value={trainingfilter}
-          // onChange={e => setTrainingFilter(e.target.value)}
+          value={trainingFilter}
+          onChange={e => setTrainingFilter(e.target.value)}
           inputProps={{
             id: "status-selector",
             label: "Filter Selector"
           }}
         >
-          <option value={"active"}>Active</option>
           <option value={"available"}>Available</option>
           <option value={"Completed"}>Completed</option>
         </Select>
@@ -96,7 +103,7 @@ function Tab(
                     edit
                   </i>
                   <Typography variant="body1">Creator: {name}</Typography>
-                  <Button>Done</Button>
+                  {/* <Button>Done</Button> */}
                 </Grid>
               </Grid>
             </Wrapper>

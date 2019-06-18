@@ -22,7 +22,10 @@ import {
   GET_VOLUNTEERS_FOR_TRAINING_SERIES_FAIL,
   ADD_VOLUNTEERS_FOR_TRAINING_SERIES_START,
   ADD_VOLUNTEERS_FOR_TRAINING_SERIES_SUCCESS,
-  ADD_VOLUNTEERS_FOR_TRAINING_SERIES_FAIL
+  ADD_VOLUNTEERS_FOR_TRAINING_SERIES_FAIL,
+  DELETE_VOLUNTEERS_FOR_TRAINING_SERIES_START,
+  DELETE_VOLUNTEERS_FOR_TRAINING_SERIES_SUCCESS,
+  DELETE_VOLUNTEERS_FOR_TRAINING_SERIES_FAIL
 } from "../actions";
 
 const initialState = {
@@ -38,7 +41,8 @@ const initialState = {
   assignments: [],
   activeTrainingSeries: {},
   trainingSeriesVolunteers: [],
-  volunteers: []
+  volunteers: [],
+  volunteer: {}
 };
 
 const trainingSeriesReducer = (state = initialState, action) => {
@@ -110,12 +114,31 @@ const trainingSeriesReducer = (state = initialState, action) => {
     case ADD_VOLUNTEERS_FOR_TRAINING_SERIES_SUCCESS:
       return {
         ...state,
-        volunteers: [...state.volunteers, action.payload],
+        trainingSeriesVolunteers: [...state.volunteers, action.payload],
         isAdding: false,
         addSuccess: true,
         error: ""
       };
     case ADD_VOLUNTEERS_FOR_TRAINING_SERIES_FAIL:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload
+      };
+    // ---REMOVE A VOLUNTEER FROM TRAINING SERIES---
+    case DELETE_VOLUNTEERS_FOR_TRAINING_SERIES_START:
+      return {
+        ...state,
+        error: ""
+      };
+    case DELETE_VOLUNTEERS_FOR_TRAINING_SERIES_SUCCESS:
+      return {
+        ...state,
+        trainingSeriesVolunteers: [
+          ...state.trainingSeriesVolunteers.filter(series => series.volunteer_id !== action.payload)
+        ],        error: ""
+      };
+    case DELETE_VOLUNTEERS_FOR_TRAINING_SERIES_FAIL:
       return {
         ...state,
         isLoading: false,
@@ -190,8 +213,10 @@ const trainingSeriesReducer = (state = initialState, action) => {
     case GET_VOLUNTEERS_FOR_TRAINING_SERIES_FAIL:
       return {
         ...state,
-        error: action.payload
+        error: action.payload,
+        trainingSeriesVolunteers: action.payload
       };
+
     default:
       return state;
   }
