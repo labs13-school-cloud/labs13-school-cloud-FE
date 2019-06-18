@@ -7,7 +7,8 @@ import styled from "styled-components";
 import history from "history.js";
 
 import DeleteModal from "../../../../UI/Modals/deleteModal";
-import { getClassList, deleteClass } from "../../../../../store/actions/classesActions";
+import ClassListModal from "../../../../UI/Modals/editModal"
+import { getClassList, deleteClass, editClass } from "../../../../../store/actions/classesActions";
 
 import { withStyles } from "@material-ui/core/styles";
 import { ListItem, ListItemText } from "@material-ui/core/";
@@ -49,6 +50,10 @@ function  Overview(props) {
                                         style={{ zIndex: "1000" }}
                                         // removeClass={removeClass}
                                     />
+                                    <ClassListModal
+                                        classId={id}
+                                        className={`material-icons ${props.classList.icons}`}
+                                    />
                                     </Typography>
                                     <div onClick={() => history.push(`home/classes/${id}`)}>
                                         
@@ -85,5 +90,5 @@ const mapStateToProps = state => {
 
 export default connect(
     mapStateToProps,
-    { getClassList, deleteClass }
+    { getClassList, deleteClass, editClass }
 )(Overview);
