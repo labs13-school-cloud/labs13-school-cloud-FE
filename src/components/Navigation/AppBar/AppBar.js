@@ -17,7 +17,7 @@ import {
 import Avatar from "@material-ui/core/Avatar";
 
 //Logo
-import Logo from "img/training-bot.png";
+import Logo from "img/cloud.png";
 
 //AUTH
 import { lock } from "Auth/Auth";
