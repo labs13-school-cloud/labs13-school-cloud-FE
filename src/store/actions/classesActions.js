@@ -25,11 +25,9 @@ const baseUrl = `${process.env.REACT_APP_API}/api`;
 
 export const getClassList = () => dispatch => {
     dispatch({ type: FETCH_CLASSES_START });
-    console.log("GET_CLASSES_START")
     axios
         .get(`${baseUrl}/classes`)
         .then(res => {
-            console.log(res)
             dispatch({ type: FETCH_CLASSES_SUCCESS, payload: res.data })
         })
         .catch(err => dispatch({ type: FETCH_CLASSES_FAILURE, payload: err }));
