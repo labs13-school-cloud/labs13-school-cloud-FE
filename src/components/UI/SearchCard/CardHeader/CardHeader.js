@@ -11,7 +11,7 @@ import { withStyles } from "@material-ui/core/styles";
 import { styles } from "./styles.js";
 
 function CardHeader(props) {
-  const { title, tour, classes, add, searchHook } = props;
+  const { title, tour, classes, searchHook } = props;
   const [isSearching, setIsSearching] = useState(!!props.isSearching);
   const [search, setSearch] = searchHook;
 
