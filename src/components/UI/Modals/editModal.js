@@ -83,7 +83,7 @@ class ClassListModal extends React.Component {
     };
 
     handleEdit = () => {
-        this.props.editClass(this.props.id)
+        this.props.editClass(this.props.classId)
     }
     // handleClose();
 
@@ -116,10 +116,11 @@ class ClassListModal extends React.Component {
 
     render() {
         console.log(this.props)
-        const { classes, ClassList } = this.props;
+        const { classes } = this.props;
         
+        console.log(this.props)
         return (
-          <div>
+            <div>
             {this.handleDisplayType()}
     
             <Modal
@@ -133,41 +134,31 @@ class ClassListModal extends React.Component {
                   Edit This Class
                 </Typography>
 
-                <FormControl>
-                    {`Class Name: `}
-                </FormControl>
-                <TextField>
-                    label="Class Name"
-                </TextField>
+                <TextField
+                    label="Class Name:"
+                    defaultValue={this.props.class_name}
+                />
+                
+                <TextField
+                    label="Subject:"
+                    defaultValue={this.props.subject}
+                />
+                    
+                <TextField
+                    label="Grade Level:"
+                    defaultValue={this.props.grade_level}
+                />
 
-                <FormControl>
-                    {`Subject: `}
-                </FormControl>
-                <TextField>
-                    label="Subject"
-                </TextField>
+                <TextField
+                    label="Number Of Students:"
+                    defaultValue={this.props.number_of_students}
+                />
 
+                <TextField
+                    label="Teacher's Name:"
+                    defaultValue={this.props.teacher_name}
+                />
 
-                <FormControl>
-                    {`Grade Level: `}
-                </FormControl>
-                <TextField>
-                    label="Grade Level"
-                </TextField>
-
-                <FormControl>
-                    {`Number Of Students: `}
-                </FormControl>
-                <TextField>
-                    label="Number Of Students"
-                </TextField>
-
-                <FormControl>
-                    {`Teacher's Name: `}
-                </FormControl>
-                <TextField>
-                    label="Teacher's Name"
-                </TextField>
 
                 <Button
                   onClick={() => this.handleEdit()}

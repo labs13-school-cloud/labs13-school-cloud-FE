@@ -46,24 +46,23 @@ export const addClass = classList => dispatch => {
         .catch(err => dispatch({ type: ADD_CLASS_FAILURE, payload: err }));
 };
 
-export const editClass = classList => dispatch => {
-    const { id, class_name, grade_level, subject, teacher_name, number_of_students, ...changes } = classList;
-    //
-    //
+export const editClass = (classId, changes) => dispatch => {
+
+    console.log(changes)
     dispatch({ type: EDIT_CLASS_START });
     axios
-        .put(`${baseUrl}/classes/${id}`, changes)
+        .put(`${baseUrl}/classes/${classId}`, changes)
         .then(res => {
             dispatch({
                 type: EDIT_CLASS_SUCCESS,
-                payload: res.data.updatedClass
+                payload: res.data.updatedClassList
             });
         })
         .catch(err => dispatch({ type: EDIT_CLASS_FAILURE, payload: err }));
 };
 
 export const deleteClass = (classID) => dispatch => {
-    dispatch({ type :DELETE_CLASS_START });
+    dispatch({ type: DELETE_CLASS_START });
     axios
         .delete(`${baseUrl}/classes/${classID}`)
         .then(res => {

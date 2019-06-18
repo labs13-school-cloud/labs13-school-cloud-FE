@@ -52,6 +52,11 @@ function  Overview(props) {
                                     />
                                     <ClassListModal
                                         classId={id}
+                                        class_name={class_name}
+                                        subject={subject}
+                                        grade_level={grade_level}
+                                        number_of_students={number_of_students}
+                                        teacher_name={teacher_name}
                                         className={`material-icons ${props.classList.icons}`}
                                     />
                                     </Typography>
