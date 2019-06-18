@@ -7,9 +7,6 @@ import { Auth0LockPasswordless } from "auth0-lock";
 //Config variables
 import { AUTH_CONFIG } from "./auth0-variables";
 
-//History
-import history from "history.js";
-
 //Token Variables
 const ID_TOKEN_KEY = "id_token";
 const ACCESS_TOKEN_KEY = "access_token";
