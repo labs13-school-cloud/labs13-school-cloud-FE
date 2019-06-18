@@ -16,22 +16,24 @@ import {
 } from "store/actions";
 
 function AddMemberToTrainingSeries(props) {
+
+  const [volunteers, getVolunteers] = useState(props.getVolunteers)
   useEffect(() => {
     props.getTrainingSeriesID(props.match.params.id);
-  }, [getTrainingSeriesID]);
+  }, [props.getTrainingSeriesID]);
 
   useEffect(() => {
     props.getTrainingSeriesForVolunteer(props.match.params.id);
-  }, [getTrainingSeriesForVolunteer]);
-  // useEffect(() => {
-  //   props.getAllVolunteers(props.volunteers.id !== props.trainingSeriesVolunteers.volunteer_id);
-  // }, [getAllVolunteers]);
+  }, [props.getTrainingSeriesForVolunteer]);
+  useEffect(() => {
+    getVolunteers()
+  }, [volunteers]);
 
 
-  console.log()
   return (
     <Wrapper>
-      Add
+      
+      Add 
     </Wrapper>
   );
   }

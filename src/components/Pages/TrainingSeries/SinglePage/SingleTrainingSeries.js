@@ -28,10 +28,10 @@ import { styles, PageContainer, Wrapper } from "./styles.js";
 function SingleTrainingSeries(props) {
   useEffect(() => {
     props.getTrainingSeriesForVolunteer(props.match.params.id);
-  }, [getTrainingSeriesForVolunteer]);
+  }, [props.getTrainingSeriesForVolunteer]);
   useEffect(() => {
     props.getTrainingSeriesID(props.match.params.id);
-  }, [getTrainingSeriesID]);
+  }, [props.getTrainingSeriesID]);
 
   // Removes Training Series from database
   const removeTrainingSeries = id => {
@@ -62,6 +62,8 @@ function SingleTrainingSeries(props) {
     link
   } = props.activeTrainingSeries;
 
+  console.log("Single page-Volunteers",props.trainingSeriesVolunteers.length)
+
   return (
     <>
       <Wrapper>
@@ -91,7 +93,7 @@ function SingleTrainingSeries(props) {
             </i>
             {props.trainingSeriesVolunteers.map(v =>
               // checks if any Volunteers are assigned to TrainingSeries
-              v.length !== 0 ? (
+              v.length > 0 ? (
                 <Typography variant="body1" key={v.id}>
                   {v.name}{" "}
                   <i className="material-icons" onClick={e=> removeVolunteer({id:props.match.params.id, user_id: v.volunteer_id })}>
