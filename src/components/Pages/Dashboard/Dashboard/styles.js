@@ -39,8 +39,11 @@ export const TripleColumn = styled.div`
 `;
 export const SmallColumns = styled.div`
   display: flex;
+  flex-direction: column-reverse;
   height: 100%;
   width: 100%;
+  margin-left: 115px;
+  
 
   @media (max-width: 1400px) {
     margin-bottom: 50px;
