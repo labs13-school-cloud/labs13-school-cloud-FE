@@ -7,17 +7,26 @@ import styled from "styled-components";
 import history from "history.js";
 
 import DeleteModal from "../../../../UI/Modals/deleteModal";
-import { getClassList, deleteClass } from "../../../../../store/actions/classesActions";
+import AddClassModal from "../../../../UI/Modals/addModal";
+import { getClassList, deleteClass, addClass } from "../../../../../store/actions/classesActions";
 
 import { withStyles } from "@material-ui/core/styles";
-import { ListItem, ListItemText } from "@material-ui/core/";
+import { ListItem,
+         ListItemText,
+         Typography,
+         Fab,
+         TextField,
+         InputAdornment
+        } from "@material-ui/core/";
 import { ListStyles } from "./styles.js";
-import { Typography } from "@material-ui/core/";
+// import { Typography } from "@material-ui/core/";
 
 function  Overview(props) {
     useEffect(() => {
         props.getClassList()
     }, [getClassList]);
+
+    const { title, tour, classes, add, searchHook } = props;
 
     const removeClass = id => {
         props.deleteClass(props.classList.id);
@@ -27,7 +36,7 @@ function  Overview(props) {
 
     console.log(props)
     return (
-        <div style={{ display: "flex", flexWrap: "wrap" }}>
+        <div style={{ display: "flex", flexWrap: "wrap", alignItems: "flex-end" }}>
             {props.getFiltered(props.classList).map(
                 ({ id, class_name, subject, grade_level, number_of_students, teacher_name }) => {
                     console.log(id)
@@ -73,6 +82,19 @@ function  Overview(props) {
                     )
                  } 
             )}
+            <AddClassModal 
+            className={`material-icons ${props.classList.icons}`}
+            
+            />
+                                    {/* <Fab
+                                        // data-tour={tour ? tour[1] : ""}
+                                        size="small"
+                                        aria-label="Add"
+                                        // className={classes.fab}
+                                        onClick={() => add()}
+                                    >
+                                        <i className="material-icons">add</i>
+                                    </Fab> */}
         </div>
     )
 }
@@ -85,5 +107,5 @@ const mapStateToProps = state => {
 
 export default connect(
     mapStateToProps,
-    { getClassList, deleteClass }
+    { getClassList, deleteClass, addClass }
 )(Overview);
