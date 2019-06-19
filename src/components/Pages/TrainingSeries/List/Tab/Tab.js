@@ -34,7 +34,6 @@ function Tab(
   props
 ) {
   const { classes } = props;
-  console.log(props);
   const setTrainingSeries = id => {
     getTrainingSeriesID(id);
     getTrainingSeriesForVolunteer(id);
