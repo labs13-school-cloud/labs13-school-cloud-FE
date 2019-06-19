@@ -13,17 +13,17 @@ import { ListItem, ListItemText } from "@material-ui/core/";
 import DeleteModal from "components/UI/Modals/deleteModal";
 import { ListStyles, styles } from "./styles.js";
 
-function Overview({
-  getFiltered,
-  user_id,
-  getTrainingSeries,
-  getAllMessages,
-  trainingSeries,
-  notifications,
-  messages,
-  classes,
-  history
-}) {
+function Overview(props) {
+  const {
+    getFiltered,
+    user_id,
+    getTrainingSeries,
+    getAllMessages,
+    trainingSeries,
+    classes,
+    history,
+  } = props;
+  
   useEffect(() => {
     getTrainingSeries();
     getAllMessages();
@@ -32,29 +32,17 @@ function Overview({
   return (
     <ListStyles>
       {getFiltered(trainingSeries).map(props => {
-        const tsMessages = messages.filter(msg => {
-          return msg.training_series_id === props.id;
-        });
-        const userCount = new Set(
-          notifications
-            .filter(n => n.training_series_id === props.id)
-            .map(n => n.team_member_id)
-        ).size;
-
         return (
           <ListItem key={props.id} component="li" className={classes.listItem}>
             <ListItemText
               primary={props.title}
-              secondary={`Messages: ${
-                tsMessages.length
-              } | Assigned: ${userCount}`}
+              secondary={`Subject: ${props.subject} | Volunteers: ${props.volunteers.length}`}
               onClick={e => history.push(`/home/training-series/${props.id}`)}
             />
             <DeleteModal
               deleteType="trainingSeries"
               trainingSeriesId={props.id}
               className={`material-icons ${classes.icons}`}
-              user_id={user_id}
             />
           </ListItem>
         );
@@ -63,11 +51,12 @@ function Overview({
   );
 }
 
-const mapStateToProps = state => ({
-  trainingSeries: state.trainingSeriesReducer.trainingSeries,
-  notifications: state.notificationsReducer.notifications,
-  messages: state.messagesReducer.messages
-});
+const mapStateToProps = state => {
+  return {
+    trainingSeries: state.trainingSeriesReducer.trainingSeries,
+    messages: state.messagesReducer.messages
+  }
+};
 
 export default connect(
   mapStateToProps,
