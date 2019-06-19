@@ -7,54 +7,54 @@ import history from "history.js";
 
 import DeleteModal from "../../../../UI/Modals/deleteModal";
 
-import { getClassList, deleteClass, addClass } from "../../../../../store/actions/classesActions";
+import { getVolunteers, addVolunteer } from "../../../../../store/actions/volunteerActions";
 
 import { Typography } from "@material-ui/core/";
 import { ListStyles } from "./styles.js";
 
 
-function  Overview(props) {
+function  AdminVolunteerTab(props) {
     useEffect(() => {
-        props.getClassList()
-    }, [getClassList]);
+        props.getVolunteers()
+    }, [getVolunteers]);
 
 
     console.log(props)
     return (
         <div style={{ display: "flex", flexWrap: "wrap", alignItems: "flex-end" }}>
-            {props.getFiltered(props.classList).map(
-                ({ id, class_name, subject, grade_level, number_of_students, teacher_name }) => {
+            {props.getFiltered(props.volunteers).map(
+                ({ id, name, email, role, approved, donator }) => {
                     console.log(id)
                     return (
-                        <ListStyles key={id} component="li" className={props.classList.listItem}>
+                        <ListStyles key={id} component="li" className={props.volunteers.listItem}>
                          
                             <Typography key={id}>
                                 <div 
                                 style={{ cursor: "pointer" }}
                                 >
                                     <Typography variant="subtitle1" style={{ display:"flex", justifyContent:"space-between" }}>
-                                        {class_name}
+                                        {name}
                                     <DeleteModal 
-                                        deleteType="classes"
+                                        deleteType="volunteeer"
                                         classId={id}
-                                        className={`material-icons ${props.classList.icons}`}
+                                        className={`material-icons ${props.volunteers.icons}`}
                                         style={{ zIndex: "1000" }}
                                     />
                                     </Typography>
-                                    <div onClick={() => history.push(`home/classes/${id}`)}>
+                                    <div onClick={() => history.push(`home/volunteers/${id}`)}>
                                         
                                         <hr />
                                         <Typography variant="overline">
-                                            {`Subject: ${subject}`}
+                                            {`Subject: ${email}`}
                                         </Typography>
                                         <Typography variant="overline">
-                                            {`Grade Level: ${grade_level}`}
+                                            {`Grade Level: ${role}`}
                                         </Typography>
                                         <Typography variant="overline">
-                                            {`Teacher Name: ${teacher_name}`}
+                                            {`Teacher Name: ${approved}`}
                                         </Typography>
                                         <Typography variant="overline">
-                                            {`Number Of Students: ${number_of_students}`}
+                                            {`Number Of Students: ${donator}`}
                                         </Typography>
                                     </div>
 
@@ -64,10 +64,10 @@ function  Overview(props) {
                     )
                  } 
             )}
-            <AddClassModal 
-            className={`material-icons ${props.classList.icons}`}
+            {/* <AddClassModal 
+            className={`material-icons ${props.volunteers.icons}`}
             
-            />
+            /> */}
 
         </div>
     )
@@ -75,11 +75,11 @@ function  Overview(props) {
 
 const mapStateToProps = state => {
     return {
-      classList: state.classesReducer.classList
+      volunteers: state.classesReducer.volunteers
     }
 };
 
 export default connect(
     mapStateToProps,
-    { getClassList, deleteClass, addClass }
-)(Overview);
+    { getVolunteers, addVolunteer }
+)(AdminVolunteerTab);
