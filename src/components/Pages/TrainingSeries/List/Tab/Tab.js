@@ -6,7 +6,8 @@ import { withRouter } from "react-router-dom";
 import {
   getTrainingSeries,
   getTrainingSeriesID,
-  getTrainingSeriesForVolunteer
+  getTrainingSeriesForVolunteer,
+  deleteTrainingSeries
 } from "store/actions";
 //import DeleteModal from "components/UI/Modals/deleteModal";
 import history from "history.js";
@@ -22,45 +23,61 @@ import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
 import { Wrapper, styles } from "./styles.js";
 
-function Tab({
-  getFiltered,
-  getTrainingSeries,
-  trainingSeries,
-  getTrainingSeriesID,
-  getTrainingSeriesForVolunteer
-}) {
-  useEffect(() => {
-    getTrainingSeries();
-  }, [getTrainingSeries]);
-
+function Tab(
+  {
+    getFiltered,
+    getTrainingSeries,
+    trainingSeries,
+    getTrainingSeriesID,
+    getTrainingSeriesForVolunteer
+  },
+  props
+) {
+  const { classes } = props;
+  console.log(props);
   const setTrainingSeries = id => {
     getTrainingSeriesID(id);
     getTrainingSeriesForVolunteer(id);
     history.push(`/home/training-series/${id}`);
   };
 
-  const filterTraining = () => {};
+  // Removes Training Series from database
+  const removeTrainingSeries = id => {
+    deleteTrainingSeries(props.activeTrainingSeries.id);
+    history.push(`/home`);
+  };
+  // Sends Admin to Edit screen for Training Series
+  const editTrainingSeries = id => {
+    getTrainingSeriesID(id);
+    history.push(`/home/training-series/${id}/edit`);
+  };
 
+  const [trainingFilter, setTrainingFilter] = useState("available");
+
+  // Marks training as complete
+  // const [trainingComplete, setTrainingComplete] = useState("");
+  // useEffect(() => {
+  //   setTrainingComplete(props.activeTrainingSeries.finished);
+  // }, [props.activeTrainingSeries, setTrainingComplete]);
   return (
     <>
       <FormControl>
         <Select
-          // native
+          native
           // className={selection}
-          // // value={trainingfilter}
-          // onChange={e => setTrainingFilter(e.target.value)}
+          value={trainingFilter}
+          onChange={e => setTrainingFilter(e.target.value)}
           inputProps={{
             id: "status-selector",
             label: "Filter Selector"
           }}
         >
-          <option value={"active"}>Active</option>
           <option value={"available"}>Available</option>
           <option value={"Completed"}>Completed</option>
         </Select>
       </FormControl>
       {getFiltered(trainingSeries).map(
-        ({ id, title, subject, first_name, last_name, finished }) => {
+        ({ id, title, subject, name, finished }) => {
           return (
             <Wrapper key={`container_${id}`}>
               <Grid container spacing={24}>
@@ -71,11 +88,17 @@ function Tab({
                   </Typography>
                   <hr />
                   <Typography variant="body1">Subject: {subject}</Typography>
-                  <Typography variant="body1">
-                    Creator: {first_name} {""}
-                    {last_name}
-                  </Typography>
-                  <Button>Done</Button>
+                  <i className="material-icons" onClick={removeTrainingSeries}>
+                    delete
+                  </i>{" "}
+                  <i
+                    className="material-icons"
+                    onClick={e => editTrainingSeries(id)}
+                  >
+                    edit
+                  </i>
+                  <Typography variant="body1">Creator: {name}</Typography>
+                  {/* <Button>Done</Button> */}
                 </Grid>
               </Grid>
             </Wrapper>
@@ -97,6 +120,11 @@ const mapStateToProps = state => ({
 export default withRouter(
   connect(
     mapStateToProps,
-    { getTrainingSeries, getTrainingSeriesID, getTrainingSeriesForVolunteer }
+    {
+      getTrainingSeries,
+      getTrainingSeriesID,
+      getTrainingSeriesForVolunteer,
+      deleteTrainingSeries
+    }
   )(withStyles(styles)(Tab))
 );

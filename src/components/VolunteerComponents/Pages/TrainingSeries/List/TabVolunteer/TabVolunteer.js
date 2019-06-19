@@ -1,16 +1,19 @@
 // main page for displaying list of all training series for Volunteer users
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { withRouter } from 'react-router-dom';
+import { withRouter } from "react-router-dom";
 
-import {
-  getTrainingSeries,
-  getTrainingSeriesID
-} from "store/actions";
+import { getTrainingSeries, getTrainingSeriesID } from "store/actions";
 //import DeleteModal from "components/UI/Modals/deleteModal";
 import history from "history.js";
 
-import { Grid, Typography, Link, Select, FormControl } from "@material-ui/core/";
+import {
+  Grid,
+  Typography,
+  Link,
+  Select,
+  FormControl
+} from "@material-ui/core/";
 import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
 import { Wrapper, styles } from "./styles.js";
@@ -21,41 +24,34 @@ function TabVolunteer({
   trainingSeries,
   getTrainingSeriesID
 }) {
-  useEffect(() => {
-    getTrainingSeries();
-  }, [getTrainingSeries]);
-
-
   const setTrainingSeries = id => {
     getTrainingSeriesID(id);
     history.push(`/home/training-series/${id}`);
   };
-  
-const filterTraining = () => {
 
-}
- 
+  const [trainingFilter, setTrainingFilter] = useState("available");
+
+  const filterTraining = () => {};
 
   return (
     <>
-    <FormControl>
-                    <Select
-                      // native
-                      // className={selection}
-                      // // value={trainingfilter}
-                      // onChange={e => setTrainingFilter(e.target.value)}
-                      inputProps={{
-                        id: "status-selector",
-                        label: "Filter Selector"
-                      }}
-                    >
-                      <option value={"active"}>Active</option>
-                      <option value={"available"}>Available</option>
-                      <option value={"Completed"}>Completed</option>
-                    </Select>
-                  </FormControl>
+      <FormControl>
+        <Select
+          native
+          // className={selection}
+          value={trainingFilter}
+          onChange={e => setTrainingFilter(e.target.value)}
+          inputProps={{
+            id: "status-selector",
+            label: "Filter Selector"
+          }}
+        >
+          <option value={"available"}>Available</option>
+          <option value={"Completed"}>Completed</option>
+        </Select>
+      </FormControl>
       {getFiltered(trainingSeries).map(
-        ({ id, title, subject, first_name, last_name, finished }) => {
+        ({ id, title, subject, name, finished }) => {
           return (
             <Wrapper key={`container_${id}`}>
               <Grid container spacing={24}>
@@ -66,10 +62,8 @@ const filterTraining = () => {
                   </Typography>
                   <hr />
                   <Typography variant="body1">Subject: {subject}</Typography>
-                  <Typography variant="body1">
-                    Creator: {first_name} {""}
-                    {last_name}
-                  </Typography>
+
+                  <Typography variant="body1">Creator: {name}</Typography>
                   <Button>Done</Button>
                 </Grid>
               </Grid>
@@ -88,7 +82,9 @@ const mapStateToProps = state => ({
   activeTrainingSeries: state.messagesReducer.activeTrainingSeries
 });
 
-export default withRouter(connect(
-  mapStateToProps,
-  { getTrainingSeries,  getTrainingSeriesID }
-)(withStyles(styles)(TabVolunteer)));
+export default withRouter(
+  connect(
+    mapStateToProps,
+    { getTrainingSeries, getTrainingSeriesID }
+  )(withStyles(styles)(TabVolunteer))
+);
