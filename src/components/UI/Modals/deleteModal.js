@@ -100,10 +100,7 @@ class TrainingSeriesModal extends React.Component {
         this.props.deleteTeamMember(this.props.teamMemberId);
         break;
       case "trainingSeries":
-        this.props.deleteTrainingSeries(
-          this.props.trainingSeriesId,
-          this.props.user_id
-        );
+        this.props.deleteTrainingSeries(this.props.trainingSeriesId);
         break;
       case "user":
         this.props.deleteUser(this.props.id);
@@ -114,7 +111,6 @@ class TrainingSeriesModal extends React.Component {
         break;
       case "classes":
         this.props.deleteClass(this.props.classId);
-        // this.props.reRouteOnDelete();
         break;
       default:
         break;
@@ -150,7 +146,6 @@ class TrainingSeriesModal extends React.Component {
   };
 
   render() {
-    console.log(this.props)
     const { classes } = this.props;
 
     return (
