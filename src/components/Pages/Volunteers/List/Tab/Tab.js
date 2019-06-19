@@ -34,27 +34,27 @@ function  AdminVolunteerTab(props) {
                                 >
                                     <Typography variant="subtitle1" style={{ display:"flex", justifyContent:"space-between" }}>
                                         {name}
-                                    <DeleteModal 
+                                    {/* <DeleteModal 
                                         deleteType="volunteeer"
                                         classId={id}
                                         className={`material-icons ${props.volunteers.icons}`}
                                         style={{ zIndex: "1000" }}
-                                    />
+                                    /> */}
                                     </Typography>
                                     <div onClick={() => history.push(`home/volunteers/${id}`)}>
                                         
                                         <hr />
                                         <Typography variant="overline">
-                                            {`Subject: ${email}`}
+                                            {`Email: ${email}`}
                                         </Typography>
                                         <Typography variant="overline">
-                                            {`Grade Level: ${role}`}
+                                            {`Role: ${role}`}
                                         </Typography>
                                         <Typography variant="overline">
-                                            {`Teacher Name: ${approved}`}
+                                            {`Approved: ${approved}`}
                                         </Typography>
                                         <Typography variant="overline">
-                                            {`Number Of Students: ${donator}`}
+                                            {`Donator: ${donator}`}
                                         </Typography>
                                     </div>
 
@@ -75,7 +75,7 @@ function  AdminVolunteerTab(props) {
 
 const mapStateToProps = state => {
     return {
-      volunteers: state.classesReducer.volunteers
+      volunteers: state.userReducer.volunteers
     }
 };
 

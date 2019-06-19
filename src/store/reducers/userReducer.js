@@ -31,7 +31,7 @@ import {
   GET_VOLUNTEER_ID_START,
   GET_VOLUNTEER_ID_SUCCESS,
   GET_VOLUNTEER_ID_FAILURE,
-} from "store/actions"
+} from "store/actions/volunteerActions"
 
 const initialState = {
   userProfile: [],

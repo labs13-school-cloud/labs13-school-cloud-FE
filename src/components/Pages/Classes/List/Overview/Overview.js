@@ -26,14 +26,6 @@ function  Overview(props) {
         props.getClassList()
     }, [getClassList]);
 
-    const { title, tour, classes, add, searchHook } = props;
-
-    const removeClass = id => {
-        props.deleteClass(props.classList.id);
-        props.history.push(`/home`);
-        console.log("Remove Class", id);
-    };
-
     console.log(props)
     return (
         <div style={{ display: "flex", flexWrap: "wrap", alignItems: "flex-end" }}>

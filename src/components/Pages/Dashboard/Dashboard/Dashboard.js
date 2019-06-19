@@ -99,14 +99,14 @@ function Dashboard(props) {
           />
         )}
 
-        {/* {topTab === "volunteers" && (
-          <SearchCard 
+        {topTab === "volunteers" && (
+          <SmallColumns 
             List={AdminVolunteerTab}
             section="Volunteers"
             isSearching={false}
             limit={10}
           />
-        )} */}
+        )}
 
         {topTab === "notifications" && (
           <div style={{ width: "100%" }}>
