@@ -107,6 +107,7 @@ class AddClassModal extends React.Component {
               <i
                 onClick={this.handleOpen}
                 className={`material-icons ${classes.icons}`}
+                style={{ fontSize: "xx-large" }}
               >
                 add_circle
               </i>
