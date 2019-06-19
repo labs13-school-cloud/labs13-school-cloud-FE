@@ -3,7 +3,7 @@ import { withRouter } from "react-router-dom";
 
 import { connect } from "react-redux";
 
-import DeleteModal from "UI/Modals/deleteModal";
+//import DeleteModal from "UI/Modals/deleteModal";
 import { getClassByID, 
         deleteClass, 
         addClass, 
@@ -23,7 +23,7 @@ import {
 } from "@material-ui/core/";
 
 import { styles, PageContainer, Wrapper } from "./styles.js";
-import SingleClassView from ".";
+//import SingleClassView from ".";
 
 function SingleClassView(props) {
 
@@ -33,7 +33,7 @@ function SingleClassView(props) {
 
   useEffect(() => {
     props.addClass(props.match.params.id);
-  }, [getTrainingSeriesID]);
+  }, [addClass]);
 
   // Removes class from database
   const removeClass = id => {
