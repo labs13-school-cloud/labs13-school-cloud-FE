@@ -2,7 +2,7 @@ import axios from "axios";
 
 //GET TRAINING SERIES
 export const GET_TRAINING_SERIES_START = "GET_TRAINING_SERIES_START";
-export const GET_TRAINING_SERIES_SUCCESS = "GET_TRAINING_SERIES_COMPLETE";
+export const GET_TRAINING_SERIES_SUCCESS = "GET_TRAINING_SERIES_SUCCESS";
 export const GET_TRAINING_SERIES_FAIL = "GET_TRAINING_SERIES_FAIL";
 //ADD TRAINING SERIES
 export const ADD_TRAINING_SERIES_START = "ADD_TRAINING_SERIES_START";
@@ -59,8 +59,10 @@ export const getTrainingSeries = () => dispatch => {
       dispatch({
         type: GET_TRAINING_SERIES_SUCCESS,
         payload: res.data.trainingSeries
-      })
+      },
+      console.log("Actions- Training Series", res.data.trainingSeries))
     )
+
     .catch(err => dispatch({ type: GET_TRAINING_SERIES_FAIL, error: err }));
 };
 

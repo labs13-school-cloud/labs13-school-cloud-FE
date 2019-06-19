@@ -26,7 +26,7 @@ function Edit(props) {
   // Used to update the title and subject for Training Series
   const [title, setTitle] = useState("");
   const [subject, setSubject] = useState("");
-
+  // Sets the current title and subject so that they can be changed
   useEffect(() => {
     setTitle(props.activeTrainingSeries.title);
   }, [props.activeTrainingSeries, setTitle]);

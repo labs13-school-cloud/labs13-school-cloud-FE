@@ -24,14 +24,12 @@ function TabVolunteer({
   trainingSeries,
   getTrainingSeriesID
 }) {
-  useEffect(() => {
-    getTrainingSeries();
-  }, [getTrainingSeries]);
-
   const setTrainingSeries = id => {
     getTrainingSeriesID(id);
     history.push(`/home/training-series/${id}`);
   };
+
+  const [trainingFilter, setTrainingFilter] = useState("available");
 
   const filterTraining = () => {};
 
@@ -39,16 +37,15 @@ function TabVolunteer({
     <>
       <FormControl>
         <Select
-          // native
+          native
           // className={selection}
-          // // value={trainingfilter}
-          // onChange={e => setTrainingFilter(e.target.value)}
+          value={trainingFilter}
+          onChange={e => setTrainingFilter(e.target.value)}
           inputProps={{
             id: "status-selector",
             label: "Filter Selector"
           }}
         >
-          <option value={"active"}>Active</option>
           <option value={"available"}>Available</option>
           <option value={"Completed"}>Completed</option>
         </Select>
@@ -65,6 +62,7 @@ function TabVolunteer({
                   </Typography>
                   <hr />
                   <Typography variant="body1">Subject: {subject}</Typography>
+
                   <Typography variant="body1">Creator: {name}</Typography>
                   <Button>Done</Button>
                 </Grid>

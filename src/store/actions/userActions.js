@@ -37,8 +37,10 @@ export const getAllVolunteers = () => dispatch => {
   axios
     .get(`${process.env.REACT_APP_API}/api/users/volunteers`)
     .then(res => {
-      dispatch({ type: GET_ALL_VOLUNTEERS_SUCCESS, payload: res.data },
-        console.log("User Action", res.data));
+      dispatch(
+        { type: GET_ALL_VOLUNTEERS_SUCCESS, payload: res.data.volunteers },
+        console.log("User Action", res.data.volunteers)
+      );
     })
     .catch(err => dispatch({ type: GET_ALL_VOLUNTEERS_FAIL, error: err }));
 };

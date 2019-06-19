@@ -88,14 +88,16 @@ const userReducer = (state = initialState, action) => {
     case GET_ALL_VOLUNTEERS_SUCCESS:
       return {
         ...state,
-        volunteers: action.payload
+        volunteers: action.payload,
+        isLoading: false,
+        doneLoading: true
       };
     case GET_ALL_VOLUNTEERS_FAIL:
       return {
         ...state,
         isLoading: false,
         doneLoading: false,
-        error: action.payload
+        error: ""
       };
     case EDIT_USER_START:
       return {

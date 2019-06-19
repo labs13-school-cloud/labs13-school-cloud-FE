@@ -8,8 +8,7 @@ import {
   editTrainingSeries,
   deleteTrainingSeries,
   addVolunteerToTrainingSeries,
-  deleteVolunteerFromTrainingSeries,
-  getUser
+  deleteVolunteerFromTrainingSeries
 } from "store/actions";
 import InfoPopup from "components/UI/InfoPopup/InfoPopup.js";
 
@@ -28,10 +27,8 @@ import { styles, PageContainer, Wrapper } from "./styles.js";
 function SingleTrainingSeries(props) {
   useEffect(() => {
     props.getTrainingSeriesForVolunteer(props.match.params.id);
-  }, [props.getTrainingSeriesForVolunteer]);
-  useEffect(() => {
     props.getTrainingSeriesID(props.match.params.id);
-  }, [props.getTrainingSeriesID]);
+  }, [props.getTrainingSeriesForVolunteer, props.getTrainingSeriesID]);
 
   // Removes Training Series from database
   const removeTrainingSeries = id => {
@@ -47,22 +44,14 @@ function SingleTrainingSeries(props) {
   // Sends Admin to Add Volunteer to Training Series page
   const addVolunteer = id => {
     props.getTrainingSeriesID(id);
-    props.history.push(`/home/training-series/${id}/addVolunteer`) 
+    props.history.push(`/home/training-series/${id}/addVolunteer`);
   };
 
   // Remove Volunteer from training series
   const removeVolunteer = (id, user_id) => {
     props.deleteVolunteerFromTrainingSeries(id, user_id);
   };
-  const {
-    id,
-    name,
-    title,
-    subject,
-    link
-  } = props.activeTrainingSeries;
-
-  console.log("Single page-Volunteers",props.trainingSeriesVolunteers.length)
+  const { id, name, title, subject, link } = props.activeTrainingSeries;
 
   return (
     <>
@@ -92,17 +81,24 @@ function SingleTrainingSeries(props) {
               add_circle
             </i>
             {props.trainingSeriesVolunteers.map(v =>
-              // checks if any Volunteers are assigned to TrainingSeries
-              v.length > 0 ? (
+              v.length !== 0 ? (
                 <Typography variant="body1" key={v.id}>
                   {v.name}{" "}
-                  <i className="material-icons" onClick={e=> removeVolunteer({id:props.match.params.id, user_id: v.volunteer_id })}>
+                  <i
+                    className="material-icons"
+                    onClick={e =>
+                      removeVolunteer({
+                        id: props.match.params.id,
+                        user_id: v.volunteer_id
+                      })
+                    }
+                  >
                     delete_forever
                   </i>
                 </Typography>
               ) : (
-                <Typography variant="body1">
-                  No Volunteers are taking this Training Series at this time.
+                <Typography>
+                  No Volunteers taking this Training Series
                 </Typography>
               )
             )}
@@ -117,7 +113,6 @@ const mapStateToProps = state => ({
   activeTrainingSeries: state.trainingSeriesReducer.activeTrainingSeries,
   trainingSeriesVolunteers:
     state.trainingSeriesReducer.trainingSeriesVolunteers,
-  volunteers: state.trainingSeriesReducer.volunteers,
   trainingSeries: state.trainingSeriesReducer.trainingSeries,
   userProfile: state.userReducer.userProfile
 });

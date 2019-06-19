@@ -41,7 +41,6 @@ const initialState = {
   assignments: [],
   activeTrainingSeries: {},
   trainingSeriesVolunteers: [],
-  volunteers: [],
   volunteer: {}
 };
 
@@ -135,8 +134,11 @@ const trainingSeriesReducer = (state = initialState, action) => {
       return {
         ...state,
         trainingSeriesVolunteers: [
-          ...state.trainingSeriesVolunteers.filter(series => series.volunteer_id !== action.payload)
-        ],        error: ""
+          ...state.trainingSeriesVolunteers.filter(
+            series => series.volunteer_id !== action.payload
+          )
+        ],
+        error: ""
       };
     case DELETE_VOLUNTEERS_FOR_TRAINING_SERIES_FAIL:
       return {

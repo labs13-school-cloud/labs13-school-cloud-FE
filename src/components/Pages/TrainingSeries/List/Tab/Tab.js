@@ -33,12 +33,8 @@ function Tab(
   },
   props
 ) {
-  useEffect(() => {
-    getTrainingSeries();
-  }, [getTrainingSeries]);
-
   const { classes } = props;
-
+  console.log(props);
   const setTrainingSeries = id => {
     getTrainingSeriesID(id);
     getTrainingSeriesForVolunteer(id);
@@ -63,7 +59,6 @@ function Tab(
   // useEffect(() => {
   //   setTrainingComplete(props.activeTrainingSeries.finished);
   // }, [props.activeTrainingSeries, setTrainingComplete]);
-
   return (
     <>
       <FormControl>
@@ -93,11 +88,11 @@ function Tab(
                   </Typography>
                   <hr />
                   <Typography variant="body1">Subject: {subject}</Typography>
-                  <i class="material-icons" onClick={removeTrainingSeries}>
+                  <i className="material-icons" onClick={removeTrainingSeries}>
                     delete
                   </i>{" "}
                   <i
-                    class="material-icons"
+                    className="material-icons"
                     onClick={e => editTrainingSeries(id)}
                   >
                     edit
