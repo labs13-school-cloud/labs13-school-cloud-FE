@@ -8,7 +8,8 @@ import {
   editTrainingSeries,
   deleteTrainingSeries,
   addVolunteerToTrainingSeries,
-  deleteVolunteerFromTrainingSeries
+  deleteVolunteerFromTrainingSeries,
+  getAllVolunteers
 } from "store/actions";
 import InfoPopup from "components/UI/InfoPopup/InfoPopup.js";
 
@@ -41,9 +42,15 @@ function SingleTrainingSeries(props) {
     props.history.push(`/home/training-series/${id}/edit`);
   };
 
+  // Filter out volunteers that are already apart of the training series
+  let addVolunteerToList = props.volunteers.filter(v => {
+    return v.id !== props.getTrainingSeriesForVolunteer.volunteer_id;
+  });
+
   // Sends Admin to Add Volunteer to Training Series page
   const addVolunteer = id => {
     props.getTrainingSeriesID(id);
+    props.getAllVolunteers(addVolunteerToList);
     props.history.push(`/home/training-series/${id}/addVolunteer`);
   };
 
@@ -114,7 +121,8 @@ const mapStateToProps = state => ({
   trainingSeriesVolunteers:
     state.trainingSeriesReducer.trainingSeriesVolunteers,
   trainingSeries: state.trainingSeriesReducer.trainingSeries,
-  userProfile: state.userReducer.userProfile
+  userProfile: state.userReducer.userProfile,
+  volunteers: state.userReducer.volunteers
 });
 
 export default withRouter(
@@ -126,7 +134,8 @@ export default withRouter(
       editTrainingSeries,
       deleteTrainingSeries,
       addVolunteerToTrainingSeries,
-      deleteVolunteerFromTrainingSeries
+      deleteVolunteerFromTrainingSeries,
+      getAllVolunteers
     }
   )(withStyles(styles)(SingleTrainingSeries))
 );

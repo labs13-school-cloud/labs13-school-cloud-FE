@@ -56,11 +56,13 @@ export const getTrainingSeries = () => dispatch => {
   axios
     .get(`${process.env.REACT_APP_API}/api/training-series`)
     .then(res =>
-      dispatch({
-        type: GET_TRAINING_SERIES_SUCCESS,
-        payload: res.data.trainingSeries
-      },
-      console.log("Actions- Training Series", res.data.trainingSeries))
+      dispatch(
+        {
+          type: GET_TRAINING_SERIES_SUCCESS,
+          payload: res.data.trainingSeries
+        },
+        console.log("Actions- Training Series", res.data.trainingSeries)
+      )
     )
 
     .catch(err => dispatch({ type: GET_TRAINING_SERIES_FAIL, error: err }));
@@ -161,16 +163,15 @@ export const getTrainingSeriesForVolunteer = trainingSeriesID => dispatch => {
 };
 
 // Add a Volunteers to a Training Series
-export const addVolunteerToTrainingSeries = trainingSeriesID => dispatch => {
+export const addVolunteerToTrainingSeries = (id, user_id) => dispatch => {
   dispatch({
     type: ADD_VOLUNTEERS_FOR_TRAINING_SERIES_START
   });
   axios
-    .post(
-      `${
-        process.env.REACT_APP_API
-      }/api/training-series/${trainingSeriesID}/volunteers`
-    )
+    .post(`${process.env.REACT_APP_API}/api/training-series/${id}/volunteers`, {
+      id,
+      user_id
+    })
     .then(res =>
       dispatch(
         {
