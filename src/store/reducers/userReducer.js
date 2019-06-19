@@ -2,6 +2,9 @@ import {
   GET_USER_START,
   GET_USER_SUCCESS,
   GET_USER_FAIL,
+  GET_ALL_VOLUNTEERS_START,
+  GET_ALL_VOLUNTEERS_SUCCESS,
+  GET_ALL_VOLUNTEERS_FAIL,
   EDIT_USER_START,
   EDIT_USER_SUCCESS,
   EDIT_USER_FAIL
@@ -20,6 +23,7 @@ import {
 
 const initialState = {
   userProfile: [],
+  volunteers: [],
   error: "",
   isLoading: false,
   isEditing: false,
@@ -72,6 +76,28 @@ const userReducer = (state = initialState, action) => {
         isLoading: false,
         doneLoading: false,
         error: action.payload
+      };
+    // Get All VOLUNTEERS
+    case GET_ALL_VOLUNTEERS_START:
+      return {
+        ...state,
+        isLoading: true,
+        doneLoading: false,
+        error: ""
+      };
+    case GET_ALL_VOLUNTEERS_SUCCESS:
+      return {
+        ...state,
+        volunteers: action.payload,
+        isLoading: false,
+        doneLoading: true
+      };
+    case GET_ALL_VOLUNTEERS_FAIL:
+      return {
+        ...state,
+        isLoading: false,
+        doneLoading: false,
+        error: ""
       };
     case EDIT_USER_START:
       return {

@@ -2,7 +2,7 @@ import axios from "axios";
 
 //GET TRAINING SERIES
 export const GET_TRAINING_SERIES_START = "GET_TRAINING_SERIES_START";
-export const GET_TRAINING_SERIES_SUCCESS = "GET_TRAINING_SERIES_COMPLETE";
+export const GET_TRAINING_SERIES_SUCCESS = "GET_TRAINING_SERIES_SUCCESS";
 export const GET_TRAINING_SERIES_FAIL = "GET_TRAINING_SERIES_FAIL";
 //ADD TRAINING SERIES
 export const ADD_TRAINING_SERIES_START = "ADD_TRAINING_SERIES_START";
@@ -56,11 +56,15 @@ export const getTrainingSeries = () => dispatch => {
   axios
     .get(`${process.env.REACT_APP_API}/api/training-series`)
     .then(res =>
-      dispatch({
-        type: GET_TRAINING_SERIES_SUCCESS,
-        payload: res.data.trainingSeries
-      })
+      dispatch(
+        {
+          type: GET_TRAINING_SERIES_SUCCESS,
+          payload: res.data.trainingSeries
+        },
+        console.log("Actions- Training Series", res.data.trainingSeries)
+      )
     )
+
     .catch(err => dispatch({ type: GET_TRAINING_SERIES_FAIL, error: err }));
 };
 
@@ -158,24 +162,23 @@ export const getTrainingSeriesForVolunteer = trainingSeriesID => dispatch => {
     );
 };
 
-// Get a list of Volunteers assigned to a Training Series
-export const addVolunteerToTrainingSeries = trainingSeriesID => dispatch => {
+// Add a Volunteers to a Training Series
+export const addVolunteerToTrainingSeries = (id, user_id) => dispatch => {
   dispatch({
     type: ADD_VOLUNTEERS_FOR_TRAINING_SERIES_START
   });
   axios
-    .post(
-      `${
-        process.env.REACT_APP_API
-      }/api/training-series/${trainingSeriesID}/volunteers`
-    )
+    .post(`${process.env.REACT_APP_API}/api/training-series/${id}/volunteers`, {
+      id,
+      user_id
+    })
     .then(res =>
       dispatch(
         {
           type: ADD_VOLUNTEERS_FOR_TRAINING_SERIES_SUCCESS,
           payload: res.data.volunteers
         },
-        console.log("From Actions", res.data.volunteers)
+        console.log("From Actions", id, user_id)
       )
     )
     .catch(err =>
@@ -183,8 +186,11 @@ export const addVolunteerToTrainingSeries = trainingSeriesID => dispatch => {
     );
 };
 
-// Get a list of Volunteers assigned to a Training Series
-export const deleteVolunteerToTrainingSeries = trainingSeriesID => dispatch => {
+// Remove a Volunteers from Training Series
+export const deleteVolunteerFromTrainingSeries = ({
+  id,
+  user_id
+}) => dispatch => {
   dispatch({
     type: DELETE_VOLUNTEERS_FOR_TRAINING_SERIES_START
   });
@@ -192,15 +198,15 @@ export const deleteVolunteerToTrainingSeries = trainingSeriesID => dispatch => {
     .delete(
       `${
         process.env.REACT_APP_API
-      }/api/training-series/${trainingSeriesID}/volunteers`
+      }/api/training-series/${id}/volunteers/${user_id}`
     )
     .then(res =>
       dispatch(
         {
           type: DELETE_VOLUNTEERS_FOR_TRAINING_SERIES_SUCCESS,
-          payload: res.data.volunteers
+          payload: user_id
         },
-        console.log("From Actions", res.data.volunteers)
+        console.log("From Actions-Delete", id, user_id)
       )
     )
     .catch(err =>

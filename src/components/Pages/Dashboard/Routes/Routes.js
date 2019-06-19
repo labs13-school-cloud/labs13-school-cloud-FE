@@ -2,7 +2,7 @@ import React from "react";
 import { Router, Route } from "react-router-dom";
 
 import Profile from "components/Pages/Profile";
-import CreateTrainingSeries from "components/Pages/TrainingSeries/Add/CreateTrainingSeries";
+import AddMemberToTrainingSeries from "components/Pages/TrainingSeries/Add/AddMemberToTrainingSeries";
 import EditTrainingSeries from "components/Pages/TrainingSeries/Edit/";
 import SingleTrainingSeries from "components/Pages/TrainingSeries/SinglePage/SingleTrainingSeries";
 import Classes from "components/Pages/Classes/List/Overview/Overview";
@@ -84,9 +84,9 @@ function Routes(props) {
         )}
       />
       <Route
-        path="/home/create-training-series"
+        path="/home/training-series/:id/addVolunteer"
         render={renderProps => (
-          <CreateTrainingSeries {...renderProps} user_id={props.user.id} />
+          <AddMemberToTrainingSeries {...renderProps} user_id={props.user.id} />
         )}
       />
       <Route
