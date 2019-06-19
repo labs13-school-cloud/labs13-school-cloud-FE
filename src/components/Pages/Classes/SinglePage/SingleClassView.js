@@ -35,10 +35,18 @@ function SingleClassView(props) {
     props.addClass(props.match.params.id);
   }, [addClass]);
 
+  //
+  // Removes class from database
+  const getClass = id => {
+    props.getClassByID(props.SingleClass.id);
+    props.history.push(`/home/classes/${id}`);
+  };
+
+
   // Removes class from database
   const removeClass = id => {
-    props.deleteClass(props.activeClasses.id);
-    props.history.push(`/home`);
+    props.deleteClass(props.SingleClass.id);
+    props.history.push(`/home/classes/${id}`);
   };
   // Sends Admin to Edit screen for classes
   const editClass = id => {
@@ -48,7 +56,7 @@ function SingleClassView(props) {
 
   const completeClass = e => {
     e.preventDefault();
-    if (props.activeClasses.id === props.match.params.id) {
+    if (props.SingleClass.id === props.match.params.id) {
       this.setState({
         finished: true
       });
@@ -65,7 +73,7 @@ function SingleClassView(props) {
     finished
   } = props.activeClasses;
 
-  console.log("activeClasses", props.activeClasses);
+  console.log("singleClass", props.SingleClass);
   console.log("Classes ", props.match.params.id);
   return (
     <>
@@ -82,7 +90,8 @@ function SingleClassView(props) {
             <Typography variant="body1">Subject: {subject}</Typography>
             <Typography>
               Link to Classes:
-              <Link>{link}</Link>
+              Link to Training Series:
+              <Link to={link}> Classes Link</Link>
             </Typography>
             <Typography variant="body1">
               Creator: {first_name} {""}
