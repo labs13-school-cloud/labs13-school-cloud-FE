@@ -16,41 +16,26 @@ import {
 } from "store/actions";
 
 function AddMemberToTrainingSeries(props) {
-  const [volunteers, setVolunteers] = useState([]);
-  useEffect(() => {
-    setVolunteers(volunteers);
-  }, [volunteers]);
+  // const [volunteers, setVolunteers] = useState([]);
+  // useEffect(() => {
+  //   props.getAllVolunteers();
+  // }, [props.getAllVolunteers]);
 
-  useEffect(() => {
-    props.getAllVolunteers();
-  }, [volunteers]);
-
-  const addVolunteer = (volunteer_id, training_series_id) => {
-    props.addVolunteerToTrainingSeries(volunteer_id, training_series_id);
-    props.history.push(`/home/training-series/${training_series_id}`);
+  const addVolunteer = (id, user_id) => {
+    props.addVolunteerToTrainingSeries(id, user_id);
+    props.history.push(`/home/training-series/${id}`);
+    console.log(id, user_id);
   };
   // Filter out volunteers that are already apart of the training series
-  let addVolunteerToList = props.volunteers.filter(v => {
-    return v.id !== props.getTrainingSeriesForVolunteer.volunteer_id;
-  });
 
   return (
     <Wrapper>
-      {addVolunteerToList.map(v => (
+      {props.volunteers.map(v => (
         <Wrapper key={v.id}>
-          {/* <Grid item xs={12}> */}
-          <Typography>{v.name}</Typography>{" "}
-          <Button
-            onClick={e =>
-              addVolunteer({
-                volunteer_id: v.id,
-                training_series_id: props.match.params.id
-              })
-            }
-          >
+          <Typography variant="body1">{v.name}</Typography>{" "}
+          <Button onClick={e => addVolunteer(props.match.params.id, v.id)}>
             Add
           </Button>
-          {/* </Grid> */}
         </Wrapper>
       ))}
     </Wrapper>

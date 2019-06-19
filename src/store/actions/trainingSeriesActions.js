@@ -178,7 +178,7 @@ export const addVolunteerToTrainingSeries = (id, user_id) => dispatch => {
           type: ADD_VOLUNTEERS_FOR_TRAINING_SERIES_SUCCESS,
           payload: res.data.volunteers
         },
-        console.log("From Actions", res.data.volunteers)
+        console.log("From Actions", id, user_id)
       )
     )
     .catch(err =>

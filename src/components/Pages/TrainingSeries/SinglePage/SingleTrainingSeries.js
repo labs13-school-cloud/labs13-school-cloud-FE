@@ -28,8 +28,10 @@ import { styles, PageContainer, Wrapper } from "./styles.js";
 function SingleTrainingSeries(props) {
   useEffect(() => {
     props.getTrainingSeriesForVolunteer(props.match.params.id);
+  }, [props.getTrainingSeriesForVolunteer]);
+  useEffect(() => {
     props.getTrainingSeriesID(props.match.params.id);
-  }, [props.getTrainingSeriesForVolunteer, props.getTrainingSeriesID]);
+  }, [props.getTrainingSeriesID]);
 
   // Removes Training Series from database
   const removeTrainingSeries = id => {
@@ -43,14 +45,11 @@ function SingleTrainingSeries(props) {
   };
 
   // Filter out volunteers that are already apart of the training series
-  let addVolunteerToList = props.volunteers.filter(v => {
-    return v.id !== props.getTrainingSeriesForVolunteer.volunteer_id;
-  });
 
   // Sends Admin to Add Volunteer to Training Series page
   const addVolunteer = id => {
     props.getTrainingSeriesID(id);
-    props.getAllVolunteers(addVolunteerToList);
+    props.getAllVolunteers();
     props.history.push(`/home/training-series/${id}/addVolunteer`);
   };
 
@@ -59,7 +58,6 @@ function SingleTrainingSeries(props) {
     props.deleteVolunteerFromTrainingSeries(id, user_id);
   };
   const { id, name, title, subject, link } = props.activeTrainingSeries;
-
   return (
     <>
       <Wrapper>
