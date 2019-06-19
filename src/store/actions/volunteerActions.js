@@ -15,12 +15,10 @@ export const  getVolunteers  = () => dispatch => {
     axios
         .get(`${baseUrl}/users`)
         .then(res => {
-            if( role === "volunteer" ) {
-                dispatch({ 
-                    type: GET_VOLUNTEERS_SUCCESS, 
-                    payload: res.data 
-                })
-            }
+            dispatch({ 
+                type: GET_VOLUNTEERS_SUCCESS, 
+                payload: res.data 
+            })
         })
         .catch(err => dispatch({ 
             type: GET_VOLUNTEERS_FAILURE, 
@@ -56,7 +54,7 @@ export const EDIT_VOLUNTEERS_START = "EDIT_VOLUNTEERS_START";
 export const EDIT_VOLUNTEERS_SUCCESS = "EDIT_VOLUNTEERS_SUCCESS";
 export const EDIT_VOLUNTEERS_FAILURE = "EDIT_VOLUNTEERS_FAILURE";
 
-export const editVolunteer = id => dispatch => {
+export const editVolunteer = (id, changes) => dispatch => {
     dispatch({
         type: EDIT_VOLUNTEERS_START
     });

@@ -2,9 +2,6 @@ import {
   GET_USER_START,
   GET_USER_SUCCESS,
   GET_USER_FAIL,
-  GET_ALL_VOLUNTEERS_START,
-  GET_ALL_VOLUNTEERS_SUCCESS,
-  GET_ALL_VOLUNTEERS_FAIL,
   EDIT_USER_START,
   EDIT_USER_SUCCESS,
   EDIT_USER_FAIL
@@ -21,12 +18,31 @@ import {
   POST_REGISTERSTRIPE_FAIL
 } from "../actions/stripeActions";
 
+import {
+  GET_VOLUNTEERS_START,
+  GET_VOLUNTEERS_SUCCESS,
+  GET_VOLUNTEERS_FAILURE,
+  ADD_VOLUNTEERS_START,
+  ADD_VOLUNTEERS_SUCCESS,
+  ADD_VOLUNTEERS_FAILURE,
+  EDIT_VOLUNTEERS_START,
+  EDIT_VOLUNTEERS_SUCCESS,
+  EDIT_VOLUNTEERS_FAILURE,
+  GET_VOLUNTEER_ID_START,
+  GET_VOLUNTEER_ID_SUCCESS,
+  GET_VOLUNTEER_ID_FAILURE,
+} from "store/actions"
+
 const initialState = {
   userProfile: [],
   volunteers: [],
+  singleVolunteer: {},
+  volunteerId: "",
   error: "",
   isLoading: false,
   isEditing: false,
+  isAdding: false,
+  addSuccess: false,
   doneLoading: false,
   paymentLoading: false,
   newUser: true
@@ -78,27 +94,96 @@ const userReducer = (state = initialState, action) => {
         error: action.payload
       };
     // Get All VOLUNTEERS
-    case GET_ALL_VOLUNTEERS_START:
+    case GET_VOLUNTEERS_START:
       return {
         ...state,
         isLoading: true,
         doneLoading: false,
         error: ""
       };
-    case GET_ALL_VOLUNTEERS_SUCCESS:
+    case GET_VOLUNTEERS_SUCCESS:
       return {
         ...state,
         volunteers: action.payload,
         isLoading: false,
         doneLoading: true
       };
-    case GET_ALL_VOLUNTEERS_FAIL:
+    case GET_VOLUNTEERS_FAILURE:
       return {
         ...state,
         isLoading: false,
         doneLoading: false,
         error: ""
       };
+    case ADD_VOLUNTEERS_START:
+      return {
+        ...state,
+        isLoading: true,
+        isAdding: true,
+        error: ""
+      };
+    case ADD_VOLUNTEERS_SUCCESS:
+      return {
+        ...state,
+        volunteers: [...state.volunteers, action.payload],
+        volunteerId: action.payload.id,
+        isLoading: false,
+        isAdding: false,
+        addSuccess: true,
+        error: ""
+      };
+    case ADD_VOLUNTEERS_FAILURE:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload
+      }
+    case EDIT_VOLUNTEERS_START:
+      return {
+        ...state,
+        error: "",
+        isEditing: true
+      };
+    case EDIT_VOLUNTEERS_SUCCESS: // v = volunteers
+      const updatedVolunteer = state.volunteers.map(v => {
+        if(v.id === action.payload.id) {
+          return {
+            ...v,
+            v: action.payload
+          }
+        } else return v;
+      })
+      return {
+        ...state,
+        isEditing: false,
+        error: "",
+        singleVolunteer: updatedVolunteer
+      };
+    case EDIT_VOLUNTEERS_FAILURE:
+      return {
+        ...state,
+        isEditing: false,
+        error: action.payload
+      }
+    case GET_VOLUNTEER_ID_START: 
+      return {
+        ...state,
+        isLoading: true,
+        error: ""
+      }
+    case GET_VOLUNTEER_ID_SUCCESS:
+      return {
+        ...state,
+        singleVolunteer: action.payload,
+        isLoading: false,
+        error: ""
+      }
+    case GET_VOLUNTEER_ID_FAILURE: 
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload
+      }
     case EDIT_USER_START:
       return {
         ...state,
