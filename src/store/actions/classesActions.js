@@ -23,6 +23,7 @@ export const EDIT_CLASS_FAILURE = "EDIT_CLASS_FAILURE";
 
 const baseUrl = `${process.env.REACT_APP_API}/api`;
 
+//get all classes
 export const getClassList = () => dispatch => {
     dispatch({ type: FETCH_CLASSES_START });
     console.log("GET_CLASSES_START")
@@ -35,6 +36,7 @@ export const getClassList = () => dispatch => {
         .catch(err => dispatch({ type: FETCH_CLASSES_FAILURE, payload: err }));
 };
 
+//Add class
 export const addClass = classList => dispatch => {
     dispatch({ type: ADD_CLASS_START });
     axios
@@ -46,6 +48,7 @@ export const addClass = classList => dispatch => {
         .catch(err => dispatch({ type: ADD_CLASS_FAILURE, payload: err }));
 };
 
+//Edit class
 export const editClass = classList => dispatch => {
     const { id, class_name, grade_level, subject, teacher_name, number_of_students, ...changes } = classList;
     //
@@ -62,6 +65,7 @@ export const editClass = classList => dispatch => {
         .catch(err => dispatch({ type: EDIT_CLASS_FAILURE, payload: err }));
 };
 
+//Delete class
 export const deleteClass = (classID) => dispatch => {
     dispatch({ type :DELETE_CLASS_START });
     axios
@@ -78,6 +82,7 @@ export const deleteClass = (classID) => dispatch => {
         .catch(err => dispatch({ type: DELETE_CLASS_FAILURE, payload: err }))
 };
 
+//Get class by id
 export const getClassByID = id => dispatch => {
     dispatch({ type: FETCH_SINGLE_CLASS_START });
     axios

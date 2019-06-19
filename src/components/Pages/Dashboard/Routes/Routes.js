@@ -5,6 +5,8 @@ import Profile from "components/Pages/Profile";
 import CreateTrainingSeries from "components/Pages/TrainingSeries/Add/CreateTrainingSeries";
 import EditTrainingSeries from "components/Pages/TrainingSeries/Edit/";
 import SingleTrainingSeries from "components/Pages/TrainingSeries/SinglePage/SingleTrainingSeries";
+import Classes from "components/Pages/Classes/List/Overview/Overview";
+import SingleClassView from "components/Pages/Classes/SinglePage/SingleClassView";
 import CreateMessage from "components/Pages/TrainingSeries/Add/CreateMessage";
 import MessagePage from "components/Pages/TrainingSeries/Add/MessagePage";
 import HelpModal from "components/UI/HelpModal/HelpModal.js";
@@ -109,6 +111,18 @@ function Routes(props) {
         render={renderProps => <CreateMessage {...renderProps} />}
       />
       <Route path="/home/message/:id" component={MessagePage} />
+      <Route
+        path="/home/classes"
+        render={renderProps => (
+          <Classes {...renderProps} user_id={props.user.id} />
+        )}
+      />
+      <Route
+        path="/home/classes/:id"
+        render={renderProps => (
+          <SingleClassView {...renderProps} user_id={props.user.id} />
+        )}
+      />
     </Router>
   );
 }

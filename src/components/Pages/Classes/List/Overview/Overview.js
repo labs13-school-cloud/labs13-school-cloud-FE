@@ -86,4 +86,4 @@ const mapStateToProps = state => {
 export default connect(
     mapStateToProps,
     { getClassList, deleteClass }
-)(Overview);
+)(withStyles(styles)(Overview));
