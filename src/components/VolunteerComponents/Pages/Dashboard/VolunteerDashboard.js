@@ -77,7 +77,6 @@ const VolunteerDashboard = props => {
                 handleAdd={() => history.push("/home/create-training-series")}
               />
             </SmallColumns>
-            <NotificationsCard List={NotificationsOverview} user_id={user_id} />
           </>
         )}
 
