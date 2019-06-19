@@ -19,6 +19,7 @@ export const TripleColumn = styled.div`
   display: flex;
   justify-content: space-between;
   margin: 48px auto;
+  flex-wrap: wrap;
 
   @media (max-width: 1400px) {
     flex-wrap: wrap;
@@ -39,10 +40,9 @@ export const TripleColumn = styled.div`
 export const SmallColumns = styled.div`
   display: flex;
   height: 100%;
-  width: 800px;
+  width: 100%;
 
   @media (max-width: 1400px) {
-    width: 100%;
     margin-bottom: 50px;
   }
   @media (max-width: 768px) {
