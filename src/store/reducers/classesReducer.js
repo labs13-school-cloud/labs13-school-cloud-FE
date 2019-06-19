@@ -33,7 +33,6 @@ const initialState = {
         isDeleting: false,
         deleteSuccess: false,
         deleteFailed: false,
-        activeClasses: {},
     }
 };
 

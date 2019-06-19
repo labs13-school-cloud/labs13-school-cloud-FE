@@ -9,21 +9,19 @@ import { getClassByID,
         addClass, 
         editClass } from "store/actions/classesActions";
 
+import { singleClass } from "store/reducers/classesReducer"
 
-import InfoPopup from "components/UI/InfoPopup/InfoPopup.js";
 
 import { withStyles } from "@material-ui/core/styles";
 import {
-  Paper,
-  Divider,
   Typography,
   Grid,
   Button,
   Link
 } from "@material-ui/core/";
 
-import { styles, PageContainer, Wrapper } from "./styles.js";
-//import SingleClassView from ".";
+import { styles, Wrapper } from "./styles.js";
+
 
 function SingleClassView(props) {
 
@@ -35,17 +33,11 @@ function SingleClassView(props) {
     props.addClass(props.match.params.id);
   }, [addClass]);
 
-  //
-  // Removes class from database
-  const getClass = id => {
-    props.getClassByID(props.SingleClass.id);
-    props.history.push(`/home/classes/${id}`);
-  };
 
 
   // Removes class from database
   const removeClass = id => {
-    props.deleteClass(props.SingleClass.id);
+    props.deleteClass(props.singleClass.id);
     props.history.push(`/home/classes/${id}`);
   };
   // Sends Admin to Edit screen for classes
@@ -71,7 +63,7 @@ function SingleClassView(props) {
     subject,
     link,
     finished
-  } = props.activeClasses;
+  } = props.singleClass;
 
   console.log("singleClass", props.SingleClass);
   console.log("Classes ", props.match.params.id);
@@ -126,7 +118,8 @@ function SingleClassView(props) {
 
 const mapStateToProps = state => {
     return {
-        classList: state.classesReducer.classList
+        classList: state.classesReducer.classList,
+        singleClass: state.classesReducer.singleClass
       }
 };
 
