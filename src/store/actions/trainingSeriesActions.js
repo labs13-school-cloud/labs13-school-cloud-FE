@@ -61,7 +61,6 @@ export const getTrainingSeries = () => dispatch => {
           type: GET_TRAINING_SERIES_SUCCESS,
           payload: res.data.trainingSeries
         },
-        console.log("Actions- Training Series", res.data.trainingSeries)
       )
     )
 
