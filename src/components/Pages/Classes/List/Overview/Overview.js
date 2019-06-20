@@ -16,7 +16,7 @@ import { Typography } from "@material-ui/core/";
 
 function  Overview(props) {
     useEffect(() => {
-        props.getClassList()
+        props.getClassList();
     }, [getClassList]);
 
     const removeClass = id => {
