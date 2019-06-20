@@ -3,22 +3,9 @@ import React, { useEffect } from "react";
 //Loading SVG that gets displayed
 import Progress from "components/UI/Progress/ProgressCircle";
 import { style } from "./styles.js";
+import { connect } from "react-redux";
 
-//Auth
-import { getUserProfile } from "Auth/Auth";
-// * if deprecated functions are needed please add "setAccessToken" and "setIdToken" to above import
-
-function Callback({ history }) {
-  useEffect(() => {
-    // componentDidMount
-    // ! Deprecated in favor of letting the AuthService take care of setting the access_token and id_token
-    // setAccessToken();
-    // setIdToken();
-    getUserProfile(() => {
-      history.push("/home");
-    });
-  }, [history]);
-
+function Callback() {
   //Customized styling
 
   return (
@@ -28,4 +15,11 @@ function Callback({ history }) {
   );
 }
 
-export default Callback;
+const mapStateToProps = state => {
+  console.log('callback', state);
+}
+
+export default connect(
+  mapStateToProps,
+  {}
+)(Callback);
