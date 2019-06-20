@@ -74,13 +74,12 @@ const EditModal = props => {
   const handleEdit = () => {
     switch (props.updateType) {
       case "trainingSeries":
-        // console.log(trainingSeries)
         const { user_id, subject, title } = trainingSeries;
         props.editTrainingSeries(trainingSeries.id, { user_id, subject, title });
         setIsOpen(false);
         break;
       case "classes":
-        props.editClass(currentClass);
+        props.editClass(currentClass.id, { ...currentClass });
         setIsOpen(false);
         break;
       default:
