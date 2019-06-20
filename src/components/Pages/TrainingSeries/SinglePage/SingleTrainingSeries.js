@@ -79,11 +79,9 @@ function SingleTrainingSeries(props) {
             >
               edit
             </i>
-            <DeleteModal
-              deleteType="trainingSeries"
-              trainingSeriesId={id}
-              className={`material-icons ${props.classes.icons}`}
-            />
+            <i className="material-icons" className={`material-icons ${props.classes.icons}`} onClick={removeTrainingSeries}>
+              delete
+            </i>
           </Grid>
         </Grid>
         <Grid

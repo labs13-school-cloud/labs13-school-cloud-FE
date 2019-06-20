@@ -6,12 +6,8 @@ import { getAllResponses, getClassList } from "store/actions";
 import SearchCard from "components/UI/SearchCard/";
 import TrainingSeriesOverview from "components/Pages/TrainingSeries/List/Overview";
 import TrainingSeriesTab from "components/Pages/TrainingSeries/List/Tab";
-<<<<<<< HEAD
-import ClassListTab from "../../../../components/Pages/Classes/List/Overview";
-=======
 import ClassesOverview from "components/Pages/Classes/List/AdminOverview";
 import ClassListTab from "components/Pages/Classes/List/Overview"
->>>>>>> master
 import NotificationsCard from "components/Pages/Notifications/Card";
 import VolunteerOverview from "components/Pages/Volunteers/Overview"
 import VolunteerCard from "components/Pages/Volunteers";

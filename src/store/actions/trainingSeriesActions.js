@@ -154,13 +154,13 @@ export const getTrainingSeriesForVolunteer = trainingSeriesID => dispatch => {
     .get(
       `${
         process.env.REACT_APP_API
-      }/api/training-series/volunteers/${trainingSeriesID}`
+      }/api/training-series/${trainingSeriesID}/volunteers`
     )
     .then(res =>
       dispatch(
         {
           type: GET_VOLUNTEERS_FOR_TRAINING_SERIES_SUCCESS,
-          payload: res.data.volunteer
+          payload: res.data.volunteers
         },
         console.log("From Actions", res.data)
       )
@@ -184,7 +184,7 @@ export const addVolunteerToTrainingSeries = (id, user_id) => dispatch => {
       dispatch(
         {
           type: ADD_VOLUNTEERS_FOR_TRAINING_SERIES_SUCCESS,
-          payload: res.data.volunteer
+          payload: res.data.volunteers
         },
         console.log("From Actions", id, user_id)
       )
