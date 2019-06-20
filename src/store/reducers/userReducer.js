@@ -97,16 +97,13 @@ const userReducer = (state = initialState, action) => {
     case GET_VOLUNTEERS_START:
       return {
         ...state,
-        isLoading: true,
-        doneLoading: false,
         error: ""
       };
     case GET_VOLUNTEERS_SUCCESS:
       return {
         ...state,
         volunteers: action.payload,
-        isLoading: false,
-        doneLoading: true
+
       };
     case GET_VOLUNTEERS_FAILURE:
       return {

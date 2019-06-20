@@ -6,8 +6,8 @@ import { getAllResponses, getClassList } from "store/actions";
 import SearchCard from "components/UI/SearchCard/";
 import TrainingSeriesOverview from "components/Pages/TrainingSeries/List/Overview";
 import TrainingSeriesTab from "components/Pages/TrainingSeries/List/Tab";
-import ClassListTab from "../../../../components/Pages/Classes/List/Overview"
-import AdminVolunteerTab from "../../../../components/Pages/Volunteers/List/Tab"
+import ClassListTab from "components/Pages/Classes/List/Overview"
+import AdminVolunteerTab from "components/Pages/Volunteers/List/Tab";
 import NotificationsCard from "components/Pages/Notifications/Card";
 import NotificationsOverview from "components/Pages/Notifications/Card/Overview/Overview.js";
 import Responses from "components/Pages/Notifications/Responses";
@@ -88,7 +88,7 @@ function Dashboard(props) {
             limit={3}
           />
         )}
-
+ 
         {topTab === "classes" && (
           <SearchCard
             List={ClassListTab}
@@ -100,7 +100,7 @@ function Dashboard(props) {
         )}
 
         {topTab === "volunteers" && (
-          <SmallColumns 
+          <SearchCard 
             List={AdminVolunteerTab}
             section="Volunteers"
             isSearching={false}
@@ -119,7 +119,7 @@ function Dashboard(props) {
         )}
         {topTab === "responses" && (
           <Responses history={props.history} user_id={user_id} />
-        )}
+        )}  
       </TripleColumn>
     </DashWrapper>
   );

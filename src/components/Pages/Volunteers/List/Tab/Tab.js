@@ -7,15 +7,16 @@ import history from "history.js";
 
 import DeleteModal from "../../../../UI/Modals/deleteModal";
 
-import { getVolunteers, addVolunteer } from "../../../../../store/actions/volunteerActions";
+import { getVolunteers, addVolunteer } from "store/actions/volunteerActions";
 
 import { Typography } from "@material-ui/core/";
 import { ListStyles } from "./styles.js";
 
 
 function  AdminVolunteerTab(props) {
+    // const { getVolunteers } = props;
     useEffect(() => {
-        props.getVolunteers()
+       props.getVolunteers()
     }, [getVolunteers]);
 
 
@@ -34,12 +35,12 @@ function  AdminVolunteerTab(props) {
                                 >
                                     <Typography variant="subtitle1" style={{ display:"flex", justifyContent:"space-between" }}>
                                         {name}
-                                    {/* <DeleteModal 
+                                    <DeleteModal 
                                         deleteType="volunteeer"
                                         classId={id}
                                         className={`material-icons ${props.volunteers.icons}`}
                                         style={{ zIndex: "1000" }}
-                                    /> */}
+                                    />
                                     </Typography>
                                     <div onClick={() => history.push(`home/volunteers/${id}`)}>
                                         
@@ -64,16 +65,12 @@ function  AdminVolunteerTab(props) {
                     )
                  } 
             )}
-            {/* <AddClassModal 
-            className={`material-icons ${props.volunteers.icons}`}
-            
-            /> */}
-
         </div>
     )
 }
 
 const mapStateToProps = state => {
+    console.log("TEST", state)
     return {
       volunteers: state.userReducer.volunteers
     }
