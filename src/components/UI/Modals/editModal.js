@@ -10,7 +10,7 @@ import Button from "@material-ui/core/Button";
 import { Typography, Paper, TextField } from "@material-ui/core";
 
 // Actions
-import { editTrainingSeries } from "store/actions/";
+import { editTrainingSeries, editClass } from "store/actions/";
 
 
 function getModalStyle() {
@@ -66,6 +66,10 @@ const EditModal = props => {
   const [trainingSeries, setTrainingSeries] = useState({
     ...props.trainingSeries
   });
+  // console.log('test', classList)
+  const [currentClass, setCurrentClass] = useState({
+    ...props.classList
+  })
   // Runs different functions based on what is being updated
   const handleEdit = () => {
     switch (props.updateType) {
@@ -73,6 +77,10 @@ const EditModal = props => {
         // console.log(trainingSeries)
         const { user_id, subject, title } = trainingSeries;
         props.editTrainingSeries(trainingSeries.id, { user_id, subject, title });
+        setIsOpen(false);
+        break;
+      case "classes":
+        props.editClass(currentClass);
         setIsOpen(false);
         break;
       default:
@@ -84,6 +92,9 @@ const EditModal = props => {
     switch (props.updateType) {
       case "trainingSeries":
         setTrainingSeries({ ...trainingSeries, [e.target.name]: e.target.value })
+        break;
+      case "classes":
+        setCurrentClass({ ...currentClass, [e.target.name]: e.target.value })
         break;
       default:
         break
@@ -122,6 +133,8 @@ const EditModal = props => {
     switch (props.updateType) {
       case "trainingSeries":
         return "Training Series";
+      case "classes":
+        return "Class"
       default:
         break;
     }
@@ -131,8 +144,21 @@ const EditModal = props => {
     switch (props.updateType) {
       case "trainingSeries":
         return Object.keys(trainingSeries)
+      case "classes":
+        return Object.keys(currentClass)
       default:
         break
+    }
+  }
+
+  const handleValue = (property) => {
+    switch (props.updateType) {
+      case "trainingSeries":
+        return trainingSeries[property]
+      case "classes":
+        return currentClass[property]
+      default: 
+        break;
     }
   }
 
@@ -162,7 +188,7 @@ const EditModal = props => {
                   label={property.toString().charAt(0).toUpperCase() + property.slice(1)}
                   name={property.toString()}
                   onChange={handleChange}
-                  value={trainingSeries[property]}
+                  value={handleValue(property)}
                 />
               )
             })
@@ -188,6 +214,7 @@ EditModal.propTypes = {
 export default connect(
   null,
   {
-    editTrainingSeries
+    editTrainingSeries,
+    editClass
   }
 )(withRouter(withStyles(styles)(EditModal)));
