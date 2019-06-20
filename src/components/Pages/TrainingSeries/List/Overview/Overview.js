@@ -36,18 +36,14 @@ function Overview({
           return msg.training_series_id === props.id;
         });
         const userCount = new Set(
-          notifications
-            .filter(n => n.training_series_id === props.id)
-            .map(n => n.team_member_id)
+          notifications.filter(n => n.training_series_id === props.id)
         ).size;
 
         return (
           <ListItem key={props.id} component="li" className={classes.listItem}>
             <ListItemText
               primary={props.title}
-              secondary={`Messages: ${
-                tsMessages.length
-              } | Assigned: ${userCount}`}
+              secondary={`Messages: ${tsMessages.length} `}
               onClick={e => history.push(`/home/training-series/${props.id}`)}
             />
             <DeleteModal

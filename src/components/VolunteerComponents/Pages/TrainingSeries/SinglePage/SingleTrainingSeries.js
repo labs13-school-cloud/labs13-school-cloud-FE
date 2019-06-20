@@ -11,35 +11,38 @@ import { Paper, Divider, Typography, Grid, Button } from "@material-ui/core/";
 import { styles, PageContainer, Wrapper } from "./styles.js";
 
 function SingleTrainingSeries(props) {
-  console.log(props.activeTrainingSeries.trainingSeries);
-  const {
-    id,
-    name,
-    title,
-    subject,
-    link,
-    finished
-  } = props.activeTrainingSeries;
+  // useEffect(() => {
+  //   props.getTrainingSeriesID(props.match.params.id);
+  // }, [props.getTrainingSeriesID]);
+  // const {
+  //   id,
+  //   name,
+  //   title,
+  //   subject,
+  //   link,
+  //   finished
+  // } = props.activeTrainingSeries;
   return (
     <>
-      <Wrapper key={`container_${id}`}>
-        <Grid container spacing={24}>
+      <Wrapper>
+        Hello
+        {/* <Grid container spacing={24}>
           <Grid item xs={12}>
             <Typography variant="h6">{title}</Typography>
             <hr />
             <Typography variant="body1">Subject: {subject}</Typography>
-
             <Typography variant="body1">Creator: {name}</Typography>
             <Button>Done</Button>
           </Grid>
-        </Grid>
+        </Grid> */}
       </Wrapper>
     </>
   );
 }
 
 const mapStateToProps = state => ({
-  activeTrainingSeries: state.trainingSeriesReducer.activeTrainingSeries
+  activeTrainingSeries: state.trainingSeriesReducer.activeTrainingSeries,
+  userProfile: state.userReducer.userProfile
 });
 
 export default withRouter(

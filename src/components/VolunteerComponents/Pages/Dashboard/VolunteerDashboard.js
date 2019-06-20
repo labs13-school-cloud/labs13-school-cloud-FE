@@ -74,7 +74,6 @@ const VolunteerDashboard = props => {
                 List={TrainingSeriesOverview}
                 containerTourNum="2"
                 section="Training Series"
-                handleAdd={() => history.push("/home/create-training-series")}
               />
             </SmallColumns>
           </>

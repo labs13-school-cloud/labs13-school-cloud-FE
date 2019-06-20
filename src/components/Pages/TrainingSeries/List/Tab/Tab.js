@@ -53,11 +53,6 @@ function Tab(
 
   const [trainingFilter, setTrainingFilter] = useState("available");
 
-  // Marks training as complete
-  // const [trainingComplete, setTrainingComplete] = useState("");
-  // useEffect(() => {
-  //   setTrainingComplete(props.activeTrainingSeries.finished);
-  // }, [props.activeTrainingSeries, setTrainingComplete]);
   return (
     <>
       <FormControl>

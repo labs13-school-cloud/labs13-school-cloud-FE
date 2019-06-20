@@ -153,7 +153,7 @@ export const getTrainingSeriesForVolunteer = trainingSeriesID => dispatch => {
     .get(
       `${
         process.env.REACT_APP_API
-      }/api/training-series/${trainingSeriesID}/volunteers`
+      }/api/training-series/volunteers/${trainingSeriesID}`
     )
     .then(res =>
       dispatch(
@@ -222,7 +222,7 @@ export const deleteVolunteerFromTrainingSeries = ({
 };
 
 // Get Training Series for Volunteer
-export const getTrainingSeriesforVolunteer = user_id => dispatch => {
+export const getVolunteerTrainingSeries = user_id => dispatch => {
   dispatch({
     type: GET_TRAINING_SERIES_FOR_VOLUNTEER_START
   });
