@@ -19,6 +19,7 @@ export const TripleColumn = styled.div`
   display: flex;
   justify-content: space-between;
   margin: 48px auto;
+  flex-wrap: wrap;
 
   @media (max-width: 1400px) {
     flex-wrap: wrap;
@@ -38,13 +39,13 @@ export const TripleColumn = styled.div`
 `;
 export const SmallColumns = styled.div`
   display: flex;
-  flex-direction: column-reverse;
+  // flex-direction: column-reverse; Removed for admin dashboard 
   height: 100%;
-  margin-left: 115px;
+  width: 100%;
+  // margin-left: 115px; Removed for admin dashboard 
   
 
   @media (max-width: 1400px) {
-    width: 100%;
     margin-bottom: 50px;
   }
   @media (max-width: 768px) {

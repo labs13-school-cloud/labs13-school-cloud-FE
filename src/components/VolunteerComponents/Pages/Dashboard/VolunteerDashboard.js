@@ -4,8 +4,7 @@ import { connect } from "react-redux";
 import { getAllResponses } from "store/actions";
 
 import SearchCard from "components/UI/SearchCard/";
-import TrainingSeriesOverview from "components/Pages/TrainingSeries/List/Overview";
-import TrainingSeriesTab from "components/Pages/TrainingSeries/List/Tab";
+import TrainingSeriesOverview from "components/VolunteerComponents/Pages/TrainingSeries/List/Overview";
 import VolunteerClassTab from "components/VolunteerComponents/Pages/Classes/List";
 import TrainingSeriesTabVolunteer from "components/VolunteerComponents/Pages/TrainingSeries/List/TabVolunteer/TabVolunteer.js";
 import NotificationsCard from "components/Pages/Notifications/Card";
@@ -75,33 +74,30 @@ const VolunteerDashboard = props => {
                 List={TrainingSeriesOverview}
                 containerTourNum="2"
                 section="Training Series"
-                handleAdd={() => history.push("/home/create-training-series")}
               />
             </SmallColumns>
-            <NotificationsCard List={NotificationsOverview} user_id={user_id} />
           </>
         )}
 
-        {topTab === "training series" && (
+        {/* {topTab === "Training Series" && (
           <SearchCard
             user_id={user_id}
             List={TrainingSeriesTabVolunteer}
             section="Training Series"
-            handleAdd={() => history.push("/home/create-training-series")}
             isSearching={true}
             limit={3}
           />
-				)}
-				
-				{topTab === "classes" && (
-					<SearchCard
-						user_id={user_id}
-						List={VolunteerClassTab}
-						section="classes"
-						isSearching={true}
-						limit={10}
-					/>
-				)}
+        )} */}
+
+        {topTab === "classes" && (
+          <SearchCard
+            user_id={user_id}
+            List={VolunteerClassTab}
+            section="classes"
+            isSearching={true}
+            limit={10}
+          />
+        )}
 
         {topTab === "notifications" && (
           <div style={{ width: "100%" }}>
