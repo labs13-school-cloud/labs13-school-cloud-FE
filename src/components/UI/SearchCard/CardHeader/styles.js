@@ -12,8 +12,7 @@ export const styles = theme => ({
   },
   icons: {
     display: "flex",
-    alignItems: "flex-end",
-    justifyContent: "flex-end"
+    alignItems: "center"
   },
   fab: {
     margin: 5,

@@ -25,9 +25,11 @@ export const styles = () => ({
     marginBottom: 15
   },
   selection: {
-    margin: "0 10px",
+    width: "20%",
+    display: "flex",
+    marginLeft: "60%",
     "@media (max-width: 450px)": {
-      fontSize: "0.9rem"
+      marginLeft: "70%"
     }
   }
 });
@@ -37,11 +39,23 @@ export const Wrapper = styled(Paper)`
   padding: 10px;
   margin: 10px auto;
   max-width: 1200px;
+  &:hover {
+    background: #f8f8f8;
+  }
 `;
 
 export const HeaderWrapper = styled.div`
   display: flex;
   align-items: center;
+`;
+
+export const Redirect = styled.a`
+  color: "inherit";
+  &:hover {
+    text-decoration: "none";
+    color: #4169e0;
+    cursor: pointer;
+  }
 `;
 
 export const Series = styled(Paper)`

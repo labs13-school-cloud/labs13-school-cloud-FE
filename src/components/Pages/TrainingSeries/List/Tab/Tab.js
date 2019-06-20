@@ -9,19 +9,13 @@ import {
   getTrainingSeriesForVolunteer,
   deleteTrainingSeries
 } from "store/actions";
-//import DeleteModal from "components/UI/Modals/deleteModal";
+import DeleteModal from "components/UI/Modals/deleteModal";
 import history from "history.js";
 
-import {
-  Grid,
-  Typography,
-  Link,
-  Select,
-  FormControl
-} from "@material-ui/core/";
+import { Grid, Typography, Select, FormControl } from "@material-ui/core/";
 import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
-import { Wrapper, styles } from "./styles.js";
+import { Wrapper, styles, Redirect } from "./styles.js";
 
 function Tab(
   {
@@ -29,20 +23,21 @@ function Tab(
     getTrainingSeries,
     trainingSeries,
     getTrainingSeriesID,
-    getTrainingSeriesForVolunteer
-  },
-  props
+    getTrainingSeriesForVolunteer,
+    classes,
+    user_id,
+    activeTrainingSeries  }
 ) {
-  const { classes } = props;
+
   const setTrainingSeries = id => {
-    getTrainingSeriesID(id);
+    getTrainingSeriesID(activeTrainingSeries.id);
     getTrainingSeriesForVolunteer(id);
     history.push(`/home/training-series/${id}`);
   };
 
   // Removes Training Series from database
   const removeTrainingSeries = id => {
-    deleteTrainingSeries(props.activeTrainingSeries.id);
+    deleteTrainingSeries(activeTrainingSeries.id);
     history.push(`/home`);
   };
   // Sends Admin to Edit screen for Training Series
@@ -50,16 +45,17 @@ function Tab(
     getTrainingSeriesID(id);
     history.push(`/home/training-series/${id}/edit`);
   };
-
   const [trainingFilter, setTrainingFilter] = useState("Filter");
-
+console.log(classes)
   return (
     <>
-      <FormControl>
+      <FormControl
+      className={classes.formControl}
+      >
         <Select
           native
-          // className={selection}
           value={trainingFilter}
+          className={classes.selection}
           onChange={e => setTrainingFilter(e.target.value)}
           inputProps={{
             id: "status-selector",
@@ -70,35 +66,58 @@ function Tab(
           <option value={"Completed"}>Completed</option>
         </Select>
       </FormControl>
-      {getFiltered(trainingSeries).map(
-        ({ id, title, subject, name }) => {
-          return (
-            <Wrapper key={`container_${id}`}>
-              <Grid container spacing={24}>
-                <Grid item xs={12}>
+      {getFiltered(trainingSeries).map(({ id, title, subject, name }) => {
+        return (
+          <Wrapper key={`container_${id}`}>
+            <Grid container spacing={24}>
+              <Grid item xs={12}>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between"
+                  }}
+                >
                   <Typography variant="h6">
                     {" "}
-                    <Link onClick={e => setTrainingSeries(id)}>{title}</Link>
+                    <Redirect onClick={e => setTrainingSeries(id)}>
+                      {title}
+                    </Redirect>
                   </Typography>
-                  <hr />
-                  <Typography variant="body1">Subject: {subject}</Typography>
-                  <i className="material-icons" onClick={removeTrainingSeries}>
-                    delete
-                  </i>{" "}
+                  <div style={{ display: "flex", justifyContent: 'space-between' }}>
                   <i
-                    className="material-icons"
-                    onClick={e => editTrainingSeries(id)}
-                  >
-                    edit
-                  </i>
+                      className={`material-icons ${classes.icons}`}
+                      style={{
+                        color: "#808080"
+                      }}
+                      onClick={e => editTrainingSeries(id)}
+                    >
+                      edit
+                    </i>
+                    <DeleteModal
+                      deleteType="trainingSeries"
+                      trainingSeriesId={id}
+                      className={`material-icons ${classes.icons}`}
+                      user_id={user_id}
+                    />
+                    
+                  </div>
+                </div>
+                <hr />
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    fontSize: "1rem"
+                  }}
+                >
+                  <Typography variant="body1">Subject: {subject}</Typography>
                   <Typography variant="body1">Creator: {name}</Typography>
-                  {/* <Button>Done</Button> */}
-                </Grid>
+                </div>
               </Grid>
-            </Wrapper>
-          );
-        }
-      )}
+            </Grid>
+          </Wrapper>
+        );
+      })}
     </>
   );
 }
@@ -107,7 +126,7 @@ const mapStateToProps = state => ({
   trainingSeries: state.trainingSeriesReducer.trainingSeries,
   notifications: state.notificationsReducer.notifications,
   messages: state.messagesReducer.messages,
-  activeTrainingSeries: state.messagesReducer.activeTrainingSeries,
+  activeTrainingSeries: state.trainingSeriesReducer.activeTrainingSeries,
   trainingSeriesVolunteers: state.trainingSeriesReducer.trainingSeriesVolunteers
 });
 
