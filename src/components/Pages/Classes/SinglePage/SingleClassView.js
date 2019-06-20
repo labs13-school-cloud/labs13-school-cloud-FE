@@ -58,9 +58,9 @@ function SingleClassView(props) {
   };
 
   
-  const { id, class_name, subject, grade_level, number_of_students, teacher_name, link, title } = props;
+  const { id, class_name, subject, grade_level, number_of_students, teacher_name, link, title } = props.singleClass;
 
-  console.log("singleClass", props.classList[0].class_name);
+  console.log("singleClass", props.classList[2]);
   console.log("Class ", props.match.params.id);
   console.log(props.classList.class_name);
   return (

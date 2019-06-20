@@ -14,16 +14,7 @@ import HelpModal from "components/UI/HelpModal/HelpModal.js";
 import ContactModal from "components/UI/ContactModal/ContactModal.js";
 
 import Dashboard from "../Dashboard";
-<<<<<<< HEAD
-<<<<<<< HEAD
-import VolunteerDashboard from "components/VolunteerComponents/Pages/Dashboard/VolunteerDashboard.js";
-import Overview from "../../Classes/List/Overview";
-=======
->>>>>>> master
-=======
-import VolunteerDashboard from "components/VolunteerComponents/Pages/Dashboard/VolunteerDashboard.js";
-import Overview from "../../Classes/List/Overview";
->>>>>>> cfaab2a25d3aed4039aa6868b8c665715fc56bf5
+
 
 function Routes(props) {
   const { setDisplaySnackbar, history, setIsTourOpen } = props;
