@@ -82,13 +82,13 @@ function Dashboard(props) {
                 section="Classes"
               />
             </SmallColumns>
-            {/* <VolunteerCard List={ClassListTab} user_id={user_id} /> */}
             <SearchCard
-            List={VolunteerOverview}
-            section="Volunteers"
-            isSearching={false}
-            limit={5}
-          />
+              List={VolunteerOverview}
+              section="Volunteers"
+              isSearching={false}
+              limit={6}
+              adminVolunteerOverview={true}
+            />
           </>
         )}
 
