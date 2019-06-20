@@ -1,11 +1,6 @@
 import React, { useState } from "react";
 
-import {
-  Typography,
-  Fab,
-  TextField,
-  InputAdornment
-} from "@material-ui/core/";
+import { Typography, Fab, TextField, InputAdornment } from "@material-ui/core/";
 
 import { withStyles } from "@material-ui/core/styles";
 import { styles } from "./styles.js";
@@ -61,13 +56,11 @@ function CardHeader(props) {
               startAdornment: (
                 <InputAdornment position="start">
                   <i className="material-icons">search</i>
-                  
                 </InputAdornment>
               )
             }}
           />
         )}
-        
       </div>
     </>
   );

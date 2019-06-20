@@ -51,7 +51,7 @@ function Tab(
     history.push(`/home/training-series/${id}/edit`);
   };
 
-  const [trainingFilter, setTrainingFilter] = useState("available");
+  const [trainingFilter, setTrainingFilter] = useState("Filter");
 
   return (
     <>
@@ -71,7 +71,7 @@ function Tab(
         </Select>
       </FormControl>
       {getFiltered(trainingSeries).map(
-        ({ id, title, subject, name, finished }) => {
+        ({ id, title, subject, name }) => {
           return (
             <Wrapper key={`container_${id}`}>
               <Grid container spacing={24}>
