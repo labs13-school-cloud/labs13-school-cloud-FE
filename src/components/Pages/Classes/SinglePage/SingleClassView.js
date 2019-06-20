@@ -1,16 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { withRouter } from "react-router-dom";
+
 
 import { connect } from "react-redux";
 
-//import DeleteModal from "UI/Modals/deleteModal";
+
 import { getClassByID, 
         deleteClass, 
         addClass, 
         editClass } from "store/actions/classesActions";
-
-import { singleClass } from "store/reducers/classesReducer"
-
 
 import { withStyles } from "@material-ui/core/styles";
 import {
@@ -46,7 +44,12 @@ function SingleClassView(props) {
     props.history.push(`/home/classes/${id}/edit`);
   };
 
-  const completeClass = e => {
+  const removeVolunteer = (id, user_id) => {
+    props.deleteVolunteerFromTrainingSeries(id, user_id);
+  };
+  const { id, name, title, subject, link } = props.singleClass;
+
+  const done = e => {
     e.preventDefault();
     if (props.SingleClass.id === props.match.params.id) {
       this.setState({
@@ -55,57 +58,56 @@ function SingleClassView(props) {
     }
   };
 
-  const {
-    id,
-    first_name,
-    last_name,
-    title,
-    subject,
-    link,
-    finished
-  } = props.singleClass;
+  
 
-  console.log("singleClass", props.SingleClass);
+  console.log("singleClass", props.singleClass);
   console.log("Classes ", props.match.params.id);
   return (
     <>
-      <Wrapper key={`container_${id}`}>
+      <Wrapper>
         <Grid container spacing={24}>
           <Grid item xs={12}>
-            <i class="material-icons" onClick={removeClass}>
+            <i className="material-icons" onClick={removeClass}>
               delete
             </i>{" "}
-            <i class="material-icons" onClick={e => editClass(id)}>
+            <i className="material-icons" onClick={e => editClass(id)}>
               edit
             </i>
             <Typography variant="h6">{title}</Typography>
-            <Typography variant="body1">Subject: {subject}</Typography>
+            <Typography variant="body1"> Class: {props.match.params.id}</Typography>
             <Typography>
-              Link to Classes:
-              Link to Training Series:
-              <Link to={link}> Classes Link</Link>
+              Classes Overview:
+              <Link to={link}>Classes Link</Link>
             </Typography>
-            <Typography variant="body1">
-              Creator: {first_name} {""}
-              {last_name}
-            </Typography>
-            <Button onClick={e => completeClass(finished)}>
+            <Typography variant="body1">Creator: {name}</Typography>
+            <Button onClick={e => done(true)}>
               Done
             </Button>
           </Grid>
           <Grid item xs={12}>
-            <Typography variant="h6">Active Volunteers</Typography>
-            <i class="material-icons">add_circle</i>
-            {props.classList.map(v =>
-              // checks if any volunteers are assigned to Classes
+            <Typography variant="h6">Volunteers Available</Typography>
+            <i className="material-icons" onClick={e => addClass(id)}>
+              add_circle
+            </i>
+            {props.trainingSeriesVolunteers.map(v =>
               v.length !== 0 ? (
                 <Typography variant="body1" key={v.id}>
-                  {v.first_name} {""}
-                  {v.last_name} <i class="material-icons">delete</i>
+                  {v.name}{" "}
+                  <i
+                    className="material-icons"
+                    onClick={e =>
+                      removeVolunteer({
+                        id: props.match.params.id,
+                        user_id: v.volunteer_id
+                      })
+                    }
+                  >
+                    delete_forever
+                  </i>
                 </Typography>
               ) : (
-                <Typography variant="body1">
-                  No volunteers are assigned to this class at this time.
+                <Typography>
+                  No Volunteers taking this Training Series
                 </Typography>
               )
             )}
@@ -119,7 +121,9 @@ function SingleClassView(props) {
 const mapStateToProps = state => {
     return {
         classList: state.classesReducer.classList,
-        singleClass: state.classesReducer.singleClass
+        singleClass: state.classesReducer.singleClass,
+        trainingSeriesVolunteers:
+        state.trainingSeriesReducer.trainingSeriesVolunteers,
       }
 };
 

@@ -14,6 +14,7 @@ import ContactModal from "components/UI/ContactModal/ContactModal.js";
 
 import Dashboard from "../Dashboard";
 import VolunteerDashboard from "components/VolunteerComponents/Pages/Dashboard/VolunteerDashboard.js";
+import Overview from "../../Classes/List/Overview";
 
 function Routes(props) {
   const { setDisplaySnackbar, history, setIsTourOpen } = props;
@@ -112,16 +113,16 @@ function Routes(props) {
       />
       <Route path="/home/message/:id" component={MessagePage} />
       <Route
-        path="/home/classes"
-        render={renderProps => (
-          <Classes {...renderProps} user_id={props.user.id} />
-        )}
+        path="/home/classes" component={Overview}
+        // render={renderProps => (
+        //   <Classes {...renderProps} user_id={props.user.id} />
+        // )}
       />
       <Route
-        path="/home/classes/:id"
-        render={renderProps => (
-          <SingleClassView {...renderProps} user_id={props.user.id} />
-        )}
+        path="/home/classes/:id" component={SingleClassView}
+        // render={renderProps => (
+        //   <SingleClassView {...renderProps} user_id={props.user.id} />
+        // )}
       />
     </Router>
   );
