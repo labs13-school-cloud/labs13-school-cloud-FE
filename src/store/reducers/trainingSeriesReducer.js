@@ -154,12 +154,15 @@ const trainingSeriesReducer = (state = initialState, action) => {
         error: "",
         isEditing: true
       };
+    // ! Gotta fix
     case EDIT_TRAINING_SERIES_SUCCESS:
       const updatedItem = state.trainingSeries.map(series => {
-        if (series.trainingSeriesID === action.payload.id) {
+        if (series.id === action.payload.id) {
           return {
             ...series,
-            series: action.payload
+            user_id: action.payload.trainingSeriesData.user_id,
+            subject: action.payload.trainingSeriesData.subject,
+            title: action.payload.trainingSeriesData.title
           };
         } else return series;
       });
@@ -168,7 +171,7 @@ const trainingSeriesReducer = (state = initialState, action) => {
         isEditing: false,
         // isLoading: false,
         error: "",
-        activeTrainingSeries: updatedItem
+        trainingSeries: updatedItem
       };
 
     case EDIT_TRAINING_SERIES_FAIL:
