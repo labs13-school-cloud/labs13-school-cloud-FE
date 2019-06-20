@@ -79,15 +79,15 @@ const VolunteerDashboard = props => {
           </>
         )}
 
-        {topTab === "training series" && (
+        {/* {topTab === "Training Series" && (
           <SearchCard
             user_id={user_id}
             List={TrainingSeriesTabVolunteer}
-            section="training series"
+            section="Training Series"
             isSearching={true}
             limit={3}
           />
-        )}
+        )} */}
 
         {topTab === "classes" && (
           <SearchCard
