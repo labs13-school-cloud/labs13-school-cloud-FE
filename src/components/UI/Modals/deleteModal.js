@@ -14,7 +14,8 @@ import {
   deleteMessage,
   deleteUser,
   unassignTeamMember,
-  deleteClass
+  deleteClass,
+  deleteVolunteer
 } from "store/actions/";
 
 import { Typography, Paper } from "@material-ui/core";
@@ -112,6 +113,9 @@ class TrainingSeriesModal extends React.Component {
       case "classes":
         this.props.deleteClass(this.props.classId);
         break;
+      case "volunteers":
+        this.props.deleteVolunteer(this.props.volunteerId);
+        break;
       default:
         break;
     }
@@ -194,6 +198,7 @@ export default connect(
     deleteUser,
     deleteTrainingSeries,
     unassignTeamMember,
-    deleteClass
+    deleteClass,
+    deleteVolunteer
   }
 )(withRouter(TrainingSeriesModalWrapped));
