@@ -25,12 +25,16 @@ import {
   ADD_VOLUNTEERS_FOR_TRAINING_SERIES_FAIL,
   DELETE_VOLUNTEERS_FOR_TRAINING_SERIES_START,
   DELETE_VOLUNTEERS_FOR_TRAINING_SERIES_SUCCESS,
-  DELETE_VOLUNTEERS_FOR_TRAINING_SERIES_FAIL
+  DELETE_VOLUNTEERS_FOR_TRAINING_SERIES_FAIL,
+  GET_TRAINING_SERIES_FOR_VOLUNTEER_START,
+  GET_TRAINING_SERIES_FOR_VOLUNTEER_SUCCESS,
+  GET_TRAINING_SERIES_FOR_VOLUNTEER_FAIL
 } from "../actions";
 
 const initialState = {
   trainingSeries: [],
   trainingSeriesID: "",
+  volunteerTrainingSeries: [],
   error: "",
   isLoading: false,
   isEditing: false,
@@ -57,6 +61,22 @@ const trainingSeriesReducer = (state = initialState, action) => {
         error: ""
       };
     case GET_TRAINING_SERIES_FAIL:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload
+      };
+    // ---GET All TRAINING SERIES FOR VOLUNTEER---
+    case GET_TRAINING_SERIES_FOR_VOLUNTEER_START:
+      return { ...state, isLoading: true, error: "" };
+    case GET_TRAINING_SERIES_FOR_VOLUNTEER_SUCCESS:
+      return {
+        ...state,
+        volunteerTrainingSeries: action.payload.reverse(),
+        isLoading: false,
+        error: ""
+      };
+    case GET_TRAINING_SERIES_FOR_VOLUNTEER_FAIL:
       return {
         ...state,
         isLoading: false,
