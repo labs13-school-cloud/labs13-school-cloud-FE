@@ -8,7 +8,7 @@ export const styles = theme => ({
     display: "flex",
     flexDirection: "column",
     minWidth: 330,
-    width: "95%",
+    width: "100%",
     minHeight: 533,
     // The "Deal with It" pixel - snaps height out of auto so height:100% can take effect
     height: "100%",

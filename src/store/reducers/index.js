@@ -5,6 +5,7 @@ import stripeReducer from "./stripeReducer";
 import notificationsReducer from "./notificationsReducer";
 import responsesReducer from "./responsesReducer";
 import classesReducer from "./classesReducer";
+import volunteerReducer from "./volunteerReducer";
 
 import { combineReducers } from "redux";
 
@@ -15,7 +16,8 @@ const rootReducer = combineReducers({
   messagesReducer,
   stripeReducer,
   notificationsReducer,
-  responsesReducer
+  responsesReducer,
+  volunteerReducer
 });
 
 export default rootReducer;

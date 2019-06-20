@@ -6,8 +6,11 @@ import { getAllResponses, getClassList } from "store/actions";
 import SearchCard from "components/UI/SearchCard/";
 import TrainingSeriesOverview from "components/Pages/TrainingSeries/List/Overview";
 import TrainingSeriesTab from "components/Pages/TrainingSeries/List/Tab";
-import ClassListTab from "../../../../components/Pages/Classes/List/Overview"
+import ClassesOverview from "components/Pages/Classes/List/AdminOverview";
+import ClassListTab from "components/Pages/Classes/List/Overview"
 import NotificationsCard from "components/Pages/Notifications/Card";
+import VolunteerOverview from "components/Pages/Volunteers/Overview"
+import VolunteerCard from "components/Pages/Volunteers";
 import NotificationsOverview from "components/Pages/Notifications/Card/Overview/Overview.js";
 import Responses from "components/Pages/Notifications/Responses";
 import TabNavigation from "./helpers/TabNavigation.js";
@@ -34,7 +37,6 @@ function Dashboard(props) {
   } = props;
 
   useEffect(() => {
-    console.log("Dashboard use effect");
     responsesFromProps();
     setTimeout(() => {
       responsesFromProps();
@@ -46,7 +48,6 @@ function Dashboard(props) {
   }, [responses]);
 
   useEffect(() => {
-    console.log("I'm here!!");
     getClassList();
   }, [getClassList]);
 
@@ -72,10 +73,22 @@ function Dashboard(props) {
                 List={TrainingSeriesOverview}
                 containerTourNum="4"
                 section="Training Series"
-                handleAdd={() => history.push("/home/create-training-series")}
+              />
+              <Divider />
+              <SearchCard
+                user_id={user_id}
+                List={ClassesOverview}
+                containerTourNum="5"
+                section="Classes"
               />
             </SmallColumns>
-            <NotificationsCard List={NotificationsOverview} user_id={user_id} />
+            <SearchCard
+              List={VolunteerOverview}
+              section="Volunteers"
+              isSearching={false}
+              limit={6}
+              adminVolunteerOverview={true}
+            />
           </>
         )}
 

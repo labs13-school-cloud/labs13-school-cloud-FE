@@ -143,19 +143,16 @@ const classListReducer = (state = initialState, action) => {
                 }
             }
         case EDIT_CLASS_SUCCESS:
-            const updatedClassList = state.classList.map(classList => {
-                if (classList.id === action.payload.id) {
+            const updatedItem = state.classList.map(item => {
+                if (item.id === action.payload.id) {
                     return {
-                        ...classList,
-                        ...action.payload
-                    };
-                } else {
-                    return classList;
-                }
-            });
+                        ...action.payload.changes
+                    }
+                }  else return item;
+            })
             return {
                 ...state,
-                classList: updatedClassList,
+                classList: updatedItem,
                 status: {
                     ...state.status,
                     isEditing: false,
