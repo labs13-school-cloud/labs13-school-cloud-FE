@@ -7,8 +7,7 @@ import {
         getClassByID, 
         deleteClass, 
         addClass, 
-        editClass,
-        getClassList } from "store/actions/classesActions";
+        editClass } from "store/actions/classesActions";
 
 import { withStyles } from "@material-ui/core/styles";
 import {
@@ -27,9 +26,6 @@ function SingleClassView(props) {
     props.getClassByID(props.match.params.id);
   }, [getClassByID]);
 
-  // useEffect(() => {
-  //   props.getClassList();
-  // }, [getClassList]);
 
   useEffect(() => {
     props.addClass(props.match.params.id);
