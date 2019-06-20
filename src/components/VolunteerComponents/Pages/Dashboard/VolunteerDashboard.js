@@ -83,7 +83,7 @@ const VolunteerDashboard = props => {
           <SearchCard
             user_id={user_id}
             List={TrainingSeriesTabVolunteer}
-            section="Training Series"
+            section="training series"
             isSearching={true}
             limit={3}
           />

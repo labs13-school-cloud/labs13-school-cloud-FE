@@ -24,23 +24,25 @@ function Overview(props) {
 
   const goToTrainingSeries = id => {
     getTrainingSeriesID(id);
-    props.history.push(`/home/training-series/${id}`);
+    props.history.push(`/home-volunteer/training-series/${id}`);
   };
   console.log("overview page", props);
   return (
     <ListStyles>
       {props
         .getFiltered(props.volunteerTrainingSeries)
-        .map(({ training_series_id, title }) => {
+        .map(({ training_series_id, title, finished }) => {
           return (
             <ListItem
               key={training_series_id}
               component="li"
-              className={styles.listItem}
+              className={props.classes.listItem}
             >
               <ListItemText
                 primary={title}
-                // secondary={`Messages: ${tsMessages.length} `}
+                secondary={`Status: ${
+                  finished === null || false ? "Not Complete" : "Complete"
+                }  `}
                 onClick={e => goToTrainingSeries(training_series_id)}
               />
             </ListItem>

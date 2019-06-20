@@ -5,7 +5,7 @@ import Profile from "components/Pages/Profile";
 import AddMemberToTrainingSeries from "components/Pages/TrainingSeries/Add/AddMemberToTrainingSeries";
 import EditTrainingSeries from "components/Pages/TrainingSeries/Edit/";
 import SingleTrainingSeries from "components/Pages/TrainingSeries/SinglePage/SingleTrainingSeries";
-import SingleTrainingSeriesVolunteer from "components/VolunteerComponents/Pages/TrainingSeries/SinglePage/SingleTrainingSeries.js";
+import SingleTrainingSeriesVolunteer from "components/VolunteerComponents/Pages/TrainingSeries/SinglePage/";
 import CreateMessage from "components/Pages/TrainingSeries/Add/CreateMessage";
 import MessagePage from "components/Pages/TrainingSeries/Add/MessagePage";
 import HelpModal from "components/UI/HelpModal/HelpModal.js";
@@ -88,7 +88,7 @@ function Routes(props) {
       />
       <Route
         exact
-        path="/home/training-series/:id"
+        path="/home-volunteer/training-series/:id"
         render={renderProps => (
           <SingleTrainingSeriesVolunteer
             {...renderProps}
