@@ -26,11 +26,9 @@ const baseUrl = `${process.env.REACT_APP_API}/api`;
 //get all classes
 export const getClassList = () => dispatch => {
     dispatch({ type: FETCH_CLASSES_START });
-    console.log("GET_CLASSES_START")
     axios
         .get(`${baseUrl}/classes`)
         .then(res => {
-            console.log(res)
             dispatch({ type: FETCH_CLASSES_SUCCESS, payload: res.data })
         })
         .catch(err => dispatch({ type: FETCH_CLASSES_FAILURE, payload: err }));
@@ -49,17 +47,14 @@ export const addClass = classList => dispatch => {
 };
 
 //Edit class
-export const editClass = classList => dispatch => {
-    const { id, class_name, grade_level, subject, teacher_name, number_of_students, ...changes } = classList;
-    //
-    //
+export const editClass = (id, changes) => dispatch => {
     dispatch({ type: EDIT_CLASS_START });
     axios
         .put(`${baseUrl}/classes/${id}`, changes)
         .then(res => {
             dispatch({
                 type: EDIT_CLASS_SUCCESS,
-                payload: res.data.updatedClass
+                payload: { id, changes }
             });
         })
         .catch(err => dispatch({ type: EDIT_CLASS_FAILURE, payload: err }));

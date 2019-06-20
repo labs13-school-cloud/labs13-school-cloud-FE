@@ -3,10 +3,12 @@ import React, { useState } from "react";
 import { Typography, Fab, TextField, InputAdornment } from "@material-ui/core/";
 
 import { withStyles } from "@material-ui/core/styles";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
 import { styles } from "./styles.js";
 
 function CardHeader(props) {
-  const { title, tour, classes, add, searchHook } = props;
+  const { title, tour, classes, searchHook, adminVolunteerOverview, setVolunteerFilter, volunteerFilter } = props;
   const [isSearching, setIsSearching] = useState(!!props.isSearching);
   const [search, setSearch] = searchHook;
 
@@ -20,6 +22,22 @@ function CardHeader(props) {
       <div className={classes.columnHeader}>
         <Typography variant="h5">{title}</Typography>
         <div className={classes.icons}>
+          {adminVolunteerOverview && (
+            <div>
+              <FormControl className={classes.formControl}>
+                <Select
+                  native
+                  className={classes.selection}
+                  value={volunteerFilter}
+                  onChange={(e) => setVolunteerFilter(e.target.value)}
+                >
+                  <option value={"filter"}>Filter</option>
+                  <option value={"approved"}>Approved</option>
+                  <option value={"unapproved"}>Unapproved</option>
+                </Select>
+              </FormControl>
+            </div>
+          )}
           {!props.isSearching && (
             <Fab
               data-tour={tour ? tour[0] : ""}
@@ -31,7 +49,6 @@ function CardHeader(props) {
               <i className="material-icons">search</i>
             </Fab>
           )}
-
           {/* <Fab
             data-tour={tour ? tour[1] : ""}
             size="small"

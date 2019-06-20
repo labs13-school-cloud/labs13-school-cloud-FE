@@ -68,7 +68,6 @@ export const getTrainingSeries = () => dispatch => {
           type: GET_TRAINING_SERIES_SUCCESS,
           payload: res.data.trainingSeries
         },
-        console.log("Actions- Training Series", res.data.trainingSeries)
       )
     )
 
@@ -95,18 +94,20 @@ export const addTrainingSeries = trainingSeriesData => dispatch => {
 
 export const editTrainingSeries = (id, trainingSeriesData) => dispatch => {
   dispatch({ type: EDIT_TRAINING_SERIES_START });
-
+  console.log(id)
+  console.log(trainingSeriesData)
   axios
     .put(
       `${process.env.REACT_APP_API}/api/training-series/${id}`,
       trainingSeriesData
     )
-    .then(res =>
+    .then(res => {
+      console.log('fires')
       dispatch({
         type: EDIT_TRAINING_SERIES_SUCCESS,
-        payload: res.data.updatedTrainingSeries
+        payload: { id, trainingSeriesData }
       })
-    )
+    })
     .catch(err => dispatch({ type: EDIT_TRAINING_SERIES_FAIL, error: err }));
 };
 

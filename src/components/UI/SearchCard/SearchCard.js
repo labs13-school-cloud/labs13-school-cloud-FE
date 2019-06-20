@@ -14,6 +14,7 @@ import { MessageContainer, styles } from "./styles.js";
 
 function SearchCard(props) {
   const [itemCount, setItemCount] = useState(0);
+  const [volunteerFilter, setVolunteerFilter] = useState('filter');
   const search = useState("");
   const [offset, setOffset] = useState(0);
 
@@ -25,7 +26,8 @@ function SearchCard(props) {
     headerTourNum,
     section,
     handleAdd,
-    history
+    history,
+    adminVolunteerOverview
   } = props;
   const limit = props.limit || 5;
 
@@ -37,26 +39,20 @@ function SearchCard(props) {
         isSearching={props.isSearching}
         title={section}
         tour={headerTourNum}
-        // add={() => handleAdd()}
+        setVolunteerFilter={setVolunteerFilter}
+        volunteerFilter={volunteerFilter}
+        adminVolunteerOverview={adminVolunteerOverview}
       />
       <Suspense fallback={<div />}>
         <List
           user_id={user_id}
           getFiltered={items =>
-            filter({ items, pagination, search: search[0].toLowerCase(0) })
+            filter({ items, pagination, volunteerFilter, search: search[0].toLowerCase(0) })
           }
+          volunteerFilter={volunteerFilter}
           history={history}
         />
       </Suspense>
-      {!itemCount && (
-        <MessageContainer>
-          <p>
-            {props.isLoading
-              ? `Loading your ${section}.`
-              : `You do not have any ${section}.`}
-          </p>
-        </MessageContainer>
-      )}
       <div className={classes.footer}>
         <Pagination
           limit={limit}
