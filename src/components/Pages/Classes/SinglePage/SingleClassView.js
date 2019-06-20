@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
 import { withRouter } from "react-router-dom";
-
-
 import { connect } from "react-redux";
 
 
-import { getClassByID, 
+import { 
+        getClassByID, 
         deleteClass, 
         addClass, 
-        editClass } from "store/actions/classesActions";
+        editClass,
+        getClassList } from "store/actions/classesActions";
 
 import { withStyles } from "@material-ui/core/styles";
 import {
@@ -27,6 +27,10 @@ function SingleClassView(props) {
     props.getClassByID(props.match.params.id);
   }, [getClassByID]);
 
+  // useEffect(() => {
+  //   props.getClassList();
+  // }, [getClassList]);
+
   useEffect(() => {
     props.addClass(props.match.params.id);
   }, [addClass]);
@@ -43,12 +47,7 @@ function SingleClassView(props) {
     props.getClassByID(id);
     props.history.push(`/home/classes/${id}/edit`);
   };
-
-  const removeVolunteer = (id, user_id) => {
-    props.deleteVolunteerFromTrainingSeries(id, user_id);
-  };
-  const { id, name, title, subject, link } = props.singleClass;
-
+//Exit out of single class view
   const done = e => {
     e.preventDefault();
     if (props.SingleClass.id === props.match.params.id) {
@@ -59,59 +58,40 @@ function SingleClassView(props) {
   };
 
   
+  const { id, class_name, subject, grade_level, number_of_students, teacher_name, link, title } = props;
 
-  console.log("singleClass", props.singleClass);
-  console.log("Classes ", props.match.params.id);
+  console.log("singleClass", props.classList[0].class_name);
+  console.log("Class ", props.match.params.id);
+  console.log(props.classList.class_name);
   return (
     <>
       <Wrapper>
         <Grid container spacing={24}>
           <Grid item xs={12}>
-            <i className="material-icons" onClick={removeClass}>
+          <Typography variant="overline">
+          <Typography variant="h6">{props.classList.title}</Typography>
+          <i className="material-icons" onClick={removeClass}>
               delete
             </i>{" "}
             <i className="material-icons" onClick={e => editClass(id)}>
               edit
             </i>
-            <Typography variant="h6">{title}</Typography>
-            <Typography variant="body1"> Class: {props.match.params.id}</Typography>
-            <Typography>
-              Classes Overview:
-              <Link to={link}>Classes Link</Link>
-            </Typography>
-            <Typography variant="body1">Creator: {name}</Typography>
             <Button onClick={e => done(true)}>
               Done
             </Button>
-          </Grid>
-          <Grid item xs={12}>
-            <Typography variant="h6">Volunteers Available</Typography>
-            <i className="material-icons" onClick={e => addClass(id)}>
-              add_circle
-            </i>
-            {props.trainingSeriesVolunteers.map(v =>
-              v.length !== 0 ? (
-                <Typography variant="body1" key={v.id}>
-                  {v.name}{" "}
-                  <i
-                    className="material-icons"
-                    onClick={e =>
-                      removeVolunteer({
-                        id: props.match.params.id,
-                        user_id: v.volunteer_id
-                      })
-                    }
-                  >
-                    delete_forever
-                  </i>
-                </Typography>
-              ) : (
-                <Typography>
-                  No Volunteers taking this Training Series
-                </Typography>
-              )
-            )}
-          </Grid>
+            <hr />
+            {`Subject: ${props.match.params.id}`}
+            </Typography>
+            <Typography variant="overline">
+                {`Grade Level: ${grade_level}`}
+            </Typography>
+            <Typography variant="overline">
+                {`Teacher Name: ${teacher_name}`}
+            </Typography>
+            <Typography variant="overline">
+                {`Number Of Students: ${number_of_students}`}
+            </Typography>
+            </Grid>
         </Grid>
       </Wrapper>
     </>
