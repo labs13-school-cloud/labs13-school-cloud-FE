@@ -27,9 +27,12 @@ export const styles = () => ({
   selection: {
     width: "20%",
     display: "flex",
-    marginLeft: "60%",
-    "@media (max-width: 450px)": {
-      marginLeft: "70%"
+    marginLeft: "75%"
+  },
+  icons: {
+    color: "#808080",
+    "&:hover": {
+      color: "#2699FB"
     }
   }
 });

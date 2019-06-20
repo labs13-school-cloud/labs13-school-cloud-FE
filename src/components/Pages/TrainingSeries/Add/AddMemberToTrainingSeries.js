@@ -26,10 +26,9 @@ function AddMemberToTrainingSeries(props) {
     props.history.push(`/home/training-series/${id}`);
     console.log(id, user_id);
   };
-  // Filter out volunteers that are already apart of the training series
 
   return (
-    <Wrapper>
+    <Wrapper style={{ display: "flex", flexWrap: "wrap" }}>
       {props.volunteers.map(v => (
         <Wrapper key={v.id}>
           <Typography variant="body1">{v.name}</Typography>{" "}

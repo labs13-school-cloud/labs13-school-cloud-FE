@@ -37,6 +37,20 @@ export const styles = theme => ({
   },
   divider: {
     margin: "15px 0"
+  },
+  icons: {
+    cursor: "pointer",
+    color: "#808080",
+    "&:hover": {
+      color: "#2699FB"
+    }
+  },
+  delete: {
+    opacity: 0,
+    "&:hover": {
+      color: "red",
+      opacity: 1
+    }
   }
 });
 

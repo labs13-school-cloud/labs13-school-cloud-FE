@@ -17,18 +17,16 @@ import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
 import { Wrapper, styles, Redirect } from "./styles.js";
 
-function Tab(
-  {
-    getFiltered,
-    getTrainingSeries,
-    trainingSeries,
-    getTrainingSeriesID,
-    getTrainingSeriesForVolunteer,
-    classes,
-    user_id,
-    activeTrainingSeries  }
-) {
-
+function Tab({
+  getFiltered,
+  getTrainingSeries,
+  trainingSeries,
+  getTrainingSeriesID,
+  getTrainingSeriesForVolunteer,
+  classes,
+  user_id,
+  activeTrainingSeries
+}) {
   const setTrainingSeries = id => {
     getTrainingSeriesID(activeTrainingSeries.id);
     getTrainingSeriesForVolunteer(id);
@@ -46,12 +44,9 @@ function Tab(
     history.push(`/home/training-series/${id}/edit`);
   };
   const [trainingFilter, setTrainingFilter] = useState("Filter");
-console.log(classes)
   return (
     <>
-      <FormControl
-      className={classes.formControl}
-      >
+      <FormControl className={classes.formControl}>
         <Select
           native
           value={trainingFilter}
@@ -83,11 +78,14 @@ console.log(classes)
                       {title}
                     </Redirect>
                   </Typography>
-                  <div style={{ display: "flex", justifyContent: 'space-between' }}>
-                  <i
-                      className={`material-icons ${classes.icons}`}
+                  <div
+                    style={{ display: "flex", justifyContent: "space-between" }}
+                  >
+                    <i
+                      className={`material-icons styles.icons`}
                       style={{
-                        color: "#808080"
+                        color: "#808080",
+                        marginRight: "5px"
                       }}
                       onClick={e => editTrainingSeries(id)}
                     >
@@ -99,7 +97,6 @@ console.log(classes)
                       className={`material-icons ${classes.icons}`}
                       user_id={user_id}
                     />
-                    
                   </div>
                 </div>
                 <hr />

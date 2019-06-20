@@ -12,6 +12,7 @@ import {
   getAllVolunteers
 } from "store/actions";
 import InfoPopup from "components/UI/InfoPopup/InfoPopup.js";
+import DeleteModal from "components/UI/Modals/deleteModal";
 
 import { withStyles } from "@material-ui/core/styles";
 import {
@@ -44,15 +45,12 @@ function SingleTrainingSeries(props) {
     props.history.push(`/home/training-series/${id}/edit`);
   };
 
-  // Filter out volunteers that are already apart of the training series
-
   // Sends Admin to Add Volunteer to Training Series page
   const addVolunteer = id => {
     props.getTrainingSeriesID(id);
     props.getAllVolunteers();
     props.history.push(`/home/training-series/${id}/addVolunteer`);
   };
-
   // Remove Volunteer from training series
   const removeVolunteer = (id, user_id) => {
     props.deleteVolunteerFromTrainingSeries(id, user_id);
@@ -61,36 +59,111 @@ function SingleTrainingSeries(props) {
   return (
     <>
       <Wrapper>
-        <Grid container spacing={24}>
-          <Grid item xs={12}>
-            <i className="material-icons" onClick={removeTrainingSeries}>
-              delete
-            </i>{" "}
-            <i className="material-icons" onClick={e => editTrainingSeries(id)}>
+        <Grid container>
+          <Grid item xs={11}>
+            <Typography
+              variant="h6"
+              style={{ textAlign: "center", marginLeft: "5rem" }}
+            >
+              {title}
+            </Typography>
+          </Grid>
+          <Grid
+            item
+            xs={1}
+            style={{ display: "flex", justifyContent: "flex-end" }}
+          >
+            <i
+              className={`material-icons ${props.classes.icons}`}
+              onClick={e => editTrainingSeries(id)}
+            >
               edit
             </i>
-            <Typography variant="h6">{title}</Typography>
-            <Typography variant="body1">Subject: {subject}</Typography>
-            <Typography>
-              Link to Training Series:
-              <Link to={link}>Training Link</Link>
-            </Typography>
-            <Typography variant="body1">Creator: {name}</Typography>
-            {/* <Button onClick={e => completeTrainingSeries(finished)}>
-              Done
-            </Button> */}
+            <DeleteModal
+              deleteType="trainingSeries"
+              trainingSeriesId={id}
+              className={`material-icons ${props.classes.icons}`}
+            />
           </Grid>
-          <Grid item xs={12}>
-            <Typography variant="h6">Active Volunteers</Typography>
-            <i className="material-icons" onClick={e => addVolunteer(id)}>
-              add_circle
-            </i>
+        </Grid>
+        <Grid
+          container
+          spacing={8}
+          style={{
+            marginTop: "2rem",
+            padding: "1.5rem"
+          }}
+        >
+          <Grid item xs={6}>
+            <Typography
+              variant="body1"
+              style={{
+                fontSize: "1rem",
+                paddingBottom: "5px"
+              }}
+            >
+              Subject: {subject}
+            </Typography>
+            <Typography style={{ fontSize: "1rem", paddingBottom: "5px" }}>
+              Link to Training Series:
+              <Link
+                to={link}
+                style={{ fontSize: "1rem", paddingBottom: "5px" }}
+              >
+                {" "}
+                Training Link
+              </Link>
+            </Typography>
+            <Typography
+              variant="body1"
+              style={{ fontSize: "1rem", paddingBottom: "5px" }}
+            >
+              Creator: {name}
+            </Typography>
+          </Grid>
+          <Grid
+            item
+            xs={6}
+            style={{
+              border: "solid black .5px",
+              padding: "1rem"
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center"
+              }}
+            >
+              <Typography
+                variant="h6"
+                style={{
+                  marginRight: "5px",
+                  marginBottom: "10px"
+                }}
+              >
+                Active Volunteers
+              </Typography>
+              <i
+                className={`material-icons ${props.classes.icons}`}
+                onClick={e => addVolunteer(id)}
+              >
+                add_circle
+              </i>
+            </div>
             {props.trainingSeriesVolunteers.map(v =>
               v.length !== 0 ? (
-                <Typography variant="body1" key={v.id}>
+                <Typography
+                  variant="body1"
+                  style={{
+                    textAlign: "center",
+                    marginBottom: "10px"
+                  }}
+                  key={v.id}
+                >
                   {v.name}{" "}
                   <i
-                    className="material-icons"
+                    className={`material-icons ${props.classes.delete}`}
                     onClick={e =>
                       removeVolunteer({
                         id: props.match.params.id,

@@ -63,7 +63,7 @@ const styles = theme => ({
     width: 20,
     color: "gray",
     cursor: "pointer",
-    "&:hover": { color: "#2699FB" }
+    "&:hover": { color: "red" }
   }
 });
 
@@ -184,8 +184,7 @@ TrainingSeriesModal.propTypes = {
 };
 
 const mapStateToProps = state => {
-  return {
-  };
+  return {};
 };
 
 const TrainingSeriesModalWrapped = withStyles(styles)(TrainingSeriesModal);

@@ -183,7 +183,7 @@ export const addVolunteerToTrainingSeries = (id, user_id) => dispatch => {
       dispatch(
         {
           type: ADD_VOLUNTEERS_FOR_TRAINING_SERIES_SUCCESS,
-          payload: res.data.volunteers
+          payload: res.data.volunteer
         },
         console.log("From Actions", id, user_id)
       )
