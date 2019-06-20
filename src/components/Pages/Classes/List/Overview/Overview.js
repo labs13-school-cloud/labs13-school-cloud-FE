@@ -24,11 +24,11 @@ function  Overview(props) {
         props.history.push(`/home`);
         console.log("Remove Class", id);
     };
-
+    //{props.getFiltered(props.classList).map
     console.log(props)
     return (
         <div style={{ display: "flex", flexWrap: "wrap" }}>
-            {props.getFiltered(props.classList).map(
+            {props.classList.map(
                 ({ id, class_name, subject, grade_level, number_of_students, teacher_name }) => {
                     console.log(id)
                     return (

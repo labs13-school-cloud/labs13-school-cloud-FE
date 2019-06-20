@@ -15,6 +15,7 @@ import ContactModal from "components/UI/ContactModal/ContactModal.js";
 
 import Dashboard from "../Dashboard";
 
+
 function Routes(props) {
   const { setDisplaySnackbar, history, setIsTourOpen } = props;
   const disableSnackbar = () => {
@@ -117,7 +118,7 @@ function Routes(props) {
         )}
       />
       <Route
-        path="/home/classes/:id"
+        path="/home/classes/:id" 
         render={renderProps => (
           <SingleClassView {...renderProps} user_id={props.user.id} />
         )}
