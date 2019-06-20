@@ -49,8 +49,6 @@ export const addClass = classList => dispatch => {
 //Edit class
 export const editClass = classList => dispatch => {
     const { id, class_name, grade_level, subject, teacher_name, number_of_students, ...changes } = classList;
-    //
-    //
     dispatch({ type: EDIT_CLASS_START });
     axios
         .put(`${baseUrl}/classes/${id}`, changes)
