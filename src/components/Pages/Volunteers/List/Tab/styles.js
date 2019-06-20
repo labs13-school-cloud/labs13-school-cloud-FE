@@ -6,7 +6,7 @@ display: flex;
 margin: 10px;
 padding: 10px;
 height: 100%;
-width: 16%;
+// width: 16%;
 &:hover {
     background: #f8f8f8;
 }`;

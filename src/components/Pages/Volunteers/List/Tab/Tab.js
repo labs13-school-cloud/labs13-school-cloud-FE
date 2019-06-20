@@ -14,15 +14,15 @@ import { ListStyles } from "./styles.js";
 
 
 function  AdminVolunteerTab(props) {
-    // const { getVolunteers } = props;
+    const { getVolunteers } = props;
     useEffect(() => {
-       props.getVolunteers()
+       getVolunteers()
     }, [getVolunteers]);
 
 
     console.log(props)
     return (
-        <div style={{ display: "flex", flexWrap: "wrap", alignItems: "flex-end" }}>
+        <div style={{ display: "flex", flexWrap: "wrap", alignItems: "flex-end", justifyContent: "space-evenly" }}>
             {props.getFiltered(props.volunteers).map(
                 ({ id, name, email, role, approved, donator }) => {
                     console.log(id)
@@ -46,7 +46,8 @@ function  AdminVolunteerTab(props) {
                                         
                                         <hr />
                                         <Typography variant="overline">
-                                            {`Email: ${email}`}
+                                            {`Email:
+                                             ${email}`}
                                         </Typography>
                                         <Typography variant="overline">
                                             {`Role: ${role}`}

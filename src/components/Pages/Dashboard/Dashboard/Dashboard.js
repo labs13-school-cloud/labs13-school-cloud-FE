@@ -104,7 +104,7 @@ function Dashboard(props) {
             List={AdminVolunteerTab}
             section="Volunteers"
             isSearching={false}
-            limit={10}
+            limit={11}
           />
         )}
 
