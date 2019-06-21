@@ -2,16 +2,12 @@
 import React, { useEffect } from  "react";
 import { connect } from  "react-redux";
 
-import styled from "styled-components";
-
 import history from "history.js";
 
-import DeleteModal from "../../../../UI/Modals/deleteModal";
-import EditModal from "../../../../UI/Modals/editModal";
-import { getClassList, deleteClass } from "../../../../../store/actions/classesActions";
+import DeleteModal from "components/UI/Modals/deleteModal";
+import EditModal from "components/UI/Modals/editModal";
+import { getClassList, deleteClass } from "store/actions/classesActions";
 
-import { withStyles } from "@material-ui/core/styles";
-import { ListItem, ListItemText } from "@material-ui/core/";
 import { ListStyles } from "./styles.js";
 import { Typography } from "@material-ui/core/";
 
@@ -20,25 +16,16 @@ function  Overview(props) {
         props.getClassList();
     }, [getClassList]);
 
-    const removeClass = id => {
-        props.deleteClass(props.classList.id);
-        props.history.push(`/home`);
-        console.log("Remove Class", id);
-    };
-    //{props.getFiltered(props.classList).map
     console.log(props)
     return (
         <div style={{ display: "flex", flexWrap: "wrap" }}>
             {props.classList.map(c => {
-                // ({ id, class_name, subject, grade_level, number_of_students, teacher_name }) => {
-                    console.log(c.id)
                     return (
                         <ListStyles key={c.id} component="li" className={props.classList.listItem}>
                          
                             <Typography key={c.id}>
                                 <div 
                                 style={{ cursor: "pointer" }}
-                                // onClick={() => history.push(`home/classes/${id}`)}
                                 >
                                     <Typography variant="subtitle1" style={{ display:"flex", justifyContent:"space-between" }}>
                                         {c.class_name}
@@ -46,9 +33,6 @@ function  Overview(props) {
                                         deleteType="classes"
                                         classId={c.id}
                                         className={`material-icons ${props.classList.icons}`}
-                                        // onClick={e => removeClass(id)}
-                                        style={{ zIndex: "1000" }}
-                                        // removeClass={removeClass}
                                     />
                                     <EditModal
                                         classList={c}
