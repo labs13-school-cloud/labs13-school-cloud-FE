@@ -32,6 +32,7 @@ export const styles = () => ({
   icons: {
     color: "#808080",
     marginLeft: "5px",
+    cursor: "pointer",
     "&:hover": {
       color: "#2699FB"
     }

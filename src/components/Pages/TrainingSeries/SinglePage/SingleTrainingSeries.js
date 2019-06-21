@@ -95,7 +95,7 @@ function SingleTrainingSeries(props) {
         </Grid>
         <Grid
           container
-          spacing={5}
+          spacing={8}
           style={{
             marginTop: "2rem",
             padding: "1.5rem",
@@ -160,29 +160,32 @@ function SingleTrainingSeries(props) {
                   add_circle
                 </i>
               </div>
-              {props.trainingSeriesVolunteers.map(v => (
-                <Typography
-                  variant="body1"
-                  style={{
-                    textAlign: "center",
-                    marginBottom: "10px"
-                  }}
-                  key={v.id}
-                >
-                  {v.name}{" "}
-                  <i
-                    className={`material-icons ${props.classes.delete}`}
-                    onClick={e =>
-                      removeVolunteer({
-                        id: props.match.params.id,
-                        user_id: v.volunteer_id
-                      })
-                    }
+              {props.trainingSeriesVolunteers.map(v =>
+                v.length !== 0 ? (
+                  <Typography
+                    variant="body1"
+                    key={v.id}
+                    style={{ textAlign: "center" }}
                   >
-                    delete_forever
-                  </i>
-                </Typography>
-              ))}
+                    {v.name}{" "}
+                    <i
+                      className={`material-icons ${props.classes.delete}`}
+                      onClick={e =>
+                        removeVolunteer({
+                          id: props.match.params.id,
+                          user_id: v.volunteer_id
+                        })
+                      }
+                    >
+                      delete_forever
+                    </i>
+                  </Typography>
+                ) : (
+                  <Typography>
+                    No Volunteers taking this Training Series
+                  </Typography>
+                )
+              )}
             </Wrapper>
           </Grid>
         </Grid>
