@@ -97,26 +97,26 @@ class Team extends React.Component {
                 <img src={Steph} alt="Stephanie Patton" />
                 <Typography variant="title">Stephanie Patton</Typography>
                 <p>Full-Stack Developer</p>
-                <PortfolioLink
+                {/* <PortfolioLink
                   target="_blank"
                   rel="noopener noreferrer"
                   href="http://gannon.dev"
                 >
                   Portfolio Site
-                </PortfolioLink>
+                </PortfolioLink> */}
 
                 <TeamMemberLinks>
                   <a
                     target="_blank"
                     rel="noopener noreferrer"
-                    href="https://github.com/GannonDetroit"
+                    href="https://github.com/StephanieRP"
                   >
                     <FontAwesomeIcon className="fa-2x" icon={faGithubSquare} />
                   </a>
                   <a
                     target="_blank"
                     rel="noopener noreferrer"
-                    href="https://www.linkedin.com/in/gannon-darcy-b8345073/"
+                    href="https://www.linkedin.com/in/stephanie-patton-154a3655/"
                   >
                     <FontAwesomeIcon className="fa-2x" icon={faLinkedin} />
                   </a>
@@ -126,26 +126,26 @@ class Team extends React.Component {
                 <img src={Brandon} alt="Brandon Vilaychith" />
                 <Typography variant="title">Brandon Vilaychith</Typography>
                 <p>Full-Stack Developer</p>
-                <PortfolioLink
+                {/* <PortfolioLink
                   target="_blank"
                   rel="noopener noreferrer"
                   href="http://ajbrush.com/"
                 >
                   Portfolio Site
-                </PortfolioLink>
+                </PortfolioLink> */}
 
                 <TeamMemberLinks>
                   <a
                     target="_blank"
                     rel="noopener noreferrer"
-                    href="https://github.com/ajb85"
+                    href="https://github.com/BrandonVilaychith"
                   >
                     <FontAwesomeIcon className="fa-2x" icon={faGithubSquare} />
                   </a>
                   <a
                     target="_blank"
                     rel="noopener noreferrer"
-                    href="https://www.linkedin.com/in/andrew-brush-58205b122/"
+                    href="https://www.linkedin.com/in/brandon-vilaychith-175348149/"
                   >
                     <FontAwesomeIcon className="fa-2x" icon={faLinkedin} />
                   </a>
