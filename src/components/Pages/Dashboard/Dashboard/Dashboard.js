@@ -8,7 +8,10 @@ import TrainingSeriesOverview from "components/Pages/TrainingSeries/List/Overvie
 import TrainingSeriesTab from "components/Pages/TrainingSeries/List/Tab";
 import ClassListTab from "components/Pages/Classes/List/Overview"
 import AdminVolunteerTab from "components/Pages/Volunteers/List/Tab";
+import ClassesOverview from "components/Pages/Classes/List/AdminOverview";
 import NotificationsCard from "components/Pages/Notifications/Card";
+import VolunteerOverview from "components/Pages/Volunteers/Overview"
+import VolunteerCard from "components/Pages/Volunteers";
 import NotificationsOverview from "components/Pages/Notifications/Card/Overview/Overview.js";
 import Responses from "components/Pages/Notifications/Responses";
 import TabNavigation from "./helpers/TabNavigation.js";
@@ -71,10 +74,22 @@ function Dashboard(props) {
                 List={TrainingSeriesOverview}
                 containerTourNum="4"
                 section="Training Series"
-                handleAdd={() => history.push("/home/create-training-series")}
+              />
+              <Divider />
+              <SearchCard
+                user_id={user_id}
+                List={ClassesOverview}
+                containerTourNum="5"
+                section="Classes"
               />
             </SmallColumns>
-            <NotificationsCard List={NotificationsOverview} user_id={user_id} />
+            <SearchCard
+              List={VolunteerOverview}
+              section="Volunteers"
+              isSearching={false}
+              limit={6}
+              adminVolunteerOverview={true}
+            />
           </>
         )}
 

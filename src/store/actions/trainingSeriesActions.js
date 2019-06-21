@@ -48,6 +48,13 @@ export const DELETE_VOLUNTEERS_FOR_TRAINING_SERIES_SUCCESS =
   "DELETE_VOLUNTEERS_FOR_TRAINING_SERIES_SUCCESS";
 export const DELETE_VOLUNTEERS_FOR_TRAINING_SERIES_FAIL =
   "DELETE_VOLUNTEERS_FOR_TRAINING_SERIES_FAIL";
+// GET TRAINING SERIES FOR A VOLUNTEER
+export const GET_TRAINING_SERIES_FOR_VOLUNTEER_START =
+  "GET_TRAINING_SERIES_FOR_VOLUNTEER_START";
+export const GET_TRAINING_SERIES_FOR_VOLUNTEER_SUCCESS =
+  "GET_TRAINING_SERIES_FOR_VOLUNTEER_SUCCESS";
+export const GET_TRAINING_SERIES_FOR_VOLUNTEER_FAIL =
+  "GET_TRAINING_SERIES_FOR_VOLUNTEER_FAIL";
 
 export const getTrainingSeries = () => dispatch => {
   dispatch({
@@ -61,7 +68,6 @@ export const getTrainingSeries = () => dispatch => {
           type: GET_TRAINING_SERIES_SUCCESS,
           payload: res.data.trainingSeries
         },
-        console.log("Actions- Training Series", res.data.trainingSeries)
       )
     )
 
@@ -88,18 +94,20 @@ export const addTrainingSeries = trainingSeriesData => dispatch => {
 
 export const editTrainingSeries = (id, trainingSeriesData) => dispatch => {
   dispatch({ type: EDIT_TRAINING_SERIES_START });
-
+  console.log(id)
+  console.log(trainingSeriesData)
   axios
     .put(
       `${process.env.REACT_APP_API}/api/training-series/${id}`,
       trainingSeriesData
     )
-    .then(res =>
+    .then(res => {
+      console.log('fires')
       dispatch({
         type: EDIT_TRAINING_SERIES_SUCCESS,
-        payload: res.data.updatedTrainingSeries
+        payload: { id, trainingSeriesData }
       })
-    )
+    })
     .catch(err => dispatch({ type: EDIT_TRAINING_SERIES_FAIL, error: err }));
 };
 
@@ -146,7 +154,7 @@ export const getTrainingSeriesForVolunteer = trainingSeriesID => dispatch => {
     .get(
       `${
         process.env.REACT_APP_API
-      }/api/training-series/${trainingSeriesID}/volunteers`
+      }/api/training-series/volunteers/${trainingSeriesID}`
     )
     .then(res =>
       dispatch(
@@ -211,5 +219,31 @@ export const deleteVolunteerFromTrainingSeries = ({
     )
     .catch(err =>
       dispatch({ type: DELETE_VOLUNTEERS_FOR_TRAINING_SERIES_FAIL, error: err })
+    );
+};
+
+// Get Training Series for Volunteer
+export const getVolunteerTrainingSeries = user_id => dispatch => {
+  dispatch({
+    type: GET_TRAINING_SERIES_FOR_VOLUNTEER_START
+  });
+  axios
+    .get(
+      `${process.env.REACT_APP_API}/api/training-series/volunteers/${user_id}`
+    )
+    .then(res =>
+      dispatch(
+        {
+          type: GET_TRAINING_SERIES_FOR_VOLUNTEER_SUCCESS,
+          payload: res.data.trainingSeries
+        },
+        console.log(
+          "From Actions-Get volunteer's training series",
+          res.data.trainingSeries
+        )
+      )
+    )
+    .catch(err =>
+      dispatch({ type: GET_TRAINING_SERIES_FOR_VOLUNTEER_FAIL, error: err })
     );
 };

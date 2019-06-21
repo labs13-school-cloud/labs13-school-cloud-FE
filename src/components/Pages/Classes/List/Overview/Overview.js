@@ -23,13 +23,19 @@ import { ListStyles } from "./styles.js";
 
 function  Overview(props) {
     useEffect(() => {
-        props.getClassList()
+        props.getClassList();
     }, [getClassList]);
 
+    const removeClass = id => {
+        props.deleteClass(props.classList.id);
+        props.history.push(`/home`);
+        console.log("Remove Class", id);
+    };
+    //{props.getFiltered(props.classList).map
     console.log(props)
     return (
-        <div style={{ display: "flex", flexWrap: "wrap", alignItems: "flex-end" }}>
-            {props.getFiltered(props.classList).map(
+        <div style={{ display: "flex", flexWrap: "wrap" }}>
+            {props.classList.map(
                 ({ id, class_name, subject, grade_level, number_of_students, teacher_name }) => {
                     console.log(id)
                     return (
@@ -99,5 +105,5 @@ const mapStateToProps = state => {
 
 export default connect(
     mapStateToProps,
-    { getClassList, deleteClass, addClass }
+    { getClassList, deleteClass }
 )(Overview);

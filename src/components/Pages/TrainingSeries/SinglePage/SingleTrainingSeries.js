@@ -58,6 +58,7 @@ function SingleTrainingSeries(props) {
     props.deleteVolunteerFromTrainingSeries(id, user_id);
   };
   const { id, name, title, subject, link } = props.activeTrainingSeries;
+  
   return (
     <>
       <Wrapper>

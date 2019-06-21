@@ -71,7 +71,7 @@ const classListReducer = (state = initialState, action) => {
         case FETCH_SINGLE_CLASS_START:
             return {
                 ...state,
-                teamMember: {},
+                singleClass: {},
                 status: {
                 ...state.status,
                 isLoading: true,
@@ -82,7 +82,7 @@ const classListReducer = (state = initialState, action) => {
         case FETCH_SINGLE_CLASS_SUCCESS:
             return {
                 ...state,
-                teamMember: action.payload,
+                singleClass: action.payload,
                 status: {
                 ...state.status,
                 isLoading: false,
@@ -131,6 +131,7 @@ const classListReducer = (state = initialState, action) => {
                 },
                 error: action.payload
             };
+        //---Edit classes----     
         case EDIT_CLASS_START:
             return {
                 ...state,
@@ -142,19 +143,16 @@ const classListReducer = (state = initialState, action) => {
                 }
             }
         case EDIT_CLASS_SUCCESS:
-            const updatedClassList = state.classList.map(classList => {
-                if (classList.id === action.payload.id) {
+            const updatedItem = state.classList.map(item => {
+                if (item.id === action.payload.id) {
                     return {
-                        ...classList,
-                        ...action.payload
-                    };
-                } else {
-                    return classList;
-                }
-            });
+                        ...action.payload.changes
+                    }
+                }  else return item;
+            })
             return {
                 ...state,
-                classList: updatedClassList,
+                classList: updatedItem,
                 status: {
                     ...state.status,
                     isEditing: false,

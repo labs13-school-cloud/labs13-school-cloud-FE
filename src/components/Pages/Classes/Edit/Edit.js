@@ -77,7 +77,7 @@ const mapStateToProps = state => ({
     singleClass: state.classList.singleClass
 });
 
-export default coonnect(
+export default connect(
     mapStateToProps,
     { getClassById, editClass }
 )(withStyles(styles)(Edit))
