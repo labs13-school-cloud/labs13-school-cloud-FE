@@ -71,7 +71,7 @@ const classListReducer = (state = initialState, action) => {
         case FETCH_SINGLE_CLASS_START:
             return {
                 ...state,
-                teamMember: {},
+                singleClass: {},
                 status: {
                 ...state.status,
                 isLoading: true,
@@ -82,7 +82,7 @@ const classListReducer = (state = initialState, action) => {
         case FETCH_SINGLE_CLASS_SUCCESS:
             return {
                 ...state,
-                teamMember: action.payload,
+                singleClass: action.payload,
                 status: {
                 ...state.status,
                 isLoading: false,
@@ -131,6 +131,7 @@ const classListReducer = (state = initialState, action) => {
                 },
                 error: action.payload
             };
+        //---Edit classes----     
         case EDIT_CLASS_START:
             return {
                 ...state,

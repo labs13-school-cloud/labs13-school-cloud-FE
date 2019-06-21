@@ -8,7 +8,7 @@ import InfoPopup from "components/UI/InfoPopup/InfoPopup.js";
  import { withStyles } from "@material-ui/core/styles";
 import { Paper, Divider, Typography, Grid, Button } from "@material-ui/core/";
 
- import { styles, PageContainer, Wrapper } from "./styles.js";
+ import { styles, PageContainer, Wrapper } from "./styles.js/index.js";
 
  function SinglePage(props) {
   console.log(props);
