@@ -37,7 +37,7 @@ function Overview(props) {
           <ListItem key={series.id} component="li" className={classes.listItem}>
             <ListItemText
               primary={series.title}
-              secondary={`Subject: ${series.subject} | Volunteers: ${series.volunteers.length}`}
+              secondary={`Subject: ${series.subject}`}
               onClick={e => history.push(`/home/training-series/${series.id}`)}
             />
             <div style={{ width: "65px", display: "flex", justifyContent: "space-between" }}>

@@ -68,7 +68,7 @@ const EditModal = props => {
   });
   // console.log('test', classList)
   const [currentClass, setCurrentClass] = useState({
-    ...props.classList
+    // ...props.classList
   })
   // Runs different functions based on what is being updated
   const handleEdit = () => {
