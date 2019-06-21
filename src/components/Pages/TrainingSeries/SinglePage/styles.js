@@ -59,6 +59,11 @@ export const styles = theme => ({
       color: "red",
       opacity: 1
     }
+  },
+  info: {
+    fontSize: "1rem",
+    paddingBottom: "5px",
+    fontWeight: 'bold'
   }
 });
 

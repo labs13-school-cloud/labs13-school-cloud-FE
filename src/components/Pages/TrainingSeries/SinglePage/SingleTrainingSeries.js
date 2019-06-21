@@ -55,7 +55,7 @@ function SingleTrainingSeries(props) {
   const removeVolunteer = (id, user_id) => {
     props.deleteVolunteerFromTrainingSeries(id, user_id);
   };
-  const { id, name, title, subject, link } = props.activeTrainingSeries;
+  // const { id, name, title, subject, link } = props.activeTrainingSeries;
   return (
     <>
       <Wrapper>
@@ -63,9 +63,9 @@ function SingleTrainingSeries(props) {
           <Grid item xs={11}>
             <Typography
               variant="h6"
-              style={{ textAlign: "center", marginLeft: "5rem" }}
+              style={{ textAlign: "center", marginLeft: "5rem", fontSize: '1.8rem' }}
             >
-              {title}
+              {props.activeTrainingSeries.title}
             </Typography>
           </Grid>
           <Grid
@@ -80,7 +80,7 @@ function SingleTrainingSeries(props) {
               edit
             </i> */}
              <EditModal
-                                        trainingSeries={id}
+                                        trainingSeries={props.activeTrainingSeries}
                                         updateType="trainingSeries"
                                     />
             <i className="material-icons" className={`material-icons ${props.classes.iconDelete}`} onClick={removeTrainingSeries}>
@@ -99,18 +99,17 @@ function SingleTrainingSeries(props) {
           <Grid item xs={6}   style={{display: 'flex', flexDirection: 'column', justifyContent:'space-evenly', alignContent: 'center'}}>
             <Typography
               variant="body1"
-              style={{
-                fontSize: "1rem",
-                paddingBottom: "5px"
-              }}
+              className={props.classes.info}
+
             >
-              Subject: {subject}
+              Subject: {props.activeTrainingSeries.subject}
             </Typography>
-            <Typography style={{ fontSize: "1rem", paddingBottom: "5px" }}>
+            <Typography className={props.classes.info}
+>
               Link to Training Series:
               <Link
-                to={link}
-                style={{ fontSize: "1rem", paddingBottom: "5px" }}
+                to={props.activeTrainingSeries.link}
+                className={props.classes.info}
               >
                 {" "}
                 Training Link
@@ -118,9 +117,9 @@ function SingleTrainingSeries(props) {
             </Typography>
             <Typography
               variant="body1"
-              style={{ fontSize: "1rem", paddingBottom: "5px" }}
-            >
-              Creator: {name}
+              className={props.classes.info}
+              >
+              Creator: {props.activeTrainingSeries.name}
             </Typography>
           </Grid>
           <Grid
@@ -134,7 +133,8 @@ function SingleTrainingSeries(props) {
             <div
               style={{
                 display: "flex",
-                justifyContent: "center"
+                justifyContent: "center",
+                alignContent: 'center'
               }}
             >
               <Typography
@@ -148,7 +148,7 @@ function SingleTrainingSeries(props) {
               </Typography>
               <i
                 className={`material-icons ${props.classes.icons}`}
-                onClick={e => addVolunteer(id)}
+                onClick={e => addVolunteer(props.activeTrainingSeries.id)}
               >
                 add_circle
               </i>
