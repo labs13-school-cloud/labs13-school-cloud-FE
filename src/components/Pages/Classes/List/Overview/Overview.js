@@ -2,15 +2,14 @@
 import React, { useEffect } from  "react";
 import { connect } from  "react-redux";
 
-import styled from "styled-components";
+
 
 import history from "history.js";
 
 import DeleteModal from "../../../../UI/Modals/deleteModal";
 import { getClassList, deleteClass } from "../../../../../store/actions/classesActions";
 
-import { withStyles } from "@material-ui/core/styles";
-import { ListItem, ListItemText } from "@material-ui/core/";
+
 import { ListStyles } from "./styles.js";
 import { Typography } from "@material-ui/core/";
 
@@ -24,13 +23,13 @@ function  Overview(props) {
         props.history.push(`/home`);
         console.log("Remove Class", id);
     };
-    //{props.getFiltered(props.classList).map
-    console.log(props)
+    
+    console.log(props);
     return (
         <div style={{ display: "flex", flexWrap: "wrap" }}>
             {props.classList.map(
                 ({ id, class_name, subject, grade_level, number_of_students, teacher_name }) => {
-                    console.log(id)
+                    console.log(id);
                     return (
                         <ListStyles key={id} component="li" className={props.classList.listItem}>
                          
@@ -51,7 +50,7 @@ function  Overview(props) {
                                     />
                                     </Typography>
                                     <div onClick={() => history.push(`home/classes/${id}`)}>
-                                        
+                                      
                                         <hr />
                                         <Typography variant="overline">
                                             {`Subject: ${subject}`}

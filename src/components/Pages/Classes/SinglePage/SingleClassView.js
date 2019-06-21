@@ -2,19 +2,22 @@ import React, { useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 
+import history from "history.js";
+//import DeleteModal from "UI/Modals/deleteModal";
+
 
 import { 
         getClassByID, 
         deleteClass, 
         addClass, 
-        editClass } from "store/actions/classesActions";
+        editClass,
+        getClassList } from "store/actions/classesActions";
 
 import { withStyles } from "@material-ui/core/styles";
 import {
   Typography,
   Grid,
-  Button,
-  Link
+  Button
 } from "@material-ui/core/";
 
 import { styles, Wrapper } from "./styles.js";
@@ -46,7 +49,7 @@ function SingleClassView(props) {
 //Exit out of single class view
   const done = e => {
     e.preventDefault();
-    if (props.SingleClass.id === props.match.params.id) {
+    if (props.singleClass.id === props.match.params.id) {
       this.setState({
         finished: true
       });
@@ -56,9 +59,11 @@ function SingleClassView(props) {
   
   const { id, class_name, subject, grade_level, number_of_students, teacher_name, link, title } = props.singleClass;
 
-  console.log("singleClass", props.classList[2]);
+  console.log("singleClass", props.classList[1]);
   console.log("Class ", props.match.params.id);
   console.log(props.classList.class_name);
+
+
   return (
     <>
       <Wrapper>
@@ -110,7 +115,8 @@ export default withRouter(
         getClassByID,
         deleteClass,
         addClass,
-        editClass
+        editClass,
+        getClassList
     }
   )(withStyles(styles)(SingleClassView))
 );
