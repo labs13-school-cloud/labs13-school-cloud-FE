@@ -55,7 +55,8 @@ function SingleTrainingSeries(props) {
   const removeVolunteer = (id, user_id) => {
     props.deleteVolunteerFromTrainingSeries(id, user_id);
   };
-  // const { id, name, title, subject, link } = props.activeTrainingSeries;
+  // destructor training series
+  const { id, name, title, subject, link } = props.activeTrainingSeries;
   return (
     <>
       <Wrapper>
@@ -63,9 +64,13 @@ function SingleTrainingSeries(props) {
           <Grid item xs={11}>
             <Typography
               variant="h6"
-              style={{ textAlign: "center", marginLeft: "5rem", fontSize: '1.8rem' }}
+              style={{
+                textAlign: "center",
+                marginLeft: "5rem",
+                fontSize: "1.8rem"
+              }}
             >
-              {props.activeTrainingSeries.title}
+              {title}
             </Typography>
           </Grid>
           <Grid
@@ -73,88 +78,89 @@ function SingleTrainingSeries(props) {
             xs={1}
             style={{ display: "flex", justifyContent: "flex-end" }}
           >
-            {/* <i
+            <i
               className={`material-icons ${props.classes.icons}`}
               onClick={e => editTrainingSeries(id)}
             >
               edit
-            </i> */}
-             <EditModal
-                                        trainingSeries={props.activeTrainingSeries}
-                                        updateType="trainingSeries"
-                                    />
-            <i className="material-icons" className={`material-icons ${props.classes.iconDelete}`} onClick={removeTrainingSeries}>
+            </i>
+            <i
+              className="material-icons"
+              className={`material-icons ${props.classes.iconDelete}`}
+              onClick={removeTrainingSeries}
+            >
               delete
             </i>
           </Grid>
         </Grid>
         <Grid
           container
-          spacing={8}
+          spacing={5}
           style={{
             marginTop: "2rem",
-            padding: "1.5rem"
+            padding: "1.5rem",
+            display: "flex",
+            justifyContent: "center",
+            alignContent: "center"
           }}
         >
-          <Grid item xs={6}   style={{display: 'flex', flexDirection: 'column', justifyContent:'space-evenly', alignContent: 'center'}}>
-            <Typography
-              variant="body1"
-              className={props.classes.info}
+          <Grid
+            item
+            xs={6}
+            style={{
+              display: "flex",
+              flexDirection: "column",
 
-            >
-              Subject: {props.activeTrainingSeries.subject}
+              justifyContent: "space-evenly",
+              alignContent: "center"
+            }}
+          >
+            <Typography variant="body1" className={props.classes.info}>
+              Subject: {subject}
             </Typography>
-            <Typography className={props.classes.info}
->
+            <Typography className={props.classes.info}>
               Link to Training Series:
-              <Link
-                to={props.activeTrainingSeries.link}
-                className={props.classes.info}
-              >
+              <Link to={link} className={props.classes.info}>
                 {" "}
                 Training Link
               </Link>
             </Typography>
-            <Typography
-              variant="body1"
-              className={props.classes.info}
-              >
-              Creator: {props.activeTrainingSeries.name}
+            <Typography variant="body1" className={props.classes.info}>
+              Creator: {name}
             </Typography>
           </Grid>
           <Grid
             item
             xs={6}
             style={{
-              border: "solid black .5px",
               padding: "1rem"
             }}
           >
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignContent: 'center'
-              }}
-            >
-              <Typography
-                variant="h6"
+            <Wrapper>
+              <div
                 style={{
-                  marginRight: "5px",
-                  marginBottom: "10px"
+                  display: "flex",
+                  justifyContent: "center",
+                  alignContent: "center"
                 }}
               >
-                Active Volunteers
-              </Typography>
-              <i
-                className={`material-icons ${props.classes.icons}`}
-                onClick={e => addVolunteer(props.activeTrainingSeries.id)}
-              >
-                add_circle
-              </i>
-            </div>
-            {props.trainingSeriesVolunteers.map(v =>
-              v.length !== 0 ? (
+                <Typography
+                  variant="h6"
+                  style={{
+                    marginRight: "5px",
+                    marginBottom: "10px"
+                  }}
+                >
+                  Active Volunteers
+                </Typography>
+                <i
+                  className={`material-icons ${props.classes.icons}`}
+                  onClick={e => addVolunteer(id)}
+                >
+                  add_circle
+                </i>
+              </div>
+              {props.trainingSeriesVolunteers.map(v => (
                 <Typography
                   variant="body1"
                   style={{
@@ -176,12 +182,8 @@ function SingleTrainingSeries(props) {
                     delete_forever
                   </i>
                 </Typography>
-              ) : (
-                <Typography>
-                  No Volunteers taking this Training Series
-                </Typography>
-              )
-            )}
+              ))}
+            </Wrapper>
           </Grid>
         </Grid>
       </Wrapper>

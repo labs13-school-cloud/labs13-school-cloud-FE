@@ -28,7 +28,6 @@ function Tab({
   user_id,
   activeTrainingSeries
 }) {
-
   const setTrainingSeries = id => {
     getTrainingSeriesID(activeTrainingSeries.id);
     getTrainingSeriesForVolunteer(id);
@@ -48,7 +47,7 @@ function Tab({
   const [trainingFilter, setTrainingFilter] = useState("filter");
   return (
     <>
-      <FormControl className={classes.formControl}>
+      {/* <FormControl className={classes.formControl}>
         <Select
           native
           value={trainingFilter}
@@ -62,7 +61,7 @@ function Tab({
           <option value={"sports"}>Sports</option>
           <option value={"garden"}>Garden</option>
         </Select>
-      </FormControl>
+      </FormControl> */}
       {getFiltered(trainingSeries).map(({ id, title, subject, name }) => {
         return (
           <Wrapper key={`container_${id}`}>
@@ -84,11 +83,7 @@ function Tab({
                     style={{ display: "flex", justifyContent: "space-between" }}
                   >
                     <i
-                      className={`material-icons styles.icons`}
-                      style={{
-                        color: "#808080",
-                        marginRight: "5px"
-                      }}
+                      className={`material-icons ${classes.icons}`}
                       onClick={e => editTrainingSeries(id)}
                     >
                       edit
