@@ -41,7 +41,12 @@ export const styles = theme => ({
       flexDirection: "column",
       alignItems: "center"
     }
-  }
+  },
+  button: {
+    backgroundColor: "#d3d3d3",
+    "&:hover": {
+      backgroundColor: "#2699FB"
+    }  }
 });
 
 export const MainWrapper = styled.div`

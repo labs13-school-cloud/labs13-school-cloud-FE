@@ -1,13 +1,13 @@
 export const styles = theme => ({
   textField: {
-    width: "50%"
+    width: "100%"
   },
   selection: {
     margin: "0 10px"
   },
   columnHeader: {
     display: "flex",
-    justifyContent: "space-between",
+    justifyContent: "center",
     alignItems: "center"
   },
   icons: {

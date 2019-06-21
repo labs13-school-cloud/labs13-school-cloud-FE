@@ -99,7 +99,7 @@ function Dashboard(props) {
             List={TrainingSeriesTab}
             section="Training Series"
             handleAdd={() => history.push("/home/create-training-series")}
-            isSearching={true}
+            isSearching={false}
             limit={3}
           />
         )}

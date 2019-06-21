@@ -36,6 +36,12 @@ export const styles = theme => ({
   },
   divider: {
     margin: "15px 0"
+  },
+  button: {
+    backgroundColor: "#d3d3d3",
+    "&:hover": {
+      backgroundColor: "#2699FB"
+    }
   }
 });
 

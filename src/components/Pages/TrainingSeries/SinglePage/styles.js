@@ -37,6 +37,47 @@ export const styles = theme => ({
   },
   divider: {
     margin: "15px 0"
+  },
+  icons: {
+    cursor: "pointer",
+    color: "#808080",
+    "&:hover": {
+      color: "#2699FB"
+    }
+  },
+  iconDelete: {
+    cursor: "pointer",
+    color: "#808080",
+    "&:hover": {
+      color: "red"
+    }
+  },
+  delete: {
+    opacity: 0,
+    cursor: "pointer",
+    "&:hover": {
+      color: "red",
+      opacity: 1
+    }
+  },
+  listItem: {
+    transition: "background-color 0.3s",
+    "&:hover": {
+      cursor: "pointer",
+      backgroundColor: "whitesmoke"
+    }
+  },
+  info: {
+    fontSize: "1rem",
+    paddingBottom: "5px",
+    fontWeight: "bold"
+  },
+  links: {
+    "&:hover": {
+      color: "#2699FB",
+      cursor: "pointer",
+      textDecoration: "none"
+    }
   }
 });
 

@@ -64,7 +64,7 @@ export const editVolunteer = (id, changes) => dispatch => {
         .then(res => {
             dispatch({
                 type: EDIT_VOLUNTEERS_SUCCESS,
-                payload: res.data.updatedVolunteer
+                payload: { id, changes }
             })
         })
         .catch(err => dispatch({

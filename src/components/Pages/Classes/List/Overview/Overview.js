@@ -4,8 +4,9 @@ import { connect } from  "react-redux";
 
 import history from "history.js";
 
+import EditModal from "components/UI/Modals/editModal"
 import DeleteModal from "components/UI/Modals/deleteModal";
-import EditModal from "components/UI/Modals/editModal";
+import AddModal from "components/UI/Modals/addModal";
 import { getClassList, deleteClass } from "store/actions/classesActions";
 
 import { ListStyles } from "./styles.js";
@@ -18,10 +19,13 @@ function  Overview(props) {
 
     console.log(props)
     return (
+        <div>
+
         <div style={{ display: "flex", flexWrap: "wrap" }}>
             {props.classList.map(c => {
-                    return (
-                        <ListStyles key={c.id} component="li" className={props.classList.listItem}>
+                console.log(c.id)
+                return (
+                    <ListStyles key={c.id} component="li" className={props.classList.listItem}>
                          
                             <Typography key={c.id}>
                                 <div 
@@ -60,13 +64,17 @@ function  Overview(props) {
                                         </Typography>
                                         </div>
                                     </div>
-
                                 </div>
+                            <AddModal
+                                classList={c}
+                                addType="classes"
+                                />
                             </Typography>
                         </ListStyles>
                     )
-                 } 
-            )}
+                } 
+                )}
+                </div>
         </div>
     )
 }
