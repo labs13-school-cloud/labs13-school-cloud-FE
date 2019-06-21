@@ -13,7 +13,7 @@ import {
 } from "store/actions";
 import InfoPopup from "components/UI/InfoPopup/InfoPopup.js";
 import DeleteModal from "components/UI/Modals/deleteModal";
-
+import EditModal from "components/UI/Modals/editModal";
 import { withStyles } from "@material-ui/core/styles";
 import {
   Paper,
@@ -73,13 +73,17 @@ function SingleTrainingSeries(props) {
             xs={1}
             style={{ display: "flex", justifyContent: "flex-end" }}
           >
-            <i
+            {/* <i
               className={`material-icons ${props.classes.icons}`}
               onClick={e => editTrainingSeries(id)}
             >
               edit
-            </i>
-            <i className="material-icons" className={`material-icons ${props.classes.icons}`} onClick={removeTrainingSeries}>
+            </i> */}
+             <EditModal
+                                        trainingSeries={id}
+                                        updateType="trainingSeries"
+                                    />
+            <i className="material-icons" className={`material-icons ${props.classes.iconDelete}`} onClick={removeTrainingSeries}>
               delete
             </i>
           </Grid>
@@ -92,7 +96,7 @@ function SingleTrainingSeries(props) {
             padding: "1.5rem"
           }}
         >
-          <Grid item xs={6}>
+          <Grid item xs={6}   style={{display: 'flex', flexDirection: 'column', justifyContent:'space-evenly', alignContent: 'center'}}>
             <Typography
               variant="body1"
               style={{

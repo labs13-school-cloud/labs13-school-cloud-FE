@@ -45,8 +45,16 @@ export const styles = theme => ({
       color: "#2699FB"
     }
   },
+  iconDelete: {
+    cursor: "pointer",
+    color: "#808080",
+    "&:hover": {
+      color: "red"
+    }
+  },
   delete: {
     opacity: 0,
+    cursor: "pointer",
     "&:hover": {
       color: "red",
       opacity: 1

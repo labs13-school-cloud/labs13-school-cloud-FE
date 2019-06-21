@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
+import filter from "./filter.js";
 
 import {
   getTrainingSeries,
@@ -27,6 +28,7 @@ function Tab({
   user_id,
   activeTrainingSeries
 }) {
+
   const setTrainingSeries = id => {
     getTrainingSeriesID(activeTrainingSeries.id);
     getTrainingSeriesForVolunteer(id);
@@ -43,7 +45,7 @@ function Tab({
     getTrainingSeriesID(id);
     history.push(`/home/training-series/${id}/edit`);
   };
-  const [trainingFilter, setTrainingFilter] = useState("Filter");
+  const [trainingFilter, setTrainingFilter] = useState("filter");
   return (
     <>
       <FormControl className={classes.formControl}>
@@ -52,13 +54,13 @@ function Tab({
           value={trainingFilter}
           className={classes.selection}
           onChange={e => setTrainingFilter(e.target.value)}
-          inputProps={{
-            id: "status-selector",
-            label: "Filter Selector"
-          }}
+          
         >
-          <option value={"available"}>Available</option>
-          <option value={"Completed"}>Completed</option>
+        <option value={"filter"}>Filter</option>
+          <option value={"electronics"}>Electronics</option>
+          <option value={"clothing"}>Clothing</option>
+          <option value={"sports"}>Sports</option>
+          <option value={"garden"}>Garden</option>
         </Select>
       </FormControl>
       {getFiltered(trainingSeries).map(({ id, title, subject, name }) => {
