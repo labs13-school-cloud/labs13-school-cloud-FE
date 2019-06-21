@@ -120,7 +120,10 @@ function SingleTrainingSeries(props) {
             </Typography>
             <Typography className={props.classes.info}>
               Link to Training Series:
-              <Link to={link} className={props.classes.info}>
+              <Link
+                to={link}
+                className={`${props.classes.info} ${props.classes.links}`}
+              >
                 {" "}
                 Training Link
               </Link>
@@ -166,6 +169,7 @@ function SingleTrainingSeries(props) {
                     variant="body1"
                     key={v.id}
                     style={{ textAlign: "center" }}
+                    className={props.classes.listItem}
                   >
                     {v.name}{" "}
                     <i

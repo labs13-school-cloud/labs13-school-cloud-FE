@@ -60,10 +60,24 @@ export const styles = theme => ({
       opacity: 1
     }
   },
+  listItem: {
+    transition: "background-color 0.3s",
+    "&:hover": {
+      cursor: "pointer",
+      backgroundColor: "whitesmoke"
+    }
+  },
   info: {
     fontSize: "1rem",
     paddingBottom: "5px",
-    fontWeight: 'bold'
+    fontWeight: "bold"
+  },
+  links: {
+    "&:hover": {
+      color: "#2699FB",
+      cursor: "pointer",
+      textDecoration: "none"
+    }
   }
 });
 
