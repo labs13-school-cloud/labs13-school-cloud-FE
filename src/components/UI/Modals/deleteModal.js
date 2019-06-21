@@ -14,7 +14,7 @@ import {
   deleteMessage,
   deleteUser,
   unassignTeamMember,
-  deleteClass
+  deleteClass,
 } from "store/actions/";
 
 import { Typography, Paper } from "@material-ui/core";
@@ -107,14 +107,15 @@ class TrainingSeriesModal extends React.Component {
         break;
       case "user":
         this.props.deleteUser(this.props.id);
-        // this.props.reRouteOnDelete();
         break;
       case "unassign":
         this.props.unassignTeamMember(this.props.id, this.props.ts_id);
         break;
       case "classes":
         this.props.deleteClass(this.props.classId);
-        // this.props.reRouteOnDelete();
+        break;
+      case "volunteers":
+        this.props.deleteUser(this.props.volunteerID);
         break;
       default:
         break;

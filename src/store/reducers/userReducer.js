@@ -4,7 +4,10 @@ import {
   GET_USER_FAIL,
   EDIT_USER_START,
   EDIT_USER_SUCCESS,
-  EDIT_USER_FAIL
+  EDIT_USER_FAIL,
+  DELETE_USER_START,
+  DELETE_USER_SUCCESS,
+  DELETE_USER_FAIL,
 } from "../actions/userActions";
 import {
   POST_SUBSCRIBE_START,
@@ -45,7 +48,10 @@ const initialState = {
   addSuccess: false,
   doneLoading: false,
   paymentLoading: false,
-  newUser: true
+  newUser: true,
+  isDeleting: false,
+  deleteSuccess: false,
+  deleteFailed: false,
 };
 
 //returned stripe ids, currently only test versions should be passed back unless App wants to accept real money
@@ -310,6 +316,43 @@ const userReducer = (state = initialState, action) => {
         isLoading: false,
         error: action.payload
       };
+
+    case DELETE_USER_START:
+      return {
+        ...state,
+        status: {
+          ...state.status,
+          isDeleting: true,
+          deleteFailed: false,
+          deleteSuccess: false
+        }
+      };
+
+      case DELETE_USER_SUCCESS: 
+        return  {
+          ...state,
+          volunteers: [
+            ...state.volunteers.filter(volunteer => volunteer.id !== action.payload)
+          ],
+          status: {
+            ...state.status,
+            isDeleting: false,
+            deleteSuccess: true,
+            deleteFailed: false
+          }
+        };
+
+      case DELETE_USER_FAIL:
+        return {
+          ...state,
+          status: {
+            ...state.status,
+            isDeleting: false,
+            deleteSuccess: false,
+            deleteFailed: true
+          },
+          error: action.payload
+        };
 
     default:
       return state;

@@ -36,10 +36,10 @@ function  AdminVolunteerTab(props) {
                                     <Typography variant="subtitle1" style={{ display:"flex", justifyContent:"space-between" }}>
                                         {name}
                                     <DeleteModal 
-                                        deleteType="volunteeer"
-                                        classId={id}
+                                        deleteType="volunteers"
+                                        volunteerID={id}
                                         className={`material-icons ${props.volunteers.icons}`}
-                                        style={{ zIndex: "1000" }}
+                                        // style={{ zIndex: "1000" }}
                                     />
                                     </Typography>
                                     <div onClick={() => history.push(`home/volunteers/${id}`)}>
