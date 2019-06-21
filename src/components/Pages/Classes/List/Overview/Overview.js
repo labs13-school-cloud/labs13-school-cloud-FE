@@ -2,31 +2,21 @@
 import React, { useEffect } from  "react";
 import { connect } from  "react-redux";
 
-import styled from "styled-components";
-
 import history from "history.js";
 
-import DeleteModal from "../../../../UI/Modals/deleteModal";
-import AddModal from "../../../../UI/Modals/addModal";
-import { getClassList, deleteClass } from "../../../../../store/actions/classesActions";
+import EditModal from "components/UI/Modals/editModal"
+import DeleteModal from "components/UI/Modals/deleteModal";
+import AddModal from "components/UI/Modals/addModal";
+import { getClassList, deleteClass } from "store/actions/classesActions";
 
-import { withStyles } from "@material-ui/core/styles";
-import { ListItem,
-         ListItemText,
-         Typography,
-         Fab,
-         TextField,
-         InputAdornment
-        } from "@material-ui/core/";
 import { ListStyles } from "./styles.js";
-// import { Typography } from "@material-ui/core/";
+import { Typography } from "@material-ui/core/";
 
 function  Overview(props) {
     useEffect(() => {
         props.getClassList();
     }, [getClassList]);
 
-    // {props.getFiltered(props.classList).map
     console.log(props)
     return (
         <div>
@@ -43,14 +33,22 @@ function  Overview(props) {
                                 >
                                     <Typography variant="subtitle1" style={{ display:"flex", justifyContent:"space-between" }}>
                                         {c.class_name}
+                                        <div style={{ display:"flex", justifyContent: "space-around" }}>
+
                                     <DeleteModal 
                                         deleteType="classes"
                                         classId={c.id}
                                         className={`material-icons ${props.classList.icons}`}
-                                        />
+                                    />
+                                    <EditModal
+                                        classList={c}
+                                        updateType="classes"
+                                    />
+                                        </div>
                                     </Typography>
                                     <div onClick={() => history.push(`home/classes/${c.id}`)}>
-                                        
+                                        <div >
+
                                         <hr />
                                         <Typography variant="overline">
                                             {`Subject: ${c.subject}`}
@@ -64,6 +62,7 @@ function  Overview(props) {
                                         <Typography variant="overline">
                                             {`Number Of Students: ${c.number_of_students}`}
                                         </Typography>
+                                        </div>
                                     </div>
                                 </div>
                             <AddModal
