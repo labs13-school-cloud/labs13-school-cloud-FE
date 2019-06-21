@@ -29,6 +29,8 @@ function  Overview(props) {
                                 >
                                     <Typography variant="subtitle1" style={{ display:"flex", justifyContent:"space-between" }}>
                                         {c.class_name}
+                                        <div style={{ display:"flex", justifyContent: "space-around" }}>
+
                                     <DeleteModal 
                                         deleteType="classes"
                                         classId={c.id}
@@ -38,9 +40,11 @@ function  Overview(props) {
                                         classList={c}
                                         updateType="classes"
                                     />
+                                        </div>
                                     </Typography>
                                     <div onClick={() => history.push(`home/classes/${c.id}`)}>
-                                        
+                                        <div >
+
                                         <hr />
                                         <Typography variant="overline">
                                             {`Subject: ${c.subject}`}
@@ -54,6 +58,7 @@ function  Overview(props) {
                                         <Typography variant="overline">
                                             {`Number Of Students: ${c.number_of_students}`}
                                         </Typography>
+                                        </div>
                                     </div>
 
                                 </div>
