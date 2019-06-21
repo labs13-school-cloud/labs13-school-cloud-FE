@@ -6,8 +6,9 @@ import { getAllResponses, getClassList } from "store/actions";
 import SearchCard from "components/UI/SearchCard/";
 import TrainingSeriesOverview from "components/Pages/TrainingSeries/List/Overview";
 import TrainingSeriesTab from "components/Pages/TrainingSeries/List/Tab";
-import ClassesOverview from "components/Pages/Classes/List/AdminOverview";
 import ClassListTab from "components/Pages/Classes/List/Overview"
+import AdminVolunteerTab from "components/Pages/Volunteers/List/Tab";
+import ClassesOverview from "components/Pages/Classes/List/AdminOverview";
 import NotificationsCard from "components/Pages/Notifications/Card";
 import VolunteerOverview from "components/Pages/Volunteers/Overview"
 import VolunteerCard from "components/Pages/Volunteers";
@@ -102,7 +103,7 @@ function Dashboard(props) {
             limit={3}
           />
         )}
-
+ 
         {topTab === "classes" && (
           <SearchCard
             List={ClassListTab}
@@ -110,6 +111,15 @@ function Dashboard(props) {
             handleAdd={() => history.push("/home/create-class")}
             isSearching={false}
             limit={10}
+          />
+        )}
+
+        {topTab === "volunteers" && (
+          <SearchCard 
+            List={AdminVolunteerTab}
+            section="Volunteers"
+            isSearching={false}
+            limit={11}
           />
         )}
 
@@ -124,7 +134,7 @@ function Dashboard(props) {
         )}
         {topTab === "responses" && (
           <Responses history={props.history} user_id={user_id} />
-        )}
+        )}  
       </TripleColumn>
     </DashWrapper>
   );

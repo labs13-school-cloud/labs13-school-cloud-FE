@@ -51,7 +51,7 @@ function ClassesOverview(props) {
             >
               <DeleteModal
                 deleteType="classes"
-                classId={props.id}
+                classId={classSingle.id}
                 className={`material-icons ${classes.icons}`}
               />
               <EditModal

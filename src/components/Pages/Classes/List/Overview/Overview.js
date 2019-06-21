@@ -11,9 +11,15 @@ import AddModal from "../../../../UI/Modals/addModal";
 import { getClassList, deleteClass } from "../../../../../store/actions/classesActions";
 
 import { withStyles } from "@material-ui/core/styles";
-import { ListItem, ListItemText } from "@material-ui/core/";
+import { ListItem,
+         ListItemText,
+         Typography,
+         Fab,
+         TextField,
+         InputAdornment
+        } from "@material-ui/core/";
 import { ListStyles } from "./styles.js";
-import { Typography } from "@material-ui/core/";
+// import { Typography } from "@material-ui/core/";
 
 function  Overview(props) {
     useEffect(() => {
