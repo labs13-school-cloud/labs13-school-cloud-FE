@@ -7,6 +7,7 @@ import styled from "styled-components";
 import history from "history.js";
 
 import DeleteModal from "../../../../UI/Modals/deleteModal";
+import EditModal from "../../../../UI/Modals/editModal";
 import { getClassList, deleteClass } from "../../../../../store/actions/classesActions";
 
 import { withStyles } from "@material-ui/core/styles";
@@ -28,42 +29,46 @@ function  Overview(props) {
     console.log(props)
     return (
         <div style={{ display: "flex", flexWrap: "wrap" }}>
-            {props.classList.map(
-                ({ id, class_name, subject, grade_level, number_of_students, teacher_name }) => {
-                    console.log(id)
+            {props.classList.map(c => {
+                // ({ id, class_name, subject, grade_level, number_of_students, teacher_name }) => {
+                    console.log(c.id)
                     return (
-                        <ListStyles key={id} component="li" className={props.classList.listItem}>
+                        <ListStyles key={c.id} component="li" className={props.classList.listItem}>
                          
-                            <Typography key={id}>
+                            <Typography key={c.id}>
                                 <div 
                                 style={{ cursor: "pointer" }}
                                 // onClick={() => history.push(`home/classes/${id}`)}
                                 >
                                     <Typography variant="subtitle1" style={{ display:"flex", justifyContent:"space-between" }}>
-                                        {class_name}
+                                        {c.class_name}
                                     <DeleteModal 
                                         deleteType="classes"
-                                        classId={id}
+                                        classId={c.id}
                                         className={`material-icons ${props.classList.icons}`}
                                         // onClick={e => removeClass(id)}
                                         style={{ zIndex: "1000" }}
                                         // removeClass={removeClass}
                                     />
+                                    <EditModal
+                                        classList={c}
+                                        updateType="classes"
+                                    />
                                     </Typography>
-                                    <div onClick={() => history.push(`home/classes/${id}`)}>
+                                    <div onClick={() => history.push(`home/classes/${c.id}`)}>
                                         
                                         <hr />
                                         <Typography variant="overline">
-                                            {`Subject: ${subject}`}
+                                            {`Subject: ${c.subject}`}
                                         </Typography>
                                         <Typography variant="overline">
-                                            {`Grade Level: ${grade_level}`}
+                                            {`Grade Level: ${c.grade_level}`}
                                         </Typography>
                                         <Typography variant="overline">
-                                            {`Teacher Name: ${teacher_name}`}
+                                            {`Teacher Name: ${c.teacher_name}`}
                                         </Typography>
                                         <Typography variant="overline">
-                                            {`Number Of Students: ${number_of_students}`}
+                                            {`Number Of Students: ${c.number_of_students}`}
                                         </Typography>
                                     </div>
 
