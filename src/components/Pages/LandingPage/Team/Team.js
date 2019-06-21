@@ -183,7 +183,7 @@ class Team extends React.Component {
               <TeamMember>
                 <AdamsIMG src={Adam} alt="Adam McKenney" />
                 <Typography variant="title">Adam McKenney</Typography>
-                <p>Full-Stack Developer</p>
+                <p>Full-Stack Developer (PM)</p>
                 <PortfolioLink
                   target="_blank"
                   href="https://github.com/DaftBeowulf"

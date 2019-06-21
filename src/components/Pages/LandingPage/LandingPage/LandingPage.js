@@ -118,9 +118,9 @@ class LandingPage extends React.Component {
                 />
               </MarketingImage>
               <MarketingContent>
-                <h3>Keep Your Engagement High.</h3>
+                <h3>Choose Who Works With Your Students.</h3>
                 <p>
-                  Once a Training Series has been completed, you can approve a Mentorand add them to a class.
+                  Once a Training Series has been completed, you can approve a mentor and add them to a class.
                 </p>
               </MarketingContent>
             </MarketingSection>
@@ -132,9 +132,9 @@ class LandingPage extends React.Component {
                 />
               </MarketingImage>
               <MarketingContent>
-                <h3>Personalized Help</h3>
+                <h3>Personalized Help.</h3>
                 <p>
-                  Mentors contribute specialized skills in your classrooms! Soon your students will be blooming and you'll have some free time.
+                  Mentors contribute specialized skills in your classrooms! Soon your students will have extra and you'll have extra free time.
                 </p>
               </MarketingContent>
             </MarketingSection>
