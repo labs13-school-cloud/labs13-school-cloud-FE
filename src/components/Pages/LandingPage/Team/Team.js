@@ -8,12 +8,12 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLinkedin, faGithubSquare } from "@fortawesome/free-brands-svg-icons";
 
-import Logo from "img/training-bot.png";
-import AJ from "img/AJ.png";
-import Gannon from "img/Gannon.png";
-import Nick from "img/Nick.png";
+import Logo from "img/cloud.png";
+import Brandon from "img/Brandon.jpg";
+import Steph from "img/Steph.jpg";
+import Abdul from "img/Abdul.png";
 import Adam from "img/Adam.png";
-import Tom from "img/Tom.png";
+import Josi from "img/Josi.png";
 
 import { animateScroll as scroll } from "react-scroll";
 
@@ -50,7 +50,10 @@ class Team extends React.Component {
           {/* NAVIGATION */}
           <NavbarContainer>
             <Link to="/">
-              <img src={Logo} alt="A cute, personable robot" />
+              <img 
+              style={{ height: "45px", width: "50px" }}
+              src={Logo} 
+              alt="Owl with Grad Cap in a Cloud" />
             </Link>
             <NavbarItemsContainer>
               <NavbarItem href="/team">Team</NavbarItem>
@@ -62,8 +65,8 @@ class Team extends React.Component {
             <Typography variant="h3">The Team</Typography>
             <TeamInfoContainer>
               <TeamMember>
-                <img src={Nick} alt="Nick Cannariato" />
-                <Typography variant="title">Nick Cannariato</Typography>
+                <img src={Abdul} alt="Abdul A. Ahmad" />
+                <Typography variant="title">Abdul A. Ahmad</Typography>
                 <p>Full-Stack Developer</p>
                 <PortfolioLink
                   target="_blank"
@@ -91,8 +94,8 @@ class Team extends React.Component {
                 </TeamMemberLinks>
               </TeamMember>
               <TeamMember>
-                <img src={Gannon} alt="Gannon Darcy" />
-                <Typography variant="title">Gannon Darcy</Typography>
+                <img src={Steph} alt="Stephanie Patton" />
+                <Typography variant="title">Stephanie Patton</Typography>
                 <p>Full-Stack Developer</p>
                 <PortfolioLink
                   target="_blank"
@@ -120,8 +123,8 @@ class Team extends React.Component {
                 </TeamMemberLinks>
               </TeamMember>
               <TeamMember>
-                <img src={AJ} alt="Andrew Brush" />
-                <Typography variant="title">Andrew Brush</Typography>
+                <img src={Brandon} alt="Brandon Vilaychith" />
+                <Typography variant="title">Brandon Vilaychith</Typography>
                 <p>Full-Stack Developer</p>
                 <PortfolioLink
                   target="_blank"
@@ -149,13 +152,13 @@ class Team extends React.Component {
                 </TeamMemberLinks>
               </TeamMember>
               <TeamMember>
-                <img src={Tom} alt="Thomas Hessburg" />
-                <Typography variant="title">Thomas Hessburg</Typography>
+                <img src={Josi} alt="Josefia Magagnoli" />
+                <Typography variant="title">Josefia Magagnoli</Typography>
                 <p>Full-Stack Developer</p>
                 <PortfolioLink
                   target="_blank"
                   rel="noopener noreferrer"
-                  href="https://github.com/TomHessburg"
+                  href="https://github.com/josefiaaa"
                 >
                   Portfolio Site
                 </PortfolioLink>
@@ -164,14 +167,14 @@ class Team extends React.Component {
                   <a
                     target="_blank"
                     rel="noopener noreferrer"
-                    href="https://github.com/TomHessburg"
+                    href="https://github.com/josefiaaa"
                   >
                     <FontAwesomeIcon className="fa-2x" icon={faGithubSquare} />
                   </a>
                   <a
                     target="_blank"
                     rel="noopener noreferrer"
-                    href="https://www.linkedin.com/in/thomas-hessburg-596948180/"
+                    href="https://www.linkedin.com/in/josefia-magagnoli-a02067184/"
                   >
                     <FontAwesomeIcon className="fa-2x" icon={faLinkedin} />
                   </a>
