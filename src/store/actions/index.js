@@ -6,6 +6,8 @@ export * from "./classesActions";
 
 export * from "./messagesActions";
 
+export * from './volunteerActions';
+
 export * from "./stripeActions";
 
 export * from "./notificationsActions";
