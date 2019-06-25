@@ -43,8 +43,7 @@ function Edit(props) {
     });
     props.history.push("/home");
   };
-
-  console.log(title);
+  const { link, name } = props.activeTrainingSeries;
   return (
     <PageContainer style={{ position: "relative" }}>
       <InfoPopup popOverText={<p>Will edit this later....</p>} />
@@ -71,15 +70,17 @@ function Edit(props) {
           />
         </FormControl>
 
-        <Typography>
+        <Typography style={{ marginBottom: ".5rem" }}>
           Link to Training Series:
-          <Link>{props.activeTrainingSeries.link}</Link>
+          <Link to={link}> Training Link</Link>
         </Typography>
-        <Typography variant="body1">
-          Creator: {props.activeTrainingSeries.name}
-        </Typography>
+        <Typography variant="body1" style={{ marginBottom: ".5rem" }}>Creator: {name}</Typography>
 
-        <Button type="submit" onClick={updateTrainingSeries}>
+        <Button
+          type="submit"
+          onClick={updateTrainingSeries}
+          className={props.classes.button}
+        >
           Submit
         </Button>
       </Paper>

@@ -4,8 +4,7 @@ export const LandingPageContainer = styled.div`
   margin: 0 auto;
 
   width: 100%;
-  max-width: 1280px;
-  background-color: white;
+  background-color: #8ecafb;
   @media (max-width: 700px) {
     padding: 0;
   }
@@ -132,7 +131,7 @@ export const MarketingContent = styled.div`
   h3 {
     width: 100%;
     font-size: 32px;
-    color: #451476;
+    color: #14289A;
     margin-bottom: 0;
     text-align: left;
   }
@@ -159,7 +158,7 @@ export const LandingPageContentContainer = styled.div`
   padding: 0 80px;
   h1 {
     margin-top: 0;
-    color: #451476;
+    color: #14289a;
     font-size: 42px;
   }
 
@@ -177,16 +176,16 @@ export const LandingPageButtonContainer = styled.div`
   margin-top: 30px;
   button:first-child {
     margin: 0 10px;
-    background-color: #451476;
+    background-color: #14289a;
     color: white;
     padding: 0 16px;
   }
   button:nth-child(2) {
-    border: 1px solid #451476;
-    color: #451476;
+    border: 1px solid #14289a;
+    color: #14289a;
 
     &:hover {
-      background-color: #451476;
+      background-color: #14289a;
       color: white;
     }
   }
@@ -205,7 +204,7 @@ export const FooterContainer = styled.div`
   }
 `;
 export const FooterItemsContainer = styled.div`
-  background-color: #451476;
+  background-color: #14289a;
   display: flex;
   color: white;
   justify-content: center;
@@ -227,11 +226,11 @@ export const FooterItemsContainer = styled.div`
 export const GetStartedButton = styled.div`
   button {
     margin: 10px 10px 0;
-    background-color: #451476;
+    background-color: #14289a;
     color: white;
     &:hover {
       /* margin: 0 15px; */
-      background-color: #451476;
+      background-color: #14289a;
       color: white;
     }
   }

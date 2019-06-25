@@ -1,10 +1,12 @@
-// Main page fro displaying a list of all classes
+
+// Main page for displaying a list of all volunteers
 import React, { useEffect } from  "react";
 import { connect } from  "react-redux";
 
 
 import history from "history.js";
 
+import EditModal from "../../../../../components/UI/Modals/editModal"
 import DeleteModal from "../../../../UI/Modals/deleteModal";
 
 import { getVolunteers, addVolunteer } from "store/actions/volunteerActions";
@@ -16,47 +18,51 @@ import { ListStyles } from "./styles.js";
 function  AdminVolunteerTab(props) {
     const { getVolunteers } = props;
     useEffect(() => {
-       getVolunteers()
+       getVolunteers();
     }, [getVolunteers]);
 
 
     console.log(props)
     return (
         <div style={{ display: "flex", flexWrap: "wrap", alignItems: "flex-end", justifyContent: "space-evenly" }}>
-            {props.getFiltered(props.volunteers).map(
-                ({ id, name, email, role, approved, donator }) => {
-                    console.log(id)
+            {props.getFiltered(props.volunteers).map(v => {
+                // ({ id, name, email, role, approved, donator }) => {
+                    console.log(v.id)
                     return (
-                        <ListStyles key={id} component="li" className={props.volunteers.listItem}>
+                        <ListStyles key={v.id} component="li" className={props.volunteers.listItem}>
                          
-                            <Typography key={id}>
+                            <Typography key={v.id}>
                                 <div 
                                 style={{ cursor: "pointer" }}
                                 >
                                     <Typography variant="subtitle1" style={{ display:"flex", justifyContent:"space-between" }}>
-                                        {name}
+                                        {v.name}
                                     <DeleteModal 
                                         deleteType="volunteers"
-                                        volunteerID={id}
+                                        volunteerID={v.id}
                                         className={`material-icons ${props.volunteers.icons}`}
                                         // style={{ zIndex: "1000" }}
                                     />
+                                    <EditModal
+                                        volunteers={v}
+                                        updateType="volunteers"
+                                    />
                                     </Typography>
-                                    <div onClick={() => history.push(`home/volunteers/${id}`)}>
+                                    <div onClick={() => history.push(`home/volunteers/${v.id}`)}>
                                         
                                         <hr />
                                         <Typography variant="overline">
                                             {`Email:
-                                             ${email}`}
+                                             ${v.email}`}
                                         </Typography>
                                         <Typography variant="overline">
-                                            {`Role: ${role}`}
+                                            {`Role: ${v.role}`}
                                         </Typography>
                                         <Typography variant="overline">
-                                            {`Approved: ${approved}`}
+                                            {`Approved: ${v.approved}`}
                                         </Typography>
                                         <Typography variant="overline">
-                                            {`Donator: ${donator}`}
+                                            {`Donator: ${v.donator}`}
                                         </Typography>
                                     </div>
 
@@ -71,7 +77,7 @@ function  AdminVolunteerTab(props) {
 }
 
 const mapStateToProps = state => {
-    console.log("TEST", state)
+    // console.log("TEST", state)
     return {
       volunteers: state.userReducer.volunteers
     }

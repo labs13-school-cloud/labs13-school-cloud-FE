@@ -10,7 +10,7 @@ import Button from "@material-ui/core/Button";
 import { Typography, Paper, TextField } from "@material-ui/core";
 
 // Actions
-import { editTrainingSeries, editClass } from "store/actions/";
+import { editTrainingSeries, editClass, editVolunteer } from "store/actions/";
 
 
 function getModalStyle() {
@@ -68,8 +68,13 @@ const EditModal = props => {
   });
   // console.log('test', classList)
   const [currentClass, setCurrentClass] = useState({
-    ...props.classList
+    // ...props.classList
   })
+
+  const [currentVolunteer, setCurrentVolunteer] = useState({
+    ...props.volunteers
+  })
+
   // Runs different functions based on what is being updated
   const handleEdit = () => {
     switch (props.updateType) {
@@ -80,6 +85,10 @@ const EditModal = props => {
         break;
       case "classes":
         props.editClass(currentClass.id, { ...currentClass });
+        setIsOpen(false);
+        break;
+      case "volunteers":
+        props.editVolunteer(currentVolunteer.id, {...currentVolunteer});
         setIsOpen(false);
         break;
       default:
@@ -94,6 +103,9 @@ const EditModal = props => {
         break;
       case "classes":
         setCurrentClass({ ...currentClass, [e.target.name]: e.target.value })
+        break;
+      case "volunteers": 
+        setCurrentVolunteer({ ...currentVolunteer, [e.target.name]: e.target.value });
         break;
       default:
         break
@@ -134,6 +146,8 @@ const EditModal = props => {
         return "Training Series";
       case "classes":
         return "Class"
+      case "volunteers":
+        return "Volunteer"
       default:
         break;
     }
@@ -145,6 +159,8 @@ const EditModal = props => {
         return Object.keys(trainingSeries)
       case "classes":
         return Object.keys(currentClass)
+      case "volunteers":
+        return Object.keys(currentVolunteer)
       default:
         break
     }
@@ -156,6 +172,8 @@ const EditModal = props => {
         return trainingSeries[property]
       case "classes":
         return currentClass[property]
+      case "volunteers":
+        return currentVolunteer[property]
       default: 
         break;
     }
@@ -214,6 +232,7 @@ export default connect(
   null,
   {
     editTrainingSeries,
-    editClass
+    editClass,
+    editVolunteer
   }
 )(withRouter(withStyles(styles)(EditModal)));

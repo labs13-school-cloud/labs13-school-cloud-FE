@@ -25,10 +25,12 @@ import Button from "@material-ui/core/Button";
 
 //Icons & Images
 import { ArrowUpward } from "@material-ui/icons";
-import Logo from "img/training-bot.png";
-import undrawCoworker from "img/undraw_co-workers_ujs6.svg";
-import undrawNotify from "img/undraw_notify_88a4.svg";
-import undrawTask from "img/undraw_personal_text_vkd8.svg";
+import Logo from "img/cloud.png";
+import Cloud from "img/fullCloud.png";
+import Confirmation from "img/confirmation.svg"
+import classTeam from "img/class.svg";
+import teach from "img/teach.svg"
+
 
 //Auth
 
@@ -57,91 +59,95 @@ class LandingPage extends React.Component {
   render() {
     return (
       <>
+            <section style={{ display:"flex" }}>
+
+                  <div
+                  style={{ display:"flex", flexDirection:"column", width: "50%", background:"#8ECAFB", alignItems:"center" }}
+                  >
+                    <h1
+                    style={{ fontSize:"90px", margin:"0", fontFamily:"Avenir Next",padding:"20px", fontWeight:"boldItalic", color:"#4c4c4c" }}
+                    >
+                    Connecting qualified volunteers to mentor children in environments with high student to teacher ratios.
+                    </h1>
+                  </div>
+                  <div  
+                    style={{ display: "flex", flexDirection: "column", alignItems: "center" }}                      
+                  >
+                    <img 
+                    style={{ height:"700px",  padding: "10px" }}
+                    src={Cloud} alt="Owl with Grad Cap in a Cloud" />
+                    <Button color="primary">
+                      <h2 onClick={() => lock.login()}>Sign In</h2>
+                    </Button>
+                    <h1>
+                      Or
+                    </h1>
+                    <Button 
+                      color={"primary"}
+                      onClick={() => this.scrollTo(500)}
+                    >
+                      <h1>Learn More!</h1>
+                    </Button>
+                  </div>
+            </section>
         <CssBaseline />
         <LandingPageContainer>
-          {/* NAVIGATION */}
-          <NavbarContainer>
-            <img src={Logo} alt="A cute, personable robot" />
-            <NavbarItemsContainer>
-              <NavbarItem href="/team">Team</NavbarItem>
-              <NavbarItem href="/pricing">Pricing</NavbarItem>
-              <h2 onClick={() => lock.login()}>Sign In</h2>
-            </NavbarItemsContainer>
-          </NavbarContainer>
-          {/* JUMBOTRON STYLED SECTION */}
-          <FirstSection>
-            <LandingPageContentContainer>
-              <h1>Training Bot</h1>
-              <p>
-                Training bot is a message scheduler that bridges the gap between
-                your training materials and employees. Automatically deliver
-                resources to team members on your schedule with just a few
-                clicks.
-              </p>
-              <LandingPageButtonContainer>
-                <Button onClick={() => lock.login()}>Get Started</Button>
-                <Button variant="outlined" onClick={() => this.scrollTo(500)}>
-                  Learn More
-                </Button>
-              </LandingPageButtonContainer>
-            </LandingPageContentContainer>
-          </FirstSection>
+
           {/* MARKETING CONTAINER / UNDRAW PHOTO SECTION */}
           <MarketingContentContainer name="MarketingContent">
             <MarketingSection>
               <MarketingImage>
                 <img
-                  src={undrawCoworker}
+                  src={classTeam}
                   alt="A drawing of an employee standing next to a folder"
                 />
               </MarketingImage>
               <MarketingContent>
-                <h3>Manage Your Team. Stress Free.</h3>
+                <h3>Manage Your Volunteers. Stress Free.</h3>
                 <p>
-                  With Training Bot, we take the stress out of managing your
-                  employees{"'"} recurring training modules.
+                  With School In The Clouds, we take the stress out of managing
+                  mentors. Create a Training Series to make sure they have the skills first.
                 </p>
               </MarketingContent>
             </MarketingSection>
             <MarketingSection>
               <MarketingImage>
                 <img
-                  src={undrawNotify}
-                  alt="A drawing of an employee with a explanation mark."
+                  src={Confirmation}
+                  alt="A drawing of two employees with a check mark."
                 />
               </MarketingImage>
               <MarketingContent>
-                <h3>Keep Your Engagement High.</h3>
+                <h3>Choose Who Works With Your Students.</h3>
                 <p>
-                  Your employees will no longer forget if they have a task to
-                  accomplish. Training Bot handles that for you.
+                  Once a Training Series has been completed, you can approve a mentor and add them to a class.
                 </p>
               </MarketingContent>
             </MarketingSection>
             <MarketingSection>
               <MarketingImage>
                 <img
-                  src={undrawTask}
-                  alt="A drawing of an employee moving text messages."
+                  src={teach}
+                  alt="A drawing of a professor and a board."
                 />
               </MarketingImage>
               <MarketingContent>
-                <h3>Notifications, Your Way.</h3>
+                <h3>Personalized Help.</h3>
                 <p>
-                  Send text messages or email notifications to your employees.
-                  Modern communication for the modern workplace.
+                  Mentors contribute specialized skills in your classrooms! Soon your students will have extra and you'll have extra free time.
                 </p>
               </MarketingContent>
             </MarketingSection>
           </MarketingContentContainer>
-          <FirstSection>
+          <FirstSection
+          style={{ boxShadow:"10px 10px 5px 0px rgba(0,0,0,0.75)" }}
+          >
             <LandingPageContentContainer>
               <h1>Get Started For Free!</h1>
               <p>
-                Let Training Bot take the stress out of managing your team's
-                reminders. Get started for FREE now!
+                Let School In The Clouds take the stress out of managing your classrooms. Get started for FREE now!
               </p>
-              <LogoImage src={Logo} alt="A cute, personable robot" />
+              <LogoImage src={Logo} alt="Owl with Grad Cap in a Cloud" />
               <GetStartedButton>
                 <Button onClick={() => lock.login()}>Get Started</Button>
               </GetStartedButton>

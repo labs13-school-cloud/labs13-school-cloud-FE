@@ -1,33 +1,29 @@
-import React from 'react';
-
-import  PropTypes from "prop-types";
+import React, { useState } from 'react';
+import { withRouter } from  'react-router';
+import PropTypes from "prop-types";
+import { connect } from 'react-redux';
 
 //Styles
 import { withStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import Button from "@material-ui/core/Button";
-import { withRouter } from "react-router";
+import { Typography, Paper, TextField } from "@material-ui/core";
 
-import { connect } from "react-redux";
-
-import {
-    addClass
-} from "store/actions/";
-
-import { Typography, Paper, FormControl, TextField } from "@material-ui/core";
+// actions
+import { addClass } from "store/actions/";
 
 function getModalStyle() {
-  const top = 50;
-  const left = 50;
-
-  return {
-    top: `${top}%`,
-    left: `${left}%`,
-    transform: `translate(-${top}%, -${left}%)`
-  };
-};
-
-const styles = theme => ({
+    const top = 50;
+    const left = 50;
+  
+    return {
+      top: `${top}%`,
+      left: `${left}%`,
+      transform: `translate(-${top}%, -${left}%)`
+    };
+  }
+  
+  const styles = theme => ({
     paper: {
       position: "absolute",
       maxWidth: "400px",
@@ -64,50 +60,51 @@ const styles = theme => ({
     }
 });
 
-class AddClassModal extends React.Component {
-    state  = {
-        open: false,
-        title: ""
+const AddModal = props  => {
+    console.log(props)
+    const [isOpen, setIsOpen]  = useState(false);
+    const [classList, setClassList]  = useState({
+        ...props.classList
+    })
+  console.log('test', classList)
+    const handleAdd = () => {
+        switch (props.addType) {
+            case "classes":
+                props.addClass(classList);
+                setIsOpen(false);
+        }
     };
 
-    handleOpen = () => {
-        this.setState({ open: true });
-    };
-
-    handleClose = () => {
-        this.setState({ open: false });
-    };
-
-    clearForm = () => {
-        this.setState({ title: "" });
-    };
-
-    handleAdd = () => {
-        this.props.addClass();
+    const handleChange = e => {
+        switch (props.addType) {
+            case "classes":
+                setClassList({ ...classList, [e.target.name]: e.target.value })
+                break;
+            default:
+                break
+        }
     }
-    // handleClose();
 
-    handleDisplayType = () => {
-        switch (this.props.displayType) {
+    const handleDisplayType = () => {
+        switch (props.displayType) {
           case "button":
             return (
               <Button
                 variant="outlined"
                 style={{ marginLeft: 10 }}
-                onClick={this.handleOpen}
+                onClick={() => setIsOpen(true)}
               >
                 Add
               </Button>
             );
           case "text":
-            return <p onClick={this.handleOpen}>Add</p>;
+            return <p onClick={() => setIsOpen(true)}>Add</p>;
           default:
-            const { classes } = this.props;
+            const { classes } = props;
             return (
               <i
-                onClick={this.handleOpen}
+                onClick={() => setIsOpen(true)}
                 className={`material-icons ${classes.icons}`}
-                style={{ fontSize: "xx-large" }}
               >
                 add_circle
               </i>
@@ -115,81 +112,85 @@ class AddClassModal extends React.Component {
         }
     };
 
-    render() {
-        console.log(this.props)
-        const { classes } = this.props;
+    const handleTitle = () => {
+        switch (props.addType) {
+          case "classes":
+            return "Class"
+          default:
+            break;
+        }
+    };
 
-        console.log(this.props)
-        return (
-            <div>
-            {this.handleDisplayType()}
+    const handleMap = () =>  {
+        switch(props.addType)  {
+            case "classes":
+                return Object.keys(classList)
+            default:
+                break
+        }
+    };
 
-            <Modal
-              aria-labelledby="simple-modal-title"
-              aria-describedby="simple-modal-description"
-              open={this.state.open}
-              onClose={this.handleClose}
-            >
-              <Paper style={getModalStyle()} className={classes.paper}>
-                <Typography variant="h4">
-                  Add A Class
-                </Typography>
-
-                <TextField
-                    label="Class Name:"
-                    defaultValue={this.props.class_name}
-                />
-
-                <TextField
-                    label="Subject:"
-                    defaultValue={this.props.subject}
-                />
-
-                <TextField
-                    label="Grade Level:"
-                    defaultValue={this.props.grade_level}
-                />
-
-                <TextField
-                    label="Number Of Students:"
-                    defaultValue={this.props.number_of_students}
-                />
-
-                <TextField
-                    label="Teacher's Name:"
-                    defaultValue={this.props.teacher_name}
-                />
-
-
-                <Button
-                  onClick={() => this.handleAdd()}
-                  type="submit"
-                  variant="contained"
-                  className={classes.button}
-                >
-                  Add
-                </Button>
-              </Paper>
-            </Modal>
-          </div>
-        );
+    const handleValue = (property) =>{
+        switch (props.addType){
+            case "classes":
+                return classList[property]
+            default: 
+                break;
+        }
     }
-}
 
+    const { classes } = props;
 
-AddClassModal.propTypes = {
+    const doNotDisplay = ["volunteers", "user_id", "id", "name"];
+
+    return (
+        <div>
+          {handleDisplayType()}
+    
+          <Modal
+            aria-labelledby="simple-modal-title"
+            aria-describedby="simple-modal-description"
+            open={isOpen}
+            onClose={() => setIsOpen(false)}
+          >
+            <Paper style={getModalStyle()} className={classes.paper}>
+              <Typography variant="h4">Add A {handleTitle()}</Typography>
+              {
+                handleMap().map((property, index) => {
+                  if (doNotDisplay.includes(property)) return false
+                  return (
+                    // ! Update KEY to have uuid
+                    <TextField 
+                      key={index}
+                      label={property.toString().charAt(0).toUpperCase() + property.slice(1)}
+                      name={property.toString()}
+                      onChange={handleChange}
+                    //   value={handleValue(property)}
+                    />
+                  )
+                })
+              }
+              <Button
+                onClick={handleAdd}
+                type="submit"
+                variant="contained"
+                className={classes.button}
+              >
+                Add
+              </Button>
+            </Paper>
+          </Modal>
+        </div>
+      );
+    };
+    
+AddModal.propTypes = {
     classes: PropTypes.object.isRequired
 };
-
-const mapStateToProps = state => {
-    return {};
-};
-
-const AddClassModalWrapped = withStyles(styles)(AddClassModal);
-
-  export default connect(
-    mapStateToProps,
+    
+export default connect(
+    null,
     {
         addClass
     }
-)(withRouter(AddClassModalWrapped)); 
+)(withRouter(withStyles(styles)(AddModal)));

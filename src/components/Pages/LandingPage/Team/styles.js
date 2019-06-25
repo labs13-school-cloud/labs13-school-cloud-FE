@@ -14,7 +14,7 @@ export const styles = theme => ({
     margin: "15px auto"
   },
   button: {
-    background: "#451476",
+    background: "#14289a",
     color: "white",
     margin: "0 auto",
     "&:hover": {
@@ -50,18 +50,18 @@ export const NavbarContainer = styled.nav`
     cursor: pointer;
   }
   h2 {
-    color: #451476;
-    border: 1px solid #451476;
+    color: #14289a;
+    border: 1px solid #14289a;
     background-color: white;
     padding: 8px;
     border-radius: 7%;
     &:hover {
-      background-color: #451476;
+      background-color: #14289a;
       color: white;
     }
   }
   h3 {
-    color: #451476;
+    color: #14289a;
   }
 `;
 export const NavbarItemsContainer = styled.div`
@@ -74,9 +74,9 @@ export const NavbarItem = styled.a`
   font-weight: 500;
   text-decoration: none;
   cursor: pointer;
-  color: #441476;
+  color: #14289a;
   &:visited {
-    color: #441476;
+    color: #14289a;
   }
 `;
 export const TeamContainer = styled.div`
@@ -89,7 +89,7 @@ export const TeamContainer = styled.div`
   padding: 30px 20px;
   box-sizing: border-box;
   h3 {
-    color: #451476;
+    color: #14289a;
     font-size: 32px;
     text-align: center;
     margin: 0;
@@ -134,7 +134,7 @@ export const TeamMemberLinks = styled.div`
 
   a,
   a:visited {
-    color: #451476;
+    color: #14289a;
     margin: 0 7px;
   }
 `;
@@ -148,7 +148,7 @@ export const ContactContainer = styled.div`
   padding: 30px 20px;
   box-sizing: border-box;
   h3 {
-    color: #451476;
+    color: #14289a;
     font-size: 32px;
     text-align: center;
     margin: 0;
@@ -170,7 +170,7 @@ export const FooterContainer = styled.div`
   }
 `;
 export const FooterItemsContainer = styled.div`
-  background-color: #451476;
+  background-color: #14289a;
   display: flex;
   color: white;
   justify-content: center;
