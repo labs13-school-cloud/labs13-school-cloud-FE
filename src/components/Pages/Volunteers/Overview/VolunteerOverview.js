@@ -12,7 +12,7 @@ import { ListStyles } from "./styles.js";
 import { Typography } from "@material-ui/core/";
 
 function Overview(props) {
-  const { getVolunteers, volunteers, getFiltered, classes } = props;
+  const { getVolunteers, volunteers, getFiltered, classes, topTab } = props;
 
   useEffect(() => {
     getVolunteers();
@@ -24,7 +24,7 @@ function Overview(props) {
         const { id, name, approved, donator, email } = volunteer;
 
         return (
-          <ListStyles key={id} component="li" style={{ width: "30%" }}>
+          <ListStyles key={id} component="li" style={{ width: topTab === "volunteers" ? "20%" : "30%" }}>
             <Typography style={{ width: "100%" }}>
               <div style={{ cursor: "pointer" }}>
                 <Typography
