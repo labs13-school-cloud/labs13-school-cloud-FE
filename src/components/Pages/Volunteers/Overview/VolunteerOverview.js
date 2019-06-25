@@ -68,4 +68,4 @@ const mapStateToProps = state => {
 export default connect(
   mapStateToProps,
   { getVolunteers }
-)(withStyles()(Overview));
+)(withStyles(ListStyles)(Overview));
