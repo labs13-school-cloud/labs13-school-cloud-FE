@@ -23,17 +23,20 @@ function  Overview(props) {
 
         <div style={{ display: "flex", flexWrap: "wrap" }}>
             {props.classList.map(c => {
-                console.log(c.id)
+                // console.log(c.id)
                 return (
                     <ListStyles key={c.id} component="li" className={props.classList.listItem}>
-                         
-                            <Typography key={c.id}>
                                 <div 
                                 style={{ cursor: "pointer" }}
                                 >
-                                    <Typography variant="subtitle1" style={{ display:"flex", justifyContent:"space-between" }}>
+                                    <div
+                                        style={{ display: "flex", justifyContent: "space-between" }}
+                                    >
+
                                         {c.class_name}
-                                        <div style={{ display:"flex", justifyContent: "space-around" }}>
+                                    <div
+                                        style={{ display: "flex" }}
+                                    >
 
                                     <DeleteModal 
                                         deleteType="classes"
@@ -44,8 +47,11 @@ function  Overview(props) {
                                         classList={c}
                                         updateType="classes"
                                     />
+                                    </div>
+                                    </div>
+                                        <div style={{ display:"flex", justifyContent: "space-around" }}>
+
                                         </div>
-                                    </Typography>
                                     <div onClick={() => history.push(`home/classes/${c.id}`)}>
                                         <div >
 
@@ -69,10 +75,9 @@ function  Overview(props) {
                                 classList={c}
                                 addType="classes"
                                 />
-                            </Typography>
                         </ListStyles>
                     )
-                } 
+                  } 
                 )}
                 </div>
         </div>

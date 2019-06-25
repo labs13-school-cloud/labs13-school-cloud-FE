@@ -61,12 +61,12 @@ function getModalStyle() {
 });
 
 const AddModal = props  => {
-    console.log(props)
+    // console.log(props)
     const [isOpen, setIsOpen]  = useState(false);
     const [classList, setClassList]  = useState({
         ...props.classList
     })
-  console.log('test', classList)
+  // console.log('test', classList)
     const handleAdd = () => {
         switch (props.addType) {
             case "classes":
