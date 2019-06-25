@@ -8,8 +8,6 @@ import LandingPage from "components/Pages/LandingPage/LandingPage/";
 import Pricing from "components/Pages/LandingPage/Pricing";
 import Team from "components/Pages/LandingPage/Team";
 import LoadDashboard from "components/Pages/Dashboard/Loader/";
-import AdminDashboard from "components/Pages/Dashboard/Dashboard/Dashboard.js/";
-import VolunteerDashboard from "components/VolunteerComponents/Pages/Dashboard/VolunteerDashboard.js";
 
 import Callback from "components/Misc/Callback/Callback.js";
 import SlackCallback from "components/Misc/Callback/SlackCallback.js";

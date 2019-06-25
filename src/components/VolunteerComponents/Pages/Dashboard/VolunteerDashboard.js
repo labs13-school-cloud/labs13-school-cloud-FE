@@ -69,6 +69,14 @@ const VolunteerDashboard = props => {
                 containerTourNum="2"
                 section="Training Series"
               />
+              <Divider />
+              <SearchCard
+                user_id={user_id}
+                List={VolunteerClassTab}
+                containerTourNum="1"
+                section="Classes"
+                //headerTourNum={["3", "3"]}
+              />
             </SmallColumns>
           </>
         )}
@@ -78,7 +86,7 @@ const VolunteerDashboard = props => {
             user_id={user_id}
             List={TrainingSeriesTabVolunteer}
             section="Training Series"
-            isSearching={true}
+            isSearching={false}
             limit={3}
           />
         )}
@@ -87,8 +95,8 @@ const VolunteerDashboard = props => {
           <SearchCard
             user_id={user_id}
             List={VolunteerClassTab}
-            section="classes"
-            isSearching={true}
+            section="Classes"
+            isSearching={false}
             limit={10}
           />
         )}

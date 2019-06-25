@@ -3,9 +3,6 @@ import { connect } from "react-redux";
 
 import { getUser } from "store/actions/userActions";
 
-// Volunteer Component
-import VolunteerDashboard from "components/VolunteerComponents/Pages/Dashboard/VolunteerOverview/Overview";
-
 const RolesRenderHOC = ComponentToRender => {
   class RolesRender extends Component {
     componentDidMount() {
@@ -17,8 +14,10 @@ const RolesRenderHOC = ComponentToRender => {
       if (this.props.user === undefined) {
         return <h1>Loading</h1>;
       } else if (this.props.user.role === "admin") {
+        // Will return Admin Dashboard
         return <ComponentToRender {...this.props} role={"admin"} />;
       } else if (this.props.user.role === "volunteer") {
+        // Will return Volunteer Dashboard
         return <ComponentToRender {...this.props} role={"volunteer"} />;
       }
     }
