@@ -110,16 +110,16 @@ function Dashboard(props) {
             section="Classes"
             handleAdd={() => history.push("/home/create-class")}
             isSearching={false}
-            limit={10}
           />
         )}
 
         {topTab === "volunteers" && (
           <SearchCard 
-            List={AdminVolunteerTab}
+            List={VolunteerOverview}
             section="Volunteers"
             isSearching={false}
-            limit={11}
+            limit={9}
+            adminVolunteerOverview={true}
           />
         )}
 
