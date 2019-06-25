@@ -17,7 +17,7 @@ function  Overview(props) {
         props.getClassList();
     }, [getClassList]);
 
-    console.log(props)
+    // console.log(props)
     return (
         <div>
 
