@@ -26,7 +26,6 @@ function Overview(props) {
     getTrainingSeriesID(id);
     props.history.push(`/home-volunteer/training-series/${id}`);
   };
-  console.log("overview page", props);
   return (
     <ListStyles>
       {props

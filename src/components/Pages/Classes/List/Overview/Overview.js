@@ -21,7 +21,6 @@ function Overview(props) {
     <div>
       <div style={{ display: "flex", flexWrap: "wrap" }}>
         {props.classList.map(c => {
-          console.log(c.id);
           return (
             <ListStyles
               key={c.id}

@@ -95,13 +95,14 @@ function Routes(props) {
         <Route
           exact
           path="/home-volunteer/training-series/:id"
-          render={renderProps => (
-            <SingleTrainingSeriesVolunteer
-              {...renderProps}
-              history={props.history}
-              user_id={props.user.id}
-            />
-          )}
+          // render={renderProps => (
+          //   <SingleTrainingSeriesVolunteer
+          //     {...renderProps}
+          //     history={props.history}
+          //     user_id={props.user.id}
+          //   />
+          // )}
+          component={SingleTrainingSeriesVolunteer}
         />
         <Route
           path="/home/training-series/:id/edit"
