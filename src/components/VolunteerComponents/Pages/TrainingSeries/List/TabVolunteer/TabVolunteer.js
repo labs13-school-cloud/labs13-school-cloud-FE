@@ -26,16 +26,14 @@ function TabVolunteer({
 }) {
   const setTrainingSeries = id => {
     getTrainingSeriesID(id);
-    history.push(`/home/training-series/${id}`);
+    history.push(`/home-volunteer/training-series/${id}`);
   };
-
-  const [trainingFilter, setTrainingFilter] = useState("available");
 
   const filterTraining = () => {};
 
   return (
     <>
-      <FormControl>
+      {/* <FormControl>
         <Select
           native
           // className={selection}
@@ -49,7 +47,7 @@ function TabVolunteer({
           <option value={"available"}>Available</option>
           <option value={"Completed"}>Completed</option>
         </Select>
-      </FormControl>
+      </FormControl> */}
       {getFiltered(trainingSeries).map(
         ({ id, title, subject, name, finished }) => {
           return (
