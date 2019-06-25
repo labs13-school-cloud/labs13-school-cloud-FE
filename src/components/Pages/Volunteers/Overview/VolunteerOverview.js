@@ -19,20 +19,20 @@ const styles = {
 		},
 		"@media (max-width: 1090px)": {
 			width: "28%",
-        },
-        "@media (max-width: 900px)": {
-            width: "100%",
-        },
-    },
-    container: {
-        display: "flex",
-        flexWrap: "wrap",
-        justifyContent: "space-around"
-    }
+		},
+		"@media (max-width: 900px)": {
+			width: "100%",
+		},
+	},
+	container: {
+		display: "flex",
+		flexWrap: "wrap",
+		justifyContent: "space-around",
+	},
 };
 
 function Overview(props) {
-  const { getVolunteers, volunteers, getFiltered, classes, topTab } = props;
+	const { getVolunteers, volunteers, getFiltered, classes } = props;
 
 	useEffect(() => {
 		getVolunteers();
@@ -43,40 +43,39 @@ function Overview(props) {
 			{getFiltered(volunteers).map(volunteer => {
 				const { id, name, approved, donator, email } = volunteer;
 
-        return (
-          <ListStyles key={id} component="li" style={{ width: topTab === "volunteers" ? "20%" : "30%" }}>
-            <Typography style={{ width: "100%" }}>
-              <div style={{ cursor: "pointer" }}>
-                <Typography
-                  variant="subtitle1"
-                  style={{ display: "flex", justifyContent: "space-between" }}
-                >
-                  {name}
-                  <DeleteModal
-                    deleteType="volunteers"
-                    className={`material-icons ${classes.icons}`}
-                    volunteerId={id}
-                    style={{ zIndex: "1000" }}
-                  />
-                </Typography>
-                <div onClick={() => history.push(`home/classes/${id}`)}>
-                  <hr />
-                  <Typography variant="overline">{`Email: `}</Typography>
-                  <Typography variant="overline">{`${email}`}</Typography>
-                  <Typography variant="overline">
-                    {`Approved: ${approved}`}
-                  </Typography>
-                  <Typography variant="overline">
-                    {`Donator: ${donator}`}
-                  </Typography>
-                </div>
-              </div>
-            </Typography>
-          </ListStyles>
-        );
-      })}
-    </div>
-  );
+				return (
+					<ListStyles key={id} component="li" className={classes.listitem}>
+						<Typography style={{ width: "100%" }}>
+							<div style={{ cursor: "pointer" }}>
+								<Typography
+									variant="subtitle1"
+									style={{ display: "flex", justifyContent: "space-between" }}>
+									{name}
+									<DeleteModal
+										deleteType="volunteers"
+										className={`material-icons ${classes.icons}`}
+										volunteerId={id}
+										style={{ zIndex: "1000" }}
+									/>
+								</Typography>
+								<div onClick={() => history.push(`home/classes/${id}`)}>
+									<hr />
+									<Typography variant="overline">{`Email: `}</Typography>
+									<Typography variant="overline">{`${email}`}</Typography>
+									<Typography variant="overline">
+										{`Approved: ${approved}`}
+									</Typography>
+									<Typography variant="overline">
+										{`Donator: ${donator}`}
+									</Typography>
+								</div>
+							</div>
+						</Typography>
+					</ListStyles>
+				);
+			})}
+		</div>
+	);
 }
 
 const mapStateToProps = state => {
