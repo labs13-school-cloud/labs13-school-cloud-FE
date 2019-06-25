@@ -2,11 +2,6 @@
 import React, { useEffect } from  "react";
 import { connect } from  "react-redux";
 
-<<<<<<< HEAD
-
-
-=======
->>>>>>> master
 import history from "history.js";
 
 import EditModal from "components/UI/Modals/editModal"
@@ -14,15 +9,6 @@ import DeleteModal from "components/UI/Modals/deleteModal";
 import AddModal from "components/UI/Modals/addModal";
 import { getClassList, deleteClass } from "store/actions/classesActions";
 
-<<<<<<< HEAD
-
-import { 
-         Typography,
-         
-        } from "@material-ui/core/";
-        
-=======
->>>>>>> master
 import { ListStyles } from "./styles.js";
 import { Typography } from "@material-ui/core/";
 
@@ -31,33 +17,15 @@ function  Overview(props) {
         props.getClassList();
     }, [getClassList]);
 
-<<<<<<< HEAD
-    const removeClass = id => {
-        props.deleteClass(props.classList.id);
-        props.history.push(`/home`);
-        console.log("Remove Class", id);
-    };
-    
-    console.log(props);
-=======
     console.log(props)
->>>>>>> master
     return (
         <div>
 
         <div style={{ display: "flex", flexWrap: "wrap" }}>
-<<<<<<< HEAD
-            {props.classList.map(
-                ({ id, class_name, subject, grade_level, number_of_students, teacher_name }) => {
-                    console.log(id);
-                    return (
-                        <ListStyles key={id} component="li" className={props.classList.listItem}>
-=======
             {props.classList.map(c => {
                 console.log(c.id)
                 return (
                     <ListStyles key={c.id} component="li" className={props.classList.listItem}>
->>>>>>> master
                          
                             <Typography key={c.id}>
                                 <div 
@@ -78,14 +46,9 @@ function  Overview(props) {
                                     />
                                         </div>
                                     </Typography>
-<<<<<<< HEAD
-                                    <div onClick={() => history.push(`home/classes/${id}`)}>
-                                      
-=======
                                     <div onClick={() => history.push(`home/classes/${c.id}`)}>
                                         <div >
 
->>>>>>> master
                                         <hr />
                                         <Typography variant="overline">
                                             {`Subject: ${c.subject}`}
