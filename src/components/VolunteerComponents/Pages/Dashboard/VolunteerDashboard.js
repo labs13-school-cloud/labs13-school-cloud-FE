@@ -110,9 +110,6 @@ const VolunteerDashboard = props => {
             />
           </div>
         )}
-        {topTab === "responses" && (
-          <Responses history={props.history} user_id={user_id} />
-        )}
       </TripleColumn>
     </DashWrapper>
   );
