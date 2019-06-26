@@ -21,7 +21,7 @@ function Overview(props) {
     props.getVolunteerTrainingSeries(props.userProfile.user.id);
   }, [props.getVolunteerTrainingSeries]);
   const goToTrainingSeries = id => {
-    getTrainingSeriesID(id);
+    props.getTrainingSeriesID(id);
     props.history.push(`/home/training-series/${id}`);
   };
   return (

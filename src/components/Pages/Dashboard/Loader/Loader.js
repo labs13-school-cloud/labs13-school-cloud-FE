@@ -33,7 +33,6 @@ function Loader(props) {
       setDisplaySnackbar(true);
     }
   }, [state]);
-  console.log("Loader.js", props);
   return (
     <>
       {props.doneLoading ? (
