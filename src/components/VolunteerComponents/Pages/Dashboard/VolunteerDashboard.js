@@ -15,8 +15,6 @@ import DektopNavigation from "components/VolunteerComponents/Pages/Dashboard/hel
 
 import AppBar from "components/Navigation/AppBar/AppBar";
 
-import { Card } from "@material-ui/core";
-
 import {
   TripleColumn,
   SmallColumns,
@@ -103,11 +101,7 @@ const VolunteerDashboard = props => {
           />
         )}
 
-        {topTab === "contact" && (
-          <div style={{ width: "100%" }}>
-            <Card List={ContactTab} user_id={user_id} width="95%" />
-          </div>
-        )}
+        {topTab === "contact" && <ContactTab />}
       </TripleColumn>
     </DashWrapper>
   );

@@ -29,31 +29,27 @@ function TabVolunteer({
     history.push(`/home-volunteer/training-series/${id}`);
   };
 
-  const filterTraining = () => {};
-
   return (
     <>
-      {getFiltered(trainingSeries).map(
-        ({ id, title, subject, name, finished }) => {
-          return (
-            <Wrapper key={`container_${id}`}>
-              <Grid container spacing={24}>
-                <Grid item xs={12}>
-                  <Typography variant="h6">
-                    {" "}
-                    <Link onClick={e => setTrainingSeries(id)}>{title}</Link>
-                  </Typography>
-                  <hr />
-                  <Typography variant="body1">Subject: {subject}</Typography>
+      {getFiltered(trainingSeries).map(({ id, title, subject, name }) => {
+        return (
+          <Wrapper key={`container_${id}`}>
+            <Grid container spacing={24}>
+              <Grid item xs={12}>
+                <Typography variant="h6">
+                  {" "}
+                  <Link onClick={e => setTrainingSeries(id)}>{title}</Link>
+                </Typography>
+                <hr />
+                <Typography variant="body1">Subject: {subject}</Typography>
 
-                  <Typography variant="body1">Creator: {name}</Typography>
-                  <Button>Done</Button>
-                </Grid>
+                <Typography variant="body1">Creator: {name}</Typography>
+                <Button>Done</Button>
               </Grid>
-            </Wrapper>
-          );
-        }
-      )}
+            </Grid>
+          </Wrapper>
+        );
+      })}
     </>
   );
 }
