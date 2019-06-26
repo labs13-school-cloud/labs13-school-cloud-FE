@@ -16,7 +16,7 @@ import history from "history.js";
 import { Grid, Typography, Select, FormControl } from "@material-ui/core/";
 import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
-import { Wrapper, styles, Redirect } from "./styles.js";
+import { Wrapper, styles, Redirect, MessageContainer } from "./styles.js";
 
 function Tab({
   getFiltered,
@@ -47,21 +47,6 @@ function Tab({
   const [trainingFilter, setTrainingFilter] = useState("filter");
   return (
     <>
-      {/* <FormControl className={classes.formControl}>
-        <Select
-          native
-          value={trainingFilter}
-          className={classes.selection}
-          onChange={e => setTrainingFilter(e.target.value)}
-          
-        >
-        <option value={"filter"}>Filter</option>
-          <option value={"electronics"}>Electronics</option>
-          <option value={"clothing"}>Clothing</option>
-          <option value={"sports"}>Sports</option>
-          <option value={"garden"}>Garden</option>
-        </Select>
-      </FormControl> */}
       {getFiltered(trainingSeries).map(({ id, title, subject, name }) => {
         return (
           <Wrapper key={`container_${id}`}>

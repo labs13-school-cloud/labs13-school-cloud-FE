@@ -33,21 +33,6 @@ function TabVolunteer({
 
   return (
     <>
-      {/* <FormControl>
-        <Select
-          native
-          // className={selection}
-          value={trainingFilter}
-          onChange={e => setTrainingFilter(e.target.value)}
-          inputProps={{
-            id: "status-selector",
-            label: "Filter Selector"
-          }}
-        >
-          <option value={"available"}>Available</option>
-          <option value={"Completed"}>Completed</option>
-        </Select>
-      </FormControl> */}
       {getFiltered(trainingSeries).map(
         ({ id, title, subject, name, finished }) => {
           return (

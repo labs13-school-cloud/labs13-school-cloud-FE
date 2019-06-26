@@ -9,11 +9,13 @@ import VolunteerClassTab from "components/VolunteerComponents/Pages/Classes/List
 import TrainingSeriesTabVolunteer from "components/VolunteerComponents/Pages/TrainingSeries/List/TabVolunteer/TabVolunteer.js";
 import NotificationsCard from "components/Pages/Notifications/Card";
 import NotificationsOverview from "components/Pages/Notifications/Card/Overview/Overview.js";
-import Responses from "components/Pages/Notifications/Responses";
+import ContactTab from "components/VolunteerComponents/Pages/Contact/Tab";
 import TabNavigation from "components/VolunteerComponents/Pages/Dashboard/helpers/TabNavigation.js";
 import DektopNavigation from "components/VolunteerComponents/Pages/Dashboard/helpers/DesktopNavigation.js";
 
 import AppBar from "components/Navigation/AppBar/AppBar";
+
+import { Card } from "@material-ui/core";
 
 import {
   TripleColumn,
@@ -101,17 +103,10 @@ const VolunteerDashboard = props => {
           />
         )}
 
-        {topTab === "notifications" && (
+        {topTab === "contact" && (
           <div style={{ width: "100%" }}>
-            <NotificationsCard
-              List={NotificationsOverview}
-              user_id={user_id}
-              width="95%"
-            />
+            <Card List={ContactTab} user_id={user_id} width="95%" />
           </div>
-        )}
-        {topTab === "responses" && (
-          <Responses history={props.history} user_id={user_id} />
         )}
       </TripleColumn>
     </DashWrapper>

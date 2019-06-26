@@ -14,8 +14,7 @@ function TabNavigation(props) {
   const [overviewHover, setOverviewHover] = useState(false);
   const [trainingSeriesHover, setTrainingSeriesHover] = useState(false);
   const [classListHover, setClassListHover] = useState(false);
-  const [messagesHover, setMessagesHover] = useState(false);
-  const [responsesHover, setResponsesHover] = useState(false);
+  const [contactHover, setContactHover] = useState(false);
 
   return (
     <BottomNavigation
@@ -83,40 +82,20 @@ function TabNavigation(props) {
         Classes
       </Popover>
       <BottomNavigationAction
-        label="Notifications"
-        value="notifications"
+        label="Contact"
+        value="contact"
         icon={<QuestionAnswer />}
         onMouseEnter={e => {
-          setMessagesHover(true);
+          setContactHover(true);
         }}
         onMouseLeave={e => {
-          setMessagesHover(false);
+          setContactHover(false);
         }}
       />
       <Popover
-        style={messagesHover ? { display: "block" } : { display: "none" }}
+        style={contactHover ? { display: "block" } : { display: "none" }}
       >
-        Notifications
-      </Popover>
-      <BottomNavigationAction
-        onClick={() => {
-          props.setTopTab("responses");
-        }}
-        label="Responses"
-        value="responses"
-        icon={<ModeComment />}
-        onMouseEnter={e => {
-          setResponsesHover(true);
-        }}
-        onMouseLeave={e => {
-          setResponsesHover(false);
-        }}
-      />
-      {newResponses.length ? <div className={classes.circle} /> : ""}
-      <Popover
-        style={responsesHover ? { display: "block" } : { display: "none" }}
-      >
-        Responses
+        Contact
       </Popover>
     </BottomNavigation>
   );
