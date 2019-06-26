@@ -10,7 +10,7 @@ import TrainingSeriesTabVolunteer from "components/VolunteerComponents/Pages/Tra
 import NotificationsCard from "components/Pages/Notifications/Card";
 import NotificationsOverview from "components/Pages/Notifications/Card/Overview/Overview.js";
 import Responses from "components/Pages/Notifications/Responses";
-import TabNavigation from "components/Pages/Dashboard/Dashboard/helpers/TabNavigation.js";
+import TabNavigation from "components/VolunteerComponents/Pages/Dashboard/helpers/TabNavigation.js";
 import DektopNavigation from "components/VolunteerComponents/Pages/Dashboard/helpers/DesktopNavigation.js";
 
 import AppBar from "components/Navigation/AppBar/AppBar";
@@ -33,12 +33,7 @@ import {
 const VolunteerDashboard = props => {
   const [topTab, setTopTab] = useState("overview");
   const [newResponses, setNewResponses] = useState([]);
-  const {
-    user_id,
-    history,
-    responses,
-    getAllResponses: responsesFromProps
-  } = props;
+  const { user_id, responses, getAllResponses: responsesFromProps } = props;
 
   useEffect(() => {
     responsesFromProps();
@@ -53,7 +48,6 @@ const VolunteerDashboard = props => {
 
   return (
     <DashWrapper>
-      <AppBar />
       <MobileNav>
         <TabNavigation
           topTab={topTab}
@@ -75,16 +69,24 @@ const VolunteerDashboard = props => {
                 containerTourNum="2"
                 section="Training Series"
               />
+              <Divider />
+              <SearchCard
+                user_id={user_id}
+                List={VolunteerClassTab}
+                containerTourNum="1"
+                section="Classes"
+                //headerTourNum={["3", "3"]}
+              />
             </SmallColumns>
           </>
         )}
 
-        {topTab === "Training Series" && (
+        {topTab === "training series" && (
           <SearchCard
             user_id={user_id}
             List={TrainingSeriesTabVolunteer}
             section="Training Series"
-            isSearching={true}
+            isSearching={false}
             limit={3}
           />
         )}
@@ -93,8 +95,8 @@ const VolunteerDashboard = props => {
           <SearchCard
             user_id={user_id}
             List={VolunteerClassTab}
-            section="classes"
-            isSearching={true}
+            section="Classes"
+            isSearching={false}
             limit={10}
           />
         )}

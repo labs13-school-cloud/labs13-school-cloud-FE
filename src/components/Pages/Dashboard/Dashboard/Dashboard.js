@@ -11,7 +11,6 @@ import AdminVolunteerTab from "components/Pages/Volunteers/List/Tab";
 import ClassesOverview from "components/Pages/Classes/List/AdminOverview";
 import NotificationsCard from "components/Pages/Notifications/Card";
 import VolunteerOverview from "components/Pages/Volunteers/Overview"
-import VolunteerCard from "components/Pages/Volunteers";
 import NotificationsOverview from "components/Pages/Notifications/Card/Overview/Overview.js";
 import Responses from "components/Pages/Notifications/Responses";
 import TabNavigation from "./helpers/TabNavigation.js";
@@ -110,16 +109,17 @@ function Dashboard(props) {
             section="Classes"
             handleAdd={() => history.push("/home/create-class")}
             isSearching={false}
-            limit={10}
           />
         )}
 
         {topTab === "volunteers" && (
-          <SearchCard 
-            List={AdminVolunteerTab}
+          <SearchCard
+            topTab={topTab}
+            List={VolunteerOverview}
             section="Volunteers"
             isSearching={false}
-            limit={11}
+            limit={9}
+            adminVolunteerOverview={true}
           />
         )}
 

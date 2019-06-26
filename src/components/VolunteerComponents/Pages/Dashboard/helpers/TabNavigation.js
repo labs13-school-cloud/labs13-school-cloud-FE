@@ -22,6 +22,7 @@ function TabNavigation(props) {
       data-tour={window.innerWidth < 650 ? "7" : null}
       value={props.topTab}
       onChange={(e, value) => {
+        console.log("Tab is changing");
         props.setTopTab(value);
       }}
       style={{
@@ -67,7 +68,7 @@ function TabNavigation(props) {
 
       <BottomNavigationAction
         label="Classes"
-        value="classList"
+        value="classes"
         icon={<Timeline />}
         onMouseEnter={e => {
           setClassListHover(true);

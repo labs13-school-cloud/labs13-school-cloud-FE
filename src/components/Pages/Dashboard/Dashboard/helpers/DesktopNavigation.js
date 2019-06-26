@@ -58,8 +58,8 @@ class SimpleTabs extends React.Component {
             <Tab label="Training Series" />
             <Tab label="Classes" />
             <Tab label="Volunteers" />
-            <Tab label="Notifications" />
-            <Tab label="Responses" />
+            {/* <Tab label="Notifications" />
+            <Tab label="Responses" /> */}
           </TabsStyled>
         </AppBar>
       </div>

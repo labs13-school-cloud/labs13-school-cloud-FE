@@ -1,6 +1,6 @@
 import React from "react";
 import { Provider } from "react-redux";
-import { Route, Router } from "react-router-dom";
+import { Route, Router, Switch } from "react-router-dom";
 import { createStore, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 
@@ -15,7 +15,7 @@ import rootReducer from "store/reducers";
 
 import history from "./history.js";
 
-import RolesRenderHOC from 'components/HOC/RolesRender.js';
+import RolesRenderHOC from "components/HOC/RolesRender.js";
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
   rootReducer,
@@ -27,12 +27,14 @@ function Routes() {
   return (
     <Provider store={store}>
       <Router history={history}>
-        <Route exact path="/" component={LandingPage} />
-        <Route path="/pricing" component={Pricing} />
-        <Route path="/team" component={Team} />
-        <Route path="/home" component={RolesRenderHOC(LoadDashboard)} />
-        <Route path="/callback" component={Callback} />
-        <Route path="/slack-callback" component={SlackCallback} />
+        <Switch>
+          <Route exact path="/" component={LandingPage} />
+          <Route path="/pricing" component={Pricing} />
+          <Route path="/team" component={Team} />
+          <Route path="/home" component={RolesRenderHOC(LoadDashboard)} />
+          <Route path="/callback" component={Callback} />
+          <Route path="/slack-callback" component={SlackCallback} />
+        </Switch>
       </Router>
     </Provider>
   );

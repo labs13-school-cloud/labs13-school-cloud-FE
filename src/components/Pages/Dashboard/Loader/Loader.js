@@ -14,6 +14,7 @@ import authenticate from "components/Misc/authenticate/authenticate";
 import { connect } from "react-redux";
 
 import DashboardRoutes from "../Routes";
+import DashboardRoutesVolunteer from "components/VolunteerComponents/Pages/Routes/Routes.js";
 
 function Loader(props) {
   const [displaySnackbar, setDisplaySnackbar] = useState(false);
@@ -32,14 +33,14 @@ function Loader(props) {
       setDisplaySnackbar(true);
     }
   }, [state]);
-
+  console.log("Loader.js", props);
   return (
     <>
       {props.doneLoading ? (
         <>
           {displaySnackbar && (
             <Snackbar
-              message="Your team members have been successfully added."
+              message="It has been successfully added."
               type="success"
             />
           )}
@@ -48,18 +49,28 @@ function Loader(props) {
             <ReturnToPreviousPageButton history={props.history} />
           )}
           <DashboardContainer>
-            <DashboardRoutes
-              {...props}
-              user={props.userProfile.user}
-              setDisplaySnackbar={setDisplaySnackbar}
-              history={props.history}
-              setIsTourOpen={setIsTourOpen}
-            />
-            <DashboardTour
+            {props.role === "admin" ? (
+              <DashboardRoutes
+                {...props}
+                user={props.userProfile.user}
+                setDisplaySnackbar={setDisplaySnackbar}
+                history={props.history}
+                setIsTourOpen={setIsTourOpen}
+              />
+            ) : (
+              <DashboardRoutesVolunteer
+                {...props}
+                user={props.userProfile.user}
+                setDisplaySnackbar={setDisplaySnackbar}
+                history={props.history}
+                setIsTourOpen={setIsTourOpen}
+              />
+            )}
+            {/* <DashboardTour
               isTourOpen={isTourOpen}
               closeTour={() => setIsTourOpen(false)}
               newUser={props.newUser}
-            />
+            /> */}
           </DashboardContainer>
         </>
       ) : (

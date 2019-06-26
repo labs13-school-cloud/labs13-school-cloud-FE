@@ -26,7 +26,8 @@ function SearchCard(props) {
     headerTourNum,
     section,
     history,
-    adminVolunteerOverview
+    adminVolunteerOverview,
+    topTab
   } = props;
   const limit = props.limit || 5;
 
@@ -50,6 +51,7 @@ function SearchCard(props) {
           }
           volunteerFilter={volunteerFilter}
           history={history}
+          topTab={topTab}
         />
       </Suspense>
       <div className={classes.footer}>
