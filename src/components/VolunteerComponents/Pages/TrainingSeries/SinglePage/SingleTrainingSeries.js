@@ -40,8 +40,16 @@ function SingleTrainingSeries(props) {
       <Wrapper>
         <Grid container spacing={24}>
           <Grid item xs={12}>
-            <Typography variant="h6">{title}</Typography>
-            <hr />
+            <Typography
+              variant="h6"
+              style={{
+                fontSize: "1.5rem",
+                textAlign: "center",
+                marginBottom: "1rem"
+              }}
+            >
+              {title}
+            </Typography>
             <Typography variant="body1" className={props.classes.info}>
               Subject: {subject}
             </Typography>
