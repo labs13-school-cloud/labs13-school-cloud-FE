@@ -39,7 +39,7 @@ function ClassesOverview(props) {
             <ListItemText
               primary={class_name}
               secondary={`Subject: ${subject} | Grade: ${grade_level} | Students: ${number_of_students}`}
-              onClick={e => history.push(`/home/training-series/${id}`)}
+              onClick={e => history.push(`/home/classes/${id}`)}
             />
 
             <div

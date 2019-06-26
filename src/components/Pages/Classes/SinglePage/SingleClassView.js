@@ -17,7 +17,8 @@ import { withStyles } from "@material-ui/core/styles";
 import {
   Typography,
   Grid,
-  Button
+  Button,
+  Link
 } from "@material-ui/core/";
 
 import { styles, Wrapper } from "./styles.js";
@@ -46,6 +47,10 @@ function SingleClassView(props) {
     props.getClassByID(id);
     props.history.push(`/home/classes/${id}/edit`);
   };
+  // Remove Volunteer from training series
+  const removeVolunteer = (id, user_id) => {
+    props.deleteVolunteerFromTrainingSeries(id, user_id);
+  };
 //Exit out of single class view
   const done = e => {
     e.preventDefault();
@@ -56,10 +61,17 @@ function SingleClassView(props) {
     }
   };
 
-  
-  const { id, class_name, subject, grade_level, number_of_students, teacher_name, link, title } = props.singleClass;
+  const { getFiltered, classes, history, getClassList, classList } = props;
+  const {
+    id,
+    class_name,
+    subject,
+    grade_level,
+    number_of_students,
+    teacher_name
+  } = props.singleClass;
 
-  console.log("singleClass", props.classList);
+  console.log("singleClass", props.singleClass);
   console.log("Class ", props.match.params.id);
   console.log(props.classList.class_name);
 
@@ -120,7 +132,4 @@ export default withRouter(
     }
   )(withStyles(styles)(SingleClassView))
 );
-
-
-
 
