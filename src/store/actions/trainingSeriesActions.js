@@ -217,16 +217,10 @@ export const getVolunteerTrainingSeries = user_id => dispatch => {
       `${process.env.REACT_APP_API}/api/training-series/volunteers/${user_id}`
     )
     .then(res =>
-      dispatch(
-        {
-          type: GET_TRAINING_SERIES_FOR_VOLUNTEER_SUCCESS,
-          payload: res.data.trainingSeries
-        },
-        console.log(
-          "From Actions-Get volunteer's training series",
-          res.data.trainingSeries
-        )
-      )
+      dispatch({
+        type: GET_TRAINING_SERIES_FOR_VOLUNTEER_SUCCESS,
+        payload: res.data.trainingSeries
+      })
     )
     .catch(err =>
       dispatch({ type: GET_TRAINING_SERIES_FOR_VOLUNTEER_FAIL, error: err })

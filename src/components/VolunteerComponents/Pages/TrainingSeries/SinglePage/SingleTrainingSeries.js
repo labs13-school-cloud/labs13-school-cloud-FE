@@ -29,8 +29,6 @@ function SingleTrainingSeries(props) {
     link
   } = props.activeTrainingSeries;
 
-  console.log(props.activeTrainingSeries);
-
   const [finished, setFinish] = useState(false);
   const toggleChange = () => {
     setFinish(finished === false ? true : false);
