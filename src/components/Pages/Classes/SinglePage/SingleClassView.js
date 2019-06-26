@@ -2,12 +2,16 @@ import React, { useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 
+import history from "history.js";
+//import DeleteModal from "UI/Modals/deleteModal";
+
 
 import { 
         getClassByID, 
         deleteClass, 
         addClass, 
-        editClass } from "store/actions/classesActions";
+        editClass,
+        getClassList } from "store/actions/classesActions";
 
 import { withStyles } from "@material-ui/core/styles";
 import {
@@ -43,22 +47,35 @@ function SingleClassView(props) {
     props.getClassByID(id);
     props.history.push(`/home/classes/${id}/edit`);
   };
+  // Remove Volunteer from training series
+  const removeVolunteer = (id, user_id) => {
+    props.deleteVolunteerFromTrainingSeries(id, user_id);
+  };
 //Exit out of single class view
   const done = e => {
     e.preventDefault();
-    if (props.SingleClass.id === props.match.params.id) {
+    if (props.singleClass.id === props.match.params.id) {
       this.setState({
         finished: true
       });
     }
   };
 
-  
-  const { id, class_name, subject, grade_level, number_of_students, teacher_name, link, title } = props.singleClass;
+  const { getFiltered, classes, history, getClassList, classList } = props;
+  const {
+    id,
+    class_name,
+    subject,
+    grade_level,
+    number_of_students,
+    teacher_name
+  } = props.singleClass;
 
-  console.log("singleClass", props.classList[2]);
+  console.log("singleClass", props.singleClass);
   console.log("Class ", props.match.params.id);
   console.log(props.classList.class_name);
+
+
   return (
     <>
       <Wrapper>
@@ -110,11 +127,9 @@ export default withRouter(
         getClassByID,
         deleteClass,
         addClass,
-        editClass
+        editClass,
+        getClassList
     }
   )(withStyles(styles)(SingleClassView))
 );
-
-
-
 
