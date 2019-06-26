@@ -17,7 +17,7 @@ import {
   StyledLink,
   ButtonContainer
 } from "./styles.js";
-import Logo from "img/training-bot.png";
+import Logo from "img/cloud.png";
 
 //Authentication
 import { lock } from "Auth/Auth";
@@ -44,7 +44,7 @@ export default function(Component) {
           {/* NAVIGATION */}
           <NavbarContainer>
             <Link to="/">
-              <img src={Logo} alt="A cute, personable robot" />
+              <img src={Logo} alt="A cute, owl on a" />
             </Link>
             <NavbarItemsContainer>
               <NavbarItem>Team</NavbarItem>

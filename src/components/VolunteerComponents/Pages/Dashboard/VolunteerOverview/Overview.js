@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { getAllResponses } from "store/actions";
 import SearchCard from "components/UI/SearchCard/";
 import ClassesOverview from "components/Pages/Classes/List/Overview";
-import TrainingSeriesOverview from "components/VolunteerComponents/Pages/TrainingSeries/List/Overview";
+import TrainingSeriesOverview from "components/VolunteerComponents/Pages/TrainingSeries/List/Overview/Overview.js";
 
 import TabNavigation from "components/VolunteerComponents/Pages/Dashboard/helpers/TabNavigation.js";
 import DektopNavigation from "components/VolunteerComponents/Pages/Dashboard/helpers/DesktopNavigation.js";

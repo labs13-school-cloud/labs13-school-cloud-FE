@@ -18,15 +18,12 @@ import { ListStyles, styles } from "./styles.js";
 
 function Overview(props) {
   useEffect(() => {
-    props.getUser();
     props.getVolunteerTrainingSeries(props.userProfile.user.id);
-  }, [props.getTrainingSeriesForVolunteer]);
-
+  }, [props.getVolunteerTrainingSeries]);
   const goToTrainingSeries = id => {
     getTrainingSeriesID(id);
-    props.history.push(`/home-volunteer/training-series/${id}`);
+    props.history.push(`/home/training-series/${id}`);
   };
-  console.log("overview page", props);
   return (
     <ListStyles>
       {props
