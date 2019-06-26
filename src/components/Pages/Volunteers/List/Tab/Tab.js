@@ -22,16 +22,16 @@ function  AdminVolunteerTab(props) {
     }, [getVolunteers]);
 
 
-    console.log(props)
+    // console.log(props)
     return (
         <div style={{ display: "flex", flexWrap: "wrap", alignItems: "flex-end", justifyContent: "space-evenly" }}>
             {props.getFiltered(props.volunteers).map(v => {
                 // ({ id, name, email, role, approved, donator }) => {
-                    console.log(v.id)
+                    // console.log(v.id)
                     return (
                         <ListStyles key={v.id} component="li" className={props.volunteers.listItem}>
                          
-                            <Typography key={v.id}>
+                            {/* <Typography key={v.id}> */}
                                 <div 
                                 style={{ cursor: "pointer" }}
                                 >
@@ -67,7 +67,7 @@ function  AdminVolunteerTab(props) {
                                     </div>
 
                                 </div>
-                            </Typography>
+                            {/* </Typography> */}
                         </ListStyles>
                     )
                  } 

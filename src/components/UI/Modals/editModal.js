@@ -184,7 +184,7 @@ const EditModal = props => {
   const doNotDisplay = ["volunteers", "user_id", "id", "name"];
 
   return (
-    <div>
+    <>
       {handleDisplayType()}
 
       <Modal
@@ -220,7 +220,7 @@ const EditModal = props => {
           </Button>
         </Paper>
       </Modal>
-    </div>
+    </>
   );
 };
 
