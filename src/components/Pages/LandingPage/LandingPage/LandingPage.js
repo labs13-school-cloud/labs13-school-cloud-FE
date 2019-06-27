@@ -15,7 +15,11 @@ import {
   FooterContainer,
   FooterItemsContainer,
   GetStartedButton,
-  LogoImage
+  LogoImage,
+  HeroSection,
+  BlueBox,
+  HeroCaption,
+  LogoSection
 } from "./styles.js";
 import Button from "@material-ui/core/Button";
 
@@ -55,22 +59,17 @@ class LandingPage extends React.Component {
   render() {
     return (
       <>
-            <section style={{ display:"flex" }}>
+            <HeroSection>
 
-                  <div
-                  style={{ display:"flex", flexDirection:"column", width: "50%", background:"#8ECAFB", alignItems:"center" }}
-                  >
-                    <h1
-                    style={{ fontSize:"90px", margin:"0", fontFamily:"Avenir Next",padding:"20px", fontWeight:"boldItalic", color:"#4c4c4c" }}
-                    >
+                  <BlueBox>
+                    <HeroCaption>
                     Connecting qualified volunteers to mentor children in environments with high student to teacher ratios.
-                    </h1>
-                  </div>
-                  <div  
-                    style={{ display: "flex", flexDirection: "column", alignItems: "center" }}                      
-                  >
+                    </HeroCaption>
+                  </BlueBox>
+                  <LogoSection>
                     <img 
                     style={{ height:"700px",  padding: "10px" }}
+                    
                     src={Cloud} alt="Owl with Grad Cap in a Cloud" />
                     <Button color="primary">
                       <h2 onClick={() => lock.login()}>Sign In</h2>
@@ -84,8 +83,8 @@ class LandingPage extends React.Component {
                     >
                       <h1>Learn More!</h1>
                     </Button>
-                  </div>
-            </section>
+                  </LogoSection>
+                </HeroSection>
         <CssBaseline />
         <LandingPageContainer>
 
@@ -136,9 +135,11 @@ class LandingPage extends React.Component {
             </MarketingSection>
           </MarketingContentContainer>
           <FirstSection
-          style={{ boxShadow:"10px 10px 5px 0px rgba(0,0,0,0.75)" }}
+          style={{ boxShadow:"10px 10px 5px 0px rgba(0,0,0,0.75)", background: "fafafa" }}
           >
-            <LandingPageContentContainer>
+            <LandingPageContentContainer
+              style={{ background: "fafafa" }}
+            >
               <h1>Get Started For Free!</h1>
               <p>
                 Let School In The Clouds take the stress out of managing your classrooms. Get started for FREE now!

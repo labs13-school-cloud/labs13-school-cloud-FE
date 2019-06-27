@@ -3,7 +3,10 @@ import { withRouter } from "react-router-dom";
 
 import { connect } from "react-redux";
 import { getTrainingSeriesID } from "store/actions";
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
 
 import { withStyles } from "@material-ui/core/styles";
 import {
@@ -16,9 +19,10 @@ import {
 import { styles, Wrapper } from "./styles.js";
 
 function SingleTrainingSeries(props) {
+  const { getTrainingSeriesID, match } = props;
   useEffect(() => {
-    props.getTrainingSeriesID(props.match.params.id);
-  }, [props.getTrainingSeriesID]);
+    getTrainingSeriesID(match.params.id);
+  }, [getTrainingSeriesID, match]);
   const {
     name,
     title,

@@ -13,7 +13,10 @@ import HelpModal from "components/UI/HelpModal/HelpModal.js";
 import ContactModal from "components/UI/ContactModal/ContactModal.js";
 
 import Dashboard from "../Dashboard";
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
 
 function Routes(props) {
   const { setDisplaySnackbar, history, setIsTourOpen } = props;

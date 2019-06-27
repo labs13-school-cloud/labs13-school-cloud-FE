@@ -18,6 +18,8 @@ import DashboardRoutesVolunteer from "components/VolunteerComponents/Pages/Route
 
 function Loader(props) {
   const [displaySnackbar, setDisplaySnackbar] = useState(false);
+  // ! NEED TO FIX !
+  // eslint-disable-next-line 
   const [isTourOpen, setIsTourOpen] = useState(true);
   const { newUser, location } = props;
   const { state } = location;

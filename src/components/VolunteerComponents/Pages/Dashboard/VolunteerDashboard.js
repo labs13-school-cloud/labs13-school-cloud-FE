@@ -12,7 +12,10 @@ import NotificationsOverview from "components/Pages/Notifications/Card/Overview/
 import TabNavigation from "components/VolunteerComponents/Pages/Dashboard/helpers/TabNavigation.js";
 import DektopNavigation from "components/VolunteerComponents/Pages/Dashboard/helpers/DesktopNavigation.js";
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
 
 import {
   TripleColumn,
