@@ -1,5 +1,5 @@
 import axios from "axios";
-import history from "../../history.js";
+import history from "history.js";
 
 export const FETCH_CLASSES_START = "FETCH_CLASSES_START";
 export const FETCH_CLASSES_SUCCESS = "FETCH_CLASSES_SUCCESS";

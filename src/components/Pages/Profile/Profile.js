@@ -2,9 +2,9 @@ import React from "react";
 import { connect } from "react-redux";
 
 //Components
-import StripeView from "../../Misc/Stripe/StripeView";
+import StripeView from "components/Misc/Stripe/StripeView";
 import { lock } from "Auth/Auth";
-import Authentication from "../../Misc/authenticate";
+import Authentication from "components/Misc/authenticate";
 
 //State Management
 import { getUser, deleteUser } from "store/actions/userActions";
