@@ -69,6 +69,10 @@ export const NavbarItem = styled.a`
 `;
 export const HeroSection = styled.div`
   display: flex;
+
+  @media (max-width: 700px) {
+    flex-direction: column-reverse;
+  }
 `;
 export const BlueBox = styled.div`
   display: flex;
@@ -76,6 +80,10 @@ export const BlueBox = styled.div`
   width: 50%;
   background: rgb(142, 202, 251);
   align-items: center;
+
+  @media (max-width: 700px) {
+    width: 100%;
+  }
 `;
 export const HeroCaption = styled.h1`
   font-size: 90px;
@@ -83,6 +91,12 @@ export const HeroCaption = styled.h1`
   font-family: "Avenir Next";
   padding: 20px;
   color: rgb(76, 76, 76);
+
+
+  @media (max-width: 700px) {
+    font-size: 55px;
+  }
+
 `;
 export const LogoSection = styled.div`
   display: flex;
@@ -91,6 +105,24 @@ export const LogoSection = styled.div`
   background: #fafafa;
   width: 50vw;
   height: 100vh;
+
+  @media (max-width: 700px) {
+    width: 100%;
+  }
+`;
+export const OwlLogo = styled.img`
+  height: 600px;
+  padding: 10px;
+
+  @media (max-width: 700px) {
+    height: 400px;
+    padding-top: 30px;
+  }
+`;
+export const  ButtonContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 export const FirstSection = styled.div`
   background-color: #fafafa;
@@ -103,8 +135,8 @@ export const FirstSection = styled.div`
     width: 100%;
   }
   @media (max-width: 700px) {
-    width: 100%;
-    margin: 0;
+    width: 80%;
+    
   }
   p {
     text-align: center;
