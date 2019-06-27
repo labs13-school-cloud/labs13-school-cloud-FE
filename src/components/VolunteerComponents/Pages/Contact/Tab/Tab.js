@@ -9,7 +9,8 @@ import {
   Typography,
   Select,
   FormControl,
-  Paper
+  Paper,
+  Link
 } from "@material-ui/core/";
 import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
@@ -25,18 +26,31 @@ function Tab(props) {
     <Wrapper>
       <Grid container spacing={24}>
         <Grid item xs={12}>
-          <Typography>Admin Contact</Typography>
-          {admin.map(user => {
-            user.length !== 0 ? (
-              <Paper>
+          <Typography
+            variant="h4"
+            style={{ fontSize: "2rem", textAlign: "center" }}
+          >
+            Admin Contact
+          </Typography>
+          {admin.length === 0 ? (
+            <Typography
+              style={{
+                fontSize: "1.5rem",
+                textAlign: "center",
+                marginTop: "1rem"
+              }}
+            >
+              No Admins available at this time, contact us{" "}
+              <a href="mailto:help@schoolinthecloud.com">here!</a>
+            </Typography>
+          ) : (
+            <Paper>
+              <Typography>Admin Info</Typography>
+              {admin.map(user => (
                 <Typography>{user.name}</Typography>
-              </Paper>
-            ) : (
-              <Typography>
-                No Admins available at this time, contact us here!
-              </Typography>
-            );
-          })}
+              ))}
+            </Paper>
+          )}
         </Grid>
       </Grid>
     </Wrapper>
