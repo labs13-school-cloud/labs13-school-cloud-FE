@@ -20,49 +20,51 @@ import { Wrapper, styles } from "./styles.js";
 
 function TabVolunteer({
   getFiltered,
-  getTrainingSeries,
-  trainingSeries,
+  volunteerTrainingSeries,
   getTrainingSeriesID
 }) {
   const setTrainingSeries = id => {
     getTrainingSeriesID(id);
-    history.push(`/home-volunteer/training-series/${id}`);
+    history.push(`/home/training-series/${id}`);
   };
-
-  const filterTraining = () => {};
-
+  const [finished, setFinish] = useState(false);
+  const toggleChange = () => {
+    setFinish(finished === false ? true : false);
+  };
   return (
     <>
-      {/* <FormControl>
-        <Select
-          native
-          // className={selection}
-          value={trainingFilter}
-          onChange={e => setTrainingFilter(e.target.value)}
-          inputProps={{
-            id: "status-selector",
-            label: "Filter Selector"
-          }}
-        >
-          <option value={"available"}>Available</option>
-          <option value={"Completed"}>Completed</option>
-        </Select>
-      </FormControl> */}
-      {getFiltered(trainingSeries).map(
-        ({ id, title, subject, name, finished }) => {
+      {getFiltered(volunteerTrainingSeries).map(
+        ({ training_series_id, title, subject, name }) => {
           return (
-            <Wrapper key={`container_${id}`}>
+            <Wrapper key={`container_${training_series_id}`}>
               <Grid container spacing={24}>
                 <Grid item xs={12}>
                   <Typography variant="h6">
                     {" "}
-                    <Link onClick={e => setTrainingSeries(id)}>{title}</Link>
+                    <Link onClick={e => setTrainingSeries(training_series_id)}>
+                      {title}
+                    </Link>
                   </Typography>
                   <hr />
-                  <Typography variant="body1">Subject: {subject}</Typography>
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      marginBottom: "10px"
+                    }}
+                  >
+                    <Typography variant="body1">Subject: {subject}</Typography>
 
-                  <Typography variant="body1">Creator: {name}</Typography>
-                  <Button>Done</Button>
+                    <Typography variant="body1">Creator: {name}</Typography>
+                  </div>
+                  <Button
+                    style={{
+                      backgroundColor: finished === true ? "green" : "gray"
+                    }}
+                    onClick={toggleChange}
+                  >
+                    Done
+                  </Button>
                 </Grid>
               </Grid>
             </Wrapper>
@@ -77,7 +79,8 @@ const mapStateToProps = state => ({
   trainingSeries: state.trainingSeriesReducer.trainingSeries,
   notifications: state.notificationsReducer.notifications,
   messages: state.messagesReducer.messages,
-  activeTrainingSeries: state.messagesReducer.activeTrainingSeries
+  volunteerTrainingSeries: state.trainingSeriesReducer.volunteerTrainingSeries,
+  activeTrainingSeries: state.trainingSeriesReducer.activeTrainingSeries
 });
 
 export default withRouter(

@@ -37,6 +37,19 @@ export const styles = theme => ({
   },
   divider: {
     margin: "15px 0"
+  },
+  info: {
+    fontSize: "1rem",
+    paddingBottom: "5px",
+    fontWeight: "bold",
+    marginBottom: "10px"
+  },
+  links: {
+    "&:hover": {
+      color: "#2699FB",
+      cursor: "pointer",
+      textDecoration: "none"
+    }
   }
 });
 
