@@ -24,6 +24,8 @@ function Edit(props) {
             class_name,
             subject,
             number_of_Students,
+            teacher_name,
+            grade_level,
             user_id: props.user_id
         });
         props.history.push("/home");

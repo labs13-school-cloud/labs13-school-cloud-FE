@@ -11,10 +11,6 @@ import {
   deleteVolunteerFromTrainingSeries,
   getAllVolunteers
 } from "store/actions";
-<<<<<<< HEAD
-
-=======
->>>>>>> master
 import { withStyles } from "@material-ui/core/styles";
 import {
   Typography,

@@ -3,10 +3,6 @@ import { withRouter } from "react-router-dom";
 
 import { connect } from "react-redux";
 import { getTrainingSeriesID } from "store/actions";
-<<<<<<< HEAD
-
-=======
->>>>>>> master
 
 import { withStyles } from "@material-ui/core/styles";
 import {
