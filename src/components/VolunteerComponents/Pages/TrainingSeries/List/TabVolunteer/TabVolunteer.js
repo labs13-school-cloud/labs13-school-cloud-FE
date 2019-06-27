@@ -21,7 +21,8 @@ import { Wrapper, styles } from "./styles.js";
 function TabVolunteer({
   getFiltered,
   volunteerTrainingSeries,
-  getTrainingSeriesID
+  getTrainingSeriesID,
+  classes
 }) {
   const setTrainingSeries = id => {
     getTrainingSeriesID(id);
@@ -34,7 +35,9 @@ function TabVolunteer({
   return (
     <>
       {volunteerTrainingSeries.length === 0 ? (
-        <Typography>No Training Series Assigned yet</Typography>
+        <Typography className={classes.noMessage}>
+          No Training Series Assigned
+        </Typography>
       ) : (
         <>
           {getFiltered(volunteerTrainingSeries).map(

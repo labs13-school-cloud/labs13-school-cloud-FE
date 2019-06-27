@@ -78,6 +78,11 @@ export const styles = theme => ({
       cursor: "pointer",
       textDecoration: "none"
     }
+  },
+  noMessage: {
+    textAlign: "center",
+    padding: "1rem",
+    color: "grey"
   }
 });
 

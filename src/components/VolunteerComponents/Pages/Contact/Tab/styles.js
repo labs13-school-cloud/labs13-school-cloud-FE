@@ -36,6 +36,12 @@ export const styles = () => ({
     "&:hover": {
       color: "#2699FB"
     }
+  },
+  noMessage: {
+    textAlign: "center",
+    fontSize: "1.2rem",
+    margin: "4rem",
+    color: "grey"
   }
 });
 

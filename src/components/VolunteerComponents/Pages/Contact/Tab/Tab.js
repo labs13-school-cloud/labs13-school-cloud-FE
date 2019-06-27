@@ -33,15 +33,14 @@ function Tab(props) {
             Admin Contact
           </Typography>
           {admin.length === 0 ? (
-            <Typography
-              style={{
-                fontSize: "1.5rem",
-                textAlign: "center",
-                marginTop: "1rem"
-              }}
-            >
+            <Typography className={props.classes.noMessage}>
               No Admins available at this time, contact us{" "}
-              <a href="mailto:help@schoolinthecloud.com">here!</a>
+              <a
+                href="mailto:help@schoolinthecloud.com"
+                style={{ color: "#2699FB" }}
+              >
+                here!
+              </a>
             </Typography>
           ) : (
             <Paper>

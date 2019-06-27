@@ -23,12 +23,10 @@ const RolesRenderHOC = ComponentToRender => {
     }
   }
 
-  const mapStateToProps = state => {
-    return {
-      // This will grab the user profile
-      user: state.userReducer.userProfile.user
-    };
-  };
+  const mapStateToProps = state => ({
+    // This will grab the user profile
+    user: state.userReducer.userProfile.user
+  });
 
   return connect(
     mapStateToProps,

@@ -12,7 +12,7 @@ import {
 } from "store/actions";
 
 import { withStyles } from "@material-ui/core/styles";
-import { ListItem, ListItemText } from "@material-ui/core/";
+import { ListItem, ListItemText, Typography } from "@material-ui/core/";
 import DeleteModal from "components/UI/Modals/deleteModal";
 import { ListStyles, styles } from "./styles.js";
 
@@ -26,25 +26,33 @@ function Overview(props) {
   };
   return (
     <ListStyles>
-      {props
-        .getFiltered(props.volunteerTrainingSeries)
-        .map(({ training_series_id, title, finished }) => {
-          return (
-            <ListItem
-              key={training_series_id}
-              component="li"
-              className={props.classes.listItem}
-            >
-              <ListItemText
-                primary={title}
-                secondary={`Status: ${
-                  finished === null || false ? "Not Complete" : "Complete"
-                }  `}
-                onClick={e => goToTrainingSeries(training_series_id)}
-              />
-            </ListItem>
-          );
-        })}
+      {props.volunteerTrainingSeries.length === 0 ? (
+        <Typography className={props.classes.noMessage}>
+          No Training Series Assigned
+        </Typography>
+      ) : (
+        <>
+          {props
+            .getFiltered(props.volunteerTrainingSeries)
+            .map(({ training_series_id, title, finished }) => {
+              return (
+                <ListItem
+                  key={training_series_id}
+                  component="li"
+                  className={props.classes.listItem}
+                >
+                  <ListItemText
+                    primary={title}
+                    secondary={`Status: ${
+                      finished === null || false ? "Not Complete" : "Complete"
+                    }  `}
+                    onClick={e => goToTrainingSeries(training_series_id)}
+                  />
+                </ListItem>
+              );
+            })}
+        </>
+      )}
     </ListStyles>
   );
 }

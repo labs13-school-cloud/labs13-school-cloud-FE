@@ -27,6 +27,12 @@ export const styles = () => ({
   selection: {
     margin: "0 10px"
   },
+  noMessage: {
+    textAlign: "center",
+    fontSize: "1.2rem",
+    marginTop: "9rem",
+    color: "grey"
+  }
 });
 
 export const Wrapper = styled(Paper)`
