@@ -4,7 +4,7 @@ import { Router, Route, Switch } from "react-router-dom";
 import Profile from "components/Pages/Profile";
 import SingleTrainingSeriesVolunteer from "components/VolunteerComponents/Pages/TrainingSeries/SinglePage/SingleTrainingSeries.js";
 import Classes from "components/Pages/Classes/List/Overview/Overview";
-import SingleClassView from "components/Pages/Classes/SinglePage/SingleClassView";
+import SingleClassView from "components/VolunteerComponents/Pages/Classes/SinglePage/SinglePage.js";
 import HelpModal from "components/UI/HelpModal/HelpModal.js";
 import ContactModal from "components/UI/ContactModal/ContactModal.js";
 

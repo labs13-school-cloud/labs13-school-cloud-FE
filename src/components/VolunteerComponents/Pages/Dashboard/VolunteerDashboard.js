@@ -5,7 +5,8 @@ import { getAllResponses } from "store/actions";
 
 import SearchCard from "components/UI/SearchCard/";
 import TrainingSeriesOverview from "components/VolunteerComponents/Pages/TrainingSeries/List/Overview";
-import VolunteerClassTab from "components/VolunteerComponents/Pages/Classes/List";
+import VolunteerClassOverview from "components/VolunteerComponents/Pages/Classes/Overview";
+import VolunteerClassTab from "components/VolunteerComponents/Pages/Classes/List/V-ClassesTab.js";
 import TrainingSeriesTabVolunteer from "components/VolunteerComponents/Pages/TrainingSeries/List/TabVolunteer/TabVolunteer.js";
 import NotificationsCard from "components/Pages/Notifications/Card";
 import NotificationsOverview from "components/Pages/Notifications/Card/Overview/Overview.js";
@@ -71,7 +72,7 @@ const VolunteerDashboard = props => {
             <Divider />
             <SearchCard
               user_id={user_id}
-              List={VolunteerClassTab}
+              List={VolunteerClassOverview}
               containerTourNum="1"
               section="Classes"
               //headerTourNum={["3", "3"]}

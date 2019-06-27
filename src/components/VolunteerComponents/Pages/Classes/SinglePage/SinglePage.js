@@ -1,23 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
 
- import { connect } from "react-redux";
+import { connect } from "react-redux";
 import { getClassList } from "store/actions";
 import InfoPopup from "components/UI/InfoPopup/InfoPopup.js";
 
- import { withStyles } from "@material-ui/core/styles";
+import { withStyles } from "@material-ui/core/styles";
 import { Paper, Divider, Typography, Grid, Button } from "@material-ui/core/";
 
- import { styles, PageContainer, Wrapper } from "./styles.js/index.js";
+import { styles, PageContainer, Wrapper } from "./styles.js";
 
- function SinglePage(props) {
+function SinglePage(props) {
   console.log(props);
   const {
     id,
     first_name,
     last_name,
     title,
-    subject,
+    subject
   } = props.activeTrainingSeries;
   return (
     <>
@@ -28,7 +28,7 @@ import { Paper, Divider, Typography, Grid, Button } from "@material-ui/core/";
             <hr />
             <Typography variant="body1">Subject: {subject}</Typography>
 
-             <Typography variant="body1">
+            <Typography variant="body1">
               Creator: {first_name} {""}
               {last_name}
             </Typography>
@@ -40,9 +40,16 @@ import { Paper, Divider, Typography, Grid, Button } from "@material-ui/core/";
   );
 }
 
+const mapStateToProps = state => {
+  return {
+    classList: state.classesReducer.classList,
+    singleClass: state.classesReducer.singleClass,
+    trainingSeriesVolunteers:
+      state.trainingSeriesReducer.trainingSeriesVolunteers
+  };
+};
 
-
- export default withRouter(
+export default withRouter(
   connect(
     mapStateToProps,
     { getClassList }
