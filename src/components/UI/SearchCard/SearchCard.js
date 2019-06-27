@@ -42,6 +42,7 @@ function SearchCard(props) {
         setVolunteerFilter={setVolunteerFilter}
         volunteerFilter={volunteerFilter}
         adminVolunteerOverview={adminVolunteerOverview}
+        section={section}
       />
       <Suspense fallback={<div />}>
         <List
