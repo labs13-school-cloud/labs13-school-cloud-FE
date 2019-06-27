@@ -72,6 +72,9 @@ const AddModal = props => {
       case "classes":
         props.addClass(classList);
         setIsOpen(false);
+        break;
+      default: 
+        break;
     }
   };
 
