@@ -6,16 +6,12 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 //Styling
 import {
   LandingPageContainer,
-  NavbarContainer,
-  NavbarItemsContainer,
-  NavbarItem,
   FirstSection,
   MarketingContentContainer,
   MarketingSection,
   MarketingImage,
   MarketingContent,
   LandingPageContentContainer,
-  LandingPageButtonContainer,
   FooterContainer,
   FooterItemsContainer,
   GetStartedButton,

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { withRouter } from "react-router-dom";
 
 import { connect } from "react-redux";
@@ -11,20 +11,15 @@ import {
   deleteVolunteerFromTrainingSeries,
   getAllVolunteers
 } from "store/actions";
-import InfoPopup from "components/UI/InfoPopup/InfoPopup.js";
-import DeleteModal from "components/UI/Modals/deleteModal";
-import EditModal from "components/UI/Modals/editModal";
+
 import { withStyles } from "@material-ui/core/styles";
 import {
-  Paper,
-  Divider,
   Typography,
   Grid,
-  Button,
   Link
 } from "@material-ui/core/";
 
-import { styles, PageContainer, Wrapper } from "./styles.js";
+import { styles, Wrapper } from "./styles.js";
 
 function SingleTrainingSeries(props) {
   useEffect(() => {

@@ -1,14 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import Title from "./helpers/Title.js";
-import Messages from "../Messages/";
-import MessagesList from "../List/Messages/";
 import InfoPopup from "components/UI/InfoPopup/InfoPopup.js";
 import { getTrainingSeriesID, editTrainingSeries } from "store/actions";
 import { withStyles } from "@material-ui/core/styles";
 import {
   Paper,
-  Divider,
   Typography,
   TextField,
   Link,

@@ -9,11 +9,10 @@ import VolunteerClassTab from "components/VolunteerComponents/Pages/Classes/List
 import TrainingSeriesTabVolunteer from "components/VolunteerComponents/Pages/TrainingSeries/List/TabVolunteer/TabVolunteer.js";
 import NotificationsCard from "components/Pages/Notifications/Card";
 import NotificationsOverview from "components/Pages/Notifications/Card/Overview/Overview.js";
-import Responses from "components/Pages/Notifications/Responses";
 import TabNavigation from "components/VolunteerComponents/Pages/Dashboard/helpers/TabNavigation.js";
 import DektopNavigation from "components/VolunteerComponents/Pages/Dashboard/helpers/DesktopNavigation.js";
 
-import AppBar from "components/Navigation/AppBar/AppBar";
+
 
 import {
   TripleColumn,
