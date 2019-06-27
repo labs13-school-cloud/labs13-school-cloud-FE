@@ -23,28 +23,27 @@ import { styles, Wrapper } from "./styles.js";
 
 
 function SingleClassView(props) {
-  const  { getClassByID, addClass, deleteClass, match } = props;
+  const  { getClassByID, addClass, deleteClass, match, history, singleClass } = props;
   useEffect(() => {
     getClassByID(match.params.id);
-  }, [getClassByID]);
+  }, [getClassByID, match]);
 
 
   useEffect(() => {
     addClass(match.params.id);
-    props.history.push(`/home/classes`);
-  }, [addClass]);
-
+    history.push(`/home/classes`);
+  }, [addClass, match, history]);
 
 
   // Removes class from database
   const removeClass = id => {
-    deleteClass(props.singleClass.id);
-    props.history.push(`/home/classes`);
+    deleteClass(singleClass.id);
+    history.push(`/home/classes`);
   };
   // Sends Admin to Edit screen for classes
   const editClass = id => {
     getClassByID(id);
-    props.history.push(`/home/classes`);
+    history.push(`/home/classes`);
   };
   // Remove Volunteer from training series
   // const removeVolunteer = (id, user_id) => {
@@ -53,7 +52,7 @@ function SingleClassView(props) {
 //Exit out of single class view
   const done = e => {
     e.preventDefault();
-    if (props.singleClass.id === props.match.params.id) {
+    if (singleClass.id === match.params.id) {
       this.setState({
         finished: true
       });

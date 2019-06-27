@@ -15,10 +15,10 @@ import {
 import { styles, Wrapper } from "./styles.js";
 
 function SingleTrainingSeries(props) {
-  const { getTrainingSeriesID } = props;
+  const { getTrainingSeriesID, match } = props;
   useEffect(() => {
-    getTrainingSeriesID(props.match.params.id);
-  }, [getTrainingSeriesID]);
+    getTrainingSeriesID(match.params.id);
+  }, [getTrainingSeriesID, match]);
   const {
     name,
     title,

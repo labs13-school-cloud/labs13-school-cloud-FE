@@ -21,13 +21,13 @@ import {
 import { styles, Wrapper } from "./styles.js";
 
 function SingleTrainingSeries(props) {
-  const { getTrainingSeriesForVolunteer, getTrainingSeriesID, deleteTrainingSeries, activeTrainingSeries, getAllVolunteers, deleteVolunteerFromTrainingSeries } = props;
+  const { getTrainingSeriesForVolunteer, getTrainingSeriesID, deleteTrainingSeries, activeTrainingSeries, getAllVolunteers, deleteVolunteerFromTrainingSeries, match } = props;
   useEffect(() => {
-    getTrainingSeriesForVolunteer(props.match.params.id);
-  }, [getTrainingSeriesForVolunteer]);
+    getTrainingSeriesForVolunteer(match.params.id);
+  }, [getTrainingSeriesForVolunteer, match]);
   useEffect(() => {
-      getTrainingSeriesID(props.match.params.id);
-  }, [getTrainingSeriesID]);
+      getTrainingSeriesID(match.params.id);
+  }, [getTrainingSeriesID, match]);
 
   // Removes Training Series from database
   const removeTrainingSeries = id => {
@@ -80,7 +80,6 @@ function SingleTrainingSeries(props) {
               edit
             </i>
             <i
-              className="material-icons"
               className={`material-icons ${props.classes.iconDelete}`}
               onClick={removeTrainingSeries}
             >

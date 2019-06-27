@@ -15,10 +15,10 @@ import {
 import { styles, PageContainer } from "./styles.js";
 
 function Edit(props) {
-  const { getTrainingSeriesID, activeTrainingSeries } = props;  
+  const { getTrainingSeriesID, activeTrainingSeries, match } = props;  
   useEffect(() => {
-    getTrainingSeriesID(props.match.params.id);
-  }, [getTrainingSeriesID]);
+    getTrainingSeriesID(match.params.id);
+  }, [getTrainingSeriesID, match]);
   const { classes } = props;
   // Used to update the title and subject for Training Series
   const [title, setTitle] = useState("");

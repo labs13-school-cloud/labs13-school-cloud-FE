@@ -19,7 +19,7 @@ function Overview(props) {
   const  { getVolunteerTrainingSeries, getTrainingSeriesID, userProfile }  = props;
   useEffect(() => {
     getVolunteerTrainingSeries(userProfile.user.id);
-  }, [getVolunteerTrainingSeries]);
+  }, [getVolunteerTrainingSeries, userProfile]);
   const goToTrainingSeries = id => {
     getTrainingSeriesID(id);
     props.history.push(`/home/training-series/${id}`);
