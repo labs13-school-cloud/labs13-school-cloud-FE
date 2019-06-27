@@ -7,7 +7,6 @@ import ProgressCircle from "components/UI/Progress/ProgressCircle";
 import AppBar from "components/Navigation/AppBar/AppBar";
 import ReturnToPreviousPageButton from "components/Navigation/ReturnToPreviousPage";
 import Snackbar from "components/UI/Snackbar/Snackbar";
-import DashboardTour from "components/UI/Tour/Tour";
 import handleAdd from "components/UI/Modals/addModal";
 
 import authenticate from "components/Misc/authenticate/authenticate";

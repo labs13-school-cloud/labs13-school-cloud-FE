@@ -1,5 +1,5 @@
 // main page for displaying list of all training series for Volunteer users
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 
@@ -10,9 +10,7 @@ import history from "history.js";
 import {
   Grid,
   Typography,
-  Link,
-  Select,
-  FormControl
+  Link
 } from "@material-ui/core/";
 import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";

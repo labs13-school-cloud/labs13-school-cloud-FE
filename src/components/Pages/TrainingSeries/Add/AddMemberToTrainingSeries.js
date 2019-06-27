@@ -1,13 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 
 import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 
 import { styles, Wrapper } from "./styles.js";
-import { withStyles, Grid } from "@material-ui/core/styles";
+import { withStyles } from "@material-ui/core/styles";
 import {
   getTrainingSeriesID,
   getTrainingSeriesForVolunteer,

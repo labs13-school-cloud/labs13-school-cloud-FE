@@ -14,7 +14,7 @@ import { ListItem, ListItemText } from "@material-ui/core/";
 import { ListStyles } from "./styles.js";
 import { Typography } from "@material-ui/core/";
 
- function  Overview(props) {
+ function  Overview() {
     useEffect(() => {
         props.getClassList()
     }, [getClassList]);

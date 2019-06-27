@@ -2,21 +2,19 @@
 import React, { useEffect } from  "react";
 import { connect } from  "react-redux";
 
-import styled from "styled-components";
-
 import history from "history.js";
 
-import { getClassList } from "../../../../../store/actions/classesActions";
+import { getClassList } from "store/actions/classesActions";
 
 import { ListStyles } from "./styles.js";
 import { Typography } from "@material-ui/core/";
 
 function VolunteerClassTab(props) {
+    const { getClassList } = props;
     useEffect(() => {
-        props.getClassList()
+        getClassList()
     }, [getClassList]);
 
-    console.log(props)
     return (
         <div style={{ display: "flex", flexWrap: "wrap" }}>
             {props.getFiltered(props.classList).map(
