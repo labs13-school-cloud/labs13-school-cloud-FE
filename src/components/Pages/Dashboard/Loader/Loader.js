@@ -8,6 +8,7 @@ import AppBar from "components/Navigation/AppBar/AppBar";
 import ReturnToPreviousPageButton from "components/Navigation/ReturnToPreviousPage";
 import Snackbar from "components/UI/Snackbar/Snackbar";
 import DashboardTour from "components/UI/Tour/Tour";
+import handleAdd from "components/UI/Modals/addModal";
 
 import authenticate from "components/Misc/authenticate/authenticate";
 
@@ -37,16 +38,22 @@ function Loader(props) {
     <>
       {props.doneLoading ? (
         <>
-          {displaySnackbar && (
+          {displaySnackbar && props.addType && (
             <Snackbar
-              message="It has been successfully added."
+              message="Overview loaded successfully"
+              type="success"
+            />
+          )}
+          {handleAdd && (
+            <Snackbar
+              message="Class added successfully"
               type="success"
             />
           )}
           <AppBar />
-          {props.location.pathname !== "/home" && (
-            <ReturnToPreviousPageButton history={props.history} />
-          )}
+            {props.location.pathname !== "/home" && (
+            <ReturnToPreviousPageButton history={props.history} /> 
+          )} 
           <DashboardContainer>
             {props.role === "admin" ? (
               <DashboardRoutes
@@ -65,11 +72,6 @@ function Loader(props) {
                 setIsTourOpen={setIsTourOpen}
               />
             )}
-            {/* <DashboardTour
-              isTourOpen={isTourOpen}
-              closeTour={() => setIsTourOpen(false)}
-              newUser={props.newUser}
-            /> */}
           </DashboardContainer>
         </>
       ) : (

@@ -8,6 +8,7 @@ import EditModal from "components/UI/Modals/editModal";
 import DeleteModal from "components/UI/Modals/deleteModal";
 import AddModal from "components/UI/Modals/addModal";
 import { getClassList, deleteClass } from "store/actions/classesActions";
+import Snackbar from "components/UI/Snackbar/Snackbar";
 
 import { ListStyles } from "./styles.js";
 import { Typography } from "@material-ui/core/";
@@ -48,7 +49,8 @@ function Overview(props) {
                       <EditModal classList={c} updateType="classes" />
                     </div>
                   </Typography>
-                  <div onClick={() => history.push(`home/classes/${c.id}`)}>
+                  <div onClick={() => 
+                    history.push(`home/classes/${c.id}`)}>
                     <div>
                       <hr />
                       <Typography variant="overline">
@@ -67,6 +69,10 @@ function Overview(props) {
                   </div>
                 </div>
                 <AddModal classList={c} addType="classes" />
+                <Snackbar
+              message= " Class overview loaded successfully"
+              type="success"
+            />
               </Typography>
             </ListStyles>
           );
@@ -74,6 +80,12 @@ function Overview(props) {
       </div>
     </div>
   );
+  
+
+     
+            
+   
+  
 }
 
 const mapStateToProps = state => {

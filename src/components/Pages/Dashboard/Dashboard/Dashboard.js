@@ -73,6 +73,7 @@ function Dashboard(props) {
                 List={TrainingSeriesOverview}
                 containerTourNum="4"
                 section="Training Series"
+                limit={6}
               />
               <Divider />
               <SearchCard
@@ -80,6 +81,7 @@ function Dashboard(props) {
                 List={ClassesOverview}
                 containerTourNum="5"
                 section="Classes"
+                limit={6}
               />
             </SmallColumns>
             <SearchCard

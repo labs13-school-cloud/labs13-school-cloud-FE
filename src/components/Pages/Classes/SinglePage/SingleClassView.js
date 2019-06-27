@@ -33,6 +33,7 @@ function SingleClassView(props) {
 
   useEffect(() => {
     props.addClass(props.match.params.id);
+    props.history.push(`/home/classes`);
   }, [addClass]);
 
 
@@ -40,12 +41,12 @@ function SingleClassView(props) {
   // Removes class from database
   const removeClass = id => {
     props.deleteClass(props.singleClass.id);
-    props.history.push(`/home/classes/${id}`);
+    props.history.push(`/home/classes`);
   };
   // Sends Admin to Edit screen for classes
   const editClass = id => {
     props.getClassByID(id);
-    props.history.push(`/home/classes/${id}/edit`);
+    props.history.push(`/home/classes`);
   };
   // Remove Volunteer from training series
   const removeVolunteer = (id, user_id) => {
@@ -61,7 +62,7 @@ function SingleClassView(props) {
     }
   };
 
-  const { getFiltered, classes, history, getClassList, classList } = props;
+  //const { getFiltered, classes, history, getClassList, classList } = props;
   const {
     id,
     class_name,

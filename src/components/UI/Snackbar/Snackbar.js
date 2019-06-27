@@ -1,5 +1,5 @@
 import React from "react";
-import { withRouter } from "react-router";
+import { withRouter, Link, browserHistory } from "react-router";
 
 // import PropTypes from "prop-types";
 import classNames from "classnames";
@@ -53,7 +53,9 @@ function MySnackbarContent(props) {
   const Icon = variantIcon[variant];
 
   return (
+
     <SnackbarContent
+    
       className={classNames(classes[variant], className)}
       aria-describedby="client-snackbar"
       message={
@@ -109,6 +111,14 @@ class CustomizedSnackbars extends React.Component {
             message={this.props.message}
           />
         );
+        case "add":
+        return (
+          <MySnackbarContentWrapper
+            onClose={this.handleClose}
+            variant="error"
+            message="Class added successfully"
+          />
+        );
       case "delete":
         return (
           <MySnackbarContentWrapper
@@ -148,3 +158,5 @@ class CustomizedSnackbars extends React.Component {
 }
 
 export default withStyles(styles2)(withRouter(CustomizedSnackbars));
+
+
