@@ -62,22 +62,20 @@ const VolunteerDashboard = props => {
       <TripleColumn>
         {topTab === "overview" && (
           <>
-            <SmallColumns>
-              <SearchCard
-                user_id={user_id}
-                List={TrainingSeriesOverview}
-                containerTourNum="2"
-                section="Training Series"
-              />
-              <Divider />
-              <SearchCard
-                user_id={user_id}
-                List={VolunteerClassTab}
-                containerTourNum="1"
-                section="Classes"
-                //headerTourNum={["3", "3"]}
-              />
-            </SmallColumns>
+            <SearchCard
+              user_id={user_id}
+              List={TrainingSeriesOverview}
+              containerTourNum="2"
+              section="Training Series"
+            />
+            <Divider />
+            <SearchCard
+              user_id={user_id}
+              List={VolunteerClassTab}
+              containerTourNum="1"
+              section="Classes"
+              //headerTourNum={["3", "3"]}
+            />
           </>
         )}
 
