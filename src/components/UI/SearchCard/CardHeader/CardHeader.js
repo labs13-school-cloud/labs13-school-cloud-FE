@@ -8,7 +8,15 @@ import Select from "@material-ui/core/Select";
 import { styles } from "./styles.js";
 
 function CardHeader(props) {
-  const { title, tour, classes, searchHook, adminVolunteerOverview, setVolunteerFilter, volunteerFilter } = props;
+  const {
+    title,
+    tour,
+    classes,
+    searchHook,
+    adminVolunteerOverview,
+    setVolunteerFilter,
+    volunteerFilter,
+  } = props;
   const [isSearching, setIsSearching] = useState(!!props.isSearching);
   const [search, setSearch] = searchHook;
 
@@ -29,8 +37,7 @@ function CardHeader(props) {
                   native
                   className={classes.selection}
                   value={volunteerFilter}
-                  onChange={(e) => setVolunteerFilter(e.target.value)}
-                >
+                  onChange={e => setVolunteerFilter(e.target.value)}>
                   <option value={"filter"}>Filter</option>
                   <option value={"approved"}>Approved</option>
                   <option value={"unapproved"}>Unapproved</option>
@@ -44,20 +51,19 @@ function CardHeader(props) {
               size="small"
               aria-label="Add"
               className={classes.fab}
-              onClick={e => toggleSearch(e)}
-            >
+              onClick={e => toggleSearch(e)}>
               <i className="material-icons">search</i>
             </Fab>
           )}
-          {/* <Fab
-            data-tour={tour ? tour[1] : ""}
-            size="small"
-            aria-label="Add"
-            className={classes.fab}
-            onClick={() => add()}
-          >
-            <i className="material-icons">add</i>
-          </Fab> */}
+          {props.section !== "Volunteers" && (
+            <Fab
+              data-tour={tour ? tour[1] : ""}
+              size="small"
+              aria-label="Add"
+              className={classes.fab}>
+              <i className="material-icons">add</i>
+            </Fab>
+          )}
         </div>
       </div>
       <div>
@@ -74,7 +80,7 @@ function CardHeader(props) {
                 <InputAdornment position="start">
                   <i className="material-icons">search</i>
                 </InputAdornment>
-              )
+              ),
             }}
           />
         )}
