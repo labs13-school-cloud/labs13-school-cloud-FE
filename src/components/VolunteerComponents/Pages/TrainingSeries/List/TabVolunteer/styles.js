@@ -32,6 +32,13 @@ export const styles = () => ({
     fontSize: "1.2rem",
     marginTop: "9rem",
     color: "grey"
+  },
+  links: {
+    "&:hover": {
+      color: "#2699FB",
+      cursor: "pointer",
+      textDecoration: "none"
+    }
   }
 });
 

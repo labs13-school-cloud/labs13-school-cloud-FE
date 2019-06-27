@@ -49,6 +49,7 @@ function TabVolunteer({
                       <Typography variant="h6">
                         {" "}
                         <Link
+                          className={classes.links}
                           onClick={e => setTrainingSeries(training_series_id)}
                         >
                           {title}
