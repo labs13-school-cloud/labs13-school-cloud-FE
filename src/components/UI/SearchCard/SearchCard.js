@@ -10,7 +10,7 @@ import filter from "./filter.js";
 import Pagination from "material-ui-flat-pagination";
 import { withStyles } from "@material-ui/core/styles";
 import { Paper } from "@material-ui/core/";
-import { MessageContainer, styles } from "./styles.js";
+import { styles } from "./styles.js";
 
 function SearchCard(props) {
   const [itemCount, setItemCount] = useState(0);
@@ -25,7 +25,6 @@ function SearchCard(props) {
     containerTourNum,
     headerTourNum,
     section,
-    handleAdd,
     history,
     adminVolunteerOverview,
     topTab

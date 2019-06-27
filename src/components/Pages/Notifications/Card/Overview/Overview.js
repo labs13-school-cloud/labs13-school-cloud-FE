@@ -94,3 +94,4 @@ export default connect(
   mapStateToProps,
   { getNotifications }
 )(withStyles(styles)(Overview));
+

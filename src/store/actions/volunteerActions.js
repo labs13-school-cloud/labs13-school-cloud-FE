@@ -15,7 +15,7 @@ export const  getVolunteers  = () => dispatch => {
     axios
         .get(`${baseUrl}/users`)
         .then(res => {
-            console.log("res", res)
+            // console.log("res", res)
             dispatch({ 
                 type: GET_VOLUNTEERS_SUCCESS, 
                 payload: res.data.users

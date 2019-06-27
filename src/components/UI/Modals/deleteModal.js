@@ -152,7 +152,7 @@ class TrainingSeriesModal extends React.Component {
     const { classes } = this.props;
 
     return (
-      <div>
+      <>
         {this.handleDisplayType()}
 
         <Modal
@@ -175,7 +175,7 @@ class TrainingSeriesModal extends React.Component {
             </Button>
           </Paper>
         </Modal>
-      </div>
+      </>
     );
   }
 }

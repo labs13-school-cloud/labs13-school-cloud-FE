@@ -33,17 +33,11 @@ function Tab({
     history.push(`/home/training-series/${id}`);
   };
 
-  // Removes Training Series from database
-  const removeTrainingSeries = id => {
-    deleteTrainingSeries(activeTrainingSeries.id);
-    history.push(`/home`);
-  };
   // Sends Admin to Edit screen for Training Series
   const editTrainingSeries = id => {
     getTrainingSeriesID(id);
     history.push(`/home/training-series/${id}/edit`);
   };
-  const [trainingFilter, setTrainingFilter] = useState("filter");
   return (
     <>
       {getFiltered(trainingSeries).map(({ id, title, subject, name }) => {

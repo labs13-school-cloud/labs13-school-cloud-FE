@@ -63,12 +63,10 @@ export const getTrainingSeries = () => dispatch => {
   axios
     .get(`${process.env.REACT_APP_API}/api/training-series`)
     .then(res =>
-      dispatch(
-        {
-          type: GET_TRAINING_SERIES_SUCCESS,
-          payload: res.data.trainingSeries
-        },
-      )
+      dispatch({
+        type: GET_TRAINING_SERIES_SUCCESS,
+        payload: res.data.trainingSeries
+      })
     )
 
     .catch(err => dispatch({ type: GET_TRAINING_SERIES_FAIL, error: err }));
@@ -94,19 +92,18 @@ export const addTrainingSeries = trainingSeriesData => dispatch => {
 
 export const editTrainingSeries = (id, trainingSeriesData) => dispatch => {
   dispatch({ type: EDIT_TRAINING_SERIES_START });
-  console.log(id)
-  console.log(trainingSeriesData)
+  console.log(id);
+  console.log(trainingSeriesData);
   axios
     .put(
       `${process.env.REACT_APP_API}/api/training-series/${id}`,
       trainingSeriesData
     )
     .then(res => {
-      console.log('fires')
       dispatch({
         type: EDIT_TRAINING_SERIES_SUCCESS,
         payload: { id, trainingSeriesData }
-      })
+      });
     })
     .catch(err => dispatch({ type: EDIT_TRAINING_SERIES_FAIL, error: err }));
 };
@@ -134,13 +131,10 @@ export const getTrainingSeriesID = trainingSeriesID => dispatch => {
   axios
     .get(`${process.env.REACT_APP_API}/api/training-series/${trainingSeriesID}`)
     .then(res =>
-      dispatch(
-        {
-          type: GET_TRAINING_SERIES_ID_SUCCESS,
-          payload: res.data.trainingSeries
-        },
-        console.log("From Actions", res.data.trainingSeries)
-      )
+      dispatch({
+        type: GET_TRAINING_SERIES_ID_SUCCESS,
+        payload: res.data.trainingSeries
+      })
     )
     .catch(err => dispatch({ type: GET_TRAINING_SERIES_FAIL, error: err }));
 };
@@ -157,13 +151,10 @@ export const getTrainingSeriesForVolunteer = trainingSeriesID => dispatch => {
       }/api/training-series/${trainingSeriesID}/volunteers`
     )
     .then(res =>
-      dispatch(
-        {
-          type: GET_VOLUNTEERS_FOR_TRAINING_SERIES_SUCCESS,
-          payload: res.data.volunteers
-        },
-        console.log("From Actions", res.data)
-      )
+      dispatch({
+        type: GET_VOLUNTEERS_FOR_TRAINING_SERIES_SUCCESS,
+        payload: res.data.volunteers
+      })
     )
     .catch(err =>
       dispatch({ type: GET_VOLUNTEERS_FOR_TRAINING_SERIES_FAIL, error: err })
@@ -181,13 +172,10 @@ export const addVolunteerToTrainingSeries = (id, user_id) => dispatch => {
       user_id
     })
     .then(res =>
-      dispatch(
-        {
-          type: ADD_VOLUNTEERS_FOR_TRAINING_SERIES_SUCCESS,
-          payload: res.data.volunteers
-        },
-        console.log("From Actions", id, user_id)
-      )
+      dispatch({
+        type: ADD_VOLUNTEERS_FOR_TRAINING_SERIES_SUCCESS,
+        payload: res.data.volunteers
+      })
     )
     .catch(err =>
       dispatch({ type: ADD_VOLUNTEERS_FOR_TRAINING_SERIES_FAIL, error: err })
@@ -209,13 +197,10 @@ export const deleteVolunteerFromTrainingSeries = ({
       }/api/training-series/${id}/volunteers/${user_id}`
     )
     .then(res =>
-      dispatch(
-        {
-          type: DELETE_VOLUNTEERS_FOR_TRAINING_SERIES_SUCCESS,
-          payload: user_id
-        },
-        console.log("From Actions-Delete", id, user_id)
-      )
+      dispatch({
+        type: DELETE_VOLUNTEERS_FOR_TRAINING_SERIES_SUCCESS,
+        payload: user_id
+      })
     )
     .catch(err =>
       dispatch({ type: DELETE_VOLUNTEERS_FOR_TRAINING_SERIES_FAIL, error: err })
@@ -232,16 +217,10 @@ export const getVolunteerTrainingSeries = user_id => dispatch => {
       `${process.env.REACT_APP_API}/api/training-series/volunteers/${user_id}`
     )
     .then(res =>
-      dispatch(
-        {
-          type: GET_TRAINING_SERIES_FOR_VOLUNTEER_SUCCESS,
-          payload: res.data.trainingSeries
-        },
-        console.log(
-          "From Actions-Get volunteer's training series",
-          res.data.trainingSeries
-        )
-      )
+      dispatch({
+        type: GET_TRAINING_SERIES_FOR_VOLUNTEER_SUCCESS,
+        payload: res.data.trainingSeries
+      })
     )
     .catch(err =>
       dispatch({ type: GET_TRAINING_SERIES_FOR_VOLUNTEER_FAIL, error: err })
