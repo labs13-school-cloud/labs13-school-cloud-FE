@@ -23,3 +23,8 @@ export const capitalizeWord = word => {
     .map(word => word.charAt(0).toUpperCase() + word.slice(1))
     .join(" ");
 };
+
+export const handleCloseFinished = (initialState, modalStateFunc, stateFunc) => {
+  stateFunc(initialState);
+  modalStateFunc(false);
+};

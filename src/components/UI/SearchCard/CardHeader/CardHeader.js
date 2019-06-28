@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { connect } from 'react-redux';
 
 import { Typography, Fab, TextField, InputAdornment } from "@material-ui/core/";
 
@@ -17,7 +18,10 @@ function CardHeader(props) {
     adminVolunteerOverview,
     setVolunteerFilter,
     volunteerFilter,
+    user,
+    section
   } = props;
+
   const [isSearching, setIsSearching] = useState(!!props.isSearching);
   const [search, setSearch] = searchHook;
 
@@ -57,7 +61,7 @@ function CardHeader(props) {
             </Fab>
           )}
           {/* Code below keeps modal button from showing up on volunteers */}
-          {props.section !== "Volunteers" && (
+          {section !== "Volunteers" && user.role !== "volunteer" && (
               <AddModal2
                 titleForModal={props.titleForModal}
                 fields={props.fields}
@@ -88,4 +92,14 @@ function CardHeader(props) {
     </>
   );
 }
-export default withStyles(styles)(CardHeader);
+
+const mapStateToProps = state => {
+    return {
+        user: state.userReducer.userProfile.user
+    }
+}
+
+export default connect(
+    mapStateToProps,
+    {  }
+)(withStyles(styles)(CardHeader));

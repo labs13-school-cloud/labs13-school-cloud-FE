@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
 // Helpers
-import { toCamelCase, capitalizeWord } from "./helperFunctions.js";
+import { toCamelCase, capitalizeWord, handleCloseFinished } from "./helperFunctions.js";
 
 //Styles
 import { withStyles } from "@material-ui/core/styles";
@@ -114,35 +114,6 @@ const AddModal = props => {
   const [isOpen, setIsOpen] = useState(false);
   const [state, setState] = useState(initialState);
 
-  const handleCloseAfterAdd = () => {
-    setState(initialState);
-    setIsOpen(false);
-  };
-
-  // Modify when using modal
-  const handleAdd = async () => {
-    switch (section) {
-      case "Training Series":
-        const newSeries = { ...state, user_id: user.id };
-        addTrainingSeries(newSeries);
-        handleCloseAfterAdd();
-        break;
-      case "Classes":
-        // ! Add helper that will take of renaming
-        const newClass = {
-          grade_level: state.gradeLevel,
-          subject: state.subject,
-          class_name: state.className,
-          number_of_students: state.numberOfStudents
-        };
-        addClass(newClass);
-        handleCloseAfterAdd();
-        break;
-      default:
-        break;
-    }
-  };
-
   const handleDisplayType = () => {
     switch (props.displayType) {
       case "button":
@@ -167,6 +138,31 @@ const AddModal = props => {
             <i className="material-icons">add</i>
           </Fab>
         );
+    }
+  };
+
+  // Modify when using modal
+  const handleAdd = async () => {
+    switch (section) {
+      case "Training Series":
+        const newSeries = { ...state, user_id: user.id };
+        addTrainingSeries(newSeries);
+        handleCloseFinished(initialState, setIsOpen, setState);
+        break;
+      case "Classes":
+        // ! Add helper that will take of renaming
+        const newClass = {
+          grade_level: state.gradeLevel,
+          subject: state.subject,
+          class_name: state.className,
+          number_of_students: state.numberOfStudents,
+          teacher_name: state.teacherName
+        };
+        addClass(newClass);
+        handleCloseFinished(initialState, setIsOpen, setState);
+        break;
+      default:
+        break;
     }
   };
 

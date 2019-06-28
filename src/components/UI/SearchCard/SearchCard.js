@@ -29,7 +29,9 @@ function SearchCard(props) {
     adminVolunteerOverview,
     topTab,
     fields,
-    titleForModal
+    titleForModal,
+    editFields,
+    editModalTitle
   } = props;
   const limit = props.limit || 5;
 
@@ -57,6 +59,9 @@ function SearchCard(props) {
           volunteerFilter={volunteerFilter}
           history={history}
           topTab={topTab}
+          editModalTitle={editModalTitle}
+          editFields={editFields}
+          section={section}
         />
       </Suspense>
       <div className={classes.footer}>
