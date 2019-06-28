@@ -74,6 +74,8 @@ function Dashboard(props) {
                 containerTourNum="4"
                 section="Training Series"
                 limit={6}
+                titleForModal="training series"
+                fields={["title", "subject"]}
               />
               <Divider />
               <SearchCard
@@ -81,7 +83,9 @@ function Dashboard(props) {
                 List={ClassesOverview}
                 containerTourNum="5"
                 section="Classes"
+                titleForModal="class"
                 limit={6}
+                fields={["class name", "subject", "grade level", "number of students"]}
               />
             </SmallColumns>
             <SearchCard
@@ -102,6 +106,8 @@ function Dashboard(props) {
             handleAdd={() => history.push("/home/create-training-series")}
             isSearching={false}
             limit={3}
+            titleForModal="training series"
+            fields={["title", "subject"]}
           />
         )}
  

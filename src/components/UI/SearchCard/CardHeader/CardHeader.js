@@ -6,6 +6,7 @@ import { withStyles } from "@material-ui/core/styles";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import { styles } from "./styles.js";
+import AddModal2 from 'components/UI/Modals/addModalV2.js';
 
 function CardHeader(props) {
   const {
@@ -55,14 +56,13 @@ function CardHeader(props) {
               <i className="material-icons">search</i>
             </Fab>
           )}
+          {/* Code below keeps modal button from showing up on volunteers */}
           {props.section !== "Volunteers" && (
-            <Fab
-              data-tour={tour ? tour[1] : ""}
-              size="small"
-              aria-label="Add"
-              className={classes.fab}>
-              <i className="material-icons">add</i>
-            </Fab>
+              <AddModal2
+                titleForModal={props.titleForModal}
+                fields={props.fields}
+                section={props.section}
+              />
           )}
         </div>
       </div>

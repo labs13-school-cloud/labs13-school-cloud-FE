@@ -42,7 +42,6 @@ export const addClass = classList => dispatch => {
         .then(res => {
             dispatch({ type: ADD_CLASS_SUCCESS, payload: res.data.newClass });
         })
-        .then(() => history.push({ pathname: "/home", state: { success: true } }))
         .catch(err => dispatch({ type: ADD_CLASS_FAILURE, payload: err }));
 };
 
