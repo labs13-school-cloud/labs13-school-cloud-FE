@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 //Loading SVG that gets displayed
 import Progress from "components/UI/Progress/ProgressCircle";

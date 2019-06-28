@@ -17,14 +17,13 @@ import { ListStyles, styles } from "./styles.js";
 function Overview(props) {
   const {
     getFiltered,
-    user_id,
     getTrainingSeries,
     getAllMessages,
     trainingSeries,
     classes,
-    history,
+    history
   } = props;
-  
+
   useEffect(() => {
     getTrainingSeries();
     getAllMessages();
@@ -40,16 +39,19 @@ function Overview(props) {
               secondary={`Subject: ${series.subject}`}
               onClick={e => history.push(`/home/training-series/${series.id}`)}
             />
-            <div style={{ width: "65px", display: "flex", justifyContent: "space-between" }}>
+            <div
+              style={{
+                width: "65px",
+                display: "flex",
+                justifyContent: "space-between"
+              }}
+            >
               <DeleteModal
                 deleteType="trainingSeries"
                 trainingSeriesId={series.id}
                 className={`material-icons ${classes.icons}`}
               />
-              <EditModal
-                trainingSeries={series}
-                updateType="trainingSeries"
-              />
+              <EditModal trainingSeries={series} updateType="trainingSeries" />
             </div>
           </ListItem>
         );
@@ -62,7 +64,7 @@ const mapStateToProps = state => {
   return {
     trainingSeries: state.trainingSeriesReducer.trainingSeries,
     messages: state.messagesReducer.messages
-  }
+  };
 };
 
 export default connect(

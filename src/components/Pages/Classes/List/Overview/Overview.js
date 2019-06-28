@@ -14,8 +14,9 @@ import { ListStyles } from "./styles.js";
 import { Typography } from "@material-ui/core/";
 
 function Overview(props) {
+  const { getClassList } = props;
   useEffect(() => {
-    props.getClassList();
+    getClassList();
   }, [getClassList]);
 
   return (

@@ -6,8 +6,8 @@ import { connect } from  "react-redux";
 
 import history from "history.js";
 
-import EditModal from "../../../../../components/UI/Modals/editModal"
-import DeleteModal from "../../../../UI/Modals/deleteModal";
+import EditModal from "components/UI/Modals/editModal"
+import DeleteModal from "components/UI/Modals/deleteModal";
 
 import { getVolunteers, addVolunteer } from "store/actions/volunteerActions";
 

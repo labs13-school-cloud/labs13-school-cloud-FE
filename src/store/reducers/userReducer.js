@@ -8,6 +8,9 @@ import {
   DELETE_USER_START,
   DELETE_USER_SUCCESS,
   DELETE_USER_FAIL,
+  GET_ALL_ADMIN_START,
+  GET_ALL_ADMIN_SUCCESS,
+  GET_ALL_ADMIN_FAIL
 } from "../actions/userActions";
 import {
   POST_SUBSCRIBE_START,
@@ -33,12 +36,13 @@ import {
   EDIT_VOLUNTEERS_FAILURE,
   GET_VOLUNTEER_ID_START,
   GET_VOLUNTEER_ID_SUCCESS,
-  GET_VOLUNTEER_ID_FAILURE,
-} from "store/actions/volunteerActions"
+  GET_VOLUNTEER_ID_FAILURE
+} from "store/actions/volunteerActions";
 
 const initialState = {
   userProfile: [],
   volunteers: [],
+  admin: [],
   singleVolunteer: {},
   volunteerId: "",
   error: "",
@@ -51,7 +55,7 @@ const initialState = {
   newUser: true,
   isDeleting: false,
   deleteSuccess: false,
-  deleteFailed: false,
+  deleteFailed: false
 };
 
 //returned stripe ids, currently only test versions should be passed back unless App wants to accept real money
@@ -108,10 +112,27 @@ const userReducer = (state = initialState, action) => {
     case GET_VOLUNTEERS_SUCCESS:
       return {
         ...state,
-        volunteers: action.payload,
-
+        volunteers: action.payload
       };
     case GET_VOLUNTEERS_FAILURE:
+      return {
+        ...state,
+        isLoading: false,
+        doneLoading: false,
+        error: ""
+      };
+    // Get All Admin
+    case GET_ALL_ADMIN_START:
+      return {
+        ...state,
+        error: ""
+      };
+    case GET_ALL_ADMIN_SUCCESS:
+      return {
+        ...state,
+        admin: action.payload
+      };
+    case GET_ALL_ADMIN_FAIL:
       return {
         ...state,
         isLoading: false,
@@ -140,7 +161,7 @@ const userReducer = (state = initialState, action) => {
         ...state,
         isLoading: false,
         error: action.payload
-      }
+      };
     case EDIT_VOLUNTEERS_START:
       return {
         ...state,
@@ -149,13 +170,13 @@ const userReducer = (state = initialState, action) => {
       };
     case EDIT_VOLUNTEERS_SUCCESS: // v = volunteers
       const updatedVolunteer = state.volunteers.map(v => {
-        if(v.id === action.payload.id) {
+        if (v.id === action.payload.id) {
           return {
             ...v,
             v: action.payload
-          }
+          };
         } else return v;
-      })
+      });
       return {
         ...state,
         isEditing: false,
@@ -167,26 +188,26 @@ const userReducer = (state = initialState, action) => {
         ...state,
         isEditing: false,
         error: action.payload
-      }
-    case GET_VOLUNTEER_ID_START: 
+      };
+    case GET_VOLUNTEER_ID_START:
       return {
         ...state,
         isLoading: true,
         error: ""
-      }
+      };
     case GET_VOLUNTEER_ID_SUCCESS:
       return {
         ...state,
         singleVolunteer: action.payload,
         isLoading: false,
         error: ""
-      }
-    case GET_VOLUNTEER_ID_FAILURE: 
+      };
+    case GET_VOLUNTEER_ID_FAILURE:
       return {
         ...state,
         isLoading: false,
         error: action.payload
-      }
+      };
     case EDIT_USER_START:
       return {
         ...state,
@@ -328,31 +349,33 @@ const userReducer = (state = initialState, action) => {
         }
       };
 
-      case DELETE_USER_SUCCESS: 
-        return  {
-          ...state,
-          volunteers: [
-            ...state.volunteers.filter(volunteer => volunteer.id !== action.payload)
-          ],
-          status: {
-            ...state.status,
-            isDeleting: false,
-            deleteSuccess: true,
-            deleteFailed: false
-          }
-        };
+    case DELETE_USER_SUCCESS:
+      return {
+        ...state,
+        volunteers: [
+          ...state.volunteers.filter(
+            volunteer => volunteer.id !== action.payload
+          )
+        ],
+        status: {
+          ...state.status,
+          isDeleting: false,
+          deleteSuccess: true,
+          deleteFailed: false
+        }
+      };
 
-      case DELETE_USER_FAIL:
-        return {
-          ...state,
-          status: {
-            ...state.status,
-            isDeleting: false,
-            deleteSuccess: false,
-            deleteFailed: true
-          },
-          error: action.payload
-        };
+    case DELETE_USER_FAIL:
+      return {
+        ...state,
+        status: {
+          ...state.status,
+          isDeleting: false,
+          deleteSuccess: false,
+          deleteFailed: true
+        },
+        error: action.payload
+      };
 
     default:
       return state;

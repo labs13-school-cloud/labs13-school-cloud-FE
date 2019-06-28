@@ -25,20 +25,23 @@ export const styles = () => ({
     marginBottom: 15
   },
   selection: {
-    margin: "0 10px"
+    width: "20%",
+    display: "flex",
+    marginLeft: "75%"
+  },
+  icons: {
+    color: "#808080",
+    marginLeft: "5px",
+    cursor: "pointer",
+    "&:hover": {
+      color: "#2699FB"
+    }
   },
   noMessage: {
     textAlign: "center",
     fontSize: "1.2rem",
-    marginTop: "9rem",
+    margin: "4rem",
     color: "grey"
-  },
-  links: {
-    "&:hover": {
-      color: "#2699FB",
-      cursor: "pointer",
-      textDecoration: "none"
-    }
   }
 });
 
@@ -47,11 +50,31 @@ export const Wrapper = styled(Paper)`
   padding: 10px;
   margin: 10px auto;
   max-width: 1200px;
+  &:hover {
+    background: #f8f8f8;
+  }
+`;
+
+export const MessageContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: lightgray;
 `;
 
 export const HeaderWrapper = styled.div`
   display: flex;
   align-items: center;
+`;
+
+export const Redirect = styled.a`
+  color: "inherit";
+  &:hover {
+    text-decoration: "none";
+    color: #4169e0;
+    cursor: pointer;
+  }
 `;
 
 export const Series = styled(Paper)`

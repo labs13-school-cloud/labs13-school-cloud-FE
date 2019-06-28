@@ -5,7 +5,7 @@ import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
-import { styles, ContactContainer } from "../../Pages/LandingPage/Team/styles";
+import { styles, ContactContainer } from "components/Pages/LandingPage/Team/styles";
 
 const ContactModal = props => {
   const { classes } = props;

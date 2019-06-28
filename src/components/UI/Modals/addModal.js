@@ -72,6 +72,9 @@ const AddModal = props => {
       case "classes":
         props.addClass(classList);
         setIsOpen(false);
+        break;
+      default:
+        break;
     }
   };
 
@@ -130,14 +133,14 @@ const AddModal = props => {
     }
   };
 
-  const handleValue = property => {
-    switch (props.addType) {
-      case "classes":
-        return classList[property];
-      default:
-        break;
-    }
-  };
+  // const handleValue = property => {
+  //   switch (props.addType) {
+  //     case "classes":
+  //       return classList[property];
+  //     default:
+  //       break;
+  //   }
+  // };
 
   const { classes } = props;
 
