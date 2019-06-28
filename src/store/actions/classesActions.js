@@ -44,14 +44,13 @@ export const getClassList = () => dispatch => {
 
 //Add class
 export const addClass = classList => dispatch => {
-  dispatch({ type: ADD_CLASS_START });
-  axios
-    .post(`${baseUrl}/classes`, classList)
-    .then(res => {
-      dispatch({ type: ADD_CLASS_SUCCESS, payload: res.data.newClass });
-    })
-    .then(() => history.push({ pathname: "/home", state: { success: true } }))
-    .catch(err => dispatch({ type: ADD_CLASS_FAILURE, payload: err }));
+    dispatch({ type: ADD_CLASS_START });
+    axios
+        .post(`${baseUrl}/classes`, classList)
+        .then(res => {
+            dispatch({ type: ADD_CLASS_SUCCESS, payload: res.data.newClass });
+        })
+        .catch(err => dispatch({ type: ADD_CLASS_FAILURE, payload: err }));
 };
 
 //Edit class

@@ -6,10 +6,10 @@ import { getAllResponses, getClassList } from "store/actions";
 import SearchCard from "components/UI/SearchCard/";
 import TrainingSeriesOverview from "components/Pages/TrainingSeries/List/Overview";
 import TrainingSeriesTab from "components/Pages/TrainingSeries/List/Tab";
-import ClassListTab from "components/Pages/Classes/List/Overview"
+import ClassListTab from "components/Pages/Classes/List/Overview";
 import ClassesOverview from "components/Pages/Classes/List/AdminOverview";
 import NotificationsCard from "components/Pages/Notifications/Card";
-import VolunteerOverview from "components/Pages/Volunteers/Overview"
+import VolunteerOverview from "components/Pages/Volunteers/Overview";
 import NotificationsOverview from "components/Pages/Notifications/Card/Overview/Overview.js";
 import Responses from "components/Pages/Notifications/Responses";
 import TabNavigation from "./helpers/TabNavigation.js";
@@ -21,7 +21,7 @@ import {
   Divider,
   DashWrapper,
   MobileNav,
-  DesktopNav
+  DesktopNav,
 } from "./styles.js";
 
 function Dashboard(props) {
@@ -32,7 +32,7 @@ function Dashboard(props) {
     history,
     responses,
     getAllResponses: responsesFromProps,
-    getClassList
+    getClassList,
   } = props;
 
   useEffect(() => {
@@ -73,6 +73,10 @@ function Dashboard(props) {
                 containerTourNum="4"
                 section="Training Series"
                 limit={6}
+                titleForModal="training series"
+                fields={["title", "subject"]}
+                editFields={["title", "subject"]}
+                editModalTitle="training series"
               />
               <Divider />
               <SearchCard
@@ -81,6 +85,22 @@ function Dashboard(props) {
                 containerTourNum="5"
                 section="Classes"
                 limit={6}
+                titleForModal="class"
+                fields={[
+                  "class name",
+                  "subject",
+                  "grade level",
+                  "number of students",
+                  "teacher name",
+                ]}
+                editFields={[
+                  "class name",
+                  "subject",
+                  "grade level",
+                  "teacher name",
+                  "number of students",
+                ]}
+                editModalTitle="class"
               />
             </SmallColumns>
             <SearchCard
@@ -101,15 +121,35 @@ function Dashboard(props) {
             handleAdd={() => history.push("/home/create-training-series")}
             isSearching={false}
             limit={3}
+            titleForModal="training series"
+            fields={["title", "subject"]}
+            editFields={["title", "subject"]}
+            editModalTitle="training series"
           />
         )}
- 
+
         {topTab === "classes" && (
           <SearchCard
             List={ClassListTab}
             section="Classes"
             handleAdd={() => history.push("/home/create-class")}
             isSearching={false}
+            titleForModal="class"
+            limit={10}
+            fields={[
+              "class name",
+              "subject",
+              "grade level",
+              "number of students",
+            ]}
+            editFields={[
+              "class name",
+              "subject",
+              "grade level",
+              "teacher name",
+              "number of students",
+            ]}
+            editModalTitle="class"
           />
         )}
 
@@ -135,17 +175,17 @@ function Dashboard(props) {
         )}
         {topTab === "responses" && (
           <Responses history={props.history} user_id={user_id} />
-        )}  
+        )}
       </TripleColumn>
     </DashWrapper>
   );
 }
 
 const mapStateToProps = state => ({
-  responses: state.responsesReducer.responses
+  responses: state.responsesReducer.responses,
 });
 
 export default connect(
   mapStateToProps,
-  { getAllResponses, getClassList }
+  { getAllResponses, getClassList },
 )(Dashboard);

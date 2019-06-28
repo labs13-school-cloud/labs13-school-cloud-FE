@@ -27,7 +27,11 @@ function SearchCard(props) {
     section,
     history,
     adminVolunteerOverview,
-    topTab
+    topTab,
+    fields,
+    titleForModal,
+    editFields,
+    editModalTitle
   } = props;
   const limit = props.limit || 5;
 
@@ -42,6 +46,9 @@ function SearchCard(props) {
         setVolunteerFilter={setVolunteerFilter}
         volunteerFilter={volunteerFilter}
         adminVolunteerOverview={adminVolunteerOverview}
+        section={section}
+        fields={fields}
+        titleForModal={titleForModal}
       />
       <Suspense fallback={<div />}>
         <List
@@ -52,6 +59,9 @@ function SearchCard(props) {
           volunteerFilter={volunteerFilter}
           history={history}
           topTab={topTab}
+          editModalTitle={editModalTitle}
+          editFields={editFields}
+          section={section}
         />
       </Suspense>
       <div className={classes.footer}>

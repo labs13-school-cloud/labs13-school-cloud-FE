@@ -7,7 +7,7 @@ export const styles = theme => ({
   },
   columnHeader: {
     display: "flex",
-    justifyContent: "center",
+    justifyContent: "space-between",
     alignItems: "center"
   },
   icons: {

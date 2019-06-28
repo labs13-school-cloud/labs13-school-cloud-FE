@@ -1,19 +1,21 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { withRouter } from "react-router-dom";
 
 import { connect } from "react-redux";
 import { getClassList, getActiveClass } from "store/actions";
-import InfoPopup from "components/UI/InfoPopup/InfoPopup.js";
+// import InfoPopup from "components/UI/InfoPopup/InfoPopup.js";
 
 import { withStyles } from "@material-ui/core/styles";
-import { Paper, Divider, Typography, Grid, Button } from "@material-ui/core/";
+import { Typography, Grid } from "@material-ui/core/";
 
-import { styles, PageContainer, Wrapper } from "./styles.js";
+import { styles, Wrapper } from "./styles.js";
 
 function SinglePage(props) {
+  const { getActiveClass, match } = props
+
   useEffect(() => {
-    props.getActiveClass(props.match.params.id);
-  }, [props.getActiveClass]);
+    getActiveClass(match.params.id);
+  }, [getActiveClass, match]);
   console.log(props);
   const {
     id,

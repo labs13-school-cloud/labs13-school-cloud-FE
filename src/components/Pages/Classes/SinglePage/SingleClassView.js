@@ -13,7 +13,7 @@ import {
 } from "store/actions/classesActions";
 
 import { withStyles } from "@material-ui/core/styles";
-import { Typography, Grid, Button, Link } from "@material-ui/core/";
+import { Typography, Grid, Button } from "@material-ui/core/";
 
 import { styles, Wrapper } from "./styles.js";
 

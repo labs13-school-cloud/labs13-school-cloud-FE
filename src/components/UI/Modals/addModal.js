@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 
 //Styles
 import { withStyles } from "@material-ui/core/styles";
+import { Fab } from "@material-ui/core";
 import Modal from "@material-ui/core/Modal";
 import Button from "@material-ui/core/Button";
 import { Typography, Paper, TextField } from "@material-ui/core";
@@ -19,7 +20,7 @@ function getModalStyle() {
   return {
     top: `${top}%`,
     left: `${left}%`,
-    transform: `translate(-${top}%, -${left}%)`
+    transform: `translate(-${top}%, -${left}%)`,
   };
 }
 
@@ -35,38 +36,41 @@ const styles = theme => ({
     outline: "none",
     display: "flex",
     flexDirection: "column",
-    justifyContent: "space-between"
+    justifyContent: "space-between",
   },
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
-    width: 200
+    width: 200,
   },
   dense: {
-    marginTop: 19
+    marginTop: 19,
   },
   menu: {
-    width: 200
+    width: 200,
   },
   button: {
-    marginTop: "20px"
+    marginTop: "20px",
   },
   icons: {
     display: "block",
     width: 20,
     color: "gray",
     cursor: "pointer",
-    "&:hover": { color: "#2699FB" }
-  }
+    "&:hover": { color: "#2699FB" },
+  },
 });
 
 const AddModal = props => {
   // console.log(props)
   const [isOpen, setIsOpen] = useState(false);
   const [classList, setClassList] = useState({
-    ...props.classList
+    ...props.classList,
   });
-  // console.log('test', classList)
+  const [trainingSeries, setTrainingSeries] = useState({
+      ...props.trainingSeries
+  })
+
   const handleAdd = () => {
     switch (props.addType) {
       case "classes":
@@ -83,6 +87,9 @@ const AddModal = props => {
       case "classes":
         setClassList({ ...classList, [e.target.name]: e.target.value });
         break;
+      case "trainingSeries":
+        setTrainingSeries({ ...trainingSeries, [e.target.name]: e.target.value });
+        break;
       default:
         break;
     }
@@ -95,8 +102,7 @@ const AddModal = props => {
           <Button
             variant="outlined"
             style={{ marginLeft: 10 }}
-            onClick={() => setIsOpen(true)}
-          >
+            onClick={() => setIsOpen(true)}>
             Add
           </Button>
         );
@@ -105,12 +111,13 @@ const AddModal = props => {
       default:
         const { classes } = props;
         return (
-          <i
-            onClick={() => setIsOpen(true)}
-            className={`material-icons ${classes.icons}`}
-          >
-            add_circle
-          </i>
+            <Fab
+              size="small"
+              aria-label="Add"
+              onClick={() => setIsOpen(true)}
+              className={classes.fab}>
+              <i className="material-icons">add</i>
+            </Fab>
         );
     }
   };
@@ -119,6 +126,8 @@ const AddModal = props => {
     switch (props.addType) {
       case "classes":
         return "Class";
+      case "trainingSeries":
+        return "Training Series";
       default:
         break;
     }
@@ -128,19 +137,23 @@ const AddModal = props => {
     switch (props.addType) {
       case "classes":
         return Object.keys(classList);
+      case "trainingSeries":
+        return Object.keys(trainingSeries)
       default:
         break;
     }
   };
 
-  // const handleValue = property => {
-  //   switch (props.addType) {
-  //     case "classes":
-  //       return classList[property];
-  //     default:
-  //       break;
-  //   }
-  // };
+//   const handleValue = property => {
+//     switch (props.addType) {
+//       case "classes":
+//         return classList[property];
+//       case "trainingSeries":
+//         return trainingSeries[property]
+//       default:
+//         break;
+//     }
+//   };
 
   const { classes } = props;
 
@@ -154,8 +167,7 @@ const AddModal = props => {
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
         open={isOpen}
-        onClose={() => setIsOpen(false)}
-      >
+        onClose={() => setIsOpen(false)}>
         <Paper style={getModalStyle()} className={classes.paper}>
           <Typography variant="h4">Add A {handleTitle()}</Typography>
           {handleMap().map((property, index) => {
@@ -180,8 +192,7 @@ const AddModal = props => {
             onClick={handleAdd}
             type="submit"
             variant="contained"
-            className={classes.button}
-          >
+            className={classes.button}>
             Add
           </Button>
         </Paper>
@@ -191,12 +202,12 @@ const AddModal = props => {
 };
 
 AddModal.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
 };
 
 export default connect(
   null,
   {
-    addClass
-  }
+    addClass,
+  },
 )(withRouter(withStyles(styles)(AddModal)));

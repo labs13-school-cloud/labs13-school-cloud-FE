@@ -45,8 +45,8 @@ function Overview(props) {
 
 				return (
 					<ListStyles key={id} component="li" className={classes.listitem}>
-						<Typography style={{ width: "100%" }}>
-							<div style={{ cursor: "pointer" }}>
+						
+							<div style={{ cursor: "pointer", width: "100%" }}>
 								<Typography
 									variant="subtitle1"
 									style={{ display: "flex", justifyContent: "space-between" }}>
@@ -70,7 +70,7 @@ function Overview(props) {
 									</Typography>
 								</div>
 							</div>
-						</Typography>
+						
 					</ListStyles>
 				);
 			})}

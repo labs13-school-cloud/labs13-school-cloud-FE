@@ -18,9 +18,7 @@ const RolesRenderHOC = ComponentToRender => {
         return <ComponentToRender {...this.props} volunteerRole={"admin"} />;
       } else if (this.props.user.role === "volunteer") {
         // Will return Volunteer Dashboard
-        return (
-          <ComponentToRender {...this.props} volunteerRole={"volunteer"} />
-        );
+        return <ComponentToRender {...this.props} volunteerRole={"volunteer"} />;
       }
     }
   }

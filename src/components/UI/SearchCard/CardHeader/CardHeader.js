@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
 
 import { Typography, Fab, TextField, InputAdornment } from "@material-ui/core/";
 
@@ -6,9 +7,21 @@ import { withStyles } from "@material-ui/core/styles";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import { styles } from "./styles.js";
+import AddModal2 from "components/UI/Modals/addModalV2.js";
 
 function CardHeader(props) {
-  const { title, tour, classes, searchHook, adminVolunteerOverview, setVolunteerFilter, volunteerFilter } = props;
+  const {
+    title,
+    tour,
+    classes,
+    searchHook,
+    adminVolunteerOverview,
+    setVolunteerFilter,
+    volunteerFilter,
+    user,
+    section,
+  } = props;
+
   const [isSearching, setIsSearching] = useState(!!props.isSearching);
   const [search, setSearch] = searchHook;
 
@@ -29,8 +42,7 @@ function CardHeader(props) {
                   native
                   className={classes.selection}
                   value={volunteerFilter}
-                  onChange={(e) => setVolunteerFilter(e.target.value)}
-                >
+                  onChange={e => setVolunteerFilter(e.target.value)}>
                   <option value={"filter"}>Filter</option>
                   <option value={"approved"}>Approved</option>
                   <option value={"unapproved"}>Unapproved</option>
@@ -44,20 +56,19 @@ function CardHeader(props) {
               size="small"
               aria-label="Add"
               className={classes.fab}
-              onClick={e => toggleSearch(e)}
-            >
+              onClick={e => toggleSearch(e)}>
               <i className="material-icons">search</i>
             </Fab>
           )}
-          {/* <Fab
-            data-tour={tour ? tour[1] : ""}
-            size="small"
-            aria-label="Add"
-            className={classes.fab}
-            onClick={() => add()}
-          >
-            <i className="material-icons">add</i>
-          </Fab> */}
+          {/* Code below keeps modal button from showing up on volunteers */}
+          {section !== "Volunteers" &&
+            (user.role !== "volunteer" && (
+              <AddModal2
+                titleForModal={props.titleForModal}
+                fields={props.fields}
+                section={props.section}
+              />
+            ))}
         </div>
       </div>
       <div>
@@ -74,7 +85,7 @@ function CardHeader(props) {
                 <InputAdornment position="start">
                   <i className="material-icons">search</i>
                 </InputAdornment>
-              )
+              ),
             }}
           />
         )}
@@ -82,4 +93,14 @@ function CardHeader(props) {
     </>
   );
 }
-export default withStyles(styles)(CardHeader);
+
+const mapStateToProps = state => {
+  return {
+    user: state.userReducer.userProfile.user,
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  {},
+)(withStyles(styles)(CardHeader));

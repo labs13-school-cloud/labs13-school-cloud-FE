@@ -2,22 +2,21 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 
-import styled from "styled-components";
+// import styled from "styled-components";
 
 import {
   getVolunteerClasses,
   getClassByID
 } from "store/actions/classesActions";
 
-import { withStyles } from "@material-ui/core/styles";
-import { ListItem, ListItemText } from "@material-ui/core/";
 import { ListStyles } from "./styles.js";
 import { Typography } from "@material-ui/core/";
 
 function Overview(props) {
+  const { getVolunteerClasses, userProfile } = props;
   useEffect(() => {
-    props.getVolunteerClasses(props.userProfile.user.id);
-  }, [props.getVolunteerClasses]);
+    getVolunteerClasses(userProfile.user.id);
+  }, [getVolunteerClasses, userProfile]);
 
   const getClassID = id => {
     props.getClassByID(id);
@@ -105,4 +104,4 @@ export default connect(
   { getVolunteerClasses, getClassByID }
 )(Overview);
 //   (withStyles(ListStyles)
-const SingleClass = styled(ListItem)``;
+// const SingleClass = styled(ListItem)``;

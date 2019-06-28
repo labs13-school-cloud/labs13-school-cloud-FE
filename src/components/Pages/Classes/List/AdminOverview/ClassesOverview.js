@@ -10,7 +10,7 @@ import { getClassList } from "store/actions";
 import { withStyles } from "@material-ui/core/styles";
 import { ListItem, ListItemText } from "@material-ui/core/";
 import DeleteModal from "components/UI/Modals/deleteModal";
-import EditModal from "components/UI/Modals/editModal";
+import EditModal2 from "components/UI/Modals/editModalV2.js";
 // Uses styles from training series overview
 import {
   ListStyles,
@@ -18,7 +18,7 @@ import {
 } from "components/Pages/TrainingSeries/List/Overview/styles.js";
 
 function ClassesOverview(props) {
-  const { getFiltered, classes, history, getClassList, classList } = props;
+  const { getFiltered, classes, history, getClassList, classList, editFields, editModalTitle, section } = props;
 
   useEffect(() => {
     getClassList();
@@ -54,9 +54,11 @@ function ClassesOverview(props) {
                 classId={classSingle.id}
                 className={`material-icons ${classes.icons}`}
               />
-              <EditModal
-                classList={classSingle}
-                updateType="classes"
+              <EditModal2
+                item={classSingle}
+                section={section}
+                editModalTitle={editModalTitle}
+                editFields={editFields}
               />
             </div>
           </ListItem>
