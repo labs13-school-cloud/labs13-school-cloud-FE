@@ -109,6 +109,7 @@ function Routes(props) {
           )}
         />
         <Route
+          exact
           path="/home/classes/:id"
           render={renderProps => (
             <SingleClassView

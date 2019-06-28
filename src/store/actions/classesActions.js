@@ -91,14 +91,10 @@ export const getClassByID = id => dispatch => {
   axios
     .get(`${baseUrl}/classes/${id}`)
     .then(res => {
-      dispatch(
-        {
-          type: GET_CLASS_ID_SUCCESS,
-          payload: res.data.id
-        },
-
-        console.log("classes id", res.data.id)
-      );
+      dispatch({
+        type: GET_CLASS_ID_SUCCESS,
+        payload: res.data.id
+      });
     })
     .catch(err => dispatch({ type: GET_CLASS_ID_FAIL, error: err }));
 };
@@ -109,10 +105,10 @@ export const getVolunteerClasses = user_id => dispatch => {
   axios
     .get(`${baseUrl}/classes/volunteers/${user_id}`)
     .then(res => {
-      dispatch(
-        { type: GET_VOLUNTEER_CLASSES_SUCCESS, payload: res.data.classes },
-        console.log("Get classes for volunteer", res.data.classes)
-      );
+      dispatch({
+        type: GET_VOLUNTEER_CLASSES_SUCCESS,
+        payload: res.data.classes
+      });
     })
     .catch(err =>
       dispatch({ type: GET_VOLUNTEER_CLASSES_FAILURE, payload: err })
@@ -125,14 +121,10 @@ export const getActiveClass = id => dispatch => {
   axios
     .get(`${baseUrl}/classes/${id}`)
     .then(res => {
-      dispatch(
-        {
-          type: FETCH_SINGLE_CLASS_SUCCESS,
-          payload: res.data
-        },
-
-        console.log("classes info", res.data)
-      );
+      dispatch({
+        type: FETCH_SINGLE_CLASS_SUCCESS,
+        payload: res.data
+      });
     })
     .catch(err => dispatch({ type: FETCH_SINGLE_CLASS_FAIL, error: err }));
 };

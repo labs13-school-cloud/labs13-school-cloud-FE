@@ -24,9 +24,8 @@ function SinglePage(props) {
     teacher_name
   } = props.singleClass;
 
-  console.log(props);
   return (
- <Wrapper key={`container_${id}`} style={{textAlign: 'center'}}>
+    <Wrapper key={`container_${id}`} style={{ textAlign: "center" }}>
       <Grid container spacing={24}>
         <Grid item xs={12}>
           <Typography variant="h6">Class Name: {class_name}</Typography>
@@ -39,7 +38,8 @@ function SinglePage(props) {
           </Typography>
         </Grid>
       </Grid>
-    </Wrapper>  );
+    </Wrapper>
+  );
 }
 
 const mapStateToProps = state => {
