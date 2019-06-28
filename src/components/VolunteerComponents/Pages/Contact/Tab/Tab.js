@@ -44,9 +44,8 @@ function Tab(props) {
             </Typography>
           ) : (
             <Paper>
-              <Typography>Admin Info</Typography>
               {admin.map(user => (
-                <Typography>{user.name}</Typography>
+                <Typography key={user.id}>{user.name}</Typography>
               ))}
             </Paper>
           )}
