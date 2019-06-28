@@ -47,7 +47,7 @@ function Loader(props) {
           )}
           {handleAdd && (
             <Snackbar
-              message="Class added successfully"
+              message="Admin view loaded successfully"
               type="success"
             />
           )}

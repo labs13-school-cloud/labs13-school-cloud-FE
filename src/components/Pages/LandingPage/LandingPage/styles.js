@@ -69,6 +69,10 @@ export const NavbarItem = styled.a`
 `;
 export const HeroSection = styled.div`
   display: flex;
+
+  @media (max-width: 700px) {
+    flex-direction: column-reverse;
+  }
 `;
 export const BlueBox = styled.div`
   display: flex;
@@ -76,13 +80,47 @@ export const BlueBox = styled.div`
   width: 50%;
   background: rgb(142, 202, 251);
   align-items: center;
+
+  @media (max-width: 700px) {
+    width: 100%;
+  }
+
+  @media (max-width: 768px) {
+    justify-content: center;
+  }
 `;
 export const HeroCaption = styled.h1`
   font-size: 90px;
   margin: 0px;
   font-family: "Avenir Next";
-  padding: 20px;
+  padding: 30px;
   color: rgb(76, 76, 76);
+
+  @media (max-width: 1250px) {
+    font-size: 65px;
+  }
+
+  @media (max-width: 1020px) {
+    font-size: 58px;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 50px;
+  }
+  
+  @media (max-height: 870px) {
+    font-size: 75px;
+    padding: 54px;
+  }
+
+  @media (max-width: 414px) {
+    font-size: 50px;
+  }
+
+  @media (max-width: 375px) {
+    font-size: 50px;
+  }
+
 `;
 export const LogoSection = styled.div`
   display: flex;
@@ -91,6 +129,71 @@ export const LogoSection = styled.div`
   background: #fafafa;
   width: 50vw;
   height: 100vh;
+
+  @media (max-width: 1020px) {
+    padding-top: 100px;
+  }
+
+  @media (max-width: 700px) {
+    width: 100%;
+    height: 100%;
+  }
+
+  @media (max-width: 768px) {
+    justify-content: center;
+    padding-top: 0px;
+  }
+
+  @media (max-width: 414px) {
+    padding-top: 0px;
+    height: 100vh;
+  }
+
+  @media (max-width: 375px) {
+    width: 100%;
+    height: 100vh;
+    padding-top: 0px;
+    justify-content: space-evenly;
+  }
+  
+  `;
+  export const OwlLogo = styled.img`
+  height: 600px;
+  padding: 10px;
+  
+  @media (max-width: 1250px) {
+    height: 420px;
+  }
+  
+  @media (max-width: 700px) {
+    height: 400px;
+    padding-top: 30px;
+  }
+  
+  @media (max-height: 780px) {
+    height: 450px;
+  }
+
+  @media (max-width: 770px) {
+    height: 300px;
+  }
+
+  @media (max-height: 870px) {
+    height: 500px;
+  }
+
+  @media (max-width: 414px) {
+    height: 392px;
+  }
+
+  @media (max-width: 375px) {
+    height: 340px;
+  }
+  `;
+export const  ButtonContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 export const FirstSection = styled.div`
   background-color: #fafafa;
@@ -103,8 +206,8 @@ export const FirstSection = styled.div`
     width: 100%;
   }
   @media (max-width: 700px) {
-    width: 100%;
-    margin: 0;
+    width: 80%;
+    
   }
   p {
     text-align: center;
