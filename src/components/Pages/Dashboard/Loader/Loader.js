@@ -56,7 +56,7 @@ function Loader(props) {
             <ReturnToPreviousPageButton history={props.history} /> 
           )} 
           <DashboardContainer>
-            {props.role === "admin" ? (
+            {props.volunteerRole === "admin" ? (
               <DashboardRoutes
                 {...props}
                 user={props.userProfile.user}
