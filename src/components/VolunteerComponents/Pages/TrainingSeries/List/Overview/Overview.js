@@ -13,7 +13,6 @@ import {
 
 import { withStyles } from "@material-ui/core/styles";
 import { ListItem, ListItemText, Typography } from "@material-ui/core/";
-import DeleteModal from "components/UI/Modals/deleteModal";
 import { ListStyles, styles } from "./styles.js";
 
 function Overview(props) {

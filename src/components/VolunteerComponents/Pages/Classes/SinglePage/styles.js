@@ -37,6 +37,12 @@ export const styles = theme => ({
   },
   divider: {
     margin: "15px 0"
+  },
+  noMessage: {
+    textAlign: "center",
+    fontSize: "1.2rem",
+    marginTop: "9rem",
+    color: "grey"
   }
 });
 

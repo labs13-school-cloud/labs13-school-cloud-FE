@@ -5,16 +5,14 @@ import Profile from "components/Pages/Profile";
 import AddMemberToTrainingSeries from "components/Pages/TrainingSeries/Add/AddMemberToTrainingSeries";
 import EditTrainingSeries from "components/Pages/TrainingSeries/Edit/";
 import SingleTrainingSeries from "components/Pages/TrainingSeries/SinglePage/SingleTrainingSeries";
-import SingleTrainingSeriesVolunteer from "components/VolunteerComponents/Pages/TrainingSeries/SinglePage/SingleTrainingSeries.js";
 import Classes from "components/Pages/Classes/List/Overview/Overview";
-import SingleClassView from "components/Pages/Classes/SinglePage/SingleClassView";
+import SingleClassView from "components/Pages/Classes/SinglePage/SingleClassView.js";
 import CreateMessage from "components/Pages/TrainingSeries/Add/CreateMessage";
 import MessagePage from "components/Pages/TrainingSeries/Add/MessagePage";
 import HelpModal from "components/UI/HelpModal/HelpModal.js";
 import ContactModal from "components/UI/ContactModal/ContactModal.js";
 
 import Dashboard from "../Dashboard";
-import VolunteerDashboard from "components/VolunteerComponents/Pages/Dashboard/VolunteerDashboard.js";
 
 function Routes(props) {
   const { setDisplaySnackbar, history, setIsTourOpen } = props;
@@ -113,7 +111,11 @@ function Routes(props) {
         <Route
           path="/home/classes/:id"
           render={renderProps => (
-            <SingleClassView {...renderProps} user_id={props.user.id} />
+            <SingleClassView
+              {...renderProps}
+              history={props.history}
+              user_id={props.user.id}
+            />
           )}
         />
       </Switch>

@@ -21,59 +21,70 @@ function VolunteerClassTab(props) {
 
   const getClassID = id => {
     props.getClassByID(id);
-    props.history.push(`home/classes/${id}`);
+    props.history.push(`/home/classes/${id}`);
   };
 
   console.log(props);
   return (
-    <div style={{ display: "flex", flexWrap: "wrap" }}>
-      {props
-        .getFiltered(props.volunteerClasses)
-        .map(
-          ({
-            id,
-            class_name,
-            subject,
-            grade_level,
-            number_of_students,
-            teacher_name
-          }) => {
-            return (
-              <ListStyles key={id} component="li">
-                <Typography key={id}>
-                  <div
-                    style={{ cursor: "pointer" }}
-                    onClick={() => getClassID(id)}
-                  >
-                    <Typography
-                      variant="subtitle1"
-                      style={{
-                        display: "flex",
-                        justifyContent: "space-between"
-                      }}
+    <>
+      {props.volunteerClasses.length === 0 ? (<Typography style={{textAlign: "center",
+      fontSize: "1.2rem",
+      marginTop: "9rem",
+      color: "grey"}}> No Assigned Classes</Typography>): (
+        <>
+        {props
+          .getFiltered(props.volunteerClasses)
+          .map(
+            ({
+              id,
+              class_name,
+              subject,
+              grade_level,
+              number_of_students,
+              teacher_name
+            }) => {
+              return (
+                <div style={{ display: "flex", flexWrap: "wrap" }}>
+
+                <ListStyles key={id} component="li">
+                  <Typography key={id}>
+                    <div
+                      style={{ cursor: "pointer" }}
+                      onClick={() => getClassID(id)}
                     >
-                      {class_name}
-                    </Typography>
-                    <hr />
-                    <Typography variant="overline">
-                      {`Subject: ${subject}`}
-                    </Typography>
-                    <Typography variant="overline">
-                      {`Grade Level: ${grade_level}`}
-                    </Typography>
-                    <Typography variant="overline">
-                      {`Teacher Name: ${teacher_name}`}
-                    </Typography>
-                    <Typography variant="overline">
-                      {`Number Of Students: ${number_of_students}`}
-                    </Typography>
-                  </div>
-                </Typography>
-              </ListStyles>
-            );
-          }
-        )}
-    </div>
+                      <Typography
+                        variant="subtitle1"
+                        style={{
+                          display: "flex",
+                          justifyContent: "space-between"
+                        }}
+                      >
+                        {class_name}
+                      </Typography>
+                      <hr />
+                      <Typography variant="overline">
+                        {`Subject: ${subject}`}
+                      </Typography>
+                      <Typography variant="overline">
+                        {`Grade Level: ${grade_level}`}
+                      </Typography>
+                      <Typography variant="overline">
+                        {`Teacher Name: ${teacher_name}`}
+                      </Typography>
+                      <Typography variant="overline">
+                        {`Number Of Students: ${number_of_students}`}
+                      </Typography>
+                    </div>
+                  </Typography>
+                </ListStyles>
+                </div>
+
+              );
+            }
+          )}
+        </>
+      )}
+    </>
   );
 }
 
