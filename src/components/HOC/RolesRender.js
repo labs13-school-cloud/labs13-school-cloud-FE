@@ -15,10 +15,12 @@ const RolesRenderHOC = ComponentToRender => {
         return <h1>Loading</h1>;
       } else if (this.props.user.role === "admin") {
         // Will return Admin Dashboard
-        return <ComponentToRender {...this.props} role={"admin"} />;
+        return <ComponentToRender {...this.props} volunteerRole={"admin"} />;
       } else if (this.props.user.role === "volunteer") {
         // Will return Volunteer Dashboard
-        return <ComponentToRender {...this.props} role={"volunteer"} />;
+        return (
+          <ComponentToRender {...this.props} volunteerRole={"volunteer"} />
+        );
       }
     }
   }

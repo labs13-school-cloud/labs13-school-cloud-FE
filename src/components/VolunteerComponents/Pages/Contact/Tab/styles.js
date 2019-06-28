@@ -42,6 +42,18 @@ export const styles = () => ({
     fontSize: "1.2rem",
     margin: "4rem",
     color: "grey"
+  },
+  button: {
+    backgroundColor: "#d3d3d3",
+    "&:hover": {
+      backgroundColor: "#2699FB"
+    }
+  },
+  divBack: {
+    cursor: "pointer",
+    "&:hover": {
+      background: "#f8f8f8"
+    }
   }
 });
 
@@ -50,9 +62,6 @@ export const Wrapper = styled(Paper)`
   padding: 10px;
   margin: 10px auto;
   max-width: 1200px;
-  &:hover {
-    background: #f8f8f8;
-  }
 `;
 
 export const MessageContainer = styled.div`

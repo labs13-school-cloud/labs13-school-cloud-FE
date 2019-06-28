@@ -41,10 +41,10 @@ export const getAllVolunteers = () => dispatch => {
   axios
     .get(`${process.env.REACT_APP_API}/api/users/volunteers`)
     .then(res => {
-      dispatch(
-        { type: GET_ALL_VOLUNTEERS_SUCCESS, payload: res.data.volunteers },
-        console.log("User Action", res.data.volunteers)
-      );
+      dispatch({
+        type: GET_ALL_VOLUNTEERS_SUCCESS,
+        payload: res.data.volunteers
+      });
     })
     .catch(err => dispatch({ type: GET_ALL_VOLUNTEERS_FAIL, error: err }));
 };
@@ -54,10 +54,7 @@ export const getAllAdmin = () => dispatch => {
   axios
     .get(`${process.env.REACT_APP_API}/api/users/admin`)
     .then(res => {
-      dispatch(
-        { type: GET_ALL_ADMIN_SUCCESS, payload: res.data.admin },
-        console.log("User Action", res.data.admin)
-      );
+      dispatch({ type: GET_ALL_ADMIN_SUCCESS, payload: res.data.admin });
     })
     .catch(err => dispatch({ type: GET_ALL_ADMIN_FAIL, error: err }));
 };

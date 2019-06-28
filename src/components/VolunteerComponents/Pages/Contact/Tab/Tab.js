@@ -17,7 +17,7 @@ import { withStyles } from "@material-ui/core/styles";
 import { Wrapper, styles, Redirect } from "./styles.js";
 
 function Tab(props) {
-  const { admin, getAllAdmin } = props;
+  const { admin, getAllAdmin, classes } = props;
   useEffect(() => {
     getAllAdmin();
   }, [getAllAdmin]);
@@ -43,11 +43,37 @@ function Tab(props) {
               </a>
             </Typography>
           ) : (
-            <Paper>
+            <div
+              style={{
+                display: "flex",
+                flexWrap: "wrap",
+                justifyContent: "space-around",
+                textAlign: "center",
+                margin: "2rem"
+              }}
+            >
               {admin.map(user => (
-                <Typography key={user.id}>{user.name}</Typography>
+                <Paper
+                  style={{ padding: "1rem" }}
+                  className={classes.divBack}
+                  key={user.id}
+                >
+                  <Typography
+                    style={{ fontSize: "1.2rem", marginBottom: "1rem" }}
+                  >
+                    {user.name}
+                  </Typography>
+                  <Button className={classes.button}>
+                    <a
+                      href={`mailto:${user.email}`}
+                      style={{ color: "inherit", textDecoration: "none" }}
+                    >
+                      Contact Me
+                    </a>
+                  </Button>
+                </Paper>
               ))}
-            </Paper>
+            </div>
           )}
         </Grid>
       </Grid>
