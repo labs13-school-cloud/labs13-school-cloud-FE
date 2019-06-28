@@ -18,7 +18,14 @@ import { Typography, Grid, Button, Link } from "@material-ui/core/";
 import { styles, Wrapper } from "./styles.js";
 
 function SingleClassView(props) {
-  const  { getClassByID, addClass, deleteClass, match, history, singleClass } = props;
+  const {
+    getClassByID,
+    addClass,
+    deleteClass,
+    match,
+    history,
+    singleClass
+  } = props;
   useEffect(() => {
     getClassByID(match.params.id);
   }, [getClassByID, match]);
@@ -27,7 +34,6 @@ function SingleClassView(props) {
     addClass(match.params.id);
     history.push(`/home/classes`);
   }, [addClass, match, history]);
-
 
   // Removes class from database
   const removeClass = id => {
@@ -39,18 +45,8 @@ function SingleClassView(props) {
     getClassByID(id);
     history.push(`/home/classes`);
   };
-  // Remove Volunteer from training series
-<<<<<<< HEAD
-  const removeVolunteer = (id, user_id) => {
-    props.deleteVolunteerFromTrainingSeries(id, user_id);
-  };
+
   //Exit out of single class view
-=======
-  // const removeVolunteer = (id, user_id) => {
-  //   props.deleteVolunteerFromTrainingSeries(id, user_id);
-  // };
-//Exit out of single class view
->>>>>>> master
   const done = e => {
     e.preventDefault();
     if (singleClass.id === match.params.id) {
