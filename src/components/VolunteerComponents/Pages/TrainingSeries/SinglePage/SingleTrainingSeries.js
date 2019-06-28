@@ -3,26 +3,23 @@ import { withRouter } from "react-router-dom";
 
 import { connect } from "react-redux";
 import { getTrainingSeriesID } from "store/actions";
-import InfoPopup from "components/UI/InfoPopup/InfoPopup.js";
 
 import { withStyles } from "@material-ui/core/styles";
 import {
-  Paper,
-  Divider,
   Typography,
   Grid,
   Button,
   Link
 } from "@material-ui/core/";
 
-import { styles, PageContainer, Wrapper } from "./styles.js";
+import { styles, Wrapper } from "./styles.js";
 
 function SingleTrainingSeries(props) {
+  const { getTrainingSeriesID, match } = props;
   useEffect(() => {
-    props.getTrainingSeriesID(props.match.params.id);
-  }, [props.getTrainingSeriesID]);
+    getTrainingSeriesID(match.params.id);
+  }, [getTrainingSeriesID, match]);
   const {
-    training_series_id,
     name,
     title,
     subject,

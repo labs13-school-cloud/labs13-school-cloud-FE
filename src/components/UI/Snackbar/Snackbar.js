@@ -1,5 +1,5 @@
 import React from "react";
-import { withRouter, Link, browserHistory } from "react-router";
+import { withRouter } from "react-router";
 
 // import PropTypes from "prop-types";
 import classNames from "classnames";
