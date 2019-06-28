@@ -1,5 +1,5 @@
 // main page for displaying list of all training series for Volunteer users
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 
@@ -12,10 +12,9 @@ import {
 import DeleteModal from "components/UI/Modals/deleteModal";
 import history from "history.js";
 
-import { Grid, Typography, Select, FormControl } from "@material-ui/core/";
-import Button from "@material-ui/core/Button";
+import { Grid, Typography } from "@material-ui/core/";
 import { withStyles } from "@material-ui/core/styles";
-import { Wrapper, styles, Redirect } from "./styles.js";
+import { Wrapper, styles, Redirect, MessageContainer } from "./styles.js";
 
 function Tab({
   getFiltered,

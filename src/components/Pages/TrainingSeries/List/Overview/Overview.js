@@ -17,7 +17,6 @@ import { ListStyles, styles } from "./styles.js";
 function Overview(props) {
   const {
     getFiltered,
-    user_id,
     getTrainingSeries,
     getAllMessages,
     trainingSeries,
@@ -27,7 +26,7 @@ function Overview(props) {
     editModalTitle,
     section
   } = props;
-  
+
   useEffect(() => {
     getTrainingSeries();
     getAllMessages();
@@ -43,7 +42,13 @@ function Overview(props) {
               secondary={`Subject: ${series.subject}`}
               onClick={e => history.push(`/home/training-series/${series.id}`)}
             />
-            <div style={{ width: "65px", display: "flex", justifyContent: "space-between" }}>
+            <div
+              style={{
+                width: "65px",
+                display: "flex",
+                justifyContent: "space-between"
+              }}
+            >
               <DeleteModal
                 deleteType="trainingSeries"
                 trainingSeriesId={series.id}
@@ -67,7 +72,7 @@ const mapStateToProps = state => {
   return {
     trainingSeries: state.trainingSeriesReducer.trainingSeries,
     messages: state.messagesReducer.messages
-  }
+  };
 };
 
 export default connect(

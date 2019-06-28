@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 
 import { Typography, Fab, TextField, InputAdornment } from "@material-ui/core/";
 
@@ -7,7 +7,7 @@ import { withStyles } from "@material-ui/core/styles";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import { styles } from "./styles.js";
-import AddModal2 from 'components/UI/Modals/addModalV2.js';
+import AddModal2 from "components/UI/Modals/addModalV2.js";
 
 function CardHeader(props) {
   const {
@@ -19,7 +19,7 @@ function CardHeader(props) {
     setVolunteerFilter,
     volunteerFilter,
     user,
-    section
+    section,
   } = props;
 
   const [isSearching, setIsSearching] = useState(!!props.isSearching);
@@ -61,13 +61,14 @@ function CardHeader(props) {
             </Fab>
           )}
           {/* Code below keeps modal button from showing up on volunteers */}
-          {section !== "Volunteers" && user.role !== "volunteer" && (
+          {section !== "Volunteers" &&
+            (user.role !== "volunteer" && (
               <AddModal2
                 titleForModal={props.titleForModal}
                 fields={props.fields}
                 section={props.section}
               />
-          )}
+            ))}
         </div>
       </div>
       <div>
@@ -94,12 +95,12 @@ function CardHeader(props) {
 }
 
 const mapStateToProps = state => {
-    return {
-        user: state.userReducer.userProfile.user
-    }
-}
+  return {
+    user: state.userReducer.userProfile.user,
+  };
+};
 
 export default connect(
-    mapStateToProps,
-    {  }
+  mapStateToProps,
+  {},
 )(withStyles(styles)(CardHeader));

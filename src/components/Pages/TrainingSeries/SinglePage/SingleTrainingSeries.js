@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { withRouter } from "react-router-dom";
 
 import { connect } from "react-redux";
@@ -11,49 +11,44 @@ import {
   deleteVolunteerFromTrainingSeries,
   getAllVolunteers
 } from "store/actions";
-import InfoPopup from "components/UI/InfoPopup/InfoPopup.js";
-import DeleteModal from "components/UI/Modals/deleteModal";
-import EditModal from "components/UI/Modals/editModal";
 import { withStyles } from "@material-ui/core/styles";
 import {
-  Paper,
-  Divider,
   Typography,
   Grid,
-  Button,
   Link
 } from "@material-ui/core/";
 
-import { styles, PageContainer, Wrapper } from "./styles.js";
+import { styles, Wrapper } from "./styles.js";
 
 function SingleTrainingSeries(props) {
+  const { getTrainingSeriesForVolunteer, getTrainingSeriesID, deleteTrainingSeries, activeTrainingSeries, getAllVolunteers, deleteVolunteerFromTrainingSeries, match } = props;
   useEffect(() => {
-    props.getTrainingSeriesForVolunteer(props.match.params.id);
-  }, [props.getTrainingSeriesForVolunteer]);
+    getTrainingSeriesForVolunteer(match.params.id);
+  }, [getTrainingSeriesForVolunteer, match]);
   useEffect(() => {
-    props.getTrainingSeriesID(props.match.params.id);
-  }, [props.getTrainingSeriesID]);
+      getTrainingSeriesID(match.params.id);
+  }, [getTrainingSeriesID, match]);
 
   // Removes Training Series from database
   const removeTrainingSeries = id => {
-    props.deleteTrainingSeries(props.activeTrainingSeries.id);
+    deleteTrainingSeries(activeTrainingSeries.id);
     props.history.push(`/home`);
   };
   // Sends Admin to Edit page for Training Series
   const editTrainingSeries = id => {
-    props.getTrainingSeriesID(id);
+    getTrainingSeriesID(id);
     props.history.push(`/home/training-series/${id}/edit`);
   };
 
   // Sends Admin to Add Volunteer to Training Series page
   const addVolunteer = id => {
-    props.getTrainingSeriesID(id);
-    props.getAllVolunteers();
+    getTrainingSeriesID(id);
+    getAllVolunteers();
     props.history.push(`/home/training-series/${id}/addVolunteer`);
   };
   // Remove Volunteer from training series
   const removeVolunteer = (id, user_id) => {
-    props.deleteVolunteerFromTrainingSeries(id, user_id);
+    deleteVolunteerFromTrainingSeries(id, user_id);
   };
   // destructor training series
   const { id, name, title, subject, link } = props.activeTrainingSeries;
@@ -85,7 +80,6 @@ function SingleTrainingSeries(props) {
               edit
             </i>
             <i
-              className="material-icons"
               className={`material-icons ${props.classes.iconDelete}`}
               onClick={removeTrainingSeries}
             >
@@ -163,32 +157,34 @@ function SingleTrainingSeries(props) {
                   add_circle
                 </i>
               </div>
-              {props.trainingSeriesVolunteers.map(v =>
-                v.length !== 0 ? (
-                  <Typography
-                    variant="body1"
-                    key={v.id}
-                    style={{ textAlign: "center" }}
-                    className={props.classes.listItem}
-                  >
-                    {v.name}{" "}
-                    <i
-                      className={`material-icons ${props.classes.delete}`}
-                      onClick={e =>
-                        removeVolunteer({
-                          id: props.match.params.id,
-                          user_id: v.volunteer_id
-                        })
-                      }
+              {props.trainingSeriesVolunteers.length === 0 ? (
+                <Typography className={props.classes.noMessage}>
+                  No Volunteers found
+                </Typography>
+              ) : (
+                <>
+                  {props.trainingSeriesVolunteers.map(v => (
+                    <Typography
+                      variant="body1"
+                      key={v.id}
+                      style={{ textAlign: "center" }}
+                      className={props.classes.listItem}
                     >
-                      delete_forever
-                    </i>
-                  </Typography>
-                ) : (
-                  <Typography>
-                    No Volunteers taking this Training Series
-                  </Typography>
-                )
+                      {v.name}{" "}
+                      <i
+                        className={`material-icons ${props.classes.delete}`}
+                        onClick={e =>
+                          removeVolunteer({
+                            id: props.match.params.id,
+                            user_id: v.volunteer_id
+                          })
+                        }
+                      >
+                        delete_forever
+                      </i>
+                    </Typography>
+                  ))}
+                </>
               )}
             </Wrapper>
           </Grid>

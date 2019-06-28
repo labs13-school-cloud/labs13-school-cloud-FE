@@ -4,6 +4,10 @@ import axios from "axios";
 export const GET_USER_START = "GET_USER_START";
 export const GET_USER_SUCCESS = "GET_USER_SUCCESS";
 export const GET_USER_FAIL = "GET_USER_FAIL";
+//GET All Admin
+export const GET_ALL_ADMIN_START = "GET_ALL_ADMIN_START";
+export const GET_ALL_ADMIN_SUCCESS = "GET_ALL_ADMIN_SUCCESS";
+export const GET_ALL_ADMIN_FAIL = "GET_ALL_ADMIN_FAIL";
 //GET ALL VOLUNTEERS
 export const GET_ALL_VOLUNTEERS_START = "GET_ALL_VOLUNTEERS_START";
 export const GET_ALL_VOLUNTEERS_SUCCESS = "GET_ALL_VOLUNTEERS_SUCCESS";
@@ -43,6 +47,19 @@ export const getAllVolunteers = () => dispatch => {
       );
     })
     .catch(err => dispatch({ type: GET_ALL_VOLUNTEERS_FAIL, error: err }));
+};
+//--GET ALL Admin--
+export const getAllAdmin = () => dispatch => {
+  dispatch({ type: GET_ALL_ADMIN_START });
+  axios
+    .get(`${process.env.REACT_APP_API}/api/users/admin`)
+    .then(res => {
+      dispatch(
+        { type: GET_ALL_ADMIN_SUCCESS, payload: res.data.admin },
+        console.log("User Action", res.data.admin)
+      );
+    })
+    .catch(err => dispatch({ type: GET_ALL_ADMIN_FAIL, error: err }));
 };
 //--EDIT USER--
 export const editUser = (id, updatedData) => dispatch => {

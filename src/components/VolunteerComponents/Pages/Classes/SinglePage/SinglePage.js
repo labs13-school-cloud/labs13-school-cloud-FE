@@ -1,50 +1,57 @@
 import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
 
- import { connect } from "react-redux";
-import { getClassList } from "store/actions";
+import { connect } from "react-redux";
+import { getClassList, getActiveClass } from "store/actions";
 import InfoPopup from "components/UI/InfoPopup/InfoPopup.js";
 
- import { withStyles } from "@material-ui/core/styles";
+import { withStyles } from "@material-ui/core/styles";
 import { Paper, Divider, Typography, Grid, Button } from "@material-ui/core/";
 
- import { styles, PageContainer, Wrapper } from "./styles.js/index.js";
+import { styles, PageContainer, Wrapper } from "./styles.js";
 
- function SinglePage(props) {
+function SinglePage(props) {
+  useEffect(() => {
+    props.getActiveClass(props.match.params.id);
+  }, [props.getActiveClass]);
   console.log(props);
   const {
     id,
-    first_name,
-    last_name,
-    title,
+    class_name,
     subject,
-  } = props.activeTrainingSeries;
-  return (
-    <>
-      <Wrapper key={`container_${id}`}>
-        <Grid container spacing={24}>
-          <Grid item xs={12}>
-            <Typography variant="h6">{title}</Typography>
-            <hr />
-            <Typography variant="body1">Subject: {subject}</Typography>
+    grade_level,
+    number_of_students,
+    teacher_name
+  } = props.singleClass;
 
-             <Typography variant="body1">
-              Creator: {first_name} {""}
-              {last_name}
-            </Typography>
-            <Button>Done</Button>
-          </Grid>
+  return (
+    <Wrapper key={`container_${id}`} style={{ textAlign: "center" }}>
+      <Grid container spacing={24}>
+        <Grid item xs={12}>
+          <Typography variant="h6">Class Name: {class_name}</Typography>
+          <Typography variant="h6">Teacher's Name: {teacher_name}</Typography>
+          <Typography variant="body1">Subject: {subject}</Typography>
+
+          <Typography variant="body1">Grade Level: {grade_level} </Typography>
+          <Typography variant="body1">
+            Number of Students: {number_of_students}{" "}
+          </Typography>
         </Grid>
-      </Wrapper>
-    </>
+      </Grid>
+    </Wrapper>
   );
 }
 
+const mapStateToProps = state => {
+  return {
+    classID: state.classesReducer.classID,
+    singleClass: state.classesReducer.singleClass
+  };
+};
 
-
- export default withRouter(
+export default withRouter(
   connect(
     mapStateToProps,
-    { getClassList }
+    { getClassList, getActiveClass }
   )(withStyles(styles)(SinglePage))
 );

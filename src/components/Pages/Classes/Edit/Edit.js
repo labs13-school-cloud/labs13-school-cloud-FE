@@ -1,15 +1,11 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import Title from "./helpers/Title"
-import InfoPopup from "components/UI/InfoPopup/InfoPopup.js";
-import { editClass, getClassById } from "store/actions";
+import { editClass, 
+        getClassById } from "store/actions";
 import { withStyles } from "@material-ui/core/styles";
 import {
     Paper,
-    Divider,
-    Typography,
     TextField,
-    Link,
     Button,
     FormControl
 } from "@material-ui/core/";
@@ -24,8 +20,16 @@ function Edit(props) {
 
     const updateClass = e => {
         e.preventDefault();
-        props.editClass(props.singleClass);
+        props.editClass(props.singleClass.id, {
+            class_name,
+            subject,
+            number_of_Students,
+            user_id: props.user_id
+        });
+        props.history.push("/home");
     };
+
+    console.log(props.singleClass);
 
     return (
         <PageContainer style={{ position: "relative" }}>
