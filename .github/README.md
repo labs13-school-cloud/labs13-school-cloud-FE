@@ -1,5 +1,5 @@
-
-# School in the Cloud
+![banner](img/logo1.png)
+# School in the Cloud [![standard-readme compliant](https://img.shields.io/badge/standard--readme-OK-green.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
 
 You can find the deployed project at [School in the Cloud](https://school-in-the-clouds.netlify.com/).
 
@@ -13,14 +13,6 @@ You can find the deployed project at [School in the Cloud](https://school-in-the
 
 <br>
 <br>
-
-
-
-
-![React](https://img.shields.io/badge/react-v16.7.0--alpha.2-blue.svg)
-![Typescript](https://img.shields.io/npm/types/typescript.svg?style=flat)
-[![Netlify Status](https://api.netlify.com/api/v1/badges/b5c4db1c-b10d-42c3-b157-3746edd9e81d/deploy-status)](https://school-in-the-clouds.netlify.com/team)
-[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
 
 
@@ -62,54 +54,10 @@ School in the Cloud is a platform that trains senior volunteers to teach student
 [![Netlify Status](https://api.netlify.com/api/v1/badges/b5c4db1c-b10d-42c3-b157-3746edd9e81d/deploy-status)](https://school-in-the-clouds.netlify.com/team)
 
 
-# APIs
-
-## 2️⃣ Authentication API here
-
-🚫Replace text below with a description of the API
-
-Water's like me. It's laaazy ... Boy, it always looks for the easiest way to do things A little happy sunlight shining through there. Let all these little things happen. Don't fight them. Learn to use them. Even the worst thing we can do here is good.
-
-## 2️⃣ Payment API here
-
-🚫Replace text below with a description of the API
-
-This is the way you take out your flustrations. Get away from those little Christmas tree things we used to make in school. Isn't it fantastic that you can change your mind and create all these happy things? Everything's not great in life, but we can still find beauty in it.
-
-## 3️⃣ Misc API here
-
-🚫Replace text below with a description of the API
-
-You can do anything your heart can imagine. In life you need colors. This is where you take out all your hostilities and frustrations. It's better than kicking the puppy dog around and all that so. I'm sort of a softy, I couldn't shoot Bambi except with a camera. Trees get lonely too, so we'll give him a little friend. We'll lay all these little funky little things in there.
-
-## 3️⃣ Misc API here
-
-🚫Replace text below with a description of the API
 
 When you do it your way you can go anywhere you choose. Let your heart take you to wherever you want to be. If I paint something, I don't want to have to explain what it is. A tree needs to be your friend if you're going to paint him. That's a son of a gun of a cloud. Even the worst thing we can do here is good.
 
-## 3️⃣ Misc API here
 
-🚫Replace text below with a description of the API
-
-Volunteering your time; it pays you and your whole community fantastic dividends. Maybe there's a happy little waterfall happening over here. You can spend all day playing with mountains. We don't have to be committed. We are just playing here. You have freedom here. The only guide is your heart. It's cold, but it's beautiful.
-
-# 3️⃣ Environment Variables
-
-In order for the app to function correctly, the user must set up their own environment variables. There should be a .env file containing the following:
-
-🚫These are just examples, replace them with the specifics for your app
-
-    *  REACT_APP_apiKey - this is your Google API key, which can be generated in the Google Cloud Console
-    *  REACT_APP_authDomain - when you set up your Firebase project, this information will be in the dashboard
-    *  REACT_APP_databaseURL - in the Firebase dashboard
-    *  REACT_APP_projectID - in the Firebase dashboard
-    *  REACT_APP_storageBucket - in the Firebase dashboard
-    *  REACT_APP_messagingSenderId - in the Firebase dashboard
-    *  REACT_APP_stripe_API - this is your public Stripe API key, generated in the Stripe dashboard
-    *  REACT_APP_backendURL - optional for your local development server
-    *  REACT_APP_clientid - this is the Stripe_connect clientID, generated in Stripe_connect settings
-    *  REACT_APP_stripe_plan - this is the ID for a second Stripe subscription plan, generated under Stripe products
 
 # Licenses
 
@@ -117,18 +65,18 @@ In order for the app to function correctly, the user must set up their own envir
 ![MIT](https://img.shields.io/packagist/l/doctrine/orm.svg) MIT © 2019 School in the Cloud
 
 
-# 4️⃣ Installation Instructions
+# Installation Instructions
 
-🚫explain how to install the required dependencies to get this project up and running with yarn and NPM
+```sh
+npm start
+```
 
-## Other Scripts
+_([npx](https://medium.com/@maybekatz/introducing-npx-an-npm-package-runner-55f7d4bd282b) comes with npm 5.2+ and higher, see [instructions for older npm versions](https://gist.github.com/gaearon/4064d3c23a77c74a3614c498a8bb1c5f))_
 
-🚫replace these examples with your own
+Then open [http://localhost:3000/](http://localhost:3000/) to see your app.<br>
+When you’re ready to deploy to production, create a minified bundle with `npm run build`.
 
-    * typecheck - runs the TypeScript compiler
-    * build - creates a build of the application
-    * start - starts the production server after a build is created
-    * test - runs tests in **tests** directory \* eject - copy the configuration files and dependencies into the project so you have full control over them
+
 
 # Contributing
 
@@ -166,44 +114,11 @@ Remember that this project is licensed under the MIT license, and by submitting 
 
 These contribution guidelines have been adapted from [this good-Contributing.md-template](https://gist.github.com/PurpleBooth/b24679402957c63ec426).
 
-## Documentation
 
-See [Backend Documentation](🚫_link to your backend readme here_) for details on the backend of our project.
-# Training Bot Client
 
-![banner](img/logo.png)
 
-[![standard-readme compliant](https://img.shields.io/badge/standard--readme-OK-green.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
 
-> Training Bot client application, built in React & Redux
-
-## Table of Contents
-
-- [Background](#background)
-- [Deploy](#Deploy)
-- [Components](#Components)
-- [Auth](#Auth)
-- [Store](#Store)
-- [Maintainers](#maintainers)
-- [License](#license)
-
-## Background
-
-As Training Bot 2, we inherited our code base, as you do now, but found we were uncertain we could accomplish our goals with the code that we were given.  So we sacrificed some of our development time to refactor the code bases and designed it with future teams in mind (you'll have to let us know if we were successful or not)!  
-
-While the front end refactor was never 100% completed, the heavy lifting has already been done.  With all of our features and documentation added, the React portion of the app is actually significantly lighter than when we found it.  We have created reusable components that should make expanding any features far easier and our two main components (SearchCard and NotificationsCard) are largely stripped of context and can be used again on a whim!
-
-So now we pass the project on to you, much more robust than we found it, and we hope our efforts make your transition easier and that you're able to expand upon the ideas we started.  So in our final week, we've prepared these docs for you and added a one-click feature to get a live version of the app running ideally on day one.  We really loved working on Training Bot and hope you do too!
-
-- Training Bot 2
-
-## Deploy
-
-We've configured a one-click deploy to Netlify that will allow you to get the front end of the site up and running with a guided set up:
-
-**Note**: Make sure you've completed the [Auth0 section of the prerequisite docs](https://github.com/labs12-training-bot-2/labs12-training-bot-2-BE/blob/master/docs/prerequisites.md#configuring-auth0) in the [Training Bot API repository](https://github.com/labs12-training-bot-2/labs12-training-bot-2-BE)
-
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/labs12-training-bot-2/labs12-training-bot-2-FE)
+# Web Application Organization
 
 ## Components
 
@@ -614,14 +529,8 @@ We've configured a one-click deploy to Netlify that will allow you to get the fr
 <br />
 <br />
 
-#### Tour
 
-| Name    | Purpose                                      | How To View                                                  |
-| ------- | -------------------------------------------- | ------------------------------------------------------------ |
-| Tour.js | parent component for tour on login/take tour | create new account or click show tutorial at "/home/profile" |
 
-<br />
-<br />
 
 ---
 
@@ -629,22 +538,6 @@ We've configured a one-click deploy to Netlify that will allow you to get the fr
 
 ---
 
-## Auth
 
-TODO: Write Auth section
 
-    Probably just want to write a description on how auth system works
 
-## Store
-
-    The actions/store setup for this application are fairly standard for react/redux applications you've likely worked with in the past. You'll notice that actions are split into separate folders based on what they're used for. All actions are being exported via index.js and can be referenced as such. Reducers are similar, in that they are being split into separate reducers dependent on usage and combined via Redux's "combineReducers". You can reference individual reducers via their specific files. The store itself lives entirely inside of index.js "rootReducer".
-
-## Maintainers
-
-| ![Andrew Brush](https://github.com/ajb85.png) | ![Nick Cannariato](https://github.com/nickcannariato.png) | ![Adam McKenney](https://github.com/DaftBeowulf.png) | ![Gannon Darcy](https://github.com/GannonDetroit.png) | ![Thomas Hessburg](https://github.com/TomHessburg.png) |
-| --------------------------------------------- | --------------------------------------------------------- | ---------------------------------------------------- | ----------------------------------------------------- | ------------------------------------------------------ |
-| [@ajb85](https://github.com/ajb85)            | [@nickcannariato](https://github.com/nickcannariato)      | [@DaftBeowulf](https://github.com/DaftBeowulf)       | [@GannonDetroit](https://github.com/GannonDetroit)    | [@TomHessburg](https://github.com/TomHessburg)         |
-
-## License
-
-MIT © 2019 Training Bot
