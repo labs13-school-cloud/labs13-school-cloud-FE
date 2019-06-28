@@ -1,5 +1,5 @@
 // contact page for volunteers
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 
 import { getAllAdmin } from "store/actions";
@@ -7,14 +7,11 @@ import { getAllAdmin } from "store/actions";
 import {
   Grid,
   Typography,
-  Select,
-  FormControl,
   Paper,
-  Link
 } from "@material-ui/core/";
 import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
-import { Wrapper, styles, Redirect } from "./styles.js";
+import { Wrapper, styles } from "./styles.js";
 
 function Tab(props) {
   const { admin, getAllAdmin, classes } = props;

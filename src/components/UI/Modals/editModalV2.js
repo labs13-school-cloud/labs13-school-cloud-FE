@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { withRouter } from "react-router";
-import PropTypes, { arrayOf } from "prop-types";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
 // Helpers

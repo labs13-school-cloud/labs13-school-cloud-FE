@@ -2,8 +2,6 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 
-import history from "history.js";
-
 import {
   getVolunteerClasses,
   getClassByID
@@ -13,8 +11,10 @@ import { ListStyles } from "./styles.js";
 import { Typography } from "@material-ui/core/";
 
 function VolunteerClassTab(props) {
+  const { getVolunteerClasses } = props;
+
   useEffect(() => {
-    props.getVolunteerClasses();
+    getVolunteerClasses();
   }, [getVolunteerClasses]);
 
   const getClassID = id => {

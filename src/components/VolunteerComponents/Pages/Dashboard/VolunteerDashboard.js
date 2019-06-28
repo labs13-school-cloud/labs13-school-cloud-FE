@@ -14,7 +14,6 @@ import DektopNavigation from "components/VolunteerComponents/Pages/Dashboard/hel
 
 import {
   TripleColumn,
-  SmallColumns,
   Divider,
   DashWrapper,
   MobileNav,

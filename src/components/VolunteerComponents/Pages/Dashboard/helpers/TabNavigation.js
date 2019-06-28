@@ -5,12 +5,12 @@ import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
 import Home from "@material-ui/icons/HomeOutlined";
 import QuestionAnswer from "@material-ui/icons/QuestionAnswerOutlined";
 import Timeline from "@material-ui/icons/TimelineOutlined";
-import ModeComment from "@material-ui/icons/ModeCommentOutlined";
+// import ModeComment from "@material-ui/icons/ModeCommentOutlined";
 import { withStyles } from "@material-ui/core/styles";
 import { styles, Popover } from "../styles.js";
 
 function TabNavigation(props) {
-  const { classes, newResponses } = props;
+//   const { classes, newResponses } = props;
   const [overviewHover, setOverviewHover] = useState(false);
   const [trainingSeriesHover, setTrainingSeriesHover] = useState(false);
   const [classListHover, setClassListHover] = useState(false);

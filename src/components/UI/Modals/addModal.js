@@ -144,16 +144,16 @@ const AddModal = props => {
     }
   };
 
-  const handleValue = property => {
-    switch (props.addType) {
-      case "classes":
-        return classList[property];
-      case "trainingSeries":
-        return trainingSeries[property]
-      default:
-        break;
-    }
-  };
+//   const handleValue = property => {
+//     switch (props.addType) {
+//       case "classes":
+//         return classList[property];
+//       case "trainingSeries":
+//         return trainingSeries[property]
+//       default:
+//         break;
+//     }
+//   };
 
   const { classes } = props;
 
