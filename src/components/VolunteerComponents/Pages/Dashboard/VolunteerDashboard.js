@@ -13,8 +13,6 @@ import ContactTab from "components/VolunteerComponents/Pages/Contact/Tab";
 import TabNavigation from "components/VolunteerComponents/Pages/Dashboard/helpers/TabNavigation.js";
 import DektopNavigation from "components/VolunteerComponents/Pages/Dashboard/helpers/DesktopNavigation.js";
 
-import AppBar from "components/Navigation/AppBar/AppBar";
-
 import {
   TripleColumn,
   SmallColumns,

@@ -17,11 +17,16 @@ import DeleteModal from "components/UI/Modals/deleteModal";
 import { ListStyles, styles } from "./styles.js";
 
 function Overview(props) {
+  const {
+    getVolunteerTrainingSeries,
+    getTrainingSeriesID,
+    userProfile
+  } = props;
   useEffect(() => {
-    props.getVolunteerTrainingSeries(props.userProfile.user.id);
-  }, [props.getVolunteerTrainingSeries]);
+    getVolunteerTrainingSeries(userProfile.user.id);
+  }, [getVolunteerTrainingSeries, userProfile]);
   const goToTrainingSeries = id => {
-    props.getTrainingSeriesID(id);
+    getTrainingSeriesID(id);
     props.history.push(`/home/training-series/${id}`);
   };
   return (

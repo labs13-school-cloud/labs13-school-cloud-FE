@@ -17,7 +17,6 @@ import { ListStyles, styles } from "./styles.js";
 function Overview(props) {
   const {
     getFiltered,
-    user_id,
     getTrainingSeries,
     getAllMessages,
     trainingSeries,
