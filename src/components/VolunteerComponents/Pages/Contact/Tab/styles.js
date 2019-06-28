@@ -42,6 +42,12 @@ export const styles = () => ({
     fontSize: "1.2rem",
     margin: "4rem",
     color: "grey"
+  },
+  button: {
+    backgroundColor: "#d3d3d3",
+    "&:hover": {
+      backgroundColor: "#2699FB"
+    }
   }
 });
 
