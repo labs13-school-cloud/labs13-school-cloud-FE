@@ -62,6 +62,7 @@ const VolunteerDashboard = props => {
           <>
             <SmallColumns>
               <SearchCard
+                style={{ width: "48%" }}
                 user_id={user_id}
                 List={TrainingSeriesOverview}
                 containerTourNum="2"
@@ -73,6 +74,7 @@ const VolunteerDashboard = props => {
                 List={VolunteerClassTab}
                 containerTourNum="1"
                 section="Classes"
+                limit={6}
                 //headerTourNum={["3", "3"]}
               />
             </SmallColumns>

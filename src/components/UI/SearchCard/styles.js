@@ -7,8 +7,8 @@ export const styles = theme => ({
     paddingBottom: theme.spacing.unit * 2,
     display: "flex",
     flexDirection: "column",
-    minWidth: 330,
-    width: "100%",
+    // minWidth: "90%",
+    width: "99%",
     minHeight: 533,
     // The "Deal with It" pixel - snaps height out of auto so height:100% can take effect
     height: "100%",
