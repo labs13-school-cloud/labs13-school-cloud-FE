@@ -16,8 +16,10 @@ function Edit(props) {
     useEffect(() => {
         props.getClassById(props.match.params.id);
     }, [getClassById]);
-    const { classes } = props;
 
+    const { getClassById, match } = props;
+    const {link, class_name} = singleClass
+    
     const updateClass = e => {
         e.preventDefault();
         props.editClass(props.singleClass.id, {

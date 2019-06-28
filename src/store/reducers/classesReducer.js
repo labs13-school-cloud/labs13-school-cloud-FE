@@ -18,7 +18,7 @@ import {
 
 const initialState = {
     classList: [],
-    singleClass: {},
+    singleClass:{} ,
     error: null,
     status: {
         isLoading: false,
