@@ -16,12 +16,11 @@ function VolunteerClassTab(props) {
     }, [getClassList]);
 
     return (
-        <div style={{ display: "flex", flexWrap: "wrap" }}>
+        <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}>
             {props.getFiltered(props.classList).map(
                 ({ id, class_name, subject, grade_level, number_of_students, teacher_name }) => {
                     return (
                         <ListStyles key={id} component="li" className={props.classList.listItem}>
-                            <Typography key={id}>
                                 <div 
                                 style={{ cursor: "pointer" }}
                                 onClick={() => history.push(`home/classes/${id}`)}
@@ -43,7 +42,6 @@ function VolunteerClassTab(props) {
                                         {`Number Of Students: ${number_of_students}`}
                                     </Typography>
                                 </div>
-                            </Typography>
                         </ListStyles>
                     )
                 }

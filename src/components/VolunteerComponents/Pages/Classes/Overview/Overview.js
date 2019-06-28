@@ -21,7 +21,7 @@ import { Typography } from "@material-ui/core/";
 
      console.log(props)
     return (
-        <div style={{ display: "flex", flexWrap: "wrap" }}>
+        <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}>
             {props.getFiltered(props.classList).map(
                 ({ id, class_name, subject, grade_level, number_of_students, teacher_name }) => {
                     return (
@@ -73,5 +73,4 @@ import { Typography } from "@material-ui/core/";
     mapStateToProps,
     { getClassList }
 )(Overview);
-//   (withStyles(ListStyles)  
-const SingleClass = styled(ListItem)``; 
+
