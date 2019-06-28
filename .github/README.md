@@ -16,7 +16,7 @@ You can find the deployed project at [School in the Cloud](https://school-in-the
 
 
 
-![MIT](https://img.shields.io/packagist/l/doctrine/orm.svg)
+
 ![React](https://img.shields.io/badge/react-v16.7.0--alpha.2-blue.svg)
 ![Typescript](https://img.shields.io/npm/types/typescript.svg?style=flat)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/b5c4db1c-b10d-42c3-b157-3746edd9e81d/deploy-status)](https://school-in-the-clouds.netlify.com/team)
@@ -46,29 +46,21 @@ School in the Cloud is a platform that trains senior volunteers to teach student
 - Volunteer can view their training they need to complete, can mark training as complete, and completion is reported to the admin.
 
 
-## Tech Stack
-
-### Front end built using:
-
-####
-
--    React Hooks ![React](https://img.shields.io/badge/react-v16.7.0--alpha.2-blue.svg)
--    Redux
--    Material UI
+### Tech Stack
 
 
+- [React](https://reactjs.org/) ![React](https://img.shields.io/badge/react-v16.7.0--alpha.2-blue.svg)
+- [Redux](https://redux.js.org/)
+- [Node/Express](https://nodejs.org/en/)
+- [Auth0](https://auth0.com/)
+- [Stripe](https://stripe.com/)
+- [Material-UI](https://material-ui.com/)
 
-#### Front end deployed to [![Netlify Status](https://api.netlify.com/api/v1/badges/b5c4db1c-b10d-42c3-b157-3746edd9e81d/deploy-status)](https://school-in-the-clouds.netlify.com/team)
 
-#### [Back end](🚫link to back end repo here) built using:
 
-#### 🚫 back end framework goes here
+#### Front end deployed to Netlify
+[![Netlify Status](https://api.netlify.com/api/v1/badges/b5c4db1c-b10d-42c3-b157-3746edd9e81d/deploy-status)](https://school-in-the-clouds.netlify.com/team)
 
--    point one
--    point two
--    point three
-
-🚫 List the rest of the back end end features and libraries in the same format as the framework above
 
 # APIs
 
@@ -119,18 +111,11 @@ In order for the app to function correctly, the user must set up their own envir
     *  REACT_APP_clientid - this is the Stripe_connect clientID, generated in Stripe_connect settings
     *  REACT_APP_stripe_plan - this is the ID for a second Stripe subscription plan, generated under Stripe products
 
-# 5️⃣ Content Licenses
+# Licenses
 
-🚫For all content - images, icons, etc, use this table to document permission of use. Remove the two placeholders and add you content to this table
 
-| Image Filename | Source / Creator | License                                                                      |
-| -------------- | ---------------- | ---------------------------------------------------------------------------- |
-| doodles.png    | Nicole Bennett   | [Creative Commons](https://www.toptal.com/designers/subtlepatterns/doodles/) |
-| rings.svg      | Sam Herbert      | [MIT](https://github.com/SamHerbert/SVG-Loaders)                             |
+![MIT](https://img.shields.io/packagist/l/doctrine/orm.svg) MIT © 2019 School in the Cloud
 
-# 4️⃣ Testing
-
-🚫Document what you used for testing and why
 
 # 4️⃣ Installation Instructions
 
