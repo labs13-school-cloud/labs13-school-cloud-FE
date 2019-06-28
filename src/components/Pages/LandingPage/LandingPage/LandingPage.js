@@ -19,7 +19,9 @@ import {
   HeroSection,
   BlueBox,
   HeroCaption,
-  LogoSection
+  LogoSection,
+  OwlLogo,
+  ButtonContainer
 } from "./styles.js";
 import Button from "@material-ui/core/Button";
 
@@ -67,22 +69,28 @@ class LandingPage extends React.Component {
                     </HeroCaption>
                   </BlueBox>
                   <LogoSection>
-                    <img 
-                    style={{ height:"700px",  padding: "10px" }}
-                    
-                    src={Cloud} alt="Owl with Grad Cap in a Cloud" />
-                    <Button color="primary">
-                      <h2 onClick={() => lock.login()}>Sign In</h2>
-                    </Button>
-                    <h1>
-                      Or
-                    </h1>
-                    <Button 
-                      color={"primary"}
-                      onClick={() => this.scrollTo(500)}
-                    >
-                      <h1>Learn More!</h1>
-                    </Button>
+                    <OwlLogo
+                      src={Cloud}
+                      alt="Owl with Grad Cap in a Cloud"
+                    />
+                    <ButtonContainer>
+                      <Button color="primary">
+                        <h1 onClick={() => lock.login()}>Sign In</h1>
+                      </Button>
+
+                      <h1
+                        style={{ color: "rgb(76, 76, 76)" }}
+                      >
+                        OR
+                      </h1>
+                      
+                      <Button 
+                        color={"primary"}
+                        onClick={() => this.scrollTo(500)}
+                      >
+                        <h1>Learn More</h1>
+                      </Button>
+                    </ButtonContainer>
                   </LogoSection>
                 </HeroSection>
         <CssBaseline />
