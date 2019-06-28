@@ -67,6 +67,31 @@ export const NavbarItem = styled.a`
     color: #441476;
   }
 `;
+export const HeroSection = styled.div`
+  display: flex;
+`;
+export const BlueBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  background: rgb(142, 202, 251);
+  align-items: center;
+`;
+export const HeroCaption = styled.h1`
+  font-size: 90px;
+  margin: 0px;
+  font-family: "Avenir Next";
+  padding: 20px;
+  color: rgb(76, 76, 76);
+`;
+export const LogoSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #fafafa;
+  width: 50vw;
+  height: 100vh;
+`;
 export const FirstSection = styled.div`
   background-color: #fafafa;
   width: 95%;
