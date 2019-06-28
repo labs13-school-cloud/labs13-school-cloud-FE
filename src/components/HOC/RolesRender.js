@@ -15,20 +15,18 @@ const RolesRenderHOC = ComponentToRender => {
         return <h1>Loading</h1>;
       } else if (this.props.user.role === "admin") {
         // Will return Admin Dashboard
-        return <ComponentToRender {...this.props} volunteerRole={"admin"} />;
+        return <ComponentToRender {...this.props} role={"admin"} />;
       } else if (this.props.user.role === "volunteer") {
         // Will return Volunteer Dashboard
-        return <ComponentToRender {...this.props} volunteerRole={"volunteer"} />;
+        return <ComponentToRender {...this.props} role={"volunteer"} />;
       }
     }
   }
 
-  const mapStateToProps = state => {
-    return {
-      // This will grab the user profile
-      user: state.userReducer.userProfile.user
-    };
-  };
+  const mapStateToProps = state => ({
+    // This will grab the user profile
+    user: state.userReducer.userProfile.user
+  });
 
   return connect(
     mapStateToProps,

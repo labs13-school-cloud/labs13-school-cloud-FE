@@ -19,7 +19,8 @@ import { Wrapper, styles } from "./styles.js";
 function TabVolunteer({
   getFiltered,
   volunteerTrainingSeries,
-  getTrainingSeriesID
+  getTrainingSeriesID,
+  classes
 }) {
   const setTrainingSeries = id => {
     getTrainingSeriesID(id);
@@ -31,43 +32,56 @@ function TabVolunteer({
   };
   return (
     <>
-      {getFiltered(volunteerTrainingSeries).map(
-        ({ training_series_id, title, subject, name }) => {
-          return (
-            <Wrapper key={`container_${training_series_id}`}>
-              <Grid container spacing={24}>
-                <Grid item xs={12}>
-                  <Typography variant="h6">
-                    {" "}
-                    <Link onClick={e => setTrainingSeries(training_series_id)}>
-                      {title}
-                    </Link>
-                  </Typography>
-                  <hr />
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      marginBottom: "10px"
-                    }}
-                  >
-                    <Typography variant="body1">Subject: {subject}</Typography>
+      {volunteerTrainingSeries.length === 0 ? (
+        <Typography className={classes.noMessage}>
+          No Training Series Assigned
+        </Typography>
+      ) : (
+        <>
+          {getFiltered(volunteerTrainingSeries).map(
+            ({ training_series_id, title, subject, name }) => {
+              return (
+                <Wrapper key={`container_${training_series_id}`}>
+                  <Grid container spacing={24}>
+                    <Grid item xs={12}>
+                      <Typography variant="h6">
+                        {" "}
+                        <Link
+                          className={classes.links}
+                          onClick={e => setTrainingSeries(training_series_id)}
+                        >
+                          {title}
+                        </Link>
+                      </Typography>
+                      <hr />
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                          marginBottom: "10px"
+                        }}
+                      >
+                        <Typography variant="body1">
+                          Subject: {subject}
+                        </Typography>
 
-                    <Typography variant="body1">Creator: {name}</Typography>
-                  </div>
-                  <Button
-                    style={{
-                      backgroundColor: finished === true ? "green" : "gray"
-                    }}
-                    onClick={toggleChange}
-                  >
-                    Done
-                  </Button>
-                </Grid>
-              </Grid>
-            </Wrapper>
-          );
-        }
+                        <Typography variant="body1">Creator: {name}</Typography>
+                      </div>
+                      <Button
+                        style={{
+                          backgroundColor: finished === true ? "green" : "gray"
+                        }}
+                        onClick={toggleChange}
+                      >
+                        Done
+                      </Button>
+                    </Grid>
+                  </Grid>
+                </Wrapper>
+              );
+            }
+          )}
+        </>
       )}
     </>
   );

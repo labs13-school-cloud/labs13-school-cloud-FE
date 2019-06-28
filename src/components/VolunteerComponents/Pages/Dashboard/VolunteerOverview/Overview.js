@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 
 import { getAllResponses } from "store/actions";
 import SearchCard from "components/UI/SearchCard/";
-import ClassesOverview from "components/Pages/Classes/List/Overview";
+import ClassesOverview from "components/VolunteerComponents/Pages/Classes/Overview/Overview.js";
 import TrainingSeriesOverview from "components/VolunteerComponents/Pages/TrainingSeries/List/Overview/Overview.js";
 
 import TabNavigation from "components/VolunteerComponents/Pages/Dashboard/helpers/TabNavigation.js";

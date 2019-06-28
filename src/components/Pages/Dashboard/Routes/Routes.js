@@ -6,7 +6,7 @@ import AddMemberToTrainingSeries from "components/Pages/TrainingSeries/Add/AddMe
 import EditTrainingSeries from "components/Pages/TrainingSeries/Edit/";
 import SingleTrainingSeries from "components/Pages/TrainingSeries/SinglePage/SingleTrainingSeries";
 import Classes from "components/Pages/Classes/List/Overview/Overview";
-import SingleClassView from "components/Pages/Classes/SinglePage/SingleClassView";
+import SingleClassView from "components/Pages/Classes/SinglePage/SingleClassView.js";
 import CreateMessage from "components/Pages/TrainingSeries/Add/CreateMessage";
 import MessagePage from "components/Pages/TrainingSeries/Add/MessagePage";
 import HelpModal from "components/UI/HelpModal/HelpModal.js";
@@ -109,9 +109,14 @@ function Routes(props) {
           )}
         />
         <Route
+          exact
           path="/home/classes/:id"
           render={renderProps => (
-            <SingleClassView {...renderProps} user_id={props.user.id} />
+            <SingleClassView
+              {...renderProps}
+              history={props.history}
+              user_id={props.user.id}
+            />
           )}
         />
       </Switch>

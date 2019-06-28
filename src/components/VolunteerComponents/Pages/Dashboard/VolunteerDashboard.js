@@ -5,13 +5,12 @@ import { getAllResponses } from "store/actions";
 
 import SearchCard from "components/UI/SearchCard/";
 import TrainingSeriesOverview from "components/VolunteerComponents/Pages/TrainingSeries/List/Overview";
-import VolunteerClassTab from "components/VolunteerComponents/Pages/Classes/List";
+import VolunteerClassOverview from "components/VolunteerComponents/Pages/Classes/Overview/Overview.js";
+import VolunteerClassTab from "components/VolunteerComponents/Pages/Classes/List/V-ClassesTab.js";
 import TrainingSeriesTabVolunteer from "components/VolunteerComponents/Pages/TrainingSeries/List/TabVolunteer/TabVolunteer.js";
-import NotificationsCard from "components/Pages/Notifications/Card";
-import NotificationsOverview from "components/Pages/Notifications/Card/Overview/Overview.js";
+import ContactTab from "components/VolunteerComponents/Pages/Contact/Tab";
 import TabNavigation from "components/VolunteerComponents/Pages/Dashboard/helpers/TabNavigation.js";
 import DektopNavigation from "components/VolunteerComponents/Pages/Dashboard/helpers/DesktopNavigation.js";
-
 
 import {
   TripleColumn,
@@ -60,22 +59,20 @@ const VolunteerDashboard = props => {
       <TripleColumn>
         {topTab === "overview" && (
           <>
-            <SmallColumns>
-              <SearchCard
-                user_id={user_id}
-                List={TrainingSeriesOverview}
-                containerTourNum="2"
-                section="Training Series"
-              />
-              <Divider />
-              <SearchCard
-                user_id={user_id}
-                List={VolunteerClassTab}
-                containerTourNum="1"
-                section="Classes"
-                //headerTourNum={["3", "3"]}
-              />
-            </SmallColumns>
+            <SearchCard
+              user_id={user_id}
+              List={TrainingSeriesOverview}
+              containerTourNum="2"
+              section="Training Series"
+            />
+            <Divider />
+            <SearchCard
+              user_id={user_id}
+              List={VolunteerClassOverview}
+              containerTourNum="1"
+              section="Classes"
+              //headerTourNum={["3", "3"]}
+            />
           </>
         )}
 
@@ -99,15 +96,7 @@ const VolunteerDashboard = props => {
           />
         )}
 
-        {topTab === "notifications" && (
-          <div style={{ width: "100%" }}>
-            <NotificationsCard
-              List={NotificationsOverview}
-              user_id={user_id}
-              width="95%"
-            />
-          </div>
-        )}
+        {topTab === "contact" && <ContactTab />}
       </TripleColumn>
     </DashWrapper>
   );

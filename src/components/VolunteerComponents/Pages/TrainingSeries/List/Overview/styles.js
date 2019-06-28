@@ -15,6 +15,12 @@ export const styles = {
   },
   title: {
     fontSize: 16
+  },
+  noMessage: {
+    textAlign: "center",
+    fontSize: "1.2rem",
+    marginTop: "9rem",
+    color: "grey"
   }
 };
 

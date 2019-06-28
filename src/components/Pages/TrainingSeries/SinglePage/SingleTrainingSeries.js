@@ -157,32 +157,34 @@ function SingleTrainingSeries(props) {
                   add_circle
                 </i>
               </div>
-              {props.trainingSeriesVolunteers.map(v =>
-                v.length !== 0 ? (
-                  <Typography
-                    variant="body1"
-                    key={v.id}
-                    style={{ textAlign: "center" }}
-                    className={props.classes.listItem}
-                  >
-                    {v.name}{" "}
-                    <i
-                      className={`material-icons ${props.classes.delete}`}
-                      onClick={e =>
-                        removeVolunteer({
-                          id: props.match.params.id,
-                          user_id: v.volunteer_id
-                        })
-                      }
+              {props.trainingSeriesVolunteers.length === 0 ? (
+                <Typography className={props.classes.noMessage}>
+                  No Volunteers found
+                </Typography>
+              ) : (
+                <>
+                  {props.trainingSeriesVolunteers.map(v => (
+                    <Typography
+                      variant="body1"
+                      key={v.id}
+                      style={{ textAlign: "center" }}
+                      className={props.classes.listItem}
                     >
-                      delete_forever
-                    </i>
-                  </Typography>
-                ) : (
-                  <Typography>
-                    No Volunteers taking this Training Series
-                  </Typography>
-                )
+                      {v.name}{" "}
+                      <i
+                        className={`material-icons ${props.classes.delete}`}
+                        onClick={e =>
+                          removeVolunteer({
+                            id: props.match.params.id,
+                            user_id: v.volunteer_id
+                          })
+                        }
+                      >
+                        delete_forever
+                      </i>
+                    </Typography>
+                  ))}
+                </>
               )}
             </Wrapper>
           </Grid>
