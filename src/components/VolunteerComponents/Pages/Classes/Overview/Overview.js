@@ -73,5 +73,4 @@ import { Typography } from "@material-ui/core/";
     mapStateToProps,
     { getClassList }
 )(Overview);
-//   (withStyles(ListStyles)  
-const SingleClass = styled(ListItem)``; 
+
