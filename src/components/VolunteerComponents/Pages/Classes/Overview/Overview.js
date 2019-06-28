@@ -6,15 +6,15 @@ import { connect } from  "react-redux";
 
  import history from "history.js";
 
- import DeleteModal from "../../../../UI/Modals/deleteModal";
-import { getClassList } from "../../../../../store/actions/classesActions";
+ import DeleteModal from "components/UI/Modals/deleteModal";
+import { getClassList } from "store/actions/classesActions";
 
  import { withStyles } from "@material-ui/core/styles";
 import { ListItem, ListItemText } from "@material-ui/core/";
 import { ListStyles } from "./styles.js";
 import { Typography } from "@material-ui/core/";
 
- function  Overview(props) {
+ function  Overview() {
     useEffect(() => {
         props.getClassList()
     }, [getClassList]);

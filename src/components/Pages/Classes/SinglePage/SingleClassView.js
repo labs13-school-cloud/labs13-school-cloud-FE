@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 
-import history from "history.js";
 //import DeleteModal from "UI/Modals/deleteModal";
 
 
@@ -18,44 +17,42 @@ import {
   Typography,
   Grid,
   Button,
-  Link
 } from "@material-ui/core/";
 
 import { styles, Wrapper } from "./styles.js";
 
 
 function SingleClassView(props) {
+  const  { getClassByID, addClass, deleteClass, match, history, singleClass } = props;
+  useEffect(() => {
+    getClassByID(match.params.id);
+  }, [getClassByID, match]);
+
 
   useEffect(() => {
-    props.getClassByID(props.match.params.id);
-  }, [getClassByID]);
-
-
-  useEffect(() => {
-    props.addClass(props.match.params.id);
-    props.history.push(`/home/classes`);
-  }, [addClass]);
-
+    addClass(match.params.id);
+    history.push(`/home/classes`);
+  }, [addClass, match, history]);
 
 
   // Removes class from database
   const removeClass = id => {
-    props.deleteClass(props.singleClass.id);
-    props.history.push(`/home/classes`);
+    deleteClass(singleClass.id);
+    history.push(`/home/classes`);
   };
   // Sends Admin to Edit screen for classes
   const editClass = id => {
-    props.getClassByID(id);
-    props.history.push(`/home/classes`);
+    getClassByID(id);
+    history.push(`/home/classes`);
   };
   // Remove Volunteer from training series
-  const removeVolunteer = (id, user_id) => {
-    props.deleteVolunteerFromTrainingSeries(id, user_id);
-  };
+  // const removeVolunteer = (id, user_id) => {
+  //   props.deleteVolunteerFromTrainingSeries(id, user_id);
+  // };
 //Exit out of single class view
   const done = e => {
     e.preventDefault();
-    if (props.singleClass.id === props.match.params.id) {
+    if (singleClass.id === match.params.id) {
       this.setState({
         finished: true
       });
@@ -65,8 +62,6 @@ function SingleClassView(props) {
   //const { getFiltered, classes, history, getClassList, classList } = props;
   const {
     id,
-    class_name,
-    subject,
     grade_level,
     number_of_students,
     teacher_name

@@ -7,7 +7,6 @@ import ProgressCircle from "components/UI/Progress/ProgressCircle";
 import AppBar from "components/Navigation/AppBar/AppBar";
 import ReturnToPreviousPageButton from "components/Navigation/ReturnToPreviousPage";
 import Snackbar from "components/UI/Snackbar/Snackbar";
-import DashboardTour from "components/UI/Tour/Tour";
 import handleAdd from "components/UI/Modals/addModal";
 
 import authenticate from "components/Misc/authenticate/authenticate";
@@ -19,6 +18,8 @@ import DashboardRoutesVolunteer from "components/VolunteerComponents/Pages/Route
 
 function Loader(props) {
   const [displaySnackbar, setDisplaySnackbar] = useState(false);
+  // ! NEED TO FIX !
+  // eslint-disable-next-line 
   const [isTourOpen, setIsTourOpen] = useState(true);
   const { newUser, location } = props;
   const { state } = location;
@@ -51,7 +52,7 @@ function Loader(props) {
             />
           )}
           <AppBar />
-            {props.location.pathname !== "/home/classes" && (
+            {props.location.pathname !== "/home" && (
             <ReturnToPreviousPageButton history={props.history} /> 
           )} 
           <DashboardContainer>

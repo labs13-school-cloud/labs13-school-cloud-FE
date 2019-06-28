@@ -1,14 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import Title from "./helpers/Title.js";
-import Messages from "../Messages/";
-import MessagesList from "../List/Messages/";
 import InfoPopup from "components/UI/InfoPopup/InfoPopup.js";
 import { getTrainingSeriesID, editTrainingSeries } from "store/actions";
 import { withStyles } from "@material-ui/core/styles";
 import {
   Paper,
-  Divider,
   Typography,
   TextField,
   Link,
@@ -19,31 +15,32 @@ import {
 import { styles, PageContainer } from "./styles.js";
 
 function Edit(props) {
+  const { getTrainingSeriesID, activeTrainingSeries, match } = props;  
   useEffect(() => {
-    props.getTrainingSeriesID(props.match.params.id);
-  }, [getTrainingSeriesID]);
+    getTrainingSeriesID(match.params.id);
+  }, [getTrainingSeriesID, match]);
   const { classes } = props;
   // Used to update the title and subject for Training Series
   const [title, setTitle] = useState("");
   const [subject, setSubject] = useState("");
   // Sets the current title and subject so that they can be changed
   useEffect(() => {
-    setTitle(props.activeTrainingSeries.title);
-  }, [props.activeTrainingSeries, setTitle]);
+    setTitle(activeTrainingSeries.title);
+  }, [activeTrainingSeries, setTitle]);
   useEffect(() => {
-    setSubject(props.activeTrainingSeries.subject);
-  }, [props.activeTrainingSeries, setSubject]);
+    setSubject(activeTrainingSeries.subject);
+  }, [activeTrainingSeries, setSubject]);
 
   const updateTrainingSeries = e => {
     e.preventDefault();
-    props.editTrainingSeries(props.activeTrainingSeries.id, {
+    props.editTrainingSeries(activeTrainingSeries.id, {
       title,
       subject,
       user_id: props.user_id
     });
     props.history.push("/home");
   };
-  const { link, name } = props.activeTrainingSeries;
+  const { link, name } = activeTrainingSeries;
   return (
     <PageContainer style={{ position: "relative" }}>
       <InfoPopup popOverText={<p>Will edit this later....</p>} />
