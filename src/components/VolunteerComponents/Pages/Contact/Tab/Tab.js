@@ -53,7 +53,7 @@ function Tab(props) {
               }}
             >
               {admin.map(user => (
-                <Paper style={{ padding: "1rem" }}>
+                <Paper style={{ padding: "1rem" }} className={classes.divBack}>
                   <Typography
                     key={user.id}
                     style={{ fontSize: "1.2rem", marginBottom: "1rem" }}
